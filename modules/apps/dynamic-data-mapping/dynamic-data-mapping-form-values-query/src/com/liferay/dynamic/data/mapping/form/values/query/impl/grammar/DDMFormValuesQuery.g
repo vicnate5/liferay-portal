@@ -19,7 +19,7 @@ options {
  * details.
  */
 
-package com.liferay.dynamic.data.mapping.form.values.query.internal.parser;
+package com.liferay.dynamic.data.mapping.form.values.query.impl.parser;
 }
 
 path

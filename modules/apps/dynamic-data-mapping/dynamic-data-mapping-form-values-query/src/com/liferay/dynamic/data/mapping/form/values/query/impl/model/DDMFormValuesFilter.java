@@ -12,15 +12,28 @@
  * details.
  */
 
-package com.liferay.dynamic.data.mapping.form.values.query.internal.model;
+package com.liferay.dynamic.data.mapping.form.values.query.impl.model;
 
 import com.liferay.portlet.dynamicdatamapping.storage.DDMFormFieldValue;
+import com.liferay.portlet.dynamicdatamapping.storage.DDMFormValues;
+
+import java.util.List;
 
 /**
  * @author Pablo Carvalho
  */
-public interface DDMFormFieldValueMatcher {
+public interface DDMFormValuesFilter {
 
-	public boolean matches(DDMFormFieldValue ddmFormFieldValue);
+	public List<DDMFormFieldValue> filter(DDMFormValues ddmFormValues);
+
+	public List<DDMFormFieldValue> filter(
+		List<DDMFormFieldValue> baseDDMFormFieldValues);
+
+	public boolean isGreedy();
+
+	public void setDDMFormFieldValueMatcher(
+		DDMFormFieldValueMatcher ddmFormFieldValueMatcher);
+
+	public void setGreedy(boolean greedy);
 
 }
