@@ -50,6 +50,29 @@
 		<execute macro="Site#tearDownCP" />
 	</tear-down>
 
+	<command name="Test" priority="5">
+		<for list="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15" param="number">
+			<execute macro="Page#gotoPG">
+				<var name="pageName" value="${pageName}" />
+			</execute>
+
+			<execute macro="CalendarEvent#gotoAdd" />
+
+			<execute macro="CalendarEvent#editTitle">
+				<var name="eventTitle" value="Title ${number}" />
+			</execute>
+
+			<execute macro="CalendarEvent#save">
+				<var name="pageName" value="${pageName}" />
+			</execute>
+		</for>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+	</command>
+
+
 	<command name="AddCalendarEventAllDay" priority="5">
 		<var name="eventTitle" value="Calendar Event All Day Title" />
 		<var name="eventType" value="All Day" />
