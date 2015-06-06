@@ -45,6 +45,7 @@ import junit.framework.TestCase;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -1178,21 +1179,29 @@ public class WebDriverToSeleniumBridge
 	public void mouseOver(String locator) {
 		WebElement webElement = getWebElement(locator);
 
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
+
+		WebDriver wrappedWebDriver = wrapsDriver.getWrappedDriver();
+
+		JavascriptExecutor javascriptExecutor =
+			(JavascriptExecutor)wrappedWebDriver;
+
 		if (!webElement.isDisplayed()) {
 			scrollWebElementIntoView(webElement);
 		}
 
-		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
+		try
+		{
+			String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
+			javascriptExecutor.executeScript(mouseOverScript, webElement);
+		
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
 
-		WebDriver webDriver = wrapsDriver.getWrappedDriver();
+		}
 
-		Actions actions = new Actions(webDriver);
-
-		actions.moveToElement(webElement);
-
-		Action action = actions.build();
-
-		action.perform();
 	}
 
 	@Override

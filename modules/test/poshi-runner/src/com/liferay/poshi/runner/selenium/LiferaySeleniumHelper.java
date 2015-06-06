@@ -59,6 +59,8 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import org.openqa.selenium.safari.SafariDriver;
+
 import org.sikuli.api.DesktopScreenRegion;
 import org.sikuli.api.ImageTarget;
 import org.sikuli.api.Location;
@@ -72,6 +74,7 @@ import org.sikuli.api.visual.Canvas;
 import org.sikuli.api.visual.CanvasBuilder.ElementAdder;
 import org.sikuli.api.visual.CanvasBuilder.ElementAreaSetter;
 import org.sikuli.api.visual.DesktopCanvas;
+
 
 /**
  * @author Brian Wing Shun Chan
@@ -1512,20 +1515,23 @@ public class LiferaySeleniumHelper {
 			LiferaySelenium liferaySelenium, String locator)
 		throws Exception {
 
-		for (int second = 0;; second++) {
-			if (second >= PropsValues.TIMEOUT_EXPLICIT_WAIT) {
-				liferaySelenium.assertElementPresent(locator);
-			}
+		if (!(liferaySelenium instanceof SafariDriver) && !(locator.contains(".js"))) {
 
-			try {
-				if (liferaySelenium.isElementPresent(locator)) {
-					break;
+			for (int second = 0;; second++) {
+				if (second >= PropsValues.TIMEOUT_EXPLICIT_WAIT) {
+					liferaySelenium.assertElementPresent(locator);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				try {
+					if (liferaySelenium.isElementPresent(locator)) {
+						break;
+					}
+				}
+				catch (Exception e) {
+				}
+
+				Thread.sleep(1000);
+			}
 		}
 	}
 
