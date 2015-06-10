@@ -450,9 +450,7 @@
 				</if>
 			</then>
 			<else>
-				<execute function="AssertClick" locator1="Home#PAGE" value1="${pageName}">
-					<var name="key_pageName" value="${pageName}" />
-				</execute>
+				<execute function="AssertClick" locator1="Home#PAGE" value1="${pageName}" />
 			</else>
 		</if>
 	</command>
