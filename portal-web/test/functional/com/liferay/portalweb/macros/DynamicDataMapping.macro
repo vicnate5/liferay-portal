@@ -8,7 +8,10 @@
 
 		<execute function="DragAndDrop" locator1="Dynamicdatamapping#FIELDS_FIELD" locator2="Dynamicdatamapping#FORM_BUILDER" value1="${field}" />
 
-		<execute macro="DynamicDataMapping#editFieldLabelCmd" />
+		<execute macro="DynamicDataMapping#editFieldLabelCmd">
+			<var name="field" value="${field}" />
+			<var name="fieldFieldLabel" value="${fieldFieldLabel}" />
+		</execute>
 
 		<execute function="AssertTextEquals" locator1="Dynamicdatamapping#SETTINGS_FIELD_LABEL" value1="${fieldFieldLabel}" />
 		<execute function="AssertClick#pauseAssertTextClickAt" locator1="Dynamicdatamapping#FIELDS_LINK" value1="Fields" />
