@@ -165,9 +165,10 @@
 				portal,\
 				social-office
 
-			test.base.dir.name=../../../portal-web/test/functional/com/liferay/portalweb/
+			test.base.dir.name=/Users/vicnate5/Liferay/liferay-portal-ee-6.2.x/portal-web/test/functional/com/liferay/portalweb/
 
 			test.case.available.property.names=\
+				database.sharding,\
 				app.server.bundles.size,\
 				captcha.max.challenges,\
 				cluster.enabled,\
