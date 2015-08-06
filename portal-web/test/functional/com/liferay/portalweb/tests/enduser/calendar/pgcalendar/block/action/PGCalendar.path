@@ -648,7 +648,7 @@
 </tr>
 <tr>
 	<td>SCHEDULER_EVENT_DIALOG_BOX_ATTEND_ACTIVE</td>
-	<td>//form[@id='schedulerEventRecorderForm']//a[contains(@class,'calendar-event-answer-true') and contains(.,'${key_rsvp}')]</td>
+	<td>//form[@id='schedulerEventRecorderForm']//a[contains(@class,'calendar-event-answer-false') and contains(.,'${key_rsvp}')]</td>
 	<td></td>
 </tr>
 <tr>

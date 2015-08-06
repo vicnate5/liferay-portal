@@ -84,9 +84,19 @@
 				<execute function="KeyPress" locator1="PGSearch#SEARCH_FIELD" value1="\RETURN" />
 			</then>
 			<else>
-				<execute function="Click" locator1="PGSearch#SEARCH_BUTTON" />
+				<execute function="Click" locator1="PGSearch#SEARCH_BUTTON" value1="Search" />
 			</else>
 		</if>
+	</command>
+
+	<command name="searchPGWithMaximizedSearchPortlet">
+		<execute macro="SearchPortlet#gotoPortletOptions">
+			<var name="searchPortletOption" value="Maximize" />
+		</execute>
+
+		<execute function="Type" locator1="PGSearch#SEARCH_FIELD" value1="${searchTerm}" />
+
+		<execute function="AssertClick" locator1="PGSearch#SEARCH_BUTTON" value1="Search" />
 	</command>
 
 	<command name="viewAssetTypeFacetPG">

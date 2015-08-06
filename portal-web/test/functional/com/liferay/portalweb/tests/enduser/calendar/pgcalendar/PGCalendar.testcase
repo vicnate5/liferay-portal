@@ -3476,6 +3476,55 @@
 		</execute>
 	</command>
 
+	<command name="SearchCalendarEventInSearchPortletWithTag" priority="3">
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Calendar Page" />
+		</execute>
+
+		<execute macro="CalendarNavigator#gotoAddEvent" />
+
+		<execute macro="CalendarEvent#add">
+			<var name="addRSVPEnabled" value="true" />
+			<var name="eventTitle" value="Calendar Event Title" />
+			<var name="eventType" value="Regular" />
+			<var name="optionSet" value="true" />
+			<var name="pageName" value="Calendar Page" />
+			<var name="rsvp" value="Yes" />
+			<var name="rsvpYes" value="Yes" />
+			<var name="tag" value="true" />
+			<var name="tagText" value="tag1" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Calendar Page" />
+		</execute>
+
+		<execute macro="CalendarEvent#view">
+			<var name="eventTitle" value="Calendar Event Title" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Calendar Page" />
+		</execute>
+
+		<execute macro="SearchPortlet#configureDisplaySettingsSearchPG">
+			<var name="searchAssetType" value="Calendar Event" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Calendar Page" />
+		</execute>
+
+		<execute macro="Search#searchPGWithMaximizedSearchPortlet">
+			<var name="searchTerm" value="tag1" />
+		</execute>
+
+		<execute macro="Search#viewSearchResultPG">
+			<var name="searchAssetTitle" value="Calendar Event Title" />
+			<var name="searchAssetType" value="Calendar Event" />
+		</execute>
+	</command>
+
 	<command name="SearchForOtherCalendars" priority="5">
 		<var name="eventType" value="Regular" />
 		<var name="userEmailAddress" value="userea@liferay.com" />
