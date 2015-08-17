@@ -75,7 +75,7 @@
 	</command>
 
 	<command name="gotoCP">
-		<execute function="AssertClick#waitForDMHomeAssertTextEqualsClick" locator1="CPDocumentsandmedia#TOOLBAR_MANAGE" value1="Manage" />
+		<execute function="AssertClick#waitForDMHomeAssertTextEqualsClick" locator1="Toolbar#MANAGE" value1="Manage" />
 		<execute function="AssertClick" locator1="CPDocumentsandmedia#MANAGE_MENULIST_METADATA_SETS" value1="Metadata Sets" />
 	</command>
 
