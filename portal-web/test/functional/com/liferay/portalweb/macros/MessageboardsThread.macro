@@ -15,7 +15,7 @@
 	<command name="addCPWithAttachment">
 		<execute function="AssertClick" locator1="CPMessageboards#POST_NEW_THREAD_BUTTON" value1="Post New Thread" />
 
-		<execute function="Type" locator1="CPMessageboardsPostthread#SUBJECT_FIELD" value1="${threadSubject}" />
+		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 		<execute function="Type#typeCKEditor" locator1="CPMessageboardsPostthread#BODY_FIELD" value1="${threadBody}" />
 
 		<if>
@@ -34,7 +34,7 @@
 	<command name="addInvalidAttachmentPG">
 		<execute function="Click" locator1="PGMessageboards#POST_NEW_THREAD_BUTTON" />
 
-		<execute function="Type" locator1="PGMessageboardsPostthread#SUBJECT_FIELD" value1="${threadSubject}" />
+		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 
 		<if>
 			<condition function="IsElementPresent" locator1="PGMessageboardsPostthread#ATTACHMENTS_DROPDOWN_COLLAPSED" />
@@ -58,7 +58,7 @@
 	<command name="addPG">
 		<execute function="Click" locator1="PGMessageboards#POST_NEW_THREAD_BUTTON" />
 
-		<execute function="Type" locator1="PGMessageboardsPostthread#SUBJECT_FIELD" value1="${threadSubject}" />
+		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 
 		<if>
 			<isset var="source" />
@@ -181,7 +181,7 @@
 	</command>
 
 	<command name="addTagPGCmd">
-		<execute function="AssertTextEquals" locator1="PGMessageboardsPostthread#SUBJECT_FIELD" value1="${threadSubject}" />
+		<execute function="AssertTextEquals" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 		<execute function="AssertElementPresent" locator1="PGMessageboardsPostthread#BODY_FIELD" />
 
 		<if>
@@ -213,7 +213,7 @@
 	<command name="addWithWorkflowCP">
 		<execute function="AssertClick" locator1="CPMessageboards#POST_NEW_THREAD_BUTTON" value1="Post New Thread" />
 
-		<execute function="Type" locator1="CPMessageboardsPostthread#SUBJECT_FIELD" value1="${threadSubject}" />
+		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 		<execute function="Type#typeCKEditor" locator1="CPMessageboardsPostthread#BODY_FIELD" value1="${threadBody}" />
 		<execute function="Click" locator1="Button#SUBMIT_FOR_PUBLICATION" />
 
@@ -223,7 +223,7 @@
 	<command name="addWithWorkflowPG">
 		<execute function="Click" locator1="PGMessageboards#POST_NEW_THREAD_BUTTON" />
 
-		<execute function="Type" locator1="PGMessageboardsPostthread#SUBJECT_FIELD" value1="${threadSubject}" />
+		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 		<execute function="Type#typeCKEditorWaitForCKEditor" locator1="PGMessageboardsPostthread#BODY_FIELD" value1="${threadBody}" />
 		<execute function="Click" locator1="Button#SUBMIT_FOR_PUBLICATION" />
 
@@ -290,7 +290,7 @@
 		<if>
 			<isset var="threadSubjectEdit" />
 			<then>
-				<execute function="Type" locator1="CPMessageboardsPostthread#SUBJECT_FIELD" value1="${threadSubjectEdit}" />
+				<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubjectEdit}" />
 			</then>
 		</if>
 
@@ -312,7 +312,7 @@
 		<if>
 			<isset var="threadSubjectEdit" />
 			<then>
-				<execute function="Type" locator1="PGMessageboardsPostthread#SUBJECT_FIELD" value1="${threadSubjectEdit}" />
+				<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubjectEdit}" />
 			</then>
 		</if>
 
@@ -714,7 +714,7 @@
 
 		<execute function="AssertTextEquals" locator1="PGMessageboardsSplitthread#INFO_MESSAGE" value1="Click OK to create a new thread with the following messages." />
 		<execute function="AssertTextEquals" locator1="PGMessageboardsSplitthread#THREAD_TABLE_SUBJECT" value1="RE: ${threadSubject}" />
-		<execute function="Type" locator1="PGMessageboardsSplitthread#SUBJECT_FIELD" value1="${threadSplitSubject}" />
+		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSplitSubject}" />
 		<execute function="AssertTextEquals" locator1="PGMessageboardsSplitthread#ADD_EXPLANATION_POST_LABEL" value1="Add explanation post to the source thread." />
 		<execute function="Check" locator1="PGMessageboardsSplitthread#ADD_EXPLANATION_POST_CHECKBOX" />
 		<execute function="AssertTextEquals" locator1="PGMessageboardsSplitthread#ADD_EXPLANATION_POST_INFO_MESSAGE" value1="The following post will be added in place of the moved message." />
