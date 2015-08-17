@@ -25,7 +25,7 @@
 </tr>
 <tr>
 	<td>ENTRY_TITLE_LINK</td>
-	<td>//div[@class='entry-title']/h2</td>
+	<td>//div[@class='entry-title']/h1</td>
 	<td></td>
 </tr>
 <tr>
@@ -35,7 +35,7 @@
 </tr>
 <tr>
 	<td>ENTRY_CONTENT</td>
-	<td>//div[@class='entry-body']</td>
+	<td>xpath=(//div[@class='entry-body'])[2]</td>
 	<td></td>
 </tr>
 <tr>
