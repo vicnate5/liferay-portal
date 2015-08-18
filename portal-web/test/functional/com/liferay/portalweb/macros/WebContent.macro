@@ -1207,7 +1207,7 @@
 
 	<command name="viewEmailConfigurationCP">
 		<execute function="Click" locator1="CPWebcontent#OPTIONS_WRENCH_ICON" />
-		<execute function="AssertClick" locator1="CPWebcontent#OPTIONS_MENULIST_CONFIGURATION" value1="Configuration" />
+		<execute function="AssertClick" locator1="BasePortlet#OPTIONS_MENULIST_CONFIGURATION" value1="Configuration" />
 
 		<execute function="SelectFrame" locator1="CPWebcontentConfiguration#CONFIGURATION_IFRAME" />
 
