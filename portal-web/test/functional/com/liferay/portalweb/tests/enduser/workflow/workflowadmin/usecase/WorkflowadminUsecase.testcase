@@ -541,6 +541,10 @@
 			<var name="entryTitle" value="Blogs Entry Title" />
 		</execute>
 
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Notifications" />
+		</execute>
+
 		<execute macro="Notifications#viewCountAlert">
 			<var name="notificationCount" value="1" />
 		</execute>

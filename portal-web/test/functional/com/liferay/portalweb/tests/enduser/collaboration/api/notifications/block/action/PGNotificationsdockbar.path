@@ -20,7 +20,7 @@
 </tr>
 <tr>
 	<td>COUNT_ALERT</td>
-	<td>//span[contains(@class,'user-notifications-count') and contains(@class,'alert')]</td>
+	<td>//span[@class='count']</td>
 	<td></td>
 </tr>
 <tr>
