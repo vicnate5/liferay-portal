@@ -804,7 +804,7 @@
 				<contains string="${dmDocumentDescriptionEdit}" substring="{dmDocumentDescriptionEdit}" />
 			</not>
 			<then>
-				<execute function="Type" locator1="CPDocumentsandmediaEditdocument#DESCRIPTION_FIELD" value1="${dmDocumentDescriptionEdit}" />
+				<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${dmDocumentDescriptionEdit}" />
 			</then>
 		</if>
 	</command>
