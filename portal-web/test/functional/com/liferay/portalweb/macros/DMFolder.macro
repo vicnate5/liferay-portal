@@ -11,7 +11,7 @@
 		<if>
 			<isset var="dmFolderDescription" />
 			<then>
-				<execute function="Type" locator1="CPDocumentsandmediaAddfolder#DESCRIPTION_FIELD" value1="${dmFolderDescription}" />
+				<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${dmFolderDescription}" />
 			</then>
 		</if>
 
@@ -27,7 +27,7 @@
 		<execute function="AssertClick" locator1="PGDocumentsandmedia#ADD_MENULIST_FOLDER" value1="Folder" />
 
 		<execute function="Type" locator1="PGDocumentsandmediaAddfolder#NAME_FIELD" value1="${dmFolderName}" />
-		<execute function="Type" locator1="PGDocumentsandmediaAddfolder#DESCRIPTION_FIELD" value1="${dmFolderDescription}" />
+		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${dmFolderDescription}" />
 
 		<if>
 			<isset var="viewableBy" />
@@ -80,7 +80,7 @@
 		<if>
 			<isset var="dmSubFolderDescription" />
 			<then>
-				<execute function="Type" locator1="PGDocumentsandmediaAddfolder#DESCRIPTION_FIELD" value1="${dmSubFolderDescription}" />
+				<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${dmSubFolderDescription}" />
 			</then>
 		</if>
 
@@ -208,7 +208,7 @@
 		<execute function="AssertClick" locator1="CPDocumentsandmedia#FILTER_MENULIST_EDIT" value1="Edit" />
 
 		<execute function="Type" locator1="CPDocumentsandmediaEditfolder#NAME_FIELD" value1="${dmFolderNameEdit}" />
-		<execute function="Type" locator1="CPDocumentsandmediaEditfolder#DESCRIPTION_FIELD" value1="${dmFolderDescriptionEdit}" />
+		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${dmFolderDescriptionEdit}" />
 		<execute function="AssertClick" locator1="CPDocumentsandmediaEditfolder#SAVE_BUTTON" value1="Save" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />

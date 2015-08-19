@@ -541,6 +541,10 @@
 			<var name="entryTitle" value="Blogs Entry Title" />
 		</execute>
 
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Notifications" />
+		</execute>
+
 		<execute macro="Notifications#viewCountAlert">
 			<var name="notificationCount" value="1" />
 		</execute>
@@ -609,6 +613,8 @@
 		<execute macro="Page#gotoContentCP">
 			<var name="portletName" value="Web Content" />
 		</execute>
+
+		<execute macro="WebContentNavigator#gotoAddCP" />
 
 		<execute macro="WebContent#addWithWorkflowCP">
 			<var name="webContentContent" value="${webContentContent}" />
@@ -686,6 +692,8 @@
 		<execute macro="Page#gotoContentCP">
 			<var name="portletName" value="Web Content" />
 		</execute>
+
+		<execute macro="WebContentNavigator#gotoAddCP" />
 
 		<execute macro="WebContent#addWithWorkflowCP">
 			<var name="webContentContent"><![CDATA[&lt;script&gt;alert("web content article")&lt;/script&gt;]]></var>
