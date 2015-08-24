@@ -10,7 +10,7 @@
 <tbody>
 <tr>
 	<td>FIELD_1</td>
-	<td>//div[contains(@class,'field-wrapper')][1]</td>
+	<td>//div[contains(@class,'forms-field')]</td>
 	<td></td>
 </tr>
 <tr>
