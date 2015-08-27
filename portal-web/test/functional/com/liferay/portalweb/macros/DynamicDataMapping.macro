@@ -149,6 +149,14 @@
 		<execute function="AssertClick" locator1="DDMEditStructure#SETTINGS_CELL_EDITOR_SAVE_BUTTON" value1="Save" />
 	</command>
 
+	<command name="editFieldLabelNested">
+		<execute macro="DynamicDataMapping#editFieldSettingsNested" />
+
+		<execute function="DoubleClick" locator1="DDMEditStructure#SETTINGS_FIELD_LABEL" />
+		<execute function="Type" locator1="DDMEditStructure#SETTINGS_CELL_EDITOR_FIELD" value1="${fieldFieldLabelNested}" />
+		<execute function="AssertClick" locator1="DDMEditStructure#SETTINGS_CELL_EDITOR_SAVE_BUTTON" value1="Save" />
+	</command>
+
 	<command name="editFieldLocalizable">
 		<execute macro="DynamicDataMapping#selectDynamicDataMappingFrame" />
 
@@ -194,6 +202,45 @@
 		</execute>
 
 		<execute function="AssertTextEquals" locator1="DDMEditStructure#SETTINGS_CELL_EDITOR_FIELD_ALERT" value1="Please enter only alphanumeric characters." />
+
+		<execute macro="DynamicDataMapping#selectFrameTopCmd" />
+	</command>
+
+	<command name="editFieldNameNested">
+		<execute macro="DynamicDataMapping#editFieldSettingsNested" />
+
+		<execute function="DoubleClick" locator1="DDMEditStructure#SETTINGS_NAME" />
+		<execute function="Type" locator1="DDMEditStructure#SETTINGS_CELL_EDITOR_FIELD" value1="${fieldName}" />
+		<execute function="AssertClick" locator1="DDMEditStructure#SETTINGS_CELL_EDITOR_SAVE_BUTTON" value1="Save" />
+
+		<if>
+			<condition function="IsElementPresent" locator1="DDMEditStructure#SETTINGS_CELL_EDITOR_FIELD_ALERT" />
+			<then>
+				<execute function="AssertTextEquals" locator1="DDMEditStructure#SETTINGS_CELL_EDITOR_FIELD_ALERT" value1="Please enter a unique field name." />
+				<execute function="Type" locator1="DDMEditStructure#SETTINGS_CELL_EDITOR_FIELD" value1="${fieldNameNested}" />
+			</then>
+		</if>
+
+		<execute function="AssertClick" locator1="DDMEditStructure#SETTINGS_CELL_EDITOR_SAVE_BUTTON" value1="Save" />
+	</command>
+
+	<command name="editFieldNested">
+		<execute macro="DynamicDataMapping#selectDynamicDataMappingFrame" />
+
+		<execute macro="DynamicDataMapping#editFieldLabelNested">
+			<var name="fieldFieldLabelNested" value="${fieldFieldLabelNested}" />
+		</execute>
+
+		<execute function="AssertTextEquals" locator1="DDMEditStructure#SETTINGS_FIELD_LABEL" value1="${fieldFieldLabelNested}" />
+		<execute function="AssertClick#pauseAssertTextClickAt" locator1="DDMEditStructure#FIELDS_LINK" value1="Fields" />
+
+		<execute macro="DynamicDataMapping#editFieldNameNested">
+			<var name="fieldName" value="${fieldName}" />
+			<var name="fieldNameNested" value="${fieldNameNested}" />
+		</execute>
+
+		<execute function="AssertTextEquals" locator1="DDMEditStructure#SETTINGS_NAME" value1="${fieldNameNested}" />
+		<execute function="AssertClick#pauseAssertTextClickAt" locator1="DDMEditStructure#FIELDS_LINK" value1="Fields" />
 
 		<execute macro="DynamicDataMapping#selectFrameTopCmd" />
 	</command>
@@ -338,6 +385,11 @@
 		<var name="key_fieldFieldLabel" value="${fieldFieldLabel}" />
 
 		<execute function="DoubleClick" locator1="DDMEditStructure#FORM_FIELD" />
+		<execute function="AssertClick" locator1="DDMEditStructure#SETTINGS_LINK" value1="Settings" />
+	</command>
+
+	<command name="editFieldSettingsNested">
+		<execute function="DoubleClick" locator1="DDMEditStructure#FORM_FIELD_2" />
 		<execute function="AssertClick" locator1="DDMEditStructure#SETTINGS_LINK" value1="Settings" />
 	</command>
 
