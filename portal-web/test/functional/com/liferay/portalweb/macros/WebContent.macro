@@ -759,7 +759,7 @@
 
 				<var name="key_webContentTitle" value="${webContentTitleEdit}" />
 
-				<execute macro="WebContent#changeDisplayStyle">
+				<execute macro="Portlet#changeDisplayStyle">
 					<var name="displayStyle" value="Descriptive" />
 				</execute>
 
@@ -959,7 +959,7 @@
 	</command>
 
 	<command name="moveToRecycleBinViaDeleteIconCP">
-		<execute macro="WebContent#changeDisplayStyle">
+		<execute macro="Portlet#changeDisplayStyle">
 			<var name="displayStyle" value="Descriptive" />
 		</execute>
 
@@ -1055,7 +1055,7 @@
 			<var name="portletName" value="Web Content" />
 		</execute>
 
-		<execute macro="WebContent#changeDisplayStyle">
+		<execute macro="Portlet#changeDisplayStyle">
 			<var name="displayStyle" value="Descriptive" />
 		</execute>
 
@@ -1090,7 +1090,7 @@
 	<command name="viewApprovedStatus">
 		<var name="key_webContentTitle" value="${webContentTitle}" />
 
-		<execute macro="WebContent#changeDisplayStyle">
+		<execute macro="Portlet#changeDisplayStyle">
 			<var name="displayStyle" value="List" />
 		</execute>
 
@@ -1152,7 +1152,7 @@
 	<command name="viewCategoryDescriptiveCP">
 		<var name="key_webContentTitle" value="${webContentTitle}" />
 
-		<execute macro="WebContent#changeDisplayStyle">
+		<execute macro="Portlet#changeDisplayStyle">
 			<var name="displayStyle" value="Descriptive" />
 		</execute>
 
@@ -1214,7 +1214,7 @@
 	<command name="viewDefaultCP">
 		<var name="key_webContentTitle" value="${webContentTitle}" />
 
-		<execute macro="WebContent#changeDisplayStyle">
+		<execute macro="Portlet#changeDisplayStyle">
 			<var name="displayStyle" value="Descriptive" />
 		</execute>
 
@@ -1461,7 +1461,7 @@
 			</else>
 		</if>
 
-		<execute macro="WebContent#changeDisplayStyle">
+		<execute macro="Portlet#changeDisplayStyle">
 			<var name="displayStyle" value="Descriptive" />
 		</execute>
 
@@ -1576,7 +1576,7 @@
 	<command name="viewWithStructureCP">
 		<var name="key_webContentTitle" value="${webContentTitle}" />
 
-		<execute macro="WebContent#changeDisplayStyle">
+		<execute macro="Portlet#changeDisplayStyle">
 			<var name="displayStyle" value="Descriptive" />
 		</execute>
 
