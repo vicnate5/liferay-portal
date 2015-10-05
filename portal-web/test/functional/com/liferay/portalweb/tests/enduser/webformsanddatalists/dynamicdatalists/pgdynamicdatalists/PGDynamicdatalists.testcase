@@ -648,7 +648,7 @@
 		</execute>
 
 		<execute macro="DDLRecord#viewFirstRecordViaDDLDisplayTemplate">
-			<var name="ddlListName" value="DDL List Name" />
+			<var name="ddlListName" value="New Data Definition Name for List: DDL List Name" />
 			<var name="ddlRecordFieldData" value="Record Text" />
 			<var name="field" value="Text" />
 			<var name="fieldFieldLabel" value="Text" />
@@ -672,7 +672,7 @@
 		</execute>
 
 		<execute macro="DDLRecord#viewSecondRecordViaDDLDisplayTemplate">
-			<var name="ddlListName" value="DDL List Name" />
+			<var name="ddlListName" value="New Data Definition Name for List: DDL List Name" />
 			<var name="ddlRecordFieldData" value="123" />
 			<var name="field" value="Number" />
 			<var name="fieldFieldLabel" value="Number" />
@@ -795,7 +795,7 @@
 		</execute>
 
 		<execute macro="DDLRecord#viewViaDDLDisplayPG">
-			<var name="ddlListName" value="DDL List Name" />
+			<var name="ddlListName" value="New Data Definition Name for List: DDL List Name" />
 			<var name="ddlRecordFieldData" value="Record Text" />
 			<var name="fieldFieldLabel" value="Text" />
 		</execute>
@@ -885,6 +885,8 @@
 		</execute>
 
 		<execute macro="DDLList#saveViaDDLDisplayPG" />
+
+		<var name="key_ddlDataDefinitionName" value="Add ${ddlDataDefinition1Name}" />
 
 		<execute function="AssertTextEquals" locator1="DDL#TOOLBAR_ADD" value1="Add ${ddlDataDefinition1Name}" />
 
