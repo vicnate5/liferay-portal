@@ -118,6 +118,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>TEXT_FIELD_LINE_OPTION</td>
+	<td>//div[@class='radio-options']//input[@id='${key_textFieldLineOption}']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TEXT_MULTILINE_TEXT_FIELD</td>
+	<td>//textarea[contains(@id,'${key_fieldName}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td></td>
 	<td></td>
 	<td></td>
