@@ -13,6 +13,26 @@
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
 
+	<command name="searchEntries">
+		<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${searchTerm}" />
+
+		<execute function="Click" locator1="Icon#BASIC_SEARCH" />
+
+		<execute function="AssertTextNotPresent" locator1="Message#EMPTY_INFO" value1="No entries were found." />
+		<execute macro="FormsAdmin#viewFormEntry">
+			<var name="fieldLabel" value="${fieldLabel}" />
+			<var name="fieldValue" value="${fieldValue}" />
+		</execute>
+	</command>
+
+	<command name="searchEntriesNoResult">
+		<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${searchTerm}" />
+
+		<execute function="Click" locator1="Icon#BASIC_SEARCH" />
+
+		<execute function="AssertTextEquals#assertText" locator1="Message#EMPTY_INFO" value1="No entries were found." />
+	</command>
+
 	<command name="teardownForms">
 		<while>
 			<condition function="IsElementPresent" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
