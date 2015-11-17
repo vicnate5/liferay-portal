@@ -61,4 +61,10 @@
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
+
+	<command name="viewFormName">
+		<var name="key_formName" value="${formName}" />
+
+		<execute function="AssertTextEquals" locator1="Form#NAME_FIELD" value1="${formName}" />
+	</command>
 </definition>
