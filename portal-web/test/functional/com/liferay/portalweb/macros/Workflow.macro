@@ -115,6 +115,17 @@
 			<var name="workflowTask" value="${workflowTask}" />
 		</execute>
 
+		<execute macro="Workflow#viewAssetDetails">
+			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
+			<var name="workflowAssetTitle" value="${workflowAssetTitle}" />
+			<var name="workflowAssetType" value="${workflowAssetType}" />
+			<var name="workflowTask" value="${workflowTask}" />
+		</execute>
+
+		<execute macro="Page#gotoMyAccount">
+			<var name="portletName" value="My Workflow Tasks" />
+		</execute>
+
 		<execute macro="Workflow#gotoTaskAssignedToMyRolesActionsCmd">
 			<var name="workflowAssetTitle" value="${workflowAssetTitle}" />
 			<var name="workflowTask" value="${workflowTask}" />
@@ -579,6 +590,34 @@
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+	</command>
+
+	<command name="viewAssetDetails">
+		<var name="key_workflowAssetTitle" value="${workflowAssetTitle}" />
+		<var name="key_workflowTask" value="${workflowTask}" />
+
+		<if>
+			<equals arg1="${workflowAssetType}" arg2="Dynamic Data Lists Record" />
+			<then>
+				<execute function="AssertClick" locator1="MyWorkflowTasks#ASSIGNED_TO_MY_ROLES_TABLE_ASSET_TITLE" value1="New ${ddlDataDefinitionName} for List: ${workflowAssetTitle}" />
+			</then>
+			<else>
+				<execute function="AssertClick" locator1="MyWorkflowTasks#ASSIGNED_TO_MY_ROLES_TABLE_ASSET_TITLE" value1="${workflowAssetTitle}" />
+			</else>
+		</if>
+
+		<execute function="AssertTextEquals#assertValue" locator1="MyWorkflowTasksTask#ASSIGNED_TO" value1="Nobody" />
+		<execute function="AssertTextEquals#assertValue" locator1="MyWorkflowTasksTask#STATE" value1="${workflowTask}" />
+
+		<if>
+			<equals arg1="${workflowAssetType}" arg2="Dynamic Data Lists Record" />
+			<then>
+				<execute function="AssertTextEquals" locator1="MyWorkflowTasksTask#PREVIEW_TITLE" value1="New ${ddlDataDefinitionName} for List: ${workflowAssetTitle}" />
+			</then>
+			<else>
+				<execute function="AssertTextEquals" locator1="MyWorkflowTasksTask#PREVIEW_TITLE" value1="${workflowAssetTitle}" />
+			</else>
+		</if>
 	</command>
 
 	<command name="viewAssignedToMyRolesTasksCP">
