@@ -800,9 +800,9 @@
 	</command>
 
 	<command name="viewMultipleAssetOrderPGViaAP">
-		<execute function="AssertTextEquals" locator1="AP#ASSET_ABSTRACT_GENERIC_TITLE_1" value1="${assetTitle1}" />
-		<execute function="AssertTextEquals" locator1="AP#ASSET_ABSTRACT_GENERIC_TITLE_2" value1="${assetTitle2}" />
-		<execute function="AssertTextEquals" locator1="AP#ASSET_ABSTRACT_GENERIC_TITLE_3" value1="${assetTitle3}" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="AP#ASSET_ABSTRACT_GENERIC_TITLE_1" value1="${assetTitle1}" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="AP#ASSET_ABSTRACT_GENERIC_TITLE_2" value1="${assetTitle2}" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="AP#ASSET_ABSTRACT_GENERIC_TITLE_3" value1="${assetTitle3}" />
 	</command>
 
 	<command name="viewMultipleSiteScopesAddDropdowns">
