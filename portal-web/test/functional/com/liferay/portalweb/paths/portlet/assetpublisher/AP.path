@@ -94,17 +94,17 @@
 </tr>
 <tr>
 	<td>ASSET_ABSTRACT_GENERIC_TITLE_1</td>
-	<td>//h4[@class='asset-title']/a</td>
+	<td>//div[@class='asset-content']//div[contains(@class,'field-wrapper-content')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>ASSET_ABSTRACT_GENERIC_TITLE_2</td>
-	<td>xPath=(//h4[@class='asset-title']/a)[2]</td>
+	<td>xPath=(//div[@class='asset-content']//div[contains(@class,'field-wrapper-content')])[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>ASSET_ABSTRACT_GENERIC_TITLE_3</td>
-	<td>xPath=(//h4[@class='asset-title']/a)[3]</td>
+	<td>xPath=(//div[@class='asset-content']//div[contains(@class,'field-wrapper-content')])[3]</td>
 	<td></td>
 </tr>
 <tr>
