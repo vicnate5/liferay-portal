@@ -1147,6 +1147,10 @@
 
 		<execute function="AssertSelectedLabel" locator1="CalendarEditEvent#REPEAT_REPEAT_EVERY_DROPDOWN" value1="1" />
 
+		<var locator="CalendarEditEvent#REPEAT_WEEKLY_ON_DAY_DISABLED_CHECKBOX" name="repeatingDay" />
+		<var method="StringUtil#lowerCase('${repeatingDay}')" name="repeatingDay" />
+		<var method="StringUtil#upperCaseFirstLetter('${repeatingDay}')" name="repeatingDay" />
+
 		<if>
 			<isset var="position" />
 			<then>
