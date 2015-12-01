@@ -1180,6 +1180,13 @@
 		<execute function="Pause" value1="1000" />
 
 		<if>
+			<equals arg1="${frequency}" arg2="Weekly" />
+			<then>
+				<execute function="AssertTextEquals#assertPartialText" locator1="CalendarEditEvent#REPEAT_DIALOG_SUMMARY" value1="${frequency}" />
+				<execute function="AssertTextEquals#assertPartialText" locator1="CalendarEditEvent#REPEAT_DIALOG_SUMMARY" value1="${repeatingDay}" />"
+				<execute function="AssertTextEquals#assertPartialText" locator1="CalendarEditEvent#REPEAT_DIALOG_SUMMARY" value1="${numberOfOccurrences} Times" />"
+			</then>
+			<elseif>
 			<and>
 				<isset var="position" />
 				<isset var="month" />
@@ -1191,6 +1198,7 @@
 
 				<execute function="AssertTextEquals" locator1="CalendarEditEvent#REPEAT_SUMMARY" value1="${frequency}, On The ${position} ${weekday} Of ${month}" />
 			</then>
+			</elseif>
 			<elseif>
 				<and>
 					<isset var="position" />
