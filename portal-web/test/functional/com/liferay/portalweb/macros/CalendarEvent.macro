@@ -1147,10 +1147,6 @@
 
 		<execute function="AssertSelectedLabel" locator1="CalendarEditEvent#REPEAT_REPEAT_EVERY_DROPDOWN" value1="1" />
 
-		<var locator="CalendarEditEvent#REPEAT_WEEKLY_ON_DAY_DISABLED_CHECKBOX" name="repeatingDay" />
-		<var method="StringUtil#lowerCase('${repeatingDay}')" name="repeatingDay" />
-		<var method="StringUtil#upperCaseFirstLetter('${repeatingDay}')" name="repeatingDay" />
-
 		<if>
 			<isset var="position" />
 			<then>
@@ -1186,6 +1182,12 @@
 		<if>
 			<equals arg1="${frequency}" arg2="Weekly" />
 			<then>
+				<var locator="CalendarEditEvent#REPEAT_WEEKLY_ON_DAY_DISABLED_CHECKBOX" name="repeatingDay" />
+
+				<var method="StringUtil#lowerCase('${repeatingDay}')" name="repeatingDay" />
+
+				<var method="StringUtil#upperCaseFirstLetter('${repeatingDay}')" name="repeatingDay" />
+
 				<execute function="AssertTextEquals#assertPartialText" locator1="CalendarEditEvent#REPEAT_DIALOG_SUMMARY" value1="${frequency}" />
 				<execute function="AssertTextEquals#assertPartialText" locator1="CalendarEditEvent#REPEAT_DIALOG_SUMMARY" value1="${repeatingDay}" />"
 				<execute function="AssertTextEquals#assertPartialText" locator1="CalendarEditEvent#REPEAT_DIALOG_SUMMARY" value1="${numberOfOccurrences} Times" />"
