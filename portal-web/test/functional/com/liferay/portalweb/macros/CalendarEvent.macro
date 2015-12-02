@@ -1147,6 +1147,10 @@
 
 		<execute function="AssertSelectedLabel" locator1="CalendarEditEvent#REPEAT_REPEAT_EVERY_DROPDOWN" value1="1" />
 
+		<var locator="CalendarEditEvent#REPEAT_WEEKLY_ON_DAY_DISABLED_CHECKBOX" name="repeatingWeeklyDay" />
+		<var method="StringUtil#lowerCase('${repeatingWeeklyDay}')" name="repeatingWeeklyDay" />
+		<var method="StringUtil#upperCaseFirstLetter('${repeatingWeeklyDay}')" name="repeatingWeeklyDay" />
+
 		<if>
 			<isset var="position" />
 			<then>
@@ -1180,17 +1184,25 @@
 		<execute function="Pause" value1="1000" />
 
 		<if>
-			<and>
-				<isset var="position" />
-				<isset var="month" />
-			</and>
+			<equals arg1="${frequency}" arg2="Weekly" />
 			<then>
-				<execute function="AssertTextEquals" locator1="CalendarEditEvent#REPEAT_DIALOG_SUMMARY" value1="${frequency}, On The ${position} ${weekday} Of ${month}" />
-
-				<execute function="AssertClick" locator1="CalendarEditEvent#REPEAT_DONE_BUTTON" value1="Done" />
-
-				<execute function="AssertTextEquals" locator1="CalendarEditEvent#REPEAT_SUMMARY" value1="${frequency}, On The ${position} ${weekday} Of ${month}" />
+				<execute function="AssertTextEquals#assertPartialText" locator1="CalendarEditEvent#REPEAT_DIALOG_SUMMARY" value1="${frequency}" />
+				<execute function="AssertTextEquals#assertPartialText" locator1="CalendarEditEvent#REPEAT_DIALOG_SUMMARY" value1="${repeatingWeeklyDay}" />"
+				<execute function="AssertTextEquals#assertPartialText" locator1="CalendarEditEvent#REPEAT_DIALOG_SUMMARY" value1="${numberOfOccurrences} Times" />"
 			</then>
+			<elseif>
+				<and>
+					<isset var="position" />
+					<isset var="month" />
+				</and>
+				<then>
+					<execute function="AssertTextEquals" locator1="CalendarEditEvent#REPEAT_DIALOG_SUMMARY" value1="${frequency}, On The ${position} ${weekday} Of ${month}" />
+
+					<execute function="AssertClick" locator1="CalendarEditEvent#REPEAT_DONE_BUTTON" value1="Done" />
+
+					<execute function="AssertTextEquals" locator1="CalendarEditEvent#REPEAT_SUMMARY" value1="${frequency}, On The ${position} ${weekday} Of ${month}" />
+				</then>
+			</elseif>
 			<elseif>
 				<and>
 					<isset var="position" />
