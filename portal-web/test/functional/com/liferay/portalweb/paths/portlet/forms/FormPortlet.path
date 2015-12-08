@@ -14,6 +14,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>FORM_CONTENT</td>
+	<td>//div[contains(@class,'form-container')]/div[contains(@class,'form-content')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>FORM_PAGE</td>
 	<td>//ul[contains(@class,'nav-tabs')]/li/a[contains(.,'${key_formPageName}')]</td>
 	<td></td>
