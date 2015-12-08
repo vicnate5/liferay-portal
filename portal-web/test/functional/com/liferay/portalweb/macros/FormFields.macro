@@ -87,12 +87,18 @@
 		<execute function="Click" locator1="FormFields#TEXT_FIELD_LINE_OPTION" />
 	</command>
 
+	<command name="setAdvancedOption">
+		<var name="key_advancedOption" value="${advancedOption}" />
+
+		<execute function="Type" locator1="FormFields#ADVANCED_FIELD_SETTINGS_OPTION" value1="${optionSetting}" />
+	</command>
+
 	<command name="viewCheckboxLabel">
 		<var name="key_fieldName" value="${fieldName}" />
 
 		<execute function="AssertTextEquals#assertText" locator1="FormFields#CHECKBOX_LABEL" value1="${fieldLabel}" />
 	</command>
-
+	
 	<command name="viewFormName">
 		<execute function="AssertTextEquals" locator1="FormFields#FIELD_NAME" value1="Field Name:${fieldName}" />
 	</command>
