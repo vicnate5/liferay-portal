@@ -19,6 +19,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>ADVANCED_FIELD_SETTINGS_OPTION</td>
+	<td>//input[contains(@name,'${key_advancedOption}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>FIELD_ADD</td>
 	<td>//div[contains(@class,'form-field-repeatable-toolbar')]//a[contains(@class,'add-button')]</td>
 	<td></td>
@@ -26,6 +31,11 @@
 <tr>
 	<td>FIELD_NAME</td>
 	<td>//div[@class='key-value-editor']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>HIDDEN_LABEL</td>
+	<td>xpath=(//div[contains(@class,'form-field-container')][2]//label[contains(.,'${key_fieldLabelHidden}')])</td>
 	<td></td>
 </tr>
 <tr>
