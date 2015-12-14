@@ -1063,7 +1063,14 @@
 	</command>
 
 	<command name="selectCategory">
-		<execute function="Click" locator1="NavListItem#METADATA" />
+		<var name="key_vocabularyName" value="${vocabularyName}" />
+
+		<if>
+			<condition function="IsNotVisible" locator1="AssetCategorization#CATEGORY_SELECT" />
+			<then>
+				<execute function="Click" locator1="NavListItem#METADATA" />
+			</then>
+		</if>
 
 		<if>
 			<isset var="userSegmentDetailTitle" />
