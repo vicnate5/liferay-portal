@@ -796,6 +796,11 @@
 		<execute macro="CalendarEvent#view">
 			<var name="eventTitle" value="${eventTitle}" />
 		</execute>
+
+		<execute macro="CalendarNavigator#gotoViewDetails">
+			<var name="eventTitle" value="${eventTitle}" />
+			<var name="eventType" value="${eventType}" />
+		</execute>
 	</command>
 
 	<command name="AddCalendarEventRepeatingCommentToCurrentSiteCalendars" priority="3">
