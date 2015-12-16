@@ -1413,7 +1413,7 @@
 		<execute function="AssertTextEquals" locator1="PGCalendarVieweventdetails#EVENT_TITLE" value1="${eventTitle}" />
 
 		<execute function="AssertTextEquals" locator1="PGCalendarVieweventdetails#REPEAT_OCCURRENCE_SUMMARY" value1="Daily, ${numberOfOccurrences} Times" />
-				
+
 		<var name="key_calendarEventDescription" value="${calendarEventDescription}" />
 
 		<if>
