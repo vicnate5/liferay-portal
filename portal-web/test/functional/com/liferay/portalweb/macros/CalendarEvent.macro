@@ -1407,6 +1407,25 @@
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
+	<command name="viewDailyRepeatingEventViaViewDetails">
+		<execute function="SelectFrame" locator1="PGCalendarVieweventdetails#VIEW_EVENT_IFRAME" />
+
+		<execute function="AssertTextEquals" locator1="PGCalendarVieweventdetails#EVENT_TITLE" value1="${eventTitle}" />
+
+		<execute function="AssertTextEquals" locator1="PGCalendarVieweventdetails#REPEAT_OCCURRENCE_SUMMARY" value1="Daily, ${numberOfOccurrences} Times" />
+
+		<var name="key_calendarEventDescription" value="${calendarEventDescription}" />
+
+		<if>
+			<isset var="calendarDescription" />
+			<then>
+				<execute function="AssertTextEquals" locator1="PGCalendarVieweventdetails#REPEAT_EVENT_DESCRIPTION" value1="${calendarDescription}" />
+			</then>
+		</if>
+
+		<execute function="SelectFrame" value1="relative=top" />
+	</command>
+
 	<command name="viewDefaultTimes">
 		<execute function="AssertTextEquals#assertValue" locator1="CalendarEditEvent#START_DATE_TIME" value1="${startDateTime}" />
 		<execute function="AssertTextEquals#assertValue" locator1="CalendarEditEvent#END_DATE_TIME" value1="${endDateTime}" />
