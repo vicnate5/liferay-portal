@@ -59,6 +59,17 @@
 	<td></td>
 	<td></td>
 </tr>
+<!--DATE-->
+<tr>
+	<td>DATE_FIELD</td>
+	<td>//input[@type='text' and contains(@aria-label,'${key_fieldLabel}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
 <!--OPTIONS-->
 <tr>
 	<td>OPTIONS_ADD_ROW_BUTTON</td>
