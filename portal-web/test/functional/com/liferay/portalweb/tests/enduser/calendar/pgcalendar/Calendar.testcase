@@ -1672,7 +1672,7 @@
 
 		<execute macro="AssetPublisherPortlet#gotoViewInContext" />
 
-		<execute macro="CalendarEvent#viewDetailsInPortlet">
+		<execute macro="CalendarEvent#viewDetailsInAssetPublisherPortlet">
 			<var name="calendarName" value="Liferay" />
 			<var name="eventTitle" value="Calendar Event Title" />
 			<var name="relatedAssetTitle" value="Blogs Entry Title" />

@@ -639,6 +639,12 @@
 		<execute function="SelectFrameTop" />
 	</command>
 
+	<command name="viewCalendarDetailsResources">
+		<var name="key_calendarName" value="${calendarName}" />
+
+		<execute function="AssertTextEquals" locator1="AP#ASSET_ABSTRACT_CALENDAR_RESOURCE_FIELD" value1="${calendarName}" />
+	</command>
+
 	<command name="viewConfigureAPDisplayTemplateFullContentBookmarksPG">
 		<var name="key_assetTitle" value="${assetTitle}" />
 

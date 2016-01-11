@@ -222,6 +222,27 @@
 	<td></td>
 	<td></td>
 </tr>
+<!--ASSET_ABSTRACT_CALENDAR_EVENT_DETAILS-->
+<tr>
+	<td>ASSET_ABSTRACT_CALENDAR_EVENT_TITLE</td>
+	<td>//h4[@class='asset-title']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ASSET_ABSTRACT_CALENDAR_RESOURCE_FIELD</td>
+	<td>//div[@class='calendar-asset-abstract']//strong[contains(.,'${key_calendarName}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ASSET_ABSTRACT_CALENDAR_START_DATE_FIELD</td>
+	<td>//div[@class='calendar-asset-abstract']//p/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ASSET_ABSTRACT_CALENDAR_END_DATE_FIELD</td>
+	<td>//div[@class='calendar-asset-abstract']//p/span[4]</td>
+	<td></td>
+</tr>
 <!--ASSET_ABSTRACT_DDL_RECORD-->
 <tr>
 	<td>ASSET_ABSTRACT_DDL_RECORD_1</td>
