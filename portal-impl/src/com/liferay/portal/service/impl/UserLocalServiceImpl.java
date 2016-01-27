@@ -66,6 +66,7 @@ import com.liferay.portal.kernel.security.auth.FullNameDefinitionFactory;
 import com.liferay.portal.kernel.security.auth.FullNameGenerator;
 import com.liferay.portal.kernel.security.auth.FullNameGeneratorFactory;
 import com.liferay.portal.kernel.security.auth.FullNameValidator;
+import com.liferay.portal.kernel.security.auth.PasswordModificationThreadLocal;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.security.auth.ScreenNameGenerator;
@@ -134,7 +135,6 @@ import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.UserGroupRolePK;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -156,7 +156,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -334,8 +333,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Adds the user to the default roles, unless the user already has these
-	 * roles. The default roles can be specified in
+	 * Adds the user to the default regular roles, unless the user already has
+	 * these regular roles. The default regular roles can be specified in
 	 * <code>portal.properties</code> with the key
 	 * <code>admin.default.role.names</code>.
 	 *
@@ -356,56 +355,19 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				user.getCompanyId(), defaultRoleName);
 
 			if ((role != null) &&
+				(role.getType() == RoleConstants.TYPE_REGULAR) &&
 				!userPersistence.containsRole(userId, role.getRoleId())) {
 
 				roleIdSet.add(role.getRoleId());
 			}
 		}
 
-		Set<Long> groupRoleIdsSet = new HashSet<>();
-		Set<Long> regularRoleIdsSet = new HashSet<>();
-
-		long[] roleIds = ArrayUtil.toLongArray(roleIdSet);
+		long[] roleIds = ArrayUtil.toArray(
+			roleIdSet.toArray(new Long[roleIdSet.size()]));
 
 		roleIds = UsersAdminUtil.addRequiredRoles(user, roleIds);
 
-		for (long roleId : roleIds) {
-			Role role = roleLocalService.getRole(roleId);
-
-			if (role.getType() == RoleConstants.TYPE_REGULAR) {
-				regularRoleIdsSet.add(roleId);
-			}
-			else {
-				groupRoleIdsSet.add(roleId);
-			}
-		}
-
-		long[] regularRoleIds = ArrayUtil.toLongArray(regularRoleIdsSet);
-
-		userPersistence.addRoles(userId, regularRoleIds);
-
-		Set<UserGroupRole> userGroupRolesSet = new LinkedHashSet<>();
-
-		long[] groupIds = user.getGroupIds();
-
-		for (long groupRoleId : groupRoleIdsSet) {
-			for (long groupId : groupIds) {
-				UserGroupRolePK userGroupRolePK = new UserGroupRolePK(
-					userId, groupId, groupRoleId);
-
-				UserGroupRole userGroupRole = userGroupRolePersistence.create(
-					userGroupRolePK);
-
-				userGroupRolesSet.add(userGroupRole);
-			}
-		}
-
-		List<UserGroupRole> previousUserGroupRoles =
-			userGroupRolePersistence.findByUserId(userId);
-
-		updateUserGroupRoles(
-			user, groupIds, null, new ArrayList<>(userGroupRolesSet),
-			previousUserGroupRoles);
+		userPersistence.addRoles(userId, roleIds);
 	}
 
 	/**
@@ -4736,59 +4698,46 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setPasswordModified(true);
 		}
 
-		boolean passwordModified = PrincipalThreadLocal.isPasswordModified();
-
-		PrincipalThreadLocal.setPasswordModified(user.getPasswordModified());
-
-		String passwordUnencrypted =
-			PrincipalThreadLocal.getPasswordUnencrypted();
-
-		PrincipalThreadLocal.setPasswordUnencrypted(
+		PasswordModificationThreadLocal.setPasswordModified(
+			user.getPasswordModified());
+		PasswordModificationThreadLocal.setPasswordUnencrypted(
 			user.getPasswordUnencrypted());
 
 		try {
-			try {
-				user = userPersistence.update(user);
-			}
-			catch (ModelListenerException mle) {
-				String msg = GetterUtil.getString(mle.getCause().getMessage());
+			user = userPersistence.update(user);
+		}
+		catch (ModelListenerException mle) {
+			String msg = GetterUtil.getString(mle.getCause().getMessage());
 
-				if (LDAPSettingsUtil.isPasswordPolicyEnabled(
-						user.getCompanyId())) {
+			if (LDAPSettingsUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
+				String[] errorPasswordHistoryKeywords =
+					LDAPSettingsUtil.getErrorPasswordHistoryKeywords(
+						user.getCompanyId());
 
-					String[] errorPasswordHistoryKeywords =
-						LDAPSettingsUtil.getErrorPasswordHistoryKeywords(
-							user.getCompanyId());
+				for (String errorPasswordHistoryKeyword :
+						errorPasswordHistoryKeywords) {
 
-					for (String errorPasswordHistoryKeyword :
-							errorPasswordHistoryKeywords) {
-
-						if (msg.contains(errorPasswordHistoryKeyword)) {
-							throw new UserPasswordException.
-								MustNotBeRecentlyUsed(userId);
-						}
+					if (msg.contains(errorPasswordHistoryKeyword)) {
+						throw new UserPasswordException.MustNotBeRecentlyUsed(
+							userId);
 					}
 				}
-
-				throw new UserPasswordException.MustComplyWithModelListeners(
-					userId, mle);
 			}
 
-			if (!silentUpdate) {
-				user.setPasswordModified(false);
-
-				passwordTrackerLocalService.trackPassword(userId, oldEncPwd);
-			}
-
-			if (!silentUpdate && (PrincipalThreadLocal.getUserId() != userId)) {
-				sendPasswordNotification(
-					user, user.getCompanyId(), password1, null, null, null,
-					null, null, ServiceContextThreadLocal.getServiceContext());
-			}
+			throw new UserPasswordException.MustComplyWithModelListeners(
+				userId, mle);
 		}
-		finally {
-			PrincipalThreadLocal.setPasswordModified(passwordModified);
-			PrincipalThreadLocal.setPasswordUnencrypted(passwordUnencrypted);
+
+		if (!silentUpdate) {
+			user.setPasswordModified(false);
+
+			passwordTrackerLocalService.trackPassword(userId, oldEncPwd);
+		}
+
+		if (!silentUpdate && (PrincipalThreadLocal.getUserId() != userId)) {
+			sendPasswordNotification(
+				user, user.getCompanyId(), password1, null, null, null, null,
+				null, ServiceContextThreadLocal.getServiceContext());
 		}
 
 		return user;
