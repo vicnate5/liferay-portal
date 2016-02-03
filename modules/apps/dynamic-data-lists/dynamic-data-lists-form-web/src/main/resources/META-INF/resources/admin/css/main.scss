@@ -279,7 +279,7 @@ $horizontal-spacing: 35px;
 	}
 
 	.modal-title {
-		 text-transform: capitalize;
+		text-transform: capitalize;
 	}
 
 	@include lg {
@@ -438,6 +438,15 @@ $horizontal-spacing: 35px;
 		margin: 0;
 	}
 
+	.asset-icon .lexicon-icon {
+		height: 32px;
+		width: 32px;
+	}
+
+	.record-set-id, .record-set-modified-date {
+		margin-right: 20px;
+	}
+
 	.ddl-form-basic-info {
 		background-color: #869CAD;
 		min-height: 300px;
@@ -544,6 +553,16 @@ $horizontal-spacing: 35px;
 		border-bottom: 1px solid #DEE4E9;
 		padding: 20px 34px 11px 34px;
 		position: relative;
+	}
+}
+
+.portal-popup {
+	.portlet-layout {
+		margin: 0 0 75px;
+	}
+
+	.portlet-column {
+		padding: 0;
 	}
 }
 
@@ -740,6 +759,7 @@ $horizontal-spacing: 35px;
 	}
 
 	.form-builder-page-header {
+		padding-right: 34px;
 		position: relative;
 	}
 
@@ -810,6 +830,10 @@ $horizontal-spacing: 35px;
 		> li {
 			cursor: pointer;
 		}
+	}
+
+	select.form-control[multiple] {
+		height: auto;
 	}
 
 	.toggle-switch {
