@@ -22,7 +22,11 @@
 	<command name="gotoNavItem">
 		<var name="key_navItem" value="${navItem}" />
 
+		<execute function="Pause" locator1="5000" />
+
 		<execute function="AssertClick" locator1="NavBar#NAV_ITEM_LINK" value1="${navItem}" />
+
+		<execute function="Pause" locator1="5000" />
 
 		<execute function="AssertElementPresent" locator1="NavBar#ACTIVE_NAV_ITEM_LINK" />
 	</command>
