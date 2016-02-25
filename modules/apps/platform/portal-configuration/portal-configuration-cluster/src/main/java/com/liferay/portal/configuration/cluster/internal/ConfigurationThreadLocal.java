@@ -12,13 +12,25 @@
  * details.
  */
 
-package com.liferay.portal.configuration.cluster;
+package com.liferay.portal.configuration.cluster.internal;
+
+import com.liferay.portal.kernel.util.InitialThreadLocal;
 
 /**
- * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  */
-public class DestinationNames {
+public class ConfigurationThreadLocal {
 
-	public static final String CONFIGURATION = "liferay/configuration";
+	public static boolean isLocalUpdate() {
+		return _localUpdate.get();
+	}
+
+	public static void setLocalUpdate(boolean localUpdate) {
+		_localUpdate.set(localUpdate);
+	}
+
+	private static final ThreadLocal<Boolean> _localUpdate =
+		new InitialThreadLocal<>(
+			InitialThreadLocal.class + "._localUpdate", false);
 
 }
