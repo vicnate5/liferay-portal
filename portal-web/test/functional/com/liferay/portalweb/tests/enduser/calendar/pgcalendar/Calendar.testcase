@@ -2,6 +2,8 @@
 	<property name="custom.properties" value="default.layout.template.id=1_column" />
 	<property name="testray.main.component.name" value="Calendar" />
 
+	<property name="portal.acceptance" value="true" />
+
 	<var name="pageName" value="Calendar Page" />
 	<var name="portletName" value="Calendar" />
 
