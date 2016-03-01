@@ -118,6 +118,270 @@
 		</execute>
 	</command>
 
+	<command name="AddDisplayTemplateVelocity2" priority="5">
+		<property name="portal.acceptance" value="true" />
+
+		<var name="ddlDataDefinitionName" value="Data Definition" />
+		<var name="ddlDisplayTemplateLanguage" value="Velocity (.vm)" />
+		<var name="ddlDisplayTemplateName" value="Data Definition Velocity Display Template Name" />
+		<var name="ddlDisplayTemplateTextFieldScript" value="Text" />
+		<var name="field" value="Text" />
+		<var name="fieldFieldLabel" value="Text" />
+		<var name="fieldName" value="Text" />
+		<var name="formFieldKey" value="FORM_TEXT_FIELD_1" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#addCP">
+			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
+		</execute>
+
+		<execute macro="DynamicDataMapping#addField">
+			<var name="field" value="${field}" />
+			<var name="fieldFieldLabel" value="${fieldFieldLabel}" />
+			<var name="fieldName" value="${fieldName}" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#saveCP" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLTemplate#addDisplayTemplateCP">
+			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
+			<var name="ddlDisplayTemplateLanguage" value="${ddlDisplayTemplateLanguage}" />
+			<var name="ddlDisplayTemplateName" value="${ddlDisplayTemplateName}" />
+			<var name="ddlDisplayTemplateTextFieldScript" value="${ddlDisplayTemplateTextFieldScript}" />
+		</execute>
+	</command>
+
+	<command name="AddDisplayTemplateVelocity3" priority="5">
+		<property name="portal.acceptance" value="true" />
+
+		<var name="ddlDataDefinitionName" value="Data Definition" />
+		<var name="ddlDisplayTemplateLanguage" value="Velocity (.vm)" />
+		<var name="ddlDisplayTemplateName" value="Data Definition Velocity Display Template Name" />
+		<var name="ddlDisplayTemplateTextFieldScript" value="Text" />
+		<var name="field" value="Text" />
+		<var name="fieldFieldLabel" value="Text" />
+		<var name="fieldName" value="Text" />
+		<var name="formFieldKey" value="FORM_TEXT_FIELD_1" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#addCP">
+			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
+		</execute>
+
+		<execute macro="DynamicDataMapping#addField">
+			<var name="field" value="${field}" />
+			<var name="fieldFieldLabel" value="${fieldFieldLabel}" />
+			<var name="fieldName" value="${fieldName}" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#saveCP" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLTemplate#addDisplayTemplateCP">
+			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
+			<var name="ddlDisplayTemplateLanguage" value="${ddlDisplayTemplateLanguage}" />
+			<var name="ddlDisplayTemplateName" value="${ddlDisplayTemplateName}" />
+			<var name="ddlDisplayTemplateTextFieldScript" value="${ddlDisplayTemplateTextFieldScript}" />
+		</execute>
+	</command>
+
+	<command name="AddDisplayTemplateVelocity4" priority="5">
+		<property name="portal.acceptance" value="true" />
+
+		<var name="ddlDataDefinitionName" value="Data Definition" />
+		<var name="ddlDisplayTemplateLanguage" value="Velocity (.vm)" />
+		<var name="ddlDisplayTemplateName" value="Data Definition Velocity Display Template Name" />
+		<var name="ddlDisplayTemplateTextFieldScript" value="Text" />
+		<var name="field" value="Text" />
+		<var name="fieldFieldLabel" value="Text" />
+		<var name="fieldName" value="Text" />
+		<var name="formFieldKey" value="FORM_TEXT_FIELD_1" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#addCP">
+			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
+		</execute>
+
+		<execute macro="DynamicDataMapping#addField">
+			<var name="field" value="${field}" />
+			<var name="fieldFieldLabel" value="${fieldFieldLabel}" />
+			<var name="fieldName" value="${fieldName}" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#saveCP" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLTemplate#addDisplayTemplateCP">
+			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
+			<var name="ddlDisplayTemplateLanguage" value="${ddlDisplayTemplateLanguage}" />
+			<var name="ddlDisplayTemplateName" value="${ddlDisplayTemplateName}" />
+			<var name="ddlDisplayTemplateTextFieldScript" value="${ddlDisplayTemplateTextFieldScript}" />
+		</execute>
+	</command>
+
+	<command name="AddDisplayTemplateVelocity5" priority="5">
+		<property name="portal.acceptance" value="true" />
+
+		<var name="ddlDataDefinitionName" value="Data Definition" />
+		<var name="ddlDisplayTemplateLanguage" value="Velocity (.vm)" />
+		<var name="ddlDisplayTemplateName" value="Data Definition Velocity Display Template Name" />
+		<var name="ddlDisplayTemplateTextFieldScript" value="Text" />
+		<var name="field" value="Text" />
+		<var name="fieldFieldLabel" value="Text" />
+		<var name="fieldName" value="Text" />
+		<var name="formFieldKey" value="FORM_TEXT_FIELD_1" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#addCP">
+			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
+		</execute>
+
+		<execute macro="DynamicDataMapping#addField">
+			<var name="field" value="${field}" />
+			<var name="fieldFieldLabel" value="${fieldFieldLabel}" />
+			<var name="fieldName" value="${fieldName}" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#saveCP" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLTemplate#addDisplayTemplateCP">
+			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
+			<var name="ddlDisplayTemplateLanguage" value="${ddlDisplayTemplateLanguage}" />
+			<var name="ddlDisplayTemplateName" value="${ddlDisplayTemplateName}" />
+			<var name="ddlDisplayTemplateTextFieldScript" value="${ddlDisplayTemplateTextFieldScript}" />
+		</execute>
+	</command>
+
+	<command name="AddDisplayTemplateVelocity6" priority="5">
+		<property name="portal.acceptance" value="true" />
+
+		<var name="ddlDataDefinitionName" value="Data Definition" />
+		<var name="ddlDisplayTemplateLanguage" value="Velocity (.vm)" />
+		<var name="ddlDisplayTemplateName" value="Data Definition Velocity Display Template Name" />
+		<var name="ddlDisplayTemplateTextFieldScript" value="Text" />
+		<var name="field" value="Text" />
+		<var name="fieldFieldLabel" value="Text" />
+		<var name="fieldName" value="Text" />
+		<var name="formFieldKey" value="FORM_TEXT_FIELD_1" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#addCP">
+			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
+		</execute>
+
+		<execute macro="DynamicDataMapping#addField">
+			<var name="field" value="${field}" />
+			<var name="fieldFieldLabel" value="${fieldFieldLabel}" />
+			<var name="fieldName" value="${fieldName}" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#saveCP" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLTemplate#addDisplayTemplateCP">
+			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
+			<var name="ddlDisplayTemplateLanguage" value="${ddlDisplayTemplateLanguage}" />
+			<var name="ddlDisplayTemplateName" value="${ddlDisplayTemplateName}" />
+			<var name="ddlDisplayTemplateTextFieldScript" value="${ddlDisplayTemplateTextFieldScript}" />
+		</execute>
+	</command>
+
+	<command name="AddDisplayTemplateVelocity7" priority="5">
+		<property name="portal.acceptance" value="true" />
+
+		<var name="ddlDataDefinitionName" value="Data Definition" />
+		<var name="ddlDisplayTemplateLanguage" value="Velocity (.vm)" />
+		<var name="ddlDisplayTemplateName" value="Data Definition Velocity Display Template Name" />
+		<var name="ddlDisplayTemplateTextFieldScript" value="Text" />
+		<var name="field" value="Text" />
+		<var name="fieldFieldLabel" value="Text" />
+		<var name="fieldName" value="Text" />
+		<var name="formFieldKey" value="FORM_TEXT_FIELD_1" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#addCP">
+			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
+		</execute>
+
+		<execute macro="DynamicDataMapping#addField">
+			<var name="field" value="${field}" />
+			<var name="fieldFieldLabel" value="${fieldFieldLabel}" />
+			<var name="fieldName" value="${fieldName}" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#saveCP" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLTemplate#addDisplayTemplateCP">
+			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
+			<var name="ddlDisplayTemplateLanguage" value="${ddlDisplayTemplateLanguage}" />
+			<var name="ddlDisplayTemplateName" value="${ddlDisplayTemplateName}" />
+			<var name="ddlDisplayTemplateTextFieldScript" value="${ddlDisplayTemplateTextFieldScript}" />
+		</execute>
+	</command>
+
 	<command name="AddFormTemplate" priority="5">
 		<property name="portal.acceptance" value="true" />
 
