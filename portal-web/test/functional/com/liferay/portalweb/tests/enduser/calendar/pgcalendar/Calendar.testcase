@@ -5,6 +5,8 @@
 	<var name="pageName" value="Calendar Page" />
 	<var name="portletName" value="Calendar" />
 
+	<property name="portal.acceptance" value="false" />
+
 	<set-up>
 		<execute macro="TestCase#setUpPortalInstance" />
 
@@ -62,7 +64,7 @@
 	</tear-down>
 
 	<command name="AddCalendarResource" priority="5">
-		<property name="portal.acceptance" value="true" />
+		<property name="portal.acceptance" value="false" />
 
 		<execute macro="TestCase#getSiteName">
 			<return from="siteName" name="siteName" />
@@ -147,7 +149,7 @@
 	</command>
 
 	<command name="AddEventAllDay" priority="5">
-		<property name="portal.acceptance" value="true" />
+		<property name="portal.acceptance" value="false" />
 
 		<var name="eventTitle" value="Calendar Event All Day Title" />
 		<var name="eventType" value="All Day" />
@@ -514,7 +516,7 @@
 	</command>
 
 	<command name="AddEventRegular" priority="5">
-		<property name="portal.acceptance" value="true" />
+		<property name="portal.acceptance" value="false" />
 
 		<var name="eventTitle" value="Calendar Event Regular Title" />
 		<var name="eventType" value="Regular" />
@@ -1077,7 +1079,7 @@
 	</command>
 
 	<command name="AddEventRepeatingMonthly2Times" priority="5">
-		<property name="portal.acceptance" value="true" />
+		<property name="portal.acceptance" value="false" />
 
 		<var name="eventTitle" value="Calendar Event Repeating Title" />
 		<var name="eventType" value="Repeating" />
@@ -1742,7 +1744,7 @@
 	</command>
 
 	<command name="AddResourceCalendarToOtherCalendars" priority="5">
-		<property name="portal.acceptance" value="true" />
+		<property name="portal.acceptance" value="false" />
 
 		<var name="calendarResourceName" value="Calendar Resource Name" />
 		<var name="calendarType" value="Other Calendars" />
@@ -2421,7 +2423,7 @@
 	</command>
 
 	<command name="DeleteEventRepeatingAllFollowing" priority="5">
-		<property name="portal.acceptance" value="true" />
+		<property name="portal.acceptance" value="false" />
 
 		<var name="eventTitle" value="Calendar Event Repeating Title" />
 		<var name="eventType" value="Repeating" />
@@ -4704,7 +4706,7 @@
 	</command>
 
 	<command name="ViewCalendarTimeZoneDefaults" priority="5">
-		<property name="portal.acceptance" value="true" />
+		<property name="portal.acceptance" value="false" />
 
 		<execute macro="UserBar#gotoMyAccount" />
 
@@ -5668,7 +5670,7 @@
 	</command>
 
 	<command name="ViewWeekStartMonday" priority="5">
-		<property name="portal.acceptance" value="true" />
+		<property name="portal.acceptance" value="false" />
 
 		<description message="This is a use case for 51127." />
 
