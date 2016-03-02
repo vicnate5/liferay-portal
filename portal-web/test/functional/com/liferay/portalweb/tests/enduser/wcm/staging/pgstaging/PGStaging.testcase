@@ -1515,6 +1515,8 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
+		<execute function="Pause" locator1="3000" />
+
 		<execute macro="Portlet#addPG">
 			<var name="portletName" value="Blogs" />
 		</execute>
