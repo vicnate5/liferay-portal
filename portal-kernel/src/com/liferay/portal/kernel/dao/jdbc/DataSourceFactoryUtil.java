@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.dao.jdbc;
 
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Properties;
 
