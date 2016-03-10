@@ -372,7 +372,10 @@
 			<var name="ddlListName" value="DDL List" />
 		</execute>
 
-		<execute macro="DDLRecord#viewNestedFieldsVisualGroupingViaDDLDisplay" />
+		<execute macro="DDLRecord#viewNestedFields">
+			<var name="nestedChildFieldFieldName" value="Integer" />
+			<var name="nestedParentFieldFieldName" value="Text" />
+		</execute>
 
 		<execute macro="DDLRecord#populateFieldText">
 			<var name="ddlRecordFieldData" value="Text" />
