@@ -77,4 +77,10 @@
 
 		<execute function="AssertClick" locator1="MenuItem#VIEW" value1="View" />
 	</command>
+
+	<command name="gotoOptionalConfiguration">
+ 		<execute function="SelectFrame" locator1="DDLConfiguration#CONFIGURATION_IFRAME" />
+ 
+ 		<execute function="AssertClick" locator1="DDLConfiguration#NAVIGATION_OPTIONAL_CONFIGURATION" value1="Optional Configuration" />
+ 	</command>
 </definition>
