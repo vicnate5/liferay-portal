@@ -133,6 +133,8 @@
 	</command>
 
 	<command name="EditFormsConfigurationViaSystemSettings" priority="3">
+		<property name="portal.acceptance" value="victor" />
+
 		<description message="This is a use case for LPS-59749" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
