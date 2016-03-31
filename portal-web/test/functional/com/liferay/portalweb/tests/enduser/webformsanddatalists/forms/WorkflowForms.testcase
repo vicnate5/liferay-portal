@@ -1,6 +1,8 @@
 <definition component-name="portal-workflow">
 	<property name="testray.main.component.name" value="Workflow" />
 
+	<property name="portal.acceptance" value="victor" />
+
 	<set-up>
 		<var method="TestPropsUtil#get('test.portal.instance')" name="testPortalInstance" />
 
@@ -159,7 +161,7 @@
 
 	<command name="ViewDateAssetDetails" priority="5">
 		<description message="This is a use case LPS-61197." />
-		<property name="portal.acceptance" value="true" />
+		<property name="portal.acceptance" value="victor" />
 
 		<execute macro="Navigator#openURL" />
 
