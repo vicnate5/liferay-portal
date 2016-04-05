@@ -1140,6 +1140,7 @@
 
 	<command name="SubmitFormWithRequiredMultiLineTextField" priority="3">
 		<description message="This is a use case for LPS-59997." />
+		<property name="portal.acceptance" value="true" />
 
 		<execute macro="Navigator#openURL" />
 
