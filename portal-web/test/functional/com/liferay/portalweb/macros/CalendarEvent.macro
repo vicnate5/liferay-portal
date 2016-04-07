@@ -1204,6 +1204,8 @@
 
 		<execute function="AssertClick" locator1="CalendarEditEvent#${saveOptionPath}_BUTTON" value1="${saveOption}" />
 
+		<execute function="Click" locator1="TextInput#TITLE" />
+
 		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
