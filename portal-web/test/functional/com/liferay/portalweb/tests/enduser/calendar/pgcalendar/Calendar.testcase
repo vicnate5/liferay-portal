@@ -1445,6 +1445,7 @@
 
 		<execute macro="CalendarScheduler#selectSpecificEvent">
 			<var name="eventTitle" value="${eventTitle}" />
+			<var name="eventToday" value="false" />
 		</execute>
 
 		<execute macro="CalendarScheduler#gotoDetailsViaDialogBox" />
@@ -2976,6 +2977,7 @@
 
 		<execute macro="CalendarScheduler#viewNoRSVP">
 			<var name="eventTitle" value="Edited Event Title" />
+			<var name="eventToday" value="false" />
 		</execute>
 	</command>
 
@@ -3192,6 +3194,7 @@
 
 		<execute macro="CalendarScheduler#selectSpecificEvent">
 			<var name="eventTitle" value="Original Event Title" />
+			<var name="eventToday" value="false" />
 		</execute>
 
 		<execute macro="CalendarScheduler#gotoEditViaDialogBox" />
@@ -3250,6 +3253,7 @@
 
 		<execute macro="CalendarScheduler#selectSpecificEvent">
 			<var name="eventTitle" value="Original Event Title" />
+			<var name="eventToday" value="false" />
 		</execute>
 
 		<execute macro="CalendarScheduler#gotoEditViaDialogBox" />
