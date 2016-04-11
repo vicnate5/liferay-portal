@@ -508,6 +508,7 @@
 	<command name="viewNoRSVP">
 		<execute macro="CalendarScheduler#selectSpecificEvent">
 			<var name="eventTitle" value="${eventTitle}" />
+			<var name="eventToday" value="${eventToday}" />
 		</execute>
 
 		<var name="key_rsvp" value="Yes" />
@@ -529,6 +530,7 @@
 	<command name="viewRSVP">
 		<execute macro="CalendarScheduler#selectSpecificEvent">
 			<var name="eventTitle" value="${eventTitle}" />
+			<var name="eventToday" value="${eventToday}" />
 		</execute>
 
 		<var name="key_rsvp" value="${rsvp}" />
