@@ -1058,6 +1058,8 @@
 	</command>
 
 	<command name="SubmitFormWithRequiredCheckboxField" priority="4">
+		<property name="portal.acceptance" value="true" />
+
 		<description message="This is a use case for LPS-59338." />
 
 		<execute macro="Navigator#openURL" />

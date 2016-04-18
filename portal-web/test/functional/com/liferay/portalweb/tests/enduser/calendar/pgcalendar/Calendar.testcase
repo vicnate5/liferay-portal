@@ -3164,6 +3164,8 @@
 	<command name="EditEventRepeatingAllEventsInTheSeries" priority="3">
 		<description message="This is a use case for LPS-50016." />
 
+		<property name="portal.acceptance" value="true" />
+
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="${pageName}" />
 		</execute>
@@ -3219,6 +3221,8 @@
 
 	<command name="EditEventRepeatingAllFollowing" priority="2">
 		<description message="This is a use case for LPS-50017" />
+
+		<property name="portal.acceptance" value="true" />
 
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="${pageName}" />
@@ -5384,6 +5388,8 @@
 	</command>
 
 	<command name="ViewSiteCalendarRSSFeed" priority="5">
+		<property name="portal.acceptance" value="true" />
+
 		<execute macro="TestCase#getSiteName">
 			<return from="siteName" name="siteName" />
 			<var name="siteName" value="${siteName}" />
