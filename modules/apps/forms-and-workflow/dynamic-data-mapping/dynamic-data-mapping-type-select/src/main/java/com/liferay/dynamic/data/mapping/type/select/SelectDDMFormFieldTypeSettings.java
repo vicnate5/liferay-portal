@@ -39,7 +39,7 @@ import com.liferay.dynamic.data.mapping.model.DDMFormFieldValidation;
 							size = 12,
 							value = {
 								"label", "tip", "required", "dataSourceType",
-								"options", "ddmDataProviderInstanceId"
+								"options", "otherOption", "ddmDataProviderInstanceId"
 							}
 						)
 					}
@@ -92,6 +92,11 @@ public interface SelectDDMFormFieldTypeSettings
 		visibilityExpression = "equals(dataSourceType, \"manual\")"
 	)
 	public DDMFormFieldOptions options();
+
+	@DDMFormField(
+		label = "%add-other-option", properties = {"showAsSwitcher=true"}
+	)
+	public boolean otherOption();
 
 	@DDMFormField(visibilityExpression = "FALSE")
 	@Override
