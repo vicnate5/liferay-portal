@@ -8,16 +8,16 @@ AUI.add(
 		var SelectField = A.Component.create(
 			{
 				ATTRS: {
+					dataProviderURL: {
+						valueFn: '_valueDataProviderURL'
+					},
+
 					dataSourceOptions: {
 						value: []
 					},
 
 					dataSourceType: {
 						value: 'manual'
-					},
-
-					dataProviderURL: {
-						valueFn: '_valueDataProviderURL'
 					},
 
 					ddmDataProviderInstanceId: {

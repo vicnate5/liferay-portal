@@ -39,7 +39,8 @@ import com.liferay.dynamic.data.mapping.model.DDMFormFieldValidation;
 							size = 12,
 							value = {
 								"label", "tip", "required", "dataSourceType",
-								"options", "otherOption", "ddmDataProviderInstanceId"
+								"options", "otherOption",
+								"ddmDataProviderInstanceId"
 							}
 						)
 					}
