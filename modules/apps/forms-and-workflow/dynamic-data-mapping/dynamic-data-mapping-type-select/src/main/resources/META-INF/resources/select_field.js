@@ -8,16 +8,16 @@ AUI.add(
 		var SelectField = A.Component.create(
 			{
 				ATTRS: {
+					dataProviderURL: {
+						valueFn: '_valueDataProviderURL'
+					},
+
 					dataSourceOptions: {
 						value: []
 					},
 
 					dataSourceType: {
 						value: 'manual'
-					},
-
-					dataProviderURL: {
-						valueFn: '_valueDataProviderURL'
 					},
 
 					ddmDataProviderInstanceId: {
@@ -33,10 +33,15 @@ AUI.add(
 						value: []
 					},
 
+					otherOption: {
+						value: false
+					},
+
 					strings: {
 						value: {
 							chooseAnOption: Liferay.Language.get('choose-an-option'),
-							dynamicallyLoadedData: Liferay.Language.get('dynamically-loaded-data')
+							dynamicallyLoadedData: Liferay.Language.get('dynamically-loaded-data'),
+							other: Liferay.Language.get('other')
 						}
 					},
 
@@ -98,6 +103,7 @@ AUI.add(
 							{
 								multiple: instance.get('multiple') ? 'multiple' : '',
 								options: instance.getOptions(),
+								otherOption: instance.get('otherOption'),
 								strings: instance.get('strings'),
 								value: instance.getContextValue()
 							}

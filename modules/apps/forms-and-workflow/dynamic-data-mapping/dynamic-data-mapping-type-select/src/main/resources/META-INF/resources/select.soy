@@ -9,6 +9,7 @@
  * @param multiple
  * @param name
  * @param options
+ * @param otherOption
  * @param readOnly
  * @param required
  * @param showLabel
@@ -46,6 +47,12 @@
 							{$option.label}
 						</option>
 					{/foreach}
+
+					{if $otherOption}
+						<option dir="{$dir}" value="other">
+							{$strings.other}
+						</option>
+					{/if}
 				</select>
 			</div>
 
