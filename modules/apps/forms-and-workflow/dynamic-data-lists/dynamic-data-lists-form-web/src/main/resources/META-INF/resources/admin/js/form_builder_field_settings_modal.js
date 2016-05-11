@@ -66,13 +66,7 @@ AUI.add(
 
 						var settingsForm = field.get('settingsForm');
 
-						var container = settingsForm.get('container');
-
-						container.appendTo(instance._getBodyNode());
-
-						instance._showDefaultToolbar();
-
-						settingsForm.render();
+						instance._renderSettingsForm(settingsForm);
 
 						var modal = instance._modal;
 
@@ -192,6 +186,20 @@ AUI.add(
 						var instance = this;
 
 						instance._previousSettings = JSON.stringify(event.field.getSettings());
+					},
+
+					_renderSettingsForm: function(settingsForm) {
+						var instance = this;
+
+						var container = settingsForm.get('container');
+
+						container.appendTo(instance._getBodyNode());
+
+						instance._showDefaultToolbar();
+
+						settingsForm.render();
+
+						settingsForm.getField('label').focus();
 					},
 
 					_showConfirmationMessage: function() {
