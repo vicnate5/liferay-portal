@@ -8120,9 +8120,8 @@ jdbc.default.password=${database.password}</echo>
 			failonerror="true"
 			fork="true"
 			jar="${liferay.home}/tools/portal-tools-db-upgrade-client/com.liferay.portal.tools.db.upgrade.client.jar"
-			timeout="900000">
-			<sysproperty key="LIFERAY_CLASSPATH" value="${app.server.dir}/webapps/ROOT/WEB-INF/lib" />
-		</java>
+			timeout="900000"
+		/>
 
 		<waitfor maxwait="15" maxwaitunit="minute">
 			<resourcecontains
