@@ -314,6 +314,8 @@ public class UpgradeClient {
 
 		_appendClassPath(sb, _appServer.getPortalLibDir());
 
+		System.out.println(sb.toString());
+
 		return sb.toString();
 	}
 
