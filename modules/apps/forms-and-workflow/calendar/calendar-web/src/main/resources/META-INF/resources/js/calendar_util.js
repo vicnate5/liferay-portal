@@ -170,16 +170,16 @@ AUI.add(
 				var instance = this;
 
 				instance.invokeService(
-						{
-							'/calendar.calendar/delete-calendar': {
-								calendarId: calendarId
-							}
-						},
-						{
-							success: function() {
-								callback(this.get('responseData'));
-							}
+					{
+						'/calendar.calendar/delete-calendar': {
+							calendarId: calendarId
 						}
+					},
+					{
+						success: function() {
+							callback(this.get('responseData'));
+						}
+					}
 				);
 			},
 
@@ -722,11 +722,11 @@ AUI.add(
 						actionName: 'updateSchedulerCalendarBooking',
 						callback: function(data) {
 							schedulerEvent.set(
-									'loading',
-									false,
-									{
-										silent: true
-									}
+								'loading',
+								false,
+								{
+									silent: true
+								}
 							);
 
 							if (data) {
