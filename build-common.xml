@@ -261,6 +261,33 @@
 		<contains casesensitive="false" string="${os.name}" substring="Windows" />
 	</condition>
 
+	<exec executable="git" outputproperty="liferay.releng.branch">
+		<arg value="rev-parse" />
+		<arg value="--abbrev-ref" />
+		<arg value="HEAD" />
+	</exec>
+
+	<condition property="liferay.releng.ee">
+		<or>
+			<istrue value="${ee.override}" />
+			<matches pattern="ee-.+" string="${liferay.releng.branch}" />
+		</or>
+	</condition>
+
+	<condition else="Liferay" property="liferay.releng.app.title.prefix" value="Liferay CE">
+		<istrue value="${liferay.releng.ee}" />
+	</condition>
+
+	<condition else="false" property="liferay.releng.public">
+		<not>
+			<istrue value="${liferay.releng.ee}" />
+		</not>
+	</condition>
+
+	<condition else="false" property="liferay.releng.supported">
+		<istrue value="${liferay.releng.ee}" />
+	</condition>
+
 	<property name="definitions.dir" value="${project.dir}/definitions" />
 
 	<xmlcatalog id="dtd.catalog">
@@ -1466,33 +1493,6 @@ rerun your task.
 
 			<condition else="false" property="jsp.precompile.enabled">
 				<istrue value="${jsp.precompile}" />
-			</condition>
-
-			<exec executable="git" outputproperty="liferay.releng.branch">
-				<arg value="rev-parse" />
-				<arg value="--abbrev-ref" />
-				<arg value="HEAD" />
-			</exec>
-
-			<condition property="liferay.releng.ee">
-				<or>
-					<istrue value="${ee.override}" />
-					<matches pattern="ee-.+" string="${liferay.releng.branch}" />
-				</or>
-			</condition>
-
-			<condition else="Liferay" property="liferay.releng.app.title.prefix" value="Liferay CE">
-				<istrue value="${liferay.releng.ee}" />
-			</condition>
-
-			<condition else="false" property="liferay.releng.public">
-				<not>
-					<istrue value="${liferay.releng.ee}" />
-				</not>
-			</condition>
-
-			<condition else="false" property="liferay.releng.supported">
-				<istrue value="${liferay.releng.ee}" />
 			</condition>
 
 			<echoproperties destfile="${gradle.properties.file}" >
