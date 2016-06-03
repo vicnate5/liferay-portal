@@ -87,6 +87,15 @@
 			<var name="webContentContent" value="Web Content Content" />
 		</execute>
 
+		<take-screenshot />
+
+		<execute macro="WebContent#addPGViaWCD">
+			<var name="webContentContent" value="WC WebContent POST UPGRADE" />
+			<var name="webContentTitle" value="WC TITLE POST UPGRADE" />
+		</execute>
+
+		<take-screenshot />
+
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Document" />
 		</execute>
