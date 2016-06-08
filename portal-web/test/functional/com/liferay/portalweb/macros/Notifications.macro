@@ -13,34 +13,40 @@
 			<then>
 				<execute function="Click" locator1="Notifications#USER_BAR_BADGE_COUNT" />
 			</then>
-		</if>
 
-		<if>
-			<condition function="IsElementPresent" locator1="Notifications#PROFILE_BADGE_COUNT" />
-			<then>
-				<execute function="Click" locator1="Notifications#PROFILE_BADGE_COUNT" />
-			</then>
-		</if>
+			<elseif>
+				<condition function="IsElementPresent" locator1="Notifications#PROFILE_BADGE_COUNT" />
+				<then>
+					<execute function="Click" locator1="Notifications#PROFILE_BADGE_COUNT" />
+				</then>
+			</elseif>
 
-		<if>
-			<condition function="IsElementPresent" locator1="Notifications#MY_ACCOUNT_BADGE_COUNT" />
-			<then>
-				<execute function="Click" locator1="Notifications#MY_ACCOUNT_BADGE_COUNT" />
-			</then>
-		</if>
+			<elseif>
+				<condition function="IsElementPresent" locator1="Notifications#MY_ACCOUNT_BADGE_COUNT" />
+				<then>
+					<execute function="Click" locator1="Notifications#MY_ACCOUNT_BADGE_COUNT" />
+				</then>
+			</elseif>
 
-		<if>
-			<condition function="IsElementPresent" locator1="Notifications#NOTIFICATIONS_BADGE_COUNT" />
-			<then>
-				<execute function="Click" locator1="Notifications#NOTIFICATIONS_BADGE_COUNT" />
-			</then>
-		</if>
+			<elseif>
+				<condition function="IsElementPresent" locator1="Notifications#NOTIFICATIONS_BADGE_COUNT" />
+				<then>
+					<execute function="Click" locator1="Notifications#NOTIFICATIONS_BADGE_COUNT" />
+				</then>
+			</elseif>
 
-		<if>
-			<condition function="IsElementPresent" locator1="Notifications#USER_NAVIGATION_BAR_BADGE_COUNT" />
-			<then>
-				<execute function="Click" locator1="Notifications#USER_NAVIGATION_BAR_BADGE_COUNT" />
-			</then>
+			<elseif>
+				<condition function="IsElementPresent" locator1="Notifications#USER_NAVIGATION_BAR_BADGE_COUNT" />
+				<then>
+					<execute function="Click" locator1="Notifications#USER_NAVIGATION_BAR_BADGE_COUNT" />
+				</then>
+			</elseif>
+			
+			<else>
+				<execute macro="Page#gotoMyAccount">
+					<var name="portletName" value="Notifications" />
+				</execute>
+			</else>
 		</if>
 	</command>
 
