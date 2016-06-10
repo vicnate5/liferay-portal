@@ -2149,15 +2149,15 @@
 		</execute>
 
 		<execute macro="CalendarScheduler#viewEventTimesViaDialogBox">
-			<var name="endDateTime" value="pm" />
-			<var name="startDateTime" value="pm" />
+			<var name="endDateTime" value="am" />
+			<var name="startDateTime" value="am" />
 		</execute>
 
 		<execute macro="CalendarScheduler#gotoDetailsViaDialogBox" />
 
 		<execute macro="CalendarEvent#viewTimesViaDetails">
-			<var name="endDateTime" value="PM" />
-			<var name="startDateTime" value="PM" />
+			<var name="endDateTime" value="AM" />
+			<var name="startDateTime" value="AM" />
 		</execute>
 	</command>
 
