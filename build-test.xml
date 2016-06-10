@@ -5238,25 +5238,16 @@ ${custom.properties}</echo>
 			</then>
 		</if>
 
+
 		<if>
-			<equals arg1="${database.type}" arg2="db2" />
+			<equals arg1="${database.type}" arg2="sybase" />
 			<then>
 				<echo append="true" file="portal-impl/src/portal-ext.properties">
-
-hibernate.dialect=com.liferay.portal.dao.orm.hibernate.DB2Dialect
-custom.sql.function.isnull=CAST(? AS VARCHAR(32672)) IS NULL
-custom.sql.function.isnotnull=CAST(? AS VARCHAR(32672)) IS NOT NULL</echo>
-			</then>
-			<elseif>
-				<equals arg1="${database.type}" arg2="sybase" />
-				<then>
-					<echo append="true" file="portal-impl/src/portal-ext.properties">
 
 hibernate.dialect=org.hibernate.dialect.SybaseDialect
 custom.sql.function.isnull=CONVERT(VARCHAR,?) IS NULL
 custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
-				</then>
-			</elseif>
+			</then>
 		</if>
 
 		<if>
@@ -7084,7 +7075,7 @@ cluster.link.bind.addr["cluster-link-udp"]=127.0.0.1</echo>
 		<get-testcase-property property.name="portal.version" />
 
 		<if>
-			<equals arg1="${database.type}" arg2="db2"/>
+			<equals arg1="${database.type}" arg2="db2" />
 			<then>
 				<copy file="/opt/dev/projects/github/liferay-portal/data-archive/${portal.version}/${data.archive.type}-db2.zip" tofile="${portal.legacy.dir}/${portal.version}/data-archive/${data.archive.type}-${database.type}.zip" verbose="true" />
 			</then>
