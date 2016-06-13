@@ -30,6 +30,91 @@
 		</if>
 	</tear-down>
 
+	<command name="Demo" priority="5">
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Forms" />
+		</execute>
+
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
+
+		<execute macro="Form#editName" />
+
+		<execute macro="Form#editDescription" />
+
+		<execute macro="Form#gotoAddFirstField">
+			<var name="fieldType" value="Text Field" />
+		</execute>
+
+		<execute macro="Form#editFieldLabel">
+			<var name="fieldValue" value="Text Field 1" />
+		</execute>
+
+		<execute macro="FormFields#save" />
+
+		<execute macro="Form#gotoAddAdditionalField">
+			<var name="fieldType" value="Text Field" />
+			<var name="previousFieldLabel" value="Text Field 1" />
+		</execute>
+
+		<execute macro="Form#editFieldLabel">
+			<var name="fieldValue" value="Text Field 2" />
+		</execute>
+
+		<execute macro="FormFields#save" />
+
+		<execute macro="Form#gotoAddAdditionalField">
+			<var name="fieldType" value="Text Field" />
+			<var name="previousFieldLabel" value="Text Field 2" />
+		</execute>
+
+		<execute macro="Form#editFieldLabel">
+			<var name="fieldValue" value="Text Field 3" />
+		</execute>
+
+		<execute macro="FormFields#save" />
+
+		<execute macro="Form#save" />
+
+		<execute macro="Page#add">
+			<var name="pageName" value="Form Page" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Form Page" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="pageName" value="Form Page" />
+			<var name="portletName" value="Form" />
+		</execute>
+
+		<execute macro="FormPortletNavigator#gotoSelectForm" />
+
+		<execute macro="FormPortletConfiguration#selectForm" />
+
+		<execute macro="PortletEntry#save" />
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Form Page" />
+		</execute>
+
+		<for list="1,2,3" param="field">
+			<execute macro="FormFields#viewTextLabel">
+				<var name="fieldLabel" value="Text Field ${field}" />
+				<var name="fieldName" value="TextField${field}" />
+			</execute>
+
+			<execute macro="FormFields#editText">
+				<var name="fieldName" value="TextField${field}" />
+				<var name="fieldValue" value="Text Field Value ${field}" />
+			</execute>
+		</for>
+
+		<execute macro="FormPortlet#submitSuccessfully" />
+	</command>
+
 	<command name="ConfigureDataProviderWithSelectField" priority="5">
 		<property name="portal.acceptance" value="true" />
 		<property name="test.name.skip.portal.instance" value="Forms#ConfigureDataProviderWithSelectField" />
