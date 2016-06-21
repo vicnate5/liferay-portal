@@ -2,6 +2,8 @@
 	<property name="portal.release" value="true" />
 	<property name="testray.main.component.name" value="Workflow" />
 
+	<property name="portal.fw" value="true" />
+
 	<var name="pageName" value="Message Boards Page" />
 	<var name="portletName" value="Message Boards" />
 	<var name="workflowAssetType" value="Message Boards Message" />

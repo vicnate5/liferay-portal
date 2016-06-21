@@ -3,6 +3,7 @@
 	<property name="testray.main.component.name" value="Web Form" />
 
 	<property name="osgi.modules.includes" value="web-form" />
+	<property name="portal.fw" value="true" />
 
 	<var name="pageName" value="Web Form Test Page" />
 	<var name="portletName" value="Web Form" />
