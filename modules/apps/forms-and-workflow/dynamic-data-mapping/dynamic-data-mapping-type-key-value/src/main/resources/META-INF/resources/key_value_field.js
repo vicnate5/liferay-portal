@@ -6,10 +6,6 @@ AUI.add(
 		var KeyValueField = A.Component.create(
 			{
 				ATTRS: {
-					editing: {
-						value: false
-					},
-
 					generationLocked: {
 						valueFn: '_valueGenerationLocked'
 					},
@@ -40,12 +36,7 @@ AUI.add(
 						var instance = this;
 
 						instance._eventHandlers.push(
-							instance.after('editingChange', instance._afterEditingChange),
 							instance.after('keyChange', instance._afterKeyChange),
-							instance.bindContainerEvent('click', instance._onClickCancel, '.key-value-cancel'),
-							instance.bindContainerEvent('click', instance._onClickDone, '.key-value-done'),
-							instance.bindContainerEvent('click', instance._onClickEditor, '.key-value-output'),
-							instance.bindContainerEvent('keypress', instance._onKeyPressEditorInput, '.key-value-input'),
 							instance.bindContainerEvent('valuechange', instance._onValueChangeEditorInput, '.key-value-input'),
 							instance.bindInputEvent('valuechange', instance._onValueChangeInput)
 						);
@@ -57,7 +48,6 @@ AUI.add(
 						return A.merge(
 							KeyValueField.superclass.getTemplateContext.apply(instance, arguments),
 							{
-								editing: instance.get('editing'),
 								key: instance.get('key'),
 								strings: instance.get('strings'),
 								tooltip: instance.getLocalizedValue(instance.get('tooltip'))
@@ -109,40 +99,20 @@ AUI.add(
 						if (value) {
 							instance.set('key', instance.normalizeKey(value));
 						}
-
-						instance.set('editing', false);
-					},
-
-					_afterEditingChange: function(event) {
-						var instance = this;
-
-						var container = instance.get('container');
-
-						var editing = event.newVal;
-
-						if (editing && !instance._eventOutsideHandler) {
-							instance._eventOutsideHandler = container.on(
-								'clickoutside',
-								function(event) {
-									instance.set('editing', false);
-
-									instance._eventOutsideHandler.detach();
-
-									instance._eventOutsideHandler = null;
-								},
-								'.key-value-input'
-							);
-						}
-
-						instance._uiSetEditing(editing);
 					},
 
 					_afterKeyChange: function(event) {
 						var instance = this;
 
-						instance.set('generationLocked', event.newVal !== instance.normalizeKey(instance.getValue()));
+						var container = instance.get('container');
 
-						instance._uiSetKey(event.newVal);
+						var editorInput = container.one('.key-value-input');
+
+						var value = editorInput.val();
+
+						if (value !== event.newVal) {
+							instance._uiSetKey(event.newVal);
+						}
 					},
 
 					_getMaxInputSize: function(str) {
@@ -158,44 +128,12 @@ AUI.add(
 						return size;
 					},
 
-					_onClickCancel: function() {
-						var instance = this;
-
-						instance.set('editing', false);
-					},
-
-					_onClickDone: function() {
-						var instance = this;
-
-						instance.saveEditor();
-					},
-
-					_onClickEditor: function() {
-						var instance = this;
-
-						instance.set('editing', !instance.get('editing'));
-					},
-
-					_onKeyPressEditorInput: function(event) {
-						var instance = this;
-
-						if (event.isKey('ENTER')) {
-							event.preventDefault();
-
-							instance.saveEditor();
-						}
-					},
-
 					_onValueChangeEditorInput: function(event) {
 						var instance = this;
 
-						var input = event.target;
-
 						var value = event.newVal;
 
-						if (value.length === 0) {
-							value = input.attr('placeholder');
-						}
+						instance.set('key', instance.normalizeKey(value));
 
 						event.target.attr('size', instance._getMaxInputSize(value) + 1);
 					},
@@ -222,34 +160,13 @@ AUI.add(
 						editorNode.insert(container.one('.help-block'), 'after');
 					},
 
-					_uiSetEditing: function(editing) {
-						var instance = this;
-
-						var container = instance.get('container');
-
-						var editorNode = container.one('.key-value-editor');
-
-						editorNode.toggleClass('active', editing);
-
-						if (editing) {
-							var editorInput = container.one('.key-value-input');
-
-							editorInput.val('');
-							editorInput.focus();
-						}
-					},
-
 					_uiSetKey: function(key) {
 						var instance = this;
 
-						var container = instance.get('container');
+						var editorInput = instance.get('container').one('.key-value-input');
 
-						var editorInput = container.one('.key-value-input');
-
-						editorInput.attr('placeholder', key);
+						editorInput.val(key);
 						editorInput.attr('size', instance._getMaxInputSize(key) + 1);
-
-						container.one('.key-value-output').html(key);
 					},
 
 					_valueGenerationLocked: function() {
