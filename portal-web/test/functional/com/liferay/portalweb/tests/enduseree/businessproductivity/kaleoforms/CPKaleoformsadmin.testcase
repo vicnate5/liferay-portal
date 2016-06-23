@@ -2328,8 +2328,15 @@
 			<var name="kfFormName" value="Created Task Form" />
 		</execute>
 
+		<execute macro="KaleoFormsAdmin#viewTaskPresent">
+			<var name="workflowTask" value="create" />
+		</execute>
+
+		<execute macro="KaleoFormsAdmin#viewTaskPresent">
+			<var name="workflowTask" value="review" />
+		</execute>
+
 		<execute macro="KaleoFormsAdmin#viewTaskNotPresent">
-			<var name="kfFormName" value=" " />
 			<var name="workflowTask" value="update" />
 		</execute>
 
@@ -2440,8 +2447,15 @@
 			<var name="kfFormName" value="Created Task Form" />
 		</execute>
 
+		<execute macro="KaleoFormsAdmin#viewTaskPresent">
+			<var name="workflowTask" value="create" />
+		</execute>
+
+		<execute macro="KaleoFormsAdmin#viewTaskPresent">
+			<var name="workflowTask" value="review" />
+		</execute>
+
 		<execute macro="KaleoFormsAdmin#viewTaskNotPresent">
-			<var name="kfFormName" value=" " />
 			<var name="workflowTask" value="update" />
 		</execute>
 
