@@ -3,6 +3,8 @@
 	<property name="custom.properties" value="default.layout.template.id=1_column${line.separator}company.default.time.zone=America/Los_Angeles" />
 	<property name="testray.main.component.name" value="Calendar" />
 
+	<property name="portal.fw" value="true" />
+
 	<var name="pageName" value="Calendar Page" />
 	<var name="portletName" value="Calendar" />
 
@@ -1441,11 +1443,12 @@
 		</execute>
 
 		<execute macro="CalendarNavigator#gotoView">
-			<var name="viewType" value="Week" />
+			<var name="viewType" value="Day" />
 		</execute>
 
 		<execute macro="CalendarScheduler#selectSpecificEvent">
 			<var name="eventTitle" value="${eventTitle}" />
+			<var name="eventToday" value="false" />
 		</execute>
 
 		<execute macro="CalendarScheduler#gotoDetailsViaDialogBox" />
@@ -2979,6 +2982,7 @@
 
 		<execute macro="CalendarScheduler#viewNoRSVP">
 			<var name="eventTitle" value="Edited Event Title" />
+			<var name="eventToday" value="false" />
 		</execute>
 	</command>
 
@@ -3195,6 +3199,7 @@
 
 		<execute macro="CalendarScheduler#selectSpecificEvent">
 			<var name="eventTitle" value="Original Event Title" />
+			<var name="eventToday" value="false" />
 		</execute>
 
 		<execute macro="CalendarScheduler#editTitle">
@@ -3251,6 +3256,7 @@
 
 		<execute macro="CalendarScheduler#selectSpecificEvent">
 			<var name="eventTitle" value="Original Event Title" />
+			<var name="eventToday" value="false" />
 		</execute>
 
 		<execute macro="CalendarScheduler#gotoEditViaDialogBox" />
@@ -4296,10 +4302,6 @@
 			<var name="calendarName" value="${userFirstName} ${userLastName}" />
 			<var name="eventTitle" value="User Calendar Event 1" />
 			<var name="eventType" value="${eventType}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="CalendarNavigator#gotoAddEvent" />
@@ -5414,9 +5416,7 @@
 			<var name="eventTitle" value="Previous Day Event" />
 		</execute>
 
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="${pageName}" />
-		</execute>
+		<execute macro="CalendarNavigator#gotoNextDay" />
 
 		<execute macro="CalendarNavigator#gotoNextDay" />
 
