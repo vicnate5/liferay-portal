@@ -1,6 +1,8 @@
 <definition component-name="portal-business-productivity-ee">
 	<property name="testray.main.component.name" value="Kaleo Forms Admin" />
 
+	<property name="portal.fw" value="true" />
+
 	<var name="workflowAssetType" value="Kaleo Forms Process" />
 
 	<set-up>
