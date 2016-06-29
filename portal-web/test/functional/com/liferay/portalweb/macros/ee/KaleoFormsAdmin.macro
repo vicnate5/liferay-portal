@@ -260,7 +260,7 @@
 		<var name="key_paginationNumber" value="${paginationNumber}" />
 
 		<execute function="AssertClick" locator1="KaleoFormsAdminEditProcess#FIELD_SET_PAGINATION_MENULIST_NUMBER" value1="${paginationNumber}" />
-		<execute function="AssertTextEquals" locator1="KaleoFormsAdminEditProcess#FIELD_SET_PAGINATION_SELECTOR_BUTTON" value1="${paginationNumber} Items per Page" />
+		<execute function="AssertTextEquals" locator1="KaleoFormsAdminEditProcess#FIELD_SET_PAGINATION_SELECTOR_BUTTON" value1="${paginationNumber} Entries" />
 	</command>
 
 	<command name="editForm">
@@ -488,7 +488,7 @@
 		<execute function="AssertClick" locator1="Button#SAVE_AND_CONTINUE" value1="Save and Continue" />
 
 		<execute macro="Alert#viewSuccessMessage" />
-		
+
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
