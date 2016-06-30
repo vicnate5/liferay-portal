@@ -220,6 +220,10 @@
 	</command>
 
 	<command name="selectSpecificEvent">
+		<execute macro="CalendarNavigator#gotoView">
+ 			<var name="viewType" value="Week" />
+ 		</execute>
+ 
 		<var name="key_eventTitle" value="${eventTitle}" />
 
 		<if>
