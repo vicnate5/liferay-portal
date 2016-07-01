@@ -1,4 +1,4 @@
-<defintion>
+<definition>
 	<command name="gotoManageFieldSets">
 		<execute function="Pause" locator1="5000" />
 
@@ -17,4 +17,4 @@
 		<execute function="Click#waitForMenuToggleJSClick" locator1="KaleoFormsAdminSelectStructure#KALEO_FORMS_STRUCTURE_ELLIPSIS" />
 		<execute function="AssertClick" locator1="MenuItem#MANAGE_FORMS" value1="Manage Forms" />
 	</command>
-</defintion>
+</definition>
