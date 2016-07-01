@@ -958,10 +958,11 @@
 			<var name="workflowTask" value="Review" />
 		</execute>
 
-		<execute macro="KaleoFormsPortlet#assignProcessToUser">
-			<var name="kfProcessName" value="Kaleo Forms Process" />
+		<execute macro="Workflow#assignToMeTaskByActions">
 			<var name="userFullName" value="userfn userln" />
-			<var name="workflowTask" value="review" />
+			<var name="workflowAssetTitle" value="Kaleo Forms Process" />
+			<var name="workflowAssetType" value="${workflowAssetType}" />
+			<var name="workflowTask" value="Review" />
 		</execute>
 
 		<execute macro="User#logoutAndLoginPG">
