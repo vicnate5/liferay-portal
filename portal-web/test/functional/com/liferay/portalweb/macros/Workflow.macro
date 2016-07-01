@@ -163,7 +163,19 @@
 			<var name="workflowTask" value="${workflowTask}" />
 		</execute>
 
-		<execute function="AssertClick" locator1="MenuItem#ASSIGN_TO_ME" value1="Assign to Me" />
+		<if>
+			<isset var="userFullName" />
+			<then>
+				<execute function="AssertClick" locator1="MenuItem#ASSIGNED_TO_USER" value1="Assign to..." />
+
+				<execute function="Select" locator1="MyWorkflowTasks#ASSIGNED_TO_USER_SELECT" value1="${userFullName}" />
+
+				<execute macro="Workflow#confirmAndViewSucessMessageViaActions" />
+			</then>
+			<else>
+				<execute function="AssertClick" locator1="MenuItem#ASSIGN_TO_ME" value1="Assign to Me" />
+			</else>
+		</if>
 
 		<if>
 			<isset var="workflowActivityComment" />
