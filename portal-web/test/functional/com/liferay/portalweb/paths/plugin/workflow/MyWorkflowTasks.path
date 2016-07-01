@@ -59,6 +59,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>ASSIGNED_TO_USER_SELECT</td>
+	<td>//div[contains(@id,'updateAsignee')]//select[contains(@id,'assigneeUserId')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td></td>
 	<td></td>
 	<td></td>
