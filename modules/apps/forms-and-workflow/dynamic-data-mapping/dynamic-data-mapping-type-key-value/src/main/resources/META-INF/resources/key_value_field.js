@@ -14,6 +14,14 @@ AUI.add(
 						valueFn: '_valueKey'
 					},
 
+					maxKeyInputSize: {
+						value: 50
+					},
+
+					minKeyInputSize: {
+						value: 5
+					},
+
 					strings: {
 						value: {
 							cancel: Liferay.Language.get('cancel'),
@@ -37,7 +45,7 @@ AUI.add(
 
 						instance._eventHandlers.push(
 							instance.after('keyChange', instance._afterKeyChange),
-							instance.bindContainerEvent('valuechange', instance._onValueChangeEditorInput, '.key-value-input'),
+							instance.bindContainerEvent('valuechange', instance._onValueChangeKeyInput, '.key-value-input'),
 							instance.bindInputEvent('valuechange', instance._onValueChangeInput)
 						);
 					},
@@ -45,10 +53,13 @@ AUI.add(
 					getTemplateContext: function() {
 						var instance = this;
 
+						var key = instance.get('key');
+
 						return A.merge(
 							KeyValueField.superclass.getTemplateContext.apply(instance, arguments),
 							{
-								key: instance.get('key'),
+								key: key,
+								keyInputSize: instance._getKeyInputSize(key),
 								strings: instance.get('strings'),
 								tooltip: instance.getLocalizedValue(instance.get('tooltip'))
 							}
@@ -58,19 +69,34 @@ AUI.add(
 					normalizeKey: function(key) {
 						var instance = this;
 
+						var normalizedKey = '';
+
+						var nextUpperCase = false;
+
 						key = key.trim();
 
 						for (var i = 0; i < key.length; i++) {
 							var item = key[i];
 
-							if (!A.Text.Unicode.test(item, 'L') && !A.Text.Unicode.test(item, 'N')) {
-								key = key.replace(item, ' ');
+							if (item === ' ') {
+								nextUpperCase = true;
+
+								continue;
 							}
+							else if (!A.Text.Unicode.test(item, 'L') && !A.Text.Unicode.test(item, 'N')) {
+								continue;
+							}
+
+							if (nextUpperCase) {
+								item = item.toUpperCase();
+
+								nextUpperCase = false;
+							}
+
+							normalizedKey += item;
 						}
 
-						key = Lang.String.camelize(key, ' ');
-
-						return key.replace(/\s+/ig, '');
+						return normalizedKey;
 					},
 
 					render: function() {
@@ -87,55 +113,31 @@ AUI.add(
 						return instance;
 					},
 
-					saveEditor: function() {
-						var instance = this;
-
-						var container = instance.get('container');
-
-						var editorInput = container.one('.key-value-input');
-
-						var value = editorInput.val();
-
-						if (value) {
-							instance.set('key', instance.normalizeKey(value));
-						}
-					},
-
 					_afterKeyChange: function(event) {
 						var instance = this;
 
-						var container = instance.get('container');
+						instance.set('generationLocked', event.newVal !== instance.normalizeKey(instance.getValue()));
 
-						var editorInput = container.one('.key-value-input');
-
-						var value = editorInput.val();
-
-						if (value !== event.newVal) {
-							instance._uiSetKey(event.newVal);
-						}
+						instance._uiSetKey(event.newVal);
 					},
 
-					_getMaxInputSize: function(str) {
-						var size = str.length;
-
-						if (size > 50) {
-							size = 50;
-						}
-						else if (size <= 5) {
-							size = 5;
-						}
-
-						return size;
-					},
-
-					_onValueChangeEditorInput: function(event) {
+					_getKeyInputSize: function(str) {
 						var instance = this;
 
-						var value = event.newVal;
+						var size = str.length;
 
-						instance.set('key', instance.normalizeKey(value));
+						var maxKeyInputSize = instance.get('maxKeyInputSize');
 
-						event.target.attr('size', instance._getMaxInputSize(value) + 1);
+						var minKeyInputSize = instance.get('minKeyInputSize');;
+
+						if (size > maxKeyInputSize) {
+							size = maxKeyInputSize;
+						}
+						else if (size <= minKeyInputSize) {
+							size = minKeyInputSize;
+						}
+
+						return size + 1;
 					},
 
 					_onValueChangeInput: function(event) {
@@ -146,6 +148,14 @@ AUI.add(
 
 							instance.set('key', instance.normalizeKey(value));
 						}
+					},
+
+					_onValueChangeKeyInput: function(event) {
+						var instance = this;
+
+						var value = event.newVal;
+
+						instance.set('key', instance.normalizeKey(value));
 					},
 
 					_renderErrorMessage: function() {
@@ -163,10 +173,10 @@ AUI.add(
 					_uiSetKey: function(key) {
 						var instance = this;
 
-						var editorInput = instance.get('container').one('.key-value-input');
+						var keyInput = instance.get('container').one('.key-value-input');
 
-						editorInput.val(key);
-						editorInput.attr('size', instance._getMaxInputSize(key) + 1);
+						keyInput.attr('size', instance._getKeyInputSize(key));
+						keyInput.val(key);
 					},
 
 					_valueGenerationLocked: function() {
@@ -188,6 +198,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['aui-text-unicode', 'liferay-ddm-form-field-text', 'liferay-ddm-form-renderer-field']
+		requires: ['aui-text-unicode', 'event-valuechange', 'liferay-ddm-form-field-text', 'liferay-ddm-form-renderer-field']
 	}
 );

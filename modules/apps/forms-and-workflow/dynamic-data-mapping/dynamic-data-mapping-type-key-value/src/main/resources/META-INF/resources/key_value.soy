@@ -5,6 +5,7 @@
  *
  * @param dir
  * @param key
+ * @param keyInputSize
  * @param label
  * @param name
  * @param placeholder
@@ -40,7 +41,7 @@
 
 		<div class="active key-value-editor">
 			<label class="control-label key-value-label">{$strings.keyLabel}:</label>
-			<input class="key-value-input" tabindex="-1" value='{$key}' />
+			<input class="key-value-input" size="{$keyInputSize}" tabindex="-1" type="text" value='{$key}' />
 		</div>
 	</div>
 {/template}
