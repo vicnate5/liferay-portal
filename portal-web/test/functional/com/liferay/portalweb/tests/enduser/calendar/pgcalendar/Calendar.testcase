@@ -6,6 +6,8 @@
 	<var name="pageName" value="Calendar Page" />
 	<var name="portletName" value="Calendar" />
 
+	<property name="run.test" value="true" />
+
 	<set-up>
 		<execute macro="TestCase#setUpPortalInstance" />
 
