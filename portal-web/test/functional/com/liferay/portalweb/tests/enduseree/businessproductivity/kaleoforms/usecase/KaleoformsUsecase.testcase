@@ -4,6 +4,8 @@
 
 	<var name="workflowAssetType" value="Kaleo Forms Process" />
 
+	<property name="v.w" value="true" />
+
 	<set-up>
 		<execute macro="TestCase#setUpPortalInstance" />
 
