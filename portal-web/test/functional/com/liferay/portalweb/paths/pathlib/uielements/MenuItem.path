@@ -140,7 +140,7 @@
 </tr>
 <tr>
 	<td>ASSIGN_FORM</td>
-	<td>//a[@role='menuitem' and contains(.,'Assign Form')]</td>
+	<td>//tr[contains(.,'${key_workflowTask}')]//a[@role='menuitem' and contains(.,'Assign Form')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -171,6 +171,11 @@
 <tr>
 	<td>ASSIGN_TO_ME</td>
 	<td>//div[contains(@class,'open')]//a[contains(.,'Assign to Me')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ASSIGNED_TO_USER</td>
+	<td>//a[@role='menuitem']/span[contains(.,'Assign to...')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -496,6 +501,16 @@
 <tr>
 	<td>MANAGE_DATA_DEFINTIONS</td>
 	<td>//a[@role='menuitem']//span[contains(.,'Manage Data Definitions')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MANAGE_FIELD_SETS</td>
+	<td>//a[@role='menuitem']//span[contains(.,'Manage Field Sets')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MANAGE_FORMS</td>
+	<td>//div[contains(@class,'open')]//a[@role='menuitem' and contains(.,'Manage Froms')]</td>
 	<td></td>
 </tr>
 <tr>
