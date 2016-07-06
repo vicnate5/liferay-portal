@@ -238,9 +238,13 @@
 			<elseif>
 				<equals arg1="${eventToday}" arg2="false" />
 				<then>
+					<execute macro="CalendarNavigator#gotoView">
+						<var name="viewType" value="Week" />
+					</execute>
+
 					<execute function="ScrollWebElementIntoView" locator1="Calendar#SCHEDULER_VIEW_EVENT_NOT_TODAY" />
 
-					<execute function="AssertClick" locator1="Calendar#SCHEDULER_VIEW_EVENT_NOT_TODAY" value1="${eventTitle}" />
+					<execute function="AssertClick#assertTextClickNoMouseOver" locator1="Calendar#SCHEDULER_VIEW_EVENT_NOT_TODAY" value1="${eventTitle}" />
 				</then>
 			</elseif>
 			<else>
