@@ -4,6 +4,8 @@
 
 	<var name="workflowAssetType" value="Kaleo Forms Process" />
 
+	<property name="v.w" value="true" />
+
 	<set-up>
 		<execute macro="TestCase#setUpPortalInstance" />
 
@@ -644,12 +646,16 @@
 			<var name="kfFormName" value="Created Task Form" />
 		</execute>
 
-		<execute macro="KaleoFormsAdmin#assignForm">
+		<execute macro="KaleoFormsAdmin#saveProcess">
 			<var name="kfProcessName" value="${kfProcessName}" />
-			<var name="workflowTask" value="create" />
+		</execute>
+
+		<execute macro="KaleoFormsAdmin#viewProcess">
+			<var name="kfProcessName" value="${kfProcessName}" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#deleteForm">
+			<var name="kfFieldSetName" value="Inventory" />
 			<var name="kfFormName" value="Created Task Form" />
 		</execute>
 	</command>
@@ -818,12 +824,16 @@
 			<var name="kfFormName" value="Review Task Form" />
 		</execute>
 
-		<execute macro="KaleoFormsAdmin#assignForm">
+		<execute macro="KaleoFormsAdmin#saveProcess">
 			<var name="kfProcessName" value="${kfProcessName}" />
-			<var name="workflowTask" value="review" />
+		</execute>
+
+		<execute macro="KaleoFormsAdmin#viewProcess">
+			<var name="kfProcessName" value="Kaleo Forms Process" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#deleteForm">
+			<var name="kfFieldSetName" value="Inventory" />
 			<var name="kfFormName" value="Review Task Form" />
 		</execute>
 	</command>
@@ -2594,8 +2604,13 @@
 			<var name="kfProcessName" value="${kfProcessName}" />
 		</execute>
 
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Kaleo Forms Admin" />
+		</execute>
+
 		<execute macro="KaleoFormsAdmin#exportRecords">
 			<var name="fileExtension" value="CSV" />
+			<var name="kfProcessName" value="${kfProcessName}" />
 		</execute>
 	</command>
 
@@ -2740,8 +2755,13 @@
 			<var name="kfProcessName" value="${kfProcessName}" />
 		</execute>
 
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Kaleo Forms Admin" />
+		</execute>
+
 		<execute macro="KaleoFormsAdmin#exportRecords">
 			<var name="fileExtension" value="XML" />
+			<var name="kfProcessName" value="${kfProcessName}" />
 		</execute>
 	</command>
 
@@ -2886,9 +2906,14 @@
 			<var name="kfProcessName" value="${kfProcessName}" />
 		</execute>
 
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Kaleo Forms Admin" />
+		</execute>
+
 		<execute macro="KaleoFormsAdmin#exportRecords">
 			<var name="approvedOnly" value="true" />
 			<var name="fileExtension" value="CSV" />
+			<var name="kfProcessName" value="${kfProcessName}" />
 		</execute>
 	</command>
 
@@ -3033,72 +3058,14 @@
 			<var name="kfProcessName" value="${kfProcessName}" />
 		</execute>
 
-		<execute macro="KaleoFormsAdmin#exportRecords">
-			<var name="approvedOnly" value="true" />
-			<var name="fileExtension" value="XML" />
-		</execute>
-	</command>
-
-	<command name="NavigateBackFromAssignForm" priority="3">
-		<description message="This is a use case for LPS-48623." />
-
-		<execute macro="Navigator#openURL" />
-
 		<execute macro="ProductMenu#gotoSitesContent">
 			<var name="portlet" value="Kaleo Forms Admin" />
 		</execute>
 
-		<execute macro="KaleoFormsAdmin#addProcess" />
-
-		<execute macro="KaleoFormsAdmin#addProcessDetails">
-			<var name="kfProcessDescription" value="Kaleo Forms Process Description" />
-			<var name="kfProcessName" value="Kaleo Forms Process" />
-		</execute>
-
-		<execute macro="KaleoFormsAdmin#next" />
-
-		<execute macro="KaleoFormsAdmin#chooseFieldSet">
-			<var name="kfFieldSetName" value="To Do" />
-			<var name="kfProcessName" value="Kaleo Forms Process" />
-		</execute>
-
-		<execute macro="KaleoFormsAdmin#next" />
-
-		<execute macro="KaleoFormsAdmin#chooseWorkflow">
-			<var name="kfProcessName" value="Kaleo Forms Process" />
-			<var name="workflowDefinitionTitle" value="Single Approver" />
-		</execute>
-
-		<execute macro="KaleoFormsAdmin#next" />
-
-		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="kfProcessName" value="Kaleo Forms Process" />
-			<var name="workflowTask" value="create" />
-		</execute>
-
-		<execute macro="KaleoFormsAdmin#addForm">
-			<var name="kfFormName" value="Created Task Form" />
-		</execute>
-
-		<execute macro="KaleoFormsAdmin#saveForm" />
-
-		<execute function="Click" locator1="Icon#BACK" />
-
-		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="kfProcessName" value="Kaleo Forms Process" />
-			<var name="workflowTask" value="create" />
-		</execute>
-
-		<execute macro="KaleoFormsAdmin#chooseForm">
-			<var name="kfFormName" value="Created Task Form" />
-		</execute>
-
-		<execute macro="KaleoFormsAdmin#saveProcess">
-			<var name="kfProcessName" value="Kaleo Forms Process" />
-		</execute>
-
-		<execute macro="KaleoFormsAdmin#viewProcess">
-			<var name="kfProcessName" value="Kaleo Forms Process" />
+		<execute macro="KaleoFormsAdmin#exportRecords">
+			<var name="approvedOnly" value="true" />
+			<var name="fileExtension" value="XML" />
+			<var name="kfProcessName" value="${kfProcessName}" />
 		</execute>
 	</command>
 
