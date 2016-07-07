@@ -2644,6 +2644,7 @@
 
 	<command name="ViewDisplayTemplateClassLinks" priority="4">
 		<description message="This is a use case for LPS-66228." />
+		<property name="portal.acceptance" value="true" />
 
 		<execute macro="Navigator#openURL" />
 
