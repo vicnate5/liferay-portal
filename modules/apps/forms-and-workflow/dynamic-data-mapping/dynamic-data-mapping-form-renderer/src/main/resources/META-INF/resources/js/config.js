@@ -137,8 +137,7 @@
 						'liferay-ddm-form-renderer-util': {
 							path: 'util.js',
 							requires: [
-								'liferay-ddm-form-renderer-types',
-								'queue'
+								'liferay-ddm-form-renderer-types'
 							]
 						},
 						'liferay-ddm-form-renderer-validation': {

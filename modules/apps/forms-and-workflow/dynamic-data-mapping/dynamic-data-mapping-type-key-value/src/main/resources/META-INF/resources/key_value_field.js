@@ -6,16 +6,20 @@ AUI.add(
 		var KeyValueField = A.Component.create(
 			{
 				ATTRS: {
-					editing: {
-						value: false
-					},
-
 					generationLocked: {
 						valueFn: '_valueGenerationLocked'
 					},
 
 					key: {
 						valueFn: '_valueKey'
+					},
+
+					maxKeyInputSize: {
+						value: 50
+					},
+
+					minKeyInputSize: {
+						value: 5
 					},
 
 					strings: {
@@ -40,13 +44,8 @@ AUI.add(
 						var instance = this;
 
 						instance._eventHandlers.push(
-							instance.after('editingChange', instance._afterEditingChange),
 							instance.after('keyChange', instance._afterKeyChange),
-							instance.bindContainerEvent('click', instance._onClickCancel, '.key-value-cancel'),
-							instance.bindContainerEvent('click', instance._onClickDone, '.key-value-done'),
-							instance.bindContainerEvent('click', instance._onClickEditor, '.key-value-output'),
-							instance.bindContainerEvent('keypress', instance._onKeyPressEditorInput, '.key-value-input'),
-							instance.bindContainerEvent('valuechange', instance._onValueChangeEditorInput, '.key-value-input'),
+							instance.bindContainerEvent('valuechange', instance._onValueChangeKeyInput, '.key-value-input'),
 							instance.bindInputEvent('valuechange', instance._onValueChangeInput)
 						);
 					},
@@ -54,11 +53,13 @@ AUI.add(
 					getTemplateContext: function() {
 						var instance = this;
 
+						var key = instance.get('key');
+
 						return A.merge(
 							KeyValueField.superclass.getTemplateContext.apply(instance, arguments),
 							{
-								editing: instance.get('editing'),
-								key: instance.get('key'),
+								key: key,
+								keyInputSize: instance._getKeyInputSize(key),
 								strings: instance.get('strings'),
 								tooltip: instance.getLocalizedValue(instance.get('tooltip'))
 							}
@@ -68,19 +69,34 @@ AUI.add(
 					normalizeKey: function(key) {
 						var instance = this;
 
+						var normalizedKey = '';
+
+						var nextUpperCase = false;
+
 						key = key.trim();
 
 						for (var i = 0; i < key.length; i++) {
 							var item = key[i];
 
-							if (!A.Text.Unicode.test(item, 'L') && !A.Text.Unicode.test(item, 'N')) {
-								key = key.replace(item, ' ');
+							if (item === ' ') {
+								nextUpperCase = true;
+
+								continue;
 							}
+							else if (!A.Text.Unicode.test(item, 'L') && !A.Text.Unicode.test(item, 'N')) {
+								continue;
+							}
+
+							if (nextUpperCase) {
+								item = item.toUpperCase();
+
+								nextUpperCase = false;
+							}
+
+							normalizedKey += item;
 						}
 
-						key = Lang.String.camelize(key, ' ');
-
-						return key.replace(/\s+/ig, '');
+						return normalizedKey;
 					},
 
 					render: function() {
@@ -97,46 +113,6 @@ AUI.add(
 						return instance;
 					},
 
-					saveEditor: function() {
-						var instance = this;
-
-						var container = instance.get('container');
-
-						var editorInput = container.one('.key-value-input');
-
-						var value = editorInput.val();
-
-						if (value) {
-							instance.set('key', instance.normalizeKey(value));
-						}
-
-						instance.set('editing', false);
-					},
-
-					_afterEditingChange: function(event) {
-						var instance = this;
-
-						var container = instance.get('container');
-
-						var editing = event.newVal;
-
-						if (editing && !instance._eventOutsideHandler) {
-							instance._eventOutsideHandler = container.on(
-								'clickoutside',
-								function(event) {
-									instance.set('editing', false);
-
-									instance._eventOutsideHandler.detach();
-
-									instance._eventOutsideHandler = null;
-								},
-								'.key-value-input'
-							);
-						}
-
-						instance._uiSetEditing(editing);
-					},
-
 					_afterKeyChange: function(event) {
 						var instance = this;
 
@@ -145,59 +121,23 @@ AUI.add(
 						instance._uiSetKey(event.newVal);
 					},
 
-					_getMaxInputSize: function(str) {
+					_getKeyInputSize: function(str) {
+						var instance = this;
+
 						var size = str.length;
 
-						if (size > 50) {
-							size = 50;
+						var maxKeyInputSize = instance.get('maxKeyInputSize');
+
+						var minKeyInputSize = instance.get('minKeyInputSize');;
+
+						if (size > maxKeyInputSize) {
+							size = maxKeyInputSize;
 						}
-						else if (size <= 5) {
-							size = 5;
-						}
-
-						return size;
-					},
-
-					_onClickCancel: function() {
-						var instance = this;
-
-						instance.set('editing', false);
-					},
-
-					_onClickDone: function() {
-						var instance = this;
-
-						instance.saveEditor();
-					},
-
-					_onClickEditor: function() {
-						var instance = this;
-
-						instance.set('editing', !instance.get('editing'));
-					},
-
-					_onKeyPressEditorInput: function(event) {
-						var instance = this;
-
-						if (event.isKey('ENTER')) {
-							event.preventDefault();
-
-							instance.saveEditor();
-						}
-					},
-
-					_onValueChangeEditorInput: function(event) {
-						var instance = this;
-
-						var input = event.target;
-
-						var value = event.newVal;
-
-						if (value.length === 0) {
-							value = input.attr('placeholder');
+						else if (size <= minKeyInputSize) {
+							size = minKeyInputSize;
 						}
 
-						event.target.attr('size', instance._getMaxInputSize(value) + 1);
+						return size + 1;
 					},
 
 					_onValueChangeInput: function(event) {
@@ -208,6 +148,14 @@ AUI.add(
 
 							instance.set('key', instance.normalizeKey(value));
 						}
+					},
+
+					_onValueChangeKeyInput: function(event) {
+						var instance = this;
+
+						var value = event.newVal;
+
+						instance.set('key', instance.normalizeKey(value));
 					},
 
 					_renderErrorMessage: function() {
@@ -222,34 +170,13 @@ AUI.add(
 						editorNode.insert(container.one('.help-block'), 'after');
 					},
 
-					_uiSetEditing: function(editing) {
-						var instance = this;
-
-						var container = instance.get('container');
-
-						var editorNode = container.one('.key-value-editor');
-
-						editorNode.toggleClass('active', editing);
-
-						if (editing) {
-							var editorInput = container.one('.key-value-input');
-
-							editorInput.val('');
-							editorInput.focus();
-						}
-					},
-
 					_uiSetKey: function(key) {
 						var instance = this;
 
-						var container = instance.get('container');
+						var keyInput = instance.get('container').one('.key-value-input');
 
-						var editorInput = container.one('.key-value-input');
-
-						editorInput.attr('placeholder', key);
-						editorInput.attr('size', instance._getMaxInputSize(key) + 1);
-
-						container.one('.key-value-output').html(key);
+						keyInput.attr('size', instance._getKeyInputSize(key));
+						keyInput.val(key);
 					},
 
 					_valueGenerationLocked: function() {
@@ -271,6 +198,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['aui-text-unicode', 'liferay-ddm-form-field-text', 'liferay-ddm-form-renderer-field']
+		requires: ['aui-text-unicode', 'event-valuechange', 'liferay-ddm-form-field-text', 'liferay-ddm-form-renderer-field']
 	}
 );
