@@ -189,6 +189,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['liferay-ddm-form-renderer-types', 'queue']
+		requires: ['liferay-ddm-form-renderer-types']
 	}
 );

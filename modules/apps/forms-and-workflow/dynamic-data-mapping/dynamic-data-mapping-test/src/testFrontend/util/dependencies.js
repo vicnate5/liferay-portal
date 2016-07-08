@@ -13,6 +13,7 @@ var soyJSDir = path.join(osgi.resourcesClassesPath(soyDir));
 
 var ddmRendererResourcesDir = osgi.ddmBundleResourcesPath('dynamic-data-mapping-form-renderer');
 var ddmTextResourcesDir = osgi.ddmBundleResourcesPath('dynamic-data-mapping-type-text');
+var ddmKeyValueResourcesDir = osgi.ddmBundleResourcesPath('dynamic-data-mapping-type-key-value');
 
 module.exports = [
 	frontendTmpSrcDir + '/aui/aui/aui.js',
@@ -28,6 +29,7 @@ module.exports = [
 	ddmRendererResourcesDir + '/js/*.js',
 	ddmRendererResourcesDir + '/*.js',
 	ddmTextResourcesDir + '/*.js',
+	ddmKeyValueResourcesDir + '/*.js',
 	{
 		included: false,
 		pattern: frontendTmpSrcDir + '/aui/**/*.css',
