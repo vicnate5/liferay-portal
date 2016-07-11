@@ -1,7 +1,9 @@
 <definition component-name="portal-workflow">
 	<property name="portal.release" value="true" />
-	<property name="custom.properties" value="default.layout.template.id=1_column${line.separator}company.default.time.zone=America/Los_Angeles" />
+	<property name="custom.properties" value="default.layout.template.id=1_column${line.separator}company.default.time.zone=Asia/Shanghai" />
 	<property name="testray.main.component.name" value="Workflow" />
+
+	<property name="run.test" value="true" />
 
 	<set-up>
 		<execute macro="TestCase#setUpPortalInstance" />
