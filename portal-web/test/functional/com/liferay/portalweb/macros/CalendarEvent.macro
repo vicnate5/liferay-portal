@@ -1423,11 +1423,6 @@
 	<command name="setTimes">
 		<execute function="Type" locator1="CalendarEditEvent#START_DATE_TIME" value1="${startDateTime}" />
 		<execute function="Type" locator1="CalendarEditEvent#END_DATE_TIME" value1="${endDateTime}" />
-
-		<execute macro="CalendarEvent#viewTimes">
-			<var name="endDateTime" value="${endDateTime}" />
-			<var name="startDateTime" value="${startDateTime}" />
-		</execute>
 	</command>
 
 	<command name="tag">
