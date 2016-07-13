@@ -5423,6 +5423,103 @@
 		</execute>
 	</command>
 
+	<command name="ViewReminderEmailNotifications" priority="4">
+		<property name="test.smtp.server.enabled" value="true" />
+
+		<execute macro="TestCase#getSiteName">
+			<return from="siteName" name="siteName" />
+			<var name="siteName" value="${siteName}" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
+		</execute>
+
+		<execute macro="User#addCP">
+			<var name="userEmailAddress" value="userea@liferay.com" />
+			<var name="userFirstName" value="userfn" />
+			<var name="userLastName" value="userln" />
+			<var name="userScreenName" value="usersn" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
+		</execute>
+
+		<execute macro="User#editPasswordCP">
+			<var name="userEmailAddress" value="userea@liferay.com" />
+			<var name="userScreenName" value="usersn" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="${siteName}" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesMembers">
+			<var name="portlet" value="Site Memberships" />
+		</execute>
+
+		<execute macro="Site#addMemberCP">
+			<var name="userFirstName" value="userfn" />
+			<var name="userLastName" value="userln" />
+			<var name="userScreenName" value="usersn" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Calendar#add">
+			<var name="calendarName" value="userfn userln" />
+			<var name="calendarType" value="Other Calendars" />
+		</execute>
+
+		<execute macro="Calendar#getFutureTime5Minutes">
+			<return from="futureTime" name="futureTime" />
+			<var name="futureTime" value="${futureTime}" />
+		</execute>
+
+		<echo message="The future time is ${futureTime}" />
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="CalendarNavigator#gotoAddEvent" />
+
+		<execute macro="CalendarEvent#addRegular">
+			<var name="duration1" value="Minutes" />
+			<var name="duration2" value="Minutes" />
+			<var name="endDateTime" value="" />
+			<var name="eventTitle" value="Calendar Event Title" />
+			<var name="number1" value="1" />
+			<var name="number2" value="2" />
+			<var name="optionSet" value="true" />
+			<var name="optionSetValue" value="inviteResource" />
+			<var name="pageName" value="${pageName}" />
+			<var name="reminders" value="true" />
+			<var name="specificOptionSetValue" value="userfn userln" />
+			<var name="startDateTime" value="${futureTime}" />
+			<var name="user" value="userfn userln" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="CalendarEvent#addRSVP">
+			<var name="eventTitle" value="Calendar Event Title" />
+			<var name="eventType" value="Regular" />
+			<var name="rsvp" value="Yes" />
+		</execute>
+
+		<execute function="Pause" locator1="180000" />
+
+		<execute macro="MockMock#viewMailCount">
+			<var name="emailCount" value="5" />
+		</execute>
+	</command>
+
 	<command name="ViewShowMoreLocalization" priority="3">
 		<description message="This is a use case LPS-54786." />
 
