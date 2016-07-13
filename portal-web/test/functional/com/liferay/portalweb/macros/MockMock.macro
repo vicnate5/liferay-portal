@@ -65,9 +65,11 @@
 	</command>
 
 	<command name="viewMailCount">
+		<execute macro="MockMock#_gotoMail" />
+
 		<var name="key_emailCount" value="${emailCount}" />
 
-		<execute function="AssertTextEquals#assertPartialText" locator1="MockMock#MOCKMOCK_EMAIL_COUNT_MESSAGE" value1="You have ${emailCount}!" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="MockMock#MOCKMOCK_EMAIL_COUNT_MESSAGE" value1="You have ${emailCount} emails!" />
 	</command>
 
 	<command name="viewNoMailCount">

@@ -609,6 +609,43 @@
 		<execute function="AssertConsoleTextNotPresent" value1="ClassNotFoundException" />
 	</command>
 
+	<command name="getFutureTime5Minutes" returns="futureTime">
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Polls" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<var attribute="value" locator="Polls#EXPIRATION_DATE_HOUR" name="currentHour" />
+		<var name="currentHourLength" value="${currentHour?length()}" />
+
+		<if>
+			<equals arg1="${currentHourLength}" arg2="1" />
+			<then>
+				<var name="currentHour" value="0${currentHour}" />
+			</then>
+		</if>
+
+		<var attribute="value" locator="Polls#EXPIRATION_DATE_AMPM" name="currentAMPM" />
+		<var method="StringUtil#replace('${currentAMPM}', '0', 'AM')" name="currentAMPM" />
+		<var method="StringUtil#replace('${currentAMPM}', '1', 'PM')" name="currentAMPM" />
+
+		<var attribute="value" locator="Polls#EXPIRATION_DATE_MINUTE" name="currentMinute" />
+		<var method="MathUtil#sum('${currentMinute}', '5')" name="futureMinute" />
+		<var name="futureMinuteLength" value="${futureMinute?length()}" />
+
+		<if>
+			<equals arg1="${futureMinuteLength}" arg2="1" />
+			<then>
+				<var name="futureMinute" value="0${futureMinute}" />
+			</then>
+		</if>
+
+		<var name="futureTime" value="${currentHour}:${futureMinute} ${currentAMPM}" />
+
+		<return name="futureTime" value="${futureTime}" />
+	</command>
+
 	<command name="hideCurrentSiteCalendar">
 		<execute function="ScrollWebElementIntoView" locator1="Calendar#CURRENT_SITE_CALENDARS_CALENDAR_PRIMARY_COLOR_DEFAULT" />
 

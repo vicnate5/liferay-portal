@@ -25,7 +25,7 @@
 </tr>
 <tr>
 	<td>MOCKMOCK_EMAIL_COUNT_MESSAGE</td>
-	<td>//div[@class='container' and contains(.,'You have ${key_emailCount}!')]/h1</td>
+	<td>//div[@class='container' and contains(.,'You have ${key_emailCount} emails!')]/h1</td>
 	<td></td>
 </tr>
 <tr>
