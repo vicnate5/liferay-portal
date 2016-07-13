@@ -83,6 +83,32 @@
 	<td></td>
 	<td></td>
 </tr>
+<!-- EXPIRATION_DATE -->
+<tr>
+	<td>EXPIRATION_DATE_TIME</td>
+	<td>//input[contains(@name,'expirationDateTime')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>EXPIRATION_DATE_HOUR</td>
+	<td>//input[contains(@name,'expirationDateHour')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>EXPIRATION_DATE_MINUTE</td>
+	<td>//input[contains(@name,'expirationDateMinute')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>EXPIRATION_DATE_AMPM</td>
+	<td>//input[contains(@name,'expirationDateAmPm')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
 <!--POLLS_TABLE-->
 <tr>
 	<td>POLLS_TABLE_TITLE</td>
