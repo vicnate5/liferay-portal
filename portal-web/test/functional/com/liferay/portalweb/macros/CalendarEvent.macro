@@ -361,6 +361,16 @@
 		<execute function="AssertNotChecked" locator1="CalendarEditEvent#ALL_DAY_CHECKBOX" />
 		<execute function="AssertNotChecked" locator1="CalendarEditEvent#REPEAT_CHECKBOX" />
 
+		<if>
+			<isset var="startDateTime" />
+			<then>
+				<execute macro="CalendarEvent#setTimes">
+					<var name="endDateTime" value="${endDateTime}" />
+					<var name="startDateTime" value="${startDateTime}" />
+				</execute>
+			</then>
+		</if>
+
 		<var locator="CalendarEditEvent#END_DATE" name="endDate" />
 		<var locator="CalendarEditEvent#END_DATE_TIME" name="endDateTime" />
 		<var locator="CalendarEditEvent#START_DATE" name="startDate" />
