@@ -1299,6 +1299,7 @@
 
 	<command name="SubmitFormAndViewEmailNotification" priority="4">
 		<property name="test.smtp.server.enabled" value="true" />
+		<property name="victor" value="true" />
 
 		<execute macro="Navigator#openURL" />
 
