@@ -628,6 +628,8 @@
 	</command>
 
 	<command name="EditSingleApproverDefinitionDeleteTaskNode" priority="5">
+		<property name="victor" value="false" />
+
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Workflow Definition" />
 		</execute>
@@ -683,6 +685,7 @@
 
 	<command name="PublishFromSourceTabAndViewNameChange" priority="3">
 		<description message="This is a use case for LPS-43214 and LPS-50269." />
+		<property name="victor" value="false" />
 
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Kaleo Designer" />
@@ -1430,6 +1433,8 @@
 	<command name="ViewInvalidSourceXMLRemainsAfterTabSwitch" priority="4">
 		<description message="This is a use case for LPS-48590." />
 
+		<property name="victor" value="false" />
+
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Workflow Definition" />
 		</execute>
@@ -1454,6 +1459,8 @@
 
 	<command name="ViewNewUploadedDefinitionDoesNotContainDataFromDeletedDefinition" priority="4">
 		<description message="This is a use case for LPS-45676." />
+
+		<property name="victor" value="false" />
 
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Workflow Definition" />
@@ -1514,6 +1521,8 @@
 	<command name="ViewNodeNotificationRecipientPersistsAfterSwitchingTabs" priority="4">
 		<description message="This is a use case for LPS-46657." />
 
+		<property name="victor" value="false" />
+
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Workflow Definition" />
 		</execute>
@@ -1551,6 +1560,8 @@
 
 	<command name="ViewSingleApproverUserNotificationOption" priority="3">
 		<description message="This is a use case for LPS-46605." />
+
+		<property name="victor" value="false" />
 
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Workflow Definition" />
