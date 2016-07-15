@@ -1352,6 +1352,8 @@
 
 		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
 
+		<execute macro="Navigator#openURL" />
+
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Kaleo Designer" />
 		</execute>
@@ -1359,6 +1361,8 @@
 		<execute macro="KaleoDesigner#viewTableDefinitionDraftViaKDCP">
 			<var name="workflowDefinitionTitle" value="New Workflow Definition" />
 		</execute>
+
+		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Kaleo Designer" />
@@ -1369,6 +1373,8 @@
 		</execute>
 
 		<execute macro="KaleoDesigner#publishWorkflowDefinitionViaKDCP" />
+
+		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Kaleo Designer" />
