@@ -133,10 +133,22 @@
 	</command>
 
 	<command name="viewFormTableEntry">
-		<var name="key_fieldLabel" value="${fieldLabel}" />
-		<var name="key_fieldValue" value="${fieldValue}" />
+		<if>
+			<isset var="fieldName" />
+			<then>
+				<var name="key_fieldLabel" value="${fieldLabel}" />
+				<var name="key_fieldName" value="${fieldName}" />
+				<var name="key_fieldValue" value="${fieldValue}" />
 
-		<execute function="AssertTextEquals" locator1="FormsAdmin#FORM_ENTRY_TABLE_ENTRY" value1="${fieldValue}" />
+				<execute function="AssertTextEquals" locator1="FormsAdmin#FORM_ENTRY_TABLE_SPECIFIC_FIELD_ENTRY" value1="${fieldValue}" />
+			</then>
+			<else>
+				<var name="key_fieldLabel" value="${fieldLabel}" />
+				<var name="key_fieldValue" value="${fieldValue}" />
+
+				<execute function="AssertTextEquals" locator1="FormsAdmin#FORM_ENTRY_TABLE_ENTRY" value1="${fieldValue}" />
+			</else>
+		</if>
 	</command>
 
 	<command name="viewFormTableEntryNotPresent">
@@ -216,6 +228,7 @@
 		</execute>
 
 		<execute macro="FormFields#viewTextValue">
+			<var name="fieldLabel" value="${fieldLabel}" />
 			<var name="fieldName" value="${fieldName}" />
 			<var name="fieldValue" value="${fieldValue}" />
 		</execute>

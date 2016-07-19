@@ -84,9 +84,20 @@
 	</command>
 
 	<command name="editText">
-		<var name="key_fieldName" value="${fieldName}" />
+		<if>
+			<isset var="fieldLabel" />
+			<then>
+				<var name="key_fieldLabel" value="${fieldLabel}" />
+				<var name="key_fieldName" value="${fieldName}" />
 
-		<execute function="Type" locator1="FormFields#TEXT_FIELD" value1="${fieldValue}" />
+				<execute function="Type" locator1="FormFields#TEXT_FIELD_SPECIFIC_FIELD" value1="${fieldValue}" />
+			</then>
+			<else>
+				<var name="key_fieldName" value="${fieldName}" />
+
+				<execute function="Type" locator1="FormFields#TEXT_FIELD" value1="${fieldValue}" />
+			</else>
+		</if>
 	</command>
 
 	<command name="editTextMultiline">
@@ -438,8 +449,19 @@
 	</command>
 
 	<command name="viewTextValue">
-		<var name="key_fieldName" value="${fieldName}" />
+		<if>
+			<isset var="fieldLabel" />
+			<then>
+				<var name="key_fieldLabel" value="${fieldLabel}" />
+				<var name="key_fieldName" value="${fieldName}" />
 
-		<execute function="AssertTextEquals" locator1="FormFields#TEXT_FIELD" value1="${fieldValue}" />
+				<execute function="AssertTextEquals" locator1="FormFields#TEXT_FIELD_SPECIFIC_FIELD" value1="${fieldValue}" />
+			</then>
+			<else>
+				<var name="key_fieldName" value="${fieldName}" />
+
+				<execute function="AssertTextEquals" locator1="FormFields#TEXT_FIELD" value1="${fieldValue}" />
+			</else>
+		</if>
 	</command>
 </definition>

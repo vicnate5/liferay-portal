@@ -406,6 +406,7 @@
 		</execute>
 
 		<execute macro="FormFields#editText">
+			<var name="fieldLabel" value="Text" />
 			<var name="fieldName" value="Text" />
 			<var name="fieldValue" value="Text" />
 		</execute>
@@ -422,6 +423,7 @@
 		</execute>
 
 		<execute macro="FormFields#editText">
+			<var name="fieldLabel" value="Text2" />
 			<var name="fieldName" value="Text2" />
 			<var name="fieldValue" value="Text2" />
 		</execute>
@@ -503,6 +505,7 @@
 
 		<execute macro="FormsAdmin#viewFormTableEntry">
 			<var name="fieldLabel" value="Text" />
+			<var name="fieldName" value="text" />
 			<var name="fieldValue" value="Text" />
 		</execute>
 
@@ -513,6 +516,7 @@
 
 		<execute macro="FormsAdmin#viewFormTableEntry">
 			<var name="fieldLabel" value="Text" />
+			<var name="fieldName" value="text2" />
 			<var name="fieldValue" value="Text2" />
 		</execute>
 
