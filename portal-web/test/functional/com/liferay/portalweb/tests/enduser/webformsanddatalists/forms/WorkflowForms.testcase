@@ -2,6 +2,8 @@
 	<property name="portal.release" value="true" />
 	<property name="testray.main.component.name" value="Workflow" />
 
+	<property name="victor" value="true" />
+
 	<set-up>
 		<var method="TestPropsUtil#get('test.portal.instance')" name="testPortalInstance" />
 
