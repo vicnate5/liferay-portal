@@ -2,6 +2,8 @@
 	<property name="portal.release" value="true" />
 	<property name="testray.main.component.name" value="Forms" />
 
+	<property name="victor" value="true" />
+
 	<set-up>
 		<execute macro="TestCase#setUpPortalInstance" />
 
@@ -81,7 +83,7 @@
 			<var name="dataProvider" value="Liferay Countries" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -153,7 +155,7 @@
 			<var name="fieldValue" value="Text Field" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -186,7 +188,7 @@
 			<var name="fieldValue" value="Text Field" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Date" />
@@ -196,7 +198,7 @@
 			<var name="fieldValue" value="Date Field" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -315,7 +317,7 @@
 			<var name="fieldValue" value="Paragraph body text." />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Text Field" />
@@ -337,7 +339,7 @@
 			<var name="fieldName" value="TextName" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Select from List" />
@@ -388,7 +390,7 @@
 			<var name="rowNumber" value="2" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Single Selection" />
@@ -439,7 +441,7 @@
 			<var name="rowNumber" value="2" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Date" />
@@ -461,7 +463,7 @@
 			<var name="fieldName" value="DateName" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Multiple Selection" />
@@ -483,7 +485,7 @@
 			<var name="fieldName" value="CheckboxName" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -503,7 +505,7 @@
 			<var name="fieldName" value="ParagraphName" />
 		</execute>
 
-		<execute macro="FormFields#saveEdit" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="FormsAdminNavigator#gotoEditField">
 			<var name="fieldName" value="Text" />
@@ -513,7 +515,7 @@
 			<var name="fieldName" value="TextName" />
 		</execute>
 
-		<execute macro="FormFields#saveEdit" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="FormsAdminNavigator#gotoEditField">
 			<var name="fieldName" value="Select" />
@@ -532,7 +534,7 @@
 			<var name="rowNumber" value="2" />
 		</execute>
 
-		<execute macro="FormFields#saveEdit" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="FormsAdminNavigator#gotoEditField">
 			<var name="fieldName" value="Radio" />
@@ -551,7 +553,7 @@
 			<var name="rowNumber" value="2" />
 		</execute>
 
-		<execute macro="FormFields#saveEdit" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="FormsAdminNavigator#gotoEditField">
 			<var name="fieldName" value="Date" />
@@ -561,7 +563,7 @@
 			<var name="fieldName" value="DateName" />
 		</execute>
 
-		<execute macro="FormFields#saveEdit" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="FormsAdminNavigator#gotoEditField">
 			<var name="fieldName" value="Checkbox" />
@@ -571,7 +573,7 @@
 			<var name="fieldName" value="CheckboxName" />
 		</execute>
 
-		<execute macro="FormFields#saveEdit" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 	</command>
@@ -864,7 +866,7 @@
 			<var name="fieldValue" value="Text" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -892,7 +894,7 @@
 			<var name="fieldValue" value="Checkbox" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -967,7 +969,7 @@
 			<var name="fieldValue" value="Text Field" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -1068,7 +1070,7 @@
 			<var name="fieldValue" value="Text Field" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -1175,7 +1177,7 @@
 			<var name="fieldValue" value="one" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#addColumn">
 			<var name="columnLineNumber" value="3" />
@@ -1190,7 +1192,7 @@
 			<var name="fieldValue" value="two" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#addColumn">
 			<var name="columnLineNumber" value="10" />
@@ -1205,7 +1207,7 @@
 			<var name="fieldValue" value="three" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Text Field" />
@@ -1215,7 +1217,7 @@
 			<var name="fieldValue" value="four" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#addColumn">
 			<var name="columnLineNumber" value="2" />
@@ -1231,7 +1233,7 @@
 			<var name="fieldValue" value="five" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#addColumn">
 			<var name="columnLineNumber" value="7" />
@@ -1247,7 +1249,7 @@
 			<var name="fieldValue" value="six" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -1322,7 +1324,7 @@
 			<var name="fieldValue" value="Text Field" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="FormsAdminNavigator#gotoSettings" />
 
@@ -1417,7 +1419,7 @@
 			<var name="fieldValue" value="Text Field" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="FormsAdminNavigator#gotoSettings" />
 
@@ -1531,7 +1533,7 @@
 			<var name="fieldValue" value="Paragraph body text." />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Text Field" />
@@ -1541,7 +1543,7 @@
 			<var name="fieldValue" value="Text" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Select from List" />
@@ -1562,7 +1564,7 @@
 			<var name="rowNumber" value="2" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Single Selection" />
@@ -1583,7 +1585,7 @@
 			<var name="rowNumber" value="2" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Date" />
@@ -1593,7 +1595,7 @@
 			<var name="fieldValue" value="Date" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Multiple Selection" />
@@ -1603,7 +1605,7 @@
 			<var name="fieldValue" value="Checkbox" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -1624,7 +1626,7 @@
 
 		<execute macro="FormPortletConfiguration#selectForm" />
 
-		<execute macro="PortletEntry#save" />
+		<execute macro="PortletEntry#save" /> 
 
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Form Page" />
@@ -1703,7 +1705,7 @@
 			<var name="fieldValue" value="New Paragraph body text." />
 		</execute>
 
-		<execute macro="FormFields#saveEdit" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="FormsAdminNavigator#gotoEditField">
 			<var name="fieldName" value="Text" />
@@ -1714,7 +1716,7 @@
 			<var name="fieldValue" value="New Text" />
 		</execute>
 
-		<execute macro="FormFields#saveEdit" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="FormsAdminNavigator#gotoEditField">
 			<var name="fieldName" value="Select" />
@@ -1726,17 +1728,15 @@
 		</execute>
 
 		<execute macro="FormFields#editOptionsRow">
-			<var name="optionName" value="Select1" />
 			<var name="optionValue" value="New Select 1" />
 		</execute>
 
 		<execute macro="FormFields#editOptionsRow">
-			<var name="optionName" value="Select2" />
 			<var name="optionValue" value="New Select 2" />
 			<var name="rowNumber" value="2" />
 		</execute>
 
-		<execute macro="FormFields#saveEdit" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="FormsAdminNavigator#gotoEditField">
 			<var name="fieldName" value="Radio" />
@@ -1748,17 +1748,15 @@
 		</execute>
 
 		<execute macro="FormFields#editOptionsRow">
-			<var name="optionName" value="Option1" />
 			<var name="optionValue" value="New Option 1" />
 		</execute>
 
 		<execute macro="FormFields#editOptionsRow">
-			<var name="optionName" value="Option2" />
 			<var name="optionValue" value="New Option 2" />
 			<var name="rowNumber" value="2" />
 		</execute>
 
-		<execute macro="FormFields#saveEdit" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="FormsAdminNavigator#gotoEditField">
 			<var name="fieldName" value="Date" />
@@ -1769,7 +1767,7 @@
 			<var name="fieldValue" value="New Date" />
 		</execute>
 
-		<execute macro="FormFields#saveEdit" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="FormsAdminNavigator#gotoEditField">
 			<var name="fieldName" value="Checkbox" />
@@ -1780,7 +1778,7 @@
 			<var name="fieldValue" value="New Checkbox" />
 		</execute>
 
-		<execute macro="FormFields#saveEdit" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -1909,7 +1907,7 @@
 			<var name="fieldValue" value="Paragraph body text." />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Text Field" />
@@ -1919,7 +1917,7 @@
 			<var name="fieldValue" value="SingleLineText" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Text Field" />
@@ -1937,7 +1935,7 @@
 			<var name="fieldName" value="required" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Select from List" />
@@ -1958,7 +1956,7 @@
 			<var name="rowNumber" value="2" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Single Selection" />
@@ -1983,7 +1981,7 @@
 			<var name="rowNumber" value="2" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Date" />
@@ -1993,7 +1991,7 @@
 			<var name="fieldValue" value="Date" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Multiple Selection" />
@@ -2007,7 +2005,7 @@
 			<var name="fieldName" value="required" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#addPage" />
 
@@ -2023,7 +2021,7 @@
 			<var name="fieldValue" value="SingleLineText2" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -2182,7 +2180,7 @@
 			<var name="fieldValue" value="Text" />
 		</execute>
 
-		<execute macro="FormFields#enableAdvancedOptions" />
+		<execute macro="Form#goToAdvancedTab" />
 
 		<execute macro="FormFields#enableSwitcher">
 			<var name="fieldName" value="validation" />
@@ -2195,7 +2193,7 @@
 			<var name="validationType" value="Text" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -2280,7 +2278,7 @@
 			<var name="fieldValue" value="Text Field" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Multiple Selection" />
@@ -2290,7 +2288,7 @@
 			<var name="fieldValue" value="Checkbox Field" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Single Selection" />
@@ -2311,7 +2309,7 @@
 			<var name="rowNumber" value="2" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Select from List" />
@@ -2332,7 +2330,7 @@
 			<var name="rowNumber" value="2" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -2481,7 +2479,7 @@
 			<var name="fieldValue" value="Paragraph field body text." />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -2543,7 +2541,7 @@
 			<var name="formName" value="Created Form Name" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoEditFieldParagraph">
+		<execute macro="FormsAdminNavigator#gotoEditField">
 			<var name="fieldName" value="paragraph" />
 		</execute>
 
@@ -2556,7 +2554,7 @@
 			<var name="fieldValue" value="New Paragraph body text." />
 		</execute>
 
-		<execute macro="FormFields#saveEdit" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -2621,7 +2619,7 @@
 			<var name="fieldName" value="required" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -2708,7 +2706,7 @@
 			<var name="fieldName" value="required" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -2794,7 +2792,7 @@
 			<var name="fieldName" value="required" />
 		</execute>
 
-		<execute macro="FormFields#enableAdvancedOptions" />
+		<execute macro="Form#goToAdvancedTab" />
 
 		<execute macro="FormFields#editOptionsRow">
 			<var name="optionName" value="Option1" />
@@ -2807,7 +2805,7 @@
 			<var name="rowNumber" value="2" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -2892,13 +2890,13 @@
 			<var name="fieldName" value="required" />
 		</execute>
 
-		<execute macro="FormFields#enableAdvancedOptions" />
+		<execute macro="Form#goToAdvancedTab" />
 
 		<execute macro="FormFields#enableSwitcher">
 			<var name="fieldName" value="repeatable" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -2979,7 +2977,7 @@
 			<var name="fieldName" value="required" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -3063,7 +3061,7 @@
 			<var name="fieldName" value="showAsSwitcher" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -3147,7 +3145,7 @@
 			<var name="fieldValue" value="Text Field" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -3235,7 +3233,7 @@
 			<var name="fieldValue" value="Text" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#addPage" />
 
@@ -3267,7 +3265,7 @@
 			<var name="rowNumber" value="2" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#addPage" />
 
@@ -3283,7 +3281,7 @@
 			<var name="fieldValue" value="Checkbox" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -3411,7 +3409,7 @@
 			<var name="fieldName" value="text" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Text Field" />
@@ -3434,7 +3432,7 @@
 			<var name="fieldName" value="JumpSheExclaimed" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -3511,13 +3509,13 @@
 			<var name="fieldName" value="showAsSwitcher" />
 		</execute>
 
-		<execute macro="FormFields#enableAdvancedOptions" />
+		<execute macro="Form#goToAdvancedTab" />
 
 		<execute macro="FormFields#enableSwitcher">
 			<var name="fieldName" value="showLabel" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="FormFields#viewSwitcher">
 			<var name="fieldName" value="MultipleSelection" />
@@ -3586,13 +3584,13 @@
 			<var name="fieldValue" value="Text Field" />
 		</execute>
 
-		<execute macro="FormFields#enableAdvancedOptions" />
+		<execute macro="Form#goToAdvancedTab" />
 
 		<execute macro="FormFields#enableSwitcher">
 			<var name="fieldName" value="repeatable" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -3653,7 +3651,7 @@
 			<var name="fieldValue" value="Visible Field" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#gotoAddField">
 			<var name="fieldType" value="Text Field" />
@@ -3663,14 +3661,14 @@
 			<var name="fieldValue" value="Hidden Field" />
 		</execute>
 
-		<execute macro="FormFields#enableAdvancedOptions" />
+		<execute macro="Form#goToAdvancedTab" />
 
 		<execute macro="FormFields#editText">
 			<var name="fieldName" value="visibility" />
 			<var name="fieldValue" value="equals(VisibleField, &quot;test&quot;)" />
 		</execute>
 
-		<execute macro="FormFields#save" />
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
