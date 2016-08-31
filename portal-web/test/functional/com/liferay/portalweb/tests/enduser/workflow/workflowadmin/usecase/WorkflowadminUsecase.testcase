@@ -829,6 +829,8 @@
 	</command>
 
 	<command name="AddWebContentWithCategorySpecificDefinition" priority="4">
+		<property name="portal.acceptance" value="true" />
+		
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Workflow Definition" />
 		</execute>
