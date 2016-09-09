@@ -44,17 +44,6 @@
 		<execute macro="Upgrade#viewCalendar" />
 	</command>
 
-	<command name="View612PortalSmokeArchive" priority="5">
-		<property name="data.archive.type" value="data-archive-portal" />
-		<property name="portal.acceptance" value="true" />
-		<property name="portal.upgrades" value="true" />
-		<property name="test.assert.warning.exceptions" value="true" />
-
-		<execute macro="Upgrade#viewUpgrade" />
-
-		<execute macro="Upgrade#searchForAssetsAfterUpgrade" />
-	</command>
-
 	<command name="View612NestedPortletsArchive" priority="3">
 		<property name="data.archive.type" value="data-archive-nested-portlets" />
 
@@ -65,6 +54,17 @@
 		<property name="data.archive.type" value="data-archive-polls" />
 
 		<execute macro="Upgrade#viewPolls" />
+	</command>
+
+	<command name="View612PortalSmokeArchive" priority="5">
+		<property name="data.archive.type" value="data-archive-portal" />
+		<property name="portal.acceptance" value="true" />
+		<property name="portal.upgrades" value="true" />
+		<property name="test.assert.warning.exceptions" value="true" />
+
+		<execute macro="Upgrade#viewUpgrade" />
+
+		<execute macro="Upgrade#searchForAssetsAfterUpgrade" />
 	</command>
 
 	<command name="View612WebContentArchive" priority="3">
