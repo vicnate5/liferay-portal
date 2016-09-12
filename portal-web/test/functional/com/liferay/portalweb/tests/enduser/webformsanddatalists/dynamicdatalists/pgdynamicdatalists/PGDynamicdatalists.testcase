@@ -2,6 +2,8 @@
 	<property name="portal.release" value="true" />
 	<property name="testray.main.component.name" value="Dynamic Data Lists" />
 
+	<property name="victor" value="true" />
+
 	<var name="pageName" value="Dynamic Data Lists Display Page" />
 	<var name="portletName" value="Dynamic Data Lists Display" />
 
