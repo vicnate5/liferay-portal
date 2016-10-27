@@ -1966,7 +1966,9 @@
 		<property name="test.assert.javascript.errors" value="false" />
 		<property name="test.smtp.server.enabled" value="true" />
 
-		<var method="TestPropsUtil#get('email.address.2')" name="user1EmailAddress" />
+		<!-- LPS-66727 -->
+
+		<!--<var method="TestPropsUtil#get('email.address.2')" name="user1EmailAddress" />
 		<var method="TestPropsUtil#get('email.address.3')" name="user2EmailAddress" />
 		<var method="TestPropsUtil#get('email.password.3')" name="user2EmailPassword" />
 		<var method="TestPropsUtil#get('email.address.4')" name="user3EmailAddress" />
@@ -2346,7 +2348,7 @@
 		<execute macro="WorkflowAsset#previewViewContent">
 			<var name="fieldLabel" value="Assigned To" />
 			<var name="fieldValue" value="Test Test" />
-		</execute>
+		</execute>-->
 	</command>
 
 	<command name="CompleteProcessAndViewNotifications" priority="5">
@@ -6977,7 +6979,10 @@
 	</command>
 
 	<command name="ViewApprovedProcessNotificationWithComments" priority="3">
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+
+		<!-- LPS-66727 -->
+
+		<!--<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
@@ -7117,7 +7122,7 @@
 
 		<execute macro="WorkflowAsset#viewNotification">
 			<var name="contentBody" value="Submission reviewed. The reviewer left the following: Process is approved." />
-		</execute>
+		</execute>-->
 	</command>
 
 	<command name="ViewApprovedProcessRecords" priority="5">
