@@ -14,17 +14,17 @@ module.exports = function(config) {
 	config.files.push(
 		{
 			included: true,
- 			pattern: 'node_modules/soyutils-nogoog/index.js'
- 		},
- 		{
- 			included: true,
- 			pattern: '../dynamic-data-mapping-form-renderer/' + resourcesPath + '/**/!(config)*.js'
- 		},
- 		{
- 			included: true,
- 			pattern: resourcesPath + '/**/!(config)*.js'
- 		},
- 		'src/testFrontend/**/*.js'
+			pattern: 'node_modules/soyutils-nogoog/index.js'
+		},
+		{
+			included: true,
+			pattern: '../dynamic-data-mapping-form-renderer/' + resourcesPath + '/**/!(config)*.js'
+		},
+		{
+			included: true,
+			pattern: resourcesPath + '/**/!(config)*.js'
+		},
+		'src/testFrontend/**/*.js'
 	);
 
 	config.preprocessors[resourcesPath + '/**/*.soy.js'] = ['replacer'];
