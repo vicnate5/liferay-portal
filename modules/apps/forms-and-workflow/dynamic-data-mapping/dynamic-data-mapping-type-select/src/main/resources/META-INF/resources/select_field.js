@@ -61,8 +61,8 @@ AUI.add(
 						return A.merge(
 							SelectField.superclass.getTemplateContext.apply(instance, arguments),
 							{
-								strings: instance.get('strings'), //to be removed after diogo's pr
 								options: instance.get('options'),
+								strings: instance.get('strings'),
 								value: instance.getValueArray()
 							}
 						);
@@ -85,6 +85,8 @@ AUI.add(
 									}
 								}
 							);
+
+							value = value.join();
 						}
 						else {
 							value = inputNode.val();
