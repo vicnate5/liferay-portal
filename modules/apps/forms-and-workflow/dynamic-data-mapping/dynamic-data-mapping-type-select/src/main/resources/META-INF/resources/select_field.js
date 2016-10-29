@@ -14,6 +14,7 @@ AUI.add(
 					},
 
 					multiple: {
+						state: true,
 						value: false
 					},
 
