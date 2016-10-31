@@ -56,14 +56,27 @@ describe(
 					function(done) {
 						selectField.set('multiple', true);
 
-						selectField.set('options', [{label: 'a', value: 'a'}, {label: 'b', value: 'b'}, {label: 'c', value: 'c'}]);
+						selectField.set(
+							'options',
+							[
+								{
+									label: 'a',
+									value: 'a'
+								},
+								{
+									label: 'b',
+									value: 'b'
+								},
+								{
+									label: 'c',
+									value: 'c'
+								}
+							]
+						);
 
 						selectField.setValue(['a', 'b', 'c']);
 
-						assert.equal(
-							selectField.getValue(),
-							'a,b,c'
-						);
+						assert.equal(selectField.getValue(), 'a,b,c');
 
 						done();
 					}
