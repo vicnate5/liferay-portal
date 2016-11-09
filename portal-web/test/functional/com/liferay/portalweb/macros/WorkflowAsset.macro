@@ -16,6 +16,12 @@
 		<execute function="AssertClick" locator1="Notifications#NOTIFICATIONS_WORKFLOW_TITLE" value1="${user} sent you a ${assetType} for review in the workflow." />
 	</command>
 
+	<command name="previewViewCommentsContent">
+		<var name="key_commentBody" value="${commentBody}" />
+
+		<execute function="AssertElementPresent" locator1="AssetWorkflow#CONTENT_COMMENTS_PREVIEW_VIEW" value1="${commentBody}" />
+	</command>
+
 	<command name="previewViewContent">
 		<var name="key_fieldLabel" value="${fieldLabel}" />
 		<var name="key_fieldValue" value="${fieldValue}" />
