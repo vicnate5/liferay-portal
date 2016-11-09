@@ -1,9 +1,12 @@
 {
 	"devDependencies": {
 		"gulp": "^3.9.0",
+		"karma-coverage": "^0.5.1",
 		"liferay-forms-gulp-tasks": "^0.0.8",
 		"liferay-karma-alloy-config": "^0.0.12",
 		"liferay-karma-config": "0.0.3",
+		"path": "0.12.7",
+		"run-sequence": "^1.1.0",
 		"soyutils-nogoog": "^1.0.0"
 	},
 	"version": "2.0.10"
