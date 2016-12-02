@@ -4555,11 +4555,6 @@
 			<var name="fieldValue" value="Kaleo Text Field" />
 		</execute>
 
-		<execute macro="WorkflowAsset#previewViewContent">
-			<var name="fieldLabel" value="Date" />
-			<var name="fieldValue" value="4/17/17" />
-		</execute>
-
 		<execute macro="Page#gotoMyAccount">
 			<var name="portletName" value="My Workflow Tasks" />
 		</execute>
