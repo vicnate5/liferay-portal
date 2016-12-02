@@ -792,7 +792,7 @@
 			<var name="fieldValue" value="test" />
 		</execute>
 
-		<execute macro="FormFields#viewDateFieldNotPresent">
+		<execute macro="FormFields#viewDateFieldNotVisible">
 			<var name="fieldLabel" value="Date Field" />
 			<var name="fieldName" value="Date" />
 		</execute>
