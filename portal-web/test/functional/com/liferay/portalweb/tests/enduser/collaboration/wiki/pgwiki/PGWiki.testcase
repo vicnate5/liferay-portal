@@ -690,6 +690,8 @@
 	</command>
 
 	<command name="AddWikiPageFormatJSPWiki" priority="4">
+		<property name="austin" value="true" />
+		<property name="whitelist.portal.profile.names.remove" value="com.liferay.wiki.engine.creole" />
 		<property name="osgi.modules.includes" value="wiki-engine-jspwiki" />
 
 		<execute macro="Navigator#gotoPage">
