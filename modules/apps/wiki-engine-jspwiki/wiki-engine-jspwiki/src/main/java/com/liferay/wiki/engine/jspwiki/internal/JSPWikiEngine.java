@@ -60,6 +60,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Jorge Ferrer
  */
 @Component(
+	enabled = false,
 	property = {"service.ranking:Integer=-1000"}, service = WikiEngine.class
 )
 public class JSPWikiEngine extends BaseInputEditorWikiEngine {
