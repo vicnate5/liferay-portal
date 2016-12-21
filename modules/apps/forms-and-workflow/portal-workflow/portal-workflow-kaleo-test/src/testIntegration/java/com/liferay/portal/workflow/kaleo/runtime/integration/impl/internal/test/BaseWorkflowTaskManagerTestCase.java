@@ -91,12 +91,16 @@ public class BaseWorkflowTaskManagerTestCase {
 	protected void activeSingleApproverWorkflow(String className, long classPK)
 		throws PortalException {
 
+		System.out.println("activeSingleApproverWorkflow");
+
 		WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLink(
 			adminUser.getUserId(), TestPropsValues.getCompanyId(),
 			group.getGroupId(), className, classPK, 0, "Single Approver@1");
 	}
 
 	protected BlogsEntry addBlogsEntry() throws PortalException {
+		System.out.println("addBlogsEntry");
+
 		BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.addEntry(
 			adminUser.getUserId(), StringUtil.randomString(),
 			StringUtil.randomString(), new Date(), serviceContext);
@@ -108,6 +112,8 @@ public class BaseWorkflowTaskManagerTestCase {
 
 	protected DDLRecord addRecord(DDLRecordSet recordSet)
 		throws PortalException {
+
+		System.out.println("addRecord");
 
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm("TextField1");
 
@@ -125,6 +131,8 @@ public class BaseWorkflowTaskManagerTestCase {
 	}
 
 	protected DDLRecordSet addRecordSet() throws Exception, PortalException {
+		System.out.println("addRecordSet");
+
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm("TextField1");
 
 		DDMStructureTestHelper ddmStructureTestHelper =
@@ -150,6 +158,8 @@ public class BaseWorkflowTaskManagerTestCase {
 	}
 
 	protected void approveWorkflowTask(User user) throws Exception {
+		System.out.println("approveWorkflowTask");
+
 		WorkflowTask workflowTask = getWorkflowTask();
 
 		PermissionChecker userPermissionChecker =
@@ -166,6 +176,8 @@ public class BaseWorkflowTaskManagerTestCase {
 	protected void assignWorkflowTaskToUser(User user, User assigneeUser)
 		throws Exception {
 
+		System.out.println("assignWorkflowTaskToUser");
+
 		WorkflowTask workflowTask = getWorkflowTask();
 
 		PermissionChecker userPermissionChecker =
@@ -180,6 +192,8 @@ public class BaseWorkflowTaskManagerTestCase {
 	}
 
 	protected void checkUserNotificationEventsByUsers(User... users) {
+		System.out.println("checkUserNotificationEventsByUsers");
+
 		for (User user : users) {
 			List<UserNotificationEvent> userNotificationEvents =
 				UserNotificationEventLocalServiceUtil.
@@ -204,6 +218,8 @@ public class BaseWorkflowTaskManagerTestCase {
 	protected void checkWorkflowInstance(String className, long classPK)
 		throws WorkflowException {
 
+		System.out.println("checkWorkflowInstance");
+
 		List<WorkflowInstance> workflowInstances =
 			WorkflowInstanceManagerUtil.getWorkflowInstances(
 				adminUser.getCompanyId(), adminUser.getUserId(), className,
@@ -213,6 +229,8 @@ public class BaseWorkflowTaskManagerTestCase {
 	}
 
 	protected DDMFormValues createDDMFormValues(DDMForm ddmForm) {
+		System.out.println("createDDMFormValues");
+
 		DDMFormValues ddmFormValues = DDMFormValuesTestUtil.createDDMFormValues(
 			ddmForm);
 
@@ -226,6 +244,8 @@ public class BaseWorkflowTaskManagerTestCase {
 	}
 
 	protected User createUser(String roleName) throws Exception {
+		System.out.println("createUser");
+
 		User user = UserTestUtil.addUser(group.getGroupId());
 
 		Role role = RoleLocalServiceUtil.getRole(
@@ -244,12 +264,16 @@ public class BaseWorkflowTaskManagerTestCase {
 	protected void deactiveWorkflow(String className, long classPK)
 		throws PortalException {
 
+		System.out.println("deactiveWorkflow");
+
 		WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLink(
 			adminUser.getUserId(), TestPropsValues.getCompanyId(),
 			group.getGroupId(), className, classPK, 0, null);
 	}
 
 	protected WorkflowTask getWorkflowTask() throws WorkflowException {
+		System.out.println("getWorkflowTask");
+
 		List<WorkflowTask> workflowTasks =
 			WorkflowTaskManagerUtil.getWorkflowTasksBySubmittingUser(
 				adminUser.getCompanyId(), adminUser.getUserId(), false,
@@ -261,6 +285,8 @@ public class BaseWorkflowTaskManagerTestCase {
 	}
 
 	protected void setUpUsers() throws Exception {
+		System.out.println("setUpUsers");
+
 		adminUser = createUser(RoleConstants.ADMINISTRATOR);
 
 		portalContentReviewerUser = createUser(
