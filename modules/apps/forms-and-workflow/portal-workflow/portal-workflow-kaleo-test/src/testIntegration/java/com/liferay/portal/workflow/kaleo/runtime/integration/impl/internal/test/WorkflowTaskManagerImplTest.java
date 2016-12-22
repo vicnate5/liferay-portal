@@ -80,11 +80,17 @@ public class WorkflowTaskManagerImplTest
 
 		approveWorkflowTask(siteAdminUser);
 
+		System.out.println("Get Blogs Entry");
+
 		blogsEntry = BlogsEntryLocalServiceUtil.getBlogsEntry(
 			blogsEntry.getEntryId());
 
+		System.out.println("Assert Status Approved");
+
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, blogsEntry.getStatus());
+
+		System.out.println("Done asserting status, moving on to deactiveWorkflow");
 
 		deactiveWorkflow(BlogsEntry.class.getName(), 0);
 	}
