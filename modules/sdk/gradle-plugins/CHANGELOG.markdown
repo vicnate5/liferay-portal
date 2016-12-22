@@ -863,12 +863,30 @@ version 1.0.142.
 ## 3.0.59 - 2016-12-20
 
 ### Changed
+- [LPS-67352]: Update the [Liferay Gradle Plugins Source Formatter] dependency
+to version 1.0.66.
+- [LPS-67352]: Update the [Liferay Source Formatter] dependency to version
+1.0.332.
+
+## 3.0.60 - 2016-12-21
+
+### Changed
+- [LPS-67352]: Update the [Liferay Gradle Plugins Source Formatter] dependency
+to version 1.0.67.
+- [LPS-67352]: Update the [Liferay Source Formatter] dependency to version
+1.0.333.
 - [LPS-69802]: Update the [Liferay Gradle Plugins Gulp] dependency to version
 2.0.7.
 - [LPS-69802]: Update the [Liferay Gradle Plugins JS Module Config Generator]
 dependency to version 2.1.5.
 - [LPS-69802]: Update the [Liferay Gradle Plugins JS Transpiler] dependency to
 version 2.3.4.
+
+## 3.0.61 - 2016-12-21
+
+### Added
+- [LPS-69838]: Allow to configure the `npmArgs` argument in the `node` extension
+object by setting the project property `nodejs.npm.args`.
 
 [Gradle Bundle Plugin]: https://github.com/TomDmitriev/gradle-bundle-plugin
 [Liferay Ant BND]: https://github.com/liferay/liferay-portal/tree/master/modules/sdk/ant-bnd
@@ -949,4 +967,5 @@ version 2.3.4.
 [LPS-69677]: https://issues.liferay.com/browse/LPS-69677
 [LPS-69730]: https://issues.liferay.com/browse/LPS-69730
 [LPS-69802]: https://issues.liferay.com/browse/LPS-69802
+[LPS-69838]: https://issues.liferay.com/browse/LPS-69838
 [LRDOCS-3023]: https://issues.liferay.com/browse/LRDOCS-3023
