@@ -1200,6 +1200,7 @@
 	<command name="ApproveWorkflowTaskAsSiteAdmin" priority="5">
 		<description message="This is a use case for LPS-66668." />
 		<property name="portal.acceptance" value="true" />
+		<property name="victor" value="false" />
 
 		<execute macro="ProductMenu#gotoControlPanelSites">
 			<var name="portlet" value="Sites" />
@@ -1323,6 +1324,7 @@
 
 	<command name="AssignThenApproveWorkflowTaskAsPortalContentReviewer" priority="3">
 		<description message="This is a use case for LPS-66668." />
+		<property name="victor" value="false" />
 
 		<execute macro="Navigator#openURL" />
 
