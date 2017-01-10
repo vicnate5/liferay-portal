@@ -124,26 +124,20 @@ AUI.add(
 
 						var formBuilder = instance.get('formBuilder');
 
-						var pagesQuantity = formBuilder.get('layouts').length;
+						var pagesTitles = formBuilder.getPagesTitle();
+
+						var pagesQuantity = pagesTitles.length;
 
 						pages = new Array(pagesQuantity);
 
 						for (var i = 0; i < pagesQuantity; i++) {
 							pages[i] = {
-								label: (i + 1).toString(),
+								label: pagesTitles[i] ? pagesTitles[i] : (i + 1).toString(),
 								value: i.toString()
 							};
 						}
 
 						return pages;
-					},
-
-					hide: function() {
-						var instance = this;
-
-						FormBuilderRuleBuilder.superclass.hide.apply(instance, arguments);
-
-						instance.syncUI();
 					},
 
 					renderRule: function(rule) {
@@ -165,6 +159,14 @@ AUI.add(
 						instance._ruleClasses.set('pages', instance.getPages());
 
 						instance._ruleClasses.render(rule);
+					},
+
+					show: function() {
+						var instance = this;
+
+						FormBuilderRuleBuilder.superclass.show.apply(instance, arguments);
+
+						instance.syncUI();
 					},
 
 					_getActionDescription: function(type, action) {
@@ -214,17 +216,19 @@ AUI.add(
 								);
 							break;
 							case 'jump-to-page':
+								var pages = instance.getPages();
+
 								actionDescription = A.Lang.sub(
 									strings['jump-from-page-to-page'],
 									[
 										badgeTemplate(
 											{
-												content: Number(action.source) + 1
+												content: pages[action.source].label
 											}
 										),
 										badgeTemplate(
 											{
-												content: Number(action.target) + 1
+												content: pages[action.target].label
 											}
 										)
 									]
