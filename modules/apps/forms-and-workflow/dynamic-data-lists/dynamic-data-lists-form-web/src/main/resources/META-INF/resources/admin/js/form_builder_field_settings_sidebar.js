@@ -206,6 +206,12 @@ AUI.add(
 						return node.ancestorsByClassName('.ddm-form-field-container').size();
 					},
 
+					_isFieldNode: function(node) {
+						var instance = this;
+
+						return node.ancestorsByClassName('.ddm-form-field-container').size();
+					},
+
 					_loadFieldSettingsForm: function(field) {
 						var instance = this;
 
@@ -236,7 +242,7 @@ AUI.add(
 						);
 					},
 
-					_onClickDocument: function(event) {
+					_onClickDocument: function() {
 						var instance = this;
 
 						if (instance.get('open') && !instance.hasFocus(event.target)) {
