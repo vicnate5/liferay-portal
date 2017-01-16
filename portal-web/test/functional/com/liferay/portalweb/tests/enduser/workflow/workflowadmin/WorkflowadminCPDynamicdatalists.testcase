@@ -168,6 +168,7 @@
 	</command>
 
 	<command name="EditDDLRecordViaMyWorkflowTasks" priority="5">
+		<property name="victor" value="false" />
 		<property name="portal.acceptance" value="true" />
 
 		<description message="This is a use case for LPS-61212." />

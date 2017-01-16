@@ -145,6 +145,7 @@
 	</command>
 
 	<command name="ApproveInDMFolderSingleApproverTypeSpecificWorkflowCP" priority="5">
+		<property name="victor" value="false" />
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="Navigator#openURL" />
@@ -300,6 +301,7 @@
 	</command>
 
 	<command name="ApproveInDMFolderSingleApproverWorkflowWithNoHomeFolderWorkflowCP" priority="4">
+		<property name="victor" value="false" />
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
@@ -414,6 +416,7 @@
 	</command>
 
 	<command name="ApproveInDMFolderWithParentFolderSingleApproverWorkflowCP" priority="4">
+		<property name="victor" value="false" />
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">

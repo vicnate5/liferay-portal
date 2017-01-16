@@ -342,6 +342,7 @@
 	</command>
 
 	<command name="ApproveInWebContentFolderSingleApproverWorkflowWithNoHomeFolderWorkflowCP" priority="4">
+		<property name="victor" value="false" />
 		<execute macro="Workflow#configureWorkflowViaFolderInfo">
 			<var name="workflowDefinition" value="No Workflow" />
 		</execute>

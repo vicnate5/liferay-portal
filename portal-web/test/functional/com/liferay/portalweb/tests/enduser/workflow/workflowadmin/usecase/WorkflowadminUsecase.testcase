@@ -49,6 +49,8 @@
 	</tear-down>
 
 	<command name="AddBlogsEntriesWithPortalScopeWorkflowAndAssertWorkflowScope" priority="4">
+		<property name="victor" value="false" />
+
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Workflow Configuration" />
 		</execute>
@@ -339,6 +341,7 @@
 	</command>
 
 	<command name="AddDDLRecordWithDoubleApproverDefinition" priority="5">
+		<property name="victor" value="false" />
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
@@ -1461,6 +1464,8 @@
 	</command>
 
 	<command name="DeactivateAndActivateUploadedDefinition" priority="3">
+		<property name="victor" value="false" />
+
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Workflow Definition" />
 		</execute>
@@ -1488,6 +1493,7 @@
 	</command>
 
 	<command name="DeactivateAndDeleteUploadedDefinition" priority="5">
+		<property name="victor" value="false" />
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
@@ -1741,6 +1747,7 @@
 
 	<command name="ViewWorkflowConfigurationScope" priority="4">
 		<description message="This is a use case for LPS-59108." />
+		<property name="victor" value="false" />
 
 		<execute macro="ProductMenu#gotoControlPanelSites">
 			<var name="portlet" value="Sites" />

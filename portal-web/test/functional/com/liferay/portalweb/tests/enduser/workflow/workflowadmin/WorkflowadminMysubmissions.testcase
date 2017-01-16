@@ -42,6 +42,7 @@
 
 	<command name="WithdrawTaskAssignedToMeByActions" priority="5">
 		<property name="portal.acceptance" value="true" />
+		<property name="victor" value="false" />
 
 		<var name="webContentContent" value="WC WebContent Content" />
 		<var name="webContentTitle" value="WC WebContent Title" />
@@ -99,6 +100,7 @@
 	</command>
 
 	<command name="WithdrawTaskAssignedToMeByDetails" priority="3">
+		<property name="victor" value="false" />
 		<var name="webContentContent" value="WC WebContent Content" />
 		<var name="webContentTitle" value="WC WebContent Title" />
 

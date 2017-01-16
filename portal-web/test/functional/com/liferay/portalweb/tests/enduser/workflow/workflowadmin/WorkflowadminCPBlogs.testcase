@@ -302,6 +302,7 @@
 	</command>
 
 	<command name="ApproveBlogsEntryCP" priority="5">
+		<property name="victor" value="false" />
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="Navigator#openURL" />
