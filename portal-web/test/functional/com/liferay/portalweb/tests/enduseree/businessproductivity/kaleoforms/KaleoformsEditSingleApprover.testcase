@@ -234,13 +234,6 @@
 		<property name="test.name.skip.portal.instance" value="KaleoformsUsecase#ViewEmailNotificationSentToTaskAssignees" />
 		<property name="test.smtp.server.enabled" value="true" />
 
-		<var method="TestPropsUtil#get('email.address.2')" name="user1EmailAddress" />
-		<var method="TestPropsUtil#get('email.password.2')" name="user1EmailPassword" />
-		<var method="TestPropsUtil#get('email.address.3')" name="user2EmailAddress" />
-		<var method="TestPropsUtil#get('email.password.3')" name="user2EmailPassword" />
-		<var method="TestPropsUtil#get('email.address.4')" name="user3EmailAddress" />
-		<var method="TestPropsUtil#get('email.password.4')" name="user3EmailPassword" />
-
 		<execute macro="ProductMenu#gotoControlPanelUsers">
 			<var name="portlet" value="Roles" />
 		</execute>
@@ -356,7 +349,7 @@
 		</execute>
 
 		<execute macro="User#addCP">
-			<var name="userEmailAddress" value="${user1EmailAddress}" />
+			<var name="userEmailAddress" value="user1@liferay.com" />
 			<var name="userFirstName" value="userfn1" />
 			<var name="userLastName" value="Submitter" />
 			<var name="userScreenName" value="kaloesubmitter" />
@@ -367,7 +360,7 @@
 		</execute>
 
 		<execute macro="User#editPasswordCP">
-			<var name="userEmailAddress" value="${user1EmailAddress}" />
+			<var name="userEmailAddress" value="user1@liferay.com" />
 			<var name="userScreenName" value="kaloesubmitter" />
 		</execute>
 
@@ -385,7 +378,7 @@
 		</execute>
 
 		<execute macro="User#addCP">
-			<var name="userEmailAddress" value="${user2EmailAddress}" />
+			<var name="userEmailAddress" value="user2@liferay.com" />
 			<var name="userFirstName" value="userfn2" />
 			<var name="userLastName" value="Updater" />
 			<var name="userScreenName" value="kaleoupdater" />
@@ -396,7 +389,7 @@
 		</execute>
 
 		<execute macro="User#editPasswordCP">
-			<var name="userEmailAddress" value="${user2EmailAddress}" />
+			<var name="userEmailAddress" value="user2@liferay.com" />
 			<var name="userScreenName" value="kaleoupdater" />
 		</execute>
 
@@ -423,7 +416,7 @@
 		</execute>
 
 		<execute macro="User#addCP">
-			<var name="userEmailAddress" value="${user3EmailAddress}" />
+			<var name="userEmailAddress" value="user3@liferay.com" />
 			<var name="userFirstName" value="userfn3" />
 			<var name="userLastName" value="Administrator" />
 			<var name="userScreenName" value="admin" />
@@ -434,7 +427,7 @@
 		</execute>
 
 		<execute macro="User#editPasswordCP">
-			<var name="userEmailAddress" value="${user3EmailAddress}" />
+			<var name="userEmailAddress" value="user3@liferay.com" />
 			<var name="userScreenName" value="admin" />
 		</execute>
 
@@ -448,7 +441,7 @@
 		</execute>
 
 		<execute macro="User#logoutAndLoginPG">
-			<var name="userLoginEmailAddress" value="${user1EmailAddress}" />
+			<var name="userLoginEmailAddress" value="user1@liferay.com" />
 			<var name="userLoginFullName" value="userfn1 Submitter" />
 		</execute>
 
@@ -474,7 +467,7 @@
 		<execute macro="KaleoFormsAdmin#saveProcessRecord" />
 
 		<execute macro="User#logoutAndLoginPG">
-			<var name="userLoginEmailAddress" value="${user2EmailAddress}" />
+			<var name="userLoginEmailAddress" value="user2@liferay.com" />
 			<var name="userLoginFullName" value="userfn2 Updater" />
 		</execute>
 
@@ -491,7 +484,7 @@
 		</execute>
 
 		<execute macro="User#logoutAndLoginPG">
-			<var name="userLoginEmailAddress" value="${user3EmailAddress}" />
+			<var name="userLoginEmailAddress" value="user3@liferay.com" />
 			<var name="userLoginFullName" value="userfn3 userfn3" />
 		</execute>
 
