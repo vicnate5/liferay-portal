@@ -809,6 +809,63 @@
 		</execute>
 	</command>
 
+	<command name="CopyPublishURLAndSubmitForm" priority="3">
+		<description message="This is a use case for LPS-61568" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Forms" />
+		</execute>
+
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
+
+		<execute macro="Form#editName" />
+
+		<execute macro="Form#editDescription" />
+
+		<execute macro="Form#gotoAddField">
+			<var name="fieldType" value="Text Field" />
+		</execute>
+
+		<execute macro="Form#editFieldLabel">
+			<var name="fieldValue" value="Text Field" />
+		</execute>
+
+		<execute macro="Form#closeSidebar" />
+
+		<execute macro="Form#save" />
+
+		<execute macro="FormsAdminNavigator#gotoPublish" />
+
+		<execute macro="Form#clickPublishSwitcher" />
+
+		<execute macro="Form#copyPublishURL" />
+
+		<execute macro="Button#clickConfirm" />
+
+		<execute macro="Form#save" />
+
+		<execute macro="Form#submitFormPublish">
+			<var name="fieldLabel" value="Text Field" />
+			<var name="fieldName" value="TextField" />
+			<var name="fieldValue" value="Published form text entry" />
+		</execute>
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Forms" />
+		</execute>
+
+		<execute macro="FormsAdminNavigator#gotoViewEntries" />
+
+		<execute macro="FormsAdmin#viewFormTableEntry">
+			<var name="fieldLabel" value="Text Field" />
+			<var name="fieldValue" value="Published form text entry" />
+		</execute>
+	</command>
+
 	<command name="CreateUntitledForm" priority="3">
 		<description message="This is a use case for LPS-64379." />
 

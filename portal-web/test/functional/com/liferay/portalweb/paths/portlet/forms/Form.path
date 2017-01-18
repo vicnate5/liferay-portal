@@ -118,6 +118,11 @@
 </tr>
 <!--PUBLISH-->
 <tr>
+	<td>PUBLISH_FORM_COPY_URL_BUTTON</td>
+	<td>//button[contains(@data-target,'clipboard') and contains(.,'Copy URL')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>PUBLISH_FORM_NAME_FIELD</td>
 	<td>//h1[contains(@class,'form-name') and contains(.,'${key_formName}')]</td>
 	<td></td>
