@@ -2,6 +2,7 @@
 	<property name="portal.release" value="true" />
 	<property name="portal.upstream" value="true" />
 	<property name="testray.main.component.name" value="Workflow" />
+	<property name="victor" value="true" />
 
 	<var name="page" value="Public Pages" />
 	<var name="pageName" value="Site Page Name" />
@@ -275,6 +276,7 @@
 	</command>
 
 	<command name="WithdrawWorkflowSubmissionFromRemovedUser" priority="2">
+		<property name="victor" value="false" />
 		<description message="This is a use case for LPS-58754" />
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">

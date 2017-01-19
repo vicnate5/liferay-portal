@@ -2,6 +2,7 @@
 	<property name="portal.release" value="true" />
 	<property name="portal.upstream" value="true" />
 	<property name="testray.main.component.name" value="Workflow" />
+	<property name="victor" value="true" />
 
 	<var name="workflowAssetType" value="Dynamic Data Lists Record" />
 
@@ -34,6 +35,8 @@
 		<var name="field" value="Text" />
 		<var name="fieldFieldLabel" value="Text Label" />
 		<var name="fieldName" value="TextName" />
+
+		<property name="victor" value="false" />
 
 		<execute macro="Navigator#openURL" />
 
@@ -165,6 +168,7 @@
 	</command>
 
 	<command name="EditDDLRecordViaMyWorkflowTasks" priority="5">
+		<property name="victor" value="false" />
 		<property name="portal.acceptance" value="true" />
 
 		<description message="This is a use case for LPS-61212." />

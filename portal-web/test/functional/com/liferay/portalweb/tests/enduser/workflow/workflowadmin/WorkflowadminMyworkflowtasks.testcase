@@ -2,6 +2,7 @@
 	<property name="portal.release" value="true" />
 	<property name="portal.upstream" value="true" />
 	<property name="testray.main.component.name" value="Workflow" />
+	<property name="victor" value="true" />
 
 	<var name="workflowAssetType" value="Blogs Entry" />
 
@@ -50,6 +51,8 @@
 	</tear-down>
 
 	<command name="AddCommentToTaskAssignedToMe" priority="4">
+		<property name="victor" value="false" />
+
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
@@ -140,6 +143,7 @@
 	</command>
 
 	<command name="AddCommentToTaskCompleted" priority="3">
+		<property name="victor" value="false" />
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
@@ -202,6 +206,7 @@
 	</command>
 
 	<command name="ApproveResubmitTaskByActions" priority="4">
+		<property name="victor" value="false" />
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
@@ -401,6 +406,7 @@
 	</command>
 
 	<command name="ReviewerApproveResubmitTaskByActionsUser" priority="3">
+		<property name="victor" value="false" />
 		<execute macro="Permissions#setUpRegRoleLoginUserCP">
 			<var name="roleTitle" value="Regrole Name" />
 			<var name="userEmailAddress" value="userea1@liferay.com" />

@@ -2,6 +2,7 @@
 	<property name="portal.release" value="true" />
 	<property name="portal.upstream" value="true" />
 	<property name="testray.main.component.name" value="Workflow" />
+	<property name="victor" value="true" />
 
 	<var name="workflowAssetType" value="Web Content Article" />
 
@@ -136,6 +137,8 @@
 	</command>
 
 	<command name="ApproveInWebContentFolderSingleApproverStructureSpecificWorkflowCP" priority="4">
+		<property name="victor" value="false" />
+
 		<execute macro="WebContentNavigator#gotoManageStructures" />
 
 		<execute macro="WebContentStructures#addCP">
@@ -339,6 +342,7 @@
 	</command>
 
 	<command name="ApproveInWebContentFolderSingleApproverWorkflowWithNoHomeFolderWorkflowCP" priority="4">
+		<property name="victor" value="false" />
 		<execute macro="Workflow#configureWorkflowViaFolderInfo">
 			<var name="workflowDefinition" value="No Workflow" />
 		</execute>
