@@ -352,7 +352,7 @@
 			<var name="userEmailAddress" value="user1@liferay.com" />
 			<var name="userFirstName" value="userfn1" />
 			<var name="userLastName" value="Submitter" />
-			<var name="userScreenName" value="kaloesubmitter" />
+			<var name="userScreenName" value="kaleosubmitter" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
@@ -361,7 +361,7 @@
 
 		<execute macro="User#editPasswordCP">
 			<var name="userEmailAddress" value="user1@liferay.com" />
-			<var name="userScreenName" value="kaloesubmitter" />
+			<var name="userScreenName" value="kaleosubmitter" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
@@ -370,7 +370,7 @@
 
 		<execute macro="Role#assignRegRoleCP">
 			<var name="roleTitle" value="KaleoSubmitRole Name" />
-			<var name="userScreenName" value="kaloesubmitter" />
+			<var name="userScreenName" value="kaleosubmitter" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
