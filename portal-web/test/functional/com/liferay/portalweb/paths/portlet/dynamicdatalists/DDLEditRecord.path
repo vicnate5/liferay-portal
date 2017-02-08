@@ -190,6 +190,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>LINK_TO_PAGE_PAGE</td>
+	<td>//li[contains(.,'${key_pageName}')]//a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>PARAGRAPH_FIELD</td>
 	<td>//div[@class='lfr-ddm-container']/p[contains(.,'${key_fieldText}')]</td>
 	<td></td>
