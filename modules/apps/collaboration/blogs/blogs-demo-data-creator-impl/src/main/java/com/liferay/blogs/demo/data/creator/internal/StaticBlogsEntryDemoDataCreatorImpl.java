@@ -39,6 +39,6 @@ public class StaticBlogsEntryDemoDataCreatorImpl
 		String subtitle = "Blogs Entry Subtitle";
 		String content = "Blogs Entry Content";
 
-		return createBlogsEntry(userId, groupId, title, subtitle, content);
+		return createSpecific(userId, groupId, title, subtitle, content);
 	}
 }

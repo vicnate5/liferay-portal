@@ -58,7 +58,7 @@ public class CreativeCommonsBlogsEntryDemoDataCreatorImpl
 		String subtitle = _getRandomSubtitle(index);
 		String content = _getRandomContent(index);
 
-		return createBlogsEntry(userId, groupId, title, subtitle, content);
+		return createSpecific(userId, groupId, title, subtitle, content);
 	}
 
 	private int _getNextIndex() {

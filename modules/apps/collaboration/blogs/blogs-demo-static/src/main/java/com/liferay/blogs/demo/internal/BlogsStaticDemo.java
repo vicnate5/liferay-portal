@@ -56,18 +56,15 @@ public class BlogsStaticDemo extends BasePortalInstanceLifecycleListener {
 		User basicUser = _basicUserDemoDataCreator.create(
 				company.getCompanyId(), "basic.user@liferay.com");
 
-		_staticBlogsEntryDemoDataCreator.create(
-				basicUser.getUserId(), guestGroup.getGroupId());
+		for (int i = 1; i < 4; i++) {
+			String title = "Blogs Entry Title " + String.valueOf(i);
+			String subtitle = "Blogs Entry Subtitle " + String.valueOf(i);
+			String content = "Blogs Entry Content " + String.valueOf(i);
 
-		// for (int i = 1; i < 4; i++) {
-		// 	// String title = "Blogs Entry Title " + String.valueOf(i);
-		// 	// String subtitle = "Blogs Entry Subtitle " + String.valueOf(i);
-		// 	// String content = "Blogs Entry Content " + String.valueOf(i);
-
-		// 	_staticBlogsEntryDemoDataCreator.createBlogsEntry(
-		// 		basicUser.getUserId(), guestGroup.getGroupId(), title, 
-		// 		subtitle, content);
-		// }	
+			_staticBlogsEntryDemoDataCreator.createSpecific(
+				basicUser.getUserId(), guestGroup.getGroupId(), title, 
+				subtitle, content);
+		}	
 	}
 
 	@Deactivate

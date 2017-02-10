@@ -49,9 +49,9 @@ import org.osgi.service.component.annotations.Reference;
 public abstract class BaseBlogsEntryDemoDataCreator
 	implements BlogsEntryDemoDataCreator {
 
-	public BlogsEntry createBlogsEntry(
-			long userId, long groupId, String title, String subtitle,
-			String content)
+	@Override
+	public BlogsEntry createSpecific(long userId, long groupId, 
+			String title, String subtitle, String content)
 		throws IOException, PortalException {
 
 		ServiceContext serviceContext = new ServiceContext();

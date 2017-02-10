@@ -48,7 +48,7 @@ public class LoremIpsumBlogsEntryDemoDataCreatorImpl
 		String subtitle = _getRandomElement(_subtitles);
 		String content = _getRandomContent();
 
-		return createBlogsEntry(userId, groupId, title, subtitle, content);
+		return createSpecific(userId, groupId, title, subtitle, content);
 	}
 
 	private static List<String> _read(String fileName) {
