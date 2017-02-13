@@ -9,6 +9,20 @@
 			<then>
 				<execute function="Click" locator1="Icon#CLOSE" />
 			</then>
+			<else>
+				<execute function="Pause" locator1="3000" />
+
+				<if>
+					<and>
+						<condition function="IsElementPresent" locator1="Message#${messageType}" />
+						<condition function="IsVisible" locator1="Message#${messageType}" />
+						<condition function="IsVisible" locator1="Icon#CLOSE" />
+					</and>
+					<then>
+						<execute function="Click" locator1="Icon#CLOSE" />
+					</then>
+				</if>
+			</else>
 		</if>
 	</command>
 
@@ -60,8 +74,6 @@
 		<execute macro-mobile="MobileNavigator#clickRemoveIcon" />
 
 		<execute function="AssertVisible" locator1="Message#SUCCESS" />
-
-		<execute function="Pause" locator1="10000" />
 
 		<execute macro="Alert#_closeMessage">
 			<var name="messageType" value="SUCCESS" />
