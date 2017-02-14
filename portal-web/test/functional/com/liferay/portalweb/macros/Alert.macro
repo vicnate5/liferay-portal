@@ -10,7 +10,7 @@
 				<execute function="Click" locator1="Icon#CLOSE" />
 			</then>
 			<else>
-				<execute function="Pause" locator1="3000" />
+				<execute function="Pause" locator1="5000" />
 
 				<if>
 					<and>
