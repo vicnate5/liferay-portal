@@ -3,6 +3,8 @@
 	<property name="portal.upstream" value="true" />
 	<property name="testray.main.component.name" value="Dynamic Data Lists" />
 
+	<property name="portal.acceptance" value="true" />
+
 	<set-up>
 		<execute macro="TestCase#setUpPortalInstance" />
 
@@ -308,6 +310,7 @@
 	</command>
 
 	<command name="AddListAndRecordWithEventsPredefinedDataDefinition" priority="3">
+		<property name="test.name.skip.portal.instance" value="CPDynamicdatalists#AddListAndRecordWithEventsPredefinedDataDefinition" />
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
@@ -470,6 +473,8 @@
 	</command>
 
 	<command name="AddListAndRecordWithIssuesTrackingPredefinedDataDefinition" priority="3">
+		<property name="test.name.skip.portal.instance" value="CPDynamicdatalists#AddListAndRecordWithIssuesTrackingPredefinedDataDefinition" />
+
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
@@ -566,6 +571,7 @@
 	</command>
 
 	<command name="AddListAndRecordWithMeetingMinutesPredefinedDataDefinition" priority="3">
+		<property name="test.name.skip.portal.instance" value="CPDynamicdatalists#AddListAndRecordWithMeetingMinutesPredefinedDataDefinition" />
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
@@ -650,7 +656,8 @@
 	</command>
 
 	<command name="AddListAndRecordWithToDoPredefinedDataDefinition" priority="5">
-		<property name="portal.acceptance" value="quarantine" />
+		<property name="portal.acceptance" value="true" />
+		<property name="test.name.skip.portal.instance" value="CPDynamicdatalists#AddListAndRecordWithToDoPredefinedDataDefinition" />
 
 		<execute macro="Navigator#openURL" />
 
@@ -1018,6 +1025,8 @@
 	</command>
 
 	<command name="AddListRecordWithDocumentsAndMediaField" priority="4">
+		<property name="test.name.skip.portal.instance" value="CPDynamicdatalists#AddListRecordWithDocumentsAndMediaField" />
+
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
