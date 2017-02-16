@@ -239,7 +239,7 @@
 		</execute>
 
 		<execute macro="Role#addCP">
-			<var name="roleTitle" value="KaleoSubmitRole Name" />
+			<var name="roleName" value="KaleoSubmitRole Name" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
@@ -247,7 +247,7 @@
 		</execute>
 
 		<execute macro="Role#addCP">
-			<var name="roleTitle" value="KaleoReviewRole Name" />
+			<var name="roleName" value="KaleoReviewRole Name" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
@@ -259,7 +259,7 @@
 			<var name="permissionDefinitionValue" value="Submit" />
 			<var name="permissionNavigationKey" value="SITE_ADMIN_CONTENT_KALEO_FORMS_ADMIN" />
 			<var name="permissionNavigationValue" value="Kaleo Forms Admin" />
-			<var name="roleTitle" value="KaleoSubmitRole Name" />
+			<var name="roleName" value="KaleoSubmitRole Name" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
@@ -271,7 +271,7 @@
 			<var name="permissionDefinitionValue" value="View" />
 			<var name="permissionNavigationKey" value="SITE_ADMIN_CONTENT_KALEO_FORMS_ADMIN" />
 			<var name="permissionNavigationValue" value="Kaleo Forms Admin" />
-			<var name="roleTitle" value="KaleoSubmitRole Name" />
+			<var name="roleName" value="KaleoSubmitRole Name" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
@@ -283,7 +283,7 @@
 			<var name="permissionDefinitionValue" value="Access in Site Administration" />
 			<var name="permissionNavigationKey" value="SITE_ADMIN_CONTENT_KALEO_FORMS_ADMIN" />
 			<var name="permissionNavigationValue" value="Kaleo Forms Admin" />
-			<var name="roleTitle" value="KaleoSubmitRole Name" />
+			<var name="roleName" value="KaleoSubmitRole Name" />
 		</execute>
 
 		<execute macro="Navigator#openURL" />
@@ -311,7 +311,7 @@
 
 		<execute macro="KaleoDesigner#editNodeAssignments">
 			<var name="nodeAssignmentType" value="Role" />
-			<var name="roleTitle" value="KaleoReviewRole Name" />
+			<var name="roleName" value="KaleoReviewRole Name" />
 		</execute>
 
 		<execute macro="KaleoDesigner#editNodeNotifications">
@@ -369,7 +369,7 @@
 		</execute>
 
 		<execute macro="Role#assignRegRoleCP">
-			<var name="roleTitle" value="KaleoSubmitRole Name" />
+			<var name="roleName" value="KaleoSubmitRole Name" />
 			<var name="userScreenName" value="kaleosubmitter" />
 		</execute>
 
@@ -398,7 +398,7 @@
 		</execute>
 
 		<execute macro="Role#assignRegRoleCP">
-			<var name="roleTitle" value="Administrator" />
+			<var name="roleName" value="Administrator" />
 			<var name="userScreenName" value="kaleoupdater" />
 		</execute>
 
@@ -407,7 +407,7 @@
 		</execute>
 
 		<execute macro="Role#assignRegRoleCP">
-			<var name="roleTitle" value="KaleoReviewRole Name" />
+			<var name="roleName" value="KaleoReviewRole Name" />
 			<var name="userScreenName" value="kaleoupdater" />
 		</execute>
 
@@ -436,7 +436,7 @@
 		</execute>
 
 		<execute macro="Role#assignRegRoleCP">
-			<var name="roleTitle" value="Administrator" />
+			<var name="roleName" value="Administrator" />
 			<var name="userScreenName" value="admin" />
 		</execute>
 
