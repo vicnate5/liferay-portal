@@ -52,10 +52,13 @@ AUI.add(
 
 						instance._actionFactory = new Liferay.DDL.FormBuilderActionFactory(
 							{
+								bubbleTargets: [instance],
 								fields: instance.get('fields'),
 								pages: instance.get('pages')
 							}
 						);
+
+						instance._validator = new Liferay.DDL.FormBuilderRuleValidator();
 					},
 
 					bindUI: function() {
@@ -66,13 +69,13 @@ AUI.add(
 						boundingBox.delegate('click', A.bind(instance._handleAddActionClick, instance), '.form-builder-rule-add-action');
 						boundingBox.delegate('click', A.bind(instance._handleCancelClick, instance), '.form-builder-rule-settings-cancel');
 						boundingBox.delegate('click', A.bind(instance._handleDeleteActionClick, instance), '.action-card-delete');
-
 						boundingBox.delegate('click', A.bind(instance._handleSaveClick, instance), '.form-builder-rule-settings-save');
 
 						instance.after(instance._toggleShowRemoveButton, instance, '_addAction');
 
 						instance.after('fieldsChange', A.bind(instance._afterFieldsChange, instance));
 						instance.after('pagesChange', A.bind(instance._afterPagesChange, instance));
+						instance.after('*:valueChange', A.bind(instance._afterValueChange, instance));
 
 						instance.on('*:valueChange', A.bind(instance._handleActionChange, instance));
 					},
@@ -99,6 +102,8 @@ AUI.add(
 						instance._renderConditions(rule.conditions);
 						instance._renderActions(rule.actions);
 
+						instance._validateRule();
+
 						return FormBuilderRenderRule.superclass.render.apply(instance, []);
 					},
 
@@ -122,6 +127,12 @@ AUI.add(
 						var instance = this;
 
 						instance._actionFactory.set('pages', event.newVal);
+					},
+
+					_afterValueChange: function() {
+						var instance = this;
+
+						instance._validateRule();
 					},
 
 					_canDeleteCondition: function() {
@@ -214,9 +225,24 @@ AUI.add(
 						for (var i = indexes.length - 1; i >= 0; i--) {
 							var currentIndex = indexes[i];
 
-							var action = instance._actions[currentIndex + '-action'];
+							var action = {
+								action: instance._actions[currentIndex + '-target'].getValue()
+							};
 
-							actions.push(action.getValue());
+							var target;
+
+							var targetField = instance._actions[currentIndex + '-action'];
+
+							if (targetField) {
+								target = targetField.getValue();
+							}
+
+							actions.push(
+								A.merge(
+									target,
+									action
+								)
+							);
 						}
 
 						return actions;
@@ -256,6 +282,7 @@ AUI.add(
 								actions: rule ? rule.actions : [],
 								conditions: rule ? rule.conditions : [],
 								deleteIcon: Liferay.Util.getLexiconIconTpl('trash', 'icon-monospaced'),
+								invalid: !instance._isValidRule(rule),
 								logicalOperator: instance.get('logicOperator'),
 								plusIcon: Liferay.Util.getLexiconIconTpl('plus', 'icon-monospaced'),
 								showLabel: false,
@@ -271,9 +298,9 @@ AUI.add(
 
 						var fieldName = field.get('fieldName');
 
-						var index = fieldName.split('-')[0];
+						if (fieldName && fieldName.match('-target')) {
+							var index = fieldName.split('-')[0];
 
-						if (fieldName.match('-target')) {
 							instance._createTargetSelect(index, event.newVal[0]);
 						}
 					},
@@ -344,6 +371,14 @@ AUI.add(
 						);
 					},
 
+					_isValidRule: function(rule) {
+						var instance = this;
+
+						var validator = instance._validator;
+
+						return validator.isValidRule(rule);
+					},
+
 					_renderActions: function(actions) {
 						var instance = this;
 
@@ -374,6 +409,27 @@ AUI.add(
 						conditionList.toggleClass(CSS_CAN_REMOVE_ITEM, conditionItems.size() > 2);
 
 						actionList.toggleClass(CSS_CAN_REMOVE_ITEM, actionItems.size() > 2);
+					},
+
+					_validateRule: function() {
+						var instance = this;
+
+						var contentBox = instance.get('contentBox');
+
+						var saveButton = contentBox.one('.form-builder-rule-settings-save');
+
+						var rule = {
+							actions: instance._getActions(),
+							condition: instance._getConditions(),
+							'logical-operator': instance.get('logicOperator')
+						};
+
+						if (instance._isValidRule(rule)) {
+							saveButton.removeAttribute('disabled');
+						}
+						else {
+							saveButton.setAttribute('disabled', '');
+						}
 					}
 				}
 			}

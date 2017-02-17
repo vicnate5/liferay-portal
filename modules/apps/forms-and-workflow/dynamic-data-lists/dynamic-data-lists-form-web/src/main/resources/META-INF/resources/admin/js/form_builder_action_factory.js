@@ -27,6 +27,7 @@ AUI.add(
 								{
 									action: act,
 									boundingBox: container,
+									bubbleTargets: [instance],
 									index: index,
 									options: instance.get('fields'),
 									type: type
@@ -38,6 +39,7 @@ AUI.add(
 								{
 									action: act,
 									boundingBox: container,
+									bubbleTargets: [instance],
 									index: index,
 									options: instance.get('pages')
 								}
