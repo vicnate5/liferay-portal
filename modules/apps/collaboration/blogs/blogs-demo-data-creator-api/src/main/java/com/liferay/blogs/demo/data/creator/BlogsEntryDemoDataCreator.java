@@ -30,6 +30,9 @@ public interface BlogsEntryDemoDataCreator {
 	public BlogsEntry create(long userId, long groupId)
 		throws IOException, PortalException;
 
+	public BlogsEntry create(long userId, long groupId, String title)
+		throws IOException, PortalException;
+
 	public void delete() throws PortalException;
 
 }
