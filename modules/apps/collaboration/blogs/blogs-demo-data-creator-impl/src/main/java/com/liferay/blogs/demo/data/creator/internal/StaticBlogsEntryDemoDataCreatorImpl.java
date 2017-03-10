@@ -51,4 +51,5 @@ public class StaticBlogsEntryDemoDataCreatorImpl
 
 		return createBlogsEntry(userId, groupId, title, subtitle, content);
 	}
+
 }

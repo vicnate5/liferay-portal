@@ -22,14 +22,10 @@ import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
-import com.liferay.portal.kernel.security.RandomUtil;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.users.admin.demo.data.creator.BasicUserDemoDataCreator;
 import com.liferay.users.admin.demo.data.creator.OmniAdminUserDemoDataCreator;
 import com.liferay.users.admin.demo.data.creator.SiteAdminUserDemoDataCreator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -48,13 +44,13 @@ public class BlogsStaticDemo extends BasePortalInstanceLifecycleListener {
 			company.getCompanyId(), "Guest");
 
 		_siteAdminUserDemoDataCreator.create(
-				guestGroup.getGroupId(), "siteadmin.user@liferay.com");
+			guestGroup.getGroupId(), "siteadmin.user@liferay.com");
 
 		_omniAdminUserDemoDataCreator.create(
-				company.getCompanyId(), "omniadmin.user@liferay.com");
+			company.getCompanyId(), "omniadmin.user@liferay.com");
 
 		User basicUser = _basicUserDemoDataCreator.create(
-				company.getCompanyId(), "basic.user@liferay.com");
+			company.getCompanyId(), "basic.user@liferay.com");
 
 		for (int i = 1; i < 4; i++) {
 			String title = "Blogs Entry Title " + String.valueOf(i);
@@ -83,13 +79,6 @@ public class BlogsStaticDemo extends BasePortalInstanceLifecycleListener {
 		_groupLocalService = groupLocalService;
 	}
 
-	@Reference(target = "(source=static)", unbind = "-")
-	protected void setStaticBlogsEntryDemoDataCreator(
-		BlogsEntryDemoDataCreator blogsEntryDemoDataCreator) {
-
-		_staticBlogsEntryDemoDataCreator = blogsEntryDemoDataCreator;
-	}
-
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
 	protected void setModuleServiceLifecycle(
 		ModuleServiceLifecycle moduleServiceLifecycle) {
@@ -109,10 +98,17 @@ public class BlogsStaticDemo extends BasePortalInstanceLifecycleListener {
 		_siteAdminUserDemoDataCreator = siteAdminUserDemoDataCreator;
 	}
 
+	@Reference(target = "(source=static)", unbind = "-")
+	protected void setStaticBlogsEntryDemoDataCreator(
+		BlogsEntryDemoDataCreator blogsEntryDemoDataCreator) {
+
+		_staticBlogsEntryDemoDataCreator = blogsEntryDemoDataCreator;
+	}
+
 	private BasicUserDemoDataCreator _basicUserDemoDataCreator;
 	private GroupLocalService _groupLocalService;
-	private BlogsEntryDemoDataCreator _staticBlogsEntryDemoDataCreator;
 	private OmniAdminUserDemoDataCreator _omniAdminUserDemoDataCreator;
 	private SiteAdminUserDemoDataCreator _siteAdminUserDemoDataCreator;
+	private BlogsEntryDemoDataCreator _staticBlogsEntryDemoDataCreator;
 
 }
