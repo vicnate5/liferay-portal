@@ -51,6 +51,16 @@ public class LoremIpsumBlogsEntryDemoDataCreatorImpl
 		return createBlogsEntry(userId, groupId, title, subtitle, content);
 	}
 
+	@Override
+	public BlogsEntry create(long userId, long groupId, String title)
+		throws IOException, PortalException {
+
+		String subtitle = _getRandomElement(_subtitles);
+		String content = _getRandomContent();
+
+		return createBlogsEntry(userId, groupId, title, subtitle, content);
+	}
+
 	private static List<String> _read(String fileName) {
 		return Arrays.asList(
 			StringUtil.split(

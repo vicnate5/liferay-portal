@@ -61,6 +61,18 @@ public class CreativeCommonsBlogsEntryDemoDataCreatorImpl
 		return createBlogsEntry(userId, groupId, title, subtitle, content);
 	}
 
+	@Override
+	public BlogsEntry create(long userId, long groupId, String title)
+		throws IOException, PortalException {
+
+		int index = _getNextIndex();
+
+		String subtitle = _getRandomSubtitle(index);
+		String content = _getRandomContent(index);
+
+		return createBlogsEntry(userId, groupId, title, subtitle, content);
+	}
+
 	private int _getNextIndex() {
 		int index = _atomicInteger.getAndIncrement();
 

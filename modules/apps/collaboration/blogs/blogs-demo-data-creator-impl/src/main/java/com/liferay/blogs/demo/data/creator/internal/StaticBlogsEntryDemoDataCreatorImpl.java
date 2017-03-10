@@ -32,6 +32,17 @@ public class StaticBlogsEntryDemoDataCreatorImpl
 	extends BaseBlogsEntryDemoDataCreator {
 
 	@Override
+	public BlogsEntry create(long userId, long groupId)
+		throws IOException, PortalException {
+
+		String title = "Blogs Entry Title";
+		String subtitle = "Blogs Entry Subtitle";
+		String content = "Blogs Entry Content";
+
+		return createBlogsEntry(userId, groupId, title, subtitle, content);
+	}
+
+	@Override
 	public BlogsEntry create(long userId, long groupId, String title)
 		throws IOException, PortalException {
 
