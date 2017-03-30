@@ -30,7 +30,21 @@
 		/>
 
 		<#if validator.isNotNull(selectedLayout)>
-			<#assign selectedLayoutName = selectedLayout.getName(requestedLocale) />
+			<#assign selectedLayoutAncestors = selectedLayout.getAncestors() />
+
+			<#if selectedLayout.isPrivateLayout()>
+				<#assign selectedLayoutName = languageUtil.get(requestedLocale, "private-pages") />
+			<#else>
+				<#assign selectedLayoutName = languageUtil.get(requestedLocale, "public-pages") />
+			</#if>
+
+			<#assign selectedLayoutName = selectedLayoutName + " > " />
+
+			<#list selectedLayoutAncestors?reverse as selectedLayoutAncestor>
+				<#assign selectedLayoutName = selectedLayoutName + htmlUtil.escape(selectedLayoutAncestor.getName(requestedLocale)) + " > " />
+			</#list>
+
+			<#assign selectedLayoutName = selectedLayoutName + selectedLayout.getName(requestedLocale) />
 		</#if>
 	</#if>
 
