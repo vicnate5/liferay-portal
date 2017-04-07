@@ -64,6 +64,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>PAGINATION_SUCCESS_PAGE</td>
+	<td>//div[contains(@class,'form-builder-pagination')]//li[@class='pagination-success-page']</td>
+	<td></td>
+</tr>
+<tr>
 	<td></td>
 	<td></td>
 	<td></td>
@@ -87,6 +92,11 @@
 <tr>
 	<td>PAGE_CONTROLS_DELETE_CURRENT_PAGE</td>
 	<td>//li[@class='form-builder-page-manager-delete-page' and contains(text(),'Delete Current Page')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PAGE_CONTROLS_SWITCH_PAGINATION_MODE</td>
+	<td>//li[@class='form-builder-page-manager-switch-mode' and contains(text(),'Switch Pagination Mode')]</td>
 	<td></td>
 </tr>
 <tr>
