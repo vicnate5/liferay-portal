@@ -368,7 +368,7 @@
 
 		<execute macro="Blogs#addEntry">
 			<var name="entryContent" value="Blogs Entry Content" />
-			<var name="entryTitle" value="Blogs Entry Title" />
+			<var name="entryTitle" value="Blogs Entry Title 1" />
 		</execute>
 
 		<execute macro="Navigator#openURL" />
@@ -406,31 +406,21 @@
 	</command>
 
 	<command name="EditBlogsEntryTitle" priority="5">
+		<property name="osgi.modules.includes" value="users-admin-demo-data-creator-api,users-admin-demo-data-creator-impl,document-library-demo-data-creator-api,document-library-demo-data-creator-impl,blogs-demo-data-creator-api,blogs-demo-data-creator-impl,blogs-demo-static" />
 		<property name="portal.acceptance" value="true" />
 
-		<execute macro="Navigator#openURL" />
-
-		<execute macro="ProductMenu#gotoSitesContent">
-			<var name="portlet" value="Blogs" />
-		</execute>
-
-		<execute macro="Blogs#addEntry">
-			<var name="entryContent" value="Blogs Entry Content" />
-			<var name="entryTitle" value="Blogs Entry Title" />
-		</execute>
-
-		<execute macro="Navigator#openURL" />
+		<property name="victor" value="true" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
 			<var name="portlet" value="Blogs" />
 		</execute>
 
 		<execute macro="BlogsNavigator#gotoEditCP">
-			<var name="entryTitle" value="Blogs Entry Title" />
+			<var name="entryTitle" value="Blogs Entry Title 1" />
 		</execute>
 
 		<execute macro="BlogsEntry#editTitle">
-			<var name="entryTitle" value="Blogs Entry Title" />
+			<var name="entryTitle" value="Blogs Entry Title 1" />
 			<var name="entryTitleEdit" value="Blogs Entry Title Edit" />
 		</execute>
 

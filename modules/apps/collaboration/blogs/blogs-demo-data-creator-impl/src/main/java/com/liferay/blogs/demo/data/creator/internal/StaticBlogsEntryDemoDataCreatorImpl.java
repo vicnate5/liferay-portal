@@ -12,27 +12,44 @@
  * details.
  */
 
-package com.liferay.blogs.demo.data.creator;
+package com.liferay.blogs.demo.data.creator.internal;
 
-import aQute.bnd.annotation.ProviderType;
-
+import com.liferay.blogs.demo.data.creator.BlogsEntryDemoDataCreator;
 import com.liferay.blogs.model.BlogsEntry;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.io.IOException;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
- * @author Alejandro Hernández
+ * @author Victor Ware
  */
-@ProviderType
-public interface BlogsEntryDemoDataCreator {
+@Component(
+	property = {"source=static"}, service = BlogsEntryDemoDataCreator.class
+)
+public class StaticBlogsEntryDemoDataCreatorImpl
+	extends BaseBlogsEntryDemoDataCreator {
 
+	@Override
 	public BlogsEntry create(long userId, long groupId)
-		throws IOException, PortalException;
+		throws IOException, PortalException {
 
+		String title = "Blogs Entry Title";
+		String subtitle = "Blogs Entry Subtitle";
+		String content = "Blogs Entry Content";
+
+		return createBlogsEntry(userId, groupId, title, subtitle, content);
+	}
+
+	@Override
 	public BlogsEntry create(long userId, long groupId, String title)
-		throws IOException, PortalException;
+		throws IOException, PortalException {
 
-	public void delete() throws PortalException;
+		String subtitle = "Blogs Entry Subtitle";
+		String content = "Blogs Entry Content";
+
+		return createBlogsEntry(userId, groupId, title, subtitle, content);
+	}
 
 }
