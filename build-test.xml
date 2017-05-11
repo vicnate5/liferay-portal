@@ -8394,7 +8394,7 @@ cluster.link.bind.addr["cluster-link-udp"]=127.0.0.1</echo>
 
 		<unzip
 			dest="${liferay.home}"
-			src="${portal.legacy.dir}/${portal.version}/data-archive/${data.archive.type}-${database.type}.zip"
+			src="${project.dir}/qa/${portal.version}/data-archive/${data.archive.type}-${database.type}.zip"
 		/>
 
 		<if>
