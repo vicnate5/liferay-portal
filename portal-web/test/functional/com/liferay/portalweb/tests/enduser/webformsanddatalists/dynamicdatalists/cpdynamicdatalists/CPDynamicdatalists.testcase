@@ -35,6 +35,133 @@
 		</if>
 	</tear-down>
 
+	<toggle name="LPS-71717">
+		<on>
+
+			<command name="EditTextFieldLabelAndViewRecord" priority="5">
+				<property name="portal.acceptance" value="Pending" />
+
+				<execute macro="Navigator#openURL" />
+
+				<execute macro="ProductMenu#gotoSitesContent">
+					<var name="portlet" value="Dynamic Data Lists" />
+				</execute>
+
+				<execute macro="DDLDataDefinition#addCP">
+					<var name="ddlDataDefinitionName" value="Data Definition" />
+				</execute>
+
+				<execute macro="DynamicDataMapping#addField">
+					<var name="field" value="Text" />
+					<var name="fieldFieldLabel" value="Text" />
+					<var name="fieldName" value="Text" />
+				</execute>
+
+				<execute macro="DDLDataDefinition#save" />
+
+				<execute macro="Navigator#openURL" />
+
+				<execute macro="ProductMenu#gotoSitesContent">
+					<var name="portlet" value="Dynamic Data Lists" />
+				</execute>
+
+				<execute macro="DDLDataDefinition#viewCP">
+					<var name="ddlDataDefinitionName" value="Data Definition" />
+					<var name="fieldFieldLabel" value="Text" />
+				</execute>
+
+				<execute macro="DynamicDataMapping#viewField">
+					<var name="field" value="Text" />
+					<var name="fieldFieldLabel" value="Text" />
+					<var name="fieldName" value="Text" />
+				</execute>
+
+				<execute macro="Navigator#openURL" />
+
+				<execute macro="ProductMenu#gotoSitesContent">
+					<var name="portlet" value="Dynamic Data Lists" />
+				</execute>
+
+				<execute macro="DDLList#addCP">
+					<var name="ddlListName" value="List Name" />
+				</execute>
+
+				<execute macro="DDLDataDefinition#selectCP">
+					<var name="ddlDataDefinitionName" value="Data Definition" />
+				</execute>
+
+				<execute macro="DDLList#save" />
+
+				<execute macro="Navigator#openURL" />
+
+				<execute macro="ProductMenu#gotoSitesContent">
+					<var name="portlet" value="Dynamic Data Lists" />
+				</execute>
+
+				<execute macro="DDLRecord#addCP">
+					<var name="ddlDataDefinitionName" value="Data Definition" />
+					<var name="ddlListName" value="List Name" />
+				</execute>
+
+				<execute macro="DDLRecord#populateFieldText">
+					<var name="ddlRecordFieldData" value="Text Data" />
+					<var name="fieldFieldLabel" value="Text" />
+					<var name="fieldName" value="Text" />
+				</execute>
+
+				<execute macro="PortletEntry#publish" />
+
+				<execute macro="Navigator#openURL" />
+
+				<execute macro="ProductMenu#gotoSitesContent">
+					<var name="portlet" value="Dynamic Data Lists" />
+				</execute>
+
+				<execute macro="DDLNavigator#gotoListRecords">
+					<var name="ddlListName" value="List Name" />
+				</execute>
+
+				<execute macro="DDLRecord#viewFirstFieldCP">
+					<var name="ddlRecordFieldData" value="Text Data" />
+					<var name="field" value="Text" />
+					<var name="fieldFieldLabel" value="Text" />
+				</execute>
+
+				<execute macro="ProductMenu#gotoSitesContent">
+					<var name="portlet" value="Dynamic Data Lists" />
+				</execute>
+
+				<execute macro="DDLDataDefinition#editCP">
+					<var name="ddlDataDefinitionName" value="Data Definition" />
+					<var name="ddlDataDefinitionNameEdit" value="Data Definition New Label" />
+					<var name="ddlDataDefinitionDescriptionEdit" value="Data Definition Description Edit" />
+				</execute>
+
+				<execute macro="DynamicDataMapping#editFieldLabel">
+					<var name="field" value="Text" />
+					<var name="fieldName" value="Text" />
+					<var name="fieldFieldLabel" value="Text Edit Label" />
+				</execute>
+
+				<execute macro="DDLDataDefinition#save" />
+
+				<execute macro="ProductMenu#gotoSitesContent">
+					<var name="portlet" value="Dynamic Data Lists" />
+				</execute>
+
+				<execute macro="DDLNavigator#gotoListRecords">
+					<var name="ddlListName" value="List Name" />
+				</execute>
+
+				<execute macro="DDLRecord#viewFirstFieldCP">
+					<var name="ddlRecordFieldData" value="Text Data" />
+					<var name="field" value="Text" />
+					<var name="fieldFieldLabel" value="Text Edit Label" />
+				</execute>
+			</command>
+		</on>
+	</toggle>
+
 	<command name="AddDisplayTemplateFreeMarker" priority="4">
 		<execute macro="Navigator#openURL" />
 
