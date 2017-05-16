@@ -16,8 +16,6 @@
 	<var name="pageName" static="true" value="" />
 
 	<set-up>
-		<execute macro="TestCase#setUpPortalInstance" />
-
 		<execute macro="User#firstLoginPG" />
 
 		<var method="StringUtil#randomString(18)" name="userFirstName" />
