@@ -199,7 +199,7 @@
 		</execute>
 	</command>
 
-	<command name="AddFormWithSpanishAsDefaultPortalLanguage" priority="5">
+	<command ignore="true" name="AddFormWithSpanishAsDefaultPortalLanguage" priority="5">
 		<property name="test.name.skip.portal.instance" value="Forms#AddFormWithSpanishAsDefaultPortalLanguage" />
 
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
@@ -1438,7 +1438,7 @@
 		</execute>
 	</command>
 
-	<command name="EditFormWithUpdatedSiteAndUserLocale" priority="2">
+	<command ignore="true" name="EditFormWithUpdatedSiteAndUserLocale" priority="2">
 		<description message="This is a use case for LPS-69100 and LPS-69334." />
 
 		<property name="test.name.skip.portal.instance" value="Forms#EditFormWithUpdatedSiteAndUserLocale" />
@@ -1537,7 +1537,7 @@
 		<execute macro="Form#save" />
 	</command>
 
-	<command name="NavigateToCorrectForm" priority="5">
+	<command ignore="true" name="NavigateToCorrectForm" priority="5">
 		<description message="This is a use case for LPS-59331" />
 		<property name="portal.acceptance" value="true" />
 
