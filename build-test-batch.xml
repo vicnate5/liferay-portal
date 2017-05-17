@@ -315,10 +315,7 @@ mariadb.executable=${mariadb.executable}]]></echo>
 		<sequential>
 			<trycatch property="exception.message">
 				<try>
-					<antcall target="prepare-test-build">
-						<param name="test.class.groups.size" value="${test.batch.size}" />
-						<param name="test.plugin.groups.size" value="${test.batch.size}" />
-					</antcall>
+					<echo> Skipping prepare-test-build </echo>
 				</try>
 				<catch>
 					<echo message="${exception.message}" />
