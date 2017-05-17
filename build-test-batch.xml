@@ -466,14 +466,8 @@ app.server.type=@{app.server.type}]]></echo>
 			<execute>
 				<![CDATA[
 					unzip -oq liferay-portal-source.zip
-
-					unzip -oq liferay-portal-bundle-@{app.server.type}.zip
-
-					chmod -R a+x bundles
 				]]>
 			</execute>
-
-			<antcall inheritAll="false" target="install-portal-snapshots" />
 
 			<echo if:set="env.JENKINS_HOME">ANT_OPTS=${env.ANT_OPTS}</echo>
 
