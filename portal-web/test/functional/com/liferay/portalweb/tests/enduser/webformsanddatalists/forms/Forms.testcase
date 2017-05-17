@@ -2515,7 +2515,7 @@
 		</execute>
 
 		<execute macro="FormsAdminNavigator#gotoEdit">
-			<var name="formName" value="Created Form Name" />
+			<var name="formName" value="${formName}" />
 		</execute>
 
 		<execute macro="FormsAdminNavigator#gotoEditField">
@@ -3639,7 +3639,7 @@
 		</execute>
 
 		<execute macro="FormsAdminNavigator#gotoEdit">
-			<var name="formName" value="Created Form Name" />
+			<var name="formName" value="${formName}" />
 		</execute>
 
 		<execute macro="FormsAdminNavigator#gotoEditField">
