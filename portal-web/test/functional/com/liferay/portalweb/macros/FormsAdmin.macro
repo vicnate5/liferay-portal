@@ -62,7 +62,7 @@
 				<execute function="Click" locator1="Form#DATA_PROVIDER_OUTPUT_PARAMETER_REPEAT_ICON" />
 
 				<execute function="Type" locator1="Form#DATA_PROVIDER_OUTPUT_PARAMETER_PATH_FIELD_2" value1="${outputParameterPath2}" />
-				
+
 				<execute function="Type" locator1="Form#DATA_PROVIDER_OUTPUT_PARAMETER_LABEL_FIELD_2" value1="${outputParameterLabel2}" />
 
 				<execute function="Click" locator1="Form#DATA_PROVIDER_OUTPUT_PARAMETER_TYPE_FIELD_2" />
