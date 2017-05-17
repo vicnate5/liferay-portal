@@ -579,7 +579,7 @@
 		</execute>
 
 		<execute macro="Form#editFieldDataProvider">
-			<var name="dataProvider" value="Liferay Countries" />
+			<var name="dataProvider" value="${dataProviderName}" />
 			<var name="dataProviderOutput" value="Country Names" />
 		</execute>
 
