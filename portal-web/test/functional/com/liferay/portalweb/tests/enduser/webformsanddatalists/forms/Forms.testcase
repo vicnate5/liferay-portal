@@ -5,26 +5,26 @@
 
 	<property name="victor" value="true" />
 
+	<var name="dataProviderName" static="true" value="" />
+	<var name="formName" static="true" value="" />
+	<var name="pageName" static="true" value="" />
+	<var name="roleTitle" static="true" value="" />
+	<var name="siteName" static="true" value="" />
+	<var name="userEmailAddress" static="true" value="" />
 	<var name="userFirstName" static="true" value="" />
 	<var name="userLastName" static="true" value="" />
-	<var name="userEmailAddress" static="true" value="" />
 	<var name="userScreenName" static="true" value="" />
-	<var name="siteName" static="true" value="" />
-	<var name="roleTitle" static="true" value="" />
-	<var name="formName" static="true" value="" />
-	<var name="dataProviderName" static="true" value="" />
-	<var name="pageName" static="true" value="" />
 
 	<set-up>
 		<execute macro="User#firstLoginPG" />
 
+		<var method="StringUtil#randomString(18)" name="dataProviderName" />
+		<var method="StringUtil#randomString(18)" name="formName" />
+		<var method="StringUtil#randomString(18)" name="pageName" />
+		<var method="StringUtil#randomString(18)" name="roleTitle" />
+		<var method="StringUtil#randomString(18)" name="siteName" />
 		<var method="StringUtil#randomString(18)" name="userFirstName" />
 		<var method="StringUtil#randomString(18)" name="userLastName" />
-		<var method="StringUtil#randomString(18)" name="siteName" />
-		<var method="StringUtil#randomString(18)" name="roleTitle" />
-		<var method="StringUtil#randomString(18)" name="formName" />
-		<var method="StringUtil#randomString(18)" name="dataProviderName" />
-		<var method="StringUtil#randomString(18)" name="pageName" />
 
 		<var name="userEmailAddress" value="${userFirstName}@liferay.com" />
 		<var name="userScreenName" value="${userFirstName}sn" />
