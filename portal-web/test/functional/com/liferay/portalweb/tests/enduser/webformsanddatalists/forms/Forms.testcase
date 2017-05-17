@@ -1484,7 +1484,7 @@
 		</execute>
 
 		<execute macro="FormsAdminNavigator#gotoEditFormByName">
-			<var name="formName" value="{formName}" />
+			<var name="formName" value="${formName}" />
 		</execute>
 
 		<execute macro="Form#editNameLocalized">
