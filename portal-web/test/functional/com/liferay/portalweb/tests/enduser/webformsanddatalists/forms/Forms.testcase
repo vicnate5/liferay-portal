@@ -1673,7 +1673,7 @@
 		</execute>
 
 		<execute macro="FormsAdminNavigator#gotoEditFormByName">
-			<var name="formName" value="{formName}" />
+			<var name="formName" value="${formName}" />
 		</execute>
 
 		<execute macro="Form#publishForm" />
@@ -1695,7 +1695,7 @@
 		</execute>
 
 		<execute macro="FormsAdminNavigator#gotoEditFormByName">
-			<var name="formName" value="{formName}" />
+			<var name="formName" value="${formName}" />
 		</execute>
 
 		<execute macro="Form#submitFormPublish">
@@ -1726,7 +1726,7 @@
 		</execute>
 
 		<execute macro="FormsAdminNavigator#gotoEditFormByName">
-			<var name="formName" value="{formName}" />
+			<var name="formName" value="${formName}" />
 		</execute>
 
 		<execute macro="Form#viewFormNotPublished" />
