@@ -113,9 +113,9 @@
 	</command>
 
 	<command name="gotoViewEntries">
-		<execute function="AssertElementPresent" locator1="FormsAdmin#FORMS_TABLE_ELLIPSIS" />
-
 		<var name="key_formName" value="${formName}" />
+
+		<execute function="AssertElementPresent" locator1="FormsAdmin#FORMS_TABLE_ELLIPSIS" />
 
 		<execute function="Click#waitForMenuToggleJSClick" locator1="FormsAdmin#FORMS_TABLE_ELLIPSIS" />
 
