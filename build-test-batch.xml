@@ -315,10 +315,7 @@ mariadb.executable=${mariadb.executable}]]></echo>
 		<sequential>
 			<trycatch property="exception.message">
 				<try>
-					<antcall target="prepare-test-build">
-						<param name="test.class.groups.size" value="${test.batch.size}" />
-						<param name="test.plugin.groups.size" value="${test.batch.size}" />
-					</antcall>
+					<echo> Skipping prepare-test-build </echo>
 				</try>
 				<catch>
 					<echo message="${exception.message}" />
@@ -469,14 +466,8 @@ app.server.type=@{app.server.type}]]></echo>
 			<execute>
 				<![CDATA[
 					unzip -oq liferay-portal-source.zip
-
-					unzip -oq liferay-portal-bundle-@{app.server.type}.zip
-
-					chmod -R a+x bundles
 				]]>
 			</execute>
-
-			<antcall inheritAll="false" target="install-portal-snapshots" />
 
 			<echo if:set="env.JENKINS_HOME">ANT_OPTS=${env.ANT_OPTS}</echo>
 
@@ -580,7 +571,7 @@ app.server.type=@{app.server.type}]]></echo>
 
 							<trycatch>
 								<try>
-									<ant antfile="build-test-${app.server.type}.xml" inheritAll="false" target="run-selenium-${app.server.type}">
+									<ant antfile="build-test.xml" inheritAll="false" target="run-selenium-test">
 										<property name="database.type" value="@{database.type}" />
 										<property name="liferay.portal.bundle" value="@{test.portal.bundle.version}" />
 										<property name="test.build.plugins.war.zip.url" value="@{test.plugins.war.zip.url}" />
@@ -630,17 +621,7 @@ app.server.type=@{app.server.type}]]></echo>
 						<then>
 							<propertycopy from="app.server.${app.server.type}.bin.dir" name="test.app.server.bin.dir" />
 
-							<antcall inheritAll="false" target="prepare-test-bundle">
-								<param name="app.server.type" value="${app.server.type}" />
-								<param name="test.app.server.bin.dir" value="${test.app.server.bin.dir}" />
-								<param name="test.build.bundle.zip.url" value="@{test.portal.bundle.zip.url}" />
-								<param name="test.build.fix.pack.zip.url" value="@{test.build.fix.pack.zip.url}" />
-								<param name="test.build.portal.dependencies.zip.url" value="@{test.portal.bundle.dependencies.zip.url}" />
-								<param name="test.build.portal.osgi.zip.url" value="@{test.portal.bundle.osgi.zip.url}" />
-								<param name="test.build.portal.war.url" value="@{test.portal.bundle.war.url}" />
-								<param name="test.class" value="${test.class}" />
-								<param name="test.fix.pack.base.url" value="@{test.fix.pack.base.url}" />
-							</antcall>
+							<echo> Skipping prepare test bundle from run-functional-test macrodef </echo>
 
 							<if>
 								<matches pattern="https?://" string="@{test.license.xml.url}" />
@@ -680,63 +661,33 @@ app.server.type=@{app.server.type}]]></echo>
 								</then>
 							</if>
 
-							<antcall target="deploy-sql-zip">
-								<param name="test.sql.zip.url" value="@{test.sql.zip.url}" />
-							</antcall>
+							<echo> Skipping deploy sql zip </echo>
 
 							<antcall inheritAll="false" target="setup-sdk" />
 
 							<if>
 								<equals arg1="${app.server.type}" arg2="tomcat" />
 								<then>
-									<setup-testable-tomcat />
+									<echo> skip setup-testable-tomcat </echo>
 								</then>
 							</if>
 						</then>
 						<elseif>
-							<and>
-								<available file="liferay-portal-bundle-${app.server.type}.zip" />
-								<available file="liferay-portal-source.zip" />
-							</and>
+							<available file="liferay-portal-source.zip" />
 							<then>
 								<prepare-test-environment app.server.type="${app.server.type}" />
 							</then>
 						</elseif>
 						<else>
-							<antcall target="compile" />
-
-							<if>
-								<or>
-									<equals arg1="${app.server.type}" arg2="weblogic" />
-									<equals arg1="${app.server.type}" arg2="websphere" />
-								</or>
-								<then>
-									<prepare-test-build-custom />
-								</then>
-								<else>
-									<ant antfile="build-dist.xml" target="build-dist-${app.server.type}" />
-								</else>
-							</if>
+							<echo> Skip compile </echo>
 
 							<if>
 								<equals arg1="${app.server.type}" arg2="tomcat" />
 								<then>
-									<setup-testable-tomcat />
+									<echo> skip setup-testable-tomcat </echo>
 								</then>
 							</if>
 						</else>
-					</if>
-
-					<if>
-						<matches pattern="https?://" string="@{test.plugin.zip.url}" />
-						<then>
-							<mkdir dir="${liferay.home}/deploy" />
-
-							<mirrors-get
-								dest="${liferay.home}/deploy"
-								src="@{test.plugin.zip.url}"
-							/>
-						</then>
 					</if>
 
 					<echo if:set="env.JENKINS_HOME">ANT_OPTS=${env.ANT_OPTS}</echo>
@@ -746,9 +697,7 @@ app.server.type=@{app.server.type}]]></echo>
 					<if>
 						<available file=".testable.portal.started" />
 						<then>
-							<antcall target="stop-app-server" />
-
-							<delete failonerror="false" file=".testable.portal.started" />
+							<echo> Skip commands based on .testable.portal.started </echo>
 						</then>
 					</if>
 				</test-tear-down>
