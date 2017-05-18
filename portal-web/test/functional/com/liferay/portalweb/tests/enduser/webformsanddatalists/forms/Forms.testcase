@@ -1720,6 +1720,7 @@
 			<var name="fieldLabel" value="Text Field" />
 			<var name="fieldName" value="TextField" />
 			<var name="fieldValue" value="Preview Form Text entry" />
+			<var name="formName" value="${formName}" />
 		</execute>
 
 		<execute macro="Navigator#closeWindow" />
