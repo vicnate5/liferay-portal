@@ -28,6 +28,42 @@
 
 		<var name="userEmailAddress" value="${userFirstName}@liferay.com" />
 		<var name="userScreenName" value="${userFirstName}sn" />
+
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
+		</execute>
+
+		<execute macro="User#addCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
+		</execute>
+
+		<execute macro="User#editPasswordCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
+		</execute>
+
+		<execute macro="User#assignRegularRoleCP">
+			<var name="roleTitle" value="Administrator" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="User#logoutPG" />
+
+		<execute macro="User#loginUserPG">
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
 	</set-up>
 
 	<tear-down>
@@ -52,7 +88,7 @@
 		</if>
 	</tear-down>
 
-	<command name="AddFormToUserSiteAndViewNoDuplicates" priority="3">
+	<command ignore="true" name="AddFormToUserSiteAndViewNoDuplicates" priority="3">
 		<description message="This is a use case for LPS-68377." />
 
 		<execute macro="Navigator#openURL" />
