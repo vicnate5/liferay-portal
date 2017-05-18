@@ -2075,7 +2075,7 @@
 		</for>
 	</command>
 
-	<command name="SubmitFormAndViewEmailNotification" priority="4">
+	<command ignore="true" name="SubmitFormAndViewEmailNotification" priority="4">
 		<property name="test.name.skip.portal.instance" value="Forms#SubmitFormAndViewEmailNotification" />
 		<property name="test.smtp.server.enabled" value="true" />
 
@@ -2173,7 +2173,7 @@
 		</execute>
 	</command>
 
-	<command name="SubmitFormContainingCaptchaAndViewTextFieldValue" priority="5">
+	<command ignore="true" name="SubmitFormContainingCaptchaAndViewTextFieldValue" priority="5">
 		<description message="This is a use case for LPS-60818." />
 		<property name="osgi.module.configuration.file.names" value="com.liferay.captcha.configuration.CaptchaConfiguration.config" />
 		<property name="osgi.module.configurations" value="maxChallenges=&quot;0&quot;" />
