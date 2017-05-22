@@ -4665,12 +4665,12 @@
 
 			<execute function="AssertClick" locator1="Button#NEXT" value1="Next" />
 
-				<for list="BRASILSPSãoPaulo,radio,BRASILSPAlphavilleBarueri,BRASILRJRioDeJaneiro,radio1,BRASILMGBeloHorizonte,radio2,BRASILDFBrasília,radio3,radio4,BRASILPERecife,radio5,COLOMBIABogotá,radio6,CHILESantiagoDoChile,radio7,MEXICOCidadeDoMexico,radio8,CIDADEDOPANAMA,radio9,LIFERAYSAPARTMENT,radio10" param="fieldName">
-					<execute macro="FormFields#selectRadioOption">
-						<var name="fieldName" value="${fieldName}" />
-						<var name="radioOption" value="Good" />
-					</execute>
-				</for>
+			<for list="BRASILSPSãoPaulo,radio,BRASILSPAlphavilleBarueri,BRASILRJRioDeJaneiro,radio1,BRASILMGBeloHorizonte,radio2,BRASILDFBrasília,radio3,radio4,BRASILPERecife,radio5,COLOMBIABogotá,radio6,CHILESantiagoDoChile,radio7,MEXICOCidadeDoMexico,radio8,CIDADEDOPANAMA,radio9,LIFERAYSAPARTMENT,radio10" param="fieldName">
+				<execute macro="FormFields#selectRadioOption">
+					<var name="fieldName" value="${fieldName}" />
+					<var name="radioOption" value="Good" />
+				</execute>
+			</for>
 
 			<execute macro="FormFields#editText">
 				<var name="fieldName" value="SoYouCanMentionOtherHotelsOfYourChoiceOrLeaveHereYourCommentsOrSuggestions" />
