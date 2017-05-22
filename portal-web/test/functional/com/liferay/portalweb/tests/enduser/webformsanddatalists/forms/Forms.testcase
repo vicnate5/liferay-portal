@@ -4592,6 +4592,8 @@
 				<var name="fieldValue" value="User Name ${iteration}" />
 			</execute>
 
+			<execute function="Click" locator1="FormPortlet#FORM_CONTENT" />
+
 			<execute macro="FormFields#selectSelectOption">
 				<var name="fieldName" value="WhatsYourDepartment" />
 				<var name="selectOption" value="Engineering" />
