@@ -4579,14 +4579,17 @@
 	<command name="LATAMPublishedFormMultipleEntries" priority="5">
 		<description message="This is a use case for LRQA-32682." />
 
-		<for list="Excellent,Good,Regular,Poor,Excellent,Good,Regular,Poor,Excellent,Good" param="radioOption">
+		<for list="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15" param="iteration">
+			<echo> Iteration: ${iteration} </echo>
+			<var name="radioOption" value="Excellent" />
+
 			<execute macro="Navigator#openSpecificURL">
 				<var name="url" value="https://forms.liferay.com/web/forms/shared/-/form/99038" />
 			</execute>
 
 			<execute macro="FormFields#editText">
 				<var name="fieldName" value="FirstOfAllWhatsYourName" />
-				<var name="fieldValue" value="User Name" />
+				<var name="fieldValue" value="User Name ${iteration}" />
 			</execute>
 
 			<execute macro="FormFields#selectSelectOption">
