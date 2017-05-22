@@ -6,7 +6,7 @@
 	<set-up>
 		<execute macro="TestCase#setUpPortalInstance" />
 
-		<execute macro="User#firstLoginPG" />
+		<!-- <execute macro="User#firstLoginPG" /> -->
 	</set-up>
 
 	<tear-down>
