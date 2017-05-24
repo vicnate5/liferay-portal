@@ -4575,4 +4575,147 @@
 			<var name="successPageTitle" value="Success Page Title" />
 		</execute>
 	</command>
+
+	<command name="LATAMPublishedFormMultipleEntries" priority="5">
+		<description message="This is a use case for LRQA-32682." />
+
+		<for list="Excellent,Good,Regular,Poor,Excellent,Good,Regular,Poor,Excellent,Good" param="radioOption">
+			<execute macro="Navigator#openSpecificURL">
+				<var name="url" value="https://forms.liferay.com/web/forms/shared/-/form/99038" />
+			</execute>
+
+			<execute macro="FormFields#editText">
+				<var name="fieldName" value="FirstOfAllWhatsYourName" />
+				<var name="fieldValue" value="User Name" />
+			</execute>
+
+			<execute macro="FormFields#selectSelectOption">
+				<var name="fieldName" value="WhatsYourDepartment" />
+				<var name="selectOption" value="Engineering" />
+			</execute>
+
+			<execute macro="FormFields#selectRadioOption">
+				<var name="fieldName" value="NationalTickets" />
+				<var name="radioOption" value="${radioOption}" />
+			</execute>
+
+			<execute macro="FormFields#editTextMultiline">
+				<var name="fieldName" value="YouCanAlsoLeaveHereYourCritcismAndorSuggestion" />
+				<var name="fieldValue" value="Comment 1" />
+			</execute>
+
+			<execute macro="FormFields#selectRadioOption">
+				<var name="fieldName" value="InternationalTickets" />
+				<var name="radioOption" value="${radioOption}" />
+			</execute>
+
+			<execute macro="FormFields#selectRadioOption">
+				<var name="fieldName" value="NationalTickets1" />
+				<var name="radioOption" value="${radioOption}" />
+			</execute>
+
+			<execute macro="FormFields#editTextMultiline">
+				<var name="fieldName" value="LeaveHereYourCriticismAndorSuggestion" />
+				<var name="fieldValue" value="Comment 2" />
+			</execute>
+
+			<execute macro="FormFields#selectRadioOption">
+				<var name="fieldName" value="NationalTickets3" />
+				<var name="radioOption" value="${radioOption}" />
+			</execute>
+
+			<execute macro="FormFields#selectRadioOption">
+				<var name="fieldName" value="NationalTickets2" />
+				<var name="radioOption" value="${radioOption}" />
+			</execute>
+
+			<execute macro="FormFields#selectRadioOption">
+				<var name="fieldName" value="InternationalTickets2" />
+				<var name="radioOption" value="${radioOption}" />
+			</execute>
+
+			<execute macro="FormFields#editTextMultiline">
+				<var name="fieldName" value="LeaveHereYourCriticismAndorSuggestion1" />
+				<var name="fieldValue" value="Comment 3" />
+			</execute>
+
+			<execute function="AssertClick" locator1="Button#NEXT" value1="Next" />
+
+			<execute macro="FormFields#editTextMultiline">
+				<var name="fieldName" value="LeaveHereYourCriticismAndorSuggestion2" />
+				<var name="fieldValue" value="Comment 4" />
+			</execute>
+
+			<execute function="AssertClick" locator1="Button#NEXT" value1="Next" />
+
+			<execute macro="FormFields#selectRadioOption">
+				<var name="fieldName" value="4WhatsYourOpinionAboutSearchingForHotelsThroughTheSystem" />
+				<var name="radioOption" value="${radioOption}" />
+			</execute>
+
+			<execute function="AssertClick" locator1="Button#NEXT" value1="Next" />
+
+			<execute macro="FormFields#selectRadioOption">
+				<var name="fieldName" value="5WhatsYourOpinionAboutTheProcessStepsFromYourLodgingRequestThroughTheSystem" />
+				<var name="radioOption" value="${radioOption}" />
+			</execute>
+
+			<execute function="AssertClick" locator1="Button#NEXT" value1="Next" />
+
+				<for list="BRASILSPSãoPaulo,radio,BRASILSPAlphavilleBarueri,BRASILRJRioDeJaneiro,radio1,BRASILMGBeloHorizonte,radio2,BRASILDFBrasília,radio3,radio4,BRASILPERecife,radio5,COLOMBIABogotá,radio6,CHILESantiagoDoChile,radio7,MEXICOCidadeDoMexico,radio8,CIDADEDOPANAMA,radio9,LIFERAYSAPARTMENT,radio10" param="fieldName">
+					<execute macro="FormFields#selectRadioOption">
+						<var name="fieldName" value="${fieldName}" />
+						<var name="radioOption" value="Good" />
+					</execute>
+				</for>
+
+			<execute macro="FormFields#editText">
+				<var name="fieldName" value="SoYouCanMentionOtherHotelsOfYourChoiceOrLeaveHereYourCommentsOrSuggestions" />
+				<var name="fieldValue" value="Comment 5" />
+			</execute>
+
+			<execute macro="FormFields#editTextMultiline">
+				<var name="fieldName" value="YouCanAlsoLeaveHereYourCritcismAndorSuggestion3" />
+				<var name="fieldValue" value="Comment 6" />
+			</execute>
+
+			<execute function="AssertClick" locator1="Button#NEXT" value1="Next" />
+
+			<execute macro="FormFields#selectGridRadioOption">
+				<var name="categoryColumnName" value="Excellent" />
+				<var name="optionRowName" value="Uber" />
+			</execute>
+
+			<execute macro="FormFields#editTextMultiline">
+				<var name="fieldName" value="YouCanAlsoLeaveHereYourCritcismAndorSuggestion1" />
+				<var name="fieldValue" value="Comment 7" />
+			</execute>
+
+			<execute macro="FormFields#selectCheckboxOption">
+				<var name="checkboxOption" value="Budget" />
+				<var name="fieldName" value="8HaveYouEverUsedTheRentalCarServicesThroughLiferayIfYourAnswerIsPositiveDoYouHaveAnyPreferences" />
+			</execute>
+
+			<execute macro="FormFields#editTextMultiline">
+				<var name="fieldName" value="YouCanAlsoLeaveHereYourCritcismAndorSuggestion2" />
+				<var name="fieldValue" value="Comment 8" />
+			</execute>
+
+			<execute function="AssertClick" locator1="Button#NEXT" value1="Next" />
+
+			<execute macro="FormFields#editTextMultiline">
+				<var name="fieldName" value="9WeAreGoingToPrepareATravelGuideToAssistYouInThisMatterSoIfYouHaveAnyQuestionsAboutTravelProcessOrYouHaveSomeImprovementSuggestionsPleaseLetUsKnowWritingBelow" />
+				<var name="fieldValue" value="Comment 9" />
+			</execute>
+
+			<execute function="AssertClick" locator1="Button#SUBMIT" value1="Submit" />
+
+			<execute macro="FormPortlet#viewSuccessPage">
+				<var name="successPageDescription" value="Thank you for answering this form!" />
+				<var name="successPageTitle" value="Your response was saved." />
+			</execute>
+
+			<execute function="Refresh" />
+		</for>
+	</command>
 </definition>
