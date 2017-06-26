@@ -185,6 +185,15 @@
 
 		<execute function="Click" locator1="FormFields#SELECT_FIELD" />
 
+		<if>
+			<isset var="firstOption" />
+			<then>
+				<var name="key_selectOption" value="${firstOption}" />
+
+				<execute function="AssertTextEquals" locator1="FormFields#SELECT_FIELD_OPTIONS_LIST" value1="${firstOption}" />
+			</then>
+		</if>
+
 		<var name="key_selectOption" value="${selectOption}" />
 
 		<if>
@@ -196,6 +205,8 @@
 				<execute function="AssertClick" locator1="FormFields#SELECT_FIELD_DATA_PROVIDER_LIST" value1="${selectOption}" />
 			</then>
 			<else>
+				<execute function="Type" locator1="FormFields#SELECT_OPTION_SEARCH_FIELD" value1="${selectOption}" />
+
 				<execute function="AssertClick" locator1="FormFields#SELECT_FIELD_OPTIONS_LIST" value1="${selectOption}" />
 			</else>
 		</if>

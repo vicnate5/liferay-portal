@@ -288,6 +288,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SELECT_OPTION_SEARCH_FIELD</td>
+	<td>//div[contains(@data-fieldname,'${key_fieldName}')]//input[contains(@class,'drop-chosen-search')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SELECT_OPTIONS_OPTION_VALUE_FIELD_VISIBLE</td>
 	<td>//div[@class='options']/div[${key_rowNumber}]//input</td>
 	<td></td>
