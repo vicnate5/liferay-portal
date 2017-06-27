@@ -4,6 +4,8 @@
 	<property name="portal.upstream" value="true" />
 	<property name="testray.main.component.name" value="User Interface" />
 
+	<property name="portal.smoke" value="chat" />
+
 	<set-up>
 		<execute macro="TestCase#setUpPortalInstance" />
 
