@@ -31,7 +31,7 @@
 </tr>
 <tr>
 	<td>FORMS_TABLE_ELLIPSIS</td>
-	<td>///div[contains(@class,'portlet') and contains(@class,'container')]//li[contains(@class,'list-group-item') and contains(.,'${key_formName}')]//span/*[name()='svg'][contains(@class,'icon-ellipsis')]</td>
+	<td>//div[contains(@class,'portlet') and contains(@class,'container')]//li[contains(@class,'list-group-item') and contains(.,'${key_formName}')]//span/*[name()='svg'][contains(@class,'icon-ellipsis')]</td>
 	<td></td>
 </tr>
 <tr>
