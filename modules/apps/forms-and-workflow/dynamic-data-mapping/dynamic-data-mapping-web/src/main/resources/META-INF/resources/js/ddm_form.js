@@ -2948,7 +2948,7 @@ AUI.add(
 										plugins: [
 											{
 												cfg: {
-													constrain: '#main-content'
+													constrain: '.lfr-form-content'
 												},
 												fn: A.Plugin.DDConstrained
 											},
