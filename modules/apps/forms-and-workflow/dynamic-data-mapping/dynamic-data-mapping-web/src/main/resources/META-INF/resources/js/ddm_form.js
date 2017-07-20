@@ -958,9 +958,9 @@ AUI.add(
 
 						var container = instance.get('container');
 
+						var colorPicker = instance.get('colorPicker');
 						var selectorInput = container.one('.selector-input');
 						var valueField = container.one('.color-value');
-						var colorPicker = instance.get('colorPicker');
 
 						if (!colorPicker) {
 							return;
@@ -2961,7 +2961,7 @@ AUI.add(
 											}
 										]
 									},
-									dropOn: '#' + parentNode.attr("id"),
+									dropOn: '#' + parentNode.attr('id'),
 									helper: A.Node.create(TPL_REPEATABLE_HELPER),
 									nodes: '[data-fieldName=' + fieldName + ']',
 									placeholder: A.Node.create('<div class="form-builder-placeholder"></div>'),
