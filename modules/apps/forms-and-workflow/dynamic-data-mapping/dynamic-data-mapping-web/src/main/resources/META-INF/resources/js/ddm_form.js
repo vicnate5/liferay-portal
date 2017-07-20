@@ -2942,7 +2942,7 @@ AUI.add(
 						var repeatableInstance = instance.repeatableInstances[fieldName];
 
 						if (!repeatableInstance) {
-							repeatableInstance = new A.SortableList(
+							repeatableInstance = new Liferay.DDM.RepeatableSortableList(
 								{
 									dd: {
 										plugins: [
@@ -3153,6 +3153,40 @@ AUI.add(
 						translationManager.addTarget(instance);
 
 						return translationManager;
+					}
+				}
+			}
+		);
+
+		Liferay.DDM.RepeatableSortableList = A.Component.create(
+			{
+				EXTENDS: A.SortableList,
+
+				prototype: {
+					_createDrag: function(node) {
+						var instance = this;
+
+						var helper = instance.get('helper');
+
+						if (!A.DD.DDM.getDrag(node)) {
+							var dragOptions = {
+								bubbleTargets: instance,
+								node: node,
+								target: true
+							};
+
+							var proxyOptions = instance.get('proxy');
+
+							if (helper) {
+								proxyOptions.borderStyle = null;
+							}
+
+							// creating delayed drag instance
+							new A.DD.Drag(
+								A.mix(dragOptions, instance.get('dd'))
+							)
+							.plug(A.Plugin.DDProxy, proxyOptions);
+						}
 					}
 				}
 			}
