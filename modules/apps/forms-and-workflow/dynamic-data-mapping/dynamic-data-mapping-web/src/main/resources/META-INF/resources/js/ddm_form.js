@@ -2942,24 +2942,37 @@ AUI.add(
 						var repeatableInstance = instance.repeatableInstances[fieldName];
 
 						if (!repeatableInstance) {
+							var ddPlugins = [];
+
+							if (Liferay.Util.getTop() === A.config.win) {
+								ddPlugins.push(
+									{
+										fn: A.Plugin.DDWinScroll
+									}
+								);
+							}
+							else {
+								ddPlugins.push(
+									{
+										cfg: {
+											constrain: '.lfr-form-content'
+										},
+										fn: A.Plugin.DDConstrained
+									},
+									{
+										cfg: {
+											horizontal: false,
+											node: '.lfr-form-content'
+										},
+										fn: A.Plugin.DDNodeScroll
+									}
+								);
+							}
+
 							repeatableInstance = new Liferay.DDM.RepeatableSortableList(
 								{
 									dd: {
-										plugins: [
-											{
-												cfg: {
-													constrain: '.lfr-form-content'
-												},
-												fn: A.Plugin.DDConstrained
-											},
-											{
-												cfg: {
-													horizontal: false,
-													node: '.lfr-form-content'
-												},
-												fn: A.Plugin.DDNodeScroll
-											}
-										]
+										plugins: ddPlugins
 									},
 									dropOn: '#' + parentNode.attr('id'),
 									helper: A.Node.create(TPL_REPEATABLE_HELPER),
