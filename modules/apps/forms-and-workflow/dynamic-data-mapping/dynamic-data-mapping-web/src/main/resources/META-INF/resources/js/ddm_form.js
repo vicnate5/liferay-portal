@@ -2972,6 +2972,8 @@ AUI.add(
 								}
 							);
 
+							repeatableInstance.after('drag:align', A.bind(instance._afterRepeatableDragAlign, instance));
+
 							repeatableInstance.after('drag:end', A.rbind(instance._afterRepeatableDragEnd, instance, field.get('parent')));
 
 							instance.repeatableInstances[fieldName] = repeatableInstance;
@@ -3030,6 +3032,16 @@ AUI.add(
 						if (field.get('repeatable')) {
 							instance.registerRepeatable(field);
 						}
+					},
+
+					_afterRepeatableDragAlign: function() {
+						var DDM = A.DD.DDM;
+
+						DDM.syncActiveShims();
+
+						// This may not be necessary. I recommned trying both with and without
+						// this line to choose prefered behavior.
+						DDM._dropMove();
 					},
 
 					_afterRepeatableDragEnd: function(event, parentField) {
