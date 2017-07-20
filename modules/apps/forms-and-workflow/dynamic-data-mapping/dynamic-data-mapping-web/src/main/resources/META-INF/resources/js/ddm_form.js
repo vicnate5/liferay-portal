@@ -2964,6 +2964,7 @@ AUI.add(
 									dropOn: '#' + parentNode.attr("id"),
 									helper: A.Node.create(TPL_REPEATABLE_HELPER),
 									nodes: '[data-fieldName=' + fieldName + ']',
+									placeholder: A.Node.create('<div class="form-builder-placeholder"></div>'),
 									sortCondition: function(event) {
 										var dropNode = event.drop.get('node');
 
