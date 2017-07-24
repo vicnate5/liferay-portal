@@ -365,8 +365,6 @@
 		<execute function="SelectFrameTop" />
 
 		<execute macro="Button#clickDone" />
-
-		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
 	<command name="assignUserGroupAsMemberCP">

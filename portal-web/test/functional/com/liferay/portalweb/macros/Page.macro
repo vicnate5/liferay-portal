@@ -155,7 +155,7 @@
 			</then>
 		</if>
 
-		<execute macro="Alert#viewSuccessMessage" />
+		<!-- <execute macro="Alert#viewSuccessMessage" /> -->
 	</command>
 
 	<command name="addChild">
