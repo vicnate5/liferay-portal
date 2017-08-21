@@ -29,6 +29,8 @@
 					<else>
 						<var method="TestPropsUtil#get('test.run.environment')" name="testRunEnviroment" />
 
+						<echo message="test.run.environment=${testRunEnviroment}" />
+
 						<if>
 							<equals arg1="${testRunEnviroment}" arg2="EE" />
 							<then>
