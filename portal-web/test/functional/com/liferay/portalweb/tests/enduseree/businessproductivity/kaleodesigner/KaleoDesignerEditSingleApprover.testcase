@@ -4,6 +4,8 @@
 	<property name="test.run.environment" value="EE" />
 	<property name="testray.main.component.name" value="Kaleo Designer" />
 
+	<property name="victor" value="true" />
+
 	<var name="kfFieldSetName" value="New Kaleo Field Set" />
 	<var name="workflowAssetType" value="Process" />
 
