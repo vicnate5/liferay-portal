@@ -3065,6 +3065,40 @@ information. Make sure to commit in all build services results.
 		<run-modules-integration-test database.type="mysql" subrepository.name="${subrepository.name}" />
 	</target>
 
+	<target name="subrepository-frontend-js-jdk8">
+		<run-batch-test>
+			<test-action>
+				<gradle-execute dir="modules" task="npmRunTest" />
+
+				<replace
+					dir="modules"
+					includes="**/TEST-frontend-js.xml"
+				>
+					<replacefilter>
+						<replacetoken><![CDATA[<testsuites>]]></replacetoken>
+						<replacevalue><![CDATA[]]></replacevalue>
+					</replacefilter>
+					<replacefilter>
+						<replacetoken><![CDATA[</testsuites>]]></replacetoken>
+						<replacevalue><![CDATA[]]></replacevalue>
+					</replacefilter>
+				</replace>
+			</test-action>
+
+			<test-set-up>
+				<if>
+					<isset property="env.DIST_PATH" />
+					<then>
+						<prepare-test-environment />
+					</then>
+					<else>
+						<prepare-test-build />
+					</else>
+				</if>
+			</test-set-up>
+		</run-batch-test>
+	</target>
+
 	<target name="subrepository-pmd-jdk8">
 		<fail message="Please set the property ${subrepository.name}." unless="subrepository.name" />
 
