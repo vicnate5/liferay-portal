@@ -39,17 +39,7 @@
 			function(A) {lb}
 				Liferay.DDM.Renderer.FieldTypes.register({$fieldTypes});
 
-				if (window.ddm) {lb}
-					{call .render_form data="all" /}
-				{rb}
-				else {lb}
-					Liferay.after(
-						'DDMFormLoaded',
-						function() {lb}
-							{call .render_form data="all" /}
-						{rb}
-					);
-				{rb}
+				{call .render_form data="all" /}
 
 				var destroyFormHandle = function(event) {lb}
 					var form = Liferay.component('{$containerId}DDMForm');
