@@ -50,19 +50,21 @@ AUI.add(
 			render: function() {
 				var instance = this;
 
-				SoyTemplateUtil.loadModules(function() {
-					var container = instance.get('container');
+				SoyTemplateUtil.loadModules(
+					function() {
+						var container = instance.get('container');
 
-					container.html(instance.getTemplate());
+						container.html(instance.getTemplate());
 
-					instance.eachField(
-						function(field) {
-							field.updateContainer();
-						}
-					);
+						instance.eachField(
+							function(field) {
+								field.updateContainer();
+							}
+						);
 
-					instance.fire('render');
-				});
+						instance.fire('render');
+					}
+				);
 
 				return instance;
 			},
