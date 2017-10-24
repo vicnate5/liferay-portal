@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.jenkins.results.parser;
+package com.liferay.jenkins.results.parser.junit;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,7 +26,6 @@ import org.junit.runners.Parameterized.Parameters;
 /**
  *	@author Yi-Chen Tsai
  */
-
 @RunWith(Parameterized.class)
 public class CustomScriptTest {
 
