@@ -85,6 +85,12 @@ $management-bar-default-btn-default-active-bg: $management-bar-default-btn-defau
 $management-bar-default-btn-default-active-border: $management-bar-default-btn-default-hover-border !default;
 $management-bar-default-btn-default-active-color: $management-bar-default-btn-default-hover-color !default;
 
+// Icons
+
+$help-icon-default-bg: lighten(map-get($theme-colors, secondary), 24%) !default;
+$help-icon-default-color: #FFF !default;
+$help-icon-default-hover-color: $help-icon-default-color !default;
+
 // Grid
 
 $screen-lg: 1200px !default;
