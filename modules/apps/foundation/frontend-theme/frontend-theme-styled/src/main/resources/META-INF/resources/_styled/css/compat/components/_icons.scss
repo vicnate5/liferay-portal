@@ -18,8 +18,7 @@ span[class^="icon-monospaced"], .icon-monospaced {
 
 	text-align: center;
 
-	&:hover,
-	&:focus {
+	&:hover, &:focus {
 		text-decoration: none;
 	}
 
@@ -32,8 +31,7 @@ span[class^="icon-monospaced"], .icon-monospaced {
 	background-color: $help-icon-default-bg;
 	color: $help-icon-default-color;
 
-	&:focus,
-	&:hover {
+	&:focus, &:hover {
 		color: $help-icon-default-hover-color;
 	}
 }
