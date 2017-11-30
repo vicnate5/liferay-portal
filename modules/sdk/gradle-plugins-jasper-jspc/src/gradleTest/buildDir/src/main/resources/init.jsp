@@ -1,3 +1,4 @@
+<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -11,24 +12,13 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+--%>
 
-package com.liferay.knowledge.base.web.configuration.definition;
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
-import com.liferay.knowledge.base.web.configuration.KBArticlePortletInstanceConfiguration;
-import com.liferay.portal.kernel.settings.definition.ConfigurationBeanDeclaration;
+taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
+taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 
-import org.osgi.service.component.annotations.Component;
+<liferay-theme:defineObjects />
 
-/**
- * @author Roberto Díaz
- */
-@Component
-public class KBArticlePortletInstanceConfigurationBeanDeclaration
-	implements ConfigurationBeanDeclaration {
-
-	@Override
-	public Class<?> getConfigurationBeanClass() {
-		return KBArticlePortletInstanceConfiguration.class;
-	}
-
-}
+<portlet:defineObjects />
