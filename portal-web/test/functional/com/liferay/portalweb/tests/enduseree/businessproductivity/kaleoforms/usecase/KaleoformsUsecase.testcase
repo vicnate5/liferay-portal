@@ -6507,10 +6507,12 @@
 
 		<execute macro="WorkflowAsset#viewNotification">
 			<var name="contentBody" value="Test Test sent you a Process for review in the workflow." />
+			<var name="read" value="true" />
 		</execute>
 
 		<execute macro="WorkflowAsset#gotoViaNotification">
 			<var name="assetType" value="Process" />
+			<var name="read" value="true" />
 			<var name="user" value="Test Test" />
 		</execute>
 
