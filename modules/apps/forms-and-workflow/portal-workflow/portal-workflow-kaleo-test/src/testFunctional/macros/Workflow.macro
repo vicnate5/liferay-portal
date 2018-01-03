@@ -324,6 +324,19 @@
 		<execute macro="PortletEntry#save" />
 	</command>
 
+	<command name="confirmAndViewSucessMessageViaDetails">
+		<if>
+			<condition function="IsElementPresent" locator1="IFrame#DIALOG" />
+			<then>
+				<execute macro="IFrame#selectDialogFrame" />
+			</then>
+		</if>
+
+		<execute function="AssertClick" locator1="Button#DONE" value1="Done" />
+
+		<execute macro="Alert#waitForSuccessMessageHide" />
+	</command>
+
 	<command name="confirmWorkflowAction">
 		<execute macro="IFrame#selectConfigurationFrame" />
 
