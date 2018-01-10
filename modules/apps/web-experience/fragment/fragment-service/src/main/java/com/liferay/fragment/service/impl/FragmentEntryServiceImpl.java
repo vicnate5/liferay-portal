@@ -42,7 +42,7 @@ public class FragmentEntryServiceImpl extends FragmentEntryServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		FragmentPermission.check(
+		_portletResourcePermission.check(
 			getPermissionChecker(), groupId,
 			FragmentActionKeys.ADD_FRAGMENT_ENTRY);
 

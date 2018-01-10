@@ -35,7 +35,6 @@
 			<property name="allowedExportPackageDirName" value="journal-content-asset-addon-entry/journal-content-asset-addon-entry-common" />
 			<property name="allowedExportPackageDirName" value="journal-service" />
 			<property name="allowedExportPackageDirName" value="journal-web" />
-			<property name="allowedExportPackageDirName" value="modules/apps/chat/chat-service" />
 			<property name="allowedExportPackageDirName" value="modules/apps/collaboration/blogs/blogs-item-selector-web" />
 			<property name="allowedExportPackageDirName" value="modules/apps/collaboration/blogs/blogs-recent-bloggers-web" />
 			<property name="allowedExportPackageDirName" value="modules/apps/collaboration/blogs/blogs-service" />
@@ -64,11 +63,9 @@
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal/portal-custom-jsp-bag" />
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal/portal-dao-orm-custom-sql" />
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal/portal-instance-lifecycle" />
-			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal/portal-jmx" />
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal/portal-spring-extender" />
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal/portal-upgrade" />
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal/portal-upload" />
-			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal/portal-verify-extender" />
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal-cache/portal-cache" />
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal-cache/portal-cache-ehcache" />
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal-cache/portal-cache-ehcache-provider" />
@@ -81,7 +78,6 @@
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal-security/portal-security-auto-login" />
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal-security/portal-security-ldap" />
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal-security/portal-security-service-access-policy-service" />
-			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal-security-sso/portal-security-sso-facebook-connect" />
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal-security-sso/portal-security-sso-openid" />
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal-security-sso/portal-security-sso-openid-connect" />
 			<property name="allowedExportPackageDirName" value="modules/apps/foundation/portal-security-sso/portal-security-sso-token" />
@@ -92,9 +88,7 @@
 			<property name="allowedExportPackageDirName" value="modules/apps/knowledge-base/knowledge-base-markdown-converter" />
 			<property name="allowedExportPackageDirName" value="modules/apps/knowledge-base/knowledge-base-service" />
 			<property name="allowedExportPackageDirName" value="modules/apps/mail-reader/mail-reader-service" />
-			<property name="allowedExportPackageDirName" value="modules/apps/marketplace/marketplace-service" />
 			<property name="allowedExportPackageDirName" value="modules/apps/marketplace/marketplace-store-web" />
-			<property name="allowedExportPackageDirName" value="modules/apps/portal-mobile-device-detection-fiftyonedegrees/portal-mobile-device-detection-fiftyonedegrees" />
 			<property name="allowedExportPackageDirName" value="modules/apps/portal-security-wedeploy-auth/portal-security-wedeploy-auth-service" />
 			<property name="allowedExportPackageDirName" value="modules/apps/push-notifications/push-notifications-service" />
 			<property name="allowedExportPackageDirName" value="modules/apps/shopping/shopping-service" />
