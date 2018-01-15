@@ -12,13 +12,23 @@
  * details.
  */
 
-package com.liferay.blogs.item.selector.web.constants;
+package com.liferay.fragment.entry.processor.editable.parser;
+
+import com.liferay.portal.kernel.xml.Element;
 
 /**
- * @author Sergio González
+ * This service provides a utility to replace editable element value.
+ *
+ * @author Pavel Savinov
  */
-public class BlogsItemSelectorViewConstants {
+public interface EditableElementParser {
 
-	public static final String ITEM_SELECTOR_VIEW_KEY = "blogs-attachments";
+	/**
+	 * Replaces editable element value with the provided one.
+	 *
+	 * @param element Editable element to replace
+	 * @param value New element value
+	 */
+	public void replace(Element element, String value);
 
 }
