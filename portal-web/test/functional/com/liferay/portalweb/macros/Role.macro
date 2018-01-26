@@ -70,16 +70,16 @@
 
 		<if>
 			<or>
-				<equals arg1="${roleType}" arg2="Organization" />
-				<equals arg1="${roleType}" arg2="Site" />
+				<equals arg1="${roleType}" arg2="Organization Roles" />
+				<equals arg1="${roleType}" arg2="Site Roles" />
 			</or>
 			<then>
 				<var name="key_navItem" value="${roleType}" />
 				<var name="key_roleType" value="${roleType}" />
 			</then>
 			<else>
-				<var name="key_navItem" value="Regular" />
-				<var name="key_roleType" value="Regular" />
+				<var name="key_navItem" value="Regular Roles" />
+				<var name="key_roleType" value="Regular Roles" />
 			</else>
 		</if>
 
