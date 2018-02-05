@@ -246,6 +246,8 @@
 	</command>
 
 	<command name="gotoView">
+		<execute function="AssertElementPresent" locator1="Calendar#VIEW_DAY_BUTTON" />
+
 		<if>
 			<equals arg1="${viewType}" arg2="Day" />
 			<then>
