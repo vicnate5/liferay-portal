@@ -616,6 +616,14 @@
 		<execute function="Click" locator1="Icon#CLOSE" />
 	</command>
 
+	<command name="updateWorkflow">
+		<execute macro="PortletEntry#update" />
+
+		<execute function="SelectFrame" value1="relative=top" />
+
+		<execute function="Click" locator1="Icon#CLOSE" />
+	</command>
+
 	<command name="saveAndContinueForm">
 		<execute macro="DynamicDataMapping#selectDynamicDataMappingFrame" />
 
