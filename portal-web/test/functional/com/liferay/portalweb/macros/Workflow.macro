@@ -66,6 +66,14 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="MyWorkflowTasksTask#ACTIVITIES_LINE_1" value1="${workflowActivityComment}" />
 	</command>
 
+	<command name="addNewDefinition">
+		<execute macro="LexiconEntry#gotoAdd" />
+
+		<execute macro="PortletEntry#inputTitle">
+			<var name="title" value="${workflowDefinitionTitle}" />
+		</execute>
+	</command>
+
 	<command name="approveTaskByActions">
 		<execute macro="Workflow#viewTaskAssignedToMe">
 			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
@@ -813,9 +821,7 @@
 	</command>
 
 	<command name="uploadDefinition">
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute macro="PortletEntry#inputTitle">
+		<execute macro="Workflow#addNewDefinition">
 			<var name="title" value="${workflowDefinitionTitle}" />
 		</execute>
 

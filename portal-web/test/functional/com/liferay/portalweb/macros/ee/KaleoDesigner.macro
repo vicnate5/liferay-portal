@@ -60,22 +60,6 @@
 		</execute>
 	</command>
 
-	<command name="addNewDefinitionViaKDCP">
-		<execute macro="LexiconEntry#gotoAdd" />
-
-		<execute macro="PortletEntry#inputTitle">
-			<var name="title" value="${workflowDefinitionTitle}" />
-		</execute>
-	</command>
-
-	<command name="addNewDefinitionViaWorkflowCP">
-		<execute macro="LexiconEntry#gotoAdd" />
-
-		<execute macro="PortletEntry#inputTitle">
-			<var name="title" value="${workflowDefinitionTitle}" />
-		</execute>
-	</command>
-
 	<command name="addNodeSettingsSection">
 		<execute function="AssertClick" locator1="KaleoDesignerEditWorkflow#SETTINGS_CELL_EDITOR_ADD_SECTION" value1="Add Section" />
 	</command>
