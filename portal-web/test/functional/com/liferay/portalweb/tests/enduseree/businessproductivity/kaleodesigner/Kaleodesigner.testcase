@@ -331,7 +331,7 @@
 			<var name="portlet" value="Workflow" />
 		</execute>
 
-		<execute macro="KaleoDesigner#editWorkflowDefinitionViaKDCP">
+		<execute macro="Workflow#gotoEditWorkflowDefinition">
 			<var name="workflowDefinitionTitle" value="New Workflow Definition Title" />
 		</execute>
 
@@ -739,7 +739,7 @@
 			<var name="portlet" value="Workflow" />
 		</execute>
 
-		<execute macro="KaleoDesigner#editWorkflowDefinitionViaKDCP">
+		<execute macro="Workflow#gotoEditWorkflowDefinition">
 			<var name="workflowDefinitionTitle" value="New Workflow Definition Title" />
 		</execute>
 
@@ -890,7 +890,7 @@
 			<var name="workflowDefinitionTitle" value="Test Definition" />
 		</execute>
 
-		<execute macro="KaleoDesigner#editWorkflowDefinitionViaKDCP">
+		<execute macro="Workflow#gotoEditWorkflowDefinition">
 			<var name="workflowDefinitionTitle" value="Test Definition" />
 		</execute>
 
@@ -1291,7 +1291,7 @@
 			<var name="workflowDefinitionTitle" value="Test Definition" />
 		</execute>
 
-		<execute macro="KaleoDesigner#editWorkflowDefinitionViaKDCP">
+		<execute macro="Workflow#gotoEditWorkflowDefinition">
 			<var name="workflowDefinitionName" value="Test Definition" />
 			<var name="workflowDefinitionTitle" value="Test Definition" />
 		</execute>
@@ -1567,7 +1567,7 @@
 			<var name="portlet" value="Workflow" />
 		</execute>
 
-		<execute macro="KaleoDesigner#editWorkflowDefinitionViaKDCP">
+		<execute macro="Workflow#gotoEditWorkflowDefinition">
 			<var name="workflowDefinitionTitle" value="New Workflow Definition Title" />
 		</execute>
 
@@ -1640,7 +1640,7 @@
 			<var name="portlet" value="Workflow" />
 		</execute>
 
-		<execute macro="KaleoDesigner#editWorkflowDefinitionViaKDCP">
+		<execute macro="Workflow#gotoEditWorkflowDefinition">
 			<var name="workflowDefinitionTitle" value="New Workflow Definition" />
 		</execute>
 
