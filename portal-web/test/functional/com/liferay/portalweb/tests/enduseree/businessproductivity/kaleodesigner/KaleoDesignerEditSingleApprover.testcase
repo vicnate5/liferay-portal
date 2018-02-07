@@ -17,7 +17,7 @@
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Configuration" />
 			<var name="panel" value="Control Panel" />
-			<var name="portlet" value="Kaleo Designer" />
+			<var name="portlet" value="Workflow" />
 		</execute>
 
 		<execute macro="KaleoDesigner#editWorkflowDefinitionViaKDCP">
@@ -54,7 +54,7 @@
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Configuration" />
 			<var name="panel" value="Control Panel" />
-			<var name="portlet" value="Kaleo Designer" />
+			<var name="portlet" value="Workflow" />
 		</execute>
 
 		<execute macro="KaleoDesigner#viewTableDefinitionPublishedViaKDCP">
