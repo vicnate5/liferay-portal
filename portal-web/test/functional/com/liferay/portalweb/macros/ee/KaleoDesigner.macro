@@ -534,14 +534,6 @@
 		<execute function="AssertClick" locator1="KaleoDesignerEditWorkflow#DRAFT_HISTORY_LATEST_VERSION_BUTTON" value1="Latest Version" />
 	</command>
 
-	<command name="publishInvalidWorkflowDefinitionViaWorkflowCP">
-		<execute function="AssertClickNoError" locator1="Button#PUBLISH" value1="Publish" />
-
-		<execute macro="Alert#viewErrorMessage">
-			<var name="errorMessage" value="${errorMessage}" />
-		</execute>
-	</command>
-
 	<command name="publishWorkflowDefinitionViaKDCP">
 		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 

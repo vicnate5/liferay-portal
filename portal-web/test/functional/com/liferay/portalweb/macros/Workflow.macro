@@ -851,6 +851,14 @@
 		<execute macro="Navigator#gotoBack" />
 	</command>
 
+	<command name="publishInvalidWorkflowDefinition">
+		<execute function="AssertClickNoError" locator1="Button#PUBLISH" value1="Publish" />
+
+		<execute macro="Alert#viewErrorMessage">
+			<var name="errorMessage" value="${errorMessage}" />
+		</execute>
+	</command>
+
 	<command name="viewAssignedToMyRolesTasksCP">
 		<var name="key_workflowAssetTitle" value="${workflowAssetTitle}" />
 		<var name="key_workflowTask" value="${workflowTask}" />
