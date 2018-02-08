@@ -683,29 +683,7 @@
 		</while>
 	</command>
 
-	<command name="tearDownWorkflowDefinitionDraftsViaKDCP">
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Apps" />
-			<var name="panel" value="Control Panel" />
-			<var name="portlet" value="Kaleo Designer" />
-		</execute>
-
-		<while>
-			<condition function="IsElementPresent" locator1="KaleoDesigner#DEFINITION_TABLE_DEFINITION_DRAFT_ACTIONS" />
-			<then>
-				<execute macro="Workflow#deleteWorkflowDefinition" />
-
-				<if>
-					<condition function="IsElementNotPresent" locator1="KaleoDesigner#DEFINITION_TABLE_DEFINITION_DRAFT_ACTIONS" />
-					<then>
-						<execute macro="KaleoDesigner#viewNoWorkflowDefinitionsViaKDCP" />
-					</then>
-				</if>
-			</then>
-		</while>
-	</command>
-
-	<command name="tearDownWorkflowDefinitionsViaWorkflowCP">
+	<command name="tearDownWorkflowDefinitions">
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Configuration" />
 			<var name="panel" value="Control Panel" />

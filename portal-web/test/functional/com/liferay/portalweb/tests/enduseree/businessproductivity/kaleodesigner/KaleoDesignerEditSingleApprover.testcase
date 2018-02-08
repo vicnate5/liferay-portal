@@ -37,8 +37,8 @@
 	</tear-down>
 
 	<command name="DeleteTaskNode" priority="5">
-		<execute macro="KaleoDesigner#editWorkflowDefinitionTitleViaWorkflowCP">
-			<var name="workflowDefinitionTitle" value="Edited Workflow Definition" />
+		<execute macro="PortletEntry#inputTitle">
+			<var name="title" value="${workflowDefinitionTitle}" />
 		</execute>
 
 		<execute macro="KaleoDesigner#selectNode">
@@ -57,7 +57,7 @@
 			<var name="portlet" value="Workflow" />
 		</execute>
 
-		<execute macro="KaleoDesigner#viewTableDefinitionPublishedViaKDCP">
+		<execute macro="Workflow#viewDefinitionPublished">
 			<var name="workflowDefinitionName" value="Single Approver" />
 			<var name="workflowDefinitionTitle" value="Edited Workflow Definition" />
 			<var name="workflowDefinitionVersionNumber" value="2" />

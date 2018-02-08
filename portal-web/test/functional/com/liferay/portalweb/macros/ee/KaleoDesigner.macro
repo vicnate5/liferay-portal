@@ -222,20 +222,6 @@
 		</execute>
 	</command>
 
-	<command name="deleteTableDefinitionDraftViaKDCP">
-		<var name="key_rowEntry" value="${workflowDefinitionTitle}" />
-
-		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
-
-		<execute function="AssertClickNoError" locator1="MenuItem#ANY_MENU_ITEM" value1="Delete">
-			<var name="key_menuItem" value="Delete" />
-		</execute>
-
-		<execute function="Confirm" value1="Are you sure you want to delete this? It will be deleted immediately." />
-
-		<execute macro="Alert#viewSuccessMessage" />
-	</command>
-
 	<command name="editConnectorName">
 		<execute function="DoubleClick" locator1="KaleoDesignerEditWorkflow#SETTINGS_NAME" />
 
@@ -510,12 +496,6 @@
 		<execute function="TypeScreen" locator1="${kdSourceXML}" />
 	</command>
 
-	<command name="editWorkflowDefinitionTitleViaWorkflowCP">
-		<execute macro="PortletEntry#inputTitle">
-			<var name="title" value="${workflowDefinitionTitle}" />
-		</execute>
-	</command>
-
 	<command name="eraseDefinitionViaSourceXML">
 		<execute function="AssertClick" locator1="KaleoDesignerEditWorkflow#SOURCE_KALEO_XML_TAB" value1="Source (Kaleo XML)" />
 
@@ -532,20 +512,6 @@
 
 	<command name="latestVersionDraft">
 		<execute function="AssertClick" locator1="KaleoDesignerEditWorkflow#DRAFT_HISTORY_LATEST_VERSION_BUTTON" value1="Latest Version" />
-	</command>
-
-	<command name="publishWorkflowDefinitionViaKDCP">
-		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
-
-		<execute macro="Alert#viewSuccessMessage" />
-	</command>
-
-	<command name="publishWorkflowDefinitionViaWorkflowCP">
-		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
-
-		<execute macro="Alert#viewSuccessMessage" />
-
-		<execute function="SelectFrameTop" locator1="IFrame#DIALOG" value1="relative=top" />
 	</command>
 
 	<command name="redoDraft">
@@ -804,7 +770,7 @@
 		<if>
 			<condition function="IsElementPresent" locator1="KaleoDesigner#DEFINITION_TABLE_TITLE" />
 			<then>
-				<execute macro="KaleoDesigner#viewTableDefinitionPublishedViaKDCP">
+				<execute macro="Workflow#viewDefinitionPublished">
 					<var name="workflowDefinitionTitle" value="Single Approver" />
 				</execute>
 			</then>
@@ -833,20 +799,6 @@
 		<execute function="AssertClick" locator1="KaleoDesignerEditWorkflow#SOURCE_KALEO_XML_TAB" value1="Source (Kaleo XML)" />
 
 		<execute function="Pause" locator1="1000" />
-	</command>
-
-	<command name="viewTableDefinitionDraftViaKDCP">
-		<var name="key_workflowDefinitionTitle" value="${workflowDefinitionTitle}" />
-
-		<execute function="AssertTextEquals" locator1="WorkflowDefinition#DEFINITION_TABLE_TITLE_UNPUBLISHED" value1="${workflowDefinitionTitle}" />
-		<execute function="AssertElementPresent" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
-	</command>
-
-	<command name="viewTableDefinitionPublishedViaKDCP">
-		<var name="key_workflowDefinitionTitle" value="${workflowDefinitionTitle}" />
-
-		<execute function="AssertTextEquals" locator1="WorkflowDefinition#DEFINITION_TABLE_TITLE_PUBLISHED" value1="${workflowDefinitionTitle}" />
-		<execute function="AssertElementPresent" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
 	</command>
 
 	<command name="viewViewTab">

@@ -23,8 +23,7 @@
 					<var name="workflowDefinitionTitle" value="Edited Workflow Definition" />
 				</execute>
 
-				<execute macro="Workflow#tearDownWorkflowDefinitionsViaWorkflowCP" />
-				<execute macro="Workflow#tearDownWorkflowDefinitionDraftsViaKDCP" />
+				<execute macro="Workflow#tearDownWorkflowDefinitions" />
 			</else>
 		</if>
 	</tear-down>
@@ -268,7 +267,7 @@
 
 		<execute function="ScrollBy" value1="0, 60" />
 
-		<execute macro="KaleoDesigner#publishWorkflowDefinitionViaKDCP" />
+		<execute macro="PortletEntry#publish" />
 	</command>
 
 	<command name="AddNewWorkflowDefinitionViaViewTab" priority="5">
@@ -323,7 +322,7 @@
 			<var name="nodeType" value="task" />
 		</execute>
 
-		<execute macro="KaleoDesigner#publishWorkflowDefinitionViaKDCP" />
+		<execute macro="PortletEntry#publish" />
 
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Configuration" />
@@ -785,7 +784,7 @@
 			<var name="portlet" value="Workflow" />
 		</execute>
 
-		<execute macro="KaleoDesigner#viewTableDefinitionDraftViaKDCP">
+		<execute macro="Workflow#viewDefinitionUnpublished">
 			<var name="workflowDefinitionTitle" value="New Workflow Definition" />
 		</execute>
 
@@ -856,7 +855,7 @@
 			<var name="line" value="34" />
 		</execute>
 
-		<execute macro="KaleoDesigner#publishWorkflowDefinitionViaKDCP" />
+		<execute macro="PortletEntry#publish" />
 	</command>
 
 	<command name="PublishFromSourceTabAndViewNameChange" priority="3">
@@ -877,7 +876,7 @@
 			<var name="line" value="5" />
 		</execute>
 
-		<execute macro="KaleoDesigner#publishWorkflowDefinitionViaKDCP" />
+		<execute macro="PortletEntry#publish" />
 
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Configuration" />
@@ -885,7 +884,7 @@
 			<var name="portlet" value="Workflow" />
 		</execute>
 
-		<execute macro="KaleoDesigner#viewTableDefinitionPublishedViaKDCP">
+		<execute macro="Workflow#viewDefinitionPublished">
 			<var name="workflowDefinitionName" value="NAME EDIT" />
 			<var name="workflowDefinitionTitle" value="Test Definition" />
 		</execute>
@@ -1279,7 +1278,7 @@
 			<var name="workflowDefinitionTitle" value="Test Definition" />
 		</execute>
 
-		<execute macro="KaleoDesigner#publishWorkflowDefinitionViaKDCP" />
+		<execute macro="PortletEntry#publish" />
 
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Configuration" />
@@ -1287,7 +1286,7 @@
 			<var name="portlet" value="Workflow" />
 		</execute>
 
-		<execute macro="KaleoDesigner#viewTableDefinitionPublishedViaKDCP">
+		<execute macro="Workflow#viewDefinitionPublished">
 			<var name="workflowDefinitionTitle" value="Test Definition" />
 		</execute>
 
@@ -1628,7 +1627,7 @@
 			<var name="portlet" value="Workflow" />
 		</execute>
 
-		<execute macro="KaleoDesigner#viewTableDefinitionDraftViaKDCP">
+		<execute macro="Workflow#viewDefinitionUnpublished">
 			<var name="workflowDefinitionTitle" value="New Workflow Definition" />
 		</execute>
 
@@ -1654,7 +1653,7 @@
 			<var name="portlet" value="Workflow" />
 		</execute>
 
-		<execute macro="KaleoDesigner#viewTableDefinitionPublishedViaKDCP">
+		<execute macro="Workflow#viewDefinitionPublished">
 			<var name="workflowDefinitionTitle" value="New Workflow Definition" />
 		</execute>
 	</command>
@@ -1696,7 +1695,7 @@
 			<var name="nodeNodeLabel" value="EndNode" />
 		</execute>
 
-		<execute macro="KaleoDesigner#publishWorkflowDefinitionViaKDCP" />
+		<execute macro="PortletEntry#publish" />
 	</command>
 
 	<command name="ViewWorkflowDefinitionButtonsViaKaleoFormsAdmin" priority="2">
