@@ -730,7 +730,7 @@
 			<var name="nodeNodeLabel" value="End" />
 		</execute>
 
-		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
+		<execute macro="Workflow#saveDefinition" />
 
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Configuration" />
@@ -774,7 +774,7 @@
 			<var name="workflowDefinitionTitle" value="New Workflow Definition" />
 		</execute>
 
-		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
+		<execute macro="Workflow#saveDefinition" />
 
 		<execute macro="Navigator#openURL" />
 
@@ -1365,7 +1365,7 @@
 			<var name="nodeType" value="start" />
 		</execute>
 
-		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
+		<execute macro="Workflow#saveDefinition" />
 
 		<execute macro="KaleoDesigner#addConnectorAndNodeViaViewTab">
 			<var name="connectorName" value="Submit" />
@@ -1376,7 +1376,7 @@
 			<var name="nodeType" value="start" />
 		</execute>
 
-		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
+		<execute macro="Workflow#saveDefinition" />
 
 		<execute macro="KaleoDesigner#addConnectorAndNodeViaViewTab">
 			<var name="connectorName" value="Complete" />
@@ -1387,7 +1387,7 @@
 			<var name="nodeType" value="task" />
 		</execute>
 
-		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
+		<execute macro="Workflow#saveDefinition" />
 
 		<execute macro="KaleoDesigner#showDetails" />
 
@@ -1451,7 +1451,7 @@
 			<var name="connectorLabel" value="Complete" />
 		</execute>
 
-		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
+		<execute macro="Workflow#saveDefinition" />
 	</command>
 
 	<command name="SaveInvalidWorkflowDefinitionAsDraft" priority="3">
@@ -1473,7 +1473,7 @@
 			<var name="nodeNodeLabel" value="EndNode" />
 		</execute>
 
-		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
+		<execute macro="Workflow#saveDefinition" />
 	</command>
 
 	<command name="UndoDraftDefinition" priority="3">
@@ -1510,7 +1510,7 @@
 			<var name="nodeType" value="start" />
 		</execute>
 
-		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
+		<execute macro="Workflow#saveDefinition" />
 
 		<execute macro="KaleoDesigner#addConnectorAndNodeViaViewTab">
 			<var name="connectorName" value="Submit" />
@@ -1521,7 +1521,7 @@
 			<var name="nodeType" value="start" />
 		</execute>
 
-		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
+		<execute macro="Workflow#saveDefinition" />
 
 		<execute macro="KaleoDesigner#addConnectorAndNodeViaViewTab">
 			<var name="connectorName" value="Complete" />
@@ -1532,7 +1532,7 @@
 			<var name="nodeType" value="task" />
 		</execute>
 
-		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
+		<execute macro="Workflow#saveDefinition" />
 
 		<execute macro="KaleoDesigner#showDetails" />
 
@@ -1605,7 +1605,7 @@
 			<var name="connectorLabel" value="Complete" />
 		</execute>
 
-		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
+		<execute macro="Workflow#saveDefinition" />
 	</command>
 
 	<command name="ViewAndPublishWorkflowDefinitionDraftViaKDCP" priority="4">
@@ -1619,7 +1619,7 @@
 			<var name="workflowDefinitionTitle" value="New Workflow Definition" />
 		</execute>
 
-		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
+		<execute macro="Workflow#saveDefinition" />
 
 		<execute macro="Navigator#openURL" />
 

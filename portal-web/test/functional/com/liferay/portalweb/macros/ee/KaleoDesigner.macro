@@ -522,12 +522,6 @@
 		<execute function="AssertClick" locator1="KaleoDesignerEditWorkflow#SETTINGS_CELL_EDITOR_REMOVE_SECTION" value1="Remove" />
 	</command>
 
-	<command name="saveAsDraftWorkflowDefinitionViaKDCP">
-		<execute function="AssertClick" locator1="KaleoDesigner#SAVE_BUTTON" value1="Save" />
-
-		<execute macro="Alert#viewSuccessMessage" />
-	</command>
-
 	<command name="selectNode">
 		<var name="key_nodeNodeLabel" value="${nodeNodeLabel}" />
 

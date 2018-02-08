@@ -837,6 +837,12 @@
 		</execute>
 	</command>
 
+	<command name="saveDefinition">
+		<execute function="AssertClick" locator1="KaleoDesigner#SAVE_BUTTON" value1="Save" />
+
+		<execute macro="Alert#viewSuccessMessage" />
+	</command>
+
 	<command name="viewAssignedToMyRolesTasksCP">
 		<var name="key_workflowAssetTitle" value="${workflowAssetTitle}" />
 		<var name="key_workflowTask" value="${workflowTask}" />
