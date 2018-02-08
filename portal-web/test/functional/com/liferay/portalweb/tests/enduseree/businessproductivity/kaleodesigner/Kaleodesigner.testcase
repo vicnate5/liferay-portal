@@ -1700,6 +1700,22 @@
 		<execute macro="PortletEntry#publish" />
 	</command>
 
+	<command name="ViewWorkflowDefinitionButtons" priority="2">
+		<description message="This is a use case for LPS-47352 and LPS-48912." />
+
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
+			<var name="portlet" value="Workflow" />
+		</execute>
+
+		<execute macro="Workflow#addNewDefinition">
+			<var name="workflowDefinitionTitle" value="New Workflow Definition Title" />
+		</execute>
+
+		<execute macro="KaleoDesigner#viewButtons" />
+	</command>
+
 	<command name="ViewWorkflowDefinitionButtonsViaKaleoFormsAdmin" priority="2">
 		<description message="This is a use case for LPS-47352 and LPS-48912." />
 
@@ -1753,21 +1769,5 @@
 
 		<execute macro="KaleoFormsAdmin#viewPublishedWorkflowDefinitions" />
 		<execute macro="KaleoFormsAdmin#viewNoUnpublishedWorkflowDefinitions" />
-	</command>
-
-	<command name="ViewWorkflowDefinitionButtons" priority="2">
-		<description message="This is a use case for LPS-47352 and LPS-48912." />
-
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Configuration" />
-			<var name="panel" value="Control Panel" />
-			<var name="portlet" value="Workflow" />
-		</execute>
-
-		<execute macro="Workflow#addNewDefinition">
-			<var name="workflowDefinitionTitle" value="New Workflow Definition Title" />
-		</execute>
-
-		<execute macro="KaleoDesigner#viewButtons" />
 	</command>
 </definition>

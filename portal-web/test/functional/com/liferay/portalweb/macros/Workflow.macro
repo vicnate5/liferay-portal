@@ -390,6 +390,16 @@
 		<execute macro="Workflow#gotoPreviewView" />
 	</command>
 
+	<command name="gotoEditWorkflowDefinition">
+		<var name="key_rowEntry" value="${workflowDefinitionTitle}" />
+
+		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
+
+		<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="Edit">
+			<var name="key_menuItem" value="Edit" />
+		</execute>
+	</command>
+
 	<command name="gotoPreviewEdit">
 		<execute function="Click" locator1="WorkflowSubmissionsTask#PREVIEW_EDIT" />
 
@@ -434,16 +444,6 @@
 		<execute macro="Workflow#gotoPreviewView" />
 	</command>
 
-	<command name="gotoEditWorkflowDefinition">
-		<var name="key_rowEntry" value="${workflowDefinitionTitle}" />
-
-		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
-
-		<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="Edit">
-			<var name="key_menuItem" value="Edit" />
-		</execute>
-	</command>
-
 	<command name="publishExistingWorkflowDefinition">
 		<var name="key_workflowDefinitionTitle" value="${workflowDefinitionTitle}" />
 
@@ -463,6 +463,14 @@
 
 		<execute macro="Workflow#viewDefinitionPublicationStatus">
 			<var name="status" value="Published" />
+		</execute>
+	</command>
+
+	<command name="publishInvalidWorkflowDefinition">
+		<execute function="AssertClickNoError" locator1="Button#PUBLISH" value1="Publish" />
+
+		<execute macro="Alert#viewErrorMessage">
+			<var name="errorMessage" value="${errorMessage}" />
 		</execute>
 	</command>
 
@@ -605,6 +613,12 @@
 			<var name="workflowAssetType" value="${workflowAssetType}" />
 			<var name="workflowTask" value="${workflowTask}" />
 		</execute>
+	</command>
+
+	<command name="saveDefinition">
+		<execute function="AssertClick" locator1="KaleoDesigner#SAVE_BUTTON" value1="Save" />
+
+		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
 	<command name="tearDownPortalWorkflow">
@@ -827,20 +841,6 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="Portlet#HEADER" value1="${workflowDefinitionTitle}" />
 
 		<execute macro="Navigator#gotoBack" />
-	</command>
-
-	<command name="publishInvalidWorkflowDefinition">
-		<execute function="AssertClickNoError" locator1="Button#PUBLISH" value1="Publish" />
-
-		<execute macro="Alert#viewErrorMessage">
-			<var name="errorMessage" value="${errorMessage}" />
-		</execute>
-	</command>
-
-	<command name="saveDefinition">
-		<execute function="AssertClick" locator1="KaleoDesigner#SAVE_BUTTON" value1="Save" />
-
-		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
 	<command name="viewAssignedToMyRolesTasksCP">
