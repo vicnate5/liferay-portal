@@ -182,7 +182,7 @@
 			<var name="key_navItem" value="Workflow Definitions" />
 		</execute>
 
-		<execute function="AssertTextEquals" locator1="Portlet#HEADER" value1="Kaleo Designer" />
+		<execute function="AssertTextEquals" locator1="Portlet#HEADER" value1="Workflow" />
 
 		<execute macro="ProductMenuHelper#closeProductMenu" />
 
@@ -763,7 +763,7 @@
 		</execute>
 	</command>
 
-	<command name="DeleteWorkflowDefinitionDraftViaKDCP" priority="3">
+	<command name="DeleteWorkflowDefinitionDraft" priority="3">
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Configuration" />
 			<var name="panel" value="Control Panel" />
@@ -1608,7 +1608,7 @@
 		<execute macro="Workflow#saveDefinition" />
 	</command>
 
-	<command name="ViewAndPublishWorkflowDefinitionDraftViaKDCP" priority="4">
+	<command name="ViewAndPublishWorkflowDefinitionDraft" priority="4">
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Configuration" />
 			<var name="panel" value="Control Panel" />
@@ -1755,7 +1755,7 @@
 		<execute macro="KaleoFormsAdmin#viewNoUnpublishedWorkflowDefinitions" />
 	</command>
 
-	<command name="ViewWorkflowDefinitionButtonsViaWorkflowCP" priority="2">
+	<command name="ViewWorkflowDefinitionButtons" priority="2">
 		<description message="This is a use case for LPS-47352 and LPS-48912." />
 
 		<execute macro="ProductMenu#gotoPortlet">
