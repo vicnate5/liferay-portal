@@ -764,22 +764,6 @@
 		<execute function="AssertTextEquals" locator1="KaleoDesignerEditWorkflow#SETTINGS_TYPE" value1="${nodeType}" />
 	</command>
 
-	<command name="viewNoWorkflowDefinitionsViaKDCP">
-		<var name="key_workflowDefinitionTitle" value="Single Approver" />
-
-		<if>
-			<condition function="IsElementPresent" locator1="KaleoDesigner#DEFINITION_TABLE_TITLE" />
-			<then>
-				<execute macro="Workflow#viewDefinitionPublished">
-					<var name="workflowDefinitionTitle" value="Single Approver" />
-				</execute>
-			</then>
-			<else>
-				<execute function="AssertTextEquals" locator1="KaleoDesigner#INFO_MESSAGE" value1="No workflow definitions are defined." />
-			</else>
-		</if>
-	</command>
-
 	<command name="viewSourceXMLLine">
 		<execute macro="KaleoDesigner#viewSourceXMLTab" />
 

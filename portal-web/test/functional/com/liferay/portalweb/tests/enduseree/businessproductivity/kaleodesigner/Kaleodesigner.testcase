@@ -792,7 +792,9 @@
 			<var name="workflowDefinitionTitle" value="New Workflow Definition" />
 		</execute>
 
-		<execute macro="KaleoDesigner#viewNoWorkflowDefinitionsViaKDCP" />
+		<execute macro="Workflow#viewDefinitionNotPresent">
+			<var name="workflowDefinitionTitle" value="New Workflow Definition" />
+		</execute>
 	</command>
 
 	<command name="EditAssignmentsForTaskNodeKDCP" priority="5">

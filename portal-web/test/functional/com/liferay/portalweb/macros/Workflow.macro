@@ -989,6 +989,12 @@
 		</if>
 	</command>
 
+	<command name="viewDefinitionNotPresent">
+		<execute function="AssertElementNotPresent" locator1="WorkflowDefinition#DEFINITION_TABLE_TITLE" value1="${workflowDefinitionTitle}">
+			<var name="key_workflowDefinitionTitle" value="${workflowDefinitionTitle}" />
+		</execute>
+	</command>
+
 	<command name="viewDefinitionPublicationStatus">
 		<execute function="AssertTextEquals" locator1="WorkflowDefinition#PUBLICATION_STATUS" value1="${status}" />
 	</command>
