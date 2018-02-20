@@ -1762,7 +1762,7 @@
 		</execute>
 
 		<execute macro="KaleoDesigner#viewButtons">
-			<var name="cancelButton" value="true" />
+			<var name="gotoBack" value="true" />
 		</execute>
 
 		<execute function="SelectFrameTop" />

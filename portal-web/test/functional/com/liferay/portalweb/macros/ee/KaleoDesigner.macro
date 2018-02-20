@@ -551,11 +551,9 @@
 		<execute function="AssertTextEquals" locator1="KaleoDesigner#SAVE_BUTTON" value1="Save" />
 
 		<if>
-			<equals arg1="${cancelButton}" arg2="true" />
+			<equals arg1="${gotoBack}" arg2="true" />
 			<then>
-				<execute function="AssertTextEquals" locator1="Button#CANCEL" value1="Cancel" />
-
-				<execute function="AssertClick" locator1="Button#CANCEL" value1="Cancel" />
+				<execute macro="Navigator#gotoBack" />
 			</then>
 		</if>
 	</command>
