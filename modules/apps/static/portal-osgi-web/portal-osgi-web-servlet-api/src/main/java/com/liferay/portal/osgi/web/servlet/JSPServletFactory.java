@@ -12,30 +12,15 @@
  * details.
  */
 
-package com.liferay.apio.architect.wiring.osgi.internal.manager.base;
+package com.liferay.portal.osgi.web.servlet;
 
-import org.osgi.framework.ServiceReference;
+import javax.servlet.Servlet;
 
 /**
- * Manages services that have a generic type. No transformations are performed
- * on the stored services.
- *
- * @author Alejandro Hernández
+ * @author Preston Crary
  */
-public abstract class SimpleBaseManager<T> extends BaseManager<T, T> {
+public interface JSPServletFactory {
 
-	public SimpleBaseManager(Class<T> managedClass) {
-		super(managedClass);
-	}
-
-	@Override
-	public Integer getPrincipalTypeParamPosition() {
-		return 0;
-	}
-
-	@Override
-	public T map(T t, ServiceReference<T> serviceReference, Class<?> clazz) {
-		return t;
-	}
+	public Servlet createJSPServlet();
 
 }

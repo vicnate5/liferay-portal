@@ -12,50 +12,61 @@
  * details.
  */
 
-package com.liferay.apio.architect.wiring.osgi.internal.service.reference.mapper;
+package com.liferay.apio.architect.wiring.osgi.internal.manager.base;
 
 import static com.liferay.apio.architect.wiring.osgi.internal.manager.TypeArgumentProperties.KEY_PRINCIPAL_TYPE_ARGUMENT;
 import static com.liferay.apio.architect.wiring.osgi.internal.manager.util.ManagerUtil.getGenericClassFromPropertyOrElse;
 import static com.liferay.apio.architect.wiring.osgi.internal.manager.util.ManagerUtil.getTypeParamOrFail;
 
-import com.liferay.osgi.service.tracker.collections.map.ServiceReferenceMapper;
+import com.liferay.osgi.service.tracker.collections.map.ServiceReferenceMapper.Emitter;
 
-import org.osgi.framework.BundleContext;
+import java.util.Optional;
+
 import org.osgi.framework.ServiceReference;
 
 /**
- * An implementation of a {@code ServiceReferenceMapper} that emits the first
- * generic type parameter class's name as the key.
+ * Manages services that have a generic type using the class name of the generic
+ * type as key.
  *
  * @author Alejandro Hernández
+ * @review
  */
-public class CustomServiceReferenceMapper<T>
-	implements ServiceReferenceMapper<String, T> {
+public abstract class ClassNameBaseManager<T> extends BaseManager<T, String> {
 
-	public CustomServiceReferenceMapper(
-		BundleContext bundleContext, Class<T> clazz,
-		Integer typeParamPosition) {
+	public ClassNameBaseManager(
+		Class<T> managedClass, Integer principalTypeParamPosition) {
 
-		_bundleContext = bundleContext;
-		_clazz = clazz;
-		_typeParamPosition = typeParamPosition;
+		super(managedClass);
+		_managedClass = managedClass;
+		_principalTypeParamPosition = principalTypeParamPosition;
 	}
 
-	@Override
-	public void map(
+	protected void emit(
 		ServiceReference<T> serviceReference, Emitter<String> emitter) {
 
-		T t = _bundleContext.getService(serviceReference);
+		T t = bundleContext.getService(serviceReference);
 
 		Class<?> genericClass = getGenericClassFromPropertyOrElse(
 			serviceReference, KEY_PRINCIPAL_TYPE_ARGUMENT,
-			() -> getTypeParamOrFail(t, _clazz, _typeParamPosition));
+			() -> getTypeParamOrFail(
+				t, _managedClass, _principalTypeParamPosition));
 
 		emitter.emit(genericClass.getName());
 	}
 
-	private final BundleContext _bundleContext;
-	private final Class<T> _clazz;
-	private final Integer _typeParamPosition;
+	/**
+	 * Returns a service from the inner map based on the service's generic inner
+	 * class, if the service exists. Returns {@code Optional#empty()} otherwise.
+	 *
+	 * @param  clazz the generic inner class
+	 * @return the service, if present; {@code Optional#empty()} otherwise
+	 */
+	protected <V> Optional<T> getServiceOptional(Class<V> clazz) {
+		return Optional.ofNullable(
+			serviceTrackerMap.getService(clazz.getName()));
+	}
+
+	private final Class<T> _managedClass;
+	private final Integer _principalTypeParamPosition;
 
 }
