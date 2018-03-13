@@ -2034,7 +2034,10 @@ public class DLFileEntryLocalServiceImpl
 						WorkflowConstants.STATUS_APPROVED);
 
 				if (!approvedFileVersions.isEmpty()) {
-					newVersion = approvedFileVersions.get(0).getVersion();
+					DLFileVersion firstApprovedFileVersion =
+						approvedFileVersions.get(0);
+
+					newVersion = firstApprovedFileVersion.getVersion();
 				}
 
 				dlFileEntry.setVersion(newVersion);
@@ -2779,8 +2782,9 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		throw new InvalidFileEntryTypeException(
-			"Invalid file entry type " + fileEntryTypeId + " for folder " +
-				folderId);
+			StringBundler.concat(
+				"Invalid file entry type ", String.valueOf(fileEntryTypeId),
+				" for folder ", String.valueOf(folderId)));
 	}
 
 	protected void validateFileExtension(String extension)

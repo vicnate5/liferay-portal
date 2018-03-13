@@ -35,7 +35,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
 
@@ -126,7 +125,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		TABLE_COLUMNS_MAP.put("active_", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table MBMailingList (uuid_ VARCHAR(75) null,mailingListId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,emailAddress VARCHAR(75) null,inProtocol VARCHAR(75) null,inServerName VARCHAR(75) null,inServerPort INTEGER,inUseSSL BOOLEAN,inUserName VARCHAR(75) null,inPassword VARCHAR(75) null,inReadInterval INTEGER,outEmailAddress VARCHAR(75) null,outCustom BOOLEAN,outServerName VARCHAR(75) null,outServerPort INTEGER,outUseSSL BOOLEAN,outUserName VARCHAR(75) null,outPassword VARCHAR(75) null,allowAnonymous BOOLEAN,active_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table MBMailingList (uuid_ VARCHAR(75) null,mailingListId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,emailAddress VARCHAR(254) null,inProtocol VARCHAR(75) null,inServerName VARCHAR(75) null,inServerPort INTEGER,inUseSSL BOOLEAN,inUserName VARCHAR(75) null,inPassword VARCHAR(75) null,inReadInterval INTEGER,outEmailAddress VARCHAR(254) null,outCustom BOOLEAN,outServerName VARCHAR(75) null,outServerPort INTEGER,outUseSSL BOOLEAN,outUserName VARCHAR(75) null,outPassword VARCHAR(75) null,allowAnonymous BOOLEAN,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table MBMailingList";
 	public static final String ORDER_BY_JPQL = " ORDER BY mbMailingList.mailingListId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY MBMailingList.mailingListId ASC";
@@ -383,7 +382,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	@Override
 	public String getUuid() {
 		if (_uuid == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _uuid;
@@ -475,7 +474,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 			return user.getUuid();
 		}
 		catch (PortalException pe) {
-			return StringPool.BLANK;
+			return "";
 		}
 	}
 
@@ -486,7 +485,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	@Override
 	public String getUserName() {
 		if (_userName == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _userName;
@@ -549,7 +548,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	@Override
 	public String getEmailAddress() {
 		if (_emailAddress == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _emailAddress;
@@ -564,7 +563,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	@Override
 	public String getInProtocol() {
 		if (_inProtocol == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _inProtocol;
@@ -579,7 +578,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	@Override
 	public String getInServerName() {
 		if (_inServerName == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _inServerName;
@@ -619,7 +618,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	@Override
 	public String getInUserName() {
 		if (_inUserName == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _inUserName;
@@ -634,7 +633,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	@Override
 	public String getInPassword() {
 		if (_inPassword == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _inPassword;
@@ -659,7 +658,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	@Override
 	public String getOutEmailAddress() {
 		if (_outEmailAddress == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _outEmailAddress;
@@ -689,7 +688,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	@Override
 	public String getOutServerName() {
 		if (_outServerName == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _outServerName;
@@ -729,7 +728,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	@Override
 	public String getOutUserName() {
 		if (_outUserName == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _outUserName;
@@ -744,7 +743,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	@Override
 	public String getOutPassword() {
 		if (_outPassword == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _outPassword;

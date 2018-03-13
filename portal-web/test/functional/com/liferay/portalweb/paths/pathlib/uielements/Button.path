@@ -50,7 +50,7 @@
 </tr>
 <tr>
 	<td>ADD_ENTRY</td>
-	<td>//button[contains(.,'Add Entry')]</td>
+	<td>//button[contains(.,'Add Entry')]|//a[@data-original-title='Add Entry']</td>
 	<td></td>
 </tr>
 <tr>
@@ -134,6 +134,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>ADVANCED_REPLY</td>
+	<td>//button/span[contains(.,'Advanced Reply')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ANY</td>
+	<td>//a[normalize-space()='${key_text}']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>APPLY_EFFECTS</td>
 	<td>//div[contains(@class,'controls-container') and contains(@class,'open')]//button[contains(@class,'btn') and contains(.,'Apply')]</td>
 	<td></td>
@@ -150,7 +160,7 @@
 </tr>
 <tr>
 	<td>BROWSE</td>
-	<td>//input[contains(@id,'fileName')]</td>
+	<td>//input[contains(@id,'file')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -181,11 +191,6 @@
 <tr>
 	<td>CHANGE</td>
 	<td>//button[contains(.,'Change')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>CHANGE_LOGO</td>
-	<td>//button[contains(@class,'edit-logo')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -284,6 +289,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>CREATE_CERTIFICATE</td>
+	<td>//button[contains(.,'Create Certificate')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>DEACTIVATE</td>
 	<td>//*[@data-qa-id='deactivateButton'] | //button[contains(.,'Deactivate')]</td>
 	<td></td>
@@ -324,6 +334,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>DOWNLOAD_CERTIFICATE</td>
+	<td>//a[contains(.,'Download Certificate')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>EDIT</td>
 	<td>//a[contains(@class,'btn') and contains(.,'Edit')] | //a[contains(@id,'edit') and contains(@class,'btn')] | //button[contains(.,'Edit')]</td>
 	<td></td>
@@ -360,7 +375,7 @@
 </tr>
 <tr>
 	<td>FILTER_EFFECT</td>
-	<td>//a[@class='btn' and (@data-control='effects')]//*[name()='svg'][contains(@class,'lexicon-icon')]</td>
+	<td>//a[contains(@class,'btn') and (@data-control='effects')]//*[name()='svg'][contains(@class,'lexicon-icon')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -514,11 +529,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>PUBLISH_TO_LIVE</td>
-	<td>//button[contains(.,'Publish to Live')]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>RECYCLE_BIN</td>
 	<td>//a[@data-qa-id='recycle-binButton']</td>
 	<td></td>
@@ -546,6 +556,11 @@
 <tr>
 	<td>REORDER</td>
 	<td>//button[span[@class='icon-bar'][3]]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>REPLACE_CERTIFICATE</td>
+	<td>//button[contains(.,'Replace Certificate')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -706,6 +721,11 @@
 <tr>
 	<td>SUBMIT</td>
 	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TAB_SUBMIT_BTN</td>
+	<td>//button[contains(@type,'submit') and contains(.,'${key_tab}')]</td>
 	<td></td>
 </tr>
 <tr>

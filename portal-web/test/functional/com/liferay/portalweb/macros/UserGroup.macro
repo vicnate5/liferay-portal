@@ -2,7 +2,7 @@
 	<command name="addCP">
 		<var name="key_userGroupName" value="${userGroupName}" />
 
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="PortletEntry#inputName">
 			<var name="name" value="${userGroupName}" />
@@ -119,7 +119,7 @@
 			<var name="key_menuItem" value="Assign Members" />
 		</execute>
 
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="IFrame#selectDialogFrame" />
 
@@ -151,7 +151,7 @@
 
 		<execute function="AssertVisible" locator1="NavBar#USERS" />
 
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute function="AssertElementPresent#assertVisible" locator1="Button#ADD" />
 
@@ -199,7 +199,7 @@
 
 		<execute macro="Alert#viewSuccessMessage" />
 
-		<execute function="AssertElementNotPresent" locator1="UserGroups#USER_GROUP_TABLE_NAME" value1="${userGroupName}" />
+		<execute function="AssertElementNotPresent" locator1="UserGroups#USER_GROUP_TABLE_NAME" />
 	</command>
 
 	<command name="deleteUserCP">
@@ -240,19 +240,6 @@
 		</execute>
 
 		<execute macro="PortletEntry#save" />
-	</command>
-
-	<command name="expandRootCP">
-		<execute function="Click" locator1="SitePages#PAGE_TREE_ROOT_ARROW" />
-
-		<execute function="AssertElementPresent#assertElementPresent" locator1="SitePages#PAGE_TREE_PAGE_EDIT_COG" />
-
-		<if>
-			<condition function="IsElementNotPresent#isNotVisible" locator1="Sitepages#PAGE_TREE_PAGE_EDIT_COG" />
-			<then>
-				<execute function="Click" locator1="SitePages#PAGE_TREE_ROOT_ARROW" />
-			</then>
-		</if>
 	</command>
 
 	<command name="gotoActionsCmd">
@@ -328,7 +315,9 @@
 	</command>
 
 	<command name="tearDownCP">
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="User Groups" />
 		</execute>
 
@@ -418,9 +407,9 @@
 	<command name="viewPortletCP">
 		<execute function="AssertElementPresent" locator1="Button#PLUS" />
 		<execute function="AssertElementPresent" locator1="TextInput#SEARCH" />
-		<execute function="AssertElementPresent" locator1="Button#SUBMIT" value1="Search" />
+		<execute function="AssertElementPresent" locator1="Button#SUBMIT" />
 		<execute function="AssertElementPresent" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
-		<execute function="AssertElementPresent" locator1="Message#EMPTY_INFO" value1="No user groups were found." />
+		<execute function="AssertElementPresent" locator1="Message#EMPTY_INFO" />
 	</command>
 
 	<command name="viewRemoveMemberCP">

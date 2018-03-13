@@ -15,6 +15,7 @@
 package com.liferay.portlet.trash.util;
 
 import com.liferay.document.library.kernel.store.DLStoreUtil;
+import com.liferay.petra.string.CharPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -38,7 +39,6 @@ import com.liferay.portal.kernel.trash.TrashHandler;
 import com.liferay.portal.kernel.trash.TrashHandlerRegistryUtil;
 import com.liferay.portal.kernel.trash.TrashRenderer;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -294,8 +294,9 @@ public class TrashImpl implements Trash {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to find trash entry for " + entryClassName +
-							" with primary key " + classPK);
+						StringBundler.concat(
+							"Unable to find trash entry for ", entryClassName,
+							" with primary key ", String.valueOf(classPK)));
 				}
 			}
 		}
@@ -407,7 +408,7 @@ public class TrashImpl implements Trash {
 			return StringPool.BLANK;
 		}
 
-		return title.substring(index + 1, title.length());
+		return title.substring(index + 1);
 	}
 
 	@Override

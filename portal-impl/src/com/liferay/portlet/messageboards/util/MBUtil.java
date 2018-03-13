@@ -26,6 +26,8 @@ import com.liferay.message.boards.kernel.model.MBThread;
 import com.liferay.message.boards.kernel.service.MBCategoryLocalServiceUtil;
 import com.liferay.message.boards.kernel.service.MBMessageLocalServiceUtil;
 import com.liferay.message.boards.kernel.service.MBThreadLocalServiceUtil;
+import com.liferay.petra.mail.JavaMailUtil;
+import com.liferay.petra.string.CharPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -61,7 +63,6 @@ import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.transaction.TransactionCommitCallbackUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -76,7 +77,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.MBGroupServiceSettings;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
-import com.liferay.util.mail.JavaMailUtil;
 
 import java.io.InputStream;
 
@@ -479,9 +479,10 @@ public class MBUtil {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Message boards search index is stale and contains " +
-							"entry {className=" + entryClassName + ", " +
-								"classPK=" + entryClassPK + "}");
+						StringBundler.concat(
+							"Message boards search index is stale and ",
+							"contains entry {className=", entryClassName, ", ",
+							"classPK=", String.valueOf(entryClassPK), "}"));
 				}
 
 				continue;
@@ -1015,14 +1016,14 @@ public class MBUtil {
 	}
 
 	private static String[] _getMessageIdStringParts(String messageIdString) {
-		int pos = messageIdString.indexOf(CharPool.AT);
+		int start =
+			messageIdString.indexOf(MBUtil.MESSAGE_POP_PORTLET_PREFIX) +
+				MBUtil.MESSAGE_POP_PORTLET_PREFIX.length();
+
+		int end = messageIdString.indexOf(CharPool.AT);
 
 		return StringUtil.split(
-			messageIdString.substring(
-				MBUtil.MESSAGE_POP_PORTLET_PREFIX.length() +
-					getMessageIdStringOffset(),
-				pos),
-			CharPool.PERIOD);
+			messageIdString.substring(start, end), CharPool.PERIOD);
 	}
 
 	private static String _getParentMessageIdFromSubject(Message message)

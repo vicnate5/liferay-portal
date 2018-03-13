@@ -1,5 +1,6 @@
 <definition component-name="portal-web-forms-and-data-lists">
 	<property name="portal.release" value="true" />
+	<property name="portal.upstream" value="true" />
 	<property name="testray.main.component.name" value="Dynamic Data Lists" />
 
 	<set-up>
@@ -29,7 +30,9 @@
 	<command name="ViewCacheableCheckbox" priority="4">
 		<description message="This is a use case for LPS-67094." />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 
@@ -50,7 +53,9 @@
 			<var name="structureName" value="WC Structure Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 
@@ -70,9 +75,11 @@
 			<var name="templateLanguage" value="ftl" />
 		</execute>
 
-		<execute macro="WebContentStructures#saveCP" />
+		<execute macro="DDLDataDefinition#save" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 
@@ -90,7 +97,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 
@@ -125,9 +134,8 @@
 			<var name="pageName" value="Test Page" />
 		</execute>
 
-		<execute macro="Portlet#gotoPortletOptions">
-			<var name="portletName" value="Web Content Display" />
-			<var name="portletOption" value="Edit Template" />
+		<execute macro="WebContentNavigator#gotoLocalizedEditPGViaWCD" >
+			<var name="localizedPortletOption" value="Edit Template" />
 		</execute>
 
 		<execute macro="IFrame#selectDialogFrame" />

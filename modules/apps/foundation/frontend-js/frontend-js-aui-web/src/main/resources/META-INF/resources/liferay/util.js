@@ -32,6 +32,7 @@
 
 	var TPL_LEXICON_ICON = '<svg class="lexicon-icon lexicon-icon-{0} {1}" focusable="false" role="image">' +
 			'<use data-href="' + themeDisplay.getPathThemeImages() + '/lexicon/icons.svg#{0}" />' +
+			'<title>{0}</title>'
 		'</svg>';
 
 	var Window = {
@@ -1137,7 +1138,7 @@
 
 				var singleSubmit = event.singleSubmit;
 
-				var inputs = form.all('input[type=button], input[type=image], input[type=reset], input[type=submit]');
+				var inputs = form.all('button[type=submit], input[type=button], input[type=image], input[type=reset], input[type=submit]');
 
 				Util.disableFormButtons(inputs, form);
 

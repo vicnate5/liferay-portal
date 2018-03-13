@@ -80,6 +80,8 @@ public abstract class UpgradeProcess
 	public void upgrade() throws UpgradeException {
 		long start = System.currentTimeMillis();
 
+		String message = "Completed upgrade process ";
+
 		if (_log.isInfoEnabled()) {
 			_log.info("Upgrading " + ClassUtil.getClassName(this));
 		}
@@ -89,17 +91,20 @@ public abstract class UpgradeProcess
 
 			doUpgrade();
 		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
+		catch (Throwable t) {
+			message = "Failed upgrade process ";
+
+			throw new UpgradeException(t);
 		}
 		finally {
 			connection = null;
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Completed upgrade process " +
-						ClassUtil.getClassName(this) + " in " +
-							(System.currentTimeMillis() - start) + "ms");
+					StringBundler.concat(
+						message, ClassUtil.getClassName(this), " in ",
+						String.valueOf(System.currentTimeMillis() - start),
+						"ms"));
 			}
 		}
 	}
@@ -343,9 +348,7 @@ public abstract class UpgradeProcess
 		throws Exception {
 
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			Field tableNameField = tableClass.getField("TABLE_NAME");
-
-			String tableName = (String)tableNameField.get(null);
+			String tableName = getTableName(tableClass);
 
 			DatabaseMetaData databaseMetaData = connection.getMetaData();
 			DBInspector dbInspector = new DBInspector(connection);
@@ -398,8 +401,9 @@ public abstract class UpgradeProcess
 
 						if (alterable.shouldDropIndex(entry.getValue())) {
 							runSQL(
-								"drop index " + entry.getKey() + " on " +
-									tableName);
+								StringBundler.concat(
+									"drop index ", entry.getKey(), " on ",
+									tableName));
 						}
 					}
 
@@ -526,6 +530,12 @@ public abstract class UpgradeProcess
 		return _portalIndexesSQL.get(tableName);
 	}
 
+	protected String getTableName(Class<?> tableClass) throws Exception {
+		Field tableNameField = tableClass.getField("TABLE_NAME");
+
+		return (String)tableNameField.get(null);
+	}
+
 	protected long increment() {
 		DB db = DBManagerUtil.getDB();
 
@@ -570,8 +580,7 @@ public abstract class UpgradeProcess
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             DBInspector#normalizeName(java.lang.String,
-	 *             DatabaseMetaData)}
+	 *             DBInspector#normalizeName(String, DatabaseMetaData)}
 	 */
 	@Deprecated
 	protected String normalizeName(

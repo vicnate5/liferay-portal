@@ -14,15 +14,14 @@
 
 package com.liferay.wiki.web.internal.portlet.configuration.icon;
 
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.configuration.icon.BasePortletConfigurationIcon;
 import com.liferay.portal.kernel.portlet.configuration.icon.PortletConfigurationIcon;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.trash.kernel.util.TrashUtil;
 import com.liferay.wiki.constants.WikiPortletKeys;
@@ -130,20 +129,8 @@ public class DeletePagePortletConfigurationIcon
 		try {
 			WikiPage page = ActionUtil.getPage(portletRequest);
 
-			if (!page.isDraft() &&
-				WikiPagePermissionChecker.contains(
-					themeDisplay.getPermissionChecker(), page.getNodeId(),
-					HtmlUtil.unescape(page.getTitle()), ActionKeys.DELETE)) {
-
-				return true;
-			}
-			else if (page.isDraft() &&
-					 WikiPagePermissionChecker.contains(
-						 themeDisplay.getPermissionChecker(), page,
-						 ActionKeys.DELETE)) {
-
-				return true;
-			}
+			return WikiPagePermissionChecker.contains(
+				themeDisplay.getPermissionChecker(), page, ActionKeys.DELETE);
 		}
 		catch (Exception e) {
 		}

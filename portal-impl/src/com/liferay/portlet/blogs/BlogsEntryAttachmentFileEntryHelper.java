@@ -204,8 +204,9 @@ public class BlogsEntryAttachmentFileEntryHelper {
 		}
 
 		throw new PortalException(
-			"Unable to get a unique file name for " + fileName + " in folder " +
-				folderId);
+			StringBundler.concat(
+				"Unable to get a unique file name for ", fileName,
+				" in folder ", String.valueOf(folderId)));
 	}
 
 	private FileEntry _fetchPortletFileEntry(

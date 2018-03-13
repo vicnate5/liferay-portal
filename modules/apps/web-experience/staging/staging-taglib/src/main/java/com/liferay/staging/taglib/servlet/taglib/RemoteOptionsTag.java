@@ -48,6 +48,8 @@ public class RemoteOptionsTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_disableInputs = false;
 		_exportImportConfigurationId = 0;
 		_privateLayout = false;

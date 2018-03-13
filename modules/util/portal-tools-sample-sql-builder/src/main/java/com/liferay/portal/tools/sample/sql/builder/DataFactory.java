@@ -23,13 +23,14 @@ import com.liferay.asset.kernel.model.AssetTagModel;
 import com.liferay.asset.kernel.model.AssetTagStatsModel;
 import com.liferay.asset.kernel.model.AssetVocabulary;
 import com.liferay.asset.kernel.model.AssetVocabularyModel;
+import com.liferay.blogs.constants.BlogsPortletKeys;
 import com.liferay.blogs.kernel.model.BlogsEntry;
 import com.liferay.blogs.kernel.model.BlogsEntryModel;
 import com.liferay.blogs.kernel.model.BlogsStatsUserModel;
-import com.liferay.blogs.web.constants.BlogsPortletKeys;
 import com.liferay.counter.kernel.model.Counter;
 import com.liferay.counter.kernel.model.CounterModel;
 import com.liferay.counter.model.impl.CounterModelImpl;
+import com.liferay.document.library.constants.DLPortletKeys;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.model.DLFileEntryConstants;
 import com.liferay.document.library.kernel.model.DLFileEntryMetadata;
@@ -40,7 +41,6 @@ import com.liferay.document.library.kernel.model.DLFileEntryTypeModel;
 import com.liferay.document.library.kernel.model.DLFileVersionModel;
 import com.liferay.document.library.kernel.model.DLFolder;
 import com.liferay.document.library.kernel.model.DLFolderModel;
-import com.liferay.document.library.web.constants.DLPortletKeys;
 import com.liferay.dynamic.data.lists.constants.DDLPortletKeys;
 import com.liferay.dynamic.data.lists.model.DDLRecordConstants;
 import com.liferay.dynamic.data.lists.model.DDLRecordModel;
@@ -85,7 +85,6 @@ import com.liferay.journal.model.impl.JournalArticleModelImpl;
 import com.liferay.journal.model.impl.JournalArticleResourceModelImpl;
 import com.liferay.journal.model.impl.JournalContentSearchModelImpl;
 import com.liferay.journal.social.JournalActivityKeys;
-import com.liferay.login.web.constants.LoginPortletKeys;
 import com.liferay.message.boards.kernel.model.MBCategory;
 import com.liferay.message.boards.kernel.model.MBCategoryConstants;
 import com.liferay.message.boards.kernel.model.MBCategoryModel;
@@ -100,6 +99,8 @@ import com.liferay.message.boards.kernel.model.MBThread;
 import com.liferay.message.boards.kernel.model.MBThreadFlagModel;
 import com.liferay.message.boards.kernel.model.MBThreadModel;
 import com.liferay.message.boards.web.constants.MBPortletKeys;
+import com.liferay.petra.string.CharPool;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.io.OutputStreamWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
@@ -142,7 +143,6 @@ import com.liferay.portal.kernel.security.auth.FullNameGeneratorFactory;
 import com.liferay.portal.kernel.service.permission.PortletPermissionUtil;
 import com.liferay.portal.kernel.template.TemplateConstants;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
@@ -152,7 +152,6 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Time;
@@ -852,7 +851,9 @@ public class DataFactory {
 				assetTagModel.setUserName(_SAMPLE_USER_NAME);
 				assetTagModel.setCreateDate(new Date());
 				assetTagModel.setModifiedDate(new Date());
-				assetTagModel.setName("TestTag_" + i + "_" + j);
+				assetTagModel.setName(
+					StringBundler.concat(
+						"TestTag_", String.valueOf(i), "_", String.valueOf(j)));
 				assetTagModel.setLastPublishDate(new Date());
 
 				assetTagModels.add(assetTagModel);
@@ -999,9 +1000,10 @@ public class DataFactory {
 
 		outputDir.mkdirs();
 
-		for (String csvFileName : StringUtil.split(
-				properties.getProperty("sample.sql.output.csv.file.names"))) {
+		String[] csvFileNames = StringUtil.split(
+			properties.getProperty("sample.sql.output.csv.file.names"));
 
+		for (String csvFileName : csvFileNames) {
 			_csvWriters.put(
 				csvFileName,
 				new UnsyncBufferedWriter(
@@ -1445,7 +1447,7 @@ public class DataFactory {
 	public DDMStructureLayoutModel newDDLDDMStructureLayoutModel(
 		long groupId, DDMStructureVersionModel ddmStructureVersionModel) {
 
-		StringBundler sb = new StringBundler(4 + _maxDDLCustomFieldCount * 4);
+		StringBundler sb = new StringBundler(3 + _maxDDLCustomFieldCount * 4);
 
 		sb.append("{\"defaultLanguageId\": \"en_US\", \"pages\": [{\"rows\": ");
 		sb.append("[");
@@ -1476,9 +1478,8 @@ public class DataFactory {
 		sb.append("\"defaultLanguageId\": \"en_US\", \"fields\": [");
 
 		for (int i = 0; i < _maxDDLCustomFieldCount; i++) {
-			sb.append(
-				"{\"dataType\": \"string\", \"indexType\": \"keyword\", ");
-			sb.append("\"label\": {\"en_US\": \"Text");
+			sb.append("{\"dataType\": \"string\", \"indexType\": ");
+			sb.append("\"keyword\", \"label\": {\"en_US\": \"Text");
 			sb.append(i);
 			sb.append("\"}, \"name\": \"");
 			sb.append(nextDDLCustomFieldName(groupId, i));
@@ -1499,8 +1500,8 @@ public class DataFactory {
 			"Test DDM Structure", sb.toString());
 	}
 
-	public List<PortletPreferencesModel>
-		newDDLPortletPreferencesModels(long plid) {
+	public List<PortletPreferencesModel> newDDLPortletPreferencesModels(
+		long plid) {
 
 		List<PortletPreferencesModel> portletPreferencesModels =
 			new ArrayList<>(3);
@@ -1931,8 +1932,8 @@ public class DataFactory {
 		return journalContentSearchModel;
 	}
 
-	public List<PortletPreferencesModel>
-		newJournalPortletPreferencesModels(long plid) {
+	public List<PortletPreferencesModel> newJournalPortletPreferencesModels(
+		long plid) {
 
 		return Collections.singletonList(
 			newPortletPreferencesModel(
@@ -2325,7 +2326,8 @@ public class DataFactory {
 
 		layoutModels.add(
 			newLayoutModel(
-				groupId, "welcome", LoginPortletKeys.LOGIN + ",",
+				groupId, "welcome",
+				"com_liferay_login_web_portlet_LoginPortlet,",
 				"com_liferay_hello_world_web_portlet_HelloWorldPortlet,"));
 		layoutModels.add(
 			newLayoutModel(groupId, "blogs", "", BlogsPortletKeys.BLOGS + ","));

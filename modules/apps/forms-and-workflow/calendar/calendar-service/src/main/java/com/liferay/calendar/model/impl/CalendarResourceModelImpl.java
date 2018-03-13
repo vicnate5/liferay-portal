@@ -40,7 +40,6 @@ import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
@@ -373,7 +372,7 @@ public class CalendarResourceModelImpl extends BaseModelImpl<CalendarResource>
 	@Override
 	public String getUuid() {
 		if (_uuid == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _uuid;
@@ -469,7 +468,7 @@ public class CalendarResourceModelImpl extends BaseModelImpl<CalendarResource>
 			return user.getUuid();
 		}
 		catch (PortalException pe) {
-			return StringPool.BLANK;
+			return "";
 		}
 	}
 
@@ -481,7 +480,7 @@ public class CalendarResourceModelImpl extends BaseModelImpl<CalendarResource>
 	@Override
 	public String getUserName() {
 		if (_userName == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _userName;
@@ -547,7 +546,7 @@ public class CalendarResourceModelImpl extends BaseModelImpl<CalendarResource>
 	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
-			return StringPool.BLANK;
+			return "";
 		}
 
 		return PortalUtil.getClassName(getClassNameId());
@@ -614,7 +613,7 @@ public class CalendarResourceModelImpl extends BaseModelImpl<CalendarResource>
 	@Override
 	public String getClassUuid() {
 		if (_classUuid == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _classUuid;
@@ -630,7 +629,7 @@ public class CalendarResourceModelImpl extends BaseModelImpl<CalendarResource>
 	@Override
 	public String getCode() {
 		if (_code == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _code;
@@ -656,7 +655,7 @@ public class CalendarResourceModelImpl extends BaseModelImpl<CalendarResource>
 	@Override
 	public String getName() {
 		if (_name == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _name;
@@ -755,7 +754,7 @@ public class CalendarResourceModelImpl extends BaseModelImpl<CalendarResource>
 	@Override
 	public String getDescription() {
 		if (_description == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _description;
@@ -951,7 +950,7 @@ public class CalendarResourceModelImpl extends BaseModelImpl<CalendarResource>
 		String xml = getName();
 
 		if (xml == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 
 		Locale defaultLocale = LocaleUtil.getSiteDefault();

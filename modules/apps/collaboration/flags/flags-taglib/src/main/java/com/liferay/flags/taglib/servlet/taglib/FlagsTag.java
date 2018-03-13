@@ -58,6 +58,8 @@ public class FlagsTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_className = null;
 		_classPK = 0;
 		_contentTitle = null;

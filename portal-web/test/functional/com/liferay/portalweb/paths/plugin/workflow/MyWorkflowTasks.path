@@ -59,11 +59,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>ASSIGNED_TO_ME_MENULIST_OPTION</td>
-	<td>//a[@role='menuitem' and contains(.,'${key_menuListOption}')]</td>
-	<td></td>
-</tr>
-<tr>
 	<td></td>
 	<td></td>
 	<td></td>
@@ -136,37 +131,16 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--ASSIGNED_TO_ME_MENULIST-->
-<tr>
-	<td>ASSIGNED_TO_ME_MENULIST_APPROVE</td>
-	<td>//a[@role='menuitem' and contains(.,'Approve')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>ASSIGNED_TO_ME_MENULIST_REJECT</td>
-	<td>//a[@role='menuitem' and contains(.,'Reject')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>ASSIGNED_TO_ME_MENULIST_RESUBMIT</td>
-	<td>//a[@role='menuitem' and contains(.,'Resubmit')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>ASSIGNED_TO_ME_MENULIST_UPDATE_DUE_DATE</td>
-	<td>//a[@role='menuitem' and contains(.,'Update Due Date')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
 <!--ASSIGNED_TO_MY_ROLES_TABLE-->
 <tr>
 	<td>ASSIGNED_TO_MY_ROLES_TABLE_ASSET_TITLE</td>
 	<td>//div[contains(@id,'workflowTasksSearchContainerSearchContainer')]//tr[contains(.,'${key_workflowTask}') and contains(.,'${key_workflowAssetTitle}')]/td[1]//a</td>
 	<td></td>
+</tr>
+<tr>
+ 	<td>ASSIGNED_TO_MY_ROLES_TABLE_ASSET_TITLE_DUPLICATE</td>
+ 	<td>//div[contains(@id,'workflowTasksSearchContainerSearchContainer')]//tr[contains(.,'${key_workflowTask}') and contains(.,'${key_workflowAssetTitle}')][2]/td[1]//a</td>
+ 	<td></td>
 </tr>
 <tr>
 	<td>ASSIGNED_TO_MY_ROLES_TABLE_ASSET_TYPE</td>
@@ -191,22 +165,6 @@
 <tr>
 	<td>ASSIGNED_TO_MY_ROLES_TABLE_ACTIONS</td>
 	<td>//div[contains(@id,'workflowTasksSearchContainerSearchContainer')]//tr[contains(.,'${key_workflowTask}') and contains(.,'${key_workflowAssetTitle}')]/td[6]//div/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<!--ASSIGNED_TO_MY_ROLES_MENULIST-->
-<tr>
-	<td>ASSIGNED_TO_MY_ROLES_MENULIST_ASSIGN_TO_ME</td>
-	<td>//a[@role='menuitem' and contains(.,'Assign to Me')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>ASSIGNED_TO_MY_ROLES_MENULIST_UPDATE_DUE_DATE</td>
-	<td>//a[@role='menuitem' and contains(.,'Update Due Date')]</td>
 	<td></td>
 </tr>
 <tr>

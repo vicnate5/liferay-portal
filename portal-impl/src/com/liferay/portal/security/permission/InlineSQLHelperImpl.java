@@ -14,6 +14,7 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.petra.string.CharPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.service.ResourceBlockLocalServiceUtil;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.kernel.service.ResourceTypePermissionLocalServiceUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -583,8 +583,10 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 				catch (PortalException pe) {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"Unable to get resource permissions for " +
-								className + " with group " + groupId,
+							StringBundler.concat(
+								"Unable to get resource permissions for ",
+								className, " with group ",
+								String.valueOf(groupId)),
 							pe);
 					}
 				}
@@ -628,8 +630,9 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Unable to get resource permissions for " + className +
-						" with company " + companyId,
+					StringBundler.concat(
+						"Unable to get resource permissions for ", className,
+						" with company ", String.valueOf(companyId)),
 					pe);
 			}
 		}

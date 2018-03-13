@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.template.TemplateManager;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.template.TemplateResourceLoader;
 import com.liferay.portal.kernel.util.ReflectionUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.template.BaseSingleTemplateManager;
 import com.liferay.portal.template.RestrictedTemplate;
@@ -165,8 +166,9 @@ public class VelocityManager extends BaseSingleTemplateManager {
 				VelocityEngine.RESOURCE_LOADER, "liferay");
 
 			extendedProperties.setProperty(
-				"liferay." + VelocityEngine.RESOURCE_LOADER + "." +
-					VelocityTemplateResourceLoader.class.getName(),
+				StringBundler.concat(
+					"liferay.", VelocityEngine.RESOURCE_LOADER, ".",
+					VelocityTemplateResourceLoader.class.getName()),
 				templateResourceLoader);
 
 			boolean cacheEnabled = false;

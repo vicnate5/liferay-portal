@@ -30,6 +30,8 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.expando.kernel.model.ExpandoColumn;
 import com.liferay.expando.kernel.model.ExpandoColumnConstants;
 import com.liferay.expando.kernel.model.ExpandoValue;
+import com.liferay.petra.string.CharPool;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -37,17 +39,14 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.AssertUtils;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
-import com.liferay.portal.kernel.test.rule.Sync;
-import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.test.ServiceTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
@@ -75,15 +74,12 @@ import org.junit.runner.RunWith;
  * @author Roberto Díaz
  */
 @RunWith(Arquillian.class)
-@Sync
 public class WikiPageLocalServiceTest {
 
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new AggregateTestRule(
-			new LiferayIntegrationTestRule(),
-			SynchronousDestinationTestRule.INSTANCE);
+		new LiferayIntegrationTestRule();
 
 	@Before
 	public void setUp() throws Exception {
@@ -527,44 +523,69 @@ public class WikiPageLocalServiceTest {
 		String[] finalAssetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			WikiPage.class.getName(), renamedPage.getResourcePrimKey());
 
-		Assert.assertArrayEquals(finalAssetTagNames, assetTagNames);
+		Assert.assertArrayEquals(assetTagNames, finalAssetTagNames);
 	}
 
 	@Test
-	public void testRenameNonDefaultVersionPageWithAssetCategories()
+	public void testRenameNondefaultVersionPageWithAssetCategories()
 		throws Exception {
 
-		ServiceContext serviceContext =
+		ServiceContext defaultVersionPageServiceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		AssetVocabulary assetVocabulary = AssetTestUtil.addVocabulary(
 			_group.getGroupId());
 
-		AssetCategory assetCategory1 = AssetTestUtil.addCategory(
-			_group.getGroupId(), assetVocabulary.getVocabularyId());
-		AssetCategory assetCategory2 = AssetTestUtil.addCategory(
-			_group.getGroupId(), assetVocabulary.getVocabularyId());
+		AssetCategory defaultVersionPageAssetCategory =
+			AssetTestUtil.addCategory(
+				_group.getGroupId(), assetVocabulary.getVocabularyId());
+		AssetCategory defaultVersionPageAssetCategory2 =
+			AssetTestUtil.addCategory(
+				_group.getGroupId(), assetVocabulary.getVocabularyId());
 
-		long[] assetCategoryIds = new long[2];
+		long[] defaultVersionPageAssetCategoryIds = new long[2];
 
-		assetCategoryIds[0] = assetCategory1.getCategoryId();
-		assetCategoryIds[1] = assetCategory2.getCategoryId();
+		defaultVersionPageAssetCategoryIds[0] =
+			defaultVersionPageAssetCategory.getCategoryId();
+		defaultVersionPageAssetCategoryIds[1] =
+			defaultVersionPageAssetCategory2.getCategoryId();
 
-		serviceContext.setAssetCategoryIds(assetCategoryIds);
+		defaultVersionPageServiceContext.setAssetCategoryIds(
+			defaultVersionPageAssetCategoryIds);
 
 		WikiPage page = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), _node.getNodeId(),
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(), true,
-			serviceContext);
+			defaultVersionPageServiceContext);
 
-		WikiTestUtil.updatePage(page);
+		ServiceContext nondefaultVersionPageServiceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
-		serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		AssetCategory assetCategory3 = AssetTestUtil.addCategory(
+			_group.getGroupId(), assetVocabulary.getVocabularyId());
+		AssetCategory assetCategory4 = AssetTestUtil.addCategory(
+			_group.getGroupId(), assetVocabulary.getVocabularyId());
+
+		long[] nondefaultVersionPageAssetCategoryIds = new long[2];
+
+		nondefaultVersionPageAssetCategoryIds[0] =
+			assetCategory3.getCategoryId();
+		nondefaultVersionPageAssetCategoryIds[1] =
+			assetCategory4.getCategoryId();
+
+		nondefaultVersionPageServiceContext.setAssetCategoryIds(
+			nondefaultVersionPageAssetCategoryIds);
+
+		WikiTestUtil.updatePage(
+			page, TestPropsValues.getUserId(), StringUtil.randomString(),
+			nondefaultVersionPageServiceContext);
+
+		ServiceContext renamePageServiceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		WikiPageLocalServiceUtil.renamePage(
 			TestPropsValues.getUserId(), _node.getNodeId(), page.getTitle(),
-			"New Title", true, serviceContext);
+			"New Title", true, renamePageServiceContext);
 
 		WikiPage renamedPage = WikiPageLocalServiceUtil.getPage(
 			_node.getNodeId(), "New Title");
@@ -573,39 +594,65 @@ public class WikiPageLocalServiceTest {
 			AssetCategoryLocalServiceUtil.getCategoryIds(
 				WikiPage.class.getName(), renamedPage.getResourcePrimKey());
 
-		Assert.assertArrayEquals(assetCategoryIds, finalAssetCategoryIds);
+		Assert.assertArrayEquals(
+			nondefaultVersionPageAssetCategoryIds, finalAssetCategoryIds);
 	}
 
 	@Test
-	public void testRenameNonDefaultVersionPageWithAssetTags()
+	public void testRenameNondefaultVersionPageWithAssetTags()
 		throws Exception {
 
-		ServiceContext serviceContext =
+		ServiceContext defaultVersionPageServiceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
-		AssetTag assetTag1 = AssetTestUtil.addTag(_group.getGroupId());
-		AssetTag assetTag2 = AssetTestUtil.addTag(_group.getGroupId());
+		AssetTag defaultVersionPageAssetTag1 = AssetTestUtil.addTag(
+			_group.getGroupId());
+		AssetTag defaultVersionPageAssetTag2 = AssetTestUtil.addTag(
+			_group.getGroupId());
 
-		String[] assetTagNames = new String[2];
+		String[] defaultVersionPageAssetTagNames = new String[2];
 
-		assetTagNames[0] = assetTag1.getName();
-		assetTagNames[1] = assetTag2.getName();
+		defaultVersionPageAssetTagNames[0] =
+			defaultVersionPageAssetTag1.getName();
+		defaultVersionPageAssetTagNames[1] =
+			defaultVersionPageAssetTag2.getName();
 
-		serviceContext.setAssetTagNames(assetTagNames);
+		defaultVersionPageServiceContext.setAssetTagNames(
+			defaultVersionPageAssetTagNames);
 
 		WikiPage page = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), _node.getNodeId(),
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(), true,
-			serviceContext);
+			defaultVersionPageServiceContext);
 
-		WikiTestUtil.updatePage(page);
+		ServiceContext nondefaultVersionPageServiceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
-		serviceContext = ServiceContextTestUtil.getServiceContext(
+		AssetTag nondefaultVersionPageAssetTag1 = AssetTestUtil.addTag(
 			_group.getGroupId());
+		AssetTag nondefaultVersionPageAssetTag2 = AssetTestUtil.addTag(
+			_group.getGroupId());
+
+		String[] nondefaultVersionPageAssetTagNames = new String[2];
+
+		nondefaultVersionPageAssetTagNames[0] =
+			nondefaultVersionPageAssetTag1.getName();
+		nondefaultVersionPageAssetTagNames[1] =
+			nondefaultVersionPageAssetTag2.getName();
+
+		nondefaultVersionPageServiceContext.setAssetTagNames(
+			nondefaultVersionPageAssetTagNames);
+
+		WikiTestUtil.updatePage(
+			page, TestPropsValues.getUserId(), StringUtil.randomString(),
+			nondefaultVersionPageServiceContext);
+
+		ServiceContext renamePageServiceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		WikiPageLocalServiceUtil.renamePage(
 			TestPropsValues.getUserId(), _node.getNodeId(), page.getTitle(),
-			"New Title", true, serviceContext);
+			"New Title", true, renamePageServiceContext);
 
 		WikiPage renamedPage = WikiPageLocalServiceUtil.getPage(
 			_node.getNodeId(), "New Title");
@@ -613,7 +660,8 @@ public class WikiPageLocalServiceTest {
 		String[] finalAssetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			WikiPage.class.getName(), renamedPage.getResourcePrimKey());
 
-		Assert.assertArrayEquals(finalAssetTagNames, assetTagNames);
+		Assert.assertArrayEquals(
+			nondefaultVersionPageAssetTagNames, finalAssetTagNames);
 	}
 
 	@Test

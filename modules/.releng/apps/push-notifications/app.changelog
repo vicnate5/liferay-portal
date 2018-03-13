@@ -49,3 +49,21 @@ app.artifacts-2.2.0=\
 app.change.log-2.2.0=LPS-66339 LPS-67102 LPS-68189 LPS-69926 LPS-70692 LPS-71261
 
 app.git.id-2.2.0=7696c2b11bbf98c67574c5536f7232eb4dfd121d
+
+#
+# Liferay App Version 2.2.1
+#
+
+app.artifacts-2.2.1=\
+	com.liferay.push.notifications.api-1.2.2.jar,\
+	com.liferay.push.notifications.sender.android-1.0.6.jar,\
+	com.liferay.push.notifications.sender.apple-1.0.9.jar,\
+	com.liferay.push.notifications.sender.firebase-1.0.4.jar,\
+	com.liferay.push.notifications.sender.microsoft-1.0.5.jar,\
+	com.liferay.push.notifications.sender.sms-1.0.4.jar,\
+	com.liferay.push.notifications.service-1.0.14.jar,\
+	com.liferay.push.notifications.web-1.0.8.jar
+
+app.change.log-2.2.1=LPS-73178 LPS-73967 LPS-74064 LPS-74155 LPS-74306 LPS-74401
+
+app.git.id-2.2.1=f5e42d2bdc50a41d90ef38329f93a9fabd65b453

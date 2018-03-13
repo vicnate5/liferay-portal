@@ -91,7 +91,21 @@ AUI.add(
 						instance.set('bodyContent', fieldTypesListNode);
 					},
 
+					_onFieldTypesModalCloseClick: function() {
+						var instance = this;
+
+						if ((window['last_position_y'])) {
+							window.scroll(0, window['last_position_y']);
+
+							window['last_position_y'] = null;
+						}
+
+						instance.hide();
+					},
+
 					_valueToolbars: function() {
+						var instance = this;
+
 						return {
 							header: [
 								{
@@ -99,7 +113,7 @@ AUI.add(
 									discardDefaultButtonCssClasses: true,
 									labelHTML: Liferay.Util.getLexiconIconTpl('times'),
 									on: {
-										click: A.bind(this._onFieldTypesModalCloseClick, this)
+										click: A.bind(instance._onFieldTypesModalCloseClick, instance)
 									}
 								}
 							]

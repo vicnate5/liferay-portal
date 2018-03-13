@@ -57,6 +57,8 @@ public class CalendarTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_data = null;
 		_day = 0;
 		_headerFormat = null;

@@ -3,6 +3,8 @@ AUI.add(
 	function(A) {
 		var AArray = A.Array;
 
+		var AObject = A.Object;
+
 		var DateMath = A.DataType.DateMath;
 
 		var Lang = A.Lang;
@@ -189,7 +191,7 @@ AUI.add(
 
 				var field = new FieldClass(
 					A.merge(
-						instance.getAttrs(A.Object.keys(DDMPortletSupport.ATTRS)),
+						instance.getAttrs(AObject.keys(DDMPortletSupport.ATTRS)),
 						{
 							container: fieldNode,
 							dataType: fieldDefinition.dataType,
@@ -378,6 +380,36 @@ AUI.add(
 						instance.get('container').remove();
 					},
 
+					addLocaleToLocalizationMap: function(locale) {
+						var instance = this;
+
+						var localizationMap = instance.get('localizationMap');
+
+						if (!localizationMap[locale]) {
+							var predefinedValue = instance.getPredefinedValueByLocale(locale);
+
+							if (predefinedValue) {
+								localizationMap[locale] = predefinedValue;
+							}
+							else {
+								var name = instance.get('name');
+
+								var field = instance.getFieldByNameInFieldDefinition(name);
+
+								if (field && field.type) {
+									var type = field.type;
+
+									if (type === 'radio' || type === 'select') {
+										localizationMap[locale] = instance.getValue();
+									}
+									else {
+										localizationMap[locale] = '';
+									}
+								}
+							}
+						}
+					},
+
 					createField: function(fieldTemplate) {
 						var instance = this;
 
@@ -402,7 +434,7 @@ AUI.add(
 						return field;
 					},
 
-					getDefaulLocale: function() {
+					getDefaultLocale: function() {
 						var instance = this;
 
 						var defaultLocale = themeDisplay.getDefaultLanguageId();
@@ -414,6 +446,25 @@ AUI.add(
 						}
 
 						return defaultLocale;
+					},
+
+					getFieldByNameInFieldDefinition: function(name) {
+						var instance = this;
+
+						var definition = instance.get('definition');
+
+						var fields = [];
+
+						if (definition && definition.fields) {
+							fields = definition.fields;
+						}
+
+						return AArray.find(
+							fields,
+							function(item) {
+								return item.name === name;
+							}
+						);
 					},
 
 					getFieldDefinition: function() {
@@ -470,6 +521,22 @@ AUI.add(
 						return instance.get('container').one('.control-label');
 					},
 
+					getPredefinedValueByLocale: function(locale) {
+						var instance = this;
+
+						var name = instance.get('name');
+
+						var field = instance.getFieldByNameInFieldDefinition(name);
+
+						var predefinedValue;
+
+						if (field && field.predefinedValue && field.predefinedValue[locale]) {
+							predefinedValue = field.predefinedValue[locale];
+						}
+
+						return predefinedValue;
+					},
+
 					getRepeatedSiblings: function() {
 						var instance = this;
 
@@ -522,6 +589,26 @@ AUI.add(
 						instance.get('container').remove(true);
 					},
 
+					removeNotAvailableLocales: function(localizationMap) {
+						var instance = this;
+
+						var parent = instance.get('parent');
+
+						var translationManager = parent.get('translationManager');
+
+						var availableLocales = translationManager.get('availableLocales');
+
+						if (availableLocales.length == 0) {
+							return;
+						}
+
+						for (var localization in localizationMap) {
+							if (availableLocales.indexOf(localization) == -1) {
+								delete localizationMap[localization];
+							}
+						}
+					},
+
 					renderRepeatableUI: function() {
 						var instance = this;
 
@@ -555,7 +642,7 @@ AUI.add(
 						if (labelNode) {
 							var tipNode = labelNode.one('.taglib-icon-help');
 
-							if (Lang.isValue(label) && Lang.isNode(labelNode)) {
+							if (!A.UA.ie && Lang.isValue(label) && Lang.isNode(labelNode)) {
 								labelNode.html(A.Escape.html(label));
 							}
 
@@ -584,7 +671,7 @@ AUI.add(
 					syncLabelUI: function() {
 						var instance = this;
 
-						var defaultLocale = instance.getDefaulLocale();
+						var defaultLocale = instance.getDefaultLocale();
 
 						var fieldDefinition = instance.getFieldDefinition();
 
@@ -674,6 +761,10 @@ AUI.add(
 
 						var value = instance.getValue();
 
+						if (AObject.keys(localizationMap).length != 0) {
+							this.removeNotAvailableLocales(localizationMap);
+						}
+
 						if (instance.get('localizable')) {
 							localizationMap[locale] = value;
 						}
@@ -733,7 +824,7 @@ AUI.add(
 						if (tipNode) {
 							var instance = this;
 
-							var defaultLocale = instance.getDefaulLocale();
+							var defaultLocale = instance.getDefaultLocale();
 							var fieldDefinition = instance.getFieldDefinition();
 
 							var tipsMap = fieldDefinition.tip;
@@ -741,7 +832,7 @@ AUI.add(
 							if (Lang.isObject(tipsMap)) {
 								var tip = tipsMap[instance.get('displayLocale')] || tipsMap[defaultLocale];
 
-								tipNode.attr('title', A.Escape.html(tip));
+								tipNode.attr('title', tip);
 							}
 
 							labelNode.append(tipNode);
@@ -767,12 +858,26 @@ AUI.add(
 
 						var defaultLocale = translationManager.get('defaultLocale');
 
+						var changeableDefaultLanguage = translationManager.get('changeableDefaultLanguage');
+
+						if (changeableDefaultLanguage && availableLocales && (availableLocales.indexOf(defaultLocale) == -1)) {
+							availableLocales.push(defaultLocale);
+
+							instance.set('availableLocales', availableLocales);
+						}
+
 						var localizable = instance.get('localizable');
 
 						var locales = [defaultLocale].concat(availableLocales);
 
-						if (localizable && locales.indexOf(event.prevVal) > -1) {
-							instance.updateLocalizationMap(event.prevVal);
+						if (localizable) {
+							if (locales.indexOf(event.prevVal) > -1) {
+								instance.updateLocalizationMap(event.prevVal);
+							}
+
+							if (locales.indexOf(event.newVal) > -1) {
+								instance.addLocaleToLocalizationMap(event.newVal);
+							}
 						}
 
 						instance.set('displayLocale', event.newVal);
@@ -1117,7 +1222,6 @@ AUI.add(
 						var instance = this;
 
 						instance.setValue('');
-
 					},
 
 					_handleSelectButtonClick: function(event) {
@@ -1383,7 +1487,7 @@ AUI.add(
 						instance.after('selectedLayoutChange', instance._afterSelectedLayoutChange);
 						instance.after('selectedLayoutPathChange', instance._afterSelectedLayoutPathChange);
 
-						container.delegate('click', instance._handleControlButtonsClick, '.btn', instance);
+						container.delegate('click', instance._handleControlButtonsClick, '> .form-group .btn', instance);
 					},
 
 					getParsedValue: function(value) {
@@ -2668,7 +2772,18 @@ AUI.add(
 					getValue: function() {
 						var instance = this;
 
-						return instance.getInputNode().all('option:selected').val();
+						var selectedItems = instance.getInputNode().all('option:selected');
+
+						var value;
+
+						if (selectedItems._nodes && selectedItems._nodes.length > 0) {
+							value = selectedItems.val();
+						}
+						else {
+							value = [];
+						}
+
+						return value;
 					},
 
 					setLabel: function() {
@@ -2831,9 +2946,13 @@ AUI.add(
 
 						var fieldContainer = field.get('container');
 
+						var parentField = field.get('parent');
+
 						var parentNode = fieldContainer.get('parentNode');
 
-						var repeatableInstance = instance.repeatableInstances[fieldName];
+						var treeName = fieldName + '_' + parentField.get('instanceId');
+
+						var repeatableInstance = instance.repeatableInstances[treeName];
 
 						if (!repeatableInstance) {
 							var ddPlugins = [];
@@ -2870,7 +2989,7 @@ AUI.add(
 									},
 									dropOn: '#' + parentNode.attr('id'),
 									helper: A.Node.create(TPL_REPEATABLE_HELPER),
-									nodes: '[data-fieldName=' + fieldName + ']',
+									nodes: '#' + parentNode.attr('id') + ' [data-fieldName=' + fieldName + ']',
 									placeholder: A.Node.create('<div class="form-builder-placeholder"></div>'),
 									sortCondition: function(event) {
 										var dropNode = event.drop.get('node');
@@ -2882,9 +3001,9 @@ AUI.add(
 
 							repeatableInstance.after('drag:align', A.bind(instance._afterRepeatableDragAlign, instance));
 
-							repeatableInstance.after('drag:end', A.rbind(instance._afterRepeatableDragEnd, instance, field.get('parent')));
+							repeatableInstance.after('drag:end', A.rbind(instance._afterRepeatableDragEnd, instance, parentField));
 
-							instance.repeatableInstances[fieldName] = repeatableInstance;
+							instance.repeatableInstances[treeName] = repeatableInstance;
 						}
 						else {
 							repeatableInstance.add(fieldContainer);

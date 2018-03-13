@@ -47,6 +47,7 @@ import com.liferay.exportimport.kernel.lar.PortletDataHandler;
 import com.liferay.exportimport.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.exportimport.kernel.lar.PortletDataHandlerStatusMessageSender;
 import com.liferay.exportimport.kernel.lar.StagedModelDataHandlerUtil;
+import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.exportimport.kernel.lar.UserIdStrategy;
 import com.liferay.exportimport.kernel.lifecycle.ExportImportLifecycleManager;
 import com.liferay.exportimport.kernel.model.ExportImportConfiguration;
@@ -1105,6 +1106,9 @@ public class PortletImportController implements ImportController {
 
 		portletDataContext.addDeletionSystemEventStagedModelTypes(
 			portletDataHandler.getDeletionSystemEventStagedModelTypes());
+
+		portletDataContext.addDeletionSystemEventStagedModelTypes(
+			new StagedModelType(StagedAssetLink.class));
 	}
 
 	protected void readExpandoTables(PortletDataContext portletDataContext)
@@ -1406,8 +1410,10 @@ public class PortletImportController implements ImportController {
 
 		if (buildNumber != importBuildNumber) {
 			throw new LayoutImportException(
-				"LAR build number " + importBuildNumber + " does not match " +
-					"portal build number " + buildNumber);
+				StringBundler.concat(
+					"LAR build number ", String.valueOf(importBuildNumber),
+					" does not match portal build number ",
+					String.valueOf(buildNumber)));
 		}
 
 		// Type
@@ -1447,8 +1453,10 @@ public class PortletImportController implements ImportController {
 
 					LocaleException le = new LocaleException(
 						LocaleException.TYPE_EXPORT_IMPORT,
-						"Locale " + sourceAvailableLocale + " is not " +
-							"available in company " + companyId);
+						StringBundler.concat(
+							"Locale ", String.valueOf(sourceAvailableLocale),
+							" is not available in company ",
+							String.valueOf(companyId)));
 
 					le.setSourceAvailableLocales(sourceAvailableLocales);
 					le.setTargetAvailableLocales(

@@ -6,7 +6,7 @@
 			<var name="key_menuItem" value="Templates" />
 		</execute>
 
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="AlloyEditor#addTitleAndContent">
 			<var name="content" value="${kbTemplateContent}" />
@@ -35,7 +35,9 @@
 	<command name="tearDownCP">
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Knowledge Base" />
 		</execute>
 

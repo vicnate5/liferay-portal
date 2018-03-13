@@ -1001,6 +1001,45 @@ public class StagingImpl implements Staging {
 	}
 
 	@Override
+	public Group getPermissionStagingGroup(Group group) {
+		if (group == null) {
+			return null;
+		}
+
+		Group stagingGroup = group;
+
+		if (!group.isStagedRemotely() && group.hasStagingGroup()) {
+			try {
+				PermissionChecker permissionChecker =
+					PermissionThreadLocal.getPermissionChecker();
+
+				long scopeGroupId = stagingGroup.getGroupId();
+
+				boolean hasManageStagingPermission =
+					GroupPermissionUtil.contains(
+						permissionChecker, scopeGroupId,
+						ActionKeys.MANAGE_STAGING);
+				boolean hasPublishStagingPermission =
+					GroupPermissionUtil.contains(
+						permissionChecker, scopeGroupId,
+						ActionKeys.PUBLISH_STAGING);
+				boolean hasViewStagingPermission = GroupPermissionUtil.contains(
+					permissionChecker, scopeGroupId, ActionKeys.VIEW_STAGING);
+
+				if (hasManageStagingPermission || hasPublishStagingPermission ||
+					hasViewStagingPermission) {
+
+					stagingGroup = group.getStagingGroup();
+				}
+			}
+			catch (Exception e) {
+			}
+		}
+
+		return stagingGroup;
+	}
+
+	@Override
 	public long getRecentLayoutRevisionId(
 			HttpServletRequest request, long layoutSetBranchId, long plid)
 		throws PortalException {
@@ -1182,11 +1221,10 @@ public class StagingImpl implements Staging {
 
 		JSONArray warningMessagesJSONArray = JSONFactoryUtil.createJSONArray();
 
-		for (String missingReferenceReferrerClassName :
-				missingReferences.keySet()) {
+		for (Map.Entry<String, MissingReference> entry :
+				missingReferences.entrySet()) {
 
-			MissingReference missingReference = missingReferences.get(
-				missingReferenceReferrerClassName);
+			MissingReference missingReference = entry.getValue();
 
 			Map<String, String> referrers = missingReference.getReferrers();
 
@@ -1208,8 +1246,7 @@ public class StagingImpl implements Staging {
 			errorMessageJSONObject.put("size", referrers.size());
 			errorMessageJSONObject.put(
 				"type",
-				ResourceActionsUtil.getModelResource(
-					locale, missingReferenceReferrerClassName));
+				ResourceActionsUtil.getModelResource(locale, entry.getKey()));
 
 			warningMessagesJSONArray.put(errorMessageJSONObject);
 		}
@@ -1419,8 +1456,8 @@ public class StagingImpl implements Staging {
 				userId, exportImportConfiguration.getGroupId(),
 				backgroundTaskName,
 				BackgroundTaskExecutorNames.
-					LAYOUT_STAGING_BACKGROUND_TASK_EXECUTOR, taskContextMap,
-				new ServiceContext());
+					LAYOUT_STAGING_BACKGROUND_TASK_EXECUTOR,
+				taskContextMap, new ServiceContext());
 
 		return backgroundTask.getBackgroundTaskId();
 	}
@@ -2280,6 +2317,12 @@ public class StagingImpl implements Staging {
 			portletId, portletPreferences, null, lastPublishDate);
 	}
 
+	/**
+	 * @deprecated As of 3.11.0, replaced by {@link
+	 *             com.liferay.staging.configuration.web.internal.portlet.StagingConfigurationPortlet#editStagingConfiguration(
+	 *             javax.portlet.ActionRequest, javax.portlet.ActionResponse)}
+	 */
+	@Deprecated
 	@Override
 	public void updateStaging(PortletRequest portletRequest, Group liveGroup)
 		throws PortalException {
@@ -2680,6 +2723,8 @@ public class StagingImpl implements Staging {
 
 		Layout sourceLayout = _layoutLocalService.getLayout(plid);
 
+		Group scopeGroup = sourceLayout.getScopeGroup();
+
 		Group stagingGroup = null;
 		Group liveGroup = null;
 
@@ -2693,9 +2738,9 @@ public class StagingImpl implements Staging {
 			targetLayout = sourceLayout;
 		}
 		else if (sourceLayout.hasScopeGroup() &&
-				 (sourceLayout.getScopeGroup().getGroupId() == scopeGroupId)) {
+				 (scopeGroup.getGroupId() == scopeGroupId)) {
 
-			stagingGroup = sourceLayout.getScopeGroup();
+			stagingGroup = scopeGroup;
 
 			liveGroup = stagingGroup.getLiveGroup();
 
@@ -2874,9 +2919,11 @@ public class StagingImpl implements Staging {
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to set recent layout revision ID with layout set " +
-						"branch " + layoutSetBranchId + " and PLID " + plid +
-							" and layout branch " + layoutBranchId,
+					StringBundler.concat(
+						"Unable to set recent layout revision ID with layout ",
+						"set branch ", String.valueOf(layoutSetBranchId),
+						" and PLID ", String.valueOf(plid),
+						" and layout branch ", String.valueOf(layoutBranchId)),
 					pe);
 			}
 		}
@@ -3004,17 +3051,6 @@ public class StagingImpl implements Staging {
 
 			Group remoteGroup = GroupServiceHttp.getGroup(
 				httpPrincipal, remoteGroupId);
-
-			if (group.equals(remoteGroup) &&
-				Objects.equals(group.getUuid(), remoteGroup.getUuid())) {
-
-				RemoteExportException ree = new RemoteExportException(
-					RemoteExportException.SAME_GROUP);
-
-				ree.setGroupId(remoteGroupId);
-
-				throw ree;
-			}
 
 			if (group.isCompany() ^
 				isCompanyGroup(httpPrincipal, remoteGroup)) {

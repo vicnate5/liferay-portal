@@ -209,7 +209,8 @@ public class TemplateContextHelper {
 
 		// Request
 
-		contextObjects.put("request", request);
+		contextObjects.put("httpServletRequest", request);
+		contextObjects.putIfAbsent("request", request);
 
 		// Portlet config
 

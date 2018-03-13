@@ -2,7 +2,9 @@ sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
 dependencies {
-	provided group: "com.liferay", name: "com.liferay.portal.search", version: "3.7.0"
+	provided group: "com.liferay", name: "com.liferay.petra.string", version: "1.0.0"
+	provided group: "com.liferay", name: "com.liferay.portal.search", version: "4.0.0"
+	provided group: "com.liferay", name: "com.liferay.portal.search.api", version: "1.0.0"
 	provided group: "com.liferay", name: "com.liferay.registry.api", version: "1.0.0"
 	provided group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.40.0"
 	provided group: "com.liferay.portal", name: "com.liferay.portal.test", version: "1.0.0"

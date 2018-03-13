@@ -17,7 +17,9 @@ package com.liferay.asset.publisher.web.internal.portlet.toolbar.contributor;
 import com.liferay.asset.kernel.AssetRendererFactoryRegistryUtil;
 import com.liferay.asset.kernel.model.AssetRendererFactory;
 import com.liferay.asset.publisher.web.constants.AssetPublisherPortletKeys;
+import com.liferay.asset.publisher.web.constants.AssetPublisherWebKeys;
 import com.liferay.asset.publisher.web.display.context.AssetPublisherDisplayContext;
+import com.liferay.asset.publisher.web.util.AssetPublisherCustomizer;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -37,6 +39,7 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.util.AssetUtil;
 
 import java.util.ArrayList;
@@ -79,23 +82,18 @@ public class AssetPublisherPortletToolbarContributor
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Layout layout = themeDisplay.getLayout();
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		String portletName = portletDisplay.getPortletName();
+		AssetPublisherCustomizer assetPublisherCustomizer =
+			(AssetPublisherCustomizer)portletRequest.getAttribute(
+				AssetPublisherWebKeys.ASSET_PUBLISHER_CUSTOMIZER);
 
 		AssetPublisherDisplayContext assetPublisherDisplayContext =
 			new AssetPublisherDisplayContext(
-				portletRequest, portletResponse,
+				assetPublisherCustomizer, portletRequest, portletResponse,
 				portletRequest.getPreferences());
 
-		if (!assetPublisherDisplayContext.isShowAddContentButton() ||
-			layout.isLayoutPrototypeLinkActive() ||
-			portletName.equals(
-				AssetPublisherPortletKeys.HIGHEST_RATED_ASSETS) ||
-			portletName.equals(AssetPublisherPortletKeys.MOST_VIEWED_ASSETS) ||
-			portletName.equals(AssetPublisherPortletKeys.RELATED_ASSETS)) {
-
+		if (!_isVisible(assetPublisherDisplayContext, portletRequest)) {
 			return;
 		}
 
@@ -245,6 +243,54 @@ public class AssetPublisherPortletToolbarContributor
 		urlMenuItem.setUseDialog(true);
 
 		return urlMenuItem;
+	}
+
+	private boolean _isVisible(
+		AssetPublisherDisplayContext assetPublisherDisplayContext,
+		PortletRequest portletRequest) {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		if (!assetPublisherDisplayContext.isShowAddContentButton()) {
+			return false;
+		}
+
+		Group scopeGroup = themeDisplay.getScopeGroup();
+
+		if (scopeGroup.hasStagingGroup() && !scopeGroup.isStagingGroup() &&
+			PropsValues.STAGING_LIVE_GROUP_LOCKING_ENABLED) {
+
+			return false;
+		}
+
+		Layout layout = themeDisplay.getLayout();
+
+		if (layout.isLayoutPrototypeLinkActive() &&
+			assetPublisherDisplayContext.isSelectionStyleManual()) {
+
+			return false;
+		}
+
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+		String portletName = portletDisplay.getPortletName();
+
+		if (portletName.equals(
+				AssetPublisherPortletKeys.HIGHEST_RATED_ASSETS)) {
+
+			return false;
+		}
+
+		if (portletName.equals(AssetPublisherPortletKeys.MOST_VIEWED_ASSETS)) {
+			return false;
+		}
+
+		if (portletName.equals(AssetPublisherPortletKeys.RELATED_ASSETS)) {
+			return false;
+		}
+
+		return true;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

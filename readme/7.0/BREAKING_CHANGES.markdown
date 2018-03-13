@@ -624,9 +624,9 @@ This will affect any implementations of `ActionCommand`.
 #### How should I update my code?
 
 Replace imports of `com.liferay.util.bridges.mvc.ActionCommand` with
-`com.liferay.portal.kernel.portlet.bridges.mvc.ActionCommand` and imports of
+`com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand` and imports of
 `com.liferay.util.bridges.mvc.BaseActionCommand` with
-`com.liferay.portal.kernel.portlet.bridges.mvc.BaseActionCommand`.
+`com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand`.
 
 #### Why was this change made?
 
@@ -1338,19 +1338,19 @@ always required, but it was hidden by the `ServiceContext` object.
 
 The following tags have been removed:
 
-- `portlet:icon-close`
-- `portlet:icon-configuration`
-- `portlet:icon-edit`
-- `portlet:icon-edit-defaults`
-- `portlet:icon-edit-guest`
-- `portlet:icon-export-import`
-- `portlet:icon-help`
-- `portlet:icon-maximize`
-- `portlet:icon-minimize`
-- `portlet:icon-portlet-css`
-- `portlet:icon-print`
-- `portlet:icon-refresh`
-- `portlet:icon-staging`
+- `liferay-portlet:icon-close`
+- `liferay-portlet:icon-configuration`
+- `liferay-portlet:icon-edit`
+- `liferay-portlet:icon-edit-defaults`
+- `liferay-portlet:icon-edit-guest`
+- `liferay-portlet:icon-export-import`
+- `liferay-portlet:icon-help`
+- `liferay-portlet:icon-maximize`
+- `liferay-portlet:icon-minimize`
+- `liferay-portlet:icon-portlet-css`
+- `liferay-portlet:icon-print`
+- `liferay-portlet:icon-refresh`
+- `liferay-portlet:icon-staging`
 
 #### Who is affected?
 
@@ -1362,7 +1362,8 @@ The tag `liferay-ui:icon` can replace the call to the previous tags. All the
 previous tags have been converted into Java classes that implement the methods
 that the `icon` tag requires.
 
-See the modules `portlet-configuration-icon-*` in the `modules/addons` folder.
+See the modules `portlet-configuration-icon-*` in the
+`modules/apps/web-experience/portlet-configuration` folder.
 
 #### Why was this change made?
 
@@ -4346,8 +4347,8 @@ This change reintroduces Build Auto Upgrade in a new global property
 `schema.module.build.auto.upgrade` in the
 `[Liferay_Home]/portal-developer.properties` file.
 
-Setting global property `schema.module.build.auto.upgrade` to `true` applies
-module schema changes  for redeployed modules whose service build numbers have
+Setting the global property `schema.module.build.auto.upgrade` to `true` applies
+module schema changes for redeployed modules whose service build numbers have
 incremented. The `build.number` property in the module's `service.properties`
 file indicates the service build number.
 
@@ -4360,7 +4361,7 @@ DOES NOT support Build Auto Upgrade in production.
 
 #### How should I update my code?
 
-To use this feature in development, set  global property
+To use this feature in development, set the global property
 `schema.module.build.auto.upgrade` in
 `[Liferay_Home]/portal-developer.properties` to `true`, increment your module's
 `build.number` in the `service.properties` file, and deploy the module.
@@ -4369,5 +4370,35 @@ To use this feature in development, set  global property
 
 This change was made so that 7.0 developers could test database schema changes
 on the fly, without having to write upgrade processes.
+
+---------------------------------------
+
+### Removed Exports from Dynamic Data Lists Web
+- **Date:** 2017-Nov-27
+- **JIRA Ticket:** LPS-75778
+
+#### What changed?
+
+The `Dynamic Data Lists Web` module no longer exports the
+`com.liferay.dynamic.data.lists.web.asset` package.
+
+#### Who is affected?
+
+This change affects anyone who is using the
+`com.liferay.dynamic.data.lists.web.asset` package. This particularly affects
+anyone using
+`com.liferay.dynamic.data.lists.web.asset.DDLRecordAssetRendererFactory` and
+casting the return `AssetRenderer` to
+`com.liferay.dynamic.data.lists.web.asset.DDLRecordAssetRenderer`.
+
+#### How should I update my code?
+
+There are no replacements for this package; you must remove all usages.
+`DDLRecordAssetRendererFactory` can still be used as an OSGi service; however,
+you can no longer cast the returned `AssetRenderer` to `DDLRecordAssetRenderer`.
+
+#### Why was this change made?
+
+This change was made to clean up LPKG dependencies.
 
 ---------------------------------------

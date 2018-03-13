@@ -37,6 +37,8 @@ public class MySitesTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_classNames = null;
 		_cssClass = null;
 		_max = 0;

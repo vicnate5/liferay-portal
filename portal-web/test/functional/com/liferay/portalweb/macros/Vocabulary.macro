@@ -28,7 +28,7 @@
 	</command>
 
 	<command name="addCP" summary="Add a vocabulary named '${vocabularyName}'">
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="PortletEntry#inputName">
 			<var name="name" value="${vocabularyName}" />
@@ -80,7 +80,7 @@
 	</command>
 
 	<command name="addViewableByCP">
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="PortletEntry#inputName">
 			<var name="name" value="${vocabularyName}" />
@@ -100,7 +100,7 @@
 	</command>
 
 	<command name="addVocabularyWithNullTitle">
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="PortletEntry#inputName">
 			<var name="name" value=" " />
@@ -112,7 +112,7 @@
 	</command>
 
 	<command name="addWithAssociatedAssetTypeCP">
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="PortletEntry#inputName">
 			<var name="name" value="${vocabularyName}" />
@@ -245,7 +245,9 @@
 	<command name="tearDownCP">
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Categories" />
 		</execute>
 
@@ -277,7 +279,7 @@
 					<var name="key_menuItem" value="Edit" />
 				</execute>
 
-				<execute function="AssertNotChecked#assertNotCheckedToggleSwitch" locator1="CategoriesEditVocabulary#ALLOW_MULTIPLE_CATEGORIES_TOGGLE_SWITCH" />
+				<execute function="AssertNotChecked#assertNotCheckedNotVisible" locator1="CategoriesEditVocabulary#ALLOW_MULTIPLE_CATEGORIES_TOGGLE_SWITCH" />
 			</then>
 		</if>
 	</command>

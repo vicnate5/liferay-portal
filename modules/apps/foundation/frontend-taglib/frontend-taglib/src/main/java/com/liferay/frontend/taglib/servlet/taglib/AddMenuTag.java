@@ -64,6 +64,8 @@ public class AddMenuTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_addMenuItems = new ArrayList<>();
 	}
 

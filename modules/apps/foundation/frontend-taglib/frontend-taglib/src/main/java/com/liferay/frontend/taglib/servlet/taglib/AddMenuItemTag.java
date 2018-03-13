@@ -49,6 +49,8 @@ public class AddMenuItemTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_id = null;
 		_title = null;
 		_url = null;

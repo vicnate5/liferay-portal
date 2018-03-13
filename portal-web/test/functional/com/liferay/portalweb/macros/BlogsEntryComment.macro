@@ -86,7 +86,7 @@
 
 		<execute function="Click#clickAt" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
 
-		<execute function="Click#clickAt" locator1="MenuItem#ANY_MENU_ITEM" value1="Edit">
+		<execute function="Click#clickAt" locator1="MenuItem#ANY_MENU_ITEM">
 			<var name="key_menuItem" value="Edit" />
 		</execute>
 
@@ -112,19 +112,13 @@
 		<execute function="Type" locator1="TextInput#EMAIL_ADDRESS" value1="${userEmailAddress}" />
 		<execute function="Type" locator1="TextInput#PASSWORD" value1="test" />
 
-		<execute function="Click" locator1="Button#SIGN_IN" value1="Sign In" />
+		<execute function="Click" locator1="Button#SIGN_IN" />
 
 		<execute function="AssertElementPresent" locator1="UserBar#USER_AVATAR_IMAGE" />
 
 		<execute macro="BlogsEntryComment#add">
 			<var name="entryComment" value="${entryComment}" />
 		</execute>
-	</command>
-
-	<command name="subscribePG">
-		<execute function="AssertClick" locator1="Comments#SUBSCRIBE_TO_COMMENTS_LINK" value1="Subscribe to Comments" />
-
-		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
 	<command name="viewCP">

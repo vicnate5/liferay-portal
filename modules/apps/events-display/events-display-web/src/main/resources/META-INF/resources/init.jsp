@@ -55,8 +55,7 @@ page import="com.liferay.portal.kernel.util.StringPool" %><%@
 page import="com.liferay.portal.kernel.util.StringUtil" %><%@
 page import="com.liferay.portal.kernel.util.Time" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %><%@
-page import="com.liferay.portal.kernel.workflow.WorkflowConstants" %><%@
-page import="com.liferay.site.my.sites.web.constants.MySitesPortletKeys" %>
+page import="com.liferay.portal.kernel.workflow.WorkflowConstants" %>
 
 <%@ page import="java.text.Format" %>
 

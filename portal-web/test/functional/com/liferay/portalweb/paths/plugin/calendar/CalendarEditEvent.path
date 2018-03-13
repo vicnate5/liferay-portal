@@ -500,7 +500,7 @@
 </tr>
 <tr>
 	<td>CATEGORIZATION_TAG_FIELD</td>
-	<td>//input[contains(@title,'Add Tags')]</td>
+	<td>//textarea[contains(@title,'Add Tags')]</td>
 	<td></td>
 </tr>
 <tr>

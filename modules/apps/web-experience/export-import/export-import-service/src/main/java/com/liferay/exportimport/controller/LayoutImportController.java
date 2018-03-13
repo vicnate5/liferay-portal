@@ -23,6 +23,7 @@ import static com.liferay.exportimport.kernel.lifecycle.ExportImportLifecycleCon
 import static com.liferay.exportimport.kernel.lifecycle.ExportImportLifecycleConstants.PROCESS_FLAG_LAYOUT_IMPORT_IN_PROCESS;
 import static com.liferay.exportimport.kernel.lifecycle.ExportImportLifecycleConstants.PROCESS_FLAG_LAYOUT_STAGING_IN_PROCESS;
 
+import com.liferay.asset.kernel.model.adapter.StagedAssetLink;
 import com.liferay.exportimport.kernel.controller.ExportImportController;
 import com.liferay.exportimport.kernel.controller.ImportController;
 import com.liferay.exportimport.kernel.exception.LARFileException;
@@ -859,17 +860,27 @@ public class LayoutImportController implements ImportController {
 
 			// Archived setups
 
-			_portletImportController.importPortletPreferences(
-				portletDataContext, layoutSet.getCompanyId(),
-				portletDataContext.getGroupId(), null, portletElement, false,
-				importPortletControlsMap.get(
-					PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS),
-				importPortletControlsMap.get(
-					PortletDataHandlerKeys.PORTLET_DATA),
-				importPortletControlsMap.get(
-					PortletDataHandlerKeys.PORTLET_SETUP),
-				importPortletControlsMap.get(
-					PortletDataHandlerKeys.PORTLET_USER_PREFERENCES));
+			try {
+				_portletImportController.importPortletPreferences(
+					portletDataContext, layoutSet.getCompanyId(),
+					portletDataContext.getGroupId(), null, portletElement,
+					false,
+					importPortletControlsMap.get(
+						PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS),
+					importPortletControlsMap.get(
+						PortletDataHandlerKeys.PORTLET_DATA),
+					importPortletControlsMap.get(
+						PortletDataHandlerKeys.PORTLET_SETUP),
+					importPortletControlsMap.get(
+						PortletDataHandlerKeys.PORTLET_USER_PREFERENCES));
+			}
+			catch (Throwable t) {
+				throw t;
+			}
+			finally {
+				_portletImportController.resetPortletScope(
+					portletDataContext, portletPreferencesGroupId);
+			}
 		}
 
 		// Import services
@@ -1074,6 +1085,9 @@ public class LayoutImportController implements ImportController {
 		}
 
 		portletDataContext.addDeletionSystemEventStagedModelTypes(
+			new StagedModelType(StagedAssetLink.class));
+
+		portletDataContext.addDeletionSystemEventStagedModelTypes(
 			new StagedModelType(Layout.class));
 	}
 
@@ -1195,6 +1209,35 @@ public class LayoutImportController implements ImportController {
 							_log.warn(nsle);
 						}
 					}
+				}
+
+				if (!ExportImportThreadLocal.isStagingInProcess() &&
+					group.isStagingGroup() &&
+					!group.isStagedPortlet(portletDataContext.getPortletId())) {
+
+					scopeGroup = group.getLiveGroup();
+
+					Layout scopeLiveLayout =
+						_layoutLocalService.fetchLayoutByUuidAndGroupId(
+							scopeLayoutUuid, group.getLiveGroupId(),
+							portletDataContext.isPrivateLayout());
+
+					if (scopeLiveLayout != null) {
+						scopeGroup = _groupLocalService.checkScopeGroup(
+							scopeLiveLayout,
+							portletDataContext.getUserId(null));
+					}
+				}
+			}
+			else {
+				Group group = _groupLocalService.getGroup(
+					portletDataContext.getGroupId());
+
+				if (!ExportImportThreadLocal.isStagingInProcess() &&
+					group.isStagingGroup() &&
+					!group.isStagedPortlet(portletDataContext.getPortletId())) {
+
+					scopeGroup = group.getLiveGroup();
 				}
 			}
 
@@ -1332,9 +1375,26 @@ public class LayoutImportController implements ImportController {
 			}
 		}
 		else {
+			BiPredicate<Version, Version> majorVersionCompatBiPredicate =
+				(currentVersion, importVersion) -> {
+					if (Objects.equals(
+							currentVersion.getMajor(),
+							_VERSION_400.getMajor()) &&
+						Objects.equals(
+							importVersion.getMajor(),
+							_VERSION_300.getMajor())) {
+
+						return true;
+					}
+
+					return Objects.equals(
+						currentVersion.getMajor(), importVersion.getMajor());
+				};
+
 			BiPredicate<Version, Version> majorVersionBiPredicate =
-				(currentVersion, importVersion) -> Objects.equals(
-					currentVersion.getMajor(), importVersion.getMajor());
+				majorVersionCompatBiPredicate.or(
+					(currentVersion, importVersion) -> Objects.equals(
+						currentVersion.getMajor(), importVersion.getMajor()));
 
 			BiPredicate<Version, Version> minorVersionBiPredicate =
 				(currentVersion, importVersion) -> {
@@ -1342,6 +1402,16 @@ public class LayoutImportController implements ImportController {
 						currentVersion.getMinor(), -1);
 					int importedMinorVersion = GetterUtil.getInteger(
 						importVersion.getMinor(), -1);
+
+					if (Objects.equals(
+							currentVersion.getMajor(),
+							_VERSION_400.getMajor()) &&
+						Objects.equals(
+							importVersion.getMajor(),
+							_VERSION_300.getMajor())) {
+
+						return true;
+					}
 
 					if (((currentMinorVersion == -1) &&
 						 (importedMinorVersion == -1)) ||
@@ -1426,15 +1496,6 @@ public class LayoutImportController implements ImportController {
 
 			if (sourceCompanyGroupId == sourceGroupId) {
 				companySourceGroup = true;
-			}
-			else if ((group.isStaged() || group.hasStagingGroup()) &&
-					 !(group.isStagedRemotely() &&
-					   group.hasRemoteStagingGroup())) {
-
-				Group sourceGroup = _groupLocalService.fetchGroup(
-					sourceGroupId);
-
-				companySourceGroup = sourceGroup.isCompany();
 			}
 
 			if (group.isCompany() ^ companySourceGroup) {
@@ -1609,6 +1670,10 @@ public class LayoutImportController implements ImportController {
 			throw new LayoutPrototypeException(missingLayoutPrototypes);
 		}
 	}
+
+	private static final Version _VERSION_300 = Version.getInstance("3.0.0");
+
+	private static final Version _VERSION_400 = Version.getInstance("4.0.0");
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		LayoutImportController.class);

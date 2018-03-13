@@ -3,7 +3,7 @@
 		<if>
 			<isset var="larFileName" />
 			<then>
-				<execute function="Type" locator1="ExportImport#EXPORT_VIA_TEMPLATE_FILE_NAME" value1="${larFileName}" />
+				<execute function="Type" locator1="SitePagesExport#EXPORT_PROCESS_NAME" value1="${larFileName}" />
 			</then>
 		</if>
 
@@ -161,7 +161,7 @@
 
 				<var name="key_lastDateRange" value="${lastDateRange}" />
 
-				<execute function="Click" locator1="Select#LAST_TIME" value1="${lastDateRange}" />
+				<execute function="Click" locator1="Select#LAST_TIME" />
 				<execute function="Click" locator1="Link#REFRESH_COUNTS" />
 			</then>
 		</if>
@@ -227,7 +227,9 @@
 			</then>
 		</if>
 
-		<execute macro="ProductMenu#gotoSitesPublishing">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Publishing" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Export" />
 		</execute>
 	</command>
@@ -242,7 +244,9 @@
 			</then>
 		</if>
 
-		<execute macro="ProductMenu#gotoSitesPublishing">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Publishing" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Import" />
 		</execute>
 	</command>
@@ -264,7 +268,7 @@
 		<if>
 			<equals arg1="${privateLayout}" arg2="true" />
 			<then>
-				<execute function="Click" locator1="SitePagesImport#PRIVATE_LAYOUT" />
+				<execute function="Click" locator1="ExportImport#PRIVATE_LAYOUT" />
 			</then>
 		</if>
 
@@ -296,6 +300,13 @@
 			</then>
 		</if>
 
+		<if>
+			<equals arg1="${mirrorWithOverwriting}" arg2="true" />
+			<then>
+				<execute macro="LAR#_mirrorWithOverwriting" />
+			</then>
+		</if>
+
 		<execute function="AssertVisible" locator1="Button#BACK" />
 
 		<execute function="AssertClickNoError" locator1="SitePagesImport#IMPORT_BUTTON" value1="Import" />
@@ -303,6 +314,16 @@
 		<execute function="Pause" locator1="5000" />
 
 		<execute function="AssertTextEquals" locator1="SitePagesImport#CURRENT_AND_PREVIOUS_STATUS_1" value1="Successful" />
+	</command>
+
+	<command name="_mirrorWithOverwriting">
+		<execute function="ScrollWebElementIntoView" locator1="//div[contains(@class,'panel') and contains(@role,'tablist')]//a[normalize-space(text())='Update Data']" />
+
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Update Data" />
+		</execute>
+
+		<execute function="Click" locator1="ExportImport#UPDATE_DATA_MIRROR_WITH_OVERWRITING_RADIO" />
 	</command>
 
 	<command name="_selectImportFile">
@@ -355,13 +376,7 @@
 				<if>
 					<equals arg1="${mirrorWithOverwriting}" arg2="true" />
 					<then>
-						<execute function="ScrollWebElementIntoView" locator1="//div[contains(@class,'panel') and contains(@role,'tablist')]//a[normalize-space(text())='Update Data']" />
-
-						<execute macro="Panel#expandPanel">
-							<var name="panelHeading" value="Update Data" />
-						</execute>
-
-						<execute function="Click" locator1="ExportImport#UPDATE_DATA_MIRROR_WITH_OVERWRITING_RADIO" />
+						<execute macro="LAR#_mirrorWithOverwriting" />
 					</then>
 				</if>
 
@@ -379,7 +394,7 @@
 	</command>
 
 	<command name="_selectImportFileSite">
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute function="Pause" locator1="5000" />
 
@@ -438,7 +453,7 @@
 			<var name="key_menuItem" value="Export Templates" />
 		</execute>
 
-		<execute function="Click" locator1="ExportImport#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="PortletEntry#inputName">
 			<var name="name" value="${exportTemplateName}" />
@@ -471,7 +486,7 @@
 	<command name="configureExportSiteCP">
 		<execute macro="LAR#_gotoExportSite" />
 
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="LAR#_configureExportSiteOptions">
 			<var name="checkContentNameList" value="${checkContentNameList}" />
@@ -535,12 +550,14 @@
 
 		<execute function="Click#waitForMenuToggleJSClick" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
 
-		<execute function="Click" locator1="SitePagesExport#EXPORT_TEMPLATES_TABLE_EXPORT_BUTTON" />
+		<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="Export">
+			<var name="key_menuItem" value="Export" />
+		</execute>
 
 		<if>
 			<isset var="larFileName" />
 			<then>
-				<execute function="Type" locator1="ExportImport#EXPORT_VIA_TEMPLATE_FILE_NAME" value1="${larFileName}" />
+				<execute function="Type" locator1="SitePagesExport#EXPORT_PROCESS_NAME" value1="${larFileName}" />
 			</then>
 		</if>
 
@@ -683,7 +700,7 @@
 
 		<execute function="Click#waitForMenuToggleJSClick" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
 
-		<execute function="Click" locator1="SitePagesExport#EXPORT_TEMPLATES_TABLE_MOVE_TO_THE_RECYCLE_BIN_BUTTON" />
+		<execute function="Click" locator1="Link#MOVE_TO_THE_RECYCLING_BIN" />
 
 		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
 	</command>
@@ -718,7 +735,7 @@
 
 	<command name="searchTemplate">
 		<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${exportTemplateName}" />
-		<execute function="Click" locator1="SitePagesExport#EXPORT_TEMPLATES_SEARCH" />
+		<execute function="Click" locator1="NavBar#SEARCH_BUTTON" />
 
 		<var name="key_exportTemplateName" value="${exportTemplateName}" />
 
@@ -743,7 +760,9 @@
 			</else>
 		</if>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -774,7 +793,9 @@
 			</else>
 		</if>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -808,7 +829,9 @@
 			</else>
 		</if>
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 

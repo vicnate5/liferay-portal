@@ -58,25 +58,23 @@
 			<var name="portletName" value="Navigation Menu" />
 		</execute>
 
-		<execute macro="Portlet#gotoPortletOptions">
-			<var name="portletOption" value="Configuration" />
+		<execute macro="ApplicationDisplayTemplates#selectPortletADT">
+			<var name="portletName" value="Navigation" />
+			<var name="templateName" value="Split Button Dropdowns" />
 		</execute>
 
-		<execute macro="NavigationMenu#selectAndSaveConfiguration">
-			<var name="displayTemplate" value="Split Button Dropdowns" />
+		<execute macro="Navigator#openURL" />
+
+		<var name="pageName" value="Navigation Test Page1" />
+
+		<execute function="AssertClick" locator1="Home#PAGE_SPLIT_BUTTON_DROPDOWNS" value1="${pageName}">
+			<var name="key_pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="Navigation Test Page1" />
+		<execute macro="ApplicationDisplayTemplates#selectPortletADT">
+			<var name="portletName" value="Navigation" />
+			<var name="templateName" value="Bar minimally styled" />
 		</execute>
-
-		<execute macro="Portlet#gotoPortletOptions">
-			<var name="portletOption" value="Configuration" />
-		</execute>
-
-		<execute macro="IFrame#selectConfigurationFrame" />
-
-		<execute function="Select" locator1="Select#DISPLAY_TEMPLATE" value1="Bar minimally styled" />
 
 		<execute macro="Navigator#openURL" />
 
@@ -135,7 +133,9 @@
 	<command name="UserPersonalSiteUserGroupPrivatePage" priority="4">
 		<property name="custom.properties" value="layout.user.private.layouts.enabled=false${line.separator}layout.user.private.layouts.auto.create=false" />
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -146,7 +146,9 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -155,7 +157,9 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Roles" />
 		</execute>
 
@@ -164,7 +168,9 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="User Groups" />
 		</execute>
 
@@ -172,7 +178,9 @@
 			<var name="userGroupName" value="UG UserGroup Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="User Groups" />
 		</execute>
 
@@ -182,7 +190,9 @@
 			<var name="userGroupName" value="UG UserGroup Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="User Groups" />
 		</execute>
 
@@ -233,13 +243,9 @@
 
 		<execute function="AssertTextEquals" locator1="Navigation#BREADCRUMB_ENTRY" value1="Navigation Display Test Page" />
 
-		<execute macro="Portlet#gotoPortletOptions">
+		<execute macro="ApplicationDisplayTemplates#selectPortletADT">
 			<var name="portletName" value="Navigation Menu" />
-			<var name="portletOption" value="Configuration" />
-		</execute>
-
-		<execute macro="NavigationMenu#selectAndSaveConfiguration">
-			<var name="displayTemplate" value="Bar minimally styled" />
+			<var name="templateName" value="Bar minimally styled" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
@@ -273,7 +279,9 @@
 			<var name="pageName" value="Navigation Page" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -284,7 +292,9 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -293,7 +303,9 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Roles" />
 		</execute>
 

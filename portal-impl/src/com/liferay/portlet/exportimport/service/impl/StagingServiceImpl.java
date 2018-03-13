@@ -77,8 +77,9 @@ public class StagingServiceImpl extends StagingServiceBaseImpl {
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"StagingServiceImpl#createStagingRequest(" + groupId +
-						", " + checksum + ")",
+					StringBundler.concat(
+						"StagingServiceImpl#createStagingRequest(",
+						String.valueOf(groupId), ", ", checksum, ")"),
 					pe);
 			}
 
@@ -173,9 +174,10 @@ public class StagingServiceImpl extends StagingServiceBaseImpl {
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"StagingServiceImpl#publishStagingRequest(" +
-						stagingRequestId + ", " + exportImportConfiguration +
-							")",
+					StringBundler.concat(
+						"StagingServiceImpl#publishStagingRequest(",
+						String.valueOf(stagingRequestId), ", ",
+						String.valueOf(exportImportConfiguration), ")"),
 					pe);
 			}
 
@@ -197,9 +199,10 @@ public class StagingServiceImpl extends StagingServiceBaseImpl {
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"StagingServiceImpl#updateStagingRequest(" +
-						stagingRequestId + ", " + fileName + ", " +
-							bytes.length + "bytes)",
+					StringBundler.concat(
+						"StagingServiceImpl#updateStagingRequest(",
+						String.valueOf(stagingRequestId), ", ", fileName, ", ",
+						String.valueOf(bytes.length), "bytes)"),
 					pe);
 			}
 

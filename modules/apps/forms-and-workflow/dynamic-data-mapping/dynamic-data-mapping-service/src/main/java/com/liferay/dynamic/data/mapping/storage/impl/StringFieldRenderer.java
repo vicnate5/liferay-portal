@@ -23,6 +23,7 @@ import com.liferay.dynamic.data.mapping.storage.Field;
 import com.liferay.dynamic.data.mapping.util.impl.DDMImpl;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -33,6 +34,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * @author Bruno Basto
@@ -115,17 +117,31 @@ public class StringFieldRenderer extends BaseFieldRenderer {
 			return StringPool.BLANK;
 		}
 
+		DDMStructure ddmStructure = field.getDDMStructure();
+
+		DDMFormField ddmFormField = ddmStructure.getDDMFormField(
+			field.getName());
+
+		boolean manualDataSourceType = isManualDataSourceType(ddmFormField);
+
 		StringBundler sb = new StringBundler(jsonArray.length() * 2);
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			LocalizedValue label = getFieldOptionLabel(
-				field, jsonArray.getString(i));
+			String optionValue = jsonArray.getString(i);
 
-			if (label == null) {
-				continue;
+			if (manualDataSourceType) {
+				LocalizedValue label = getFieldOptionLabel(field, optionValue);
+
+				if (label == null) {
+					continue;
+				}
+
+				sb.append(label.getString(locale));
+			}
+			else {
+				sb.append(optionValue);
 			}
 
-			sb.append(label.getString(locale));
 			sb.append(StringPool.COMMA_AND_SPACE);
 		}
 
@@ -134,6 +150,21 @@ public class StringFieldRenderer extends BaseFieldRenderer {
 		}
 
 		return sb.toString();
+	}
+
+	protected boolean isManualDataSourceType(DDMFormField ddmFormField) {
+		String dataSourceType = GetterUtil.getString(
+			ddmFormField.getProperty("dataSourceType"), "manual");
+
+		if (Objects.equals(dataSourceType, StringPool.BLANK)) {
+			dataSourceType = "manual";
+		}
+
+		if (Objects.equals(dataSourceType, "manual")) {
+			return true;
+		}
+
+		return false;
 	}
 
 }

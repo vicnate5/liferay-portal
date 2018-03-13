@@ -19,11 +19,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>VOCABULARY_SELECT</td>
-	<td>//div[contains(@class,'select-wrapper')]/select</td>
-	<td></td>
-</tr>
-<tr>
 	<td></td>
 	<td></td>
 	<td></td>

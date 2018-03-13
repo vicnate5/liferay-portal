@@ -82,7 +82,7 @@ create unique index IX_E7B95510 on BrowserTracker (userId);
 create unique index IX_B27A301F on ClassName_ (value[$COLUMN_LENGTH:200$]);
 
 create index IX_38EFE3FD on Company (logoId);
-create index IX_12566EC2 on Company (mx[$COLUMN_LENGTH:75$]);
+create index IX_12566EC2 on Company (mx[$COLUMN_LENGTH:200$]);
 create index IX_35E3E7C6 on Company (system);
 create unique index IX_EC00543C on Company (webId[$COLUMN_LENGTH:75$]);
 
@@ -531,7 +531,7 @@ create index IX_14D8BCC0 on UserTrackerPath (userTrackerId);
 
 create index IX_BCFDA257 on User_ (companyId, createDate, modifiedDate);
 create index IX_C6EA4F34 on User_ (companyId, defaultUser, status);
-create unique index IX_615E9F7A on User_ (companyId, emailAddress[$COLUMN_LENGTH:75$]);
+create unique index IX_615E9F7A on User_ (companyId, emailAddress[$COLUMN_LENGTH:254$]);
 create index IX_1D731F03 on User_ (companyId, facebookId);
 create index IX_B6E3AE1 on User_ (companyId, googleUserId[$COLUMN_LENGTH:75$]);
 create index IX_EE8ABD19 on User_ (companyId, modifiedDate);
@@ -540,7 +540,7 @@ create unique index IX_C5806019 on User_ (companyId, screenName[$COLUMN_LENGTH:7
 create index IX_F6039434 on User_ (companyId, status);
 create unique index IX_9782AD88 on User_ (companyId, userId);
 create unique index IX_5ADBE171 on User_ (contactId);
-create index IX_762F63C6 on User_ (emailAddress[$COLUMN_LENGTH:75$]);
+create index IX_762F63C6 on User_ (emailAddress[$COLUMN_LENGTH:254$]);
 create index IX_A18034A4 on User_ (portraitId);
 create index IX_405CC0E on User_ (uuid_[$COLUMN_LENGTH:75$], companyId);
 
@@ -565,7 +565,7 @@ create index IX_66FF2503 on Users_UserGroups (userGroupId);
 create index IX_BE8102D6 on Users_UserGroups (userId);
 
 create unique index IX_A083D394 on VirtualHost (companyId, layoutSetId);
-create unique index IX_431A3960 on VirtualHost (hostname[$COLUMN_LENGTH:75$]);
+create unique index IX_431A3960 on VirtualHost (hostname[$COLUMN_LENGTH:200$]);
 
 create unique index IX_97DFA146 on WebDAVProps (classNameId, classPK);
 

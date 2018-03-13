@@ -137,7 +137,9 @@ public class JournalArticleLocalServiceUtil {
 	workflow actions for the web content article. Can also set
 	whether to add the default guest and group permissions.
 	* @return the web content article
+	* @deprecated As of 3.24.0
 	*/
+	@Deprecated
 	public static com.liferay.journal.model.JournalArticle addArticle(
 		long userId, long groupId, long folderId, long classNameId,
 		long classPK, java.lang.String articleId, boolean autoArticleId,
@@ -3612,7 +3614,9 @@ public class JournalArticleLocalServiceUtil {
 	content update activity; otherwise it is considered a web content
 	add activity.
 	* @return the updated web content article
+	* @deprecated As of 3.24.0
 	*/
+	@Deprecated
 	public static com.liferay.journal.model.JournalArticle updateArticle(
 		long userId, long groupId, long folderId, java.lang.String articleId,
 		double version,

@@ -14,7 +14,9 @@
 
 package com.liferay.portal.portlet.bridge.soy;
 
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
+import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCCommandCache;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
@@ -27,7 +29,6 @@ import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnsyncPrintWriterPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -281,6 +282,11 @@ public class SoyPortlet extends MVCPortlet {
 		sb.append("<script>");
 
 		Template template = getTemplate(portletRequest);
+
+		LiferayPortletConfig liferayPortletConfig =
+			(LiferayPortletConfig)getPortletConfig();
+
+		template.put("portletId", liferayPortletConfig.getPortletId());
 
 		String portletJavaScript = _soyPortletHelper.getPortletJavaScript(
 			template, path, portletResponse.getNamespace(),

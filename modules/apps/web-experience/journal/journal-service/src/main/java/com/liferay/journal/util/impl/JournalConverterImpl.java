@@ -25,6 +25,7 @@ import com.liferay.dynamic.data.mapping.util.FieldsToDDMFormValuesConverter;
 import com.liferay.dynamic.data.mapping.util.impl.DDMFieldsCounter;
 import com.liferay.dynamic.data.mapping.util.impl.DDMImpl;
 import com.liferay.journal.util.JournalConverter;
+import com.liferay.petra.string.CharPool;
 import com.liferay.petra.xml.XMLUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -39,7 +40,6 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.LayoutLocalService;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -371,9 +371,7 @@ public class JournalConverterImpl implements JournalConverter {
 
 		int repetitions = 0;
 
-		for (int i = 0; i < fieldsDisplayValues.length; i++) {
-			String fieldDisplayName = fieldsDisplayValues[i];
-
+		for (String fieldDisplayName : fieldsDisplayValues) {
 			if (offset > parentOffset) {
 				break;
 			}

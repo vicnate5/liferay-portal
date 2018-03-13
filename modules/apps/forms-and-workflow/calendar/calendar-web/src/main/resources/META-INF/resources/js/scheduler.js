@@ -13,6 +13,7 @@ AUI.add(
 		var isBoolean = Lang.isBoolean;
 		var isFunction = Lang.isFunction;
 		var isObject = Lang.isObject;
+		var isString = Lang.isString;
 		var isValue = Lang.isValue;
 
 		var toInitialCap = A.cached(
@@ -339,6 +340,7 @@ AUI.add(
 						var node = instance.get('node');
 
 						node.toggleClass('calendar-portlet-event-approved', val === CalendarWorkflow.STATUS_APPROVED);
+						node.toggleClass('calendar-portlet-event-denied', val === CalendarWorkflow.STATUS_DENIED);
 						node.toggleClass('calendar-portlet-event-draft', val === CalendarWorkflow.STATUS_DRAFT);
 						node.toggleClass('calendar-portlet-event-maybe', val === CalendarWorkflow.STATUS_MAYBE);
 						node.toggleClass('calendar-portlet-event-pending', val === CalendarWorkflow.STATUS_PENDING);
@@ -521,7 +523,7 @@ AUI.add(
 					CalendarUtil.getEvents(
 						instance.getLoadStartDate(activeView),
 						instance.getLoadEndDate(activeView),
-						[CalendarWorkflow.STATUS_APPROVED, CalendarWorkflow.STATUS_DRAFT, CalendarWorkflow.STATUS_MAYBE, CalendarWorkflow.STATUS_PENDING],
+						[CalendarWorkflow.STATUS_APPROVED, CalendarWorkflow.STATUS_DENIED, CalendarWorkflow.STATUS_DRAFT, CalendarWorkflow.STATUS_MAYBE, CalendarWorkflow.STATUS_PENDING],
 						function(calendarBookings) {
 							if (filterCalendarBookings) {
 								calendarBookings = calendarBookings.filter(filterCalendarBookings);
@@ -619,6 +621,18 @@ AUI.add(
 						);
 
 						Scheduler.superclass.bindUI.apply(this, arguments);
+					},
+
+					destructor: function() {
+						var instance = this;
+
+						instance.get('views').forEach(
+							function(item) {
+								item.destroy();
+							}
+						);
+
+						Scheduler.superclass.destructor.apply(instance, arguments);
 					},
 
 					getEventsByCalendarBookingId: function(calendarBookingId) {
@@ -985,6 +999,7 @@ AUI.add(
 
 				ATTRS: {
 					navigationDateFormatter: {
+						validator: isFunction,
 						value: function(date) {
 							var instance = this;
 
@@ -997,8 +1012,7 @@ AUI.add(
 									locale: scheduler.get('locale')
 								}
 							);
-						},
-						validator: isFunction
+						}
 					}
 				}
 			}
@@ -1006,13 +1020,85 @@ AUI.add(
 
 		Liferay.SchedulerDayView = SchedulerDayView;
 
-		Liferay.SchedulerWeekView = A.SchedulerWeekView;
+		Liferay.SchedulerWeekView = A.Component.create(
+			{
+				EXTENDS: A.SchedulerWeekView,
+
+				NAME: 'scheduler-week-view',
+
+				ATTRS: {
+					navigationDateFormatter: {
+						validator: isFunction,
+						value: function(date) {
+							var instance = this;
+
+							var scheduler = instance.get('scheduler');
+
+							var locale = scheduler.get('locale');
+
+							var startDate = instance._firstDayOfWeek(date);
+
+							var endDate = DateMath.add(startDate, DateMath.DAY, instance.get('days') - 1);
+
+							var startDateFormat = Liferay.Language.get('b-d');
+
+							var endDateFormat;
+
+							if (DateMath.isMonthOverlapWeek(startDate)) {
+								endDateFormat = Liferay.Language.get('b-d-y');
+							}
+							else {
+								endDateFormat = Liferay.Language.get('d-y');
+							}
+
+							var startDateLabel = A.DataType.Date.format(
+								startDate,
+								{
+									format: startDateFormat,
+									locale: locale
+								}
+							);
+
+							var endDateLabel = A.DataType.Date.format(
+								endDate,
+								{
+									format: endDateFormat,
+									locale: locale
+								}
+							);
+
+							return [startDateLabel, '&mdash;', endDateLabel].join(' ');
+
+						}
+					}
+				}
+			}
+		);
 
 		var SchedulerMonthView = A.Component.create(
 			{
 				EXTENDS: A.SchedulerMonthView,
 
 				NAME: 'scheduler-month-view',
+
+				ATTRS: {
+					navigationDateFormatter: {
+						validator: isFunction,
+						value: function(date) {
+							var instance = this;
+
+							var scheduler = instance.get('scheduler');
+
+							return A.DataType.Date.format(
+								date,
+								{
+									format: Liferay.Language.get('b-y'),
+									locale: scheduler.get('locale')
+								}
+							);
+						}
+					}
+				},
 
 				prototype: {
 					_syncCellDimensions: function() {
@@ -1054,7 +1140,163 @@ AUI.add(
 
 		Liferay.SchedulerMonthView = SchedulerMonthView;
 
-		Liferay.SchedulerAgendaView = A.SchedulerAgendaView;
+		var SchedulerAgendaView = A.Component.create(
+			{
+				ATTRS: {
+					eventsDateFormatter: {
+						validator: isFunction,
+						value: function(startDate, endDate) {
+							var instance = this;
+
+							var scheduler = instance.get('scheduler');
+
+							var isoTime = scheduler.get('activeView').get('isoTime');
+
+							var startDateMask;
+
+							var endDateMask;
+
+							var startDateFormatter;
+
+							var endDateFormatter;
+
+							if (isoTime) {
+								startDateMask = '%H:%M';
+
+								endDateMask = '%H:%M';
+							}
+							else {
+								startDateMask = '%l:%M';
+								endDateMask = '%l:%M';
+
+								if (startDate.getHours() >= 12) {
+									startDateMask += 'pm';
+								}
+
+								if (endDate.getHours() >= 12) {
+									endDateMask += 'pm';
+								}
+							}
+
+							if (DateMath.isDayOverlap(startDate, endDate)) {
+								startDateMask += ', ' + Liferay.Language.get('b-e');
+								endDateMask += ', ' + Liferay.Language.get('b-e');
+							}
+
+							startDateFormatter = instance._getFormatter.call(instance, startDateMask);
+							endDateFormatter = instance._getFormatter.call(instance, endDateMask);
+
+							return [
+								startDateFormatter.call(instance, startDate),
+								'&mdash;',
+								endDateFormatter.call(instance, endDate)
+							].join(' ');
+						}
+					},
+
+					headerDayDateFormatter: {
+						validator: isFunction,
+						value: function(date) {
+							var instance = this;
+
+							var todayDate = instance.get('scheduler').get('todayDate');
+
+							var mask;
+
+							var formatter;
+
+							if (!DateMath.isDayOverlap(date, todayDate)) {
+								mask = Liferay.Language.get('today');
+							}
+							else {
+								mask = Liferay.Language.get('a');
+							}
+
+							formatter = instance._getFormatter.call(instance, mask);
+
+							return formatter.call(instance, date);
+						}
+					},
+
+					headerExtraDateFormatter: {
+						validator: isFunction,
+						valueFn: function() {
+							var instance = this;
+
+							return instance._getFormatter(Liferay.Language.get('b-e'));
+						}
+					},
+
+					infoDayDateFormatter: {
+						validator: isFunction,
+						valueFn: function() {
+							var instance = this;
+
+							return instance._getFormatter(Liferay.Language.get('e'));
+						}
+					},
+
+					infoLabelBigDateFormatter: {
+						validator: isFunction,
+						valueFn: function() {
+							var instance = this;
+
+							return instance._getFormatter(Liferay.Language.get('a'));
+						}
+					},
+
+					infoLabelSmallDateFormatter: {
+						validator: isFunction,
+						valueFn: function() {
+							var instance = this;
+
+							return instance._getFormatter(Liferay.Language.get('b-d-y'));
+						}
+					}
+				},
+
+				EXTENDS: A.SchedulerAgendaView,
+
+				NAME: 'scheduler-view-agenda',
+
+				prototype: {
+					plotEvents: function() {
+						var instance = this;
+
+						var scheduler = instance.get('scheduler');
+
+						SchedulerAgendaView.superclass.plotEvents.apply(instance, arguments);
+
+						var headerContent = instance.get('headerContent');
+
+						if (scheduler.get('showHeader')) {
+							headerContent.show();
+						}
+						else {
+							headerContent.hide();
+						}
+					},
+
+					_getFormatter: function(mask) {
+						return function(date) {
+							var instance = this;
+
+							var scheduler = instance.get('scheduler');
+
+							return A.DataType.Date.format(
+								date,
+								{
+									format: mask,
+									locale: scheduler.get('locale')
+								}
+							);
+						};
+					}
+				}
+			}
+		);
+
+		Liferay.SchedulerAgendaView = SchedulerAgendaView;
 
 		var SchedulerEventRecorder = A.Component.create(
 			{
@@ -1062,6 +1304,11 @@ AUI.add(
 					calendarId: {
 						setter: toInt,
 						value: 0
+					},
+
+					dateFormat: {
+						validator: isString,
+						value: Liferay.Language.get('a-b-d')
 					},
 
 					editCalendarBookingURL: {
@@ -1359,6 +1606,9 @@ AUI.add(
 									},
 									destroyOnHide: true,
 									modal: true
+								},
+								dialogIframe: {
+									bodyCssClass: 'dialog-with-footer'
 								},
 								refreshWindow: window,
 								title: Liferay.Language.get('edit-calendar-booking'),

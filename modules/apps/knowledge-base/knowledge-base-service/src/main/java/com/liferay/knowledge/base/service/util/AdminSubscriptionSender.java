@@ -69,13 +69,14 @@ public class AdminSubscriptionSender extends SubscriptionSender {
 		setLocalizedContextAttribute(
 			"[$ARTICLE_VERSION$]",
 			new EscapableLocalizableFunction(
-				(locale) -> LanguageUtil.format(
+				locale -> LanguageUtil.format(
 					locale, "version-x",
-					String.valueOf(_kbArticle.getVersion()), false), true));
+					String.valueOf(_kbArticle.getVersion()), false),
+				true));
 		setLocalizedContextAttribute(
 			"[$CATEGORY_TITLE$]",
 			new EscapableLocalizableFunction(
-				(locale) -> LanguageUtil.get(locale, "category.kb"), true));
+				locale -> LanguageUtil.get(locale, "category.kb"), true));
 	}
 
 	@Override
@@ -154,10 +155,10 @@ public class AdminSubscriptionSender extends SubscriptionSender {
 			_kbArticle.getAttachmentsFileEntries();
 
 		if (attachmentsFileEntries.isEmpty()) {
-			return (locale) -> StringPool.BLANK;
+			return locale -> StringPool.BLANK;
 		}
 
-		return (locale) -> {
+		return locale -> {
 			StringBundler sb = new StringBundler(
 				attachmentsFileEntries.size() * 5);
 

@@ -58,6 +58,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -591,6 +592,13 @@ public class OrganizationLocalServiceImpl
 		}
 	}
 
+	@Override
+	public List<Organization> getOrganizations(
+		long companyId, String treePath) {
+
+		return organizationPersistence.findByC_T(companyId, treePath);
+	}
+
 	/**
 	 * Returns the organizations with the primary keys.
 	 *
@@ -672,9 +680,7 @@ public class OrganizationLocalServiceImpl
 
 		List<Organization> allSuborganizations = new ArrayList<>();
 
-		for (int i = 0; i < organizations.size(); i++) {
-			Organization organization = organizations.get(i);
-
+		for (Organization organization : organizations) {
 			List<Organization> suborganizations =
 				organizationPersistence.findByC_P(
 					organization.getCompanyId(),
@@ -2059,8 +2065,9 @@ public class OrganizationLocalServiceImpl
 
 			if (!ArrayUtil.contains(childrenTypes, type)) {
 				throw new OrganizationParentException(
-					"Type " + type + " not allowed as child of " +
-						parentOrganization.getType());
+					StringBundler.concat(
+						"Type ", type, " not allowed as child of ",
+						parentOrganization.getType()));
 			}
 		}
 

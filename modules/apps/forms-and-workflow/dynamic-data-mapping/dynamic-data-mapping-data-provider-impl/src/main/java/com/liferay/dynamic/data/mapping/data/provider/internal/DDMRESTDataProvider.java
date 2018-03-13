@@ -19,6 +19,7 @@ import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderContext;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderException;
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.cache.PortalCacheHelperUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
@@ -93,7 +94,8 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 
 		HttpResponse httpResponse = httpRequest.send();
 
-		JSONArray jsonArray = _jsonFactory.createJSONArray(httpResponse.body());
+		JSONArray jsonArray = _jsonFactory.createJSONArray(
+			httpResponse.bodyText());
 
 		List<KeyValuePair> results = new ArrayList<>();
 
@@ -109,7 +111,8 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 		}
 
 		if (ddmRESTDataProviderSettings.cacheable()) {
-			_portalCache.put(cacheKey, new DDMRESTDataProviderResult(results));
+			PortalCacheHelperUtil.putWithoutReplicator(
+				_portalCache, cacheKey, new DDMRESTDataProviderResult(results));
 		}
 
 		return results;

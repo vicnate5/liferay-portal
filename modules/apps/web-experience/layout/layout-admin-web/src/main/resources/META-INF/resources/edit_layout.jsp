@@ -17,17 +17,22 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String backURL = ParamUtil.getString(request, "backURL");
-
-if (Validator.isNull(backURL)) {
-	backURL = PortalUtil.getLayoutFullURL(layoutsAdminDisplayContext.getSelLayout(), themeDisplay);
-}
-
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
 Group group = layoutsAdminDisplayContext.getGroup();
 
 Layout selLayout = layoutsAdminDisplayContext.getSelLayout();
+
+String backURL = ParamUtil.getString(request, "backURL");
+
+if (Validator.isNull(backURL)) {
+	if (selLayout.isTypeURL()) {
+		backURL = PortalUtil.getGroupFriendlyURL(layoutsAdminDisplayContext.getSelLayoutSet(), themeDisplay);
+	}
+	else {
+		backURL = PortalUtil.getLayoutFullURL(selLayout, themeDisplay);
+	}
+}
 
 PortletURL redirectURL = layoutsAdminDisplayContext.getRedirectURL();
 
@@ -126,7 +131,7 @@ renderResponse.setTitle(selLayout.getName(locale));
 			<portlet:param name="mvcPath" value="/view.jsp" />
 		</portlet:actionURL>
 
-		<aui:form action='<%= HttpUtil.addParameter(editLayoutURL, "refererPlid", plid) %>' cssClass="edit-layout-form" data-senna-off="true" enctype="multipart/form-data" method="post" name="editLayoutFm">
+		<aui:form action='<%= HttpUtil.addParameter(editLayoutURL, "refererPlid", plid) %>' cssClass="edit-layout-form" enctype="multipart/form-data" method="post" name="editLayoutFm">
 			<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 			<aui:input name="groupId" type="hidden" value="<%= layoutsAdminDisplayContext.getGroupId() %>" />
 			<aui:input name="liveGroupId" type="hidden" value="<%= layoutsAdminDisplayContext.getLiveGroupId() %>" />

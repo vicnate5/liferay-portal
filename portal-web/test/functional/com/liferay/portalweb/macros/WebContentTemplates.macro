@@ -164,7 +164,9 @@
 		<if>
 			<isset var="templateDescription" />
 			<then>
-				<execute function="Type" locator1="TextInput#DESCRIPTION" value1="${templateDescription}" />
+				<execute macro="PortletEntry#inputDescriptionTextInput">
+					<var name="description" value="${templateDescription}" />
+				</execute>
 			</then>
 		</if>
 
@@ -206,7 +208,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 
@@ -236,14 +240,12 @@
 		</if>
 	</command>
 
-	<command name="save">
-		<execute function="AssertClick" locator1="DDMEditTemplate#SAVE_BUTTON" value1="Save" />
-	</command>
-
 	<command name="tearDownCP">
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 

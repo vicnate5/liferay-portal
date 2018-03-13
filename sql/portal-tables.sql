@@ -277,7 +277,7 @@ create table Company (
 	accountId LONG,
 	webId VARCHAR(75) null,
 	key_ TEXT null,
-	mx VARCHAR(75) null,
+	mx VARCHAR(200) null,
 	homeURL STRING null,
 	logoId LONG,
 	system BOOLEAN,
@@ -297,7 +297,7 @@ create table Contact_ (
 	classPK LONG,
 	accountId LONG,
 	parentContactId LONG,
-	emailAddress VARCHAR(75) null,
+	emailAddress VARCHAR(254) null,
 	firstName VARCHAR(75) null,
 	middleName VARCHAR(75) null,
 	lastName VARCHAR(75) null,
@@ -518,7 +518,7 @@ create table EmailAddress (
 	modifiedDate DATE null,
 	classNameId LONG,
 	classPK LONG,
-	address VARCHAR(75) null,
+	address VARCHAR(254) null,
 	typeId LONG,
 	primary_ BOOLEAN
 );
@@ -708,8 +708,8 @@ create table LayoutPrototype (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	name STRING null,
-	description STRING null,
+	name TEXT null,
+	description TEXT null,
 	settings_ STRING null,
 	active_ BOOLEAN
 );
@@ -869,7 +869,7 @@ create table MBMailingList (
 	createDate DATE null,
 	modifiedDate DATE null,
 	categoryId LONG,
-	emailAddress VARCHAR(75) null,
+	emailAddress VARCHAR(254) null,
 	inProtocol VARCHAR(75) null,
 	inServerName VARCHAR(75) null,
 	inServerPort INTEGER,
@@ -877,7 +877,7 @@ create table MBMailingList (
 	inUserName VARCHAR(75) null,
 	inPassword VARCHAR(75) null,
 	inReadInterval INTEGER,
-	outEmailAddress VARCHAR(75) null,
+	outEmailAddress VARCHAR(254) null,
 	outCustom BOOLEAN,
 	outServerName VARCHAR(75) null,
 	outServerPort INTEGER,
@@ -1565,7 +1565,7 @@ create table User_ (
 	reminderQueryAnswer VARCHAR(75) null,
 	graceLoginCount INTEGER,
 	screenName VARCHAR(75) null,
-	emailAddress VARCHAR(75) null,
+	emailAddress VARCHAR(254) null,
 	facebookId LONG,
 	googleUserId VARCHAR(75) null,
 	ldapServerId LONG,
@@ -1719,7 +1719,7 @@ create table VirtualHost (
 	virtualHostId LONG not null primary key,
 	companyId LONG,
 	layoutSetId LONG,
-	hostname VARCHAR(75) null
+	hostname VARCHAR(200) null
 );
 
 create table WebDAVProps (

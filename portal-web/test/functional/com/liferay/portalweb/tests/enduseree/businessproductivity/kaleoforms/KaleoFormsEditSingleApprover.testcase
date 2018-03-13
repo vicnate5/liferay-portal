@@ -14,7 +14,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Kaleo Forms Admin" />
 		</execute>
 
@@ -64,6 +66,11 @@
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#saveForm" />
+
+		<execute macro="KaleoFormsAdmin#assignForm">
+			<var name="kfProcessName" value="Kaleo Forms Process" />
+			<var name="workflowTask" value="create" />
+		</execute>
 
 		<execute macro="KaleoFormsAdmin#chooseForm">
 			<var name="kfFormName" value="Created Task Form" />
@@ -120,7 +127,9 @@
 		<property name="test.assert.javascript.errors" value="false" />
 		<property name="test.smtp.server.enabled" value="true" />
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Roles" />
 		</execute>
 
@@ -128,7 +137,9 @@
 			<var name="roleName" value="Reviewer Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Roles" />
 		</execute>
 
@@ -136,7 +147,9 @@
 			<var name="roleName" value="Updater Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -147,7 +160,9 @@
 			<var name="userScreenName" value="creator" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -156,7 +171,9 @@
 			<var name="userScreenName" value="creator" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Roles" />
 		</execute>
 
@@ -165,7 +182,9 @@
 			<var name="userScreenName" value="creator" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -176,7 +195,9 @@
 			<var name="userScreenName" value="reviewer" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -185,7 +206,9 @@
 			<var name="userScreenName" value="reviewer" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Roles" />
 		</execute>
 
@@ -194,7 +217,9 @@
 			<var name="userScreenName" value="reviewer" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Roles" />
 		</execute>
 
@@ -203,7 +228,9 @@
 			<var name="userScreenName" value="reviewer" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -214,7 +241,9 @@
 			<var name="userScreenName" value="updater" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -223,7 +252,9 @@
 			<var name="userScreenName" value="updater" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Roles" />
 		</execute>
 
@@ -232,7 +263,9 @@
 			<var name="userScreenName" value="updater" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Roles" />
 		</execute>
 
@@ -243,7 +276,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Kaleo Forms Admin" />
 		</execute>
 
@@ -317,7 +352,9 @@
 			<var name="kfProcessName" value="Kaleo Forms Process" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Kaleo Forms Admin" />
 		</execute>
 
@@ -336,7 +373,9 @@
 
 		<execute macro="Workflow#viewDefaultMyWorkflowTasksCP" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Kaleo Forms Admin" />
 		</execute>
 
@@ -355,11 +394,11 @@
 			<var name="asset" value="Review Notification Description" />
 			<var name="content" value="userfn Creator sent you a Process for review in the workflow." />
 			<var name="recipient" value="userfn Reviewer" />
-			<var name="sender" value="Liferay Portal Workflow Notifications" />
+			<var name="sender" value="Joe Bloggs" />
 			<var name="subject" value="Review Notification Description" />
 		</execute>
 
-		<execute function="Open" locator1="http://localhost:8080" />
+		<execute macro="Navigator#openURL" />
 
 		<execute macro="User#logoutAndLoginPG">
 			<var name="userLoginEmailAddress" value="user2@liferay.com" />
@@ -400,11 +439,11 @@
 			<var name="asset" value="Updater Modification Notification Description" />
 			<var name="content" value="Your submission was rejected by userfn Reviewer, please modify and resubmit." />
 			<var name="recipient" value="userfn Updater" />
-			<var name="sender" value="Liferay Portal Workflow Notifications" />
+			<var name="sender" value="Joe Bloggs" />
 			<var name="subject" value="Updater Modification Notification Description" />
 		</execute>
 
-		<execute function="Open" locator1="http://localhost:8080" />
+		<execute macro="Navigator#openURL" />
 
 		<execute macro="User#logoutAndLoginPG">
 			<var name="userLoginEmailAddress" value="user3@liferay.com" />
@@ -431,11 +470,11 @@
 			<var name="asset" value="Review Notification Description" />
 			<var name="content" value="userfn Updater sent you a Process for review in the workflow." />
 			<var name="recipient" value="userfn Reviewer" />
-			<var name="sender" value="Liferay Portal Workflow Notifications" />
+			<var name="sender" value="Joe Bloggs" />
 			<var name="subject" value="Review Notification Description" />
 		</execute>
 
-		<execute function="Open" locator1="http://localhost:8080" />
+		<execute macro="Navigator#openURL" />
 
 		<execute macro="User#logoutAndLoginPG">
 			<var name="userLoginEmailAddress" value="user2@liferay.com" />
@@ -479,9 +518,13 @@
 	</command>
 
 	<command name="ViewApprovedProcessNotificationWithComments" priority="3">
+		<execute function="WaitForSPARefresh" />
+
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Kaleo Forms Admin" />
 		</execute>
 
@@ -538,7 +581,9 @@
 			<var name="kfProcessName" value="Edited Kaleo Forms Process" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Kaleo Forms Admin" />
 		</execute>
 
@@ -552,7 +597,9 @@
 
 		<execute macro="Workflow#viewDefaultMyWorkflowTasksCP" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Kaleo Forms Admin" />
 		</execute>
 

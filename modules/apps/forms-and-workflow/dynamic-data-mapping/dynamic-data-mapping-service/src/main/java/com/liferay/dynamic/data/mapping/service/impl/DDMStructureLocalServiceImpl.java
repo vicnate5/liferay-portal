@@ -65,6 +65,7 @@ import com.liferay.portal.kernel.util.GroupThreadLocal;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -1466,8 +1467,8 @@ public class DDMStructureLocalServiceImpl
 
 		structureVersion.setGroupId(structure.getGroupId());
 		structureVersion.setCompanyId(structure.getCompanyId());
-		structureVersion.setUserId(structure.getUserId());
-		structureVersion.setUserName(structure.getUserName());
+		structureVersion.setUserId(user.getUserId());
+		structureVersion.setUserName(user.getFullName());
 		structureVersion.setCreateDate(structure.getModifiedDate());
 		structureVersion.setStructureId(structure.getStructureId());
 		structureVersion.setVersion(version);
@@ -1536,6 +1537,7 @@ public class DDMStructureLocalServiceImpl
 		validateParentStructure(structure.getStructureId(), parentStructureId);
 		validate(nameMap, parentDDMForm, ddmForm);
 
+		structure.setUserId(userId);
 		structure.setParentStructureId(parentStructureId);
 
 		DDMStructureVersion latestStructureVersion =
@@ -1845,8 +1847,10 @@ public class DDMStructureLocalServiceImpl
 
 			LocaleException le = new LocaleException(
 				LocaleException.TYPE_CONTENT,
-				"The locale " + contentDefaultLocale +
-					" is not available in company " + companyId);
+				StringBundler.concat(
+					"The locale ", String.valueOf(contentDefaultLocale),
+					" is not available in company ",
+					String.valueOf(companyId)));
 
 			le.setSourceAvailableLocales(
 				Collections.singleton(contentDefaultLocale));

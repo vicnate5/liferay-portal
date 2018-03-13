@@ -421,13 +421,28 @@ if (!portletName.equals(PortletKeys.SERVER_ADMIN)) {
 </aui:script>
 
 <aui:script>
-	function <portlet:namespace />updateActions() {
+	function <portlet:namespace />updateActions(oldSelectedResourceBlockPermissionActionIdsString, oldUnselectedResourceBlockPermissionActionIdsString) {
 		var form = AUI.$(document.<portlet:namespace />fm);
 
-		form.fm('redirect').val('<%= HtmlUtil.escapeJS(portletURL.toString()) %>');
-		form.fm('selectedTargets').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
-		form.fm('unselectedTargets').val(Liferay.Util.listUncheckedExcept(form, '<portlet:namespace />allRowIds'));
+		var oldSelectedResourceBlockPermissionActionIds = oldSelectedResourceBlockPermissionActionIdsString.split(',');
+		var oldUnselectedResourceBlockPermissionActionIds = oldUnselectedResourceBlockPermissionActionIdsString.split(',');
 
-		submitForm(form);
+		var selectedPermissionActionIdsString = Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds');
+		var unselectedPermissionActionIdsString = Liferay.Util.listUncheckedExcept(form, '<portlet:namespace />allRowIds');
+
+		var selectedPermissionActionIds = selectedPermissionActionIdsString.split(',');
+		var unselectedPermissionActionIds = unselectedPermissionActionIdsString.split(',');
+
+		function hasCommonItems(arr1, arr2) {
+			return AUI._.compact(AUI._.intersection(arr1, arr2)).length > 0;
+		}
+
+		if (!(hasCommonItems(selectedPermissionActionIds, oldUnselectedResourceBlockPermissionActionIds) || hasCommonItems(unselectedPermissionActionIds, oldSelectedResourceBlockPermissionActionIds)) || confirm('<liferay-ui:message key="updating-the-chosen-permissions-will-overwrite-the-respective-individually-defined-permissions-for-one-or-more-of-these-resource-types" />')) {
+			form.fm('redirect').val('<%= HtmlUtil.escapeJS(portletURL.toString()) %>');
+			form.fm('selectedTargets').val(selectedPermissionActionIdsString);
+			form.fm('unselectedTargets').val(unselectedPermissionActionIdsString);
+
+			submitForm(form);
+		}
 	}
 </aui:script>

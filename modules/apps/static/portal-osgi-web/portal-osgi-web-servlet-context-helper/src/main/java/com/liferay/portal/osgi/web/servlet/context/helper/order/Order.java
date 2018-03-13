@@ -40,7 +40,7 @@ public interface Order {
 
 	public enum Path {
 
-		BEFORE, AFTER
+		AFTER, BEFORE
 
 	}
 

@@ -34,9 +34,11 @@ import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
 import com.liferay.dynamic.data.mapping.util.DDMIndexer;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.exportimport.kernel.lar.PortletDataException;
+import com.liferay.exportimport.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.exportimport.kernel.lar.StagedModelDataHandler;
 import com.liferay.exportimport.kernel.lar.StagedModelDataHandlerRegistryUtil;
 import com.liferay.exportimport.kernel.lar.StagedModelDataHandlerUtil;
+import com.liferay.exportimport.kernel.staging.MergeLayoutPrototypesThreadLocal;
 import com.liferay.exportimport.portlet.preferences.processor.Capability;
 import com.liferay.exportimport.portlet.preferences.processor.ExportImportPortletPreferencesProcessor;
 import com.liferay.exportimport.portlet.preferences.processor.base.BaseExportImportPortletPreferencesProcessor;
@@ -70,6 +72,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
@@ -132,7 +135,13 @@ public class AssetPublisherExportImportPortletPreferencesProcessor
 		throws PortletDataException {
 
 		try {
-			exportAssetObjects(portletDataContext, portletPreferences);
+			if (MapUtil.getBoolean(
+					portletDataContext.getParameterMap(),
+					PortletDataHandlerKeys.PORTLET_DATA) &&
+				!MergeLayoutPrototypesThreadLocal.isInProgress()) {
+
+				exportAssetObjects(portletDataContext, portletPreferences);
+			}
 
 			return updateExportPortletPreferences(
 				portletDataContext, portletDataContext.getPortletId(),
@@ -446,6 +455,20 @@ public class AssetPublisherExportImportPortletPreferencesProcessor
 				_ddmStructureLocalService.fetchDDMStructureByUuidAndGroupId(
 					uuid, groupId);
 
+			if (ddmStructure == null) {
+				Map<String, String> structureUuids =
+					(Map<String, String>)
+						portletDataContext.getNewPrimaryKeysMap(
+							DDMStructure.class + ".ddmStructureUuid");
+
+				String defaultStructureUuid = MapUtil.getString(
+					structureUuids, uuid, uuid);
+
+				ddmStructure =
+					_ddmStructureLocalService.fetchDDMStructureByUuidAndGroupId(
+						defaultStructureUuid, groupId);
+			}
+
 			if (ddmStructure != null) {
 				return ddmStructure.getStructureId();
 			}
@@ -723,9 +746,10 @@ public class AssetPublisherExportImportPortletPreferencesProcessor
 		if (Validator.isNull(newPreferencesValue)) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to export portlet preferences value for class " +
-						DDMStructure.class.getName() + " with primary key " +
-							primaryKeyLong);
+					StringBundler.concat(
+						"Unable to export portlet preferences value for class ",
+						DDMStructure.class.getName(), " with primary key ",
+						String.valueOf(primaryKeyLong)));
 			}
 
 			return;
@@ -1223,7 +1247,7 @@ public class AssetPublisherExportImportPortletPreferencesProcessor
 			else if (name.startsWith("queryName") &&
 					 StringUtil.equalsIgnoreCase(value, "assetCategories")) {
 
-				String index = name.substring(9, name.length());
+				String index = name.substring(9);
 
 				updateImportPortletPreferencesClassPKs(
 					portletDataContext, portletPreferences,
@@ -1302,8 +1326,9 @@ public class AssetPublisherExportImportPortletPreferencesProcessor
 			if (Validator.isNumber(newValue)) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Ignoring group " + newValue + " because it cannot " +
-							"be converted to scope");
+						StringBundler.concat(
+							"Ignoring group ", newValue, " because it cannot ",
+							"be converted to scope"));
 				}
 
 				continue;
@@ -1322,25 +1347,28 @@ public class AssetPublisherExportImportPortletPreferencesProcessor
 			catch (NoSuchGroupException nsge) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Ignoring scope " + newValue + " because the " +
-							"referenced group was not found",
+						StringBundler.concat(
+							"Ignoring scope ", newValue, " because the ",
+							"referenced group was not found"),
 						nsge);
 				}
 			}
 			catch (NoSuchLayoutException nsle) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Ignoring scope " + newValue + " because the " +
-							"referenced layout was not found",
+						StringBundler.concat(
+							"Ignoring scope ", newValue, " because the ",
+							"referenced layout was not found"),
 						nsle);
 				}
 			}
 			catch (PrincipalException pe) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Ignoring scope " + newValue + " because the " +
-							"referenced parent group no longer allows " +
-								"sharing content with child sites",
+						StringBundler.concat(
+							"Ignoring scope ", newValue, " because the ",
+							"referenced parent group no longer allows sharing ",
+							"content with child sites"),
 						pe);
 				}
 			}

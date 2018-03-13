@@ -30,11 +30,11 @@ import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.upgrade.UpgradeStep;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.spring.extender.internal.classloader.BundleResolverClassLoader;
-import com.liferay.portal.upgrade.registry.UpgradeStepRegistratorTracker;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -150,11 +150,8 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 
 		@Override
 		public void destroy() throws Exception {
-			for (ServiceRegistration<UpgradeStep>
-					upgradeStepServiceRegistration :
-						_upgradeStepServiceRegistrations) {
-
-				upgradeStepServiceRegistration.unregister();
+			if (_upgradeStepServiceRegistration != null) {
+				_upgradeStepServiceRegistration.unregister();
 			}
 
 			if (_component != null) {
@@ -230,7 +227,7 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 
 			_dependencyManager.add(_component);
 
-			_upgradeStepServiceRegistrations = _processInitialUpgrade(
+			_upgradeStepServiceRegistration = _processInitialUpgrade(
 				classLoader);
 		}
 
@@ -242,14 +239,16 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 
 			serviceDependency.setService(
 				Release.class,
-				"(&(release.bundle.symbolic.name=" + _bundle.getSymbolicName() +
-					")(release.schema.version=" + _bundle.getVersion() + "))");
+				StringBundler.concat(
+					"(&(release.bundle.symbolic.name=",
+					_bundle.getSymbolicName(), ")(release.schema.version=",
+					String.valueOf(_bundle.getVersion()), "))"));
 
 			_component.add(serviceDependency);
 		}
 
-		private List<ServiceRegistration<UpgradeStep>>
-			_processInitialUpgrade(ClassLoader classLoader) {
+		private ServiceRegistration<UpgradeStep> _processInitialUpgrade(
+			ClassLoader classLoader) {
 
 			Dictionary<String, String> headers = _bundle.getHeaders();
 
@@ -280,10 +279,17 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 
 			properties.put("upgrade.initial.database.creation", "true");
 
-			return UpgradeStepRegistratorTracker.register(
-				ModuleApplicationContextExtender.this.getBundleContext(),
-				_bundle.getSymbolicName(), "0.0.0", upgradeToSchemaVersion,
-				properties,
+			properties.put(
+				"upgrade.bundle.symbolic.name", _bundle.getSymbolicName());
+			properties.put("upgrade.db.type", "any");
+			properties.put("upgrade.from.schema.version", "0.0.0");
+			properties.put("upgrade.to.schema.version", upgradeToSchemaVersion);
+
+			BundleContext bundleContext =
+				ModuleApplicationContextExtender.this.getBundleContext();
+
+			return bundleContext.registerService(
+				UpgradeStep.class,
 				new UpgradeStep() {
 
 					@Override
@@ -312,9 +318,10 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 							}
 							catch (Exception e) {
 								throw new UpgradeException(
-									"Bundle " + _bundle +
-										" has invalid content in " +
-											"tables.sql:\n" + tablesSQL,
+									StringBundler.concat(
+										"Bundle ", String.valueOf(_bundle),
+										" has invalid content in ",
+										"tables.sql:\n", tablesSQL),
 									e);
 							}
 						}
@@ -326,9 +333,10 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 							}
 							catch (Exception e) {
 								throw new UpgradeException(
-									"Bundle " + _bundle +
-										" has invalid content in " +
-											"sequences.sql:\n" + sequencesSQL,
+									StringBundler.concat(
+										"Bundle ", String.valueOf(_bundle),
+										" has invalid content in ",
+										"sequences.sql:\n", sequencesSQL),
 									e);
 							}
 						}
@@ -339,15 +347,17 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 							}
 							catch (Exception e) {
 								throw new UpgradeException(
-									"Bundle " + _bundle +
-										" has invalid content in " +
-											"indexes.sql:\n" + indexesSQL,
+									StringBundler.concat(
+										"Bundle ", String.valueOf(_bundle),
+										" has invalid content in ",
+										"indexes.sql:\n", indexesSQL),
 									e);
 							}
 						}
 					}
 
-				});
+				},
+				properties);
 		}
 
 		private List<ContextDependency> _processServiceReferences(Bundle bundle)
@@ -390,8 +400,8 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 		private final Bundle _bundle;
 		private org.apache.felix.dm.Component _component;
 		private final DependencyManager _dependencyManager;
-		private List<ServiceRegistration<UpgradeStep>>
-			_upgradeStepServiceRegistrations;
+		private ServiceRegistration<UpgradeStep>
+			_upgradeStepServiceRegistration;
 
 		private class ContextDependency {
 

@@ -69,6 +69,9 @@ public class DDLRecordSetStagedModelRepository
 		if (portletDataContext.isDataStrategyMirror()) {
 			serviceContext.setUuid(ddlRecordSet.getUuid());
 		}
+		else {
+			ddlRecordSet.setRecordSetKey(null);
+		}
 
 		return _ddlRecordSetLocalService.addRecordSet(
 			userId, ddlRecordSet.getGroupId(), ddlRecordSet.getDDMStructureId(),

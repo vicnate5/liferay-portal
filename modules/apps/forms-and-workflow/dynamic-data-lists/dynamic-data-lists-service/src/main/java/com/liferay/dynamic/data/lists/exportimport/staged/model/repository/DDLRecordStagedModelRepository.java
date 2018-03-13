@@ -19,6 +19,7 @@ import com.liferay.dynamic.data.lists.model.DDLRecordSet;
 import com.liferay.dynamic.data.lists.model.DDLRecordSetConstants;
 import com.liferay.dynamic.data.lists.model.DDLRecordVersion;
 import com.liferay.dynamic.data.lists.service.DDLRecordLocalService;
+import com.liferay.dynamic.data.mapping.constants.DDMWebKeys;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.exportimport.kernel.lar.StagedModelDataHandler;
@@ -74,6 +75,9 @@ public class DDLRecordStagedModelRepository
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			ddlRecord);
+
+		serviceContext.setAttribute(
+			DDMWebKeys.VALIDATE_DDM_FORM_VALUES, Boolean.FALSE);
 
 		if (portletDataContext.isDataStrategyMirror()) {
 			serviceContext.setUuid(ddlRecord.getUuid());
@@ -196,6 +200,9 @@ public class DDLRecordStagedModelRepository
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			ddlRecord);
+
+		serviceContext.setAttribute(
+			DDMWebKeys.VALIDATE_DDM_FORM_VALUES, Boolean.FALSE);
 
 		return _ddlRecordLocalService.updateRecord(
 			userId, ddlRecord.getRecordId(), false, ddlRecord.getDisplayIndex(),

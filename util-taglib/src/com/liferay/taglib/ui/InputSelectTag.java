@@ -45,6 +45,8 @@ public class InputSelectTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_cssClass = null;
 		_defaultValue = Boolean.FALSE;
 		_disabled = false;

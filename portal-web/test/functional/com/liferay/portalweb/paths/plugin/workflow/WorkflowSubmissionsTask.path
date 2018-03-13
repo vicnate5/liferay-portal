@@ -147,22 +147,6 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--TASKS_MENULIST-->
-<tr>
-	<td>TASKS_MENULIST_APPROVE</td>
-	<td>//a[@role='menuitem' and contains(.,'Approve')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>TASKS_MENULIST_REJECT</td>
-	<td>//a[@role='menuitem' and contains(.,'Reject')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
 <!--DIALOG_BOX-->
 <tr>
 	<td>DIALOG_BOX_COMMENT_FIELD</td>

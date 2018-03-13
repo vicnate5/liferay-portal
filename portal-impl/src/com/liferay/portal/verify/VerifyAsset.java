@@ -15,13 +15,13 @@
 package com.liferay.portal.verify;
 
 import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
-import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
-import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.model.DLFileEntryConstants;
-import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.util.LoggingTimer;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portlet.asset.model.impl.AssetEntryImpl;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,6 +31,10 @@ import java.sql.ResultSet;
  */
 public class VerifyAsset extends VerifyProcess {
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
+	@Deprecated
 	protected void deleteOrphanedAssetEntries() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			long classNameId = PortalUtil.getClassNameId(
@@ -38,34 +42,21 @@ public class VerifyAsset extends VerifyProcess {
 
 			StringBundler sb = new StringBundler(5);
 
-			sb.append("select classPK, entryId from AssetEntry where ");
-			sb.append("classNameId = ");
+			sb.append("delete from AssetEntry where classNameId = ");
 			sb.append(classNameId);
 			sb.append(" and classPK not in (select fileVersionId from ");
-			sb.append("DLFileVersion)");
+			sb.append("DLFileVersion) and classPK not in (select fileEntryId ");
+			sb.append("from DLFileEntry)");
 
-			try (PreparedStatement ps = connection.prepareStatement(
-					sb.toString());
-				ResultSet rs = ps.executeQuery()) {
+			runSQL(sb.toString());
 
-				while (rs.next()) {
-					long classPK = rs.getLong("classPK");
-					long entryId = rs.getLong("entryId");
-
-					DLFileEntry dlFileEntry =
-						DLFileEntryLocalServiceUtil.fetchDLFileEntry(classPK);
-
-					if (dlFileEntry == null) {
-						AssetEntryLocalServiceUtil.deleteAssetEntry(entryId);
-					}
-				}
-			}
+			EntityCacheUtil.clearCache(AssetEntryImpl.class);
+			FinderCacheUtil.clearCache(AssetEntryImpl.class.getName());
 		}
 	}
 
 	@Override
 	protected void doVerify() throws Exception {
-		deleteOrphanedAssetEntries();
 		rebuildTree();
 	}
 

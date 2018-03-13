@@ -62,7 +62,7 @@ AssetEntry layoutAssetEntry = AssetEntryLocalServiceUtil.getEntry(CalendarBookin
 				</dd>
 
 				<%
-				List<CalendarBooking> childCalendarBookings = calendarBooking.getChildCalendarBookings();
+				List<CalendarBooking> childCalendarBookings = calendarDisplayContext.getChildCalendarBookings(calendarBooking);
 				%>
 
 				<c:if test="<%= !childCalendarBookings.isEmpty() %>">

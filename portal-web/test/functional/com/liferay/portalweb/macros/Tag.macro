@@ -23,9 +23,9 @@
 
 		<execute function="Type" locator1="AssetCategorization#TAGS_FIELD" value1="tag " />
 
-		<execute function="AssertTextEquals" locator1="AssetCategorization#TAG_AUTOCOMPLETE" value1="${tagName}" />
+		<execute function="AssertTextEquals" locator1="AssetCategorization#TAG_AUTO_COMPLETE_SPECIFIC" value1="${tagName}" />
 
-		<execute function="AssertClick" locator1="AssetCategorization#TAG_AUTOCOMPLETE" value1="${tagName}" />
+		<execute function="AssertClick" locator1="AssetCategorization#TAG_AUTO_COMPLETE_SPECIFIC" value1="${tagName}" />
 
 		<execute macro="PortletEntry#publish" />
 	</command>
@@ -179,7 +179,7 @@
 		<if>
 			<isset var="selectTagName" />
 			<then>
-				<execute function="Click" locator1="Button#SELECT" value1="Select" />
+				<execute function="Click" locator1="Button#SELECT" />
 
 				<execute macro="IFrame#selectDialogFrame" />
 
@@ -229,9 +229,19 @@
 	</command>
 
 	<command name="tearDownCP">
-		<execute macro="Navigator#openURL" />
+		<if>
+			<equals arg1="${stagingSite}" arg2="true" />
+			<then>
+				<execute macro="ProductMenu#gotoStagingSite" />
+			</then>
+			<else>
+				<execute macro="Navigator#openURL" />
+			</else>
+		</if>
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Tags" />
 		</execute>
 

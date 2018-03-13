@@ -158,11 +158,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>EDIT_SELECT_RELATED_ASSETS</td>
-	<td>//a[@role='menuitem' and contains(.,'${key_kbArticleRelatedAssetType}')]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>EDIT_TITLE_FIELD_REQUIRED</td>
 	<td>//span[contains(.,'Required')]</td>
 	<td></td>

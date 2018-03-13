@@ -658,6 +658,7 @@ public class DLFileEntryFinderImpl
 
 			if (userId > 0) {
 				qPos.add(userId);
+				qPos.add(userId);
 			}
 
 			qPos.add(queryDefinition.getStatus());
@@ -729,6 +730,7 @@ public class DLFileEntryFinderImpl
 			qPos.add(groupId);
 
 			if (userId > 0) {
+				qPos.add(userId);
 				qPos.add(userId);
 			}
 

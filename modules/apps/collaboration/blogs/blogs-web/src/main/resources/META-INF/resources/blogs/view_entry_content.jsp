@@ -23,6 +23,9 @@ BlogsEntry entry = (BlogsEntry)request.getAttribute("view_entry_content.jsp-entr
 
 AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp-assetEntry");
 
+RatingsEntry ratingsEntry = (RatingsEntry)request.getAttribute("view_entry_content.jsp-ratingsEntry");
+RatingsStats ratingsStats = (RatingsStats)request.getAttribute("view_entry_content.jsp-ratingsStats");
+
 String socialBookmarksDisplayPosition = blogsPortletInstanceConfiguration.socialBookmarksDisplayPosition();
 %>
 
@@ -67,7 +70,7 @@ String socialBookmarksDisplayPosition = blogsPortletInstanceConfiguration.social
 
 					<c:if test="<%= viewSingleEntry %>">
 						<div class="cover-image-caption">
-							<small><%= HtmlUtil.escape(entry.getCoverImageCaption()) %></small>
+							<small><%= entry.getCoverImageCaption() %></small>
 						</div>
 					</c:if>
 				</c:if>
@@ -263,6 +266,8 @@ String socialBookmarksDisplayPosition = blogsPortletInstanceConfiguration.social
 								className="<%= BlogsEntry.class.getName() %>"
 								classPK="<%= entry.getEntryId() %>"
 								inTrash="<%= entry.isInTrash() %>"
+								ratingsEntry="<%= ratingsEntry %>"
+								ratingsStats="<%= ratingsStats %>"
 							/>
 						</div>
 					</c:if>

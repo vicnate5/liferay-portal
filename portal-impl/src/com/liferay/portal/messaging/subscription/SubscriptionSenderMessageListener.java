@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.SubscriptionSender;
 import com.liferay.portal.kernel.util.Time;
 
@@ -47,9 +48,11 @@ public class SubscriptionSenderMessageListener extends BaseMessageListener {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Sending notifications for {mailId=" +
-					subscriptionSender.getMailId() + "} completed in " +
-						(stopWatch.getTime() / Time.SECOND) + " seconds");
+				StringBundler.concat(
+					"Sending notifications for {mailId=",
+					subscriptionSender.getMailId(), "} completed in ",
+					String.valueOf(stopWatch.getTime() / Time.SECOND),
+					" seconds"));
 		}
 	}
 

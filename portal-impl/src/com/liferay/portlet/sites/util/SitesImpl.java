@@ -296,9 +296,10 @@ public class SitesImpl implements Sites {
 		UnicodeProperties typeSettingsProperties =
 			targetLayout.getTypeSettingsProperties();
 
+		Date modifiedDate = targetLayout.getModifiedDate();
+
 		typeSettingsProperties.setProperty(
-			LAST_MERGE_TIME,
-			String.valueOf(targetLayout.getModifiedDate().getTime()));
+			LAST_MERGE_TIME, String.valueOf(modifiedDate.getTime()));
 
 		LayoutLocalServiceUtil.updateLayout(targetLayout);
 
@@ -635,6 +636,10 @@ public class SitesImpl implements Sites {
 		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
 			serviceContext);
 
+		parameterMap.put(
+			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT,
+			new String[] {Boolean.FALSE.toString()});
+
 		Map<String, Serializable> exportLayoutSettingsMap =
 			ExportImportConfigurationSettingsMapFactory.
 				buildExportLayoutSettingsMap(
@@ -877,6 +882,10 @@ public class SitesImpl implements Sites {
 
 		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
 			serviceContext);
+
+		parameterMap.put(
+			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT,
+			new String[] {Boolean.FALSE.toString()});
 
 		setLayoutSetPrototypeLinkEnabledParameter(
 			parameterMap, layoutSet, serviceContext);
@@ -1352,10 +1361,21 @@ public class SitesImpl implements Sites {
 				layoutSet.isPrivateLayout(), parameterMap, importData);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			mergeFailCount++;
+
+			StringBundler sb = new StringBundler(6);
+
+			sb.append("Merge fail count increased to ");
+			sb.append(mergeFailCount);
+			sb.append(" for layout set prototype ");
+			sb.append(layoutSetPrototype.getLayoutSetPrototypeId());
+			sb.append(" and layout set ");
+			sb.append(layoutSet.getLayoutSetId());
+
+			_log.error(sb.toString(), e);
 
 			layoutSetPrototypeSettingsProperties.setProperty(
-				MERGE_FAIL_COUNT, String.valueOf(++mergeFailCount));
+				MERGE_FAIL_COUNT, String.valueOf(mergeFailCount));
 
 			// Invoke updateImpl so that we do not trigger the listeners
 
@@ -1923,14 +1943,16 @@ public class SitesImpl implements Sites {
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Copied " + file.getAbsolutePath() + " to " +
-							cacheFile.getAbsolutePath());
+						StringBundler.concat(
+							"Copied ", file.getAbsolutePath(), " to ",
+							cacheFile.getAbsolutePath()));
 				}
 			}
 			catch (Exception e) {
 				_log.error(
-					"Unable to copy file " + file.getAbsolutePath() + " to " +
-						cacheFile.getAbsolutePath(),
+					StringBundler.concat(
+						"Unable to copy file ", file.getAbsolutePath(), " to ",
+						cacheFile.getAbsolutePath()),
 					e);
 			}
 		}

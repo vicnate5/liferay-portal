@@ -6,7 +6,7 @@
 		<if>
 			<condition function="IsElementPresent" locator1="Panel#PANEL_HEADING_COLLAPSED" />
 			<then>
-				<execute function="AssertClick#assertTextClickAt" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="${contentType}" />
+				<execute function="AssertClick" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="${contentType}" />
 			</then>
 		</if>
 
@@ -33,7 +33,9 @@
 	</command>
 
 	<command name="gotoNotificationDelivery">
-		<execute macro="ProductMenu#gotoUserMyAccount">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="My Account" />
+			<var name="panel" value="User" />
 			<var name="portlet" value="Notifications" />
 		</execute>
 
@@ -76,7 +78,7 @@
 
 		<var name="key_contentType" value="Bookmarks" />
 
-		<execute function="AssertClick#assertTextClickAt" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Bookmarks" />
+		<execute function="AssertClick" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Bookmarks" />
 
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_1" value1="Adds a new bookmark in a folder you are subscribed to." />
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_2" value1="Updates a bookmark you are subscribed to." />
@@ -85,7 +87,7 @@
 
 		<var name="key_contentType" value="Comments" />
 
-		<execute function="AssertClick#assertTextClickAt" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Comments" />
+		<execute function="AssertClick" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Comments" />
 
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_1" value1="Adds a comment to comments you are subscribed to." />
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_2" value1="Updates a comment you are subscribed to." />
@@ -94,7 +96,7 @@
 
 		<var name="key_contentType" value="Documents and Media" />
 
-		<execute function="AssertClick#assertTextClickAt" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Documents and Media" />
+		<execute function="AssertClick" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Documents and Media" />
 
 		<var method="StringUtil#replace('${key_contentType}',' ','-')" name="key_contentType" />
 
@@ -105,7 +107,7 @@
 
 		<var name="key_contentType" value="Mentions" />
 
-		<execute function="AssertClick#assertTextClickAt" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Mentions" />
+		<execute function="AssertClick" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Mentions" />
 
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_1" value1="Mentions you in a blogs entry, comment, or message boards message." />
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_EMAIL_OPTION" value1="Email" />
@@ -113,7 +115,7 @@
 
 		<var name="key_contentType" value="Message Boards" />
 
-		<execute function="AssertClick#assertTextClickAt" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Message Boards" />
+		<execute function="AssertClick" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Message Boards" />
 
 		<var method="StringUtil#replace('${key_contentType}',' ','-')" name="key_contentType" />
 
@@ -124,7 +126,7 @@
 
 		<var name="key_contentType" value="Microblogs" />
 
-		<execute function="AssertClick#assertTextClickAt" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Microblogs" />
+		<execute function="AssertClick" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Microblogs" />
 
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_1" value1="Comments on a microblog you commented on." />
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_2" value1="Comments on a microblog you are tagged in." />
@@ -135,7 +137,7 @@
 
 		<var name="key_contentType" value="Web Content" />
 
-		<execute function="AssertClick#assertTextClickAt" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Web Content" />
+		<execute function="AssertClick" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Web Content" />
 
 		<var method="StringUtil#replace('${key_contentType}',' ','-')" name="key_contentType" />
 
@@ -146,7 +148,7 @@
 
 		<var name="key_contentType" value="Wiki" />
 
-		<execute function="AssertClick#assertTextClickAt" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Wiki" />
+		<execute function="AssertClick" locator1="Notifications#NOTIFICATION_DELIVERY_PANEL" value1="Wiki" />
 
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_1" value1="Adds a new wiki page in a wiki you are subscribed to." />
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_2" value1="Updates a wiki page you are subscribed to." />

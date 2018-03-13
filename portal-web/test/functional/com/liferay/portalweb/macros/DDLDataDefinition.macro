@@ -28,7 +28,7 @@
 			</else>
 		</if>
 
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="DDLDataDefinition#editName">
 			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
@@ -149,7 +149,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Dynamic Data Lists" />
 		</execute>
 
@@ -262,7 +264,9 @@
 	<command name="tearDownCP">
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Dynamic Data Lists" />
 		</execute>
 
@@ -307,7 +311,7 @@
 
 		<var name="key_ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
 
-		<execute function="Click" locator1="DDMSelectStructure#DDM_STRUCTURE_TABLE_NAME_LINK" value1="${ddlDataDefinitionName}" />
+		<execute function="Click" locator1="DDMSelectStructure#DDM_STRUCTURE_TABLE_NAME_LINK" />
 
 		<execute function="AssertTextEquals" locator1="Portlet#HEADER" value1="${ddlDataDefinitionName}" />
 
@@ -327,7 +331,7 @@
 			<then>
 				<var name="key_fieldFieldLabel" value="${fieldFieldLabel}" />
 
-				<execute function="AssertElementPresent" locator1="DDMEditStructure#FORM_FIELD" value1="${fieldFieldLabel}" />
+				<execute function="AssertElementPresent" locator1="DDMEditStructure#FORM_FIELD" />
 			</then>
 		</if>
 	</command>

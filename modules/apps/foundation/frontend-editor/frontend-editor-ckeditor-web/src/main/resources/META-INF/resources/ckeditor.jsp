@@ -575,6 +575,8 @@ name = HtmlUtil.escapeJS(name);
 
 											window['<%= name %>'].create();
 
+											window['<%= name %>'].setHTML(ckEditorContent);
+
 											initialEditor = CKEDITOR.instances['<%= name %>'].id;
 										}
 									}

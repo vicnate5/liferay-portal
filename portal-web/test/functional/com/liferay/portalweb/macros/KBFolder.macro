@@ -1,9 +1,7 @@
 <definition>
 	<command name="_gotoAddFolder">
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="Folder">
-			<var name="key_menuItem" value="Folder" />
+		<execute macro="LexiconEntry#gotoAddMenuItem">
+			<var name="menuItem" value="Folder" />
 		</execute>
 	</command>
 
@@ -109,7 +107,7 @@
 				<execute function="AssertClick" locator1="Button#CHOOSE_THIS_FOLDER" value1="Choose This Folder" />
 			</then>
 			<else>
-				<execute function="Click" locator1="KnowledgeBaseSelectParent#CHOOSE_BUTTON" value1="Choose" />
+				<execute function="Click" locator1="KnowledgeBaseSelectParent#CHOOSE_BUTTON" />
 			</else>
 		</if>
 
@@ -125,7 +123,9 @@
 	<command name="tearDownCP">
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Knowledge Base" />
 		</execute>
 

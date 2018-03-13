@@ -112,6 +112,16 @@
 </tr>
 <!--TEXT_FORMATTING-->
 <tr>
+	<td>TEXT_FORMATTING_LINK_BROWSE_BUTTON</td>
+	<td>//button[contains(@title,'browse')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TEXT_FORMATTING_LINK_NAME</td>
+	<td>//a[contains(@href,'${key_linkName}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>TEXT_FORMATTING_STYLE</td>
 	<td>//button[contains(@class,'ae-toolbar-element')]//span[contains(@class,'icon-arrow')]</td>
 	<td></td>

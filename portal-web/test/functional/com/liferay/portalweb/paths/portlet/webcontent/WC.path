@@ -9,6 +9,11 @@
 </thead>
 <tbody>
 <tr>
+	<td>BODY</td>
+	<td>//div[contains(@id,'journal_content_web_portlet')]//div[contains(@class,'portlet-content-editable')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>LINK_TO_PAGE_SELECT_PAGE_BUTTON</td>
 	<td>//button[contains(@id,'SelectButton')]</td>
 	<td></td>
@@ -21,6 +26,11 @@
 <tr>
 	<td>PRIORITY</td>
 	<td>//input[contains(@id,'assetPriority')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SOURCE_GARBAGE_DATA</td>
+	<td>//pre[contains(.,'data')]</td>
 	<td></td>
 </tr>
 <!--SEARCH-->

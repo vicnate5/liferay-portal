@@ -38,7 +38,7 @@
 	</tear-down>
 
 	<command name="AddDMDocumentRegRoleDefaultPermissions" priority="5">
-		<property name="portal.acceptance" value="true" />
+		<property name="portal.acceptance" value="false" />
 
 		<execute macro="Permissions#setUpRegRolePG">
 			<var name="pageName" value="Documents and Media Page" />
@@ -59,11 +59,11 @@
 			<var name="pageName" value="Documents and Media Page" />
 		</execute>
 
-		<execute function="AssertElementNotPresent" locator1="Toolbar#ADD" value1="Add" />
+		<execute function="AssertElementNotPresent" locator1="Toolbar#ADD" />
 	</command>
 
 	<command name="AddDMDocumentRegRoleDefinePermissions" priority="5">
-		<property name="portal.acceptance" value="true" />
+		<property name="portal.acceptance" value="false" />
 
 		<execute macro="Permissions#setUpRegRolePG">
 			<var name="pageName" value="Documents and Media Page" />
@@ -115,7 +115,7 @@
 			<var name="pageName" value="Documents and Media Page" />
 		</execute>
 
-		<execute function="AssertElementNotPresent" locator1="Toolbar#ADD" value1="Add" />
+		<execute function="AssertElementNotPresent" locator1="Toolbar#ADD" />
 	</command>
 
 	<command name="AddDMDocumentSiteMemberRoleInline" priority="4">
@@ -178,7 +178,7 @@
 			<var name="portletName" value="Documents and Media" />
 		</execute>
 
-		<execute function="AssertElementNotPresent" locator1="MenuItem#ANY_MENU_ITEM" value1="Basic Document">
+		<execute function="AssertElementNotPresent" locator1="MenuItem#ANY_MENU_ITEM">
 			<var name="key_menuItem" value="Basic Document" />
 		</execute>
 
@@ -255,7 +255,7 @@
 			<var name="portletName" value="Documents and Media" />
 		</execute>
 
-		<execute function="AssertElementNotPresent" locator1="MenuItem#ANY_MENU_ITEM" value1="Basic Document">
+		<execute function="AssertElementNotPresent" locator1="MenuItem#ANY_MENU_ITEM">
 			<var name="key_menuItem" value="Basic Document" />
 		</execute>
 
@@ -296,13 +296,12 @@
 			<var name="portletName" value="Documents and Media" />
 		</execute>
 
-		<execute function="AssertElementNotPresent" locator1="MenuItem#ANY_MENU_ITEM" value1="Basic Document">
+		<execute function="AssertElementNotPresent" locator1="MenuItem#ANY_MENU_ITEM">
 			<var name="key_menuItem" value="Basic Document" />
 		</execute>
 	</command>
 
 	<command name="DeleteDMFolderRegRoleInline" priority="5">
-		<property name="portal.acceptance" value="true" />
 		<property name="testray.component.names" value="Training" />
 
 		<execute macro="Permissions#setUpRegRoleLoginUserPG">

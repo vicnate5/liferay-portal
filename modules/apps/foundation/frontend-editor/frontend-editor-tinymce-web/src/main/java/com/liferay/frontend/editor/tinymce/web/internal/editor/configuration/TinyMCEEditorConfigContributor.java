@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.AggregateResourceBundleLoader;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.ResourceBundleLoaderUtil;
 import com.liferay.portal.kernel.util.TextFormatter;
@@ -110,8 +109,7 @@ public class TinyMCEEditorConfigContributor
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		ResourceBundle resourceBundle =
-			_resourceBundleLoader.loadResourceBundle(
-				LocaleUtil.toLanguageId(locale));
+			_resourceBundleLoader.loadResourceBundle(locale);
 
 		jsonArray.put(
 			getStyleFormatJSONObject(

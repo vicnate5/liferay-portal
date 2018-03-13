@@ -19,7 +19,7 @@ import com.liferay.application.list.PanelAppRegistry;
 import com.liferay.application.list.PanelCategoryRegistry;
 import com.liferay.application.list.constants.ApplicationListWebKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.product.navigation.simulation.web.constants.ProductNavigationSimulationPortletKeys;
+import com.liferay.product.navigation.simulation.constants.ProductNavigationSimulationPortletKeys;
 
 import java.io.IOException;
 
@@ -47,6 +47,7 @@ import org.osgi.service.component.annotations.Reference;
 		"javax.portlet.display-name=Simulation",
 		"javax.portlet.init-param.view-template=/portlet/view.jsp",
 		"javax.portlet.name=" + ProductNavigationSimulationPortletKeys.PRODUCT_NAVIGATION_SIMULATION,
+		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user",
 		"javax.portlet.supports.mime-type=text/html"
 	},

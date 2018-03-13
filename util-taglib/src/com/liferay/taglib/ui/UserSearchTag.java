@@ -42,6 +42,8 @@ public class UserSearchTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_portletURL = null;
 		_rowChecker = null;
 		_userParams = null;

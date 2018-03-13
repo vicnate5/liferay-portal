@@ -109,8 +109,9 @@ public class PortletConfigurationCSSPortlet extends MVCPortlet {
 			JSONObject defaultPortletTitlesJSONObject =
 				JSONFactoryUtil.createJSONObject();
 
-			for (Locale locale : LanguageUtil.getAvailableLocales(
-					themeDisplay.getSiteGroupId())) {
+			for (Locale locale :
+					LanguageUtil.getAvailableLocales(
+						themeDisplay.getSiteGroupId())) {
 
 				String rootPortletId = PortletIdCodec.decodePortletName(
 					portletId);

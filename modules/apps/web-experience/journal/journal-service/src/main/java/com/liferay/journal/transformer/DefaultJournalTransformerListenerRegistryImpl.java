@@ -40,6 +40,7 @@ public class DefaultJournalTransformerListenerRegistryImpl
 		return _transformerListeners.get(className);
 	}
 
+	@Override
 	public List<TransformerListener> getTransformerListeners() {
 		return new ArrayList(_transformerListeners.values());
 	}

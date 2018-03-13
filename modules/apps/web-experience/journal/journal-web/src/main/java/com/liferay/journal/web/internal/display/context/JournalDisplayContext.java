@@ -77,6 +77,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PrefsParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -115,6 +116,9 @@ public class JournalDisplayContext {
 		_liferayPortletResponse = liferayPortletResponse;
 		_portletPreferences = portletPreferences;
 
+		_journalWebConfiguration =
+			(JournalWebConfiguration)_request.getAttribute(
+				JournalWebConfiguration.class.getName());
 		_portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
 			_request);
 	}
@@ -322,6 +326,46 @@ public class JournalDisplayContext {
 		return ddmStructure.getPrimaryKey();
 	}
 
+	public List<DDMStructure> getDDMStructures() throws PortalException {
+		Integer restrictionType = getRestrictionType();
+
+		return getDDMStructures(restrictionType);
+	}
+
+	public List<DDMStructure> getDDMStructures(Integer restrictionType)
+		throws PortalException {
+
+		if (_ddmStructures != null) {
+			return _ddmStructures;
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		if (restrictionType == null) {
+			restrictionType = getRestrictionType();
+		}
+
+		_ddmStructures = JournalFolderServiceUtil.getDDMStructures(
+			PortalUtil.getCurrentAndAncestorSiteGroupIds(
+				themeDisplay.getScopeGroupId()),
+			getFolderId(), restrictionType);
+
+		Locale locale = themeDisplay.getLocale();
+
+		if (_journalWebConfiguration.journalBrowseByStructuresSortedByName()) {
+			_ddmStructures.sort(
+				(ddmStructure1, ddmStructure2) -> {
+					String name1 = ddmStructure1.getName(locale);
+					String name2 = ddmStructure2.getName(locale);
+
+					return name1.compareTo(name2);
+				});
+		}
+
+		return _ddmStructures;
+	}
+
 	public String getDDMTemplateKey() {
 		if (_ddmTemplateKey != null) {
 			return _ddmTemplateKey;
@@ -345,13 +389,9 @@ public class JournalDisplayContext {
 		_displayStyle = ParamUtil.getString(_request, "displayStyle");
 
 		if (Validator.isNull(_displayStyle)) {
-			JournalWebConfiguration journalWebConfiguration =
-				(JournalWebConfiguration)_request.getAttribute(
-					JournalWebConfiguration.class.getName());
-
 			_displayStyle = portalPreferences.getValue(
 				JournalPortletKeys.JOURNAL, "display-style",
-				journalWebConfiguration.defaultDisplayView());
+				_journalWebConfiguration.defaultDisplayView());
 		}
 		else if (ArrayUtil.contains(displayViews, _displayStyle)) {
 			portalPreferences.setValue(
@@ -370,14 +410,10 @@ public class JournalDisplayContext {
 
 	public String[] getDisplayViews() {
 		if (_displayViews == null) {
-			JournalWebConfiguration journalWebConfiguration =
-				(JournalWebConfiguration)_request.getAttribute(
-					JournalWebConfiguration.class.getName());
-
 			_displayViews = StringUtil.split(
 				PrefsParamUtil.getString(
 					_portletPreferences, _request, "displayViews",
-					StringUtil.merge(journalWebConfiguration.displayViews())));
+					StringUtil.merge(_journalWebConfiguration.displayViews())));
 		}
 
 		return _displayViews;
@@ -536,13 +572,9 @@ public class JournalDisplayContext {
 	}
 
 	public String[] getOrderColumns() {
-		JournalWebConfiguration journalWebConfiguration =
-			(JournalWebConfiguration)_request.getAttribute(
-				JournalWebConfiguration.class.getName());
-
 		String[] orderColumns = {"display-date", "modified-date"};
 
-		if (!journalWebConfiguration.journalArticleForceAutogenerateId()) {
+		if (!_journalWebConfiguration.journalArticleForceAutogenerateId()) {
 			orderColumns = ArrayUtil.append(orderColumns, "id");
 		}
 
@@ -670,8 +702,9 @@ public class JournalDisplayContext {
 
 		entriesChecker.setCssClass("entry-selector");
 		entriesChecker.setRememberCheckBoxStateURLRegex(
-			"^(?!.*" + _liferayPortletResponse.getNamespace() +
-				"redirect).*(folderId=" + getFolderId() + ")");
+			StringBundler.concat(
+				"^(?!.*", _liferayPortletResponse.getNamespace(),
+				"redirect).*(folderId=", String.valueOf(getFolderId()), ")"));
 
 		articleSearchContainer.setRowChecker(entriesChecker);
 
@@ -759,11 +792,7 @@ public class JournalDisplayContext {
 				folderIds.add(getFolderId());
 			}
 
-			JournalWebConfiguration journalWebConfiguration =
-				(JournalWebConfiguration)_request.getAttribute(
-					JournalWebConfiguration.class.getName());
-
-			if (journalWebConfiguration.journalArticlesSearchWithIndex()) {
+			if (_journalWebConfiguration.journalArticlesSearchWithIndex()) {
 				boolean orderByAsc = false;
 
 				if (Objects.equals(getOrderByType(), "asc")) {
@@ -816,9 +845,7 @@ public class JournalDisplayContext {
 
 				Document[] documents = hits.getDocs();
 
-				for (int i = 0; i < documents.length; i++) {
-					Document document = documents[i];
-
+				for (Document document : documents) {
 					JournalArticle article = null;
 					JournalFolder folder = null;
 
@@ -1114,10 +1141,10 @@ public class JournalDisplayContext {
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, List<java.lang.Long> folderIds,
-		long classNameId, String ddmStructureKey, String ddmTemplateKey,
-		String keywords, LinkedHashMap<String, Object> params, int start,
-		int end, Sort sort, boolean showVersions) {
+		long companyId, long groupId, List<Long> folderIds, long classNameId,
+		String ddmStructureKey, String ddmTemplateKey, String keywords,
+		LinkedHashMap<String, Object> params, int start, int end, Sort sort,
+		boolean showVersions) {
 
 		String articleId = null;
 		String title = null;
@@ -1173,6 +1200,7 @@ public class JournalDisplayContext {
 		}
 
 		searchContext.setAttribute("head", !showVersions);
+		searchContext.setAttribute("latest", !showVersions);
 		searchContext.setAttribute("params", params);
 
 		if (!showVersions) {
@@ -1226,11 +1254,13 @@ public class JournalDisplayContext {
 	private DDMFormValues _ddmFormValues;
 	private String _ddmStructureKey;
 	private String _ddmStructureName;
+	private List<DDMStructure> _ddmStructures;
 	private String _ddmTemplateKey;
 	private String _displayStyle;
 	private String[] _displayViews;
 	private JournalFolder _folder;
 	private Long _folderId;
+	private final JournalWebConfiguration _journalWebConfiguration;
 	private String _keywords;
 	private final LiferayPortletRequest _liferayPortletRequest;
 	private final LiferayPortletResponse _liferayPortletResponse;

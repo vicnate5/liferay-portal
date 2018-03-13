@@ -14,6 +14,9 @@
 
 package com.liferay.portlet;
 
+import com.liferay.petra.encryptor.Encryptor;
+import com.liferay.petra.encryptor.EncryptorException;
+import com.liferay.petra.string.CharPool;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
@@ -36,7 +39,6 @@ import com.liferay.portal.kernel.service.PortletLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Base64;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.CookieKeys;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -54,8 +56,6 @@ import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.security.lang.DoPrivilegedUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.social.util.FacebookUtil;
-import com.liferay.util.Encryptor;
-import com.liferay.util.EncryptorException;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -86,6 +86,7 @@ import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Brian Wing Shun Chan
@@ -415,8 +416,10 @@ public class PortletURLImpl
 			!mappedCacheability.equals(PORTLET)) {
 
 			throw new IllegalArgumentException(
-				"Cacheability " + cacheability + " is not FULL, " + FULL +
-					", PAGE, " + PAGE + ", or PORTLET, " + PORTLET);
+				StringBundler.concat(
+					"Cacheability ", cacheability, " is not FULL, ",
+					String.valueOf(FULL), ", PAGE, ", PAGE, ", or PORTLET, ",
+					String.valueOf(PORTLET)));
 		}
 
 		if (_portletRequest instanceof ResourceRequest) {
@@ -716,7 +719,9 @@ public class PortletURLImpl
 			biConsumer.accept("p_p_lifecycle", "2");
 		}
 
-		if (_windowStateString != null) {
+		if ((_windowStateString != null) &&
+			!_cacheability.equals(ResourceURL.FULL)) {
+
 			biConsumer.accept("p_p_state", _windowStateString);
 		}
 
@@ -724,7 +729,9 @@ public class PortletURLImpl
 			biConsumer.accept("p_p_state_rcv", "1");
 		}
 
-		if (_portletModeString != null) {
+		if ((_portletModeString != null) &&
+			!_cacheability.equals(ResourceURL.FULL)) {
+
 			biConsumer.accept("p_p_mode", _portletModeString);
 		}
 
@@ -755,7 +762,7 @@ public class PortletURLImpl
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #PortletURLImpl(PortletRequest, String, PortletRequest,
+	 *             #PortletURLImpl(HttpServletRequest, String, PortletRequest,
 	 *             Layout, String)}
 	 */
 	@Deprecated
@@ -880,16 +887,9 @@ public class PortletURLImpl
 			});
 
 		if (_doAsUserId > 0) {
-			try {
-				Company company = PortalUtil.getCompany(_request);
-
-				sb.append("doAsUserId=");
-				sb.append(processValue(company.getKeyObj(), _doAsUserId));
-				sb.append(StringPool.AMPERSAND);
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
+			sb.append("doAsUserId=");
+			sb.append(processValue(key, _doAsUserId));
+			sb.append(StringPool.AMPERSAND);
 		}
 		else {
 			String doAsUserId = themeDisplay.getDoAsUserId();
@@ -958,25 +958,27 @@ public class PortletURLImpl
 				sb.append(StringPool.AMPERSAND);
 			}
 
-			String removeValue = processValue(key, "1");
-
 			for (String removedPublicParameter :
 					_removePublicRenderParameters) {
 
 				sb.append(URLCodec.encodeURL(removedPublicParameter));
 				sb.append(StringPool.EQUAL);
-				sb.append(removeValue);
 				sb.append(StringPool.AMPERSAND);
 			}
 		}
 
-		if (_copyCurrentRenderParameters) {
-			mergeRenderParameters();
+		Map<String, String[]> renderParams = _params;
+
+		if (_copyCurrentRenderParameters &&
+			!(_lifecycle.equals(PortletRequest.RESOURCE_PHASE) &&
+			 _cacheability.equals(ResourceURL.FULL))) {
+
+			renderParams = _mergeWithRenderParameters(renderParams);
 		}
 
 		int previousSbIndex = sb.index();
 
-		for (Map.Entry<String, String[]> entry : _params.entrySet()) {
+		for (Map.Entry<String, String[]> entry : renderParams.entrySet()) {
 			String name = entry.getKey();
 			String[] values = entry.getValue();
 
@@ -984,11 +986,13 @@ public class PortletURLImpl
 				continue;
 			}
 
-			String publicRenderParameterName = getPublicRenderParameterName(
-				name);
+			if (!_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				String publicRenderParameterName = getPublicRenderParameterName(
+					name);
 
-			if (Validator.isNotNull(publicRenderParameterName)) {
-				name = publicRenderParameterName;
+				if (Validator.isNotNull(publicRenderParameterName)) {
+					name = publicRenderParameterName;
+				}
 			}
 
 			for (String value : values) {
@@ -1067,8 +1071,9 @@ public class PortletURLImpl
 			}
 		}
 		else if (!CookieKeys.hasSessionId(_request)) {
-			result = PortalUtil.getURLWithSessionId(
-				result, _request.getSession().getId());
+			HttpSession session = _request.getSession();
+
+			result = PortalUtil.getURLWithSessionId(result, session.getId());
 		}
 
 		if (_escapeXml) {
@@ -1135,15 +1140,20 @@ public class PortletURLImpl
 			}
 		}
 
-		if (_copyCurrentRenderParameters) {
-			mergeRenderParameters();
+		Map<String, String[]> renderParams = _params;
+
+		if (_copyCurrentRenderParameters &&
+			!(_lifecycle.equals(PortletRequest.RESOURCE_PHASE) &&
+			 _cacheability.equals(ResourceURL.FULL))) {
+
+			renderParams = _mergeWithRenderParameters(renderParams);
 		}
 
 		StringBundler parameterSB = new StringBundler();
 
 		int previousSbIndex = sb.index();
 
-		for (Map.Entry<String, String[]> entry : _params.entrySet()) {
+		for (Map.Entry<String, String[]> entry : renderParams.entrySet()) {
 			String name = entry.getKey();
 			String[] values = entry.getValue();
 
@@ -1151,11 +1161,13 @@ public class PortletURLImpl
 				continue;
 			}
 
-			String publicRenderParameterName = getPublicRenderParameterName(
-				name);
+			if (!_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				String publicRenderParameterName = getPublicRenderParameterName(
+					name);
 
-			if (Validator.isNotNull(publicRenderParameterName)) {
-				name = publicRenderParameterName;
+				if (Validator.isNotNull(publicRenderParameterName)) {
+					name = publicRenderParameterName;
+				}
 			}
 
 			for (String value : values) {
@@ -1186,8 +1198,7 @@ public class PortletURLImpl
 			}
 		}
 
-		String navigationalState = Base64.toURLSafe(
-			Base64.encode(parameterBytes));
+		String navigationalState = Base64.encodeToURL(parameterBytes);
 
 		sb.append(navigationalState);
 
@@ -1225,45 +1236,12 @@ public class PortletURLImpl
 		}
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
+	@Deprecated
 	protected void mergeRenderParameters() {
-		String namespace = getNamespace();
-
-		Map<String, String[]> renderParameters = RenderParametersPool.get(
-			_request, _plid, _portlet.getPortletId());
-
-		if (renderParameters == null) {
-			return;
-		}
-
-		for (Map.Entry<String, String[]> entry : renderParameters.entrySet()) {
-			String name = entry.getKey();
-
-			if (name.contains(namespace)) {
-				name = name.substring(namespace.length());
-			}
-
-			if (!_lifecycle.equals(PortletRequest.RESOURCE_PHASE) &&
-				(_removedParameterNames != null) &&
-				_removedParameterNames.contains(name)) {
-
-				continue;
-			}
-
-			String[] oldValues = entry.getValue();
-			String[] newValues = _params.get(name);
-
-			if (newValues == null) {
-				_params.put(name, oldValues);
-			}
-			else if (isBlankValue(newValues)) {
-				_params.remove(name);
-			}
-			else {
-				newValues = ArrayUtil.append(newValues, oldValues);
-
-				_params.put(name, newValues);
-			}
-		}
+		_params = _mergeWithRenderParameters(_params);
 	}
 
 	/**
@@ -1328,6 +1306,10 @@ public class PortletURLImpl
 		_removePublicRenderParameters = new LinkedHashSet<>();
 		_secure = PortalUtil.isSecure(request);
 		_wsrp = ParamUtil.getBoolean(request, "wsrp");
+
+		if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			_copyCurrentRenderParameters = true;
+		}
 
 		if (!portlet.isUndeployedPortlet()) {
 			Set<String> autopropagatedParameters =
@@ -1421,10 +1403,58 @@ public class PortletURLImpl
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Unable to get company key", e);
 		}
 
 		return null;
+	}
+
+	private Map<String, String[]> _mergeWithRenderParameters(
+		Map<String, String[]> portletURLParams) {
+
+		String namespace = getNamespace();
+
+		Map<String, String[]> renderParameters = RenderParametersPool.get(
+			_request, _plid, _portlet.getPortletId());
+
+		if (renderParameters == null) {
+			return portletURLParams;
+		}
+
+		Map<String, String[]> mergedRenderParams = new LinkedHashMap<>(
+			portletURLParams);
+
+		for (Map.Entry<String, String[]> entry : renderParameters.entrySet()) {
+			String name = entry.getKey();
+
+			if (name.contains(namespace)) {
+				name = name.substring(namespace.length());
+			}
+
+			if (!_lifecycle.equals(PortletRequest.RESOURCE_PHASE) &&
+				(_removedParameterNames != null) &&
+				_removedParameterNames.contains(name)) {
+
+				continue;
+			}
+
+			String[] oldValues = entry.getValue();
+			String[] newValues = _params.get(name);
+
+			if (newValues == null) {
+				mergedRenderParams.put(name, oldValues);
+			}
+			else if (isBlankValue(newValues)) {
+				mergedRenderParams.remove(name);
+			}
+			else {
+				newValues = ArrayUtil.append(newValues, oldValues);
+
+				mergedRenderParams.put(name, newValues);
+			}
+		}
+
+		return mergedRenderParams;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(PortletURLImpl.class);

@@ -48,7 +48,7 @@ if (!ignoreRequestValue) {
 	<aui:input name="<%= hiddenInput %>" type="hidden" />
 
 	<c:if test="<%= allowAddEntry %>">
-		<input class="form-control lfr-tag-selector-input" id="<%= id %>assetTagNames" size="15" title="<liferay-ui:message key="add-tags" />" type="text" />
+		<textarea class="form-control lfr-tag-selector-textarea" id="<%= id %>assetTagNames" title="<liferay-ui:message key="add-tags" />"></textarea>
 	</c:if>
 </div>
 

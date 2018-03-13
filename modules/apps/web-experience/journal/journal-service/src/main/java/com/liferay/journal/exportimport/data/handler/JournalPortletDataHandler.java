@@ -22,10 +22,12 @@ import com.liferay.exportimport.kernel.lar.BasePortletDataHandler;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.exportimport.kernel.lar.PortletDataHandler;
 import com.liferay.exportimport.kernel.lar.PortletDataHandlerBoolean;
+import com.liferay.exportimport.kernel.lar.PortletDataHandlerChoice;
 import com.liferay.exportimport.kernel.lar.PortletDataHandlerControl;
 import com.liferay.exportimport.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.journal.configuration.JournalServiceConfiguration;
+import com.liferay.journal.constants.JournalConstants;
 import com.liferay.journal.constants.JournalPortletKeys;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalFeed;
@@ -113,6 +115,11 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 	}
 
 	@Override
+	public String getServiceName() {
+		return JournalConstants.SERVICE_NAME;
+	}
+
+	@Override
 	public boolean isPublishToLiveByDefault() {
 		try {
 			JournalServiceConfiguration journalServiceConfiguration =
@@ -144,15 +151,24 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 			new StagedModelType(JournalArticle.class, DDMStructure.class),
 			new StagedModelType(JournalFeed.class),
 			new StagedModelType(JournalFolder.class));
+
+		String[] referencedContentBehaviorOptions =
+			{"include-always", "include-if-modified"};
+
 		setExportControls(
 			new PortletDataHandlerBoolean(
 				NAMESPACE, "web-content", true, false,
 				new PortletDataHandlerControl[] {
 					new PortletDataHandlerBoolean(
-						NAMESPACE, "referenced-content"),
+						NAMESPACE, "referenced-content", true, false,
+						new PortletDataHandlerControl[] {
+							new PortletDataHandlerChoice(
+								NAMESPACE, "referenced-content-behavior", 1,
+								referencedContentBehaviorOptions)
+						}),
 					new PortletDataHandlerBoolean(
 						NAMESPACE, "version-history",
-						isPublishToLiveByDefault())
+						_isVersionHistoryByDefaultEnabled())
 				},
 				JournalArticle.class.getName()),
 			new PortletDataHandlerBoolean(
@@ -615,6 +631,22 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
 	protected void setModuleServiceLifecycle(
 		ModuleServiceLifecycle moduleServiceLifecycle) {
+	}
+
+	private boolean _isVersionHistoryByDefaultEnabled() {
+		try {
+			JournalServiceConfiguration journalServiceConfiguration =
+				ConfigurationProviderUtil.getCompanyConfiguration(
+					JournalServiceConfiguration.class,
+					CompanyThreadLocal.getCompanyId());
+
+			return journalServiceConfiguration.versionHistoryByDefaultEnabled();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return true;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

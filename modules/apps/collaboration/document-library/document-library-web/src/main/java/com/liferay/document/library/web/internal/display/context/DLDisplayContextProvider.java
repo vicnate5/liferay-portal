@@ -17,6 +17,7 @@ package com.liferay.document.library.web.internal.display.context;
 import com.liferay.document.library.display.context.DLDisplayContextFactory;
 import com.liferay.document.library.display.context.DLEditFileEntryDisplayContext;
 import com.liferay.document.library.display.context.DLMimeTypeDisplayContext;
+import com.liferay.document.library.display.context.DLViewFileEntryHistoryDisplayContext;
 import com.liferay.document.library.display.context.DLViewFileVersionDisplayContext;
 import com.liferay.document.library.kernel.model.DLFileEntryType;
 import com.liferay.dynamic.data.mapping.storage.StorageEngine;
@@ -27,9 +28,12 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileShortcut;
 import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -89,10 +93,42 @@ public class DLDisplayContextProvider {
 		return dlEditFileEntryDisplayContext;
 	}
 
-	public DLViewFileVersionDisplayContext
-		getDLViewFileVersionDisplayContext(
+	public DLViewFileEntryHistoryDisplayContext
+		getDLViewFileEntryHistoryDisplayContext(
 			HttpServletRequest request, HttpServletResponse response,
-			FileShortcut fileShortcut) {
+			FileVersion fileVersion) {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		ResourceBundle resourceBundle =
+			_resourceBundleLoader.loadResourceBundle(
+				themeDisplay.getLanguageId());
+
+		DLViewFileEntryHistoryDisplayContext
+			dlViewFileEntryHistoryDisplayContext =
+				new DefaultDLViewFileEntryHistoryDisplayContext(
+					request, fileVersion, resourceBundle);
+
+		if (fileVersion == null) {
+			return dlViewFileEntryHistoryDisplayContext;
+		}
+
+		for (DLDisplayContextFactory dlDisplayContextFactory :
+				_dlDisplayContextFactories) {
+
+			dlViewFileEntryHistoryDisplayContext =
+				dlDisplayContextFactory.getDLViewFileEntryHistoryDisplayContext(
+					dlViewFileEntryHistoryDisplayContext, request, response,
+					fileVersion);
+		}
+
+		return dlViewFileEntryHistoryDisplayContext;
+	}
+
+	public DLViewFileVersionDisplayContext getDLViewFileVersionDisplayContext(
+		HttpServletRequest request, HttpServletResponse response,
+		FileShortcut fileShortcut) {
 
 		try {
 			DLViewFileVersionDisplayContext dlViewFileVersionDisplayContext =
@@ -120,10 +156,9 @@ public class DLDisplayContextProvider {
 		}
 	}
 
-	public DLViewFileVersionDisplayContext
-		getDLViewFileVersionDisplayContext(
-			HttpServletRequest request, HttpServletResponse response,
-			FileVersion fileVersion) {
+	public DLViewFileVersionDisplayContext getDLViewFileVersionDisplayContext(
+		HttpServletRequest request, HttpServletResponse response,
+		FileVersion fileVersion) {
 
 		DLViewFileVersionDisplayContext dlViewFileVersionDisplayContext =
 			new DefaultDLViewFileVersionDisplayContext(

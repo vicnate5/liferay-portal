@@ -1,6 +1,8 @@
 <definition>
 	<command name="gotoAddPage">
-		<execute macro="ProductMenuHelper#expandPanelSites" />
+		<execute macro="ProductMenuHelper#expandPanel">
+			<var name="panel" value="Site Administration" />
+		</execute>
 
 		<execute macro="ProductMenuHelper#expandCategory">
 			<var name="category" value="Navigation" />
@@ -69,7 +71,9 @@
 	<command name="gotoEditPage" summary="Navigate to Product Menu > Sites > Navigation > Public Pages > ${page}">
 		<execute macro="ProductMenuHelper#openProductMenu" />
 
-		<execute macro="ProductMenuHelper#expandPanelSites" />
+		<execute macro="ProductMenuHelper#expandPanel">
+			<var name="panel" value="Site Administration" />
+		</execute>
 
 		<execute macro="ProductMenuHelper#expandCategory">
 			<var name="category" value="Navigation" />
@@ -118,7 +122,9 @@
 	<command name="gotoPages">
 		<execute macro="ProductMenuHelper#openProductMenu" />
 
-		<execute macro="ProductMenuHelper#expandPanelSites" />
+		<execute macro="ProductMenuHelper#expandPanel">
+			<var name="panel" value="Site Administration" />
+		</execute>
 
 		<execute macro="ProductMenuHelper#expandCategory">
 			<var name="category" value="Navigation" />

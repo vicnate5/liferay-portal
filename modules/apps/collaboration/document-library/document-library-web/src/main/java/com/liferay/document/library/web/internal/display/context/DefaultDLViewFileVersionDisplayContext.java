@@ -158,8 +158,7 @@ public class DefaultDLViewFileVersionDisplayContext
 	@Override
 	public String getDiscussionLabel(Locale locale) {
 		ResourceBundle resourceBundle =
-			_resourceBundleLoader.loadResourceBundle(
-				LanguageUtil.getLanguageId(locale));
+			_resourceBundleLoader.loadResourceBundle(locale);
 
 		return LanguageUtil.get(resourceBundle, "comments");
 	}

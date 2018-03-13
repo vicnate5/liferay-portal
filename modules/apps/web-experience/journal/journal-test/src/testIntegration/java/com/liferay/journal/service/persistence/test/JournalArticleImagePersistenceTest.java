@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
@@ -181,22 +180,20 @@ public class JournalArticleImagePersistenceTest {
 
 	@Test
 	public void testCountByG_A_V() throws Exception {
-		_persistence.countByG_A_V(RandomTestUtil.nextLong(), StringPool.BLANK,
+		_persistence.countByG_A_V(RandomTestUtil.nextLong(), "",
 			RandomTestUtil.nextDouble());
 
-		_persistence.countByG_A_V(0L, StringPool.NULL, 0D);
+		_persistence.countByG_A_V(0L, "null", 0D);
 
 		_persistence.countByG_A_V(0L, (String)null, 0D);
 	}
 
 	@Test
 	public void testCountByG_A_V_E_E_L() throws Exception {
-		_persistence.countByG_A_V_E_E_L(RandomTestUtil.nextLong(),
-			StringPool.BLANK, RandomTestUtil.nextDouble(), StringPool.BLANK,
-			StringPool.BLANK, StringPool.BLANK);
+		_persistence.countByG_A_V_E_E_L(RandomTestUtil.nextLong(), "",
+			RandomTestUtil.nextDouble(), "", "", "");
 
-		_persistence.countByG_A_V_E_E_L(0L, StringPool.NULL, 0D,
-			StringPool.NULL, StringPool.NULL, StringPool.NULL);
+		_persistence.countByG_A_V_E_E_L(0L, "null", 0D, "null", "null", "null");
 
 		_persistence.countByG_A_V_E_E_L(0L, (String)null, 0D, (String)null,
 			(String)null, (String)null);

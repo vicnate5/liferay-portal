@@ -14,7 +14,7 @@
 
 package com.liferay.exportimport.kernel.staging;
 
-import com.liferay.portal.kernel.util.AutoResetThreadLocal;
+import com.liferay.petra.lang.CentralizedThreadLocal;
 import com.liferay.portal.kernel.util.HashUtil;
 
 import java.lang.reflect.Method;
@@ -79,11 +79,11 @@ public class MergeLayoutPrototypesThreadLocal {
 	}
 
 	private static final ThreadLocal<Boolean> _inProgress =
-		new AutoResetThreadLocal<>(
+		new CentralizedThreadLocal<>(
 			MergeLayoutPrototypesThreadLocal.class + "._inProgress",
 			() -> Boolean.FALSE);
 	private static final ThreadLocal<Set<MethodKey>> _mergeComplete =
-		new AutoResetThreadLocal<>(
+		new CentralizedThreadLocal<>(
 			MergeLayoutPrototypesThreadLocal.class + "._mergeComplete",
 			HashSet::new);
 

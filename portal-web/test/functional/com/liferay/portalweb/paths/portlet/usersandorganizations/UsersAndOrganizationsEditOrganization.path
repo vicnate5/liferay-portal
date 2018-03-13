@@ -174,7 +174,7 @@
 </tr>
 <tr>
 	<td>CATEGORIZATION_TAGS_FIELD</td>
-	<td>//input[@title='Add Tags']</td>
+	<td>//textarea[@title='Add Tags']</td>
 	<td></td>
 </tr>
 <tr>

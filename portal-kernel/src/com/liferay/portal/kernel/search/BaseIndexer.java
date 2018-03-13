@@ -47,7 +47,6 @@ import com.liferay.portal.kernel.model.ResourcedModel;
 import com.liferay.portal.kernel.model.TrashedModel;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.WorkflowedModel;
-import com.liferay.portal.kernel.search.facet.AssetEntriesFacet;
 import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.search.facet.ScopeFacet;
@@ -79,6 +78,7 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -96,6 +96,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -209,22 +210,7 @@ public abstract class BaseIndexer<T> implements Indexer<T> {
 			String className, SearchContext searchContext)
 		throws Exception {
 
-		BooleanFilter facetBooleanFilter = new BooleanFilter();
-
-		facetBooleanFilter.addTerm(Field.ENTRY_CLASS_NAME, className);
-
-		if (searchContext.getUserId() > 0) {
-			SearchPermissionChecker searchPermissionChecker =
-				SearchEngineHelperUtil.getSearchPermissionChecker();
-
-			facetBooleanFilter =
-				searchPermissionChecker.getPermissionBooleanFilter(
-					searchContext.getCompanyId(), searchContext.getGroupIds(),
-					searchContext.getUserId(), className, facetBooleanFilter,
-					searchContext);
-		}
-
-		return facetBooleanFilter;
+		return null;
 	}
 
 	@Override
@@ -253,11 +239,18 @@ public abstract class BaseIndexer<T> implements Indexer<T> {
 
 			addSearchAssetCategoryIds(fullQueryBooleanFilter, searchContext);
 			addSearchAssetTagNames(fullQueryBooleanFilter, searchContext);
-			addSearchEntryClassNames(fullQueryBooleanFilter, searchContext);
 			addSearchFolderId(fullQueryBooleanFilter, searchContext);
 			addSearchGroupId(fullQueryBooleanFilter, searchContext);
 			addSearchLayout(fullQueryBooleanFilter, searchContext);
 			addSearchUserId(fullQueryBooleanFilter, searchContext);
+
+			Map<String, Indexer<?>> entryClassNameIndexerMap =
+				_getEntryClassNameIndexerMap(
+					entryClassNames, searchContext.getSearchEngineId());
+
+			_addPreFilters(
+				fullQueryBooleanFilter, entryClassNameIndexerMap,
+				searchContext);
 
 			BooleanQuery fullQuery = createFullQuery(
 				fullQueryBooleanFilter, searchContext);
@@ -322,8 +315,9 @@ public abstract class BaseIndexer<T> implements Indexer<T> {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Search engine ID for " + clazz.getName() + " is " +
-					searchEngineId);
+				StringBundler.concat(
+					"Search engine ID for ", clazz.getName(), " is ",
+					searchEngineId));
 		}
 
 		return _searchEngineId;
@@ -548,7 +542,11 @@ public abstract class BaseIndexer<T> implements Indexer<T> {
 		}
 		catch (NoSuchModelException nsme) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to index " + className + " " + classPK, nsme);
+				_log.warn(
+					StringBundler.concat(
+						"Unable to index ", className, " ",
+						String.valueOf(classPK)),
+					nsme);
 			}
 		}
 		catch (SearchException se) {
@@ -1014,12 +1012,6 @@ public abstract class BaseIndexer<T> implements Indexer<T> {
 	protected void addSearchEntryClassNames(
 			BooleanFilter queryBooleanFilter, SearchContext searchContext)
 		throws Exception {
-
-		Facet facet = new AssetEntriesFacet(searchContext);
-
-		facet.setStatic(true);
-
-		searchContext.addFacet(facet);
 	}
 
 	protected Map<String, Query> addSearchExpando(
@@ -1368,15 +1360,8 @@ public abstract class BaseIndexer<T> implements Indexer<T> {
 		BooleanQuery searchQuery = new BooleanQueryImpl();
 
 		addSearchKeywords(searchQuery, searchContext);
-		postProcessSearchQuery(
-			searchQuery, fullQueryBooleanFilter, searchContext);
 
-		for (IndexerPostProcessor indexerPostProcessor :
-				_indexerPostProcessors) {
-
-			indexerPostProcessor.postProcessSearchQuery(
-				searchQuery, fullQueryBooleanFilter, searchContext);
-		}
+		_addSearchTerms(searchQuery, fullQueryBooleanFilter, searchContext);
 
 		doPostProcessSearchQuery(this, searchQuery, searchContext);
 
@@ -1866,7 +1851,11 @@ public abstract class BaseIndexer<T> implements Indexer<T> {
 		for (Address address : addresses) {
 			cities.add(StringUtil.toLowerCase(address.getCity()));
 			countries.addAll(getLocalizedCountryNames(address.getCountry()));
-			regions.add(StringUtil.toLowerCase(address.getRegion().getName()));
+
+			Region region = address.getRegion();
+
+			regions.add(StringUtil.toLowerCase(region.getName()));
+
 			streets.add(StringUtil.toLowerCase(address.getStreet1()));
 			streets.add(StringUtil.toLowerCase(address.getStreet2()));
 			streets.add(StringUtil.toLowerCase(address.getStreet3()));
@@ -1887,8 +1876,8 @@ public abstract class BaseIndexer<T> implements Indexer<T> {
 		String defaultValue = map.get(
 			LocaleUtil.fromLanguageId(assetEntry.getDefaultLanguageId()));
 
-		for (Locale availableLocale : LanguageUtil.getAvailableLocales(
-				assetEntry.getGroupId())) {
+		for (Locale availableLocale :
+				LanguageUtil.getAvailableLocales(assetEntry.getGroupId())) {
 
 			if (!map.containsKey(availableLocale) ||
 				Validator.isNull(map.get(availableLocale))) {
@@ -1946,6 +1935,146 @@ public abstract class BaseIndexer<T> implements Indexer<T> {
 
 	protected void setStagingAware(boolean stagingAware) {
 		_stagingAware = stagingAware;
+	}
+
+	private void _addIndexerProvidedPreFilters(
+			BooleanFilter booleanFilter, Indexer<?> indexer,
+			SearchContext searchContext)
+		throws Exception {
+
+		indexer.postProcessContextBooleanFilter(booleanFilter, searchContext);
+
+		for (IndexerPostProcessor indexerPostProcessor :
+				indexer.getIndexerPostProcessors()) {
+
+			indexerPostProcessor.postProcessContextBooleanFilter(
+				booleanFilter, searchContext);
+		}
+	}
+
+	private void _addPermissionFilter(
+			BooleanFilter booleanFilter, String entryClassName,
+			Indexer<?> indexer, SearchContext searchContext)
+		throws Exception {
+
+		Filter filter = indexer.getFacetBooleanFilter(
+			entryClassName, searchContext);
+
+		if (filter != null) {
+			booleanFilter.add(filter, BooleanClauseOccur.MUST);
+
+			return;
+		}
+
+		if (searchContext.getUserId() == 0) {
+			return;
+		}
+
+		SearchPermissionChecker searchPermissionChecker =
+			SearchEngineHelperUtil.getSearchPermissionChecker();
+
+		searchPermissionChecker.getPermissionBooleanFilter(
+			searchContext.getCompanyId(), searchContext.getGroupIds(),
+			searchContext.getUserId(), entryClassName, booleanFilter,
+			searchContext);
+	}
+
+	private void _addPreFilters(
+			BooleanFilter queryBooleanFilter,
+			Map<String, Indexer<?>> entryClassNameIndexerMap,
+			SearchContext searchContext)
+		throws Exception {
+
+		for (Entry<String, Indexer<?>> entry :
+				entryClassNameIndexerMap.entrySet()) {
+
+			String entryClassName = entry.getKey();
+			Indexer<?> indexer = entry.getValue();
+
+			queryBooleanFilter.add(
+				_createPreFilterForEntryClassName(
+					entryClassName, indexer, searchContext),
+				BooleanClauseOccur.SHOULD);
+		}
+	}
+
+	private void _addSearchTerms(
+			BooleanQuery searchQuery, BooleanFilter fullQueryBooleanFilter,
+			SearchContext searchContext)
+		throws Exception {
+
+		postProcessSearchQuery(
+			searchQuery, fullQueryBooleanFilter, searchContext);
+
+		for (IndexerPostProcessor indexerPostProcessor :
+				_indexerPostProcessors) {
+
+			indexerPostProcessor.postProcessSearchQuery(
+				searchQuery, fullQueryBooleanFilter, searchContext);
+		}
+	}
+
+	private void _addStagingFilter(
+		BooleanFilter booleanFilter, Indexer<?> indexer,
+		SearchContext searchContext) {
+
+		if (!indexer.isStagingAware()) {
+			return;
+		}
+
+		if (!searchContext.isIncludeLiveGroups() &&
+			searchContext.isIncludeStagingGroups()) {
+
+			booleanFilter.addRequiredTerm(Field.STAGING_GROUP, true);
+		}
+		else if (searchContext.isIncludeLiveGroups() &&
+				 !searchContext.isIncludeStagingGroups()) {
+
+			booleanFilter.addRequiredTerm(Field.STAGING_GROUP, false);
+		}
+	}
+
+	private Filter _createPreFilterForEntryClassName(
+			String entryClassName, Indexer<?> indexer,
+			SearchContext searchContext)
+		throws Exception {
+
+		BooleanFilter booleanFilter = new BooleanFilter();
+
+		booleanFilter.addTerm(
+			Field.ENTRY_CLASS_NAME, entryClassName, BooleanClauseOccur.MUST);
+
+		_addStagingFilter(booleanFilter, indexer, searchContext);
+
+		_addPermissionFilter(
+			booleanFilter, entryClassName, indexer, searchContext);
+
+		_addIndexerProvidedPreFilters(booleanFilter, indexer, searchContext);
+
+		return booleanFilter;
+	}
+
+	private Map<String, Indexer<?>> _getEntryClassNameIndexerMap(
+		String[] entryClassNames, String searchEngineId) {
+
+		Map<String, Indexer<?>> entryClassNameIndexerMap = new LinkedHashMap<>(
+			entryClassNames.length);
+
+		for (String entryClassName : entryClassNames) {
+			Indexer<?> indexer = IndexerRegistryUtil.getIndexer(entryClassName);
+
+			if (indexer == null) {
+				continue;
+			}
+
+			if (!searchEngineId.equals(indexer.getSearchEngineId())) {
+				continue;
+			}
+
+			entryClassNameIndexerMap.put(entryClassName, indexer);
+		}
+
+		return entryClassNameIndexerMap;
 	}
 
 	private static final long _DEFAULT_FOLDER_ID = 0L;

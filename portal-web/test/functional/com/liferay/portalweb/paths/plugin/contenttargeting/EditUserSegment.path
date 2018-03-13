@@ -270,8 +270,23 @@
 </tr>
 <!--USER_SEGMENT_RULE_USER_ATTRIBUTES_USERGROUP_MEMBER-->
 <tr>
+	<td>USER_SEGMENT_RULE_USER_ATTRIBUTES_USERGROUP_MEMBER_CHOOSE_BUTTON</td>
+	<td>//button[@data-usergroupname='${key_userGroupName}']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>USER_SEGMENT_RULE_USER_ATTRIBUTES_USERGROUP_MEMBER_SELECT</td>
-	<td>//div[contains(@class,'field-editor') and contains(@class,'expanded')]//select[contains(@id,'userGroupId')]</td>
+	<td>//div[contains(@class,'field-editor') and contains(@class,'expanded')]//div[contains(@id,'userGroupName')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>USER_SEGMENT_RULE_USER_ATTRIBUTES_USERGROUP_MEMBER_SELECT_BUTTON</td>
+	<td>//div[contains(@class,'field-editor') and contains(@class,'expanded')]//a//span[contains(.,'Select')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>USER_SEGMENT_RULE_USER_ATTRIBUTES_USERGROUP_MEMBER_SELECT_IFRAME</td>
+	<td>//iframe[contains(@id,'selectUserGroup')]</td>
 	<td></td>
 </tr>
 <tr>

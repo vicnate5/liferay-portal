@@ -57,7 +57,7 @@ public interface AnnouncementsDisplayContext extends DisplayContext {
 
 	public boolean isShowPreview();
 
-	public boolean isShowPreviousEntries();
+	public boolean isShowReadEntries();
 
 	public boolean isShowScopeName();
 

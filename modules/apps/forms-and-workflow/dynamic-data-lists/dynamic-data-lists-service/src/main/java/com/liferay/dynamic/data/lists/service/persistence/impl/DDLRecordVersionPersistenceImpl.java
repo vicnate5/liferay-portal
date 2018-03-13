@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
@@ -300,7 +299,7 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 		msg.append("recordId=");
 		msg.append(recordId);
 
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
+		msg.append("}");
 
 		throw new NoSuchRecordVersionException(msg.toString());
 	}
@@ -351,7 +350,7 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 		msg.append("recordId=");
 		msg.append(recordId);
 
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
+		msg.append("}");
 
 		throw new NoSuchRecordVersionException(msg.toString());
 	}
@@ -628,7 +627,7 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 			msg.append(", version=");
 			msg.append(version);
 
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			msg.append("}");
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(msg.toString());
@@ -693,7 +692,7 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 			if (version == null) {
 				query.append(_FINDER_COLUMN_R_V_VERSION_1);
 			}
-			else if (version.equals(StringPool.BLANK)) {
+			else if (version.equals("")) {
 				query.append(_FINDER_COLUMN_R_V_VERSION_3);
 			}
 			else {
@@ -800,7 +799,7 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 			if (version == null) {
 				query.append(_FINDER_COLUMN_R_V_VERSION_1);
 			}
-			else if (version.equals(StringPool.BLANK)) {
+			else if (version.equals("")) {
 				query.append(_FINDER_COLUMN_R_V_VERSION_3);
 			}
 			else {
@@ -1080,7 +1079,7 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 		msg.append(", status=");
 		msg.append(status);
 
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
+		msg.append("}");
 
 		throw new NoSuchRecordVersionException(msg.toString());
 	}
@@ -1136,7 +1135,7 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 		msg.append(", status=");
 		msg.append(status);
 
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
+		msg.append("}");
 
 		throw new NoSuchRecordVersionException(msg.toString());
 	}
@@ -1915,12 +1914,12 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 		for (Serializable primaryKey : uncachedPrimaryKeys) {
 			query.append((long)primaryKey);
 
-			query.append(StringPool.COMMA);
+			query.append(",");
 		}
 
 		query.setIndex(query.index() - 1);
 
-		query.append(StringPool.CLOSE_PARENTHESIS);
+		query.append(")");
 
 		String sql = query.toString();
 

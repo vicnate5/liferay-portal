@@ -45,7 +45,7 @@
 </tr>
 <tr>
 	<td>CURRENT_LOCALE</td>
-	<td>//span[contains(.,'${key_localizedLanguage}') and contains(@class,'translation')]</td>
+	<td>//span[contains(.,'${key_localizedLanguage}') and contains(@class,'translation')] | //span[contains(@locale,'${key_localizedLanguage}') and contains(@class,'translation')]</td>
 	<td></td>
 </tr>
 <tr>

@@ -26,6 +26,7 @@ boolean draggableTree = GetterUtil.getBoolean((String)request.getAttribute("life
 boolean expandFirstNode = GetterUtil.getBoolean((String)request.getAttribute("liferay-layout:layouts-tree:expandFirstNode"));
 long groupId = GetterUtil.getLong((String)request.getAttribute("liferay-layout:layouts-tree:groupId"));
 boolean incomplete = GetterUtil.getBoolean((String)request.getAttribute("liferay-layout:layouts-tree:incomplete"));
+LayoutSetBranch layoutSetBranch = (LayoutSetBranch)request.getAttribute("liferay-layout:layouts-tree:layoutSetBranch");
 String linkTemplate = (String)request.getAttribute("liferay-layout:layouts-tree:linkTemplate");
 String modules = (String)request.getAttribute("liferay-layout:layouts-tree:modules");
 Map<String, PortletURL> portletURLs = (Map<String, PortletURL>)request.getAttribute("liferay-layout:layouts-tree:portletURLs");
@@ -34,12 +35,13 @@ boolean privateLayout = GetterUtil.getBoolean((String)request.getAttribute("life
 String rootLinkTemplate = (String)request.getAttribute("liferay-layout:layouts-tree:rootLinkTemplate");
 String rootNodeName = (String)request.getAttribute("liferay-layout:layouts-tree:rootNodeName");
 boolean saveState = GetterUtil.getBoolean((String)request.getAttribute("liferay-layout:layouts-tree:saveState"));
+String scriptPosition = (String)request.getAttribute("liferay-layout:layouts-tree:scriptPosition");
 boolean selectableTree = GetterUtil.getBoolean((String)request.getAttribute("liferay-layout:layouts-tree:selectableTree"));
 Long selPlid = (Long)request.getAttribute("liferay-layout:layouts-tree:selPlid");
 String treeId = (String)request.getAttribute("liferay-layout:layouts-tree:treeId");
 %>
 
-<aui:script use="<%= modules %>">
+<aui:script position="<%= scriptPosition %>" use="<%= modules %>">
 	var plugins = [];
 
 	<c:if test="<%= selectableTree %>">
@@ -84,7 +86,7 @@ String treeId = (String)request.getAttribute("liferay-layout:layouts-tree:treeId
 			long[] openNodes = StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeId), 0L);
 			%>
 
-			layouts: <%= LayoutsTreeUtil.getLayoutsJSON(request, groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, openNodes, true, treeId) %>,
+			layouts: <%= LayoutsTreeUtil.getLayoutsJSON(request, groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, openNodes, true, treeId, layoutSetBranch) %>,
 
 			<c:if test="<%= Validator.isNotNull(linkTemplate) %>">
 				linkTemplate: '<%= HtmlUtil.escapeJS(linkTemplate) %>',

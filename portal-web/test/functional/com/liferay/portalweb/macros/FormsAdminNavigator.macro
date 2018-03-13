@@ -7,10 +7,6 @@
 		<execute function="Click" locator1="FormsAdmin#DATA_PROVIDER_PLUS_BUTTON" />
 	</command>
 
-	<command name="gotoAddForm">
-		<execute function="Click" locator1="Button#PLUS" />
-	</command>
-
 	<command name="gotoDataProviders">
 		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
 
@@ -116,7 +112,7 @@
 	</command>
 
 	<command name="openPublishURL">
-		<var locator="Form#PUBLISH_FORM_PUBLIC_URL" name="publishFormURL" />
+		<var method="selenium#getElementValue(Form#PUBLISH_FORM_PUBLIC_URL)" name="publishFormURL" />
 
 		<execute macro="Navigator#openSpecificURL">
 			<var name="url" value="${publishFormURL}" />

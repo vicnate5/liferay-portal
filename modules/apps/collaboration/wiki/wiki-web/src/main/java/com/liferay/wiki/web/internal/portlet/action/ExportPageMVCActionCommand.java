@@ -14,6 +14,7 @@
 
 package com.liferay.wiki.web.internal.portlet.action;
 
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -28,7 +29,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -162,8 +162,10 @@ public class ExportPageMVCActionCommand extends BaseMVCActionCommand {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Error formatting the wiki page " + page.getPageId() +
-					" with the format " + page.getFormat(),
+				StringBundler.concat(
+					"Error formatting the wiki page ",
+					String.valueOf(page.getPageId()), " with the format ",
+					page.getFormat()),
 				e);
 		}
 
@@ -192,8 +194,10 @@ public class ExportPageMVCActionCommand extends BaseMVCActionCommand {
 		sb.append("</body>");
 		sb.append("</html>");
 
+		String s = sb.toString();
+
 		InputStream is = new UnsyncByteArrayInputStream(
-			sb.toString().getBytes(StringPool.UTF8));
+			s.getBytes(StringPool.UTF8));
 
 		String sourceExtension = "html";
 

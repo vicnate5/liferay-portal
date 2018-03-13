@@ -16,7 +16,9 @@ package com.liferay.calendar.web.internal.display.context;
 
 import com.liferay.calendar.constants.CalendarActionKeys;
 import com.liferay.calendar.model.Calendar;
+import com.liferay.calendar.model.CalendarBooking;
 import com.liferay.calendar.model.CalendarResource;
+import com.liferay.calendar.service.CalendarBookingService;
 import com.liferay.calendar.service.CalendarLocalService;
 import com.liferay.calendar.service.CalendarService;
 import com.liferay.calendar.service.permission.CalendarPermission;
@@ -40,13 +42,26 @@ import java.util.List;
 public class CalendarDisplayContext {
 
 	public CalendarDisplayContext(
-		GroupLocalService groupLocalService, CalendarService calendarService,
-		CalendarLocalService calendarLocalService, ThemeDisplay themeDisplay) {
+		GroupLocalService groupLocalService,
+		CalendarBookingService calendarBookingService,
+		CalendarLocalService calendarLocalService,
+		CalendarService calendarService, ThemeDisplay themeDisplay) {
 
 		_groupLocalService = groupLocalService;
-		_calendarService = calendarService;
+		_calendarBookingService = calendarBookingService;
 		_calendarLocalService = calendarLocalService;
+		_calendarService = calendarService;
 		_themeDisplay = themeDisplay;
+	}
+
+	public List<CalendarBooking> getChildCalendarBookings(
+			CalendarBooking calendarBooking)
+		throws PortalException {
+
+		Group group = _themeDisplay.getScopeGroup();
+
+		return _calendarBookingService.getChildCalendarBookings(
+			calendarBooking.getCalendarBookingId(), group.isStagingGroup());
 	}
 
 	public Calendar getDefaultCalendar(
@@ -111,7 +126,7 @@ public class CalendarDisplayContext {
 			}
 			catch (PrincipalException pe) {
 				if (_log.isInfoEnabled()) {
-					StringBundler sb = new StringBundler();
+					StringBundler sb = new StringBundler(4);
 
 					sb.append("No ");
 					sb.append(ActionKeys.VIEW);
@@ -179,6 +194,7 @@ public class CalendarDisplayContext {
 	private static final Log _log = LogFactoryUtil.getLog(
 		CalendarDisplayContext.class.getName());
 
+	private final CalendarBookingService _calendarBookingService;
 	private final CalendarLocalService _calendarLocalService;
 	private final CalendarService _calendarService;
 	private final GroupLocalService _groupLocalService;

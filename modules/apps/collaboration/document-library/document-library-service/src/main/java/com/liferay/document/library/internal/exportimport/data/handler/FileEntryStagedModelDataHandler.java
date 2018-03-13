@@ -16,6 +16,7 @@ package com.liferay.document.library.internal.exportimport.data.handler;
 
 import com.liferay.document.library.exportimport.data.handler.DLPluggableContentDataHandler;
 import com.liferay.document.library.kernel.model.DLFileEntry;
+import com.liferay.document.library.kernel.model.DLFileEntryConstants;
 import com.liferay.document.library.kernel.model.DLFileEntryMetadata;
 import com.liferay.document.library.kernel.model.DLFileEntryType;
 import com.liferay.document.library.kernel.model.DLFileVersion;
@@ -72,7 +73,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 import com.liferay.portal.repository.portletrepository.PortletRepository;
-import com.liferay.portal.verify.extender.marker.VerifyProcessCompletionMarker;
 import com.liferay.portlet.documentlibrary.lar.FileEntryUtil;
 import com.liferay.trash.kernel.util.TrashUtil;
 
@@ -566,7 +566,10 @@ public class FileEntryStagedModelDataHandler
 								latestExistingFileVersion.getVersion();
 
 							if (!latestExistingVersion.equals(
-									importedFileEntry.getVersion())) {
+									importedFileEntry.getVersion()) &&
+								!latestExistingVersion.equals(
+									DLFileEntryConstants.
+										PRIVATE_WORKING_COPY_VERSION)) {
 
 								_dlAppService.deleteFileVersion(
 									latestExistingFileVersion.getFileEntryId(),
@@ -616,7 +619,9 @@ public class FileEntryStagedModelDataHandler
 		}
 		finally {
 			try {
-				is.close();
+				if (is != null) {
+					is.close();
+				}
 			}
 			catch (IOException ioe) {
 				_log.error(ioe, ioe);
@@ -875,8 +880,7 @@ public class FileEntryStagedModelDataHandler
 		target = "(&(verify.process.name=com.liferay.document.library.service))",
 		unbind = "-"
 	)
-	protected void setVerifyProcessCompletionMarker(
-		VerifyProcessCompletionMarker verifyProcessCompletionMarker) {
+	protected void setVerifyProcessCompletionMarker(Object object) {
 	}
 
 	@Override

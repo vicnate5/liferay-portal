@@ -281,6 +281,8 @@ public interface PropsKeys {
 
 	public static final String CACHE_CONTENT_THRESHOLD_SIZE = "cache.content.threshold.size";
 
+	public static final String CACHE_FILTER_INCLUDE_USER_AGENT = "cache.filter.include.user.agent";
+
 	public static final String CALENDAR_EMAIL_EVENT_REMINDER_BODY = "calendar.email.event.reminder.body";
 
 	public static final String CALENDAR_EMAIL_EVENT_REMINDER_ENABLED = "calendar.email.event.reminder.enabled";
@@ -874,6 +876,8 @@ public interface PropsKeys {
 
 	public static final String HIBERNATE_JDBC_BATCH_SIZE = "hibernate.jdbc.batch_size";
 
+	public static final String HIBERNATE_SESSION_FACTORY_IMPORTED_CLASS_NAME_REGEXP = "hibernate.session.factory.imported.class.name.regexp";
+
 	public static final String HOT_DEPLOY_DEPENDENCY_MANAGEMENT_ENABLED = "hot.deploy.dependency.management.enabled";
 
 	public static final String HOT_DEPLOY_LISTENERS = "hot.deploy.listeners";
@@ -1004,6 +1008,13 @@ public interface PropsKeys {
 
 	public static final String INTRABAND_WELDER_SOCKET_TCP_NO_DELAY = "intraband.welder.socket.tcp.no.delay";
 
+	public static final String INVOKER_FILTER_CHAIN_ENABLED = "invoker.filter.chain.cache.enabled";
+
+	/**
+	 * @deprecated As of 7.0.0, replaced with {@link
+	 *             #INVOKER_FILTER_CHAIN_ENABLED}
+	 */
+	@Deprecated
 	public static final String INVOKER_FILTER_CHAIN_SIZE = "invoker.filter.chain.cache.size";
 
 	public static final String INVOKER_FILTER_URI_MAX_LENGTH = "invoker.filter.uri.max.length";
@@ -1114,6 +1125,10 @@ public interface PropsKeys {
 
 	public static final String LAYOUT_PARALLEL_RENDER_ENABLE = "layout.parallel.render.enable";
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
+	@Deprecated
 	public static final String LAYOUT_PARALLEL_RENDER_THREAD_POOL_ALLOW_CORE_THREAD_TIMEOUT = "layout.parallel.render.thread.pool.allow.core.thread.timeout";
 
 	public static final String LAYOUT_PARALLEL_RENDER_THREAD_POOL_CORE_THREAD_COUNT = "layout.parallel.render.thread.pool.core.thread.count";
@@ -1390,6 +1405,13 @@ public interface PropsKeys {
 
 	public static final String MINIFIER_ENABLED = "minifier.enabled";
 
+	public static final String MINIFIER_INLINE_CONTENT_CACHE_ENABLED = "minifier.inline.content.cache.enabled";
+
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #MINIFIER_INLINE_CONTENT_CACHE_ENABLED}
+	 */
+	@Deprecated
 	public static final String MINIFIER_INLINE_CONTENT_CACHE_SIZE = "minifier.inline.content.cache.size";
 
 	public static final String MINIFIER_INLINE_CONTENT_CACHE_SKIP_CSS = "minifier.inline.content.cache.skip.css";
@@ -2403,6 +2425,8 @@ public interface PropsKeys {
 
 	public static final String VALUE_OBJECT_FINDER_CACHE_ENABLED = "value.object.finder.cache.enabled";
 
+	public static final String VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD = "value.object.finder.cache.list.threshold";
+
 	public static final String VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE = "value.object.finder.thread.local.cache.max.size";
 
 	public static final String VALUE_OBJECT_LISTENER = "value.object.listener.";
@@ -2472,6 +2496,10 @@ public interface PropsKeys {
 	public static final String WEBLOGIC_REQUEST_WRAP_NON_SERIALIZABLE = "weblogic.request.wrap.non.serializable";
 
 	public static final String WIDGET_SERVLET_MAPPING = "widget.servlet.mapping";
+
+	public static final String WORKFLOW_EMAIL_FROM_ADDRESS = "workflow.email.from.address";
+
+	public static final String WORKFLOW_EMAIL_FROM_NAME = "workflow.email.from.name";
 
 	public static final String XML_SECURITY_ENABLED = "xml.security.enabled";
 

@@ -38,7 +38,10 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Roberto Díaz
+ * @deprecated As of 1.1.0, replaced by {@link
+ *             com.liferay.layout.item.selector.web.internal.BaseLayoutsItemSelectorView}
  */
+@Deprecated
 public abstract class BaseLayoutsItemSelectorView
 	implements ItemSelectorView<LayoutItemSelectorCriterion> {
 

@@ -26,6 +26,15 @@ Role role = (Role)objArray[1];
 %>
 
 <liferay-ui:icon-menu icon="<%= StringPool.BLANK %>" message="<%= StringPool.BLANK %>">
+
+	<%
+	String confirmation = "are-you-sure-you-want-to-remove-this-permission";
+
+	if (ResourceBlockLocalServiceUtil.isSupported(permission.getName())) {
+		confirmation = LanguageUtil.format(request, "are-you-sure-you-want-to-remove-this-permission-this-will-remove-all-permissions-of-this-type-from-x", ResourceActionsUtil.getModelResource(request, permission.getName()));
+	}
+	%>
+
 	<portlet:actionURL name="deletePermission" var="deletePermissionURL">
 		<portlet:param name="mvcPath" value="/edit_role_permissions.jsp" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -37,7 +46,7 @@ Role role = (Role)objArray[1];
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete
-		confirmation="are-you-sure-you-want-to-remove-this-permission"
+		confirmation="<%= confirmation %>"
 		message="remove"
 		url="<%= deletePermissionURL %>"
 	/>

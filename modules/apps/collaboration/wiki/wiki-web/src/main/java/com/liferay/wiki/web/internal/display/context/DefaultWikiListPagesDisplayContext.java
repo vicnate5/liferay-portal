@@ -17,6 +17,7 @@ package com.liferay.wiki.web.internal.display.context;
 import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.service.AssetEntryServiceUtil;
 import com.liferay.asset.kernel.service.persistence.AssetEntryQuery;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -47,7 +48,6 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -69,8 +69,8 @@ import com.liferay.wiki.service.permission.WikiNodePermissionChecker;
 import com.liferay.wiki.service.permission.WikiPagePermissionChecker;
 import com.liferay.wiki.util.comparator.PageVersionComparator;
 import com.liferay.wiki.web.internal.display.context.util.WikiRequestHelper;
-import com.liferay.wiki.web.util.WikiPortletUtil;
-import com.liferay.wiki.web.util.WikiWebComponentProvider;
+import com.liferay.wiki.web.internal.util.WikiPortletUtil;
+import com.liferay.wiki.web.internal.util.WikiWebComponentProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -458,8 +458,8 @@ public class DefaultWikiListPagesDisplayContext
 
 		if (!wikiPage.isDraft() &&
 			WikiPagePermissionChecker.contains(
-				_wikiRequestHelper.getPermissionChecker(), wikiPage.getNodeId(),
-				HtmlUtil.unescape(wikiPage.getTitle()), ActionKeys.DELETE)) {
+				_wikiRequestHelper.getPermissionChecker(), wikiPage,
+				ActionKeys.DELETE)) {
 
 			DeleteMenuItem deleteMenuItem = new DeleteMenuItem();
 

@@ -69,6 +69,8 @@ public class DiscussionTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_assetEntryVisible = true;
 		_className = null;
 		_classPK = 0;

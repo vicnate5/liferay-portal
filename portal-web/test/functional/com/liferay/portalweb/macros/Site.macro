@@ -7,7 +7,7 @@
 			<var name="navItem" value="Users" />
 		</execute>
 
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="IFrame#selectDialogFrame" />
 
@@ -44,7 +44,7 @@
 	</command>
 
 	<command name="addCP">
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<if>
 			<not>
@@ -77,7 +77,7 @@
 					<elseif>
 						<equals arg1="${siteType}" arg2="Site Template" />
 						<then>
-							<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM" value1="${siteTemplateName}">
+							<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM">
 								<var name="key_menuItem" value="${siteTemplateName}" />
 							</execute>
 						</then>
@@ -153,9 +153,7 @@
 			</then>
 		</if>
 
-		<execute macro="Button#clickSave" />
-
-		<execute macro="Alert#viewSuccessMessage" />
+		<execute macro="PortletEntry#save" />
 
 		<execute function="AssertTextEquals" locator1="SitesEditSite#DETAILS_NAME" value1="${siteName}" />
 	</command>
@@ -214,7 +212,7 @@
 		<execute function="Click" locator1="Button#INFO" />
 
 		<execute function="AssertTextEquals#assertPartialText" locator1="SiteMemberships#MEMBERSHIP_TYPE" value1="Membership Type: Restricted" />
-		<execute function="AssertElementPresent" locator1="SiteMemberships#REQUEST_MESSAGE" value1="There are 1 membership requests pending." />
+		<execute function="AssertElementPresent" locator1="SiteMemberships#REQUEST_MESSAGE" />
 
 		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
 
@@ -297,7 +295,7 @@
 			<var name="navItem" value="Organizations" />
 		</execute>
 
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="IFrame#selectDialogFrame" />
 
@@ -548,6 +546,22 @@
 
 		<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="No sites were found." />
 		<execute function="AssertTextNotPresent" value1="${siteName}" />
+	</command>
+
+	<command name="disableRecycleBinCP">
+		<execute function="AssertClick" locator1="SitesEditSite#MENU_ADVANCED_TAB" value1="Advanced" />
+
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Recycle Bin" />
+		</execute>
+
+		<execute function="Uncheck#uncheckToggleSwitchNoErrorNoAssert" locator1="Checkbox#ENABLE_RECYCLE_BIN" />
+
+		<execute function="Confirm" value1="Disabling the Recycle Bin prevents the restoring of content that has been moved to the Recycle Bin." />
+
+		<execute function="AssertNotChecked#assertNotCheckedNotVisible" locator1="Checkbox#ENABLE_RECYCLE_BIN" />
+
+		<execute macro="PortletEntry#save" />
 	</command>
 
 	<command name="editCP">
@@ -826,13 +840,13 @@
 			</elseif>
 		</if>
 
-		<execute macro="Button#clickSave" />
-
-		<execute macro="Alert#viewSuccessMessage" />
+		<execute macro="PortletEntry#save" />
 	</command>
 
 	<command name="manageMembershipOptions">
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Site Settings" />
 		</execute>
 
@@ -1052,7 +1066,9 @@
 	</command>
 
 	<command name="tearDownCP">
-		<execute macro="ProductMenu#gotoControlPanelSites">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Sites" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Sites" />
 		</execute>
 
@@ -1065,7 +1081,7 @@
 			<then>
 				<execute function="Check#checkAll" locator1="Checkbox#SELECT_ALL" />
 
-				<execute function="ClickNoError" locator1="Icon#DELETE" value1="Delete" />
+				<execute function="ClickNoError" locator1="Icon#DELETE" />
 
 				<execute function="Confirm" value1="Are you sure you want to delete this? It will be deleted immediately." />
 
@@ -1075,17 +1091,15 @@
 	</command>
 
 	<command name="viewCannotAdd">
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="Blank Site">
-			<var name="key_menuItem" value="Blank Site" />
+		<execute macro="LexiconEntry#gotoAddMenuItem">
+			<var name="menuItem" value="Blank Site" />
 		</execute>
 
 		<execute macro="PortletEntry#inputName">
 			<var name="name" value="${siteName}" />
 		</execute>
 
-		<execute function="Click" locator1="Button#SAVE" value1="Save" />
+		<execute function="Click" locator1="Button#SAVE" />
 
 		<if>
 			<equals arg1="${siteNameInvalid}" arg2="Duplicate" />
@@ -1131,7 +1145,7 @@
 	<command name="viewCP">
 		<var name="key_siteName" value="${siteName}" />
 
-		<execute function="AssertElementPresent" locator1="Sites#SITE_TABLE_CHECKBOX" value1="${siteName}" />
+		<execute function="AssertElementPresent" locator1="Sites#SITE_TABLE_CHECKBOX" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="Sites#SITE_TABLE_NAME" value1="${siteName}" />
 		<execute function="AssertTextEquals" locator1="Sites#SITE_TABLE_TYPE" value1="${siteType}" />
 
@@ -1191,7 +1205,7 @@
 		<var name="key_portletName" value="${portletName}" />
 		<var name="key_siteName" value="${siteName}" />
 
-		<execute function="AssertElementPresent" locator1="ProductMenu#PRODUCT_MENU_PANEL_SITE_ADMINISTRATION_SITE_NAME" value1="${siteName}" />
+		<execute function="AssertElementPresent" locator1="ProductMenu#PRODUCT_MENU_PANEL_SITE_ADMINISTRATION_SITE_NAME" />
 		<execute function="AssertTextNotPresent" value1="You do not have the roles required to access this portlet" />
 		<execute function="AssertTextEquals" locator1="ProductMenu#PRODUCT_MENU_PANEL_MENU_ITEM" value1="${portletName}" />
 	</command>
@@ -1203,7 +1217,7 @@
 			<var name="navItem" value="Users" />
 		</execute>
 
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="IFrame#selectDialogFrame" />
 
@@ -1277,7 +1291,7 @@
 	</command>
 
 	<command name="viewNoMySitesViaMySitesPG">
-		<execute function="AssertElementNotPresent" locator1="ListGroupItem#ITEM_NAME" value1="${siteName}">
+		<execute function="AssertElementNotPresent" locator1="ListGroupItem#ITEM_NAME">
 			<var name="key_itemName" value="${siteName}" />
 		</execute>
 
@@ -1295,7 +1309,7 @@
 
 		<execute function="AssertElementNotPresent" locator1="SiteMemberships#REQUEST_MESSAGE" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="SiteMemberships#MEMBERSHIP_TYPE" value1="Membership Type: Restricted" />
-		<execute function="AssertElementNotPresent" locator1="SiteMemberships#REQUEST_MESSAGE" value1="There are 1 membership requests pending." />
+		<execute function="AssertElementNotPresent" locator1="SiteMemberships#REQUEST_MESSAGE" />
 
 		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
 		<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="View Membership Requests">
@@ -1314,7 +1328,7 @@
 	<command name="viewSearchResultsCP">
 		<var name="key_siteName" value="${siteName}" />
 
-		<execute function="AssertElementPresent" locator1="Sites#SITE_TABLE_CHECKBOX" value1="${siteName}" />
+		<execute function="AssertElementPresent" locator1="Sites#SITE_TABLE_CHECKBOX" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="Sites#SITE_TABLE_NAME" value1="${siteName}" />
 		<execute function="AssertTextEquals" locator1="Sites#SITE_TABLE_TYPE" value1="${siteType}" />
 		<execute function="AssertTextEquals" locator1="Sites#SITE_TABLE_ACTIVE" value1="Yes" />
@@ -1387,7 +1401,7 @@
 		<execute function="Click" locator1="Button#INFO" />
 
 		<execute function="AssertTextEquals#assertPartialText" locator1="SiteMemberships#MEMBERSHIP_TYPE" value1="Membership Type: Restricted" />
-		<execute function="AssertElementPresent" locator1="SiteMemberships#REQUEST_MESSAGE" value1="There are 1 membership requests pending." />
+		<execute function="AssertElementPresent" locator1="SiteMemberships#REQUEST_MESSAGE" />
 
 		<execute function="Click" locator1="SiteMemberships#REQUEST_MESSAGE" />
 

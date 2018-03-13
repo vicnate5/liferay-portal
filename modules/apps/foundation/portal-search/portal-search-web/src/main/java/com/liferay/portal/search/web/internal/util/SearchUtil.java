@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PredicateFilter;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -207,8 +208,9 @@ public class SearchUtil {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to get search result  view URL for class " + className +
-					" with primary key " + classPK,
+				StringBundler.concat(
+					"Unable to get search result  view URL for class ",
+					className, " with primary key ", String.valueOf(classPK)),
 				e);
 
 			return "";

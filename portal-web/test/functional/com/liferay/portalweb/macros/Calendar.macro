@@ -53,7 +53,7 @@
 
 		<execute function="AssertTextEquals" locator1="Calendar#OTHER_CALENDARS_CALENDAR" value1="${calendarName}" />
 
-		<execute function="Click" locator1="Calendar#OTHER_CALENDARS_CALENDAR_MENULIST_ARROW" value1="${calendarName}" />
+		<execute function="Click" locator1="Calendar#OTHER_CALENDARS_CALENDAR_MENULIST_ARROW" />
 	</command>
 
 	<command name="_gotoSiteCalendarMenulist">
@@ -62,7 +62,7 @@
 
 		<execute function="AssertTextEquals" locator1="Calendar#CURRENT_SITE_CALENDARS_CALENDAR" value1="${siteCalendarName}" />
 
-		<execute function="Click" locator1="Calendar#CURRENT_SITE_CALENDARS_CALENDAR_MENULIST_ARROW" value1="${siteCalendarName}" />
+		<execute function="Click" locator1="Calendar#CURRENT_SITE_CALENDARS_CALENDAR_MENULIST_ARROW" />
 	</command>
 
 	<command name="_viewCalendarHidden">
@@ -245,9 +245,7 @@
 					<var name="name" value="${calendarNameEdit}" />
 				</execute>
 
-				<execute macro="Button#clickSave" />
-
-				<execute macro="Alert#viewSuccessMessage" />
+				<execute macro="PortletEntry#save" />
 
 				<execute function="SelectFrame" value1="relative=top" />
 			</then>
@@ -269,9 +267,7 @@
 						<var name="name" value="${calendarNameEdit}" />
 					</execute>
 
-					<execute macro="Button#clickSave" />
-
-					<execute macro="Alert#viewSuccessMessage" />
+					<execute macro="PortletEntry#save" />
 
 					<execute function="SelectFrame" value1="relative=top" />
 				</then>
@@ -290,9 +286,7 @@
 						<var name="name" value="${calendarNameEdit}" />
 					</execute>
 
-					<execute macro="Button#clickSave" />
-
-					<execute macro="Alert#viewSuccessMessage" />
+					<execute macro="PortletEntry#save" />
 
 					<execute function="SelectFrame" value1="relative=top" />
 				</then>
@@ -428,13 +422,16 @@
 		<if>
 			<condition function="IsElementPresent" locator1="Message#SUCCESS" />
 			<then>
-				<execute macro="Alert#viewSuccessMessage" />
+				<execute macro="Alert#waitForSuccessMessageHide" />
+
 				<execute function="SelectFrame" value1="relative=top" />
 			</then>
 			<else>
 				<execute function="SelectFrame" value1="relative=top" />
 
-				<execute macro="Alert#viewSuccessMessage" />
+				<execute function="SelectFrame" locator1="IFrame#DIALOG" />
+
+				<execute macro="Alert#waitForSuccessMessageHide" />
 			</else>
 		</if>
 
@@ -847,7 +844,7 @@
 		<execute function="AssertTextEquals" locator1="CalendarManageCalendars#CALENDAR_TABLE_DESCRIPTION" value1="${calendarDescription}" />
 		<execute function="AssertElementPresent" locator1="CalendarManageCalendars#CALENDAR_TABLE_COLOR" />
 		<execute function="AssertTextEquals" locator1="CalendarManageCalendars#CALENDAR_TABLE_DEFAULT" value1="${calendarDefault}" />
-		<execute function="AssertElementPresent" locator1="CalendarManageCalendars#CALENDAR_TABLE_ACTIONS" value1="${calendarDefault}" />
+		<execute function="AssertElementPresent" locator1="CalendarManageCalendars#CALENDAR_TABLE_ACTIONS" />
 	</command>
 
 	<command name="viewColor">
@@ -939,7 +936,9 @@
 	</command>
 
 	<command name="viewNoRSS">
-		<execute function="Open" locator1="${rssURL}" />
+		<execute macro="Navigator#openSpecificURL">
+			<var name="url" value="${rssURL}" />
+		</execute>
 
 		<var name="pageName" value="Welcome" />
 

@@ -37,6 +37,8 @@ public class PngImageTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_height = null;
 		_image = null;
 		_width = null;

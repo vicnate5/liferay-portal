@@ -12,11 +12,15 @@
 
 		<execute macro="Portlet#shutdownServer" />
 
-		<execute macro="Portlet#startServer" />
+		<execute macro="Portlet#startServer">
+			<var name="deleteLiferayHome" value="false" />
+		</execute>
 
 		<execute macro="User#firstLoginPG" />
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Sites" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Sites" />
 		</execute>
 
@@ -24,7 +28,9 @@
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Sites" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Sites" />
 		</execute>
 
@@ -55,12 +61,15 @@
 
 	<command name="AddGlobalUserSegmentToSiteViaUserSegmentContentDisplayPortlet" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddGlobalUserSegmentToSiteViaUserSegmentContentDisplayPortlet" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Global" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -79,7 +88,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 
@@ -139,8 +150,11 @@
 
 	<command name="AddParentSiteUserSegmentToChildSiteViaUserSegmentContentDisplayPortlet" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddParentSiteUserSegmentToChildSiteViaUserSegmentContentDisplayPortlet" />
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Sites" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Sites" />
 		</execute>
 
@@ -149,7 +163,9 @@
 			<var name="siteName" value="Child SiteName" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Sites" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Sites" />
 		</execute>
 
@@ -166,7 +182,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -185,7 +203,9 @@
 			<var name="site" value="Child SiteName" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -204,7 +224,9 @@
 			<var name="site" value="Child SiteName" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 
@@ -270,12 +292,15 @@
 
 	<command name="AddUserSegmentBehaviorContentVisitedCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentBehaviorContentVisitedCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 
@@ -296,7 +321,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -316,7 +343,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -333,12 +362,15 @@
 
 	<command name="AddUserSegmentBehaviorPageVisitedCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentBehaviorPageVisitedCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -357,7 +389,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -374,12 +408,15 @@
 
 	<command name="AddUserSegmentBehaviorPreviouslyVisitedSiteContainsCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentBehaviorPreviouslyVisitedSiteContainsCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -399,7 +436,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -417,12 +456,15 @@
 
 	<command name="AddUserSegmentBehaviorPreviouslyVisitedSiteStartsWithCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentBehaviorPreviouslyVisitedSiteStartsWithCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -442,7 +484,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -460,12 +504,15 @@
 
 	<command name="AddUserSegmentBehaviorScorePointsCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentBehaviorScorePointsCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -484,7 +531,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -501,12 +550,15 @@
 
 	<command name="AddUserSegmentBlankCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentBlankCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -520,12 +572,15 @@
 
 	<command name="AddUserSegmentMultipleBehaviorContentVisitedCP" priority="4">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentMultipleBehaviorContentVisitedCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 
@@ -559,7 +614,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -581,7 +638,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -604,8 +663,11 @@
 
 	<command name="AddUserSegmentMultipleBehaviorPageVisitedCP" priority="4">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentMultipleBehaviorPageVisitedCP" />
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Sites" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Sites" />
 		</execute>
 
@@ -614,7 +676,9 @@
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -635,7 +699,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -658,8 +724,11 @@
 
 	<command name="AddUserSegmentMultipleUserAttributesCustomFieldCP" priority="4">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentMultipleUserAttributesCustomFieldCP" />
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Custom Fields" />
 		</execute>
 
@@ -673,7 +742,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -695,7 +766,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -720,9 +793,12 @@
 
 	<command name="AddUserSegmentMultipleUserAttributesOrganizationMemberCP" priority="4">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentMultipleUserAttributesOrganizationMemberCP" />
 
 		<for list="Organization Name 1,Organization Name 2" param="orgName">
-			<execute macro="ProductMenu#gotoControlPanelUsers">
+			<execute macro="ProductMenu#gotoPortlet">
+				<var name="category" value="Users" />
+				<var name="panel" value="Control Panel" />
 				<var name="portlet" value="Users and Organizations" />
 			</execute>
 
@@ -736,7 +812,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -753,7 +831,9 @@
 
 		<execute macro="PortletEntry#save" />
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -776,9 +856,12 @@
 
 	<command name="AddUserSegmentMultipleUserAttributesOrganizationRoleCP" priority="4">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentMultipleUserAttributesOrganizationRoleCP" />
 
 		<for list="Organization Name 1,Organization Name 2" param="orgName">
-			<execute macro="ProductMenu#gotoControlPanelUsers">
+			<execute macro="ProductMenu#gotoPortlet">
+				<var name="category" value="Users" />
+				<var name="panel" value="Control Panel" />
 				<var name="portlet" value="Users and Organizations" />
 			</execute>
 
@@ -792,7 +875,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -814,7 +899,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -839,8 +926,11 @@
 
 	<command name="AddUserSegmentMultipleUserAttributesRegularRoleCP" priority="4">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentMultipleUserAttributesRegularRoleCP" />
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -861,7 +951,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -884,8 +976,11 @@
 
 	<command name="AddUserSegmentMultipleUserAttributesSiteMemberCP" priority="4">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentMultipleUserAttributesSiteMemberCP" />
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -911,7 +1006,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -934,12 +1031,15 @@
 
 	<command name="AddUserSegmentMultipleUserAttributesSiteRoleCP" priority="4">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentMultipleUserAttributesSiteRoleCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -961,7 +1061,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -986,9 +1088,12 @@
 
 	<command name="AddUserSegmentMultipleUserAttributesUserGroupMemberCP" priority="4">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentMultipleUserAttributesUserGroupMemberCP" />
 
 		<for list="User Group Name 1,User Group Name 2" param="userGroupName">
-			<execute macro="ProductMenu#gotoControlPanelUsers">
+			<execute macro="ProductMenu#gotoPortlet">
+				<var name="category" value="Users" />
+				<var name="panel" value="Control Panel" />
 				<var name="portlet" value="User Groups" />
 			</execute>
 
@@ -1001,7 +1106,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1022,7 +1129,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1045,12 +1154,15 @@
 
 	<command name="AddUserSegmentSocialFacebookAgeCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentSocialFacebookAgeCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1070,7 +1182,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1088,12 +1202,15 @@
 
 	<command name="AddUserSegmentSocialFacebookCityCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentSocialFacebookCityCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1112,7 +1229,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1129,12 +1248,15 @@
 
 	<command name="AddUserSegmentSocialFacebookEducationCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentSocialFacebookEducationCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1154,7 +1276,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1172,12 +1296,15 @@
 
 	<command name="AddUserSegmentSocialFacebookFriendsCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentSocialFacebookFriendsCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1197,7 +1324,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1215,12 +1344,15 @@
 
 	<command name="AddUserSegmentSocialFacebookGenderCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentSocialFacebookGenderCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1239,7 +1371,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1256,12 +1390,15 @@
 
 	<command name="AddUserSegmentSocialFacebookPageLikeCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentSocialFacebookPageLikeCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1280,7 +1417,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1297,12 +1436,15 @@
 
 	<command name="AddUserSegmentSystemAttributesBrowserCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentSystemAttributesBrowserCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1321,7 +1463,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1338,12 +1482,15 @@
 
 	<command name="AddUserSegmentSystemAttributesDeviceCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentSystemAttributesDeviceCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Mobile Device Families" />
 		</execute>
 
@@ -1356,7 +1503,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1375,7 +1524,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1392,12 +1543,15 @@
 
 	<command name="AddUserSegmentSystemAttributesLocationCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentSystemAttributesLocationCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1417,7 +1571,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1435,12 +1591,15 @@
 
 	<command name="AddUserSegmentSystemAttributesOperatingSystemCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentSystemAttributesOperatingSystemCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1459,7 +1618,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1476,12 +1637,15 @@
 
 	<command name="AddUserSegmentSystemAttributesTimeCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentSystemAttributesTimeCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1501,7 +1665,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1519,12 +1685,15 @@
 
 	<command name="AddUserSegmentUserAttributesAgeCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentUserAttributesAgeCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1544,7 +1713,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1562,8 +1733,11 @@
 
 	<command name="AddUserSegmentUserAttributesCustomFieldCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentUserAttributesCustomFieldCP" />
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Custom Fields" />
 		</execute>
 
@@ -1577,7 +1751,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1597,7 +1773,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1615,12 +1793,15 @@
 
 	<command name="AddUserSegmentUserAttributesGenderCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentUserAttributesGenderCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1639,7 +1820,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1656,8 +1839,11 @@
 
 	<command name="AddUserSegmentUserAttributesOrganizationMemberCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentUserAttributesOrganizationMemberCP" />
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -1670,7 +1856,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1689,7 +1877,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1708,8 +1898,11 @@
 
 	<command name="AddUserSegmentUserAttributesOrganizationRoleCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentUserAttributesOrganizationRoleCP" />
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -1722,7 +1915,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1742,7 +1937,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1762,12 +1959,15 @@
 
 	<command name="AddUserSegmentUserAttributesRegularRoleCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentUserAttributesRegularRoleCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1786,7 +1986,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1803,12 +2005,15 @@
 
 	<command name="AddUserSegmentUserAttributesSiteMemberCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentUserAttributesSiteMemberCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1827,7 +2032,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1844,6 +2051,7 @@
 
 	<command name="AddUserSegmentUserAttributesSiteRoleCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentUserAttributesSiteRoleCP" />
 
 		<execute macro="TestCase#getSiteName">
 			<return from="siteName" name="siteName" />
@@ -1854,7 +2062,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1874,7 +2084,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1892,8 +2104,11 @@
 
 	<command name="AddUserSegmentUserAttributesUserGroupMemberCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentUserAttributesUserGroupMemberCP" />
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="User Groups" />
 		</execute>
 
@@ -1905,7 +2120,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1924,7 +2141,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1941,12 +2160,15 @@
 
 	<command name="AddUserSegmentUserAttributesUserSignedInCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#AddUserSegmentUserAttributesUserSignedInCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1963,7 +2185,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1979,12 +2203,15 @@
 
 	<command name="DeleteUserSegmentCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#DeleteUserSegmentCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -1999,7 +2226,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -2010,12 +2239,15 @@
 
 	<command name="EditUserSegmentCP" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#EditUserSegmentCP" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -2030,7 +2262,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -2046,7 +2280,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -2062,12 +2298,15 @@
 
 	<command name="UserSegmentContentViewReport" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#UserSegmentContentViewReport" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -2086,7 +2325,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 
@@ -2138,7 +2379,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -2160,12 +2403,15 @@
 
 	<command name="ViewRulesAppliedUserSegmentContentDisplayPortlet" priority="5">
 		<property name="content.targeting.release" value="true" />
+		<property name="test.name.skip.portal.instance" value="ContentTargetingUserSegment#ViewRulesAppliedUserSegmentContentDisplayPortlet" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
@@ -2184,7 +2430,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 
@@ -2210,7 +2458,9 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 

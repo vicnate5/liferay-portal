@@ -352,7 +352,7 @@
 
 		<execute function="Select" locator1="DDLSpreadsheet#CELL_EDITOR_SELECT" value1="${ddlRecordFieldData}" />
 
-		<execute function="Click" locator1="Button#SAVE" value1="Save" />
+		<execute function="Click" locator1="Button#SAVE" />
 
 		<execute function="AssertTextEquals" locator1="DDLSpreadsheet#RECORD_TABLE_FIELD_ENTRY" value1="${ddlRecordFieldData}" />
 	</command>
@@ -401,7 +401,7 @@
 
 		<execute function="Type" locator1="DDLSpreadsheet#CELL_EDITOR_FIELD" value1="${ddlRecordFieldData}" />
 
-		<execute function="Click" locator1="Button#SAVE" value1="Save" />
+		<execute function="Click" locator1="Button#SAVE" />
 
 		<execute function="AssertTextEquals" locator1="DDLSpreadsheet#RECORD_TABLE_FIELD_ENTRY" value1="${ddlRecordFieldData}" />
 	</command>
@@ -537,7 +537,7 @@
 				<var name="key_ddlRecordFieldData" value="${ddlRecordNestedFieldData}" />
 				<var name="key_fieldFieldLabel" value="${nestedFieldFieldLabel}" />
 
-				<execute function="AssertElementNotPresent" locator1="DDL#RECORD_TABLE_ENTRY" value1="${ddlRecordFieldData}" />
+				<execute function="AssertElementNotPresent" locator1="DDL#RECORD_TABLE_ENTRY" />
 			</then>
 		</if>
 
@@ -753,7 +753,7 @@
 
 		<execute function="Click" locator1="DDL#RECORD_TABLE_ELLIPSIS_1" />
 
-		<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM" value1="View">
+		<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM">
 			<var name="key_menuItem" value="View" />
 		</execute>
 
@@ -964,7 +964,7 @@
 	</command>
 
 	<command name="viewTranslationNotAvailable">
-		<execute function="AssertElementNotPresent" locator1="Translation#AVAILABLE_TRANSLATION" value1="${localizedLanguage}" />
+		<execute function="AssertElementNotPresent" locator1="Translation#AVAILABLE_TRANSLATION" />
 	</command>
 
 	<command name="viewViaAnchorLink">
@@ -1034,7 +1034,7 @@
 			</then>
 		</if>
 
-		<execute function="AssertElementPresent" locator1="Portlet#H2_HEADER" value1="Dynamic Data Lists Display" />
+		<execute function="AssertElementPresent" locator1="Portlet#H2_HEADER" />
 
 		<execute function="AssertTextEquals#assertPartialText" locator1="DDLRecord#FIELD_1" value1="${fieldFieldLabel}" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="DDLRecord#FIELD_1" value1="${ddlRecordFieldData}" />

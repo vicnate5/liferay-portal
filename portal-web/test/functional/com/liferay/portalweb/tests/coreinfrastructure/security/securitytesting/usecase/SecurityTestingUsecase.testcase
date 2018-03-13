@@ -48,18 +48,17 @@
 			<var name="webContentContent" value="WC WebContent Content" />
 		</execute>
 
-		<execute macro="Portlet#gotoPortletOptions">
-			<var name="portletName" value="Web Content Display" />
-			<var name="portletOption" value="Edit Web Content" />
+		<execute macro="WebContentNavigator#gotoEditPGViaWCD">
+			<var name="webContentTitle" value="WebContent Title" />
 		</execute>
 
-		<execute macro="IFrame#selectDialogFrame" />
-
-		<var locator="WCEditWebContent#ARTICLE_ID" name="articleID" />
+		<var method="selenium#getText(WCEditWebContent#ARTICLE_ID)" name="articleID" />
 
 		<execute macro="User#logoutPG" />
 
-		<execute function="Open" locator1="${url}${articleID}" />
+		<execute macro="Navigator#openSpecificURL">
+			<var name="url" value="${url}${articleID}" />
+		</execute>
 
 		<execute function="AssertTextEquals" locator1="Message#ERROR" value1="You do not have the roles required to access this portlet." />
 	</command>
@@ -81,7 +80,9 @@
 
 		<var method="TestPropsUtil#get('portal.url')" name="portalURL" />
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -92,7 +93,9 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -123,15 +126,18 @@
 
 		<var method="TestPropsUtil#get('portal.url')" name="portalURL" />
 
-		<execute function="Open" locator1="${portalURL}/html/common/forward_jsp.jsp?FORWARD_URL=http://www.msn.com" />
+		<execute macro="Navigator#openSpecificURL">
+			<var name="url" value="${portalURL}/html/common/forward_jsp.jsp?FORWARD_URL=http://www.msn.com" />
+		</execute>
+
 		<execute function="Pause" locator1="3000" />
 
 		<var name="key_pageName" value="Welcome" />
 
-		<execute function="AssertElementPresent" locator1="Home#PAGE" value1="Welcome" />
+		<execute function="AssertElementPresent" locator1="Home#PAGE" />
 
 		<execute function="AssertTextEquals#assertText" locator1="HelloWorld#PORTLET_TITLE" value1="Hello World" />
-		<execute function="AssertElementPresent" locator1="HelloWorld#PORTLET_CONTENT" value1="Welcome to Liferay Portal" />
+		<execute function="AssertElementPresent" locator1="HelloWorld#PORTLET_CONTENT" />
 
 		<execute macro="Page#add">
 			<var name="pageName" value="Test" />
@@ -141,13 +147,31 @@
 
 		<var name="key_pageName" value="Test" />
 
-		<execute function="AssertElementPresent" locator1="Home#PAGE" value1="Test" />
+		<execute function="AssertElementPresent" locator1="Home#PAGE" />
+	</command>
+
+	<command name="ViewJSLoaderModulesURLNoWiki" priority="5">
+		<description message="This is a use case for LPS-73595." />
+
+		<var method="TestPropsUtil#get('portal.url')" name="portalURL" />
+
+		<execute macro="Navigator#openSpecificURL">
+			<var name="url" value="${portalURL}/o/js_loader_modules" />
+		</execute>
+
+		<execute function="AssertConsoleTextPresent" value1="com.liferay.wiki.engine.html" />
+		<execute function="AssertConsoleTextPresent" value1="com.liferay.wiki.engine.text" />
+
+		<execute function="AssertTextNotPresent" value1="com.liferay.wiki.engine.html" />
+		<execute function="AssertTextNotPresent" value1="com.liferay.wiki.engine.text" />
 	</command>
 
 	<command name="ViewUpdateUserViaJSONWS" priority="4">
 		<property name="test.name.skip.portal.instance" value="SecurityTestingUsecase#ViewUpdateUserViaJSONWS" />
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Server Administration" />
 		</execute>
 
@@ -155,7 +179,9 @@
 			<var name="actionsDescription" value="Reindex all search indexes." />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
@@ -165,7 +191,7 @@
 
 		<execute function="Pause" locator1="5000" />
 
-		<var locator="UsersAndOrganizationsEditUser#DETAILS_USER_ID_FIELD" name="userId" />
+		<var method="selenium#getElementValue(UsersAndOrganizationsEditUser#DETAILS_USER_ID_FIELD)" name="userId" />
 
 		<execute macro="Api#apiJsonwsUserView" />
 
@@ -185,7 +211,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 

@@ -14,9 +14,13 @@
 
 package com.liferay.portal.workflow.kaleo.runtime.internal.notification;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.UserNotificationDeliveryConstants;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserNotificationEventLocalService;
 import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -49,8 +53,9 @@ public class UserNotificationMessageSender
 	@Override
 	protected void doSendNotification(
 			Map<NotificationReceptionType, Set<NotificationRecipient>>
-				notificationRecipients, String defaultSubject,
-			String notificationMessage, ExecutionContext executionContext)
+				notificationRecipients,
+			String defaultSubject, String notificationMessage,
+			ExecutionContext executionContext)
 		throws Exception {
 
 		JSONObject jsonObject = populateJSONObject(
@@ -71,6 +76,28 @@ public class UserNotificationMessageSender
 					PortletKeys.MY_WORKFLOW_TASK,
 					UserNotificationDeliveryConstants.TYPE_WEBSITE, jsonObject);
 			}
+		}
+	}
+
+	protected long getUserId(
+		ExecutionContext executionContext,
+		KaleoInstanceToken kaleoInstanceToken) {
+
+		try {
+			ServiceContext serviceContext =
+				executionContext.getServiceContext();
+
+			return serviceContext.getGuestOrUserId();
+		}
+		catch (PortalException pe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to get user from context, using userId from " +
+						"kaleoInstanceToken instead",
+					pe);
+			}
+
+			return kaleoInstanceToken.getUserId();
 		}
 	}
 
@@ -105,14 +132,7 @@ public class UserNotificationMessageSender
 		KaleoInstanceToken kaleoInstanceToken =
 			executionContext.getKaleoInstanceToken();
 
-		long userId = kaleoInstanceToken.getUserId();
-
-		KaleoTaskInstanceToken kaleoTaskInstanceToken =
-			executionContext.getKaleoTaskInstanceToken();
-
-		if (kaleoTaskInstanceToken != null) {
-			userId = kaleoTaskInstanceToken.getUserId();
-		}
+		long userId = getUserId(executionContext, kaleoInstanceToken);
 
 		jsonObject.put(
 			WorkflowConstants.CONTEXT_USER_ID, String.valueOf(userId));
@@ -122,6 +142,9 @@ public class UserNotificationMessageSender
 		jsonObject.put(
 			"workflowInstanceId", kaleoInstanceToken.getKaleoInstanceId());
 
+		KaleoTaskInstanceToken kaleoTaskInstanceToken =
+			executionContext.getKaleoTaskInstanceToken();
+
 		if (kaleoTaskInstanceToken != null) {
 			jsonObject.put(
 				"workflowTaskId",
@@ -130,6 +153,9 @@ public class UserNotificationMessageSender
 
 		return jsonObject;
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		UserNotificationMessageSender.class);
 
 	@Reference
 	private JSONFactory _jsonFactory;

@@ -127,10 +127,8 @@
 
 		<execute function="AssertElementPresent#assertVisible" locator1="NavBar#ASSET_TITLE" value1="Templates" />
 
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="Add Form Template">
-			<var name="key_menuItem" value="Add Form Template" />
+		<execute macro="LexiconEntry#gotoAddMenuItem">
+			<var name="menuItem" value="Add Form Template" />
 		</execute>
 
 		<execute function="Type#clickAtType" locator1="TextInput#NAME" value1="${ddlFormTemplateName}" />
@@ -141,10 +139,8 @@
 
 		<execute function="Click" locator1="Icon#ANGLE_LEFT_BACK" />
 
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="Add Form Template">
-			<var name="key_menuItem" value="Add Form Template" />
+		<execute macro="LexiconEntry#gotoAddMenuItem">
+			<var name="menuItem" value="Add Form Template" />
 		</execute>
 
 		<execute function="Type#clickAtType" locator1="TextInput#NAME" value1="${ddlFormTemplateName}" />
@@ -227,7 +223,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Dynamic Data Lists" />
 		</execute>
 
@@ -283,9 +281,7 @@
 
 		<execute function="AssertClick" locator1="DDMEditTemplate#DATA_LIST_RECORD_FIELDS_TEXT" value1="${ddlDisplayTemplateTextFieldScriptEdit}" />
 
-		<execute function="AssertClick" locator1="DDMEditStructure#SAVE_BUTTON" value1="Save" />
-
-		<execute macro="Alert#viewSuccessMessage" />
+		<execute macro="PortletEntry#save" />
 	</command>
 
 	<command name="editFormTemplateCP">
@@ -345,12 +341,6 @@
 		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
-	<command name="saveFormTemplateCP">
-		<execute function="AssertClick" locator1="DDMEditStructure#SAVE_BUTTON" value1="Save" />
-
-		<execute macro="Alert#viewSuccessMessage" />
-	</command>
-
 	<command name="saveFormTemplateViaDDLDisplayPG">
 		<execute macro="DynamicDataMapping#selectDynamicDataMappingFrame" />
 
@@ -390,7 +380,9 @@
 	<command name="tearDownTemplateCP">
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Dynamic Data Lists" />
 		</execute>
 

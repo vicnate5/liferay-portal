@@ -4,20 +4,24 @@ import EventEmitter from 'metal-events/src/EventEmitter';
 import CompatibilityEventProxy from '../../src/main/resources/META-INF/resources/liferay/CompatibilityEventProxy.es';
 
 describe('CompatibilityEventProxy', () => {
+	/**
+	 * Mocks a target so it can be used for testing
+	 * @param {string} event The event to configure for the target
+	 * @param {boolean} emitFacade Whether the configured event should use a Facade or not
+	 * @return {Object} The mocked target object
+	 */
 	function createMockedTarget(event, emitFacade) {
 		let mockedTarget = {
-			fire: function() {
-
-			},
+			fire: function() {},
 
 			_yuievt: {
-				events: {}
-			}
+				events: {},
+			},
 		};
 
-		if (event) {
+		if (event) {
 			mockedTarget._yuievt.events[event] = {
-				emitFacade: emitFacade
+				emitFacade: emitFacade,
 			};
 		}
 
@@ -27,30 +31,30 @@ describe('CompatibilityEventProxy', () => {
 	let eventNameToEmit = 'eventToEmit';
 
 	let eventObjectToEmit = {
-		key: eventNameToEmit
+		key: eventNameToEmit,
 	};
 
 	let eventFacadeObjectToEmit = {
-		type: eventNameToEmit
+		type: eventNameToEmit,
 	};
 
-	let	host;
+	let host;
 
-	beforeEach((done) => {
+	beforeEach(done => {
 		host = new EventEmitter();
 		done();
 	});
 
-	afterEach((done) => {
+	afterEach(done => {
 		host.dispose();
 		done();
 	});
 
 	let namespace = 'namespace';
 
-	it('should not emit any event when no targets have been added', (done) => {
+	it('should not emit any event when no targets have been added', done => {
 		let component = new CompatibilityEventProxy({
-			host: host
+			host: host,
 		});
 
 		let spy = sinon.spy(component, 'emitCompatibleEvents_');
@@ -62,11 +66,11 @@ describe('CompatibilityEventProxy', () => {
 		done();
 	});
 
-	it('should not crash if target has no method fire', (done) => {
+	it('should not crash if target has no method fire', done => {
 		let mockedTarget = {};
 
 		let component = new CompatibilityEventProxy({
-			host: host
+			host: host,
 		});
 
 		let spy = sinon.spy(component, 'emitCompatibleEvents_');
@@ -80,25 +84,28 @@ describe('CompatibilityEventProxy', () => {
 		done();
 	});
 
-	it('should emit adapted event with event name and event params to given targets when no namespace is specified', (done) => {
+	it('should emit adapted event with event name and event params to given targets when no namespace is specified', done => {
 		let mockedTarget = createMockedTarget(eventNameToEmit);
 
 		let spy = sinon.spy(mockedTarget, 'fire');
 
 		let component = new CompatibilityEventProxy({
-			host: host
+			host: host,
 		});
 
 		component.addTarget(mockedTarget);
 
 		host.emit(eventNameToEmit, eventObjectToEmit, eventFacadeObjectToEmit);
 
-		assert.strictEqual(true, spy.calledWith(eventNameToEmit, eventObjectToEmit));
+		assert.strictEqual(
+			true,
+			spy.calledWith(eventNameToEmit, eventObjectToEmit)
+		);
 
 		done();
 	});
 
-	it('should emit adapted event with event name and event params to given targets when namespace is specified', (done) => {
+	it('should emit adapted event with event name and event params to given targets when namespace is specified', done => {
 		let namespacedEventNameToEmit = namespace + ':' + eventNameToEmit;
 
 		let mockedTarget = createMockedTarget(namespacedEventNameToEmit);
@@ -107,55 +114,64 @@ describe('CompatibilityEventProxy', () => {
 
 		let component = new CompatibilityEventProxy({
 			host: host,
-			namespace: namespace
+			namespace: namespace,
 		});
 
 		component.addTarget(mockedTarget);
 
 		host.emit(eventNameToEmit, eventObjectToEmit, eventFacadeObjectToEmit);
 
-		assert.strictEqual(true, spy.calledWith(namespacedEventNameToEmit, eventObjectToEmit));
+		assert.strictEqual(
+			true,
+			spy.calledWith(namespacedEventNameToEmit, eventObjectToEmit)
+		);
 
 		done();
 	});
 
-	it('should emit adapted event to given targets when target is not listening', (done) => {
+	it('should emit adapted event to given targets when target is not listening', done => {
 		let mockedTarget = createMockedTarget();
 
 		let spy = sinon.spy(mockedTarget, 'fire');
 
 		let component = new CompatibilityEventProxy({
-			host: host
+			host: host,
 		});
 
 		component.addTarget(mockedTarget);
 
 		host.emit(eventNameToEmit, eventObjectToEmit, eventFacadeObjectToEmit);
 
-		assert.strictEqual(true, spy.calledWith(eventNameToEmit, eventObjectToEmit));
+		assert.strictEqual(
+			true,
+			spy.calledWith(eventNameToEmit, eventObjectToEmit)
+		);
 
 		done();
 	});
 
-	it('should emit adapted event to given targets when target is listening', (done) => {
+	it('should emit adapted event to given targets when target is listening', done => {
 		let mockedTarget = createMockedTarget(eventNameToEmit);
 
 		let spy = sinon.spy(mockedTarget, 'fire');
 
 		let component = new CompatibilityEventProxy({
-			host: host
+			host: host,
 		});
 
 		component.addTarget(mockedTarget);
 
 		host.emit(eventNameToEmit, eventObjectToEmit, eventFacadeObjectToEmit);
 
-		assert.strictEqual(true, spy.calledWith(eventNameToEmit, eventObjectToEmit));
+		assert.strictEqual(
+			true,
+			spy.calledWith(eventNameToEmit, eventObjectToEmit)
+		);
 
 		done();
 	});
 
-	it('should maintain target original state of emitFacade after emiting events', (done) => {
+	it('should maintain target original state of emitFacade after emiting events', done => {
 		let emitFacade = false;
 
 		let mockedTarget = createMockedTarget(eventNameToEmit, emitFacade);
@@ -163,20 +179,26 @@ describe('CompatibilityEventProxy', () => {
 		let spy = sinon.spy(mockedTarget, 'fire');
 
 		let component = new CompatibilityEventProxy({
-			host: host
+			host: host,
 		});
 
 		component.addTarget(mockedTarget);
 
 		host.emit(eventNameToEmit, eventObjectToEmit, eventFacadeObjectToEmit);
 
-		assert.strictEqual(true, spy.calledWith(eventNameToEmit, eventObjectToEmit));
-		assert.strictEqual(emitFacade, mockedTarget._yuievt.events[eventNameToEmit].emitFacade);
+		assert.strictEqual(
+			true,
+			spy.calledWith(eventNameToEmit, eventObjectToEmit)
+		);
+		assert.strictEqual(
+			emitFacade,
+			mockedTarget._yuievt.events[eventNameToEmit].emitFacade
+		);
 
 		done();
 	});
 
-	it('should maintain target original state of emitFacade after emiting events when component emitFacade is true', (done) => {
+	it('should maintain target original state of emitFacade after emiting events when component emitFacade is true', done => {
 		let emitFacade = false;
 
 		let mockedTarget = createMockedTarget(eventNameToEmit, emitFacade);
@@ -185,28 +207,34 @@ describe('CompatibilityEventProxy', () => {
 
 		let component = new CompatibilityEventProxy({
 			emitFacade: true,
-			host: host
+			host: host,
 		});
 
 		component.addTarget(mockedTarget);
 
 		host.emit(eventNameToEmit, eventObjectToEmit, eventFacadeObjectToEmit);
 
-		assert.strictEqual(true, spy.calledWith(eventNameToEmit, eventObjectToEmit));
-		assert.strictEqual(emitFacade, mockedTarget._yuievt.events[eventNameToEmit].emitFacade);
+		assert.strictEqual(
+			true,
+			spy.calledWith(eventNameToEmit, eventObjectToEmit)
+		);
+		assert.strictEqual(
+			emitFacade,
+			mockedTarget._yuievt.events[eventNameToEmit].emitFacade
+		);
 
 		done();
 	});
 
-	it('should adapt the events according to specified RegExp', (done) => {
+	it('should adapt the events according to specified RegExp', done => {
 		let eventNameToEmit = 'eventChanged';
 
 		let eventObjectToEmit = {
-			key: eventNameToEmit
+			key: eventNameToEmit,
 		};
 
 		let eventFacadeObjectToEmit = {
-			type: eventNameToEmit
+			type: eventNameToEmit,
 		};
 
 		let adaptedEventNameToEmit = 'eventChange';
@@ -218,18 +246,19 @@ describe('CompatibilityEventProxy', () => {
 		let component = new CompatibilityEventProxy({
 			adaptedEvents: {
 				match: /(.*)(Changed)$/,
-				replace: '$1Change'
+				replace: '$1Change',
 			},
-			host: host
+			host: host,
 		});
 
 		component.addTarget(mockedTarget);
 
 		host.emit(eventNameToEmit, eventObjectToEmit, eventFacadeObjectToEmit);
 
-		assert.strictEqual(true, spy.getCall(0).args[0] === adaptedEventNameToEmit);
+		const eventArg = spy.getCall(0).args[0];
+
+		assert.strictEqual(true, eventArg === adaptedEventNameToEmit);
 
 		done();
 	});
-
 });

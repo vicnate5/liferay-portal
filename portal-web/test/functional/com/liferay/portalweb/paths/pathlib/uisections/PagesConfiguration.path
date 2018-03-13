@@ -14,6 +14,11 @@
 	<td></td>
 </tr>
 <tr>
+ 	<td>PAGES_ALL_PRIVATE_PAGES_CHECKBOX</td>
+ 	<td>xpath=(//div[contains(.,'Private Pages')]//span[contains(@class,'icon-check')])[1]</td>
+ 	<td></td>
+</tr>
+<tr>
 	<td>PAGES_ALL_PUBLIC_PAGES_CHECKBOX</td>
 	<td>//div[contains(.,'Public Pages')]//span[contains(@class,'icon-check')]</td>
 	<td></td>
@@ -51,6 +56,16 @@
 <tr>
 	<td>APPLICATION_CONFIGURATION_CHOOSE_APPLICATION_SUBAPPLICATION_OK_BUTTON</td>
 	<td>//div[contains(@class,'widget-content-expanded') and contains(.,'${key_applicationName}')]//button[contains(.,'OK')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CHANGE_TO_PUBLIC_PAGES</td>
+	<td>//div/button[contains(@id,'changeToPublicLayoutsButton')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CHANGE_TO_PRIVATE_PAGES</td>
+	<td>//div/button[contains(@id,'changeToPrivateLayoutsButton')]</td>
 	<td></td>
 </tr>
 <tr>

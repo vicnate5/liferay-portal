@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LoggingTimer;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.documentlibrary.store.StoreFactory;
@@ -98,9 +99,9 @@ public class VerifyProperties extends VerifyProcess {
 
 		if (portalProperties.containsKey(oldKey)) {
 			_log.error(
-				"Portal property \"" + oldKey +
-					"\" was migrated to the system property \"" + newKey +
-						"\"");
+				StringBundler.concat(
+					"Portal property \"", oldKey,
+					"\" was migrated to the system property \"", newKey, "\""));
 		}
 	}
 
@@ -111,9 +112,9 @@ public class VerifyProperties extends VerifyProcess {
 
 		if (value != null) {
 			_log.error(
-				"System property \"" + oldKey +
-					"\" was migrated to the portal property \"" + newKey +
-						"\"");
+				StringBundler.concat(
+					"System property \"", oldKey,
+					"\" was migrated to the portal property \"", newKey, "\""));
 		}
 	}
 
@@ -124,8 +125,9 @@ public class VerifyProperties extends VerifyProcess {
 
 		if (portalProperties.containsKey(oldKey)) {
 			_log.error(
-				"Portal property \"" + oldKey + "\" was modularized to " +
-					moduleName + " as \"" + newKey + "\"");
+				StringBundler.concat(
+					"Portal property \"", oldKey, "\" was modularized to ",
+					moduleName, " as \"", newKey, "\""));
 		}
 	}
 
@@ -136,8 +138,9 @@ public class VerifyProperties extends VerifyProcess {
 
 		if (systemProperties.containsKey(oldKey)) {
 			_log.error(
-				"System property \"" + oldKey + "\" was modularized to " +
-					moduleName + " as \"" + newKey + "\"");
+				StringBundler.concat(
+					"System property \"", oldKey, "\" was modularized to ",
+					moduleName, " as \"", newKey, "\""));
 		}
 	}
 
@@ -197,8 +200,9 @@ public class VerifyProperties extends VerifyProcess {
 
 		if (portalProperties.containsKey(oldKey)) {
 			_log.error(
-				"Portal property \"" + oldKey + "\" was renamed to \"" +
-					newKey + "\"");
+				StringBundler.concat(
+					"Portal property \"", oldKey, "\" was renamed to \"",
+					newKey, "\""));
 		}
 	}
 
@@ -209,8 +213,9 @@ public class VerifyProperties extends VerifyProcess {
 
 		if (value != null) {
 			_log.error(
-				"System property \"" + oldKey + "\" was renamed to \"" +
-					newKey + "\"");
+				StringBundler.concat(
+					"System property \"", oldKey, "\" was renamed to \"",
+					newKey, "\""));
 		}
 	}
 
@@ -1715,8 +1720,8 @@ public class VerifyProperties extends VerifyProcess {
 		"asset.publisher.query.form.configuration",
 		"asset.tag.permissions.enabled", "asset.tag.properties.default",
 		"asset.tag.properties.enabled", "asset.tag.suggestions.enabled",
-		"auth.max.failures.limit", "blogs.image.small.max.size",
-		"breadcrumb.display.style.options",
+		"auth.max.failures.limit", "auto.deploy.blacklist.threshold",
+		"blogs.image.small.max.size", "breadcrumb.display.style.options",
 		"buffered.increment.parallel.queue.size",
 		"buffered.increment.serial.queue.size", "cas.validate.url",
 		"cluster.executor.heartbeat.interval",
@@ -1786,11 +1791,11 @@ public class VerifyProperties extends VerifyProcess {
 		"index.portal.field.analyzer.enabled", "index.search.highlight.enabled",
 		"index.read.only", "invitation.email.max.recipients",
 		"invitation.email.message.body", "invitation.email.message.subject",
-		"javax.persistence.validation.mode", "jbi.workflow.url",
-		"json.deserializer.strict.mode", "journal.article.form.add",
-		"journal.article.form.default.values", "journal.article.form.update",
-		"journal.article.form.translate", "journal.article.types",
-		"journal.articles.page.delta.values",
+		"invoker.filter.chain.cache.size", "javax.persistence.validation.mode",
+		"jbi.workflow.url", "json.deserializer.strict.mode",
+		"journal.article.form.add", "journal.article.form.default.values",
+		"journal.article.form.update", "journal.article.form.translate",
+		"journal.article.types", "journal.articles.page.delta.values",
 		"journal.browse.by.structures.sorted.by.name",
 		"journal.template.language.parser[css]",
 		"journal.template.language.parser[ftl]",
@@ -1803,9 +1808,11 @@ public class VerifyProperties extends VerifyProcess {
 		"jpa.provider.property.eclipselink.logging.timestamp",
 		"language.display.style.options", "layout.edit.page[control_panel]",
 		"layout.first.pageable[control_panel]", "layout.form.add",
-		"layout.form.update", "layout.parentable[control_panel]",
-		"layout.reset.portlet.ids", "layout.set.form.update", "layout.types",
-		"layout.url[control_panel]", "layout.url.friendliable[control_panel]",
+		"layout.form.update",
+		"layout.parallel.render.thread.pool.allow.core.thread.timeout",
+		"layout.parentable[control_panel]", "layout.reset.portlet.ids",
+		"layout.set.form.update", "layout.types", "layout.url[control_panel]",
+		"layout.url.friendliable[control_panel]",
 		"layout.view.page[control_panel]", "library.download.url.resin.jar",
 		"library.download.url.script-10.jar", "lucene.analyzer",
 		"lucene.cluster.index.loading.sync.timeout", "lucene.file.extractor",
@@ -1829,6 +1836,7 @@ public class VerifyProperties extends VerifyProcess {
 		"message.boards.thread.previous.and.next.navigation.enabled",
 		"message.boards.thread.views", "message.boards.thread.views.default",
 		"microsoft.translator.client.id", "microsoft.translator.client.secret",
+		"minifier.inline.content.cache.size",
 		"mobile.device.styling.wap.enabled", "module.framework.initial.bundles",
 		"msn.login", "msn.password", "multicast.group.address[\"hibernate\"]",
 		"multicast.group.port[\"hibernate\"]",

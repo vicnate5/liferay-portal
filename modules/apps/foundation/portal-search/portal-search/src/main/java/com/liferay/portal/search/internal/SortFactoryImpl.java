@@ -57,6 +57,10 @@ public class SortFactoryImpl implements SortFactory {
 
 		String sortFieldName = orderByCol;
 
+		if (orderByCol.equals(Field.PRIORITY)) {
+			inferSortField = false;
+		}
+
 		if (inferSortField) {
 			sortFieldName = getSortField(orderByCol, type, clazz);
 		}

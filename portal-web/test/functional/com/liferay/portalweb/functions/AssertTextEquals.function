@@ -1,24 +1,4 @@
 <definition default="assertTextEquals" summary="Assert that '${locator1}' equals the value '${value1}'">
-	<command name="assertCKEditorText">
-		<execute function="WaitForSPARefresh" />
-
-		<execute argument1="//a[contains(@class,'cke_button__unlink') and contains(@class,'cke_button_disabled')]" selenium="waitForVisible" />
-
-		<execute argument1="1000" selenium="pause" />
-
-		<execute selenium="selectFrame" />
-
-		<execute argument1="//html/body" selenium="waitForVisible" />
-
-		<execute argument1="//html/body" selenium="assertText" />
-
-		<execute argument1="relative=parent" selenium="selectFrame" />
-
-		<execute selenium="assertJavaScriptErrors" />
-
-		<execute selenium="assertLiferayErrors" />
-	</command>
-
 	<command name="assertPartialText" summary="Assert that '${locator1}' contains the value '${value1}'">
 		<execute function="WaitForSPARefresh" />
 
@@ -73,18 +53,6 @@
 				<execute function="AssertTextEquals#assertText" />
 			</else>
 		</if>
-	</command>
-
-	<command name="assertTextWaitForCKEditor">
-		<execute function="WaitForSPARefresh" />
-
-		<execute argument1="//a[contains(@class,'cke_button__unlink') and contains(@class,'cke_button_disabled')]" selenium="waitForVisible" />
-
-		<execute function="AssertTextEquals#assertText" />
-
-		<execute selenium="assertJavaScriptErrors" />
-
-		<execute selenium="assertLiferayErrors" />
 	</command>
 
 	<command name="assertTextWaitForInlineCKEditor">

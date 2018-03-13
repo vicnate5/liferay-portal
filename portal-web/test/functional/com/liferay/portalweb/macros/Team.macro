@@ -141,9 +141,7 @@
 	<command name="definePermissionPG">
 		<execute function="Check" locator1="//tr[contains(.,'${teamName}')]/td/input[contains(@id,'${permissionDefinitionKey}')]" />
 
-		<execute macro="Button#clickSave" />
-
-		<execute macro="Alert#viewSuccessMessage" />
+		<execute macro="PortletEntry#save" />
 
 		<execute function="AssertChecked" locator1="//tr[contains(.,'${teamName}')]/td/input[contains(@id,'${permissionDefinitionKey}')]" />
 	</command>
@@ -220,9 +218,7 @@
 	<command name="removePermissionPG">
 		<execute function="Uncheck" locator1="//tr[contains(.,'${teamName}')]/td/input[contains(@id,'${permissionDefinitionKey}')]" />
 
-		<execute macro="Button#clickSave" />
-
-		<execute macro="Alert#viewSuccessMessage" />
+		<execute macro="PortletEntry#save" />
 
 		<execute function="AssertNotChecked" locator1="//tr[contains(.,'${teamName}')]/td/input[contains(@id,'${permissionDefinitionKey}')]" />
 	</command>
@@ -259,7 +255,9 @@
 			<var name="site" value="${siteName}" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesMembers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Members" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Site Teams" />
 		</execute>
 

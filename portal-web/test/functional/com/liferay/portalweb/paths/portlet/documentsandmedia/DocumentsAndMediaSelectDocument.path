@@ -33,42 +33,6 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--ADD_MENULIST-->
-<tr>
-	<td>ADD_MENULIST_FOLDER</td>
-	<td>//a[@role='menuitem' and contains(.,'Folder')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>ADD_MENULIST_BASIC_DOCUMENT</td>
-	<td>//a[@role='menuitem' and contains(.,'Basic Document')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>ADD_MENULIST_CONTRACT</td>
-	<td>//a[@role='menuitem' and contains(.,'Contract')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>ADD_MENULIST_MARKETING_BANNER</td>
-	<td>//a[@role='menuitem' and contains(.,'Marketing Banner')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>ADD_MENULIST_ONLINE_TRAINING</td>
-	<td>//a[@role='menuitem' and contains(.,'Online Training')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>ADD_MENULIST_SALES_PRESENTATION</td>
-	<td>//a[@role='menuitem' and contains(.,'Sales Presentation')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
 <!--FOLDER_TABLE-->
 <tr>
 	<td>FOLDER_TABLE_FOLDER</td>

@@ -115,10 +115,11 @@ public class DDMFormEvaluatorHelper {
 		DDMExpression<Boolean> ddmExpression =
 			_ddmExpressionFactory.createBooleanDDMExpression(expressionString);
 
-		setDDMExpressionVariables(
-			ddmExpression, _rootDDMFormFieldValues, ancestorDDMFormFieldValues);
-
 		try {
+			setDDMExpressionVariables(
+				ddmExpression, _rootDDMFormFieldValues,
+				ancestorDDMFormFieldValues);
+
 			return ddmExpression.evaluate();
 		}
 		catch (DDMExpressionException ddmee) {
@@ -128,6 +129,9 @@ public class DDMFormEvaluatorHelper {
 						"reference to a field no longer available: " +
 							expressionString);
 			}
+		}
+		catch (NumberFormatException nfe) {
+			return false;
 		}
 
 		return true;
@@ -265,6 +269,14 @@ public class DDMFormEvaluatorHelper {
 		return valueString;
 	}
 
+	protected String getVariableType(String dataType, String valueString) {
+		if (dataType.equals("integer") && !Validator.isNumber(valueString)) {
+			return "double";
+		}
+
+		return dataType;
+	}
+
 	protected boolean isDDMFormFieldValueEmpty(
 		DDMFormFieldValue ddmFormFieldValue) {
 
@@ -321,7 +333,8 @@ public class DDMFormEvaluatorHelper {
 
 			if (valueString != null) {
 				setExpressionVariableValue(
-					ddmExpression, name, ddmFormField.getDataType(),
+					ddmExpression, name,
+					getVariableType(ddmFormField.getDataType(), valueString),
 					valueString);
 			}
 
@@ -340,9 +353,13 @@ public class DDMFormEvaluatorHelper {
 			ddmExpression.setBooleanVariableValue(
 				variableName, GetterUtil.getBoolean(variableValue));
 		}
+		else if (variableType.equals("double")) {
+			ddmExpression.setDoubleVariableValue(
+				variableName, Double.parseDouble(variableValue));
+		}
 		else if (variableType.equals("integer")) {
 			ddmExpression.setIntegerVariableValue(
-				variableName, GetterUtil.getInteger(variableValue));
+				variableName, GetterUtil.getIntegerStrict(variableValue));
 		}
 		else if (variableType.equals("string")) {
 			ddmExpression.setStringVariableValue(variableName, variableValue);

@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -169,8 +170,10 @@ public class RepositoryTest {
 				localRepository.getFileEntry(fileEntryIds[i]);
 
 				Assert.fail(
-					"Should not be able to get file entry " + fileEntryIds[i] +
-						" from repository " + dlRepository.getRepositoryId());
+					StringBundler.concat(
+						"Should not be able to get file entry ",
+						String.valueOf(fileEntryIds[i]), " from repository ",
+						String.valueOf(dlRepository.getRepositoryId())));
 			}
 			catch (Exception e) {
 			}

@@ -33,6 +33,8 @@ public class JournalContentSearchTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_showListed = true;
 		_targetPortletId = null;
 	}

@@ -244,7 +244,7 @@ LayoutsTreeDisplayContext layoutsTreeDisplayContext = new LayoutsTreeDisplayCont
 	</c:if>
 
 	<liferay-util:buffer var="linkTemplate">
-		<a class="{cssClass}" data-plid="{plid}" data-url="{url}" data-uuid="{uuid}" href="{regularURL}" id="{id}" title="{label}">{label}</a>
+		<a class="{cssClass}" data-plid="{plid}" data-regularurl="{regularURL}" data-url="{url}" data-uuid="{uuid}" href="{regularURL}" id="{id}" title="{label}">{label}</a>
 
 		<div class="dropdown dropdown-menu-no-arrow layout-tree-options" data-deleteable="{deleteable}" data-parentable="{parentable}" data-updateable="{updateable}">
 			<a aria-expanded="false" class="dropdown-toggle icon-monospaced" data-qa-id="pageOptions" data-toggle="dropdown" href="javascript:;">
@@ -300,10 +300,12 @@ LayoutsTreeDisplayContext layoutsTreeDisplayContext = new LayoutsTreeDisplayCont
 	<liferay-layout:layouts-tree
 		expandFirstNode="<%= true %>"
 		groupId="<%= layoutsTreeDisplayContext.getSelGroupId() %>"
+		layoutSetBranch="<%= layoutsTreeDisplayContext.getLayoutSetBranch() %>"
 		linkTemplate="<%= linkTemplate %>"
 		portletURLs="<%= layoutsTreeDisplayContext.getPortletURLs() %>"
 		privateLayout="<%= layoutsTreeDisplayContext.isPrivateLayout() %>"
 		rootNodeName="<%= StringPool.BLANK %>"
+		scriptPosition="auto"
 		selPlid="<%= layoutsTreeDisplayContext.getCurSelPlid() %>"
 		treeId="layoutsTree"
 	/>

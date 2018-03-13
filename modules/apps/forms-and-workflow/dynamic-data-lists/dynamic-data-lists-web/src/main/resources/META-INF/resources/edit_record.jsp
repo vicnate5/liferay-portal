@@ -171,82 +171,84 @@ else {
 			<aui:input name="languageId" type="hidden" value="<%= languageId %>" />
 			<aui:input name="workflowAction" type="hidden" value="<%= WorkflowConstants.ACTION_PUBLISH %>" />
 
-			<liferay-ui:error exception="<%= DuplicateFileEntryException.class %>" message="a-file-with-that-name-already-exists" />
+			<div class="lfr-form-content">
+				<liferay-ui:error exception="<%= DuplicateFileEntryException.class %>" message="a-file-with-that-name-already-exists" />
 
-			<liferay-ui:error exception="<%= FileSizeException.class %>">
+				<liferay-ui:error exception="<%= FileSizeException.class %>">
+
+					<%
+					long fileMaxSize = PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE);
+
+					if (fileMaxSize == 0) {
+						fileMaxSize = PrefsPropsUtil.getLong(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE);
+					}
+					%>
+
+					<liferay-ui:message arguments="<%= TextFormatter.formatStorageSize(fileMaxSize, locale) %>" key="please-enter-a-file-with-a-valid-file-size-no-larger-than-x" translateArguments="<%= false %>" />
+				</liferay-ui:error>
+
+				<liferay-ui:error exception="<%= StorageFieldRequiredException.class %>" message="please-fill-out-all-required-fields" />
+
+				<c:if test="<%= !translating && !ddlDisplayContext.isFormView() %>">
+					<aui:translation-manager
+						availableLocales="<%= availableLocales %>"
+						changeableDefaultLanguage="<%= changeableDefaultLanguage %>"
+						defaultLanguageId="<%= defaultLanguageId %>"
+						id="translationManager"
+					/>
+				</c:if>
 
 				<%
-				long fileMaxSize = PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE);
+				long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
 
-				if (fileMaxSize == 0) {
-					fileMaxSize = PrefsPropsUtil.getLong(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE);
+				long classPK = recordSet.getDDMStructureId();
+
+				if (formDDMTemplateId > 0) {
+					classNameId = PortalUtil.getClassNameId(DDMTemplate.class);
+
+					classPK = formDDMTemplateId;
 				}
 				%>
 
-				<liferay-ui:message arguments="<%= TextFormatter.formatStorageSize(fileMaxSize, locale) %>" key="please-enter-a-file-with-a-valid-file-size-no-larger-than-x" translateArguments="<%= false %>" />
-			</liferay-ui:error>
+				<c:choose>
+					<c:when test="<%= ddlDisplayContext.isFormView() %>">
+						<liferay-ddm:html
+							classNameId="<%= classNameId %>"
+							classPK="<%= classPK %>"
+							ddmFormValues="<%= ddmFormValues %>"
+							repeatable="<%= translating ? false : true %>"
+							requestedLocale="<%= LocaleUtil.fromLanguageId(languageId) %>"
+						/>
+					</c:when>
+					<c:otherwise>
+						<aui:fieldset-group markupView="lexicon">
+							<aui:fieldset>
+								<liferay-ddm:html
+									classNameId="<%= classNameId %>"
+									classPK="<%= classPK %>"
+									ddmFormValues="<%= ddmFormValues %>"
+									repeatable="<%= translating ? false : true %>"
+									requestedLocale="<%= LocaleUtil.fromLanguageId(languageId) %>"
+								/>
+							</aui:fieldset>
+						</aui:fieldset-group>
+					</c:otherwise>
+				</c:choose>
 
-			<liferay-ui:error exception="<%= StorageFieldRequiredException.class %>" message="please-fill-out-all-required-fields" />
+				<%
+				boolean pending = false;
 
-			<c:if test="<%= !translating && !ddlDisplayContext.isFormView() %>">
-				<aui:translation-manager
-					availableLocales="<%= availableLocales %>"
-					changeableDefaultLanguage="<%= changeableDefaultLanguage %>"
-					defaultLanguageId="<%= defaultLanguageId %>"
-					id="translationManager"
-				/>
-			</c:if>
+				if (recordVersion != null) {
+					pending = recordVersion.isPending();
+				}
+				%>
 
-			<%
-			long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
-
-			long classPK = recordSet.getDDMStructureId();
-
-			if (formDDMTemplateId > 0) {
-				classNameId = PortalUtil.getClassNameId(DDMTemplate.class);
-
-				classPK = formDDMTemplateId;
-			}
-			%>
-
-			<c:choose>
-				<c:when test="<%= ddlDisplayContext.isFormView() %>">
-					<liferay-ddm:html
-						classNameId="<%= classNameId %>"
-						classPK="<%= classPK %>"
-						ddmFormValues="<%= ddmFormValues %>"
-						repeatable="<%= translating ? false : true %>"
-						requestedLocale="<%= LocaleUtil.fromLanguageId(languageId) %>"
-					/>
-				</c:when>
-				<c:otherwise>
-					<aui:fieldset-group markupView="lexicon">
-						<aui:fieldset>
-							<liferay-ddm:html
-								classNameId="<%= classNameId %>"
-								classPK="<%= classPK %>"
-								ddmFormValues="<%= ddmFormValues %>"
-								repeatable="<%= translating ? false : true %>"
-								requestedLocale="<%= LocaleUtil.fromLanguageId(languageId) %>"
-							/>
-						</aui:fieldset>
-					</aui:fieldset-group>
-				</c:otherwise>
-			</c:choose>
-
-			<%
-			boolean pending = false;
-
-			if (recordVersion != null) {
-				pending = recordVersion.isPending();
-			}
-			%>
-
-			<c:if test="<%= pending %>">
-				<div class="alert alert-info">
-					<liferay-ui:message key="there-is-a-publication-workflow-in-process" />
-				</div>
-			</c:if>
+				<c:if test="<%= pending %>">
+					<div class="alert alert-info">
+						<liferay-ui:message key="there-is-a-publication-workflow-in-process" />
+					</div>
+				</c:if>
+			</div>
 
 			<aui:button-row>
 

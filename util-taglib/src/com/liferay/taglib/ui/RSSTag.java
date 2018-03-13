@@ -14,10 +14,10 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.RSSUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
@@ -60,6 +60,8 @@ public class RSSTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_delta = SearchContainer.DEFAULT_DELTA;
 		_displayStyle = RSSUtil.DISPLAY_STYLE_DEFAULT;
 		_feedType = RSSUtil.FEED_TYPE_DEFAULT;

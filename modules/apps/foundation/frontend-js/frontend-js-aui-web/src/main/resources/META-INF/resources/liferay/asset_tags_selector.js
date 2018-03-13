@@ -7,7 +7,7 @@ AUI.add(
 
 		var LString = Lang.String;
 
-		var CSS_INPUT_NODE = 'lfr-tag-selector-input';
+		var CSS_INPUT_NODE = 'lfr-tag-selector-textarea';
 
 		var CSS_NO_MATCHES = 'no-matches';
 
@@ -539,7 +539,9 @@ AUI.add(
 								alertNode.remove();
 
 								contentBox.removeClass('has-error');
-							}, {}, false
+							},
+							{},
+							false
 						);
 					},
 

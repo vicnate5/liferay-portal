@@ -38,18 +38,24 @@ public interface DLDisplayContextFactory extends DisplayContextFactory {
 		HttpServletRequest request, HttpServletResponse response,
 		FileEntry fileEntry);
 
-	public DLViewFileVersionDisplayContext
-		getDLViewFileVersionDisplayContext(
-			DLViewFileVersionDisplayContext
-				parentDLViewFileVersionDisplayContext,
+	public default DLViewFileEntryHistoryDisplayContext
+		getDLViewFileEntryHistoryDisplayContext(
+			DLViewFileEntryHistoryDisplayContext
+				parentDLViewFileEntryHistoryDisplayContext,
 			HttpServletRequest request, HttpServletResponse response,
-			FileShortcut fileShortcut);
+			FileVersion fileVersion) {
 
-	public DLViewFileVersionDisplayContext
-		getDLViewFileVersionDisplayContext(
-			DLViewFileVersionDisplayContext
-				parentDLViewFileVersionDisplayContext,
-			HttpServletRequest request, HttpServletResponse response,
-			FileVersion fileVersion);
+		return parentDLViewFileEntryHistoryDisplayContext;
+	}
+
+	public DLViewFileVersionDisplayContext getDLViewFileVersionDisplayContext(
+		DLViewFileVersionDisplayContext parentDLViewFileVersionDisplayContext,
+		HttpServletRequest request, HttpServletResponse response,
+		FileShortcut fileShortcut);
+
+	public DLViewFileVersionDisplayContext getDLViewFileVersionDisplayContext(
+		DLViewFileVersionDisplayContext parentDLViewFileVersionDisplayContext,
+		HttpServletRequest request, HttpServletResponse response,
+		FileVersion fileVersion);
 
 }

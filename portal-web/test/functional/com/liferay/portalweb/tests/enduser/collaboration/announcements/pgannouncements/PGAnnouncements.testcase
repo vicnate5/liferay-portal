@@ -82,7 +82,7 @@
 
 		<execute function="Pause" locator1="10000" />
 
-		<execute function="AssertClick" locator1="Announcements#NAVIGATION_ENTRIES_NEW" value1="New" />
+		<execute function="AssertClick" locator1="Announcements#NAVIGATION_ENTRIES_UNREAD" value1="Unread" />
 
 		<execute function="AssertTextNotPresent" value1="Announcements Entry Title" />
 		<execute function="Pause" locator1="120000" />
@@ -153,7 +153,9 @@
 	</command>
 
 	<command name="AddAnnouncementsEntrySite" priority="3">
-		<execute macro="ProductMenu#gotoControlPanelSites">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Sites" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Sites" />
 		</execute>
 
@@ -161,7 +163,9 @@
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Sites" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Sites" />
 		</execute>
 
@@ -294,14 +298,14 @@
 			<var name="entryTitle" value="Announcements Entry Title" />
 		</execute>
 
-		<execute macro="AnnouncementsEntry#viewPreviousPG">
+		<execute macro="AnnouncementsEntry#viewReadPG">
 			<var name="announcementType" value="General" />
 			<var name="distributionScope" value="General" />
 			<var name="entryContent" value="Announcements Entry Content" />
 			<var name="entryTitle" value="Announcements Entry Title" />
 		</execute>
 
-		<execute function="AssertClick" locator1="Announcements#NAVIGATION_ENTRIES_NEW" value1="New" />
+		<execute function="AssertClick" locator1="Announcements#NAVIGATION_ENTRIES_UNREAD" value1="Unread" />
 
 		<execute macro="AnnouncementsEntry#viewNoPG">
 			<var name="entryTitle" value="Announcements Entry Title" />

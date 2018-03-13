@@ -15,6 +15,10 @@
 package com.liferay.asset.publisher.web.portlet;
 
 import com.liferay.asset.publisher.web.constants.AssetPublisherPortletKeys;
+import com.liferay.asset.publisher.web.constants.AssetPublisherWebKeys;
+import com.liferay.asset.publisher.web.internal.action.AssetEntryActionRegistry;
+import com.liferay.asset.publisher.web.util.AssetPublisherCustomizer;
+import com.liferay.asset.publisher.web.util.AssetPublisherCustomizerRegistry;
 import com.liferay.asset.publisher.web.util.AssetPublisherUtil;
 import com.liferay.asset.publisher.web.util.AssetRSSUtil;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
@@ -24,6 +28,9 @@ import com.liferay.dynamic.data.mapping.util.DDMUtil;
 import com.liferay.portal.kernel.exception.NoSuchGroupException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.PortletConstants;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -209,12 +216,24 @@ public class AssetPublisherPortlet extends MVCPortlet {
 		try (OutputStream outputStream =
 				resourceResponse.getPortletOutputStream()) {
 
+			String rootPortletId = PortletConstants.getRootPortletId(
+				portal.getPortletId(resourceRequest));
+
+			AssetPublisherCustomizer assetPublisherCustomizer =
+				assetPublisherCustomizerRegistry.getAssetPublisherCustomizer(
+					rootPortletId);
+
+			resourceRequest.setAttribute(
+				AssetPublisherWebKeys.ASSET_PUBLISHER_CUSTOMIZER,
+				assetPublisherCustomizer);
+
 			byte[] bytes = AssetRSSUtil.getRSS(
 				resourceRequest, resourceResponse);
 
 			outputStream.write(bytes);
 		}
 		catch (Exception e) {
+			_log.error("Unable to get RSS feed", e);
 		}
 	}
 
@@ -266,8 +285,28 @@ public class AssetPublisherPortlet extends MVCPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		renderRequest.setAttribute(
-			WebKeys.SINGLE_PAGE_APPLICATION_CLEAR_CACHE, Boolean.TRUE);
+		try {
+			renderRequest.setAttribute(
+				AssetPublisherWebKeys.ASSET_ENTRY_ACTION_REGISTRY,
+				assetEntryActionRegistry);
+
+			String rootPortletId = PortletConstants.getRootPortletId(
+				portal.getPortletId(renderRequest));
+
+			AssetPublisherCustomizer assetPublisherCustomizer =
+				assetPublisherCustomizerRegistry.getAssetPublisherCustomizer(
+					rootPortletId);
+
+			renderRequest.setAttribute(
+				AssetPublisherWebKeys.ASSET_PUBLISHER_CUSTOMIZER,
+				assetPublisherCustomizer);
+
+			renderRequest.setAttribute(
+				WebKeys.SINGLE_PAGE_APPLICATION_CLEAR_CACHE, Boolean.TRUE);
+		}
+		catch (Exception e) {
+			_log.error("Unable to get Asset Publisher customizer", e);
+		}
 
 		if (SessionErrors.contains(
 				renderRequest, NoSuchGroupException.class.getName()) ||
@@ -293,6 +332,15 @@ public class AssetPublisherPortlet extends MVCPortlet {
 	}
 
 	@Reference
+	protected AssetEntryActionRegistry assetEntryActionRegistry;
+
+	@Reference
+	protected AssetPublisherCustomizerRegistry assetPublisherCustomizerRegistry;
+
+	@Reference
 	protected Portal portal;
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		AssetPublisherPortlet.class);
 
 }

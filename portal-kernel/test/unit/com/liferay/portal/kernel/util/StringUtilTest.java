@@ -694,19 +694,6 @@ public class StringUtilTest {
 	}
 
 	@Test
-	public void testStripChar() {
-		Assert.assertEquals("abcd", StringUtil.strip(" a b  c   d", ' '));
-	}
-
-	@Test
-	public void testStripCharArray() {
-		Assert.assertEquals(
-			"HeoWor",
-			StringUtil.strip(
-				"Hello World", new char[] {CharPool.SPACE, 'l', 'd'}));
-	}
-
-	@Test
 	public void testStripParentheticalSuffixInteger() {
 		Assert.assertEquals(
 			"Hello World",
@@ -1064,6 +1051,16 @@ public class StringUtilTest {
 		Assert.assertEquals(
 			"\t\r\n" + testString + " \t\r",
 			StringUtil.trim(surroundingSpacesString, exceptions));
+	}
+
+	@Test
+	public void testUnquote() {
+		Assert.assertEquals(
+			"Hello World", StringUtil.unquote("\"Hello World\""));
+
+		// String with single character
+
+		Assert.assertEquals("\"", StringUtil.unquote("\""));
 	}
 
 	@Test

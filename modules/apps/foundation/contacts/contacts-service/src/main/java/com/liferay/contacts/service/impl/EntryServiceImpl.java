@@ -21,8 +21,12 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceMode;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
 
 import java.util.List;
 
@@ -31,12 +35,28 @@ import java.util.List;
  */
 public class EntryServiceImpl extends EntryServiceBaseImpl {
 
+	@JSONWebService(mode = JSONWebServiceMode.IGNORE)
+	@Override
+	public void afterPropertiesSet() {
+		_enabled = GetterUtil.getBoolean(
+			PropsUtil.get("contacts.entry.service.enabled"));
+
+		super.afterPropertiesSet();
+	}
+
 	@Override
 	public JSONArray searchUsersAndContacts(
 			long companyId, String keywords, int start, int end)
 		throws PortalException {
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		if (!_enabled) {
+			throw new UnsupportedOperationException(
+				"This service is disabled by default. To enable it, set the " +
+					"property \"contacts.entry.service.enabled\" to true in " +
+						"portal.properties.");
+		}
 
 		long userId = getUserId();
 
@@ -59,5 +79,7 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 
 		return jsonArray;
 	}
+
+	private volatile boolean _enabled;
 
 }

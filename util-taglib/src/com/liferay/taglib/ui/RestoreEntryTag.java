@@ -39,6 +39,8 @@ public class RestoreEntryTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_overrideMessage = _OVERRIDE_MESSAGE;
 		_renameMessage = _RENAME_MESSAGE;
 		_restoreURL = null;

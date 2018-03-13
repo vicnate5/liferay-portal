@@ -47,12 +47,34 @@ AUI.add(
 						instance.on('save', instance._onSave);
 					},
 
-					hide: function() {
+					hide: function(event, restoreWindowPosition) {
 						var instance = this;
+
+						var field = instance._fieldBeingEdited;
+
+						var settings = JSON.stringify(field.getSettings());
 
 						FormBuilderFieldSettingsModal.superclass.hide.apply(instance, arguments);
 
+						if (restoreWindowPosition || (instance._previousSettings == settings)) {
+							instance._restoreWindowPosition();
+						}
+
 						instance.fire('hide');
+					},
+
+					onConfirmCancelClick: function(event) {
+						var instance = this;
+
+						var confirmationMessage = A.one('.' + CSS_FIELD_SETTINGS_CONFIRMATION_MESSAGE);
+
+						var restoreWindowPosition = true;
+
+						if (confirmationMessage && confirmationMessage.hasClass('hide')) {
+							restoreWindowPosition = false;
+						}
+
+						instance.hide(event, restoreWindowPosition);
 					},
 
 					show: function() {
@@ -110,7 +132,7 @@ AUI.add(
 											cssClass: [CSS_BTN_LG, CSS_BTN_PRIMARY, CSS_FIELD_SETTINGS_YES].join(' '),
 											labelHTML: Liferay.Language.get('yes-cancel'),
 											on: {
-												click: A.bind('hide', instance)
+												click: A.bind('onConfirmCancelClick', instance)
 											}
 										},
 										{
@@ -126,7 +148,7 @@ AUI.add(
 											cssClass: CSS_CLOSE,
 											labelHTML: Liferay.Util.getLexiconIconTpl('times'),
 											on: {
-												click: A.bind('hide', instance)
+												click: A.bind('onConfirmCancelClick', instance)
 											}
 										}
 									]
@@ -195,6 +217,14 @@ AUI.add(
 						container.appendTo(instance._getBodyNode());
 
 						settingsForm.render();
+					},
+
+					_restoreWindowPosition: function() {
+						if ((window['last_position_y'])) {
+							window.scroll(0, window['last_position_y']);
+
+							window['last_position_y'] = null;
+						}
 					},
 
 					_showConfirmationMessage: function() {

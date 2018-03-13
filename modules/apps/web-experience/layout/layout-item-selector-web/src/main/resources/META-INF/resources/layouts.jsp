@@ -86,7 +86,7 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 
 		var link = labelEl.one('a');
 
-		var url = link.attr('data-url');
+		var url = link.attr('data-regularurl');
 		var uuid = link.attr('data-uuid');
 
 		var data = {};

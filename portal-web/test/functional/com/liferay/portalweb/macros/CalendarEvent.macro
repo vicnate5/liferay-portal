@@ -3,7 +3,7 @@
 		<if>
 			<equals arg1="${schedulerEventDialogBox}" arg2="false" />
 			<then>
-				<execute function="AssertElementNotPresent" locator1="Calendar#SCHEDULER_EVENT_DIALOG_BOX_CALENDAR" value1="${calendarName}" />
+				<execute function="AssertElementNotPresent" locator1="Calendar#SCHEDULER_EVENT_DIALOG_BOX_CALENDAR" />
 			</then>
 			<else>
 				<execute function="AssertSelectedLabel" locator1="Calendar#SCHEDULER_EVENT_DIALOG_BOX_CALENDAR" value1="${calendarName}" />
@@ -220,11 +220,11 @@
 
 		<execute function="Check" locator1="CalendarEditEvent#ALL_DAY_CHECKBOX" />
 
-		<execute function="AssertElementNotPresent#assertNotVisible" locator1="CalendarEditEvent#START_DATE_TIME" />
-		<execute function="AssertElementNotPresent#assertNotVisible" locator1="CalendarEditEvent#END_DATE_TIME" />
+		<execute function="AssertNotVisible" locator1="CalendarEditEvent#START_DATE_TIME" />
+		<execute function="AssertNotVisible" locator1="CalendarEditEvent#END_DATE_TIME" />
 
-		<var locator="CalendarEditEvent#END_DATE" name="endDate" />
-		<var locator="CalendarEditEvent#START_DATE" name="startDate" />
+		<var method="selenium#getElementValue(CalendarEditEvent#END_DATE)" name="endDate" />
+		<var method="selenium#getElementValue(CalendarEditEvent#START_DATE)" name="startDate" />
 
 		<execute macro="CalendarEvent#selectCalendar">
 			<var name="calendarName" value="${calendarName}" />
@@ -400,10 +400,10 @@
 		<execute function="AssertNotChecked" locator1="CalendarEditEvent#ALL_DAY_CHECKBOX" />
 		<execute function="AssertNotChecked" locator1="CalendarEditEvent#REPEAT_CHECKBOX" />
 
-		<var locator="CalendarEditEvent#END_DATE" name="endDate" />
-		<var locator="CalendarEditEvent#END_DATE_TIME" name="endDateTime" />
-		<var locator="CalendarEditEvent#START_DATE" name="startDate" />
-		<var locator="CalendarEditEvent#START_DATE_TIME" name="startDateTime" />
+		<var method="selenium#getElementValue(CalendarEditEvent#END_DATE)" name="endDate" />
+		<var method="selenium#getElementValue(CalendarEditEvent#END_DATE_TIME)" name="endDateTime" />
+		<var method="selenium#getElementValue(CalendarEditEvent#START_DATE)" name="startDate" />
+		<var method="selenium#getElementValue(CalendarEditEvent#START_DATE_TIME)" name="startDateTime" />
 
 		<execute macro="CalendarEvent#selectCalendar">
 			<var name="calendarName" value="${calendarName}" />
@@ -493,10 +493,10 @@
 			<var name="eventTitle" value="${eventTitle}" />
 		</execute>
 
-		<var locator="CalendarEditEvent#END_DATE" name="endDate" />
-		<var locator="CalendarEditEvent#END_DATE_TIME" name="endDateTime" />
-		<var locator="CalendarEditEvent#START_DATE" name="startDate" />
-		<var locator="CalendarEditEvent#START_DATE_TIME" name="startDateTime" />
+		<var method="selenium#getElementValue(CalendarEditEvent#END_DATE)" name="endDate" />
+		<var method="selenium#getElementValue(CalendarEditEvent#END_DATE_TIME)" name="endDateTime" />
+		<var method="selenium#getElementValue(CalendarEditEvent#START_DATE)" name="startDate" />
+		<var method="selenium#getElementValue(CalendarEditEvent#START_DATE_TIME)" name="startDateTime" />
 
 		<execute macro="CalendarEvent#setRepeating">
 			<var name="frequency" value="${frequency}" />
@@ -605,20 +605,10 @@
 
 		<execute function="Pause" value1="3000" />
 
-		<if>
-			<equals arg1="${rsvp}" arg2="No" />
-			<then>
-				<execute macro="CalendarScheduler#viewSpecificEventNotPresent">
-					<var name="eventTitle" value="${eventTitle}" />
-				</execute>
-			</then>
-			<else>
-				<execute macro="CalendarScheduler#viewRSVP">
-					<var name="eventTitle" value="${eventTitle}" />
-					<var name="rsvp"  value="${rsvp}" />
-				</execute>
-			</else>
-		</if>
+		<execute macro="CalendarScheduler#viewRSVP">
+			<var name="eventTitle" value="${eventTitle}" />
+			<var name="rsvp" value="${rsvp}" />
+		</execute>
 	</command>
 
 	<command name="addSetTime">
@@ -644,7 +634,7 @@
 				<execute function="Type" locator1="CalendarEditEvent#START_DATE_TIME" value1="${setStartDateTime}" />
 				<execute function="Type" locator1="CalendarEditEvent#END_DATE_TIME" value1="${setEndDateTime}" />
 
-				<var locator="CalendarEditEvent#START_DATE" name="startDate" />
+				<var method="selenium#getElementValue(CalendarEditEvent#START_DATE)" name="startDate" />
 
 				<var name="endDate" value="${startDate}" />
 
@@ -684,7 +674,7 @@
 					<execute function="Type" locator1="CalendarEditEvent#START_DATE_TIME" value1="${setStartDateTime}" />
 					<execute function="Type" locator1="CalendarEditEvent#END_DATE_TIME" value1="${setEndDateTime}" />
 
-					<var locator="CalendarEditEvent#START_DATE" name="startDate" />
+					<var method="selenium#getElementValue(CalendarEditEvent#START_DATE)" name="startDate" />
 
 					<var name="endDate" value="${startDate}" />
 
@@ -769,10 +759,10 @@
 	</command>
 
 	<command name="compareEventDateAndTimeToResourcesAvailabilityDateAndTime">
-		<var locator="CalendarEditEvent#END_DATE" name="endDate" />
-		<var locator="CalendarEditEvent#END_DATE_TIME" name="endDateTime" />
-		<var locator="CalendarEditEvent#START_DATE" name="startDate" />
-		<var locator="CalendarEditEvent#START_DATE_TIME" name="startDateTime" />
+		<var method="selenium#getElementValue(CalendarEditEvent#END_DATE)" name="endDate" />
+		<var method="selenium#getElementValue(CalendarEditEvent#END_DATE_TIME)" name="endDateTime" />
+		<var method="selenium#getElementValue(CalendarEditEvent#START_DATE)" name="startDate" />
+		<var method="selenium#getElementValue(CalendarEditEvent#START_DATE_TIME)" name="startDateTime" />
 
 		<execute macro="CalendarEvent#_viewResourcesAvailabilityEvent">
 			<var name="endDate" value="${endDate}" />
@@ -911,23 +901,23 @@
 
 		<execute function="Pause" value1="1000" />
 
-		<execute function="ClickNoError" locator1="Calendar#SCHEDULER_EVENT_DIALOG_BOX_DELETE_BUTTON" value1="Delete" />
+		<execute function="ClickNoError" locator1="Calendar#SCHEDULER_EVENT_DIALOG_BOX_DELETE_BUTTON" />
 
 		<if>
 			<equals arg1="${deleteOptionSet}" arg2="Entire Series" />
 			<then>
 				<execute function="AssertClick" locator1="CalendarEditEvent#ENTIRE_SERIES_BUTTON" value1="Entire Series" />
 
-				<execute function="AssertElementNotPresent" locator1="CalendarAgendaView#SCHEDULER_EVENT_SPECIFIC_1" value1="${eventTitle}" />
-				<execute function="AssertElementNotPresent" locator1="CalendarAgendaView#SCHEDULER_EVENT_SPECIFIC_2" value1="${eventTitle}" />
+				<execute function="AssertElementNotPresent" locator1="CalendarAgendaView#SCHEDULER_EVENT_SPECIFIC_1" />
+				<execute function="AssertElementNotPresent" locator1="CalendarAgendaView#SCHEDULER_EVENT_SPECIFIC_2" />
 			</then>
 			<elseif>
 				<equals arg1="${deleteOptionSet}" arg2="Following Events" />
 				<then>
 					<execute function="AssertClick" locator1="CalendarEditEvent#FOLLOWING_EVENTS_BUTTON" value1="Following Events" />
 
-					<execute function="AssertElementPresent" locator1="CalendarAgendaView#SCHEDULER_EVENT_SPECIFIC_1" value1="${eventTitle}" />
-					<execute function="AssertElementNotPresent" locator1="CalendarAgendaView#SCHEDULER_EVENT_SPECIFIC_2" value1="${eventTitle}" />
+					<execute function="AssertElementPresent" locator1="CalendarAgendaView#SCHEDULER_EVENT_SPECIFIC_1" />
+					<execute function="AssertElementNotPresent" locator1="CalendarAgendaView#SCHEDULER_EVENT_SPECIFIC_2" />
 				</then>
 			</elseif>
 			<elseif>
@@ -935,8 +925,8 @@
 				<then>
 					<execute function="AssertClick" locator1="CalendarEditEvent#SINGLE_EVENT_BUTTON" value1="Single Event" />
 
-					<execute function="AssertElementPresent" locator1="CalendarAgendaView#SCHEDULER_EVENT_SPECIFIC_1" value1="${eventTitle}" />
-					<execute function="AssertElementNotPresent" locator1="CalendarAgendaView#SCHEDULER_EVENT_SPECIFIC_2" value1="${eventTitle}" />
+					<execute function="AssertElementPresent" locator1="CalendarAgendaView#SCHEDULER_EVENT_SPECIFIC_1" />
+					<execute function="AssertElementNotPresent" locator1="CalendarAgendaView#SCHEDULER_EVENT_SPECIFIC_2" />
 				</then>
 			</elseif>
 		</if>
@@ -1034,11 +1024,11 @@
 				<var name="startDateTime" value="12:00 AM" />
 
 				<execute function="AssertChecked" locator1="CalendarEditEvent#ALL_DAY_CHECKBOX" />
-				<execute function="AssertElementNotPresent#assertNotVisible" locator1="CalendarEditEvent#START_DATE_TIME" />
-				<execute function="AssertElementNotPresent#assertNotVisible" locator1="CalendarEditEvent#END_DATE_TIME" />
+				<execute function="AssertNotVisible" locator1="CalendarEditEvent#START_DATE_TIME" />
+				<execute function="AssertNotVisible" locator1="CalendarEditEvent#END_DATE_TIME" />
 
-				<var locator="CalendarEditEvent#END_DATE" name="endDate" />
-				<var locator="CalendarEditEvent#START_DATE" name="startDate" />
+				<var method="selenium#getElementValue(CalendarEditEvent#END_DATE)" name="endDate" />
+				<var method="selenium#getElementValue(CalendarEditEvent#START_DATE)" name="startDate" />
 
 				<execute function="AssertTextEquals" locator1="TextInput#TITLE" value1="${eventTitle}" />
 
@@ -1073,8 +1063,8 @@
 					<execute function="AssertElementPresent" locator1="CalendarEditEvent#END_DATE" />
 					<execute function="AssertElementPresent" locator1="CalendarEditEvent#END_DATE_TIME" />
 
-					<var locator="CalendarEditEvent#END_DATE" name="endDate" />
-					<var locator="CalendarEditEvent#START_DATE" name="startDate" />
+					<var method="selenium#getElementValue(CalendarEditEvent#END_DATE)" name="endDate" />
+					<var method="selenium#getElementValue(CalendarEditEvent#START_DATE)" name="startDate" />
 
 					<execute function="Type" locator1="CalendarEditEvent#START_DATE_TIME" value1="${startDateTime}" />
 
@@ -1111,8 +1101,8 @@
 					<execute function="AssertElementPresent" locator1="CalendarEditEvent#END_DATE" />
 					<execute function="AssertElementPresent" locator1="CalendarEditEvent#END_DATE_TIME" />
 
-					<var locator="CalendarEditEvent#END_DATE" name="endDate" />
-					<var locator="CalendarEditEvent#START_DATE" name="startDate" />
+					<var method="selenium#getElementValue(CalendarEditEvent#END_DATE)" name="endDate" />
+					<var method="selenium#getElementValue(CalendarEditEvent#START_DATE)" name="startDate" />
 
 					<execute function="Type" locator1="CalendarEditEvent#START_DATE_TIME" value1="${startDateTime}" />
 
@@ -1152,7 +1142,7 @@
 		<if>
 			<equals arg1="${optionSetValue}" arg2="inviteResource" />
 			<then>
-				<execute function="AssertElementPresent" locator1="CalendarEditEvent#ARE_YOU_SURE_DIALOG_BOX_HEADER" value1="Are you sure?" />
+				<execute function="AssertElementPresent" locator1="CalendarEditEvent#ARE_YOU_SURE_DIALOG_BOX_HEADER" />
 				<execute function="AssertTextEquals" locator1="CalendarEditEvent#ARE_YOU_SURE_DIALOG_BOX_BODY" value1="You are about to make changes that will only affect your calendar (${calendarName})." />
 
 				<execute function="AssertClick" locator1="CalendarEditEvent#SAVE_CHANGES_BUTTON" value1="Save changes." />
@@ -1263,8 +1253,8 @@
 		<execute function="AssertElementPresent" locator1="CalendarEditEvent#END_DATE" />
 		<execute function="AssertElementPresent" locator1="CalendarEditEvent#END_DATE_TIME" />
 
-		<var locator="CalendarEditEvent#END_DATE" name="endDate" />
-		<var locator="CalendarEditEvent#START_DATE" name="startDate" />
+		<var method="selenium#getElementValue(CalendarEditEvent#END_DATE)" name="endDate" />
+		<var method="selenium#getElementValue(CalendarEditEvent#START_DATE)" name="startDate" />
 
 		<execute function="Type" locator1="CalendarEditEvent#START_DATE_TIME" value1="${startDateTime}" />
 
@@ -1292,7 +1282,7 @@
 	</command>
 
 	<command name="getEventStartDateViaDetails" returns="startDate">
-		<var locator="CalendarViewEventDetails#START_DATE_FIELD" name="startDate" />
+		<var method="selenium#getText(CalendarViewEventDetails#START_DATE_FIELD)" name="startDate" />
 
 		<return name="startDate" value="${startDate}" />
 	</command>
@@ -1323,7 +1313,7 @@
 
 			<var name="key_resource" value="${resourceName}" />
 
-			<execute function="Click" locator1="CalendarEditEvent#INVITATIONS_INVITE_RESOURCE_FIELD_LIST" value1="${resourceName}" />
+			<execute function="Click" locator1="CalendarEditEvent#INVITATIONS_INVITE_RESOURCE_FIELD_LIST" />
 
 			<execute macro="CalendarEvent#viewRSVPPending">
 				<var name="resourceName" value="${resourceName}" />
@@ -1356,7 +1346,7 @@
 	<command name="publishWithUserNotification">
 		<execute function="AssertClick" locator1="Button#SUBMIT" value1="Publish" />
 
-		<execute function="AssertElementPresent" locator1="CalendarEditEvent#ARE_YOU_SURE_DIALOG_BOX_HEADER" value1="Are you sure?" />
+		<execute function="AssertElementPresent" locator1="CalendarEditEvent#ARE_YOU_SURE_DIALOG_BOX_HEADER" />
 		<execute function="AssertTextEquals" locator1="CalendarEditEvent#ARE_YOU_SURE_DIALOG_BOX_BODY" value1="Invited users will be notified." />
 
 		<execute function="AssertClick" locator1="CalendarEditEvent#SAVE_CHANGES_BUTTON" value1="Save changes." />
@@ -1377,14 +1367,14 @@
 	</command>
 
 	<command name="saveEventUserInvite">
-		<execute function="AssertElementPresent" locator1="CalendarEditEvent#ARE_YOU_SURE_DIALOG_BOX_HEADER" value1="Are you sure?" />
+		<execute function="AssertElementPresent" locator1="CalendarEditEvent#ARE_YOU_SURE_DIALOG_BOX_HEADER" />
 		<execute function="AssertTextEquals" locator1="CalendarEditEvent#ARE_YOU_SURE_DIALOG_BOX_BODY" value1="Invited users will be notified." />
 
 		<execute function="AssertClick" locator1="CalendarEditEvent#SAVE_CHANGES_BUTTON" value1="Save changes." />
 	</command>
 
 	<command name="saveEventUserInviteCancel">
-		<execute function="AssertElementPresent" locator1="CalendarEditEvent#ARE_YOU_SURE_DIALOG_BOX_HEADER" value1="Are you sure?" />
+		<execute function="AssertElementPresent" locator1="CalendarEditEvent#ARE_YOU_SURE_DIALOG_BOX_HEADER" />
 		<execute function="AssertTextEquals" locator1="CalendarEditEvent#ARE_YOU_SURE_DIALOG_BOX_BODY" value1="Invited users will be notified." />
 
 		<execute function="AssertClick" locator1="CalendarEditEvent#DO_NOT_CHANGE_THE_EVENT_BUTTON" value1="Do not change the event." />
@@ -1434,8 +1424,8 @@
 
 	<command name="setAllDay">
 		<execute function="Check" locator1="CalendarEditEvent#ALL_DAY_CHECKBOX" />
-		<execute function="AssertElementNotPresent#assertNotVisible" locator1="CalendarEditEvent#START_DATE_TIME" />
-		<execute function="AssertElementNotPresent#assertNotVisible" locator1="CalendarEditEvent#END_DATE_TIME" />
+		<execute function="AssertNotVisible" locator1="CalendarEditEvent#START_DATE_TIME" />
+		<execute function="AssertNotVisible" locator1="CalendarEditEvent#END_DATE_TIME" />
 	</command>
 
 	<command name="setDates">
@@ -1444,7 +1434,7 @@
 	</command>
 
 	<command name="setDatesToday">
-		<var locator="CalendarEditEvent#START_DATE" name="endDate" />
+		<var method="selenium#getElementValue(CalendarEditEvent#START_DATE)" name="endDate" />
 
 		<execute function="Type" locator1="CalendarEditEvent#END_DATE" value1="${endDate}" />
 	</command>
@@ -1456,7 +1446,7 @@
 	<command name="setEndDateTomorrow">
 		<execute function="Click" locator1="CalendarEditEvent#END_DATE" />
 
-		<var locator="CalendarEditEvent#MINI_CALENDAR_DAY_SELECTED" name="daySelected" />
+		<var method="selenium#getText(CalendarEditEvent#MINI_CALENDAR_DAY_SELECTED)" name="daySelected" />
 
 		<var method="MathUtil#sum('${daySelected}', '1')" name="tomorrow" />
 
@@ -1522,7 +1512,7 @@
 			<then>
 				<execute function="AssertTextEquals#assertPartialText" locator1="CalendarEditEvent#REPEAT_DIALOG_SUMMARY" value1="${frequency}" />
 
-				<var locator="CalendarEditEvent#REPEAT_MONTHLY_CURRENT_DAY" name="currentDay" />
+				<var method="selenium#getElementValue(CalendarEditEvent#REPEAT_MONTHLY_CURRENT_DAY)" name="currentDay" />
 				<var method="StringUtil#lowerCase('${currentDay}')" name="currentDay" />
 				<var method="StringUtil#upperCaseFirstLetter('${currentDay}')" name="currentDay" />
 
@@ -1538,7 +1528,7 @@
 				<then>
 					<execute function="AssertTextEquals#assertPartialText" locator1="CalendarEditEvent#REPEAT_DIALOG_SUMMARY" value1="${frequency}" />
 
-					<var locator="CalendarEditEvent#REPEAT_WEEKLY_CURRENT_DAY" name="currentDay" />
+					<var method="selenium#getElementValue(CalendarEditEvent#REPEAT_WEEKLY_CURRENT_DAY)" name="currentDay" />
 					<var method="StringUtil#lowerCase('${currentDay}')" name="currentDay" />
 					<var method="StringUtil#upperCaseFirstLetter('${currentDay}')" name="currentDay" />
 
@@ -1677,6 +1667,8 @@
 		</if>
 
 		<execute macro="CalendarEvent#delete" />
+
+		<execute macro="Alert#waitForSuccessMessageHide" />
 	</command>
 
 	<command name="tearDownOnBusyDayInCurrentMonth">
@@ -1722,7 +1714,7 @@
 
 			<var name="key_eventTitle" value="${eventTitle}" />
 
-			<execute function="AssertElementPresent" locator1="Calendar#SCHEDULER_VIEW_ALL_DAY_EVENT_DAY_WEEK_AND_MONTH_VIEW" value1="${eventTitle}" />
+			<execute function="AssertElementPresent" locator1="Calendar#SCHEDULER_VIEW_ALL_DAY_EVENT_DAY_WEEK_AND_MONTH_VIEW" />
 		</for>
 
 		<execute macro="CalendarScheduler#viewAgenda">
@@ -1748,7 +1740,7 @@
 
 		<var name="key_rsvp" value="${rsvp}" />
 
-		<execute function="AssertElementPresent" locator1="Calendar#SCHEDULER_EVENT_DIALOG_BOX_ATTEND_INACTIVE" value1="${rsvp}" />
+		<execute function="AssertElementPresent" locator1="Calendar#SCHEDULER_EVENT_DIALOG_BOX_ATTEND_INACTIVE" />
 	</command>
 
 	<command name="viewAvailableCalendars">
@@ -1928,7 +1920,7 @@
 
 			<var name="key_eventTitle" value="${eventTitle}" />
 
-			<execute function="AssertElementPresent" locator1="Calendar#SCHEDULER_VIEW_EVENT_NOT_TODAY" value1="${eventTitle}" />
+			<execute function="AssertElementPresent" locator1="Calendar#SCHEDULER_VIEW_EVENT_NOT_TODAY" />
 		</for>
 
 		<execute macro="CalendarScheduler#viewAgenda">
@@ -1962,7 +1954,7 @@
 
 		<execute function="AssertTextEquals" locator1="Calendar#SCHEDULER_EVENT_DIALOG_BOX_EVENT_TITLE" value1="${eventTitle}" />
 
-		<execute function="AssertElementPresent" locator1="Calendar#SCHEDULER_EVENT_DIALOG_BOX_CALENDAR" value1="${userCalendarName}" />
+		<execute function="AssertElementPresent" locator1="Calendar#SCHEDULER_EVENT_DIALOG_BOX_CALENDAR" />
 
 		<execute macro="CalendarScheduler#viewNoRSVP">
 			<var name="eventTitle" value="${eventTitle}" />
@@ -2066,7 +2058,7 @@
 	</command>
 
 	<command name="viewRepeatingMonthPosition">
-		<var locator="CalendarEditEvent#REPEAT_MONTHLY_CURRENT_MONTH_POSITION" name="repeatingMonthPosition" />
+		<var method="selenium#getElementValue(CalendarEditEvent#REPEAT_MONTHLY_CURRENT_MONTH_POSITION)" name="repeatingMonthPosition" />
 
 		<if>
 			<equals arg1="${repeatingMonthPosition}" arg2="1" />
@@ -2144,7 +2136,7 @@
 
 		<var name="key_siteName" value="${siteName}" />
 
-		<execute function="AssertElementNotPresent" locator1="Calendar#CURRENT_SITE_CALENDARS_HEADER" value1="${siteName}'s Calendars" />
+		<execute function="AssertElementNotPresent" locator1="Calendar#CURRENT_SITE_CALENDARS_HEADER" />
 
 		<var name="key_endDateTime" value="${endDateTime}" />
 		<var name="key_startDateTime" value="${startDateTime}" />
@@ -2188,7 +2180,7 @@
 			<var name="eventTitle" value="${eventTitle}" />
 		</execute>
 
-		<execute function="AssertElementPresent" locator1="Calendar#SCHEDULER_EVENT_DIALOG_BOX_CALENDAR" value1="${siteCalendarName}" />
+		<execute function="AssertElementPresent" locator1="Calendar#SCHEDULER_EVENT_DIALOG_BOX_CALENDAR" />
 
 		<execute function="AssertElementNotPresent" locator1="Calendar#SCHEDULER_EVENT_ATTENDING_ROW_OPTIONS" />
 	</command>
@@ -2267,7 +2259,7 @@
 
 			<var name="key_eventTitle" value="${eventTitle}" />
 
-			<execute function="AssertElementPresent" locator1="Calendar#SCHEDULER_VIEW_YEARLY_EVENT_DAY_WEEK_AND_MONTH_VIEW" value1="${eventTitle}" />
+			<execute function="AssertElementPresent" locator1="Calendar#SCHEDULER_VIEW_YEARLY_EVENT_DAY_WEEK_AND_MONTH_VIEW" />
 		</for>
 
 		<execute macro="CalendarScheduler#viewAgenda">

@@ -1,4 +1,5 @@
 <definition component-name="portal-search-ee">
+	<property name="portal.release" value="true" />
 	<property name="portal.upstream" value="true" />
 	<property name="test.run.environment" value="EE" />
 	<property name="testray.main.component.name" value="Elastic Search Impl" />
@@ -32,7 +33,6 @@
 
 		<property name="app.server.bundles.size" value="1" />
 		<property name="cluster.enabled" value="true" />
-		<property name="portal.release" value="true" />
 		<property name="test.name.skip.portal.instance" value="ElasticsearchEE#ElasticsearchClusterSmokeTest" />
 
 		<!-- Verify the total number of Elasticsearch replicas is two as there are two nodes/bundles running -->
@@ -47,7 +47,9 @@
 
 		<!--<execute macro="Navigator#openURL" />-->
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Message Boards" />
 		</execute>
 
@@ -58,7 +60,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Documents and Media" />
 		</execute>
 
@@ -68,7 +72,9 @@
 			<var name="dmDocumentTitle" value="Apple" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Server Administration" />
 		</execute>
 
@@ -157,12 +163,11 @@
 		</execute>
 	</command>
 
-	<command name="ElasticsearchRemoteClusterSmokeTest" priority="5">
+	<command name="ElasticsearchRemotePortalClusterSmokeTest" priority="5">
 		<property name="app.server.bundles.size" value="1" />
 		<property name="cluster.enabled" value="true" />
-		<property name="portal.release" value="true" />
 		<property name="remote.elasticsearch.enabled" value="true" />
-		<property name="test.name.skip.portal.instance" value="ElasticsearchEE#ElasticsearchRemoteClusterSmokeTest" />
+		<property name="test.name.skip.portal.instance" value="ElasticsearchEE#ElasticsearchRemotePortalClusterSmokeTest" />
 
 		<execute macro="Elasticsearch#viewClusterStatusViaClusterHealthAPI">
 			<var name="numberOfNodes" value="1" />
@@ -170,7 +175,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Message Boards" />
 		</execute>
 
@@ -181,7 +188,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Documents and Media" />
 		</execute>
 
@@ -276,7 +285,6 @@
 		<property name="elastic.shield.enabled" value="true" />
 		<property name="osgi.app.includes" value="portal-search-elasticsearch-marvel" />
 		<property name="plugins.deployment.type" value="osgi" />
-		<property name="portal.release" value="true" />
 		<property name="remote.elasticsearch.enabled" value="true" />
 		<property name="test.name.skip.portal.instance" value="ElasticsearchEE#ElasticsearchRemoteWithMarvelAndKibanaAndShieldSmokeTest" />
 
@@ -311,7 +319,6 @@
 		<property name="elastic.kibana.enabled" value="true" />
 		<property name="osgi.app.includes" value="portal-search-elasticsearch-marvel" />
 		<property name="plugins.deployment.type" value="osgi" />
-		<property name="portal.release" value="true" />
 		<property name="remote.elasticsearch.enabled" value="true" />
 		<property name="test.name.skip.portal.instance" value="ElasticsearchEE#ElasticsearchRemoteWithMarvelAndKibanaSmokeTest" />
 

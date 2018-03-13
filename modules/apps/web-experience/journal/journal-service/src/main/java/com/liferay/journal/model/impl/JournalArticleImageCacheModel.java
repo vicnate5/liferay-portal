@@ -21,7 +21,6 @@ import com.liferay.journal.model.JournalArticleImage;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -98,7 +97,7 @@ public class JournalArticleImageCacheModel implements CacheModel<JournalArticleI
 		journalArticleImageImpl.setCompanyId(companyId);
 
 		if (articleId == null) {
-			journalArticleImageImpl.setArticleId(StringPool.BLANK);
+			journalArticleImageImpl.setArticleId("");
 		}
 		else {
 			journalArticleImageImpl.setArticleId(articleId);
@@ -107,21 +106,21 @@ public class JournalArticleImageCacheModel implements CacheModel<JournalArticleI
 		journalArticleImageImpl.setVersion(version);
 
 		if (elInstanceId == null) {
-			journalArticleImageImpl.setElInstanceId(StringPool.BLANK);
+			journalArticleImageImpl.setElInstanceId("");
 		}
 		else {
 			journalArticleImageImpl.setElInstanceId(elInstanceId);
 		}
 
 		if (elName == null) {
-			journalArticleImageImpl.setElName(StringPool.BLANK);
+			journalArticleImageImpl.setElName("");
 		}
 		else {
 			journalArticleImageImpl.setElName(elName);
 		}
 
 		if (languageId == null) {
-			journalArticleImageImpl.setLanguageId(StringPool.BLANK);
+			journalArticleImageImpl.setLanguageId("");
 		}
 		else {
 			journalArticleImageImpl.setLanguageId(languageId);
@@ -161,7 +160,7 @@ public class JournalArticleImageCacheModel implements CacheModel<JournalArticleI
 		objectOutput.writeLong(companyId);
 
 		if (articleId == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
+			objectOutput.writeUTF("");
 		}
 		else {
 			objectOutput.writeUTF(articleId);
@@ -170,21 +169,21 @@ public class JournalArticleImageCacheModel implements CacheModel<JournalArticleI
 		objectOutput.writeDouble(version);
 
 		if (elInstanceId == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
+			objectOutput.writeUTF("");
 		}
 		else {
 			objectOutput.writeUTF(elInstanceId);
 		}
 
 		if (elName == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
+			objectOutput.writeUTF("");
 		}
 		else {
 			objectOutput.writeUTF(elName);
 		}
 
 		if (languageId == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
+			objectOutput.writeUTF("");
 		}
 		else {
 			objectOutput.writeUTF(languageId);

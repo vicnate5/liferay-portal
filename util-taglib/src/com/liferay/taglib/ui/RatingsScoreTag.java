@@ -29,6 +29,8 @@ public class RatingsScoreTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_score = 0;
 	}
 

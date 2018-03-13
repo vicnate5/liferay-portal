@@ -177,7 +177,7 @@
 
 		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
 
-		<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM" value1="Permissions">
+		<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM">
 			<var name="key_menuItem" value="Permissions" />
 		</execute>
 
@@ -204,11 +204,11 @@
 
 		<execute function="Click#mouseOverClick" locator1="SitePages#SPECIFIC_PAGE_ELLIPSIS" />
 
-		<execute function="Click" locator1="SitePages#EDIT_SPECIFIC_PAGE" value1="Edit" />
+		<execute function="Click" locator1="SitePages#EDIT_SPECIFIC_PAGE" />
 
 		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
 
-		<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM" value1="Permissions">
+		<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM">
 			<var name="key_menuItem" value="Permissions" />
 		</execute>
 
@@ -220,7 +220,9 @@
 			<var name="site" value="${siteScopeName}" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesMembers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Members" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="${portletName}" />
 		</execute>
 
@@ -246,7 +248,9 @@
 	</command>
 
 	<command name="gotoUserGroupSitePermissionsCP">
-		<execute macro="ProductMenu#gotoControlPanelUsers">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="User Groups" />
 		</execute>
 

@@ -28,7 +28,9 @@
 	<command name="AddPortalInstance" priority="5">
 		<property name="test.name.skip.portal.instance" value="PortalconfigurationUsecase#AddPortalInstance" />
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Virtual Instances" />
 		</execute>
 
@@ -46,7 +48,9 @@
 	<command name="DefaultPortalLandingPage" priority="5">
 		<property name="test.name.skip.portal.instance" value="PortalconfigurationUsecase#DefaultPortalLandingPage" />
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Instance Settings" />
 		</execute>
 
@@ -54,18 +58,30 @@
 			<var name="defaultLandingPage" value="/web/guest/landing" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#add">
+			<var name="pageName" value="landing" />
 		</execute>
 
-		<execute macro="TestCase#getSiteName">
-			<return from="siteName" name="siteName" />
-			<var name="siteName" value="${siteName}" />
+		<execute macro="User#logoutPG" />
+
+		<execute macro="User#loginPG">
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="test@liferay.com" />
 		</execute>
+
+		<var method="TestPropsUtil#get('portal.url')" name="portalURL" />
+
+		<execute function="AssertLocation" value1="${portalURL}/web/guest/landing" />
+	</command>
+
+	<command name="DefaultPortalLandingPageSetByProperty" priority="5">
+		<description message="This is a use case for LPS-39744." />
+
+		<property name="custom.properties" value="default.landing.page.path=/web/guest/landing" />
+		<property name="test.name.skip.portal.instance" value="PortalconfigurationUsecase#DefaultPortalLandingPageSetByProperty" />
 
 		<execute macro="Page#add">
 			<var name="pageName" value="landing" />
-			<var name="siteName" value="${siteName}" />
 		</execute>
 
 		<execute macro="User#logoutPG" />
@@ -83,7 +99,9 @@
 	<command name="DeletePortalInstance" priority="5">
 		<property name="test.name.skip.portal.instance" value="PortalconfigurationUsecase#DeletePortalInstance" />
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Virtual Instances" />
 		</execute>
 
@@ -101,7 +119,9 @@
 	<command name="PermissionCheckPortalInstances" priority="4">
 		<property name="test.name.skip.portal.instance" value="PortalconfigurationUsecase#PermissionCheckPortalInstances" />
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Virtual Instances" />
 		</execute>
 
@@ -127,7 +147,9 @@
 			<var name="url" value="http://www.able.com:8080" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Documents and Media" />
 		</execute>
 
@@ -167,7 +189,9 @@
 	<command name="ViewDeactivatedPortalInstance" priority="5">
 		<property name="test.name.skip.portal.instance" value="PortalconfigurationUsecase#ViewDeactivatedPortalInstance" />
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Virtual Instances" />
 		</execute>
 
@@ -265,7 +289,9 @@
 
 		<execute macro="User#loginPG" />
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Virtual Instances" />
 		</execute>
 
@@ -284,7 +310,9 @@
 		<property name="custom.properties" value="virtual.hosts.valid.hosts=localhost,127.0.0.1,www.able.com,www.baker.com,www.charlie.com" />
 		<property name="test.name.skip.portal.instance" value="PortalconfigurationUsecase#ViewVirtualHostPrivateSitePage" />
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Instance Settings" />
 		</execute>
 
@@ -294,7 +322,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Site Settings" />
 		</execute>
 
@@ -305,7 +335,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Site Settings" />
 		</execute>
 
@@ -314,7 +346,9 @@
 			<var name="privateVirtualHosts" value="${privatePageVirtualHostURL}" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Sites" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Sites" />
 		</execute>
 
@@ -322,7 +356,9 @@
 			<var name="pageName" value="Public Page" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Sites" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Sites" />
 		</execute>
 
@@ -337,7 +373,7 @@
 
 		<var name="key_pageName" value="Welcome" />
 
-		<execute function="AssertElementPresent" locator1="Home#PAGE" value1="Welcome" />
+		<execute function="AssertElementPresent" locator1="Home#PAGE" />
 
 		<execute macro="User#loginPG">
 			<var name="password" value="test" />
@@ -360,7 +396,9 @@
 	<command name="ViewVirtualInstanceInheritsSystemSettings" priority="4">
 		<property name="test.name.skip.portal.instance" value="PortalconfigurationUsecase#ViewVirtualInstanceInheritsSystemSettings" />
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="System Settings" />
 		</execute>
 
@@ -380,7 +418,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Virtual Instances" />
 		</execute>
 
@@ -396,7 +436,9 @@
 			<var name="virtualHostsURL" value="http://www.able.com:8080" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Instance Settings" />
 		</execute>
 

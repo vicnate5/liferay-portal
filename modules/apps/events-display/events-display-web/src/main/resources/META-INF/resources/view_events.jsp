@@ -42,7 +42,7 @@ List<CalendarBooking> calendarBookings = (List<CalendarBooking>)request.getAttri
 			<%
 			Group group = GroupLocalServiceUtil.getGroup(calendarBooking.getGroupId());
 
-			LiferayPortletURL groupURL = PortletURLFactoryUtil.create(request, MySitesPortletKeys.MY_SITES, layout.getPlid(), PortletRequest.ACTION_PHASE);
+			LiferayPortletURL groupURL = PortletURLFactoryUtil.create(request, "com_liferay_site_my_sites_web_portlet_MySitesPortlet", layout.getPlid(), PortletRequest.ACTION_PHASE);
 
 			groupURL.setWindowState(LiferayWindowState.NORMAL);
 

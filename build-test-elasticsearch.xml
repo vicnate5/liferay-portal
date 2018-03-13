@@ -217,6 +217,7 @@ shield.transport.ssl: true</echo>
 				<then>
 					<mirrors-get
 						dest="${elasticsearch.dir}/${elasticsearch.analysis-icu.zip.name}"
+						skipChecksum="true"
 						src="${elasticsearch.analysis-icu.zip.url}"
 						verbose="true"
 					/>
@@ -230,6 +231,7 @@ shield.transport.ssl: true</echo>
 				<then>
 					<mirrors-get
 						dest="${elasticsearch.dir}/${elasticsearch.analysis-kuromoji.zip.name}"
+						skipChecksum="true"
 						src="${elasticsearch.analysis-kuromoji.zip.url}"
 						verbose="true"
 					/>
@@ -243,6 +245,7 @@ shield.transport.ssl: true</echo>
 				<then>
 					<mirrors-get
 						dest="${elasticsearch.dir}/${elasticsearch.analysis-smartcn.zip.name}"
+						skipChecksum="true"
 						src="${elasticsearch.analysis-smartcn.zip.url}"
 						verbose="true"
 					/>
@@ -256,6 +259,7 @@ shield.transport.ssl: true</echo>
 				<then>
 					<mirrors-get
 						dest="${elasticsearch.dir}/${elasticsearch.analysis-stempel.zip.name}"
+						skipChecksum="true"
 						src="${elasticsearch.analysis-stempel.zip.url}"
 						verbose="true"
 					/>
@@ -269,6 +273,7 @@ shield.transport.ssl: true</echo>
 				<then>
 					<mirrors-get
 						dest="${elasticsearch.dir}/${elasticsearch.license.zip.name}"
+						skipChecksum="true"
 						src="${elasticsearch.license.zip.url}"
 						verbose="true"
 					/>
@@ -313,6 +318,7 @@ shield.transport.ssl: true</echo>
 				<then>
 					<mirrors-get
 						dest="${elasticsearch.dir}/${elastic.marvel.tar.name}"
+						skipChecksum="true"
 						src="${elastic.marvel.tar.url}"
 						verbose="true"
 					/>
@@ -351,6 +357,7 @@ shield.transport.ssl: true</echo>
 				<then>
 					<mirrors-get
 						dest="${elasticsearch.dir}/${elasticsearch.marvel-agent.zip.name}"
+						skipChecksum="true"
 						src="${elasticsearch.marvel-agent.zip.url}"
 						verbose="true"
 					/>
@@ -387,6 +394,7 @@ shield.transport.ssl: true</echo>
 				<then>
 					<mirrors-get
 						dest="${elasticsearch.dir}/${elastic.shield.zip.name}"
+						skipChecksum="true"
 						src="${elastic.shield.zip.url}"
 						verbose="true"
 					/>
@@ -421,6 +429,7 @@ shield.transport.ssl: true</echo>
 				<then>
 					<mirrors-get
 						dest="${app.server.parent.dir}/${elasticsearch.zip.name}"
+						skipChecksum="true"
 						src="${elasticsearch.zip.url}"
 						verbose="true"
 					/>
@@ -452,6 +461,7 @@ shield.transport.ssl: true</echo>
 				<then>
 					<mirrors-get
 						dest="${app.server.parent.dir}/${elastic.kibana.tar.name.mac}"
+						skipChecksum="true"
 						src="${elastic.kibana.tar.url.mac}"
 						verbose="true"
 					/>
@@ -471,6 +481,7 @@ shield.transport.ssl: true</echo>
 					<then>
 						<mirrors-get
 							dest="${app.server.parent.dir}/${elastic.kibana.tar.name.linux}"
+							skipChecksum="true"
 							src="${elastic.kibana.tar.url.linux}"
 							verbose="true"
 						/>
@@ -478,6 +489,7 @@ shield.transport.ssl: true</echo>
 						<untar
 							compression="gzip"
 							dest="${app.server.parent.dir}"
+							skipChecksum="true"
 							src="${app.server.parent.dir}/${elastic.kibana.tar.name.linux}"
 						/>
 					</then>
@@ -492,6 +504,7 @@ shield.transport.ssl: true</echo>
 					<then>
 						<mirrors-get
 							dest="${app.server.parent.dir}/${elastic.kibana.zip.name.windows}"
+							skipChecksum="true"
 							src="${elastic.kibana.zip.url.windows}"
 							verbose="true"
 						/>
@@ -585,26 +598,47 @@ username=&quot;liferay&quot;</echo>
 			</then>
 		</if>
 
-		<local name="elasticsearch.server.not.started" />
+		<get-testcase-property property.name="remote.elasticsearch.cluster.size" />
+
+		<var name="elasticsearch.node.count" value="1" />
 
 		<if>
-			<os family="unix" />
+			<isset property="remote.elasticsearch.cluster.size" />
 			<then>
-				<exec dir="${elasticsearch.dir}/bin" executable="/bin/bash">
-					<arg value="-c" />
-					<arg value="ES_HEAP_SIZE=512m ./elasticsearch -Des.insecure.allow.root=true -d -p pid-elasticsearch" />
-				</exec>
+				<var name="elasticsearch.node.count" value="${remote.elasticsearch.cluster.size}" />
 			</then>
-			<elseif>
-				<os family="windows" />
+		</if>
+
+		<var name="elasticsearch.pid.file.count" value="0" />
+
+		<antelope:repeat count="${elasticsearch.node.count}">
+			<math
+				datatype="int"
+				operand1="${elasticsearch.pid.file.count}"
+				operand2="1"
+				operation="+"
+				result="elasticsearch.pid.file.count"
+			/>
+
+			<if>
+				<os family="unix" />
 				<then>
-					<exec dir="${elasticsearch.dir}/bin" executable="cmd" spawn="true">
-						<arg value="/c" />
-						<arg value="elasticsearch -d -p pid-elasticsearch" />
+					<exec dir="${elasticsearch.dir}/bin" executable="/bin/bash">
+						<arg value="-c" />
+						<arg value="ES_HEAP_SIZE=512m ./elasticsearch -Des.insecure.allow.root=true -d -p pid-elasticsearch-${elasticsearch.pid.file.count}" />
 					</exec>
 				</then>
-			</elseif>
-		</if>
+				<elseif>
+					<os family="windows" />
+					<then>
+						<exec dir="${elasticsearch.dir}/bin" executable="cmd" spawn="true">
+							<arg value="/c" />
+							<arg value="elasticsearch -d -p pid-elasticsearch-${elasticsearch.pid.file.count}" />
+						</exec>
+					</then>
+				</elseif>
+			</if>
+		</antelope:repeat>
 
 		<if>
 			<equals arg1="${elastic.shield.enabled}" arg2="true" />
@@ -697,32 +731,57 @@ elasticsearch.password: "liferay"]]></replacevalue>
 	</target>
 
 	<target name="stop-elasticsearch">
-		<if>
-			<os family="unix" />
-			<then>
-				<loadfile property="pid-elasticsearch" srcFile="${elasticsearch.dir}/bin/pid-elasticsearch">
-					<filterchain>
-						<linecontainsregexp>
-							<regexp pattern="[0-9]*" />
-						</linecontainsregexp>
-					</filterchain>
-				</loadfile>
+		<get-testcase-property property.name="remote.elasticsearch.cluster.size" />
 
-				<exec dir="${elasticsearch.dir}/bin" executable="/bin/bash">
-					<arg value="-c" />
-					<arg value="kill ${pid-elasticsearch}" />
-				</exec>
+		<var name="elasticsearch.node.count" value="1" />
+
+		<if>
+			<isset property="remote.elasticsearch.cluster.size" />
+			<then>
+				<var name="elasticsearch.node.count" value="${remote.elasticsearch.cluster.size}" />
 			</then>
-			<elseif>
-				<os family="windows" />
-				<then>
-					<exec dir="${elasticsearch.dir}/bin" executable="cmd" spawn="true">
-						<arg value="/c" />
-						<arg value="for /f %x in (pid-elasticsearch) do taskkill /f /pid %x" />
-					</exec>
-				</then>
-			</elseif>
 		</if>
+
+		<var name="elasticsearch.pid.file.count" value="0" />
+
+		<antelope:repeat count="${elasticsearch.node.count}">
+			<math
+				datatype="int"
+				operand1="${elasticsearch.pid.file.count}"
+				operand2="1"
+				operation="+"
+				result="elasticsearch.pid.file.count"
+			/>
+
+			<if>
+				<os family="unix" />
+				<then>
+					<loadfile property="pid-elasticsearch" srcFile="${elasticsearch.dir}/bin/pid-elasticsearch-${elasticsearch.pid.file.count}">
+						<filterchain>
+							<linecontainsregexp>
+								<regexp pattern="[0-9]*" />
+							</linecontainsregexp>
+						</filterchain>
+					</loadfile>
+
+					<exec dir="${elasticsearch.dir}/bin" executable="/bin/bash">
+						<arg value="-c" />
+						<arg value="kill ${pid-elasticsearch}" />
+					</exec>
+
+					<var name="pid-elasticsearch" unset="true" />
+				</then>
+				<elseif>
+					<os family="windows" />
+					<then>
+						<exec dir="${elasticsearch.dir}/bin" executable="cmd" spawn="true">
+							<arg value="/c" />
+							<arg value="for /f %x in (pid-elasticsearch-${elasticsearch.pid.file.count}) do taskkill /f /pid %x" />
+						</exec>
+					</then>
+				</elseif>
+			</if>
+		</antelope:repeat>
 	</target>
 
 	<target name="stop-kibana">

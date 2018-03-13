@@ -84,6 +84,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.SubscriptionSender;
@@ -601,9 +602,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (discussion == null) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Unable to delete discussion message for class name " +
-						className + " and class PK " + classPK +
-							" because it does not exist");
+					StringBundler.concat(
+						"Unable to delete discussion message for class name ",
+						className, " and class PK ", String.valueOf(classPK),
+						" because it does not exist"));
 			}
 
 			return;
@@ -2052,9 +2054,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				return StringPool.BLANK;
 			}
 
-			return serviceContext.getLayoutFullURL() +
-				Portal.FRIENDLY_URL_SEPARATOR + "message_boards/view_message/" +
-					message.getMessageId();
+			return StringBundler.concat(
+				serviceContext.getLayoutFullURL(),
+				Portal.FRIENDLY_URL_SEPARATOR, "message_boards/view_message/",
+				String.valueOf(message.getMessageId()));
 		}
 
 		String portletId = PortletProviderUtil.getPortletId(
@@ -2064,8 +2067,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			message.getGroupId(), portletId, serviceContext);
 
 		if (Validator.isNotNull(layoutURL)) {
-			return layoutURL + Portal.FRIENDLY_URL_SEPARATOR +
-				"message_boards/view_message/" + message.getMessageId();
+			return StringBundler.concat(
+				layoutURL, Portal.FRIENDLY_URL_SEPARATOR,
+				"message_boards/view_message/",
+				String.valueOf(message.getMessageId()));
 		}
 		else {
 			Group group = groupLocalService.fetchGroup(message.getGroupId());
@@ -2385,8 +2390,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 			catch (Exception e) {
 				_log.error(
-					"Unable to parse message " + message.getMessageId() + ": " +
-						e.getMessage());
+					StringBundler.concat(
+						"Unable to parse message ",
+						String.valueOf(message.getMessageId()), ": ",
+						e.getMessage()));
 			}
 		}
 
@@ -2475,9 +2482,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			return;
 		}
 
-		String sourceUri =
-			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR +
-				"message_boards/view_message/" + message.getMessageId();
+		String sourceUri = StringBundler.concat(
+			layoutFullURL, Portal.FRIENDLY_URL_SEPARATOR,
+			"message_boards/view_message/",
+			String.valueOf(message.getMessageId()));
 
 		Source source = new Source(message.getBody(message.isFormatBBCode()));
 

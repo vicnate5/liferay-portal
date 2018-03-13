@@ -19,11 +19,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>EXPORT_FILE_NAME</td>
-	<td>//input[contains(@id,'exportFileName')]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>EXPORT_PROCESS_NAME</td>
 	<td>//input[contains(@id,'ExportPortlet_name')]</td>
 	<td></td>
@@ -158,23 +153,7 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--EXPORT_TEMPLATES-->
-<tr>
-	<td>EXPORT_TEMPLATES_NEW_BUTTON</td>
-	<td>//a[@role='menuitem' and contains(.,'New')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
 <!--EXPORT_TEMPLATES_TABLE-->
-<tr>
-	<td>EXPORT_TEMPLATES_SEARCH</td>
-	<td>xpath=(//*[@data-qa-id='searchButton'] | //button[contains(.,'Search')])[2]</td>
-	<td></td>
-</tr>
 <tr>
 	<td>EXPORT_TEMPLATES_TABLE_NAME</td>
 	<td>//div[contains(@id,'exportImportConfigurationsSearch')]//tr[contains(.,'${key_exportTemplateName}')]/td[2]//a</td>
@@ -183,16 +162,6 @@
 <tr>
 	<td>EXPORT_TEMPLATES_TABLE_DESCRIPTION</td>
 	<td>//div[contains(@id,'exportImportConfigurationsSearch')]//tr[contains(.,'${key_exportTemplateName}')]/td[3]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>EXPORT_TEMPLATES_TABLE_EXPORT_BUTTON</td>
-	<td>//a[@role='menuitem' and contains(.,'Export')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>EXPORT_TEMPLATES_TABLE_MOVE_TO_THE_RECYCLE_BIN_BUTTON</td>
-	<td>//a[@role='menuitem']//span[contains(.,'Move to the Recycle Bin')]</td>
 	<td></td>
 </tr>
 </tbody>

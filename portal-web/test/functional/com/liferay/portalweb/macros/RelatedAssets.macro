@@ -123,6 +123,13 @@
 		</if>
 
 		<execute function="AssertTextEquals" locator1="Relatedassets#ASSET_TITLE_1" value1="${assetTitle}" />
-		<execute function="AssertElementPresent" locator1="Relatedassets#ASSET_EDIT_1" />
+
+		<execute function="MouseOver" locator1="Relatedassets#BODY" />
+
+		<execute function="Click#waitForMenuToggleJSClick" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="MenuItem#ANY_MENU_ITEM" value1="Edit ${assetTitle}">
+			<var name="key_menuItem" value="Edit ${assetTitle}" />
+		</execute>
 	</command>
 </definition>

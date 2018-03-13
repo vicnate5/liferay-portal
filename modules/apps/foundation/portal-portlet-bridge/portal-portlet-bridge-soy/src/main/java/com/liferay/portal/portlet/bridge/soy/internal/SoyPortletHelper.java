@@ -14,10 +14,10 @@
 
 package com.liferay.portal.portlet.bridge.soy.internal;
 
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.template.Template;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.template.soy.utils.SoyJavaScriptRenderer;
@@ -39,6 +39,7 @@ public class SoyPortletHelper {
 
 	public SoyPortletHelper(Bundle bundle) throws Exception {
 		_bundle = bundle;
+
 		_moduleName = getModuleName();
 		_soyJavaScriptRenderer = new SoyJavaScriptRenderer();
 	}

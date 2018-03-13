@@ -20,7 +20,9 @@
 			<else>
 				<execute macro="Navigator#openURL" />
 
-				<execute macro="ProductMenu#gotoSitesContent">
+				<execute macro="ProductMenu#gotoPortlet">
+					<var name="category" value="Content" />
+					<var name="panel" value="Site Administration" />
 					<var name="portlet" value="Polls" />
 				</execute>
 
@@ -36,7 +38,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Polls" />
 		</execute>
 
@@ -75,7 +79,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Polls" />
 		</execute>
 
@@ -141,7 +147,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Polls" />
 		</execute>
 
@@ -164,9 +172,7 @@
 			<var name="pollsQuestionChoice" value="Choice B" />
 		</execute>
 
-		<execute macro="Button#clickSave" />
-
-		<execute macro="Alert#viewSuccessMessage" />
+		<execute macro="PortletEntry#save" />
 	</command>
 
 	<command name="AddViaPollDisplay" priority="4">
@@ -174,7 +180,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Polls" />
 		</execute>
 
@@ -226,7 +234,9 @@
 	<command name="ViewChart" priority="4">
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Polls" />
 		</execute>
 
@@ -275,7 +285,9 @@
 			<var name="pollsQuestionChoice" value="Red" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Polls" />
 		</execute>
 
@@ -287,7 +299,9 @@
 	<command name="VotePollsQuestionWithGuestPermissions" priority="4">
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Polls" />
 		</execute>
 
@@ -339,11 +353,13 @@
 
 		<execute function="Type" locator1="TextInput#EMAIL_ADDRESS" value1="test@liferay.com" />
 		<execute function="Type" locator1="TextInput#PASSWORD" value1="test" />
-		<execute function="Click" locator1="Button#SIGN_IN" value1="Sign In" />
+		<execute function="Click" locator1="Button#SIGN_IN" />
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Polls" />
 		</execute>
 

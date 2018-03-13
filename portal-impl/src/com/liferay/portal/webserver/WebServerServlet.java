@@ -27,6 +27,7 @@ import com.liferay.document.library.kernel.util.PDFProcessor;
 import com.liferay.document.library.kernel.util.PDFProcessorUtil;
 import com.liferay.document.library.kernel.util.VideoProcessor;
 import com.liferay.document.library.kernel.util.VideoProcessorUtil;
+import com.liferay.petra.string.CharPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.flash.FlashMagicBytesUtil;
@@ -77,7 +78,6 @@ import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.template.URLTemplateResource;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
@@ -1132,6 +1132,10 @@ public class WebServerServlet extends HttpServlet {
 					converted = true;
 				}
 			}
+		}
+
+		if (contentLength == 0) {
+			return;
 		}
 
 		FlashMagicBytesUtil.Result flashMagicBytesUtilResult =

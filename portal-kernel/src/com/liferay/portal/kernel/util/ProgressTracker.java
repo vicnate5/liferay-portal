@@ -36,6 +36,7 @@ public class ProgressTracker implements Serializable {
 
 	public ProgressTracker(String progressId) {
 		_progressId = progressId;
+
 		addProgress(ProgressStatusConstants.PREPARED, 0, StringPool.BLANK);
 	}
 

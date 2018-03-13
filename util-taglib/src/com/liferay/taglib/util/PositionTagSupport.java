@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -86,6 +87,18 @@ public class PositionTagSupport extends BaseBodyTagSupport implements BodyTag {
 			}
 			else {
 				position = _POSITION_AUTO;
+			}
+
+			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+			String portletId = portletDisplay.getId();
+
+			if (Validator.isNotNull(portletId) &&
+				themeDisplay.isPortletEmbedded(
+					themeDisplay.getScopeGroupId(), themeDisplay.getLayout(),
+					portletId)) {
+
+				position = _POSITION_INLINE;
 			}
 		}
 

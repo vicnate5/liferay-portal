@@ -1,6 +1,8 @@
 AUI.add(
 	'liferay-ddl-form-builder-modal-support',
 	function(A) {
+		var CSS_MODAL_OPEN = A.getClassName('modal-open');
+
 		var FormBuilderModalSupport = function() {
 		};
 
@@ -51,6 +53,14 @@ AUI.add(
 
 			_afterModalVisibleChange: function(event) {
 				var instance = this;
+
+				var isOpen = A.one('.' + CSS_MODAL_OPEN);
+
+				if (event.newVal && !window['last_position_y']) {
+					window['last_position_y'] = window.scrollY;
+
+					window.scroll(0,0);
+				}
 
 				if (event.newVal && instance.get('dynamicContentHeight')) {
 					instance.syncHeight();

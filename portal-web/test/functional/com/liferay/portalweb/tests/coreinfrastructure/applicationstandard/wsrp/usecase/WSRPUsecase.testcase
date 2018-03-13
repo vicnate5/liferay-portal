@@ -27,7 +27,9 @@
 	</tear-down>
 
 	<command name="AddWSRPUnitConverter" priority="4">
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="WSRP Admin" />
 		</execute>
 
@@ -36,7 +38,9 @@
 			<var name="producerName" value="Producer Demo" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="WSRP Admin" />
 		</execute>
 
@@ -45,7 +49,9 @@
 			<var name="producerName" value="Producer Demo" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="WSRP Admin" />
 		</execute>
 
@@ -59,7 +65,7 @@
 
 		<execute function="AssertTextEquals" locator1="WSRPAdminManagePortlets#PORTLET_TABLE_NAME" value1="WSRP Unit Converter" />
 		<execute function="AssertTextEquals" locator1="WSRPAdminManagePortlets#PORTLET_TABLE_REMOTE_PORTLET" value1="Unit Converter" />
-		<execute function="AssertElementPresent" locator1="WSRPAdminManagePortlets#PORTLET_TABLE_DELETE" value1="Delete" />
+		<execute function="AssertElementPresent" locator1="WSRPAdminManagePortlets#PORTLET_TABLE_DELETE" />
 
 		<execute macro="Page#add">
 			<var name="pageName" value="WSRP Page" />

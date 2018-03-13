@@ -233,6 +233,8 @@ public class PropsValues {
 
 	public static final int CACHE_CONTENT_THRESHOLD_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.CACHE_CONTENT_THRESHOLD_SIZE));
 
+	public static final boolean CACHE_FILTER_INCLUDE_USER_AGENT = GetterUtil.getBoolean(PropsKeys.CACHE_FILTER_INCLUDE_USER_AGENT);
+
 	public static final String CALENDAR_EMAIL_FROM_ADDRESS = PropsUtil.get(PropsKeys.CALENDAR_EMAIL_FROM_ADDRESS);
 
 	public static final String CALENDAR_EMAIL_FROM_NAME = PropsUtil.get(PropsKeys.CALENDAR_EMAIL_FROM_NAME);
@@ -646,6 +648,8 @@ public class PropsValues {
 
 	public static final int HIBERNATE_JDBC_BATCH_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.HIBERNATE_JDBC_BATCH_SIZE));
 
+	public static final String HIBERNATE_SESSION_FACTORY_IMPORTED_CLASS_NAME_REGEXP = PropsUtil.get(PropsKeys.HIBERNATE_SESSION_FACTORY_IMPORTED_CLASS_NAME_REGEXP);
+
 	public static final boolean HOT_UNDEPLOY_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.HOT_UNDEPLOY_ENABLED));
 
 	public static final int HOT_UNDEPLOY_INTERVAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.HOT_UNDEPLOY_INTERVAL));
@@ -778,6 +782,10 @@ public class PropsValues {
 
 	public static final boolean LAYOUT_PARALLEL_RENDER_ENABLE = false;
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
+	@Deprecated
 	public static final boolean LAYOUT_PARALLEL_RENDER_THREAD_POOL_ALLOW_CORE_THREAD_TIMEOUT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LAYOUT_PARALLEL_RENDER_THREAD_POOL_ALLOW_CORE_THREAD_TIMEOUT));
 
 	public static final int LAYOUT_PARALLEL_RENDER_THREAD_POOL_CORE_THREAD_COUNT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.LAYOUT_PARALLEL_RENDER_THREAD_POOL_CORE_THREAD_COUNT));
@@ -946,6 +954,13 @@ public class PropsValues {
 
 	public static final boolean MINIFIER_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.MINIFIER_ENABLED));
 
+	public static final boolean MINIFIER_INLINE_CONTENT_CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.MINIFIER_INLINE_CONTENT_CACHE_ENABLED));
+
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #MINIFIER_INLINE_CONTENT_CACHE_ENABLED}
+	 */
+	@Deprecated
 	public static final int MINIFIER_INLINE_CONTENT_CACHE_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.MINIFIER_INLINE_CONTENT_CACHE_SIZE));
 
 	public static final String[] MINIFIER_INLINE_CONTENT_CACHE_SKIP_CSS = PropsUtil.getArray(PropsKeys.MINIFIER_INLINE_CONTENT_CACHE_SKIP_CSS);

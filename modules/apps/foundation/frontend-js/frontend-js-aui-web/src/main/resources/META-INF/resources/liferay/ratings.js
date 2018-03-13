@@ -381,7 +381,9 @@ AUI.add(
 
 						var label = instance._getLabel(description, json.totalEntries);
 
-						var averageIndex = instance.get('round') ? Math.round(averageScore) : Math.floor(averageScore);
+						var formattedAverageScore = averageScore.toFixed(1);
+
+						var averageIndex = instance.get('round') ? Math.round(formattedAverageScore) : Math.floor(formattedAverageScore);
 
 						var ratingScore = instance._ratingScoreNode;
 
@@ -401,7 +403,7 @@ AUI.add(
 							}
 						);
 
-						instance._updateAverageScoreText(averageScore);
+						instance._updateAverageScoreText(formattedAverageScore);
 						instance._updateScoreText(score);
 					}
 				}
@@ -493,56 +495,75 @@ AUI.add(
 					_updateScores: function(thumbScore) {
 						var instance = this;
 
-						var cssClasses = instance.ratings.get('cssClasses');
-						var elements = instance.ratings.get('elements');
+						var ratings = instance.ratings;
 
-						var cssClassesOn = cssClasses.on;
+						var cssClasses = ratings.get('cssClasses');
+						var elements = ratings.get('elements');
 
 						var ratingThumbDown = elements.item(1);
-
-						var ratingThumbDownCssClassOn = false;
-
-						if (ratingThumbDown) {
-							ratingThumbDownCssClassOn = ratingThumbDown.hasClass(cssClassesOn);
-						}
-
 						var ratingThumbUp = elements.item(0);
 
-						var ratingThumbUpCssClassOn = ratingThumbUp.hasClass(cssClassesOn);
+						if (isNaN(thumbScore.negativeVotes) && isNaN(thumbScore.positiveVotes)) {
+							ratingThumbDown.attr('title', Liferay.Language.get('you-must-be-signed-in-to-rate'));
+							ratingThumbUp.attr('title', Liferay.Language.get('you-must-be-signed-in-to-rate'));
 
-						var thumbDownMessage = '';
-						var thumbUpMessage = '';
+							ratingThumbDown.addClass(cssClasses.off);
+							ratingThumbUp.addClass(cssClasses.off);
 
-						if (ratingThumbDown) {
-							if (ratingThumbDownCssClassOn) {
-								thumbDownMessage = Liferay.Language.get('you-have-rated-this-as-bad');
+							ratingThumbDown.removeClass(cssClasses.on);
+							ratingThumbUp.removeClass(cssClasses.on);
+
+							ratings.set('disabled', true);
+						}
+						else {
+							var cssClassesOn = cssClasses.on;
+
+							var ratingThumbDownCssClassOn = false;
+
+							if (ratingThumbDown) {
+								ratingThumbDownCssClassOn = ratingThumbDown.hasClass(cssClassesOn);
 							}
-							else {
-								thumbDownMessage = Liferay.Language.get('rate-this-as-bad');
+
+							var ratingThumbUpCssClassOn = false;
+
+							if (ratingThumbUp) {
+								ratingThumbUpCssClassOn = ratingThumbUp.hasClass(cssClassesOn);
 							}
 
-							ratingThumbDown.attr('title', thumbDownMessage);
+							var thumbDownMessage = '';
+							var thumbUpMessage = '';
 
-							ratingThumbDown.html(thumbScore.negativeVotes);
-						}
+							if (ratingThumbDown) {
+								if (ratingThumbDownCssClassOn) {
+									thumbDownMessage = Liferay.Language.get('you-have-rated-this-as-bad');
+								}
+								else {
+									thumbDownMessage = Liferay.Language.get('rate-this-as-bad');
+								}
 
-						if (ratingThumbDown && ratingThumbUpCssClassOn) {
-							thumbUpMessage = Liferay.Language.get('you-have-rated-this-as-good');
-						}
-						else if (ratingThumbDown && !ratingThumbUpCssClassOn) {
-							thumbUpMessage = Liferay.Language.get('rate-this-as-good');
-						}
-						else if (!ratingThumbDown && ratingThumbUpCssClassOn) {
-							thumbUpMessage = Liferay.Language.get('unlike-this');
-						}
-						else if (!ratingThumbDown && !ratingThumbUpCssClassOn) {
-							thumbUpMessage = Liferay.Language.get('like-this');
-						}
+								ratingThumbDown.attr('title', thumbDownMessage);
 
-						if (ratingThumbUp) {
-							ratingThumbUp.attr('title', thumbUpMessage);
+								ratingThumbDown.html(thumbScore.negativeVotes);
+							}
 
-							ratingThumbUp.html(thumbScore.positiveVotes);
+							if (ratingThumbDown && ratingThumbUpCssClassOn) {
+								thumbUpMessage = Liferay.Language.get('you-have-rated-this-as-good');
+							}
+							else if (ratingThumbDown && !ratingThumbUpCssClassOn) {
+								thumbUpMessage = Liferay.Language.get('rate-this-as-good');
+							}
+							else if (!ratingThumbDown && ratingThumbUpCssClassOn) {
+								thumbUpMessage = Liferay.Language.get('unlike-this');
+							}
+							else if (!ratingThumbDown && !ratingThumbUpCssClassOn) {
+								thumbUpMessage = Liferay.Language.get('like-this');
+							}
+
+							if (ratingThumbUp) {
+								ratingThumbUp.attr('title', thumbUpMessage);
+
+								ratingThumbUp.html(thumbScore.positiveVotes);
+							}
 						}
 					}
 				}

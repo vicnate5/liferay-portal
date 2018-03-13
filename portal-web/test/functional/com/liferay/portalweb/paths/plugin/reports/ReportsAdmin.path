@@ -65,17 +65,6 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--REPORTS_ENTRY_MENULIST-->
-<tr>
-	<td>REPORTS_ENTRY_MENULIST_DELETE</td>
-	<td>//a[@role='menuitem' and contains(.,'Delete')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
 <!--DEFINITIONS-->
 <tr>
 	<td>DEFINITIONS_ADD_REPORT_DEFINITION_BUTTON</td>
@@ -108,47 +97,10 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--DEFINITIONS_DEFINITION_MENULIST-->
-<tr>
-	<td>DEFINITIONS_DEFINITION_MENULIST_EDIT</td>
-	<td>//a[@role='menuitem' and contains(.,'Edit')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>DEFINITIONS_DEFINITION_MENULIST_ADD_REPORT</td>
-	<td>//a[@role='menuitem' and contains(.,'Add Report')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>DEFINITIONS_DEFINITION_MENULIST_ADD_SCHEDULE</td>
-	<td>//a[@role='menuitem' and contains(.,'Add Schedule')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>DEFINITIONS_DEFINITION_MENULIST_DELETE</td>
-	<td>//a[@role='menuitem' and contains(.,'Delete')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
 <!--SOURCES_SOURCE-->
 <tr>
 	<td>SOURCES_SOURCE_TABLE_ACTIONS_1</td>
 	<td>xpath=(//tr/td[4]//div/a)[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<!--SOURCES_SOURCE_MENULIST-->
-<tr>
-	<td>SOURCES_SOURCE_MENULIST_DELETE</td>
-	<td>//a[@role='menuitem' and contains(.,'Delete')]</td>
 	<td></td>
 </tr>
 </tbody>

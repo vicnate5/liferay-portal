@@ -88,21 +88,20 @@ public class VerifyOrganization extends VerifyProcess {
 
 	protected void updateOrganizationAssetEntries() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			StringBundler sb = new StringBundler();
+			StringBundler sb = new StringBundler(7);
 
 			sb.append("select distinct AssetEntry.classPK as classPK, ");
-			sb.append("Organization_.uuid_ as uuid from ");
-			sb.append(
-				"AssetEntry, Organization_ where AssetEntry.classNameId = ");
+			sb.append("Organization_.uuid_ as uuid from AssetEntry, ");
+			sb.append("Organization_ where AssetEntry.classNameId = ");
 
 			long classNameId = ClassNameLocalServiceUtil.getClassNameId(
 				Organization.class.getName());
 
 			sb.append(classNameId);
 
-			sb.append(
-				" and AssetEntry.classPK = Organization_.organizationId ");
-			sb.append("and AssetEntry.classUuid is null");
+			sb.append(" and AssetEntry.classPK = ");
+			sb.append("Organization_.organizationId and AssetEntry.classUuid ");
+			sb.append("is null");
 
 			try (PreparedStatement ps1 = connection.prepareStatement(
 					sb.toString());
@@ -139,8 +138,9 @@ public class VerifyOrganization extends VerifyProcess {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Processing " + organizations.size() + " organizations " +
-						"with no asset");
+					StringBundler.concat(
+						"Processing ", String.valueOf(organizations.size()),
+						" organizations with no asset"));
 			}
 
 			for (Organization organization : organizations) {
@@ -151,9 +151,11 @@ public class VerifyOrganization extends VerifyProcess {
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Unable to update asset for organization " +
-								organization.getOrganizationId() + ": " +
-									e.getMessage());
+							StringBundler.concat(
+								"Unable to update asset for organization ",
+								String.valueOf(
+									organization.getOrganizationId()),
+								": ", e.getMessage()));
 					}
 				}
 			}

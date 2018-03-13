@@ -93,6 +93,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -497,7 +498,7 @@ public class CalEventImporter {
 		recurrence.setFrequency(frequency);
 		recurrence.setPositionalWeekdays(positionalWeekdays);
 
-		java.util.Calendar untilJCalendar = tzsRecurrence.getUntil();
+		Calendar untilJCalendar = tzsRecurrence.getUntil();
 
 		int ocurrence = tzsRecurrence.getOccurrence();
 
@@ -856,7 +857,7 @@ public class CalEventImporter {
 
 	protected CalendarBooking importCalEvent(long calEventId) throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			StringBundler sb = new StringBundler(5);
+			StringBundler sb = new StringBundler(6);
 
 			sb.append("select uuid_, eventId, groupId, companyId, userId, ");
 			sb.append("userName, createDate, modifiedDate, title, ");
@@ -990,7 +991,7 @@ public class CalEventImporter {
 		}
 
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			StringBundler sb = new StringBundler(5);
+			StringBundler sb = new StringBundler(6);
 
 			sb.append("select uuid_, eventId, groupId, companyId, userId, ");
 			sb.append("userName, createDate, modifiedDate, title, ");
@@ -1163,18 +1164,12 @@ public class CalEventImporter {
 				className, classPK, ratingsEntry.getScore());
 		}
 
-		List<Long> oldClassPKs = new ArrayList<>();
+		RatingsStats ratingsStats = _ratingsStatsLocalService.fetchStats(
+			oldClassName, oldClassPK);
 
-		oldClassPKs.add(oldClassPK);
-
-		List<RatingsStats> ratingsStatsList =
-			_ratingsStatsLocalService.getStats(oldClassName, oldClassPKs);
-
-		if (ratingsStatsList.isEmpty()) {
+		if (ratingsStats == null) {
 			return;
 		}
-
-		RatingsStats ratingsStats = ratingsStatsList.get(0);
 
 		addRatingsStats(
 			_counterLocalService.increment(), className, classPK,
@@ -1242,7 +1237,7 @@ public class CalEventImporter {
 			long entryId1, long entryId2, int type)
 		throws SQLException {
 
-		StringBundler sb = new StringBundler(128);
+		StringBundler sb = new StringBundler(3);
 
 		sb.append("select count(*) from AssetLink where ((entryId1 = ? and ");
 		sb.append("entryId2 = ?) or (entryId2 = ? and entryId1 = ?)) and ");
@@ -1444,13 +1439,13 @@ public class CalEventImporter {
 		_frequencies.put(TZSRecurrence.MONTHLY, Frequency.MONTHLY);
 		_frequencies.put(TZSRecurrence.YEARLY, Frequency.YEARLY);
 
-		_weekdays.put(java.util.Calendar.SUNDAY, Weekday.SUNDAY);
-		_weekdays.put(java.util.Calendar.MONDAY, Weekday.MONDAY);
-		_weekdays.put(java.util.Calendar.TUESDAY, Weekday.TUESDAY);
-		_weekdays.put(java.util.Calendar.WEDNESDAY, Weekday.WEDNESDAY);
-		_weekdays.put(java.util.Calendar.THURSDAY, Weekday.THURSDAY);
-		_weekdays.put(java.util.Calendar.FRIDAY, Weekday.FRIDAY);
-		_weekdays.put(java.util.Calendar.SATURDAY, Weekday.SATURDAY);
+		_weekdays.put(Calendar.SUNDAY, Weekday.SUNDAY);
+		_weekdays.put(Calendar.MONDAY, Weekday.MONDAY);
+		_weekdays.put(Calendar.TUESDAY, Weekday.TUESDAY);
+		_weekdays.put(Calendar.WEDNESDAY, Weekday.WEDNESDAY);
+		_weekdays.put(Calendar.THURSDAY, Weekday.THURSDAY);
+		_weekdays.put(Calendar.FRIDAY, Weekday.FRIDAY);
+		_weekdays.put(Calendar.SATURDAY, Weekday.SATURDAY);
 	}
 
 	private AssetCategoryLocalService _assetCategoryLocalService;

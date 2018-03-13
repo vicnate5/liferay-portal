@@ -136,6 +136,8 @@ public class DefineObjectsTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_portletId = null;
 	}
 

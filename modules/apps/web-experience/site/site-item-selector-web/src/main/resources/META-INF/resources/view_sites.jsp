@@ -144,14 +144,14 @@ GroupSearch groupSearch = siteItemSelectorViewDisplayContext.getGroupSearch();
 									showCheckbox="<%= false %>"
 								>
 									<liferay-frontend:vertical-card-header>
-										<div class="row">
-											<h5 class="col text-truncate">
+										<div class="flex-container">
+											<h5 class="flex-item-expand truncate-text">
 												<aui:a cssClass="selector-button" data="<%= data %>" href="javascript:;">
 													<%= HtmlUtil.escape(siteItemSelectorViewDisplayContext.getGroupName(group)) %>
 												</aui:a>
 											</h5>
 
-											<aui:a cssClass="col-auto" href="<%= groupURLProvider.getGroupURL(group, liferayPortletRequest) %>" target="_blank" />
+											<aui:a cssClass="flex-item-center" href="<%= groupURLProvider.getGroupURL(group, liferayPortletRequest) %>" target="_blank" />
 										</div>
 									</liferay-frontend:vertical-card-header>
 
@@ -172,14 +172,14 @@ GroupSearch groupSearch = siteItemSelectorViewDisplayContext.getGroupSearch();
 									showCheckbox="<%= false %>"
 								>
 									<liferay-frontend:vertical-card-header>
-										<div class="row">
-											<h5 class="col text-truncate">
+										<div class="flex-container">
+											<h5 class="flex-item-expand truncate-text">
 												<aui:a cssClass="selector-button" data="<%= data %>" href="javascript:;">
 													<%= HtmlUtil.escape(siteItemSelectorViewDisplayContext.getGroupName(group)) %>
 												</aui:a>
 											</h5>
 
-											<aui:a cssClass="col-auto" href="<%= groupURLProvider.getGroupURL(group, liferayPortletRequest) %>" target="_blank" />
+											<aui:a cssClass="flex-item-center" href="<%= groupURLProvider.getGroupURL(group, liferayPortletRequest) %>" target="_blank" />
 										</div>
 									</liferay-frontend:vertical-card-header>
 

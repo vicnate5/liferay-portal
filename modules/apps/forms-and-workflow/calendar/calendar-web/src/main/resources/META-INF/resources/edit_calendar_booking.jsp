@@ -221,6 +221,7 @@ while (manageableCalendarsIterator.hasNext()) {
 	<aui:input name="calendarBookingId" type="hidden" value="<%= calendarBookingId %>" />
 	<aui:input name="instanceIndex" type="hidden" value="<%= instanceIndex %>" />
 	<aui:input name="childCalendarIds" type="hidden" />
+	<aui:input name="reinvitableCalendarIds" type="hidden" />
 	<aui:input name="allFollowing" type="hidden" />
 	<aui:input name="updateCalendarBookingInstance" type="hidden" />
 	<aui:input name="workflowAction" type="hidden" value="<%= WorkflowConstants.ACTION_PUBLISH %>" />
@@ -459,6 +460,8 @@ while (manageableCalendarsIterator.hasNext()) {
 				A.Array.remove(childCalendarIds, A.Array.indexOf(childCalendarIds, calendarId));
 
 				A.one('#<portlet:namespace />childCalendarIds').val(childCalendarIds.join(','));
+
+				A.one('#<portlet:namespace />reinvitableCalendarIds').val(<portlet:namespace />reinvitableCalendarIds.join(','));
 			</c:if>
 
 			Liferay.CalendarMessageUtil.promptSchedulerEventUpdate(
@@ -585,10 +588,21 @@ while (manageableCalendarsIterator.hasNext()) {
 		}
 	).render();
 
+	window.<portlet:namespace />reinvitableCalendarIds = [];
+
 	<c:if test="<%= calendarBooking != null %>">
 		window.<portlet:namespace />calendarListDeclined = new Liferay.CalendarList(
 			{
 				after: {
+					calendarRemoved: function(event) {
+						var calendar = event.calendar;
+
+						if (calendar) {
+							var calendarId = calendar.get('calendarId');
+
+							window.<portlet:namespace />reinvitableCalendarIds.push(calendarId);
+						}
+					},
 					calendarsChange: function(event) {
 						var instance = this;
 

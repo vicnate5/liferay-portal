@@ -116,7 +116,7 @@ else {
 	dlEditFileEntryDisplayContext = dlDisplayContextProvider.getDLEditFileEntryDisplayContext(request, response, fileEntry);
 }
 
-String defaultLanguageId = themeDisplay.getLanguageId();
+String defaultLanguageId = LocaleUtil.toLanguageId(LocaleUtil.getSiteDefault());
 
 Locale[] availableLocales = {LocaleUtil.fromLanguageId(defaultLanguageId)};
 
@@ -221,6 +221,8 @@ if (portletTitleBasedNavigation) {
 		<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_PUBLISH) %>" />
 
 		<div class="lfr-form-content">
+			<liferay-ui:error exception="<%= RequiredFileException.class %>" message="please-select-the-file-again" />
+
 			<liferay-ui:error exception="<%= AntivirusScannerException.class %>">
 
 				<%
@@ -267,12 +269,6 @@ if (portletTitleBasedNavigation) {
 			<liferay-ui:asset-categories-error />
 
 			<liferay-ui:asset-tags-error />
-
-			<aui:translation-manager
-				availableLocales="<%= availableLocales %>"
-				defaultLanguageId="<%= defaultLanguageId %>"
-				id="translationManager"
-			/>
 
 			<aui:model-context bean="<%= fileVersion %>" model="<%= DLFileVersion.class %>" />
 
@@ -401,6 +397,15 @@ if (portletTitleBasedNavigation) {
 							<%
 							if (fileEntryTypeId > 0) {
 								try {
+							%>
+
+									<aui:translation-manager
+										availableLocales="<%= availableLocales %>"
+										defaultLanguageId="<%= defaultLanguageId %>"
+										id="translationManager"
+									/>
+
+							<%
 									List<DDMStructure> ddmStructures = dlFileEntryType.getDDMStructures();
 
 									for (DDMStructure ddmStructure : ddmStructures) {

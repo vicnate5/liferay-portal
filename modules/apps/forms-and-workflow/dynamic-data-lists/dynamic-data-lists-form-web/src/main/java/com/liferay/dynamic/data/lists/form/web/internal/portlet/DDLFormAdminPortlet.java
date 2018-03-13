@@ -15,8 +15,9 @@
 package com.liferay.dynamic.data.lists.form.web.internal.portlet;
 
 import com.liferay.dynamic.data.lists.form.web.configuration.DDLFormWebConfigurationActivator;
-import com.liferay.dynamic.data.lists.form.web.constants.DDLFormPortletKeys;
+import com.liferay.dynamic.data.lists.form.web.internal.constants.DDLFormPortletKeys;
 import com.liferay.dynamic.data.lists.form.web.internal.display.context.DDLFormAdminDisplayContext;
+import com.liferay.dynamic.data.lists.form.web.internal.instance.lifecycle.AddDefaultSharedFormLayoutPortalInstanceLifecycleListener;
 import com.liferay.dynamic.data.lists.model.DDLRecordSet;
 import com.liferay.dynamic.data.lists.model.DDLRecordSetSettings;
 import com.liferay.dynamic.data.lists.service.DDLRecordLocalService;
@@ -55,6 +56,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
@@ -93,6 +95,7 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
 		"com.liferay.portlet.icon=/admin/icons/form.png",
 		"com.liferay.portlet.instanceable=false",
 		"com.liferay.portlet.preferences-owned-by-group=true",
+		"com.liferay.portlet.preferences-unique-per-layout=false",
 		"com.liferay.portlet.private-request-attributes=false",
 		"com.liferay.portlet.private-session-attributes=false",
 		"com.liferay.portlet.render-weight=50",
@@ -157,7 +160,8 @@ public class DDLFormAdminPortlet extends MVCPortlet {
 				themeDisplay.getLocale(), "version-x",
 				workflowDefinition.getVersion(), false);
 
-			String label = workflowDefinition.getName() + " (" + version + ")";
+			String label = StringBundler.concat(
+				workflowDefinition.getName(), " (", version, ")");
 
 			ddmFormFieldOptions.addOptionLabel(
 				value, themeDisplay.getLocale(), label);
@@ -429,6 +433,7 @@ public class DDLFormAdminPortlet extends MVCPortlet {
 		DDLFormAdminDisplayContext ddlFormAdminDisplayContext =
 			new DDLFormAdminDisplayContext(
 				renderRequest, renderResponse,
+				_addDefaultSharedFormLayoutPortalInstanceLifecycleListener,
 				_ddlFormWebConfigurationActivator.getDDLFormWebConfiguration(),
 				_ddlRecordLocalService, _ddlRecordSetService,
 				_ddmDataProviderInstanceLocalService, _ddmFormEvaluatorServlet,
@@ -477,6 +482,10 @@ public class DDLFormAdminPortlet extends MVCPortlet {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		DDLFormAdminPortlet.class);
+
+	@Reference
+	private AddDefaultSharedFormLayoutPortalInstanceLifecycleListener
+		_addDefaultSharedFormLayoutPortalInstanceLifecycleListener;
 
 	private DDLFormWebConfigurationActivator _ddlFormWebConfigurationActivator;
 	private DDLRecordLocalService _ddlRecordLocalService;

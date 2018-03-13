@@ -54,6 +54,8 @@ public class AppViewDisplayStyleTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_displayStyle = null;
 		_displayStyles = null;
 		_displayStyleURL = null;

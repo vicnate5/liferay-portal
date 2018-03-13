@@ -4,8 +4,8 @@
 [subrepo]
 	autopull = false
 	cmdver = liferay
-	commit = f84e63697dcaeafb68b7779aa092b75891332a1a
+	commit = a605c3bac3b87eebb9e297c0b729ed408c337ac6
 	mergebuttonmergecommits = false
 	mode = push
-	parent = c8881c6c36e77d1cafdfa26aa53165c0a51585b0
+	parent = 55965c6cbffc0698c9f57fde31707a778755fe35
 	remote = git@github.com:liferay/com-liferay-image-uploader.git

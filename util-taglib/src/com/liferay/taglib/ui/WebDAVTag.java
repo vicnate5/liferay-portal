@@ -30,6 +30,8 @@ public class WebDAVTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_path = null;
 	}
 

@@ -30,29 +30,21 @@ WikiPage wikiPage = WikiPageAttachmentsUtil.getPage(attachmentsFileEntry.getFile
 	<c:choose>
 		<c:when test="<%= viewTrashAttachments %>">
 			<c:if test="<%= WikiNodePermissionChecker.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_ATTACHMENT) %>">
-
-				<%
-				TrashEntry trashEntry = TrashEntryLocalServiceUtil.getEntry(DLFileEntry.class.getName(), attachmentsFileEntry.getFileEntryId());
-				%>
-
 				<portlet:actionURL name="/wiki/edit_page_attachment" var="restoreEntryURL">
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="trashEntryId" value="<%= String.valueOf(trashEntry.getEntryId()) %>" />
+					<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
+					<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
+					<portlet:param name="fileName" value="<%= attachmentsFileEntry.getTitle() %>" />
 				</portlet:actionURL>
-
-				<%
-				String taglibOnClick = "Liferay.fire('" + renderResponse.getNamespace() + "checkEntry', {trashEntryId: " + trashEntry.getEntryId() + ", uri: '" + restoreEntryURL.toString() + "'});";
-				%>
 
 				<liferay-ui:icon
 					message="restore"
-					onClick="<%= taglibOnClick %>"
-					url="javascript:;"
+					url="<%= restoreEntryURL %>"
 				/>
 			</c:if>
 
-			<c:if test="<%= WikiPagePermissionChecker.contains(permissionChecker, wikiPage.getNodeId(), wikiPage.getTitle(), ActionKeys.DELETE) %>">
+			<c:if test="<%= WikiPagePermissionChecker.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">
 				<portlet:actionURL name="/wiki/edit_page_attachment" var="deleteURL">
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -67,7 +59,7 @@ WikiPage wikiPage = WikiPageAttachmentsUtil.getPage(attachmentsFileEntry.getFile
 			</c:if>
 		</c:when>
 		<c:otherwise>
-			<c:if test="<%= WikiPagePermissionChecker.contains(permissionChecker, wikiPage.getNodeId(), wikiPage.getTitle(), ActionKeys.DELETE) %>">
+			<c:if test="<%= WikiPagePermissionChecker.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">
 				<portlet:actionURL name="/wiki/edit_page_attachment" var="deleteURL">
 					<portlet:param name="<%= Constants.CMD %>" value="<%= TrashUtil.isTrashEnabled(scopeGroupId) ? Constants.MOVE_TO_TRASH : Constants.DELETE %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />

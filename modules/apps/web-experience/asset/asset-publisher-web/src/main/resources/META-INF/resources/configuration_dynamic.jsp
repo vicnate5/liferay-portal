@@ -133,7 +133,13 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 								List<KeyValuePair> subtypesLeftList = new ArrayList<KeyValuePair>();
 
 								for (long subtypeId : assetSelectedClassTypeIds) {
-									subtypesLeftList.add(new KeyValuePair(String.valueOf(subtypeId), HtmlUtil.escape(classTypeReader.getClassType(subtypeId, locale).getName())));
+									try {
+										ClassType classType = classTypeReader.getClassType(subtypeId, locale);
+
+										subtypesLeftList.add(new KeyValuePair(String.valueOf(subtypeId), HtmlUtil.escape(classType.getName())));
+									}
+									catch (NoSuchModelException nsme) {
+									}
 								}
 
 								Arrays.sort(assetSelectedClassTypeIds);

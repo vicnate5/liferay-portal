@@ -25,7 +25,8 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
-<%@ page import="com.liferay.announcements.kernel.exception.EntryContentException" %><%@
+<%@ page import="com.liferay.announcements.constants.AnnouncementsPortletKeys" %><%@
+page import="com.liferay.announcements.kernel.exception.EntryContentException" %><%@
 page import="com.liferay.announcements.kernel.exception.EntryDisplayDateException" %><%@
 page import="com.liferay.announcements.kernel.exception.EntryExpirationDateException" %><%@
 page import="com.liferay.announcements.kernel.exception.EntryTitleException" %><%@
@@ -38,11 +39,11 @@ page import="com.liferay.announcements.kernel.model.AnnouncementsFlagConstants" 
 page import="com.liferay.announcements.kernel.service.AnnouncementsEntryLocalServiceUtil" %><%@
 page import="com.liferay.announcements.kernel.service.AnnouncementsFlagLocalServiceUtil" %><%@
 page import="com.liferay.announcements.kernel.util.AnnouncementsUtil" %><%@
-page import="com.liferay.announcements.web.constants.AnnouncementsPortletKeys" %><%@
 page import="com.liferay.announcements.web.constants.AnnouncementsWebKeys" %><%@
 page import="com.liferay.announcements.web.internal.display.context.AnnouncementsDisplayContext" %><%@
 page import="com.liferay.announcements.web.internal.display.context.DefaultAnnouncementsDisplayContext" %><%@
 page import="com.liferay.announcements.web.internal.display.context.util.AnnouncementsRequestHelper" %><%@
+page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
 page import="com.liferay.portal.kernel.dao.search.SearchContainer" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
@@ -67,7 +68,6 @@ page import="com.liferay.portal.kernel.util.KeyValuePair" %><%@
 page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
 page import="com.liferay.portal.kernel.util.PortalUtil" %><%@
 page import="com.liferay.portal.kernel.util.PropsUtil" %><%@
-page import="com.liferay.portal.kernel.util.StringPool" %><%@
 page import="com.liferay.portal.kernel.util.StringUtil" %><%@
 page import="com.liferay.portal.kernel.util.Time" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %><%@

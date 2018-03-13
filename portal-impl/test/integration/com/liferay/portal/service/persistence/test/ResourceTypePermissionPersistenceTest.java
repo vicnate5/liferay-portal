@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
@@ -159,10 +158,10 @@ public class ResourceTypePermissionPersistenceTest {
 
 	@Test
 	public void testCountByC_N_R() throws Exception {
-		_persistence.countByC_N_R(RandomTestUtil.nextLong(), StringPool.BLANK,
+		_persistence.countByC_N_R(RandomTestUtil.nextLong(), "",
 			RandomTestUtil.nextLong());
 
-		_persistence.countByC_N_R(0L, StringPool.NULL, 0L);
+		_persistence.countByC_N_R(0L, "null", 0L);
 
 		_persistence.countByC_N_R(0L, (String)null, 0L);
 	}
@@ -170,10 +169,9 @@ public class ResourceTypePermissionPersistenceTest {
 	@Test
 	public void testCountByC_G_N_R() throws Exception {
 		_persistence.countByC_G_N_R(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong(), StringPool.BLANK,
-			RandomTestUtil.nextLong());
+			RandomTestUtil.nextLong(), "", RandomTestUtil.nextLong());
 
-		_persistence.countByC_G_N_R(0L, 0L, StringPool.NULL, 0L);
+		_persistence.countByC_G_N_R(0L, 0L, "null", 0L);
 
 		_persistence.countByC_G_N_R(0L, 0L, (String)null, 0L);
 	}

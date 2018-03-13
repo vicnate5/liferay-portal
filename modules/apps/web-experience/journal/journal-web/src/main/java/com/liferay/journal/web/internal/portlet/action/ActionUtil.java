@@ -104,8 +104,7 @@ public class ActionUtil {
 
 		if (index != -1) {
 			sourceArticleId = sourceArticleId.substring(
-				index + JournalPortlet.VERSION_SEPARATOR.length(),
-				sourceArticleId.length());
+				index + JournalPortlet.VERSION_SEPARATOR.length());
 		}
 
 		double sourceVersion = GetterUtil.getDouble(sourceArticleId);
@@ -117,8 +116,7 @@ public class ActionUtil {
 
 		if (index != -1) {
 			targetArticleId = targetArticleId.substring(
-				index + JournalPortlet.VERSION_SEPARATOR.length(),
-				targetArticleId.length());
+				index + JournalPortlet.VERSION_SEPARATOR.length());
 		}
 
 		double targetVersion = GetterUtil.getDouble(targetArticleId);
@@ -469,7 +467,7 @@ public class ActionUtil {
 					long groupId = jsonObject.getLong("groupId");
 
 					if (Validator.isNotNull(uuid) && (groupId > 0)) {
-						StringBundler sb = new StringBundler(7);
+						StringBundler sb = new StringBundler(5);
 
 						sb.append(
 							getElementInstanceId(content, field.getName(), i));

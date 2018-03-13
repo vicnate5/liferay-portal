@@ -50,6 +50,13 @@ public interface JournalWebConfiguration {
 	@Meta.AD(deflt = "true", required = false)
 	public boolean journalArticlesSearchWithIndex();
 
+	@Meta.AD(
+		deflt = "false",
+		description = "journal-browse-by-structures-sorted-by-name-help",
+		name = "journal-browse-by-structures-sorted-by-name", required = false
+	)
+	public boolean journalBrowseByStructuresSortedByName();
+
 	@Meta.AD(deflt = "true", required = false)
 	public boolean journalFeedForceAutogenerateId();
 

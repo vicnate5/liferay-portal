@@ -43,6 +43,7 @@ import com.liferay.knowledge.base.service.util.KnowledgeBaseConstants;
 import com.liferay.knowledge.base.util.KnowledgeBaseUtil;
 import com.liferay.knowledge.base.util.comparator.KBArticlePriorityComparator;
 import com.liferay.knowledge.base.util.comparator.KBArticleVersionComparator;
+import com.liferay.petra.string.CharPool;
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.orm.Conjunction;
@@ -74,14 +75,15 @@ import com.liferay.portal.kernel.search.IndexWriterHelper;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistry;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.systemevent.SystemEventHierarchyEntryThreadLocal;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.SubscriptionSender;
@@ -663,9 +665,10 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 
 		if (kbArticle == null) {
 			throw new NoSuchArticleException(
-				"No KBArticle exists with the key {groupId=" + groupId +
-					", kbFolderId=" + kbFolderId + ", urlTitle=" + urlTitle +
-						"}");
+				StringBundler.concat(
+					"No KBArticle exists with the key {groupId=",
+					String.valueOf(groupId), ", kbFolderId=",
+					String.valueOf(kbFolderId), ", urlTitle=", urlTitle, "}"));
 		}
 
 		return kbArticle;
@@ -684,9 +687,10 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 
 		if (kbArticle == null) {
 			throw new NoSuchArticleException(
-				"No KBArticle with the key {groupId=" + groupId +
-					", urlTitle=" + urlTitle + "} found in a folder with URL " +
-						"title " + kbFolderUrlTitle);
+				StringBundler.concat(
+					"No KBArticle with the key {groupId=",
+					String.valueOf(groupId), ", urlTitle=", urlTitle,
+					"} found in a folder with URL title ", kbFolderUrlTitle));
 		}
 
 		return kbArticle;
@@ -832,9 +836,11 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 
 		if (latestKBArticle == null) {
 			throw new NoSuchArticleException(
-				"No KBArticle exists with the key {groupId=" + groupId +
-					", kbFolderId=" + kbFolderId + ", urlTitle=" + urlTitle +
-						", status=" + status + "}");
+				StringBundler.concat(
+					"No KBArticle exists with the key {groupId=",
+					String.valueOf(groupId), ", kbFolderId=",
+					String.valueOf(kbFolderId), ", urlTitle=", urlTitle,
+					", status=", String.valueOf(status), "}"));
 		}
 
 		return latestKBArticle;
@@ -1622,8 +1628,9 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 			long groupId)
 		throws ConfigurationException {
 
-		return configurationProvider.getGroupConfiguration(
-			KBGroupServiceConfiguration.class, groupId);
+		return configurationProvider.getConfiguration(
+			KBGroupServiceConfiguration.class,
+			new GroupServiceSettingsLocator(groupId, KBConstants.SERVICE_NAME));
 	}
 
 	protected double getPriority(long groupId, long parentResourcePrimKey)

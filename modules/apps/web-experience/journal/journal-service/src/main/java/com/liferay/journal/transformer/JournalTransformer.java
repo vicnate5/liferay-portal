@@ -250,6 +250,10 @@ public class JournalTransformer {
 			Template template = getTemplate(
 				templateId, tokens, languageId, document, script, langType);
 
+			if ((themeDisplay != null) && (themeDisplay.getRequest() != null)) {
+				template.prepare(themeDisplay.getRequest());
+			}
+
 			if (contextObjects != null) {
 				template.putAll(contextObjects);
 			}

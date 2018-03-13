@@ -14,6 +14,7 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.petra.string.CharPool;
 import com.liferay.portal.kernel.exception.NoSuchResourcePermissionException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -55,7 +56,6 @@ import com.liferay.portal.kernel.service.permission.LayoutPrototypePermissionUti
 import com.liferay.portal.kernel.service.permission.LayoutSetPrototypePermissionUtil;
 import com.liferay.portal.kernel.service.permission.PortletPermissionUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.SetUtil;
@@ -413,9 +413,10 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Checking permission for " + groupId + " " + name + " " +
-						primKey + " " + actionId + " takes " +
-							stopWatch.getTime() + " ms");
+					StringBundler.concat(
+						"Checking permission for ", String.valueOf(groupId),
+						" ", name, " ", primKey, " ", actionId, " takes ",
+						String.valueOf(stopWatch.getTime()), " ms"));
 			}
 
 			PermissionCacheUtil.putPermission(
@@ -751,9 +752,9 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			newIndividualResourcePrimKey = name;
 
 			if (_log.isDebugEnabled()) {
-				String message =
-					"Using defaults because custom permissions for portlet " +
-						"resource " + name + " are not defined";
+				String message = StringBundler.concat(
+					"Using defaults because custom permissions for portlet ",
+					"resource ", name, " are not defined");
 
 				_log.debug(message, new IllegalArgumentException(message));
 			}
@@ -767,9 +768,9 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			newIndividualResourcePrimKey = name;
 
 			if (_log.isDebugEnabled()) {
-				String message =
-					"Using defaults because custom permissions for root " +
-						"model resource " + name + " are not defined";
+				String message = StringBundler.concat(
+					"Using defaults because custom permissions for root model ",
+					"resource ", name, " are not defined");
 
 				_log.debug(message, new IllegalArgumentException(message));
 			}
@@ -1466,9 +1467,11 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 
 		_log.debug(
-			"Checking user permission block " + block + " for " + groupId +
-				" " + name + " " + primKey + " " + actionId + " takes " +
-					stopWatch.getTime() + " ms");
+			StringBundler.concat(
+				"Checking user permission block ", String.valueOf(block),
+				" for ", String.valueOf(groupId), " ", name, " ", primKey, " ",
+				actionId, " takes ", String.valueOf(stopWatch.getTime()),
+				" ms"));
 	}
 
 	/**

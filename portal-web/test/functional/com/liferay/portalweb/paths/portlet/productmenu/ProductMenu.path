@@ -14,6 +14,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>PANEL_COLLAPSED</td>
+	<td>//div[contains(@id,'ProductMenuPortlet_${key_panel}Heading')]/div/a[@aria-expanded='false']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PANEL_EXPANDED</td>
+	<td>//div[contains(@id,'ProductMenuPortlet_${key_panel}Heading')]/div/a[@aria-expanded='true']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>PRODUCT_MENU_BODY</td>
 	<td>//*[@data-qa-id='productMenuBody']</td>
 	<td></td>
@@ -211,67 +221,6 @@
 <tr>
 	<td>USER_PROFILE</td>
 	<td>//div[contains(@class,'list-group')]//a[contains(.,'Profile')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<!--PRODUCT_MENU_TABS-->
-<tr>
-	<td>PRODUCT_MENU_TABS_TAB_ICON</td>
-	<td>//div[contains(.,'${tabName}')]/../div[contains(@class,'tab-icon')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>PRODUCT_MENU_TABS_SITES_COLLAPSED</td>
-	<td>//*[@data-qa-id='productMenuSiteAdministrationPanelCategory'][@aria-expanded='false']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>PRODUCT_MENU_TABS_SITES_EXPANDED</td>
-	<td>//*[@data-qa-id='productMenuSiteAdministrationPanelCategory'][@aria-expanded='true']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>PRODUCT_MENU_TABS_SITES_NAVIGATION</td>
-	<td>//div[contains(.,'Sites')]/../div[contains(@class,'tab-text')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>PRODUCT_MENU_TABS_USER_COLLAPSED</td>
-	<td>//*[@data-qa-id='productMenuUserPanelCategory'][@aria-expanded='false']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>PRODUCT_MENU_TABS_USER_EXPANDED</td>
-	<td>//*[@data-qa-id='productMenuUserPanelCategory'][@aria-expanded='true']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>PRODUCT_MENU_TABS_USER_NAVIGATION</td>
-	<td>//div[contains(@class,'user-tab')]//div[contains(@class,'user-icon')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>PRODUCT_MENU_TABS_CONTROL_PANEL_COLLAPSED</td>
-	<td>//*[@data-qa-id='productMenuControlPanelCategory'][@aria-expanded='false']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>PRODUCT_MENU_TABS_CONTROL_PANEL_EXPANDED</td>
-	<td>//*[@data-qa-id='productMenuControlPanelCategory'][@aria-expanded='true']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>PRODUCT_MENU_TABS_CONTROL_PANEL_NAVIGATION</td>
-	<td>//div[contains(.,'Control Panel')]/../div[contains(@class,'tab-text')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>PRODUCT_MENU_TABS_EXPANDED_PANEL</td>
-	<td>//div[(@class='collapse panel-collapse in' or @class='panel-collapse collapse in') and contains(@id,'${key_panelId}')]</td>
 	<td></td>
 </tr>
 <tr>

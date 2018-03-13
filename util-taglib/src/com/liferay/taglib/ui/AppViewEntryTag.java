@@ -14,7 +14,8 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
@@ -184,6 +185,8 @@ public class AppViewEntryTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_actionJsp = null;
 		_actionJspServletContext = null;
 		_assetCategoryClassName = null;
@@ -233,8 +236,9 @@ public class AppViewEntryTag extends IncludeTag {
 	@Override
 	protected String getPage() {
 		if (Validator.isNotNull(_markupView)) {
-			return "/html/taglib/ui/app_view_entry/" + _markupView + "/" +
-				_displayStyle + ".jsp";
+			return StringBundler.concat(
+				"/html/taglib/ui/app_view_entry/", _markupView, "/",
+				_displayStyle, ".jsp");
 		}
 
 		return "/html/taglib/ui/app_view_entry/" + _displayStyle + ".jsp";

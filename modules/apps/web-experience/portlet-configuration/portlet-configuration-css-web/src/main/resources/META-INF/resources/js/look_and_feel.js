@@ -131,6 +131,14 @@ AUI.add(
 							content = A.Node.create('<div class="loading-animation" />');
 						}
 
+						if (instance._currentPopup) {
+							var popupPortletId = instance._currentPopup.get('portletId');
+
+							if (popupPortletId !== instance._portletId) {
+								instance._currentPopup.destroy();
+							}
+						}
+
 						if (!instance._currentPopup) {
 							instance._currentPopup = Liferay.Util.Window.getWindow(
 								{
@@ -181,6 +189,8 @@ AUI.add(
 									title: Liferay.Language.get('look-and-feel')
 								}
 							);
+
+							instance._currentPopup.set('portletId', instance._portletId);
 
 							var viewURL = new Liferay.PortletURL.createURL(instance._baseRenderPortletURL);
 
@@ -1278,7 +1288,12 @@ AUI.add(
 								}
 
 								var portletDecoratorId = objectData.portletData.portletDecoratorId;
-								var selectedPortletDecoratorId = instance._portletDecorator.one('option:selected').val();
+								var selectedPortletDecorator = instance._portletDecorator.one('option:selected');
+								var selectedPortletDecoratorId = '';
+
+								if (selectedPortletDecorator) {
+									selectedPortletDecoratorId = selectedPortletDecorator.val();
+								}
 
 								instance._portletDecorator.defaultPortletDecoratorId = portletDecoratorId !== '' ? portletDecoratorId : selectedPortletDecoratorId;
 

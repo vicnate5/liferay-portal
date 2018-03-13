@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.transaction.TransactionInvokerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.trash.kernel.service.TrashEntryLocalServiceUtil;
 
 import java.io.File;
 import java.io.Serializable;
@@ -115,6 +116,9 @@ public class LayoutStagingBackgroundTaskExecutor
 				if (stagingGroup.getGroupId() == targetGroupId) {
 					ExportImportThreadLocal.setInitialLayoutStagingInProcess(
 						true);
+
+					TrashEntryLocalServiceUtil.deleteEntries(
+						sourceGroupId, true);
 				}
 			}
 

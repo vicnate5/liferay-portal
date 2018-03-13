@@ -43,6 +43,8 @@ public class UserGroupSearchContainerResultsTag<R> extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_searchTerms = null;
 		_useIndexer = false;
 		_userGroupParams = null;

@@ -16,6 +16,8 @@
 
 <%@ include file="/init.jsp" %>
 
+<%@ page import="com.liferay.document.library.web.internal.util.RepositoryClassDefinitionUtil" %>
+
 <%
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(liferayPortletRequest);
 

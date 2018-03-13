@@ -14,7 +14,7 @@
 
 package com.liferay.dynamic.data.lists.form.web.internal.notification;
 
-import com.liferay.dynamic.data.lists.form.web.constants.DDLFormPortletKeys;
+import com.liferay.dynamic.data.lists.form.web.internal.constants.DDLFormPortletKeys;
 import com.liferay.dynamic.data.lists.model.DDLRecord;
 import com.liferay.dynamic.data.lists.model.DDLRecordSet;
 import com.liferay.dynamic.data.lists.model.DDLRecordSetSettings;
@@ -48,12 +48,14 @@ import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.template.URLTemplateResource;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.template.soy.utils.SoyHTMLContextValue;
 import com.liferay.portal.util.PrefsPropsUtil;
 
 import java.io.Writer;
@@ -265,7 +267,7 @@ public class DDLFormEmailNotificationSender {
 		}
 
 		fieldMap.put("label", labelString);
-		fieldMap.put("value", sb.toString());
+		fieldMap.put("value", new SoyHTMLContextValue(sb.toString()));
 
 		return fieldMap;
 	}
@@ -466,7 +468,8 @@ public class DDLFormEmailNotificationSender {
 			_ddmFormFieldTypeServicesTracker.getDDMFormFieldValueRenderer(
 				ddmFormFieldValue.getType());
 
-		return ddmFormFieldValueRenderer.render(ddmFormFieldValue, locale);
+		return HtmlUtil.unescape(
+			ddmFormFieldValueRenderer.render(ddmFormFieldValue, locale));
 	}
 
 	@Reference(unbind = "-")

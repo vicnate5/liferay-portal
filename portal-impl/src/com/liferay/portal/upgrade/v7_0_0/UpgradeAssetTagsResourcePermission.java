@@ -18,6 +18,7 @@ import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.LoggingTimer;
+import com.liferay.portal.kernel.util.StringBundler;
 
 /**
  * @author Andrew Betts
@@ -32,9 +33,10 @@ public class UpgradeAssetTagsResourcePermission extends UpgradeProcess {
 	protected void deleteResourcePermissions() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			runSQL(
-				"delete from ResourcePermission where name = '" +
-					AssetTag.class.getName() + "' and scope = " +
-						ResourceConstants.SCOPE_INDIVIDUAL);
+				StringBundler.concat(
+					"delete from ResourcePermission where name = '",
+					AssetTag.class.getName(), "' and scope = ",
+					String.valueOf(ResourceConstants.SCOPE_INDIVIDUAL)));
 		}
 	}
 

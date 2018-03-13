@@ -48,7 +48,7 @@
 <!--FORMS_ENTRY_TABLE-->
 <tr>
 	<td>FORM_ENTRY_TABLE_ENTRY</td>
-	<td>//table[contains(.,'${key_fieldLabel}')]//tbody/tr/td[contains(.,'${key_fieldValue}')]</td>
+	<td>//td[contains(@class,'${key_fieldLabel}') and contains(.,'${key_fieldValue}')]</td>
 	<td></td>
 </tr>
 <tr>

@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
@@ -151,9 +150,9 @@ public class ResourceBlockPersistenceTest {
 
 	@Test
 	public void testCountByC_N() throws Exception {
-		_persistence.countByC_N(RandomTestUtil.nextLong(), StringPool.BLANK);
+		_persistence.countByC_N(RandomTestUtil.nextLong(), "");
 
-		_persistence.countByC_N(0L, StringPool.NULL);
+		_persistence.countByC_N(0L, "null");
 
 		_persistence.countByC_N(0L, (String)null);
 	}
@@ -161,9 +160,9 @@ public class ResourceBlockPersistenceTest {
 	@Test
 	public void testCountByC_G_N() throws Exception {
 		_persistence.countByC_G_N(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong(), StringPool.BLANK);
+			RandomTestUtil.nextLong(), "");
 
-		_persistence.countByC_G_N(0L, 0L, StringPool.NULL);
+		_persistence.countByC_G_N(0L, 0L, "null");
 
 		_persistence.countByC_G_N(0L, 0L, (String)null);
 	}
@@ -171,9 +170,9 @@ public class ResourceBlockPersistenceTest {
 	@Test
 	public void testCountByC_G_N_P() throws Exception {
 		_persistence.countByC_G_N_P(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong(), StringPool.BLANK, StringPool.BLANK);
+			RandomTestUtil.nextLong(), "", "");
 
-		_persistence.countByC_G_N_P(0L, 0L, StringPool.NULL, StringPool.NULL);
+		_persistence.countByC_G_N_P(0L, 0L, "null", "null");
 
 		_persistence.countByC_G_N_P(0L, 0L, (String)null, (String)null);
 	}

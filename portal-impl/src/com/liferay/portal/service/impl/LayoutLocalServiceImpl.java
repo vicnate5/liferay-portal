@@ -17,6 +17,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.exportimport.kernel.lar.MissingReferences;
 import com.liferay.exportimport.kernel.model.ExportImportConfiguration;
 import com.liferay.exportimport.kernel.staging.MergeLayoutPrototypesThreadLocal;
+import com.liferay.petra.lang.CentralizedThreadLocal;
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Property;
@@ -54,9 +55,9 @@ import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.systemevent.SystemEventHierarchyEntry;
 import com.liferay.portal.kernel.systemevent.SystemEventHierarchyEntryThreadLocal;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -1107,6 +1108,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			throw new NoSuchLayoutException(sb.toString());
 		}
 
+		friendlyURL = HttpUtil.decodeURL(friendlyURL);
+
 		friendlyURL = layoutLocalServiceHelper.getFriendlyURL(friendlyURL);
 
 		Layout layout = null;
@@ -1211,7 +1214,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			List<Layout> layoutChildLayoutsList =
 				layoutChildLayouts.computeIfAbsent(
 					childLayout.getParentLayoutId(),
-					(parentLayoutId) -> new ArrayList<>());
+					parentLayoutId -> new ArrayList<>());
 
 			layoutChildLayoutsList.add(childLayout);
 		}
@@ -1552,8 +1555,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	/**
 	 * Returns all the layouts without resource permissions
 	 *
-	 * @param  roleId the primary key of the role
-	 * @return all the layouts without resource permissions
+	 * @param      roleId the primary key of the role
+	 * @return     all the layouts without resource permissions
 	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
@@ -3421,7 +3424,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		LayoutLocalServiceImpl.class);
 
 	private static final ThreadLocal<Long> _virtualLayoutTargetGroupId =
-		new AutoResetThreadLocal<>(
+		new CentralizedThreadLocal<>(
 			LayoutLocalServiceImpl.class + "._virtualLayoutTargetGroupId",
 			() -> GroupConstants.DEFAULT_LIVE_GROUP_ID);
 

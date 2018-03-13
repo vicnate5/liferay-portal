@@ -30,7 +30,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL %>" />
 	<aui:input name="preferences--assetEntryId--" type="hidden" value="<%= journalContentDisplayContext.getAssetEntryId() %>" />
-	<aui:input name="preferences--ddmTemplateKey--" type="hidden" value="<%= journalContentDisplayContext.getDDMTemplateKey() %>" />
 
 	<div class="portlet-configuration-body-content">
 		<div class="container-fluid-1280">
@@ -69,7 +68,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 			PortletURL selectWebContentURL = PortletProviderUtil.getPortletURL(request, JournalArticle.class.getName(), PortletProvider.Action.BROWSE);
 
 			selectWebContentURL.setParameter("groupId", String.valueOf(journalContentDisplayContext.getGroupId()));
-			selectWebContentURL.setParameter("selectedGroupIds", StringUtil.merge(journalContentDisplayContext.getSelectedGroupIds()));
+
+			if (journalContentDisplayContext.getSelectedGroupIds() != null) {
+				selectWebContentURL.setParameter("selectedGroupIds", StringUtil.merge(journalContentDisplayContext.getSelectedGroupIds()));
+			}
+			else {
+				selectWebContentURL.setParameter("selectedGroupId", String.valueOf(themeDisplay.getScopeGroupId()));
+			}
+
 			selectWebContentURL.setParameter("refererAssetEntryId", "[$ARTICLE_REFERER_ASSET_ENTRY_ID$]");
 			selectWebContentURL.setParameter("typeSelection", JournalArticle.class.getName());
 			selectWebContentURL.setParameter("showNonindexable", String.valueOf(Boolean.TRUE));

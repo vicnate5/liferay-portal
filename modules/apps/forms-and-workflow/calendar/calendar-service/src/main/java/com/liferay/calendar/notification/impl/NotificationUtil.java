@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
@@ -131,6 +132,17 @@ public class NotificationUtil {
 			NotificationTemplateType notificationTemplateType, User sender)
 		throws Exception {
 
+		notifyCalendarBookingRecipients(
+			calendarBooking, notificationType, notificationTemplateType, sender,
+			null);
+	}
+
+	public static void notifyCalendarBookingRecipients(
+			CalendarBooking calendarBooking, NotificationType notificationType,
+			NotificationTemplateType notificationTemplateType, User sender,
+			ServiceContext serviceContext)
+		throws Exception {
+
 		NotificationSender notificationSender =
 			NotificationSenderFactory.getNotificationSender(
 				notificationType.toString());
@@ -150,7 +162,7 @@ public class NotificationUtil {
 			NotificationTemplateContext notificationTemplateContext =
 				NotificationTemplateContextFactory.getInstance(
 					notificationType, notificationTemplateType, calendarBooking,
-					user);
+					user, serviceContext);
 
 			notificationSender.sendNotification(
 				sender.getEmailAddress(), sender.getFullName(),
@@ -250,7 +262,9 @@ public class NotificationUtil {
 
 		long intervalEnd = intervalStart + _CHECK_INTERVAL;
 
-		if ((intervalStart <= deltaTime) && (deltaTime < intervalEnd)) {
+		if ((intervalStart > 0) && (intervalStart <= deltaTime) &&
+			(deltaTime < intervalEnd)) {
+
 			return true;
 		}
 

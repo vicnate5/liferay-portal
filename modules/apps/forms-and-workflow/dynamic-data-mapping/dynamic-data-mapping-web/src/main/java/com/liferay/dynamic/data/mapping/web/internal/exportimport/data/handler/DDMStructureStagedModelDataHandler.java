@@ -271,6 +271,12 @@ public class DDMStructureStagedModelDataHandler
 				DDMStructure.class + ".ddmStructureKey");
 
 		structureKeys.put(structureKey, existingStructure.getStructureKey());
+
+		Map<String, String> structureUuids =
+			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
+				DDMStructure.class + ".ddmStructureUuid");
+
+		structureUuids.put(uuid, existingStructure.getUuid());
 	}
 
 	@Override
@@ -333,20 +339,19 @@ public class DDMStructureStagedModelDataHandler
 			if (existingStructure == null) {
 				serviceContext.setUuid(structure.getUuid());
 
-				// Force a new structure key if a structure with the same key
-				// already exists
-
 				existingStructure = _ddmStructureLocalService.fetchStructure(
 					targetGroupId, structure.getClassNameId(),
 					structure.getStructureKey());
 
-				if (existingStructure != null) {
-					structure.setStructureKey(null);
+				String structureKey = null;
+
+				if (existingStructure == null) {
+					structureKey = structure.getStructureKey();
 				}
 
 				importedStructure = _ddmStructureLocalService.addStructure(
 					userId, targetGroupId, parentStructureId,
-					structure.getClassNameId(), structure.getStructureKey(),
+					structure.getClassNameId(), structureKey,
 					structure.getNameMap(), structure.getDescriptionMap(),
 					ddmForm, ddmFormLayout, structure.getStorageType(),
 					structure.getType(), serviceContext);
@@ -530,7 +535,9 @@ public class DDMStructureStagedModelDataHandler
 		List<DDMFormField> ddmFormFields = ddmForm.getDDMFormFields();
 
 		for (DDMFormField ddmFormField : ddmFormFields) {
-			if (!ddmFormField.getType().equals(DDMFormFieldType.SELECT)) {
+			String ddmFormFieldType = ddmFormField.getType();
+
+			if (!ddmFormFieldType.equals(DDMFormFieldType.SELECT)) {
 				continue;
 			}
 

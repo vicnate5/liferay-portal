@@ -16,6 +16,7 @@ package com.liferay.portal.language.servlet.filter.internal;
 
 import com.liferay.osgi.util.ServiceTrackerFactory;
 import com.liferay.portal.kernel.util.AggregateResourceBundle;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.ResourceBundleLoaderUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -25,6 +26,7 @@ import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -77,7 +79,7 @@ public class LanguageFilterTracker {
 		}
 
 		@Override
-		public ResourceBundle loadResourceBundle(String languageId) {
+		public ResourceBundle loadResourceBundle(Locale locale) {
 			ResourceBundleLoader resourceBundleLoader =
 				_serviceTracker.getService();
 
@@ -86,17 +88,25 @@ public class LanguageFilterTracker {
 
 			if (resourceBundleLoader != null) {
 				ResourceBundle resourceBundle =
-					resourceBundleLoader.loadResourceBundle(languageId);
+					resourceBundleLoader.loadResourceBundle(locale);
 
 				if (resourceBundle != null) {
 					return new AggregateResourceBundle(
 						resourceBundle,
-						portalResourceBundleLoader.loadResourceBundle(
-							languageId));
+						portalResourceBundleLoader.loadResourceBundle(locale));
 				}
 			}
 
-			return portalResourceBundleLoader.loadResourceBundle(languageId);
+			return portalResourceBundleLoader.loadResourceBundle(locale);
+		}
+
+		/**
+		 * @deprecated As of 2.0.0, replaced by {@link #loadResourceBundle(
+		 *             Locale)}
+		 */
+		@Deprecated
+		public ResourceBundle loadResourceBundle(String languageId) {
+			return loadResourceBundle(LocaleUtil.fromLanguageId(languageId));
 		}
 
 		private final ServiceTracker<ResourceBundleLoader, ResourceBundleLoader>
@@ -121,7 +131,7 @@ public class LanguageFilterTracker {
 
 			Bundle bundle = serviceReference.getBundle();
 
-			StringBundler filterSB = new StringBundler();
+			StringBundler filterSB = new StringBundler(17);
 
 			Object contextName = serviceReference.getProperty(
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_NAME);

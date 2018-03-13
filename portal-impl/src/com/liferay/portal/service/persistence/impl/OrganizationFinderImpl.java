@@ -746,7 +746,10 @@ public class OrganizationFinderImpl
 
 			int size = organizationsTree.size();
 
-			if (!organizationsTree.isEmpty()) {
+			if (size == 0) {
+				join = "WHERE (Organization_.treePath = '')";
+			}
+			else {
 				StringBundler sb = new StringBundler(size * 2 + 1);
 
 				sb.append("WHERE (");
@@ -775,7 +778,7 @@ public class OrganizationFinderImpl
 			int pos = join.indexOf("WHERE");
 
 			if (pos != -1) {
-				join = join.substring(pos + 5, join.length()).concat(" AND ");
+				join = join.substring(pos + 5).concat(" AND ");
 			}
 			else {
 				join = StringPool.BLANK;

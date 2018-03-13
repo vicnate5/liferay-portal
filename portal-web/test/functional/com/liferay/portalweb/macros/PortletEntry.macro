@@ -14,7 +14,15 @@
 	</command>
 
 	<command name="inputDescription">
+		<execute function="Click" locator1="TextArea#DESCRIPTION" />
+
 		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${description}" />
+	</command>
+
+	<command name="inputDescriptionTextInput">
+		<execute function="Click" locator1="TextInput#DESCRIPTION" />
+
+		<execute function="Type" locator1="TextInput#DESCRIPTION" value1="${description}" />
 	</command>
 
 	<command name="inputLocalizedName">
@@ -28,6 +36,8 @@
 	</command>
 
 	<command name="inputName">
+		<execute function="Click" locator1="TextInput#NAME" />
+
 		<execute function="Type" locator1="TextInput#NAME" value1="${name}" />
 	</command>
 
@@ -55,5 +65,9 @@
 		<execute macro="Button#clickSave" />
 
 		<execute macro="Alert#viewSuccessMessage" />
+	</command>
+
+	<command name="viewNoNavItemLink">
+		<execute function="AssertElementNotPresent" locator1="NavBar#NAV_ITEM_LINK" />
 	</command>
 </definition>

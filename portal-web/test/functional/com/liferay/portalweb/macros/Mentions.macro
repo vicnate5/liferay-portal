@@ -63,10 +63,8 @@
 				</execute>
 			</then>
 			<else>
-				<execute function="Click" locator1="Button#PLUS" />
-
-				<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="Thread">
-					<var name="key_menuItem" value="Thread" />
+				<execute macro="LexiconEntry#gotoAddMenuItem">
+					<var name="menuItem" value="Thread" />
 				</execute>
 			</else>
 		</if>
@@ -85,7 +83,7 @@
 
 		<execute function="Click#clickNoMouseOver" locator1="Mentions#MENTIONS_USER_DISPLAY_OPTION" />
 
-		<execute function="Click" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="Click" locator1="Button#PUBLISH" />
 
 		<execute macro="Alert#viewSuccessMessage" />
 	</command>
@@ -105,7 +103,7 @@
 	<command name="disableMentionsViaSiteSettings">
 		<execute macro="Mentions#gotoMentionsViaSiteSettings" />
 
-		<execute function="AssertElementNotPresent" locator1="Message#ERROR_3" value1="Mentions are disabled in the portal." />
+		<execute function="AssertElementNotPresent" locator1="Message#ERROR_3" />
 		<execute function="AssertChecked" locator1="Checkbox#MENTIONS" />
 
 		<execute function="Uncheck" locator1="Checkbox#MENTIONS" />
@@ -132,7 +130,7 @@
 
 		<execute function="AssertNotChecked" locator1="Checkbox#MENTIONS" />
 
-		<execute function="AssertElementNotPresent" locator1="Message#ERROR_3" value1="Mentions are disabled in the portal." />
+		<execute function="AssertElementNotPresent" locator1="Message#ERROR_3" />
 		<execute function="Check" locator1="Checkbox#MENTIONS" />
 
 		<execute macro="PortletEntry#save" />
@@ -141,7 +139,9 @@
 	</command>
 
 	<command name="gotoMentionsViaPortalSettings">
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
 			<var name="portlet" value="Instance Settings" />
 		</execute>
 
@@ -153,7 +153,9 @@
 	<command name="gotoMentionsViaSiteSettings">
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesConfiguration">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Site Settings" />
 		</execute>
 
@@ -186,7 +188,7 @@
 	<command name="viewDisabledViaSiteSettings">
 		<execute macro="Mentions#gotoMentionsViaSiteSettings" />
 
-		<execute function="AssertElementNotPresent" locator1="Message#ERROR_3" value1="Mentions are disabled in the portal." />
+		<execute function="AssertElementNotPresent" locator1="Message#ERROR_3" />
 		<execute function="AssertNotChecked" locator1="Checkbox#MENTIONS" />
 
 		<execute macro="Mentions#gotoMentionsViaPortalSettings" />
@@ -206,6 +208,6 @@
 	<command name="viewNoMentionTagLink">
 		<var name="key_mentionsUserScreenName" value="${mentionsUserScreenName}" />
 
-		<execute function="AssertElementNotPresent" locator1="Mentions#MENTIONS_TAG_LINK" value1="${mentionsUserScreenName}" />
+		<execute function="AssertElementNotPresent" locator1="Mentions#MENTIONS_TAG_LINK" />
 	</command>
 </definition>

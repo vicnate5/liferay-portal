@@ -175,7 +175,7 @@
 
 		<execute function="Click#waitForMenuToggleJSClick" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
 
-		<execute function="ClickNoError" locator1="MenuItem#ANY_MENU_ITEM" value1="Delete">
+		<execute function="ClickNoError" locator1="MenuItem#ANY_MENU_ITEM">
 			<var name="key_menuItem" value="Delete" />
 		</execute>
 
@@ -191,7 +191,7 @@
 
 		<execute function="Click#waitForMenuToggleJSClick" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
 
-		<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM" value1="Edit">
+		<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM">
 			<var name="key_menuItem" value="Edit" />
 		</execute>
 
@@ -340,7 +340,7 @@
 			<var name="navItem" value="Reports" />
 		</execute>
 
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 	</command>
 
 	<command name="gotoEditReport">
@@ -441,7 +441,7 @@
 			<then>
 				<execute function="Click#waitForMenuToggleJSClick" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
 
-				<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM" value1="Edit">
+				<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM">
 					<var name="key_menuItem" value="Edit" />
 				</execute>
 
@@ -477,7 +477,7 @@
 
 		<var name="key_rowEntry" value="${metricName}" />
 
-		<execute function="AssertElementNotPresent" locator1="ContentRow#ENTRY_CONTENT_ENTRY_NAME_LINK" value1="${metricName}" />
+		<execute function="AssertElementNotPresent" locator1="ContentRow#ENTRY_CONTENT_ENTRY_NAME_LINK" />
 	</command>
 
 	<command name="viewMetricReport">
@@ -497,7 +497,7 @@
 
 		<var name="key_campaignName" value="${campaignName}" />
 
-		<execute function="AssertElementNotPresent" locator1="ContentRow#ENTRY_CONTENT_ENTRY_NAME_LINK" value1="${campaignName}" />
+		<execute function="AssertElementNotPresent" locator1="ContentRow#ENTRY_CONTENT_ENTRY_NAME_LINK" />
 	</command>
 
 	<command name="viewTrackingActionsCP">

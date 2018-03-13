@@ -33,7 +33,7 @@
 			<then>
 				<execute function="Click" locator1="Configuration#SOURCE_SCOPE_SELECT" />
 
-				<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM" value1="Global">
+				<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM">
 					<var name="key_menuItem" value="Global" />
 				</execute>
 			</then>
@@ -44,7 +44,7 @@
 			<then>
 				<execute function="Click" locator1="Configuration#SOURCE_SCOPE_SELECT" />
 
-				<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM" value1="Other Site...">
+				<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM">
 					<var name="key_menuItem" value="Other Site..." />
 				</execute>
 
@@ -517,13 +517,7 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="APConfiguration#SOURCE_SCOPE_NAME" value1="${siteName}" />
 		<execute function="AssertTextEquals" locator1="APConfiguration#SOURCE_SCOPE_TYPE" value1="${siteScopeType}" />
 
-		<execute macro="Button#clickSave" />
-
-		<execute macro="Panel#expandPanel">
-			<var name="panelHeading" value="Source" />
-		</execute>
-
-		<execute macro="Alert#viewSuccessMessage" />
+		<execute macro="PortletEntry#save" />
 
 		<execute macro="Panel#expandPanel">
 			<var name="panelHeading" value="Source" />
@@ -622,6 +616,28 @@
 		</execute>
 
 		<execute macro="IFrame#selectDialogFrame" />
+	</command>
+
+	<command name="gotoEditRelatedAssets">
+		<execute function="MouseOver" locator1="AP#BODY" />
+
+		<execute function="Click#waitForMenuToggleJSClick" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
+
+		<execute function="AssertClick#assertPartialTextClickAt" locator1="MenuItem#ANY_MENU_ITEM" value1="Edit">
+			<var name="key_menuItem" value="Edit" />
+		</execute>
+	</command>
+
+	<command name="gotoEditWebContent">
+		<execute function="MouseOver" locator1="AP#BODY" />
+
+		<execute function="Click#waitForMenuToggleJSClick" locator1="AP#ASSET_ABSTRACT_VERTICAL_ELLIPSIS">
+			<var name="key_assetTitle" value="${assetTitle}" />
+		</execute>
+
+		<execute function="AssertClick#assertPartialTextClickAt" locator1="MenuItem#ANY_MENU_ITEM" value1="Edit">
+			<var name="key_menuItem" value="Edit" />
+		</execute>
 	</command>
 
 	<command name="gotoViewInContext">
@@ -994,7 +1010,7 @@
 							</execute>
 						</then>
 						<else>
-							<execute function="AssertElementNotPresent" locator1="MenuItem#ANY_MENU_ITEM" value1="OTHER_SITE">
+							<execute function="AssertElementNotPresent" locator1="MenuItem#ANY_MENU_ITEM">
 								<var name="key_menuItem" value="OTHER_SITE" />
 							</execute>
 						</else>
@@ -1044,7 +1060,7 @@
 		<execute function="AssertElementPresent" locator1="Comments#SUBSCRIBE_TO_COMMENTS_LINK" />
 		<execute function="AssertElementPresent" locator1="Icon#CUSTOM_EDIT" />
 
-		<execute function="Click" locator1="Icon#SHARE" value1="Share" />
+		<execute function="Click" locator1="Icon#SHARE" />
 
 		<execute function="AssertElementPresent" locator1="Icon#TWITTER" />
 		<execute function="AssertElementPresent" locator1="Icon#FACEBOOK" />
@@ -1078,7 +1094,7 @@
 		<for list="Source,Filter,Custom User Attributes,Ordering and Grouping" param="panelHeading">
 			<var name="key_panelHeading" value="${panelHeading}" />
 
-			<execute function="AssertElementPresent" locator1="Panel#PANEL_HEADING_COLLAPSED" value1="${panelHeading}" />
+			<execute function="AssertElementPresent" locator1="Panel#PANEL_HEADING_COLLAPSED" />
 		</for>
 
 		<execute function="SelectFrameTop" />
@@ -1106,8 +1122,8 @@
 		<if>
 			<equals arg1="${noneIndexable}" arg2="true" />
 			<then>
-				<execute function="AssertElementNotPresent#assertNotVisible" locator1="APConfiguration#SOURCE_SCOPE_FILTER_BY_FIELD_CHECKBOX" />
-				<execute function="AssertElementNotPresent" locator1="APConfiguration#SOURCE_SCOPE_FILTER_BY_FIELD_SELECT_BUTTON" value1="Select" />
+				<execute function="AssertNotVisible" locator1="APConfiguration#SOURCE_SCOPE_FILTER_BY_FIELD_CHECKBOX" />
+				<execute function="AssertElementNotPresent" locator1="APConfiguration#SOURCE_SCOPE_FILTER_BY_FIELD_SELECT_BUTTON" />
 			</then>
 			<else>
 				<execute function="Check#checkToggleSwitch" locator1="APConfiguration#SOURCE_SCOPE_FILTER_BY_FIELD_CHECKBOX" />
@@ -1309,6 +1325,8 @@
 		<execute function="AssertTextEquals" locator1="MenuItem#ANY_MENU_ITEM" value1="${selectedAsset}">
 			<var name="key_menuItem" value="${selectedAsset}" />
 		</execute>
+
+		<execute function="Click" locator1="AP#BODY" />
 
 		<execute macro="AssetPublisherPortlet#gotoConfigurationPG" />
 

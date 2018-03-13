@@ -17,6 +17,7 @@ package com.liferay.document.library.google.docs.internal.util;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
@@ -55,8 +56,9 @@ public class ResourceUtil {
 		}
 		catch (IOException ioe) {
 			throw new SystemException(
-				"Unable to read " + path + " in bundle " +
-					bundle.getSymbolicName(),
+				StringBundler.concat(
+					"Unable to read ", path, " in bundle ",
+					bundle.getSymbolicName()),
 				ioe);
 		}
 		finally {

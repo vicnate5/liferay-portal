@@ -3,9 +3,15 @@
 #set ($js_main_file = "")
 
 #if ($themeDisplay)
-	#set ($css_main_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$themeDisplay.getPathThemeCss()/main.css")))
+	#if ($httpServletRequest)
+		#set ($css_main_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($httpServletRequest, "$themeDisplay.getPathThemeCss()/main.css")))
+		#set ($js_main_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($httpServletRequest, "$themeDisplay.getPathThemeCss()/main.js")))
+	#else
+		#set ($css_main_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$themeDisplay.getPathThemeCss()/main.css")))
+		#set ($js_main_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$themeDisplay.getPathThemeCss()/main.js")))
+	#end
+
 	#set ($is_signed_in = $themeDisplay.isSignedIn())
-	#set ($js_main_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$themeDisplay.getPathThemeCss()/main.js")))
 #end
 
 #set ($is_setup_complete = false)

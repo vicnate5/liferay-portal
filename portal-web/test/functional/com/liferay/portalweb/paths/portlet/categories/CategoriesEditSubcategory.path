@@ -9,11 +9,6 @@
 </thead>
 <tbody>
 <tr>
-	<td>VOCABULARY_SELECT</td>
-	<td>//div[contains(@class,'select-wrapper')]/select</td>
-	<td></td>
-</tr>
-<tr>
 	<td>CATEGORY_SELECT_BUTTON</td>
 	<td>//button[contains(.,'Select ${key_vocabularyName}')]</td>
 	<td></td>

@@ -88,10 +88,12 @@
 	<command name="addDraftPGViaWCD">
 		<execute macro="WebContent#_gotoAddPGViaWCD" />
 
-		<execute macro="WebContent#addDraft">
+		<execute macro="WebContent#addCP">
 			<var name="webContentContent" value="${webContentContent}" />
 			<var name="webContentTitle" value="${webContentTitle}" />
 		</execute>
+
+		<execute macro="Button#clickSaveAsDraft" />
 	</command>
 
 	<command name="addExistingRelatedAssetCP">
@@ -927,7 +929,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Recycle Bin" />
 		</execute>
 
@@ -935,7 +939,43 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
+			<var name="portlet" value="Web Content" />
+		</execute>
+
+		<execute function="AssertTextNotPresent" value1="${webContentTitle}" />
+	</command>
+
+	<command name="deleteStagedCP">
+		<execute macro="WebContent#moveToRecycleBinCP">
+			<var name="assetType" value="Web Content Article" />
+			<var name="webContentTitle" value="${webContentTitle}" />
+			<var name="webContentTitleEscapeCharacter" value="${webContentTitleEscapeCharacter}" />
+		</execute>
+
+		<execute macro="Navigator#gotoStagedSitePage">
+			<var name="pageName" value="${pageName}" />
+			<var name="siteName" value="${siteName}" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
+			<var name="portlet" value="Recycle Bin" />
+		</execute>
+
+		<execute macro="RecycleBin#emptyCP" />
+
+		<execute macro="Navigator#gotoStagedSitePage">
+			<var name="pageName" value="${pageName}" />
+			<var name="siteName" value="${siteName}" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 
@@ -947,7 +987,7 @@
 			<var name="key_rowEntry" value="${entryTitle}" />
 		</execute>
 
-		<execute function="ClickNoError" locator1="MenuItem#ANY_MENU_ITEM" value1="Delete">
+		<execute function="ClickNoError" locator1="MenuItem#ANY_MENU_ITEM">
 			<var name="key_menuItem" value="Delete" />
 		</execute>
 
@@ -1021,11 +1061,7 @@
 	</command>
 
 	<command name="editDisplayPagePGViaAP">
-		<execute function="MouseOver" locator1="AP#BODY" />
-
-		<execute function="Click#mouseOverClick" locator1="Icon#EDIT">
-			<var name="key_assetTitle" value="${assetTitle}" />
-		</execute>
+		<execute macro="AssetPublisherPortlet#gotoEditRelatedAssets" />
 
 		<execute macro="IFrame#selectDialogFrame" />
 
@@ -1079,7 +1115,7 @@
 
 		<execute macro="IFrame#selectDialogFrame" />
 
-		<execute macro="Button#clickSave" />
+		<execute macro="PortletEntry#save" />
 	</command>
 
 	<command name="editNullCP">
@@ -1116,14 +1152,12 @@
 			<var name="content" value="${webContentContentEdit}" />
 		</execute>
 
-		<execute function="Click" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="Click" locator1="Button#PUBLISH" />
 	</command>
 
 	<command name="editPGViaAP">
-		<execute function="MouseOver" locator1="AP#BODY" />
-
-		<execute function="Click#mouseOverClick" locator1="Icon#EDIT">
-			<var name="key_assetTitle" value="${assetTitle}" />
+		<execute macro="AssetPublisherPortlet#gotoEditWebContent">
+			<var name="assetTitle" value="${assetTitle}" />
 		</execute>
 
 		<execute macro="IFrame#selectDialogFrame" />
@@ -1136,7 +1170,7 @@
 			<var name="content" value="${webContentContentEdit}" />
 		</execute>
 
-		<execute function="Click" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="Click" locator1="Button#PUBLISH" />
 	</command>
 
 	<command name="editPGViaWCD">
@@ -1158,7 +1192,7 @@
 			</else>
 		</if>
 
-		<execute function="Click" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="Click" locator1="Button#PUBLISH" />
 
 		<execute function="SelectFrame" value1="relative=top" />
 
@@ -1254,7 +1288,7 @@
 			</execute>
 		</for>
 
-		<execute function="Click" locator1="WC#TOOLBAR_MOVE_BUTTON" value1="Move" />
+		<execute function="Click" locator1="WC#TOOLBAR_MOVE_BUTTON" />
 
 		<execute function="AssertTextEquals" locator1="Portlet#HEADER" value1="Move Web Content" />
 
@@ -1477,8 +1511,8 @@
 	</command>
 
 	<command name="selectLocale">
-		<execute macro="Navigator#gotoNavTab">
-			<var name="navTab" value="${locale}" />
+		<execute function="Click" locator1="Translation#CURRENT_LOCALE">
+			<var name="key_localizedLanguage" value="${locale}" />
 		</execute>
 	</command>
 
@@ -1532,7 +1566,9 @@
 	<command name="tearDownCP">
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Web Content" />
 		</execute>
 
@@ -1553,7 +1589,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Content" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Recycle Bin" />
 		</execute>
 
@@ -1631,7 +1669,7 @@
 			<var name="panelHeading" value="Metadata" />
 		</execute>
 
-		<execute function="AssertElementNotPresent" locator1="AssetCategorization#CATEGORY" value1="${categoryName}">
+		<execute function="AssertElementNotPresent" locator1="AssetCategorization#CATEGORY">
 			<var name="key_categoryName" value="${categoryName}" />
 		</execute>
 	</command>
@@ -1786,11 +1824,7 @@
 	</command>
 
 	<command name="viewDisplayPagePGViaAP">
-		<execute function="MouseOver" locator1="AP#BODY" />
-
-		<execute function="Click#mouseOverClick" locator1="Icon#EDIT">
-			<var name="key_assetTitle" value="${assetTitle}" />
-		</execute>
+		<execute macro="AssetPublisherPortlet#gotoEditRelatedAssets" />
 
 		<execute macro="IFrame#selectDialogFrame" />
 
@@ -1830,13 +1864,13 @@
 	</command>
 
 	<command name="viewEditWCViaWCD">
-		<execute function="AssertElementPresent" locator1="WCD#WEB_CONTENT_CONTENT" value1="${webContentContent}" />
+		<execute function="AssertElementPresent" locator1="WCD#WEB_CONTENT_CONTENT" />
 
-		<execute function="Click#makeVisibleClickAt" locator1="Portlet#SPECIFIC_BORDERLESS_ELLIPSIS_ICON">
-			<var name="key_portletName" value="Web Content Display" />
-		</execute>
+		<execute function="MouseOver" locator1="WC#BODY" />
 
-		<execute function="AssertTextEquals" locator1="MenuItem#ANY_MENU_ITEM" value1="Edit Web Content">
+		<execute function="Click#waitForMenuToggleJSClick" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="MenuItem#ANY_MENU_ITEM" value1="Edit Web Content">
 			<var name="key_menuItem" value="Edit Web Content" />
 		</execute>
 	</command>
@@ -1939,7 +1973,7 @@
 	</command>
 
 	<command name="viewNoEditWCViaWCD">
-		<execute function="AssertElementPresent" locator1="WCD#WEB_CONTENT_CONTENT" value1="${webContentContent}" />
+		<execute function="AssertElementPresent" locator1="WCD#WEB_CONTENT_CONTENT" />
 
 		<execute function="AssertElementNotPresent" locator1="Portlet#SPECIFIC_BORDERLESS_ELLIPSIS_ICON">
 			<var name="key_portletName" value="Web Content Display" />
@@ -1956,7 +1990,7 @@
 	</command>
 
 	<command name="viewNotPresentCP">
-		<execute function="AssertElementNotPresent" locator1="TextInput#TITLE" value1="${webContentTitle}" />
+		<execute function="AssertElementNotPresent" locator1="TextInput#TITLE" />
 	</command>
 
 	<command name="viewPageBreak">
@@ -2073,7 +2107,7 @@
 	</command>
 
 	<command name="viewStructureViaAddMenuCP">
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute function="AssertTextEquals" locator1="MenuItem#ANY_MENU_ITEM" value1="${structureName}">
 			<var name="key_menuItem" value="${structureName}" />

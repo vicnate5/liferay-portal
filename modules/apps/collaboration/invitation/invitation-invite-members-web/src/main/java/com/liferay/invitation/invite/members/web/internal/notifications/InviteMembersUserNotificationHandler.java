@@ -17,6 +17,7 @@ package com.liferay.invitation.invite.members.web.internal.notifications;
 import com.liferay.invitation.invite.members.constants.InviteMembersPortletKeys;
 import com.liferay.invitation.invite.members.model.MemberRequest;
 import com.liferay.invitation.invite.members.service.MemberRequestLocalService;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.Group;
@@ -32,12 +33,10 @@ import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.service.UserNotificationEventLocalService;
 import com.liferay.portal.kernel.util.AggregateResourceBundleLoader;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.language.LanguageResources;
 
@@ -103,7 +102,7 @@ public class InviteMembersUserNotificationHandler
 
 		ResourceBundle resourceBundle =
 			_resourceBundleLoader.loadResourceBundle(
-				LocaleUtil.toLanguageId(serviceContext.getLocale()));
+				serviceContext.getLocale());
 
 		String title = ResourceBundleUtil.getString(
 			resourceBundle, "x-invited-you-to-join-x",
@@ -210,8 +209,9 @@ public class InviteMembersUserNotificationHandler
 			String userDisplayURL = user.getDisplayURL(
 				serviceContext.getThemeDisplay());
 
-			return "<a href=\"" + userDisplayURL + "\">" +
-				HtmlUtil.escape(userName) + "</a>";
+			return StringBundler.concat(
+				"<a href=\"", userDisplayURL, "\">", HtmlUtil.escape(userName),
+				"</a>");
 		}
 		catch (Exception e) {
 			return StringPool.BLANK;

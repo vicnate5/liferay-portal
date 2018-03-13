@@ -32,7 +32,7 @@
 
 		<execute function="AssertElementPresent" locator1="WikiTable#NAVIGATION_ACTIVE_TAB" />
 
-		<execute function="AssertElementPresent" locator1="Portlet#H3_HEADER" value1="All Pages" />
+		<execute function="AssertElementPresent" locator1="Portlet#H3_HEADER" />
 
 		<execute function="AssertTextEquals" locator1="Portlet#H3_HEADER" value1="All Pages" />
 	</command>
@@ -166,7 +166,7 @@
 
 		<var name="key_filterValue" value="All Pages" />
 
-		<execute function="AssertElementPresent" locator1="Dropdown#FILTER_VALUES" value1="All Pages" />
+		<execute function="AssertElementPresent" locator1="Dropdown#FILTER_VALUES" />
 	</command>
 
 	<command name="gotoOrphanPagesPG">
@@ -186,7 +186,7 @@
 
 		<var name="key_wikiPageTitle" value="${wikiPageTitle}" />
 
-		<execute function="AssertClick#assertTextClickAt" locator1="WikiTable#ALL_PAGES_WIKI_PAGE_TITLE" value1="${wikiPageTitle}" />
+		<execute function="AssertClick" locator1="WikiTable#ALL_PAGES_WIKI_PAGE_TITLE" value1="${wikiPageTitle}" />
 	</command>
 
 	<command name="gotoPGViaWD">

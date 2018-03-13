@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PredicateFilter;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -268,7 +269,8 @@ public class WorkflowDefinitionLinkDisplayContext {
 			_workflowDefinitionLinkRequestHelper.getLocale(), "version-x",
 			workflowDefinition.getVersion(), false);
 
-		return workflowDefinitionName + " (" + workflowDefinitionVersion + ")";
+		return StringBundler.concat(
+			workflowDefinitionName, " (", workflowDefinitionVersion, ")");
 	}
 
 	public List<WorkflowDefinition> getWorkflowDefinitions()
@@ -298,8 +300,10 @@ public class WorkflowDefinitionLinkDisplayContext {
 			return false;
 		}
 
-		if (workflowDefinitionLink.getWorkflowDefinitionName().equals(
-				workflowDefinition.getName()) &&
+		String workflowDefinitionName =
+			workflowDefinitionLink.getWorkflowDefinitionName();
+
+		if (workflowDefinitionName.equals(workflowDefinition.getName()) &&
 			(workflowDefinitionLink.getWorkflowDefinitionVersion() ==
 				workflowDefinition.getVersion())) {
 
@@ -370,8 +374,8 @@ public class WorkflowDefinitionLinkDisplayContext {
 
 	protected List<WorkflowDefinitionLinkSearchEntry> filter(
 		List<WorkflowDefinitionLinkSearchEntry>
-			workflowDefinitionLinkSearchEntries, String resource,
-		String workflowDefinitionLabel, boolean andOperator) {
+			workflowDefinitionLinkSearchEntries,
+		String resource, String workflowDefinitionLabel, boolean andOperator) {
 
 		if (Validator.isNull(resource) &&
 			Validator.isNull(workflowDefinitionLabel)) {

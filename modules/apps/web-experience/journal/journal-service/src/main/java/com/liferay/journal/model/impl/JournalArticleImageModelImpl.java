@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
 
@@ -267,7 +266,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	@Override
 	public String getArticleId() {
 		if (_articleId == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _articleId;
@@ -314,7 +313,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	@Override
 	public String getElInstanceId() {
 		if (_elInstanceId == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _elInstanceId;
@@ -339,7 +338,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	@Override
 	public String getElName() {
 		if (_elName == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _elName;
@@ -364,7 +363,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	@Override
 	public String getLanguageId() {
 		if (_languageId == null) {
-			return StringPool.BLANK;
+			return "";
 		}
 		else {
 			return _languageId;

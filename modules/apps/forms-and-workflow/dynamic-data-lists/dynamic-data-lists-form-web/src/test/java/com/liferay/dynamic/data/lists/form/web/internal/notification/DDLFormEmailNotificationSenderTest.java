@@ -22,9 +22,10 @@ import com.liferay.dynamic.data.mapping.model.UnlocalizedValue;
 import com.liferay.dynamic.data.mapping.model.Value;
 import com.liferay.dynamic.data.mapping.storage.DDMFormFieldValue;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
-import com.liferay.portal.kernel.util.Html;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.template.soy.utils.SoyHTMLContextValue;
+import com.liferay.portal.util.HtmlImpl;
 
 import java.util.Locale;
 import java.util.Map;
@@ -36,8 +37,6 @@ import org.junit.runner.RunWith;
 
 import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.api.support.membermodification.MemberMatcher;
@@ -70,9 +69,12 @@ public class DDLFormEmailNotificationSenderTest {
 
 		Assert.assertTrue(fieldLabelValueMap.containsKey("label"));
 		Assert.assertTrue(fieldLabelValueMap.containsKey("value"));
-
 		Assert.assertNull(fieldLabelValueMap.get("label"));
-		Assert.assertEquals("test", fieldLabelValueMap.get("value"));
+
+		SoyHTMLContextValue soyHTMLContextValue =
+			(SoyHTMLContextValue)fieldLabelValueMap.get("value");
+
+		Assert.assertEquals("test", String.valueOf(soyHTMLContextValue));
 	}
 
 	@Test
@@ -88,9 +90,13 @@ public class DDLFormEmailNotificationSenderTest {
 
 		Assert.assertTrue(fieldLabelValueMap.containsKey("label"));
 		Assert.assertTrue(fieldLabelValueMap.containsKey("value"));
-
 		Assert.assertNull(fieldLabelValueMap.get("label"));
-		Assert.assertEquals(StringPool.BLANK, fieldLabelValueMap.get("value"));
+
+		SoyHTMLContextValue soyHTMLContextValue =
+			(SoyHTMLContextValue)fieldLabelValueMap.get("value");
+
+		Assert.assertEquals(
+			StringPool.BLANK, String.valueOf(soyHTMLContextValue));
 	}
 
 	protected DDMFormValues createDDMFormValues(Value value) {
@@ -137,22 +143,7 @@ public class DDLFormEmailNotificationSenderTest {
 	protected void setUpHtmlUtil() {
 		HtmlUtil htmlUtil = new HtmlUtil();
 
-		htmlUtil.setHtml(_html);
-
-		PowerMockito.when(
-			_html.escape(Matchers.anyString())
-		).then(
-			new Answer<String>() {
-
-				@Override
-				public String answer(InvocationOnMock invocationOnMock)
-					throws Throwable {
-
-					return invocationOnMock.getArgumentAt(0, String.class);
-				}
-
-			}
-		);
+		htmlUtil.setHtml(new HtmlImpl());
 	}
 
 	private DDLFormEmailNotificationSender _ddlFormEmailNotificationSender;
@@ -163,8 +154,5 @@ public class DDLFormEmailNotificationSenderTest {
 	private final DefaultDDMFormFieldValueRenderer
 		_defaultDDMFormFieldValueRenderer =
 			new DefaultDDMFormFieldValueRenderer();
-
-	@Mock
-	private Html _html;
 
 }

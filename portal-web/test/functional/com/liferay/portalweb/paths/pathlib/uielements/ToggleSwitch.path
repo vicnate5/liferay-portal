@@ -44,6 +44,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>ENABLE_LOCKOUT</td>
+	<td>//label[contains(.,'Enable Lockout')]/input[@type='checkbox']/../span[2]/span</td>
+	<td></td>
+</tr>
+<tr>
 	<td>ENABLE_PRINT</td>
 	<td>//label[contains(.,'Enable Print')]/input[@type='checkbox']/../span[2]/span</td>
 	<td></td>

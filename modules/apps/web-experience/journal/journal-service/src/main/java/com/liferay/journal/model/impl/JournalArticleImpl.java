@@ -45,6 +45,7 @@ import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
@@ -136,9 +137,10 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 			return getSmallImageURL();
 		}
 
-		return themeDisplay.getPathImage() + "/journal/article?img_id=" +
-			getSmallImageId() + "&t=" +
-				WebServerServletTokenUtil.getToken(getSmallImageId());
+		return StringBundler.concat(
+			themeDisplay.getPathImage(), "/journal/article?img_id=",
+			String.valueOf(getSmallImageId()), "&t=",
+			WebServerServletTokenUtil.getToken(getSmallImageId()));
 	}
 
 	@Override

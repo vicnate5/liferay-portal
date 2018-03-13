@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.service.persistence.ResourceBlockPermissionPers
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.ResourceBlockPermissionImpl;
 import com.liferay.portal.model.impl.ResourceBlockPermissionModelImpl;
 
@@ -310,7 +309,7 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 		msg.append("resourceBlockId=");
 		msg.append(resourceBlockId);
 
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
+		msg.append("}");
 
 		throw new NoSuchResourceBlockPermissionException(msg.toString());
 	}
@@ -363,7 +362,7 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 		msg.append("resourceBlockId=");
 		msg.append(resourceBlockId);
 
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
+		msg.append("}");
 
 		throw new NoSuchResourceBlockPermissionException(msg.toString());
 	}
@@ -825,7 +824,7 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 		msg.append("roleId=");
 		msg.append(roleId);
 
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
+		msg.append("}");
 
 		throw new NoSuchResourceBlockPermissionException(msg.toString());
 	}
@@ -876,7 +875,7 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 		msg.append("roleId=");
 		msg.append(roleId);
 
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
+		msg.append("}");
 
 		throw new NoSuchResourceBlockPermissionException(msg.toString());
 	}
@@ -1157,7 +1156,7 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 			msg.append(", roleId=");
 			msg.append(roleId);
 
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			msg.append("}");
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(msg.toString());
@@ -1869,12 +1868,12 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 		for (Serializable primaryKey : uncachedPrimaryKeys) {
 			query.append((long)primaryKey);
 
-			query.append(StringPool.COMMA);
+			query.append(",");
 		}
 
 		query.setIndex(query.index() - 1);
 
-		query.append(StringPool.CLOSE_PARENTHESIS);
+		query.append(")");
 
 		String sql = query.toString();
 

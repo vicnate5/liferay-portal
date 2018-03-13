@@ -18,6 +18,7 @@ import com.liferay.mail.kernel.model.FileAttachment;
 import com.liferay.mail.kernel.model.MailMessage;
 import com.liferay.mail.kernel.model.SMTPAccount;
 import com.liferay.mail.kernel.service.MailServiceUtil;
+import com.liferay.petra.lang.ClassLoaderPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -162,8 +163,10 @@ public class SubscriptionSender implements Serializable {
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Add " + toAddress + " to the list of users who have " +
-							"received an email");
+						StringBundler.concat(
+							"Add ", toAddress,
+							" to the list of users who have received an ",
+							"email"));
 				}
 
 				_sentEmailAddresses.add(toAddress);
@@ -609,8 +612,10 @@ public class SubscriptionSender implements Serializable {
 		if (user == null) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"User with email address " + emailAddress +
-						" does not exist for company " + companyId);
+					StringBundler.concat(
+						"User with email address ", emailAddress,
+						" does not exist for company ",
+						String.valueOf(companyId)));
 			}
 
 			if (bulk) {
@@ -800,9 +805,13 @@ public class SubscriptionSender implements Serializable {
 			String localizedSubject = localizedSubjectMap.get(locale);
 
 			if (Validator.isNull(localizedSubject)) {
-				Locale defaultLocale = LocaleUtil.getDefault();
+				processedSubject = localizedSubjectMap.get(
+					LocaleUtil.getSiteDefault());
 
-				processedSubject = localizedSubjectMap.get(defaultLocale);
+				if (Validator.isNull(processedSubject)) {
+					processedSubject = localizedSubjectMap.get(
+						LocaleUtil.getDefault());
+				}
 			}
 			else {
 				processedSubject = localizedSubject;
@@ -818,9 +827,13 @@ public class SubscriptionSender implements Serializable {
 			String localizedBody = localizedBodyMap.get(locale);
 
 			if (Validator.isNull(localizedBody)) {
-				Locale defaultLocale = LocaleUtil.getDefault();
+				processedBody = localizedBodyMap.get(
+					LocaleUtil.getSiteDefault());
 
-				processedBody = localizedBodyMap.get(defaultLocale);
+				if (Validator.isNull(processedBody)) {
+					processedBody = localizedBodyMap.get(
+						LocaleUtil.getDefault());
+				}
 			}
 			else {
 				processedBody = localizedBody;
