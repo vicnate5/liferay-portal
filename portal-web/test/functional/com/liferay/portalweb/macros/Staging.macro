@@ -1057,6 +1057,13 @@
 
 	<command name="submitForPublicationPageRevision">
 		<if>
+			<condition function="IsElementPresent#pauseIsElementPresent" locator1="Staging#ENABLE_IN_MAIN_VARIATION" />
+			<then>
+				<execute function="AssertClick" locator1="Staging#ENABLE_IN_MAIN_VARIATION" value1="Enable in Main Variation" />
+			</then>
+		</if>
+
+		<if>
 			<condition function="IsTextEqual" locator1="Message#WORKFLOW_STATUS" value1="Draft" />
 			<then>
 				<execute function="AssertClick" locator1="Staging#STAGING_MENU_SUBMIT_FOR_PUBLICATION" value1="Submit for Publication" />

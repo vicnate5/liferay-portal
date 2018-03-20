@@ -67,6 +67,11 @@
 </tr>
 <!--PG-->
 <tr>
+	<td>ENABLE_IN_MAIN_VARIATION</td>
+	<td>//a[contains(@id,'submitLink') and contains(.,'Enable in Main Variation')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>LIVE_BUTTON</td>
 	<td>//a[contains(@value,'live')]</td>
 	<td></td>
