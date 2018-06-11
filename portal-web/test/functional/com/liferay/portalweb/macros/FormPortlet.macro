@@ -14,7 +14,7 @@
 	</command>
 
 	<command name="clickSubmit">
-		<execute function="AssertClick" locator1="Button#MAIN_CONTENT_SUBMIT" value1="Submit" />
+		<execute function="Click" locator1="Button#MAIN_CONTENT_SUBMIT" value1="Submit" />
 	</command>
 
 	<command name="gotoFormPage">
