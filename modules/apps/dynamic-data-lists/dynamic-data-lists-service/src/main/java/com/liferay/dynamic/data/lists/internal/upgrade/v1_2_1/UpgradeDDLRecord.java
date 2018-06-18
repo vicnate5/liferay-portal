@@ -15,10 +15,11 @@
 package com.liferay.dynamic.data.lists.internal.upgrade.v1_2_1;
 
 import com.liferay.asset.kernel.service.AssetEntryLocalService;
+import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstance;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecord;
+import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceRecordLocalService;
-import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
@@ -29,6 +30,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -47,13 +49,16 @@ public class UpgradeDDLRecord extends UpgradeProcess {
 	protected void addAssetEntry(DDMFormInstanceRecord ddmFormInstanceRecord)
 		throws Exception {
 
-		DDMFormValues ddmFormValues = ddmFormInstanceRecord.getDDMFormValues();
-
 		DDMFormInstance formInstance = ddmFormInstanceRecord.getFormInstance();
 
+		DDMStructure ddmStructure = formInstance.getStructure();
+
+		DDMForm ddmForm = ddmStructure.getDDMForm();
+
 		String title = LanguageUtil.format(
-			getResourceBundle(ddmFormValues), "new-entry-for-form-x",
-			formInstance.getName(ddmFormValues.getDefaultLocale()), false);
+			getResourceBundle(ddmForm.getDefaultLocale()),
+			"new-entry-for-form-x",
+			formInstance.getName(ddmForm.getDefaultLocale()), false);
 
 		_assetEntryLocalService.updateEntry(
 			ddmFormInstanceRecord.getUserId(),
@@ -130,12 +135,11 @@ public class UpgradeDDLRecord extends UpgradeProcess {
 		}
 	}
 
-	protected ResourceBundle getResourceBundle(DDMFormValues ddmFormValues) {
+	protected ResourceBundle getResourceBundle(Locale defaultLocale) {
 		Class<?> clazz = _ddmFormInstanceRecordLocalService.getClass();
 
 		return ResourceBundleUtil.getBundle(
-			"content.Language", ddmFormValues.getDefaultLocale(),
-			clazz.getClassLoader());
+			"content.Language", defaultLocale, clazz.getClassLoader());
 	}
 
 	private final AssetEntryLocalService _assetEntryLocalService;
