@@ -1005,7 +1005,7 @@ app.server.type=@{app.server.type}]]></echo>
 									<if>
 										<equals arg1="@{test.legacy.database.dump}" arg2="true" />
 										<then>
-											<get-testcase-property property.name="data.archive.type" />
+											<property name="data.archive.type" value="data-archive-nested-portlets" />
 
 											<ant dir="${portal.legacy.dir}" target="export-database">
 												<property name="data.archive.type" value="${data.archive.type}" />

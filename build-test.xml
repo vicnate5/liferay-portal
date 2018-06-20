@@ -3448,7 +3448,7 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 						</then>
 					</if>
 
-					<get-testcase-property property.name="portal.version" />
+					<property name="portal.version" value="6.2.10.21" />
 
 					<if>
 						<and>
@@ -4116,7 +4116,7 @@ war.path=${app.server.weblogic.portal.dir}/</echo>
 	</macrodef>
 
 	<target name="build-sql-file">
-		<get-testcase-property property.name="portal.version" />
+		<property name="portal.version" value="6.2.10.21" />
 
 		<if>
 			<isset property="portal.version" />
@@ -6441,7 +6441,7 @@ javascript.fast.load=false</echo>
 
 module.framework.properties.blacklist.portal.profile.names=${blacklist.portal.profile.names}</echo>
 
-		<get-testcase-property property.name="portal.version" />
+		<property name="portal.version" value="6.2.10.21" />
 
 		<propertyregex
 			input="${portal.version}"
@@ -8514,7 +8514,7 @@ cluster.link.bind.addr["cluster-link-udp"]=127.0.0.1</echo>
 				<isset property="skip.rebuild-database" />
 			</not>
 			<then>
-				<get-testcase-property property.name="portal.version" />
+				<property name="portal.version" value="6.2.10.21" />
 
 				<if>
 					<not>
@@ -8705,8 +8705,8 @@ cluster.link.bind.addr["cluster-link-udp"]=127.0.0.1</echo>
 	</target>
 
 	<target name="rebuild-legacy-database">
-		<get-testcase-property property.name="data.archive.type" />
-		<get-testcase-property property.name="portal.version" />
+		<property name="data.archive.type" value="data-archive-nested-portlets" />
+		<property name="portal.version" value="6.2.10.21" />
 
 		<unzip
 			dest="${liferay.home}"
@@ -9540,7 +9540,7 @@ module.framework.properties.blacklist.portal.profile.names=${blacklist.portal.pr
 			<param name="todir" value="${app.server.lib.global.dir}" />
 		</antcall>
 
-		<get-testcase-property property.name="portal.version" />
+		<property name="portal.version" value="6.2.10.21" />
 
 		<if>
 			<isset property="portal.version" />
