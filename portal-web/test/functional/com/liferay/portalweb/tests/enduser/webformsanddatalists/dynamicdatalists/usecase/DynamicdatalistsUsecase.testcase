@@ -825,8 +825,8 @@
 			<var name="ddlRecordFieldData" value="Content, Content 2" />
 		</execute>
 
-		<execute macro="DDLRecord#addTranslation">
-			<var name="localizedLanguage" value="Catalan (Spain)" />
+		<execute macro="PortletEntry#changeLocale">
+			<var name="locale" value="es-ES" />
 		</execute>
 
 		<execute macro="DDLRecord#populateTranslationFieldText">
@@ -858,6 +858,10 @@
 			<var name="fieldName" value="Text" />
 		</execute>
 
+		<execute macro="PortletEntry#changeLocale">
+			<var name="locale" value="es-ES" />
+		</execute>
+
 		<execute macro="PortletEntry#publish" />
 
 		<execute macro="Navigator#openURL" />
@@ -873,8 +877,8 @@
 			<var name="ddlRecordFieldData" value="Content, Content 2, Content 3" />
 		</execute>
 
-		<execute macro="DDLRecord#editTranslation">
-			<var name="localizedLanguage" value="Catalan (Spain)" />
+		<execute macro="PortletEntry#changeLocale">
+			<var name="locale" value="es-ES" />
 		</execute>
 
 		<execute macro="DDLRecord#viewTextFieldRepeated">
@@ -1047,8 +1051,8 @@
 			<var name="fieldOptionsValue" value="value 1" />
 		</execute>
 
-		<execute macro="DDLRecord#editTranslation">
-			<var name="localizedLanguage" value="Japanese (Japan)" />
+		<execute macro="PortletEntry#changeLocale">
+			<var name="locale" value="ja-JP" />
 		</execute>
 
 		<execute macro="DynamicDataMapping#editField">
@@ -1634,8 +1638,8 @@
 			<var name="url" value="${adminEditURL}" />
 		</execute>
 
-		<execute macro="DDLRecord#editTranslation">
-			<var name="localizedLanguage" value="Catalan (Spain)" />
+		<execute macro="PortletEntry#changeLocale">
+			<var name="locale" value="es-ES" />
 		</execute>
 
 		<execute macro="Portlet#viewCannotPublish" />
@@ -2408,8 +2412,8 @@
 			<var name="ddlRecordFieldData" value="Text Spanish" />
 		</execute>
 
-		<execute macro="DDLRecord#editTranslation">
-			<var name="localizedLanguage" value="English (United States)" />
+		<execute macro="PortletEntry#changeLocale">
+			<var name="locale" value="en-US" />
 		</execute>
 
 		<execute macro="DDLRecord#populateFieldText">
@@ -2439,12 +2443,8 @@
 			<var name="localizedLanguage" value="English (United States)" />
 		</execute>
 
-		<execute macro="DDLRecord#addTranslation">
-			<var name="localizedLanguage" value="Hebrew (Israel)" />
-		</execute>
-
-		<execute macro="DDLRecord#editTranslation">
-			<var name="localizedLanguage" value="Hebrew (Israel)" />
+		<execute macro="PortletEntry#changeLocale">
+			<var name="locale" value="iw-IL" />
 		</execute>
 
 		<execute macro="DDLRecord#populateFieldText">
@@ -2506,8 +2506,8 @@
 			<var name="fieldName" value="Text" />
 		</execute>
 
-		<execute macro="DDLRecord#editTranslation">
-			<var name="localizedLanguage" value="English (United States)" />
+		<execute macro="PortletEntry#changeLocale">
+			<var name="locale" value="en-US" />
 		</execute>
 
 		<execute macro="DDLRecord#populateFieldText">
@@ -2533,14 +2533,13 @@
 			<var name="localizedLanguage" value="English (United States)" />
 		</execute>
 
-		<execute macro="DDLRecord#addTranslation">
-			<var name="localizedLanguage" value="Hebrew (Israel)" />
+		<execute macro="PortletEntry#changeLocale">
+			<var name="locale" value="iw-IL" />
 		</execute>
 
-		<execute macro="DDLRecord#editTranslation">
-			<var name="localizedLanguage" value="Hebrew (Israel)" />
+		<execute macro="PortletEntry#changeLocale">
+			<var name="locale" value="iw-IL" />
 		</execute>
-
 		<execute macro="DDLRecord#populateFieldText">
 			<var name="ddlRecordFieldData" value="Text Hebrew" />
 			<var name="fieldName" value="Text" />
@@ -2921,8 +2920,8 @@
 			<var name="ddlRecordFieldData" value="Content, Content 2, Content 3" />
 		</execute>
 
-		<execute macro="DDLRecord#addTranslation">
-			<var name="localizedLanguage" value="Catalan (Spain)" />
+		<execute macro="PortletEntry#changeLocale">
+			<var name="locale" value="es-ES" />
 		</execute>
 
 		<execute macro="DDLRecord#populateTranslationFieldText">
@@ -2965,8 +2964,8 @@
 			<var name="ddlRecordFieldData" value="Content, Content 3" />
 		</execute>
 
-		<execute macro="DDLRecord#editTranslation">
-			<var name="localizedLanguage" value="Catalan (Spain)" />
+		<execute macro="PortletEntry#changeLocale">
+			<var name="locale" value="es-ES" />
 		</execute>
 
 		<execute macro="DDLRecord#viewTextFieldRepeated">

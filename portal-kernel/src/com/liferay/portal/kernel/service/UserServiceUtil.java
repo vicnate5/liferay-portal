@@ -640,6 +640,20 @@ public class UserServiceUtil {
 	}
 
 	/**
+	* Returns the users belonging to the user group with the status.
+	*
+	* @param userGroupId the primary key of the user group
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
+	* @return the matching users
+	*/
+	public static java.util.List<com.liferay.portal.kernel.model.User> getUserGroupUsers(
+		long userGroupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getUserGroupUsers(userGroupId, start, end);
+	}
+
+	/**
 	* Returns the primary key of the user with the email address.
 	*
 	* @param companyId the primary key of the user's company
