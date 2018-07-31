@@ -4952,6 +4952,8 @@
 	</command>
 
 	<command name="SubmitFormWithUploadField" priority="4">
+		<property name="victor" value="true" />
+
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoPortlet">
@@ -5025,6 +5027,8 @@
 
 	<command name="SubmitWithRequiredDateField" priority="4">
 		<description message="This is a use case for LPS-73322." />
+
+		<property name="victor" value="true" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
 			<var name="portlet" value="Forms" />
