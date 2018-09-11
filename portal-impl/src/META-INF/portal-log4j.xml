@@ -980,6 +980,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.zaxxer.hikari">
+		<priority value="WARN" />
+	</category>
+
 	<category name="de.hunsicker">
 		<priority value="ERROR" />
 	</category>
