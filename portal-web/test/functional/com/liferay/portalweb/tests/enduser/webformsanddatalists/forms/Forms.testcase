@@ -2532,6 +2532,12 @@
 		</execute>
 	</command>
 
+	<command name="NewTest" priority="5">
+		<execute macro="Form#viewFormName">
+			<var name="formName" value="Text" />
+		</execute>
+	</command>
+
 	<command name="PreviewAndPublishForm" priority="5">
 		<description message="This is a use case for LPS-61740" />
 
