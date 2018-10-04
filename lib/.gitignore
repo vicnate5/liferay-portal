@@ -97,6 +97,17 @@
 /portal/boilerpipe.jar
 /portal/bsf.jar
 /portal/c3p0.jar
+/portal/activation.jar
+/portal/annotation.jar
+/portal/jaxb-api.jar
+/portal/jaxrs-api.jar
+/portal/jaxws-api.jar
+/portal/jaxws-tools.jar
+/portal/jws-api.jar
+/portal/namespace.jar
+/portal/rmi-api.jar
+/portal/servlet.jar
+/portal/transaction.jar
 /portal/ccpp.jar
 /portal/ccpp-ri.jar
 /portal/cglib-nodep.jar
