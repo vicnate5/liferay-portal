@@ -283,6 +283,7 @@
 	</command>
 
 	<command name="AddWithStructure" priority="5">
+		<property name="environment.acceptance" value="true" />
 		<property name="testray.component.names" value="Web Content Display,Training" />
 
 		<execute macro="Navigator#openURL" />
