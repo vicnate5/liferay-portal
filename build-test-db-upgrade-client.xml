@@ -134,7 +134,7 @@
 				<if>
 					<isset property="gogoshell.not.started" />
 					<then>
-						<fail message="The Gogo shell failed to open before the test timed out." />
+						<fail message="The test timed out before seeing the Gogo shell connection message." />
 					</then>
 					<elseif>
 						<resourcecontains
