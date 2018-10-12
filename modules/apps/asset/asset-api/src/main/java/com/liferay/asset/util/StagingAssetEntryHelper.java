@@ -12,21 +12,27 @@
  * details.
  */
 
-package com.liferay.portal.security.sso.openid.connect;
+package com.liferay.asset.util;
 
-import aQute.bnd.annotation.ProviderType;
-
+import com.liferay.asset.kernel.model.AssetEntry;
+import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.exception.PortalException;
-
-import com.nimbusds.openid.connect.sdk.claims.UserInfo;
+import com.liferay.portal.kernel.model.ClassedModel;
+import com.liferay.portal.kernel.xml.Element;
 
 /**
- * @author Michael C. Han
+ * @author Jürgen Kappler
  */
-@ProviderType
-public interface OpenIdConnectUserInfoProcessor {
+public interface StagingAssetEntryHelper {
 
-	public long processUserInfo(UserInfo userInfo, long companyId)
+	public void addAssetReference(
+		PortletDataContext portletDataContext, ClassedModel classedModel,
+		Element stagedElement, AssetEntry assetEntry);
+
+	public AssetEntry fetchAssetEntry(long groupId, String uuid)
+		throws PortalException;
+
+	public boolean isAssetEntryApplicable(AssetEntry assetEntry)
 		throws PortalException;
 
 }

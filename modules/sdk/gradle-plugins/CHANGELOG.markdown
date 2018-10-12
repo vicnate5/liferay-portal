@@ -5466,8 +5466,8 @@ to version 2.3.241.
 ## 3.12.117 - 2018-08-28
 
 ### Changed
-- [LPS-84094]: Allow properties defined in `gradle-ext.properties` to be
-overridden by values defined in a `gradle-ext.properties` file
+- [LPS-84094]: Allow properties defined in a `gradle.properties` file to be
+overridden by values defined in a `gradle-ext.properties` file.
 - [LPS-84094]: Update the [Liferay Gradle Util] dependency to version 1.0.30.
 
 ## 3.12.118 - 2018-08-29
@@ -5805,6 +5805,11 @@ to version 2.3.275.
 dependency to version 2.1.35.
 - [LPS-85959]: Update the [Liferay Gradle Plugins JS Transpiler] dependency to
 version 2.4.14.
+
+## 3.12.160 - 2018-10-10
+
+### Changed
+- [LPS-86308]: Update the [Liferay Alloy Taglib] dependency to version 1.1.13.
 
 [Gradle Bundle Plugin]: https://github.com/TomDmitriev/gradle-bundle-plugin
 [Liferay Alloy Taglib]: https://github.com/liferay/alloy-taglibs
@@ -6253,4 +6258,5 @@ version 2.4.14.
 [LPS-85609]: https://issues.liferay.com/browse/LPS-85609
 [LPS-85678]: https://issues.liferay.com/browse/LPS-85678
 [LPS-85959]: https://issues.liferay.com/browse/LPS-85959
+[LPS-86308]: https://issues.liferay.com/browse/LPS-86308
 [LRDOCS-3023]: https://issues.liferay.com/browse/LRDOCS-3023

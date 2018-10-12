@@ -14,11 +14,13 @@
 
 package com.liferay.structured.content.apio.internal.architect.filter;
 
+import com.liferay.petra.string.StringUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.odata.entity.EntityField;
 import com.liferay.portal.odata.entity.EntityModel;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -52,6 +54,15 @@ public class StructuredContentEntityModel implements EntityModel {
 	}
 
 	private static final Map<String, EntityField> _entityFieldsMap = Stream.of(
+		new EntityField(
+			"contentStructure", EntityField.Type.ID,
+			locale -> Field.CLASS_TYPE_ID, locale -> Field.CLASS_TYPE_ID,
+			contentStructureLink -> {
+				List<String> parts = StringUtil.split(
+					String.valueOf(contentStructureLink), '/');
+
+				return parts.get(parts.size() - 1);
+			}),
 		new EntityField(
 			"dateCreated", EntityField.Type.DATE,
 			locale -> Field.getSortableFieldName(Field.CREATE_DATE),

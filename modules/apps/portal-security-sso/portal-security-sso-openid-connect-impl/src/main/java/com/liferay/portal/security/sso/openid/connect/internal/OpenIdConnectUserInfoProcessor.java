@@ -12,22 +12,21 @@
  * details.
  */
 
-package com.liferay.portal.security.sso.openid.connect;
+package com.liferay.portal.security.sso.openid.connect.internal;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.nimbusds.openid.connect.sdk.op.OIDCProviderMetadata;
-import com.nimbusds.openid.connect.sdk.rp.OIDCClientMetadata;
+import com.liferay.portal.kernel.exception.PortalException;
+
+import com.nimbusds.openid.connect.sdk.claims.UserInfo;
 
 /**
- * @author Edward C. Han
+ * @author Michael C. Han
  */
 @ProviderType
-public interface OpenIdConnectMetadataFactory {
+public interface OpenIdConnectUserInfoProcessor {
 
-	public OIDCClientMetadata getOIDCClientMetadata();
-
-	public OIDCProviderMetadata getOIDCProviderMetadata()
-		throws OpenIdConnectServiceException.ProviderException;
+	public long processUserInfo(UserInfo userInfo, long companyId)
+		throws PortalException;
 
 }
