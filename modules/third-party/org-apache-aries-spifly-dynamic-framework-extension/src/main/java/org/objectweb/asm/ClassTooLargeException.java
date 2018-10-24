@@ -25,51 +25,47 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 // THE POSSIBILITY OF SUCH DAMAGE.
-
-package org.objectweb.asm.commons;
-
-import org.objectweb.asm.AnnotationVisitor;
-import org.objectweb.asm.FieldVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.TypePath;
+package org.objectweb.asm;
 
 /**
- * A {@link FieldVisitor} adapter for type remapping.
+ * Exception thrown when the constant pool of a class produced by a {@link ClassWriter} is too
+ * large.
  *
- * @deprecated use {@link FieldRemapper} instead.
- * @author Eugene Kuleshov
+ * @author Jason Zaugg
  */
-@Deprecated
-public class RemappingFieldAdapter extends FieldVisitor {
+public final class ClassTooLargeException extends IndexOutOfBoundsException {
 
-  private final Remapper remapper;
+  private final String className;
+  private final int constantPoolCount;
 
-  public RemappingFieldAdapter(final FieldVisitor fieldVisitor, final Remapper remapper) {
-    this(Opcodes.ASM6, fieldVisitor, remapper);
+  /**
+   * Constructs a new {@link ClassTooLargeException}.
+   *
+   * @param className the internal name of the class.
+   * @param constantPoolCount the number of constant pool items of the class.
+   */
+  public ClassTooLargeException(final String className, final int constantPoolCount) {
+    super("Class too large: " + className);
+    this.className = className;
+    this.constantPoolCount = constantPoolCount;
   }
 
-  protected RemappingFieldAdapter(
-      final int api, final FieldVisitor fieldVisitor, final Remapper remapper) {
-    super(api, fieldVisitor);
-    this.remapper = remapper;
+  /**
+   * Returns the internal name of the class.
+   *
+   * @return the internal name of the class.
+   */
+  public String getClassName() {
+    return className;
   }
 
-  @Override
-  public AnnotationVisitor visitAnnotation(final String descriptor, final boolean visible) {
-    AnnotationVisitor annotationVisitor = fv.visitAnnotation(remapper.mapDesc(descriptor), visible);
-    return annotationVisitor == null
-        ? null
-        : new RemappingAnnotationAdapter(annotationVisitor, remapper);
-  }
-
-  @Override
-  public AnnotationVisitor visitTypeAnnotation(
-      final int typeRef, final TypePath typePath, final String descriptor, final boolean visible) {
-    AnnotationVisitor annotationVisitor =
-        super.visitTypeAnnotation(typeRef, typePath, remapper.mapDesc(descriptor), visible);
-    return annotationVisitor == null
-        ? null
-        : new RemappingAnnotationAdapter(annotationVisitor, remapper);
+  /**
+   * Returns the number of constant pool items of the class.
+   *
+   * @return the number of constant pool items of the class.
+   */
+  public int getConstantPoolCount() {
+    return constantPoolCount;
   }
 }
 /* @generated */

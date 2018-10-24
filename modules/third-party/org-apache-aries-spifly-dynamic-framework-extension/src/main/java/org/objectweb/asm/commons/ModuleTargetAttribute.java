@@ -28,48 +28,61 @@
 
 package org.objectweb.asm.commons;
 
-import org.objectweb.asm.AnnotationVisitor;
-import org.objectweb.asm.FieldVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.TypePath;
+import org.objectweb.asm.Attribute;
+import org.objectweb.asm.ByteVector;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Label;
 
 /**
- * A {@link FieldVisitor} adapter for type remapping.
+ * A ModuleTarget attribute. This attribute is specific to the OpenJDK and may change in the future.
  *
- * @deprecated use {@link FieldRemapper} instead.
- * @author Eugene Kuleshov
+ * @author Remi Forax
  */
-@Deprecated
-public class RemappingFieldAdapter extends FieldVisitor {
+public final class ModuleTargetAttribute extends Attribute {
 
-  private final Remapper remapper;
+  /** The name of the platform on which the module can run. */
+  public String platform;
 
-  public RemappingFieldAdapter(final FieldVisitor fieldVisitor, final Remapper remapper) {
-    this(Opcodes.ASM6, fieldVisitor, remapper);
+  /**
+   * Constructs a new {@link ModuleTargetAttribute}.
+   *
+   * @param platform the name of the platform on which the module can run.
+   */
+  public ModuleTargetAttribute(final String platform) {
+    super("ModuleTarget");
+    this.platform = platform;
   }
 
-  protected RemappingFieldAdapter(
-      final int api, final FieldVisitor fieldVisitor, final Remapper remapper) {
-    super(api, fieldVisitor);
-    this.remapper = remapper;
+  /**
+   * Constructs an empty {@link ModuleTargetAttribute}. This object can be passed as a prototype to
+   * the {@link ClassReader#accept(org.objectweb.asm.ClassVisitor, Attribute[], int)} method.
+   */
+  public ModuleTargetAttribute() {
+    this(null);
   }
 
   @Override
-  public AnnotationVisitor visitAnnotation(final String descriptor, final boolean visible) {
-    AnnotationVisitor annotationVisitor = fv.visitAnnotation(remapper.mapDesc(descriptor), visible);
-    return annotationVisitor == null
-        ? null
-        : new RemappingAnnotationAdapter(annotationVisitor, remapper);
+  protected Attribute read(
+      final ClassReader classReader,
+      final int offset,
+      final int length,
+      final char[] charBuffer,
+      final int codeOffset,
+      final Label[] labels) {
+    return new ModuleTargetAttribute(classReader.readUTF8(offset, charBuffer));
   }
 
   @Override
-  public AnnotationVisitor visitTypeAnnotation(
-      final int typeRef, final TypePath typePath, final String descriptor, final boolean visible) {
-    AnnotationVisitor annotationVisitor =
-        super.visitTypeAnnotation(typeRef, typePath, remapper.mapDesc(descriptor), visible);
-    return annotationVisitor == null
-        ? null
-        : new RemappingAnnotationAdapter(annotationVisitor, remapper);
+  protected ByteVector write(
+      final ClassWriter classWriter,
+      final byte[] code,
+      final int codeLength,
+      final int maxStack,
+      final int maxLocals) {
+    ByteVector byteVector = new ByteVector();
+    byteVector.putShort(platform == null ? 0 : classWriter.newUTF8(platform));
+    return byteVector;
   }
 }
 /* @generated */

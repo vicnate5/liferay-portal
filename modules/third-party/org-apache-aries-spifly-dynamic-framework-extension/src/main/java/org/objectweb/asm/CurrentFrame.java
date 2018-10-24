@@ -26,50 +26,32 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 // THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.objectweb.asm.commons;
-
-import org.objectweb.asm.AnnotationVisitor;
-import org.objectweb.asm.FieldVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.TypePath;
+package org.objectweb.asm;
 
 /**
- * A {@link FieldVisitor} adapter for type remapping.
+ * Information about the input stack map frame at the "current" instruction of a method. This is
+ * implemented as a Frame subclass for a "basic block" containing only one instruction.
  *
- * @deprecated use {@link FieldRemapper} instead.
- * @author Eugene Kuleshov
+ * @author Eric Bruneton
  */
-@Deprecated
-public class RemappingFieldAdapter extends FieldVisitor {
+final class CurrentFrame extends Frame {
 
-  private final Remapper remapper;
-
-  public RemappingFieldAdapter(final FieldVisitor fieldVisitor, final Remapper remapper) {
-    this(Opcodes.ASM6, fieldVisitor, remapper);
+  CurrentFrame(final Label owner) {
+    super(owner);
   }
 
-  protected RemappingFieldAdapter(
-      final int api, final FieldVisitor fieldVisitor, final Remapper remapper) {
-    super(api, fieldVisitor);
-    this.remapper = remapper;
-  }
-
+  /**
+   * Sets this CurrentFrame to the input stack map frame of the next "current" instruction, i.e. the
+   * instruction just after the given one. It is assumed that the value of this object when this
+   * method is called is the stack map frame status just before the given instruction is executed.
+   */
   @Override
-  public AnnotationVisitor visitAnnotation(final String descriptor, final boolean visible) {
-    AnnotationVisitor annotationVisitor = fv.visitAnnotation(remapper.mapDesc(descriptor), visible);
-    return annotationVisitor == null
-        ? null
-        : new RemappingAnnotationAdapter(annotationVisitor, remapper);
-  }
-
-  @Override
-  public AnnotationVisitor visitTypeAnnotation(
-      final int typeRef, final TypePath typePath, final String descriptor, final boolean visible) {
-    AnnotationVisitor annotationVisitor =
-        super.visitTypeAnnotation(typeRef, typePath, remapper.mapDesc(descriptor), visible);
-    return annotationVisitor == null
-        ? null
-        : new RemappingAnnotationAdapter(annotationVisitor, remapper);
+  void execute(
+      final int opcode, final int arg, final Symbol symbolArg, final SymbolTable symbolTable) {
+    super.execute(opcode, arg, symbolArg, symbolTable);
+    Frame successor = new Frame(null);
+    merge(symbolTable, successor, 0);
+    copyFrom(successor);
   }
 }
 /* @generated */
