@@ -71,6 +71,7 @@
 		<property name="app.server.types" value="jboss,resin,tcserver,tomcat,weblogic,websphere,wildfly" />
 		<property name="database.types" value="db2,hypersonic,mariadb,mysql,oracle,postgresql,sqlserver,sybase" />
 		<property name="environment.acceptance" value="true" />
+		<property name="fragments" value="true" />
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="PortletEntry#publish" />
