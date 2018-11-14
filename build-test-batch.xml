@@ -287,7 +287,7 @@ mariadb.executable=${mariadb.executable}]]></echo>
 				</then>
 			</if>
 
-			<print-file file.name="sql/sql.${env.HOSTNAME}.properties" />
+			<!-- <print-file file.name="sql/sql.${env.HOSTNAME}.properties" /> -->
 
 			<database-test-action database.type="@{database.type}">
 				<action>
@@ -624,7 +624,7 @@ mariadb.executable=${mariadb.executable}]]></echo>
 		<sequential>
 			<trycatch property="exception.message">
 				<try>
-					<antcall target="setup-libs" />
+					<!-- <antcall target="setup-libs" /> -->
 
 					<antcall target="prepare-test-build">
 						<param name="test.class.groups.size" value="${test.batch.size}" />

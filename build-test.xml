@@ -8681,26 +8681,26 @@ log.sanitizer.enabled=false</echo>
 	</target>
 
 	<target name="prepare-test-build">
-		<record-git-commit-portal />
+		<!-- <record-git-commit-portal />
 
 		<antcall inheritAll="false" target="compile" />
 
-		<prepare-test-bundles unit="false" />
+		<prepare-test-bundles unit="false" /> -->
 
-		<if>
+		<!-- <if>
 			<not>
 				<equals arg1="${test.build.unit}" arg2="true" />
 			</not>
 			<then>
 				<antcall target="record-test-case-method-names" />
 			</then>
-		</if>
+		</if> -->
 
 		<antcall inheritAll="false" target="compile-test" />
 
-		<record-test-class-file-names />
+		<!-- <record-test-class-file-names /> -->
 
-		<antcall inheritAll="false" target="record-test-plugin-names" />
+		<!-- <antcall inheritAll="false" target="record-test-plugin-names" /> -->
 
 		<echo if:set="env.JENKINS_HOME">
 ANT_OPTS=${env.ANT_OPTS}</echo>
@@ -9716,7 +9716,7 @@ if (ppstate.equals("normal")) {
 	</target>
 
 	<target name="record-test-case-method-names">
-		<setup-libs />
+		<!-- <setup-libs />
 
 		<delete failonerror="false" file="${test.ext.properties.file}" />
 
@@ -9742,7 +9742,7 @@ if (ppstate.equals("normal")) {
 		<move
 			file="portal-web/test.case.method.names.properties"
 			tofile="test.case.method.names.properties"
-		/>
+		/> -->
 
 		<echo></echo>
 		<echo>##</echo>
