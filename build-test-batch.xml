@@ -4649,6 +4649,10 @@ log.sanitizer.enabled=false</echo>
 		<run-modules-integration-test database.type="mysql" database.version="5.7" />
 	</target>
 
+	<target name="modules-integration-mysql57-open11">
+		<run-modules-integration-test database.type="mysql" database.version="5.7" />
+	</target>
+
 	<target name="modules-integration-oracle121-jdk8">
 		<run-modules-integration-test database.type="oracle" />
 	</target>
