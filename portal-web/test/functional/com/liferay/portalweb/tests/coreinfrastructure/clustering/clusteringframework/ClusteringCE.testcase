@@ -8,6 +8,8 @@
 	<property name="test.run.environment" value="CE" />
 	<property name="testray.main.component.name" value="Clustering" />
 
+	<property name="portal.acceptance" value="true" />
+
 	<set-up>
 		<execute macro="TestCase#setUpPortalInstance" />
 
