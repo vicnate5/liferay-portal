@@ -5773,9 +5773,24 @@ go]]></replacevalue>
 											</sequential>
 										</for>
 
-										<gradle-execute dir="@{app.dir}" task="deploy">
+										<local name="java.jdk.home" />
+										<local name="java.jdk.opts" />
+
+										<get-java-jdk-home />
+
+										<propertyregex
+											input="${env.ANT_OPTS}"
+											override="true"
+											property="java.jdk.opts"
+											regexp="Xlog:gc"
+											replace="Xloggc"
+										/>
+
+										<gradle-execute dir="@{app.dir}" gradleopts="${java.jdk.opts}" task="deploy">
 											<arg value="clean" />
 											<arg value="-Dbuild.profile=portal" />
+											<env key="ANT_OPTS" value="${java.jdk.opts}" />
+											<env key="JAVA_HOME" path="${java.jdk.home}" />
 										</gradle-execute>
 
 										<for param="module.dir.path">
@@ -5805,7 +5820,10 @@ go]]></replacevalue>
 											<property name="osgi.dir" value="${liferay.home}/osgi" />
 										</ant>
 
-										<gradle-execute dir="@{app.dir}" task="clean" />
+										<gradle-execute dir="@{app.dir}" gradleopts="${java.jdk.opts}" task="clean">
+											<env key="ANT_OPTS" value="${java.jdk.opts}" />
+											<env key="JAVA_HOME" path="${java.jdk.home}" />
+										</gradle-execute>
 
 										<move
 											failonerror="false"
@@ -5923,6 +5941,19 @@ go]]></replacevalue>
 					</dirset>
 				</pathconvert>
 
+				<local name="java.jdk.home" />
+				<local name="java.jdk.opts" />
+
+				<get-java-jdk-home />
+
+				<propertyregex
+					input="${env.ANT_OPTS}"
+					override="true"
+					property="java.jdk.opts"
+					regexp="Xlog:gc"
+					replace="Xloggc"
+				/>
+
 				<for list="${osgi.modules.paths}" parallel="true" param="osgi.module.path">
 					<sequential>
 						<local name="module.base.dir" />
@@ -5937,8 +5968,10 @@ go]]></replacevalue>
 							verbose="true"
 						/>
 
-						<gradle-execute dir="@{osgi.module.path}" forcedcacheenabled="false" task="deploy">
+						<gradle-execute dir="@{osgi.module.path}" forcedcacheenabled="false" gradleopts="${java.jdk.opts}" task="deploy">
 							<arg value="clean" />
+							<env key="ANT_OPTS" value="${java.jdk.opts}" />
+							<env key="JAVA_HOME" path="${java.jdk.home}" />
 						</gradle-execute>
 
 						<move
