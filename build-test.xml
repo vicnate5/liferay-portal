@@ -5953,12 +5953,31 @@ go]]></replacevalue>
 	</target>
 
 	<target name="deploy-project-templates">
+		<local name="java.jdk.home" />
+		<local name="java.jdk.opts" />
+
+		<get-java-jdk-home />
+
+		<propertyregex
+			input="${env.ANT_OPTS}"
+			override="true"
+			property="java.jdk.opts"
+			regexp="Xlog:gc"
+			replace="Xloggc"
+		/>
+
 		<if>
 			<equals arg1="${project.templates}" arg2="mvc-portlet" />
 			<then>
-				<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-${project.templates}" task="generateSampleProject" />
+				<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-${project.templates}" gradleopts="${java.jdk.opts}" task="generateSampleProject">
+					<env key="ANT_OPTS" value="${java.jdk.opts}" />
+					<env key="JAVA_HOME" path="${java.jdk.home}" />
+				</gradle-execute>
 
-				<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-${project.templates}/build/samplemvc" task="assemble" />
+				<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-${project.templates}/build/samplemvc" gradleopts="${java.jdk.opts}" task="assemble">
+					<env key="ANT_OPTS" value="${java.jdk.opts}" />
+					<env key="JAVA_HOME" path="${java.jdk.home}" />
+				</gradle-execute>
 
 				<copy
 					file="${project.dir}/modules/sdk/project-templates/project-templates-${project.templates}/build/samplemvc/build/libs/samplemvc-1.0.0.jar"
@@ -5968,9 +5987,15 @@ go]]></replacevalue>
 			<elseif>
 				<equals arg1="${project.templates}" arg2="simple" />
 				<then>
-					<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-npm-portlet" task="generateSampleProject" />
+					<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-npm-portlet" gradleopts="${java.jdk.opts}" task="generateSampleProject">
+						<env key="ANT_OPTS" value="${java.jdk.opts}" />
+						<env key="JAVA_HOME" path="${java.jdk.home}" />
+					</gradle-execute>
 
-					<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-npm-portlet/build/npm-simple-portlet" task="assemble" />
+					<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-npm-portlet/build/npm-simple-portlet" gradleopts="${java.jdk.opts}" task="assemble">
+						<env key="ANT_OPTS" value="${java.jdk.opts}" />
+						<env key="JAVA_HOME" path="${java.jdk.home}" />
+					</gradle-execute>
 
 					<copy
 						file="${project.dir}/modules/sdk/project-templates/project-templates-npm-portlet/build/npm-simple-portlet/build/libs/npm.simple.portlet-1.0.0.jar"
@@ -5981,9 +6006,15 @@ go]]></replacevalue>
 			<elseif>
 				<equals arg1="${project.templates}" arg2="theme" />
 				<then>
-					<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-${project.templates}" task="generateSampleProject" />
+					<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-${project.templates}" gradleopts="${java.jdk.opts}" task="generateSampleProject">
+						<env key="ANT_OPTS" value="${java.jdk.opts}" />
+						<env key="JAVA_HOME" path="${java.jdk.home}" />
+					</gradle-execute>
 
-					<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-${project.templates}/build/sampletheme" task="assemble" />
+					<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-${project.templates}/build/sampletheme" gradleopts="${java.jdk.opts}" task="assemble">
+						<env key="ANT_OPTS" value="${java.jdk.opts}" />
+						<env key="JAVA_HOME" path="${java.jdk.home}" />
+					</gradle-execute>
 
 					<copy
 						file="${project.dir}/modules/sdk/project-templates/project-templates-${project.templates}/build/sampletheme/build/libs/sampletheme.war"
@@ -5992,9 +6023,15 @@ go]]></replacevalue>
 				</then>
 			</elseif>
 			<else>
-				<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-npm-${project.templates}-portlet" task="generateSampleProject" />
+				<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-npm-${project.templates}-portlet" gradleopts="${java.jdk.opts}" task="generateSampleProject">
+					<env key="ANT_OPTS" value="${java.jdk.opts}" />
+					<env key="JAVA_HOME" path="${java.jdk.home}" />
+				</gradle-execute>
 
-				<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-npm-${project.templates}-portlet/build/npm-${project.templates}-portlet" task="assemble" />
+				<gradle-execute dir="${project.dir}/modules/sdk/project-templates/project-templates-npm-${project.templates}-portlet/build/npm-${project.templates}-portlet" gradleopts="${java.jdk.opts}" task="assemble">
+					<env key="ANT_OPTS" value="${java.jdk.opts}" />
+					<env key="JAVA_HOME" path="${java.jdk.home}" />
+				</gradle-execute>
 
 				<copy
 					file="${project.dir}/modules/sdk/project-templates/project-templates-npm-${project.templates}-portlet/build/npm-${project.templates}-portlet/build/libs/npm.${project.templates}.portlet-1.0.0.jar"
