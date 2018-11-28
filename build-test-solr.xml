@@ -148,7 +148,12 @@ dataDir=data
 name=liferay
 schema=schema.xml</echo>
 
-			<echo append="true" file="${solr.dir}/bin/solr.in.sh">SOLR_ULIMIT_CHECKS=false</echo>
+			<local name="java.jdk.home" />
+
+			<get-java-jdk-home />
+
+			<echo append="true" file="${solr.dir}/bin/solr.in.sh">SOLR_JAVA_HOME=${java.jdk.home}
+SOLR_ULIMIT_CHECKS=false</echo>
 		</sequential>
 	</macrodef>
 
@@ -264,8 +269,23 @@ schema=schema.xml</echo>
 	</macrodef>
 
 	<target name="deploy-solr">
-		<gradle-execute dir="modules/apps/portal-search-solr7" task="deploy">
+		<local name="java.jdk.home" />
+		<local name="java.jdk.opts" />
+
+		<get-java-jdk-home />
+
+		<propertyregex
+			input="${env.ANT_OPTS}"
+			override="true"
+			property="java.jdk.opts"
+			regexp="Xlog:gc"
+			replace="Xloggc"
+		/>
+
+		<gradle-execute dir="modules/apps/portal-search-solr7" gradleopts="${java.jdk.opts}" task="deploy">
 			<arg value="clean" />
+			<env key="ANT_OPTS" value="${java.jdk.opts}" />
+			<env key="JAVA_HOME" path="${java.jdk.home}" />
 		</gradle-execute>
 
 		<echo file="${liferay.home}/osgi/configs/com.liferay.portal.bundle.blacklist.internal.BundleBlacklistConfiguration.config">blacklistBundleSymbolicNames=&quot;com.liferay.portal.mobile.device.detection.fiftyonedegrees.api,com.liferay.portal.mobile.device.detection.fiftyonedegrees.enterprise,com.liferay.portal.mobile.device.detection.fiftyonedegrees.enterprise.test.data,com.liferay.portal.mobile.device.detection.fiftyonedegrees,com.liferay.portal.search.elasticsearch6.api,com.liferay.portal.search.elasticsearch6.impl,com.liferay.portal.search.elasticsearch6.xpack.security.impl,com.liferay.portal.search.elasticsearch6.xpack.monitoring.web&quot;</echo>
