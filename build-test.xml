@@ -3844,13 +3844,11 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 						/>
 					</delete>
 
+					<property name="java.jdk.home" value="/opt/java/openjdk11" />
+
 					<if>
 						<equals arg1="${test.ant.launched.by.selenium}" arg2="true" />
 						<then>
-							<local name="java.jdk.home" />
-
-							<get-java-jdk-home />
-
 							<exec dir="${test.app.server.bin.dir}" executable="${app.server.start.executable}" resolveexecutable="true">
 								<arg line="${app.server.start.executable.arg.line}" />
 								<env key="JAVA_HOME" path="${java.jdk.home}" />
@@ -3876,6 +3874,7 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 								<daemons>
 									<exec dir="${test.app.server.bin.dir}" executable="${app.server.start.executable}" failonerror="true" resolveexecutable="true">
 										<arg line="${app.server.start.executable.arg.line}" />
+										<env key="JAVA_HOME" path="${java.jdk.home}" />
 									</exec>
 								</daemons>
 							</parallel>
