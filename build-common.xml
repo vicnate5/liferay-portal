@@ -773,6 +773,8 @@ information.
 		<sequential>
 			<setup-binaries-cache unless:true="${setup.binaries.cache.executed}" />
 
+			<property name="java.jdk.home" value="/opt/java/openjdk11" />
+
 			<if>
 				<not>
 					<available file="${project.dir}/tools/${build.binaries.gradle.file}" />
@@ -819,6 +821,7 @@ information.
 						<arg value="tasks" />
 						<arg value="--all" />
 						<env key="GRADLE_OPTS" value="@{gradleopts}" />
+						<env key="JAVA_HOME" path="${java.jdk.home}" />
 						<redirector errorproperty="@{outputproperty}.error" outputproperty="tasks.output" unless:blank="tasks.output" />
 					</exec>
 
@@ -857,6 +860,7 @@ information.
 								<arg value="-Dliferay.home=${liferay.home}" />
 								<arg line="@{task}" />
 								<env key="GRADLE_OPTS" value="@{gradleopts}" />
+								<env key="JAVA_HOME" path="${java.jdk.home}" />
 								<redirector errorproperty="@{outputproperty}.error" outputproperty="@{outputproperty}" unless:blank="@{outputproperty}" />
 							</exec>
 						</try>
