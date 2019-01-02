@@ -31,7 +31,8 @@ definition {
 
 		SitePages.gotoPageMenuItem(
 			menuItem = "Configure",
-			pageName = "Classic Theme Page"
+			pageName = "Classic Theme Page",
+			parentPagesHierarchy = "Public Pages"
 		);
 
 		Navigator.gotoNavTab(navTab = "Look and Feel");
