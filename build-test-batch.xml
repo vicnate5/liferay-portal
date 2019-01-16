@@ -3169,6 +3169,10 @@ log.sanitizer.enabled=false</echo>
 		<antcall target="functional-bundle-tomcat-mysql57-jdk8" />
 	</target>
 
+	<target name="functional-bundle-marketplaceapp-smoke-tomcat-mysql57-open11">
+		<antcall target="functional-bundle-tomcat-mysql57-open11" />
+	</target>
+
 	<target name="functional-bundle-marketplaceapp-smoke-wildfly-mysql56-jdk8">
 		<antcall target="functional-bundle-wildfly-mysql56-jdk8" />
 	</target>
@@ -3726,6 +3730,10 @@ log.sanitizer.enabled=false</echo>
 
 	<target name="functional-smoke-bundle-tomcat-mysql57-jdk8">
 		<antcall target="functional-bundle-tomcat-mysql57-jdk8" />
+	</target>
+
+	<target name="functional-smoke-bundle-tomcat-mysql57-open11">
+		<antcall target="functional-bundle-tomcat-mysql57-open11" />
 	</target>
 
 	<target name="functional-smoke-jboss70-mysql56-jdk8">
@@ -5604,6 +5612,10 @@ ${output.content}</echo>
 
 	<target name="release-functional-smoke-bundle-tomcat-mysql57-jdk8">
 		<antcall target="functional-bundle-tomcat-mysql57-jdk8" />
+	</target>
+
+	<target name="release-functional-smoke-bundle-tomcat-mysql57-open11">
+		<antcall target="functional-bundle-tomcat-mysql57-open11" />
 	</target>
 
 	<target name="release-osgi-state-exploded-test-jdk8">
