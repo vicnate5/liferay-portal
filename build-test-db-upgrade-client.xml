@@ -15,8 +15,6 @@
 	<macrodef name="get-database-upgrade-client-paths">
 		<sequential>
 			<property name="db.upgrade.client.home" value="${liferay.home}/tools/portal-tools-db-upgrade-client" />
-
-			<property name="db.upgrade.client.jar" value="${db.upgrade.client.home}/com.liferay.portal.tools.db.upgrade.client.jar" />
 			<property name="db.upgrade.client.log" value="${db.upgrade.client.home}/upgrade.log" />
 		</sequential>
 	</macrodef>
@@ -25,17 +23,9 @@
 		<get-database-upgrade-client-paths />
 
 		<parallel failonany="true">
-			<java
-				dir="${db.upgrade.client.home}"
-				failonerror="true"
-				fork="true"
-				jar="${db.upgrade.client.jar}"
-				timeout="900000"
-			>
-				<arg value="-j" />
-				<arg value="&quot;-Dfile.encoding=UTF8 -Duser.country=US -Duser.language=en -Duser.timezone=GMT -Xmx4096m&quot;" />
-			</java>
-
+			<execute dir="${db.upgrade.client.home}" failonerror="true">
+				db_upgrade${file.suffix.bat} -j "-Dfile.encoding=UTF8 -Duser.country=US -Duser.language=en -Duser.timezone=GMT -Xmx4096m"
+			</execute>
 			<sequential>
 				<waitfor maxwait="60000">
 					<available file="${db.upgrade.client.log}" />
@@ -65,17 +55,9 @@
 	<target name="check-upgrade-client-custom-log">
 		<get-database-upgrade-client-paths />
 
-		<java
-			dir="${db.upgrade.client.home}"
-			failonerror="true"
-			fork="true"
-			jar="${db.upgrade.client.jar}"
-			timeout="900000"
-		>
-			<arg value="-l" />
-			<arg value="&quot;log_file.txt&quot;" />
-		</java>
-
+		<execute dir="${db.upgrade.client.home}" failonerror="true">
+			db_upgrade${file.suffix.bat} -l log_file.txt
+		</execute>
 		<if>
 			<not>
 				<available file="${db.upgrade.client.home}/log_file.txt" />
@@ -94,7 +76,7 @@
 
 		<if>
 			<not>
-				<contains string="${custom.log.file.output}" substring="com.liferay.portal.tools.db.upgrade.client.jar" />
+				<contains string="${custom.log.file.output}" substring="db_upgrade${file.suffix.bat}" />
 			</not>
 			<then>
 				<fail message="The upgrade client custom log file is missing some data." />
@@ -112,14 +94,9 @@
 		<get-database-upgrade-client-paths />
 
 		<parallel failonany="true">
-			<java
-				dir="${db.upgrade.client.home}"
-				fork="true"
-				jar="${db.upgrade.client.jar}"
-				timeout="900000"
-			>
-				<arg value="-s" />
-			</java>
+			<execute dir="${db.upgrade.client.home}">
+				db_upgrade${file.suffix.bat} -s
+			</execute>
 
 			<sequential>
 				<waitfor maxwait="900000" timeoutproperty="gogoshell.not.started">
@@ -161,16 +138,14 @@
 
 		<local name="upgrade.help.output" />
 
-		<java
-			dir="${db.upgrade.client.home}"
-			failonerror="true"
-			fork="true"
-			jar="${db.upgrade.client.jar}"
-			outputproperty="upgrade.help.output"
-			timeout="30000"
-		>
-			<arg value="-h" />
-		</java>
+		<execute dir="${db.upgrade.client.home}" failonerror="true">
+			db_upgrade${file.suffix.bat} -h > upgrade.help.output
+		</execute>
+
+		<loadfile
+			property="upgrade.help.output"
+			srcFile="upgrade.help.output"
+		/>
 
 		<echo>${upgrade.help.output}</echo>
 
@@ -184,6 +159,7 @@
 			</else>
 		</if>
 
+		<delete file="upgrade.help.output" />
 		<clean-database-upgrade-client />
 	</target>
 
@@ -191,15 +167,10 @@
 		<get-database-upgrade-client-paths />
 
 		<parallel failonany="true">
-			<java
-				dir="${db.upgrade.client.home}"
-				failonerror="true"
-				fork="true"
-				jar="${db.upgrade.client.jar}"
-				timeout="300000"
-			>
-				<env key="JAVA_HOME" value="${java.jdk.7.x64.home}" />
-			</java>
+			<execute dir="${db.upgrade.client.home}" failonerror="true">
+				JAVA_HOME=${java.jdk.7.x64.home} echo JAVA_HOME=${JAVA_HOME}
+				db_upgrade${file.suffix.bat}
+			</execute>
 
 			<sequential>
 				<local name="java.error.unavailable" />
