@@ -76,7 +76,7 @@
 
 		<if>
 			<not>
-				<contains string="${custom.log.file.output}" substring="db_upgrade${file.suffix.bat}" />
+				<contains string="${custom.log.file.output}" substring="com.liferay.portal.tools.db.upgrade.client.jar" />
 			</not>
 			<then>
 				<fail message="The upgrade client custom log file is missing some data." />
@@ -139,12 +139,12 @@
 		<local name="upgrade.help.output" />
 
 		<execute dir="${db.upgrade.client.home}" failonerror="true">
-			db_upgrade${file.suffix.bat} -h > upgrade.help.output
+			db_upgrade${file.suffix.bat} -h > help.output.txt
 		</execute>
 
 		<loadfile
 			property="upgrade.help.output"
-			srcFile="upgrade.help.output"
+			srcFile="help.output.txt"
 		/>
 
 		<echo>${upgrade.help.output}</echo>
@@ -159,7 +159,7 @@
 			</else>
 		</if>
 
-		<delete file="upgrade.help.output" />
+		<delete file="help.output.txt" />
 		<clean-database-upgrade-client />
 	</target>
 
@@ -168,14 +168,14 @@
 
 		<parallel failonany="true">
 			<execute dir="${db.upgrade.client.home}" failonerror="true">
-				JAVA_HOME=${java.jdk.7.x64.home} echo JAVA_HOME=${JAVA_HOME}
+				JAVA_HOME=${java.jdk.7.x64.home} echo ${JAVA_HOME}
 				db_upgrade${file.suffix.bat}
 			</execute>
 
 			<sequential>
-				<local name="java.error.unavailable" />
+				<local name="java.error.available" />
 
-				<waitfor maxwait="15000" timeoutproperty="java.error.unavailable">
+				<waitfor maxwait="15000" timeoutproperty="java.error.available">
 					<resourcecontains
 						resource="${db.upgrade.client.log}"
 						substring="Unsupported major.minor version"
@@ -183,15 +183,18 @@
 				</waitfor>
 
 				<if>
-					<isset property="java.error.unavailable" />
+					<isset property="java.error.available" />
 					<then>
 						<clean-database-upgrade-client />
 
-						<fail message="The upgrade client should not be able to run on versions older than Java SE 8." />
+						<echo message="The upgrade client correctly failed to run on a version older than Java SE 8." />
 					</then>
+					<else>
+						<fail message="The upgrade client should not be able to run on versions older than Java SE 8." />
+					</else>
 				</if>
 
-				<echo message="The upgrade client correctly failed to run on a version older than Java SE 8." />
+				<echo message="${java.error.available}: Unsupported major.minor version" />
 			</sequential>
 		</parallel>
 
