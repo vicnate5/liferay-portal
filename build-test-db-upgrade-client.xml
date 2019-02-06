@@ -120,9 +120,7 @@
 						/>
 						<then>
 							<echo>${db.upgrade.client.log}</echo>
-							<echo>${db.upgrade.client.log}</echo>
 							<fail message="The Gogo shell connection failed" />
-							<echo>${db.upgrade.client.log}</echo>
 						</then>
 					</elseif>
 				</if>
