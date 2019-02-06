@@ -28,9 +28,10 @@ definition {
 		}
 	}
 
-	@ignore = "true"
 	@priority = "2"
 	test AddQuickNote {
+		property portal.acceptance = "test";
+
 		Portlet.addPG(portletName = "Quick Note");
 
 		Navigator.gotoPage(pageName = "Quick Note Page");

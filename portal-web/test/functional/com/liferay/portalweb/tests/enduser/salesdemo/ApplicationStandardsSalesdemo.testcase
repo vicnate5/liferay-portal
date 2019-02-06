@@ -1,6 +1,6 @@
 @component-name = "portal-application-standards"
-@ignore = "true"
 definition {
+	property portal.acceptance = "test";
 	property portal.release = "true";
 	property portal.upstream = "true";
 	property testray.main.component.name = "Application Standards";
