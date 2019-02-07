@@ -119,7 +119,13 @@
 							substring="Unable to open Gogo shell"
 						/>
 						<then>
-							<echo>${db.upgrade.client.log}</echo>
+							<loadfile
+								property="db.upgrade.client.log.content"
+								srcFile="${db.upgrade.client.log}"
+							/>
+
+							<echo>${db.upgrade.client.log.content}</echo>
+
 							<fail message="The Gogo shell connection failed" />
 						</then>
 					</elseif>
