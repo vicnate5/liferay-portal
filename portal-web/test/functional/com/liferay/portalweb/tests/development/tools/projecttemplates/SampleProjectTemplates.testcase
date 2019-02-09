@@ -39,6 +39,7 @@ definition {
 		Portlet.viewPG(portletBody = "Hello from Samplemvc!", portletName = "Samplemvc");
 	}
 
+	@ignore = "true"
 	@priority = "5"
 	test ThemeTemplateSmoke {
 		property portal.acceptance = "false";
