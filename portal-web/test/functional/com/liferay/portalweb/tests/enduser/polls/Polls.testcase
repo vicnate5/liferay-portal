@@ -31,6 +31,8 @@ definition {
 
 	@priority = "5"
 	test RunCurl {
+		property portal.acceptance = "test";
+
 		var portalURL = PropsUtil.get("portal.url");
 
 		var curl = '''
