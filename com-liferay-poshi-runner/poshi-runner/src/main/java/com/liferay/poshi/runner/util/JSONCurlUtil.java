@@ -132,9 +132,7 @@ public class JSONCurlUtil {
 		public String send() throws IOException, TimeoutException {
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("curl -X ");
-			sb.append(_requestMethod);
-			sb.append(" ");
+			sb.append("curl -H 'Content-Type: application/json' -H 'Accept: application/json' ");
 			sb.append(_getRequestOptionsString());
 			sb.append(" ");
 			sb.append(_requestURL);
