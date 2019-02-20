@@ -6,8 +6,6 @@ definition {
 
 	setUp {
 		TestCase.setUpPortalInstance();
-
-		User.firstLoginPG();
 	}
 
 	tearDown {
@@ -30,6 +28,21 @@ definition {
 			Page.tearDownCP();
 		}
 	}
+
+	@priority = "5"
+	test RunCurl {
+		var portalURL = PropsUtil.get("portal.url");
+
+		var curl = '''
+			http://localhost:8080/o/headless-workflow-graphql/v1_0 \
+			-d {"query": "mutation($id:Long) { postWorkflowTaskAssignToMe(workflow_45_task_45_id:$id) { id  } }", "variables": {"id": 1}}
+		''';
+
+		com.liferay.poshi.runner.util.JSONCurlUtil.put("${curl}");
+
+		AssertConsoleTextNotPresent(value1 = "Query failed to validate");
+	}
+
 
 	@priority = "4"
 	test AddPollsQuestionWithExpirationDate {
