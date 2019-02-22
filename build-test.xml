@@ -6500,7 +6500,7 @@ go</echo>
 				<copy
 					file="@{log.file}"
 					overwrite="true"
-					tofile="${liferay.home}/cluster.log"
+					tofile="${liferay.home}/node.log"
 				/>
 			</sequential>
 		</for>
