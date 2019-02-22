@@ -7,6 +7,8 @@ definition {
 	property remote.elasticsearch.enabled = "true";
 	property testray.main.component.name = "Clustering";
 
+	property portal.acceptance = "test";
+
 	setUp {
 		TestCase.setUpPortalInstance();
 
