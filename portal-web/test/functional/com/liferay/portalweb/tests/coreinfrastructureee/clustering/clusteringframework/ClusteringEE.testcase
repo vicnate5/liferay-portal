@@ -387,6 +387,8 @@ definition {
 		property custom.properties = "cluster.link.enabled=true${line.separator}ehcache.replicator.properties.test.cache=replicatePutsViaCopy=true${line.separator}ehcache.bootstrap.cache.loader.enabled=false";
 		property test.name.skip.portal.instance = "ClusteringEE#CacheReplicationbyCopy";
 
+		property portal.acceptance = "test";
+
 		Clustering.viewClusterStatusInConsole();
 
 		Clustering.enableDebugging(
