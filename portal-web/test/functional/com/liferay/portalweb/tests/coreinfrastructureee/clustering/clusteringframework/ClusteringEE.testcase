@@ -483,6 +483,8 @@ definition {
 		property custom.properties = "ehcache.bootstrap.cache.loader.enabled=false${line.separator}ehcache.bootstrap.cache.loader.properties.test.cache=bootstrapAsynchronously=false";
 		property test.name.skip.portal.instance = "ClusteringEE#CacheBootstrapLoader";
 
+		property portal.acceptance = "test";
+
 		Clustering.viewClusterStatusInConsole();
 
 		Clustering.enableDebugging(
