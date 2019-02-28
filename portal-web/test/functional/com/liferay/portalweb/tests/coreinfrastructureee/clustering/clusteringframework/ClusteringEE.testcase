@@ -525,6 +525,8 @@ definition {
 			nodePort = "9080"
 		);
 
+		Pause(locator1 = "10000");
+
 		Clustering.viewTextNotPresentOnSpecificNode(
 			exceptionText = "Could not resolve module: com.liferay.cluster.test.module",
 			nodePort = "9080"
