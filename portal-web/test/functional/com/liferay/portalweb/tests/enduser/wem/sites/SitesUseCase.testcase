@@ -1155,13 +1155,7 @@ definition {
 
 		LAR.exportSuccess();
 
-		var valueName = selenium.getText("//ul/li/div/h5");
-
-		echo("value name ${valueName}");
-
-		var larFileName = RegexUtil.replace("${valueName}", "([a-zA-z0-9_.-]*)[(0-9KB)]*", "1");
-
-		echo("import file name ${larFileName}");
+		var larFileName = LAR.getLarFileName();
 
 		LexiconEntry.changeDisplayStyle(displayStyle = "list");
 
