@@ -272,6 +272,8 @@ definition {
 
 	@priority = "4"
 	test ViewContentSharingDisabledAcrossSitesViaAP {
+		property test.name.skip.portal.instance = "CPPortalSettings#ViewContentSharingDisabledAcrossSitesViaAP";
+
 		PortalSettings.gotoPortalSettings();
 
 		PortalSettings.configureContentSharingAcrossSitesCP(enableAcrossSite = "false");
