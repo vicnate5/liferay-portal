@@ -67,8 +67,6 @@ definition {
 
 			PortletEntry.save();
 
-			Panel.expandPanel(panel = "Content Sharing");
-
 			AssertChecked(
 				locator1 = "PortalSettingsContentSharing#CONTENT_SHARING_CHECKBOX"
 			);
