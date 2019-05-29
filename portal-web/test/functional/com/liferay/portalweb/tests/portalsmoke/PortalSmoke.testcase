@@ -33,9 +33,17 @@ definition {
 		property deploy.lcs.token.file = "true";
 		property environment.acceptance = "true";
 		property portal.fixpack.release = "true";
-		property portal.smoke = "false";
+		property portal.smoke = "true";
 		property portal.upstream = "false";
-		property test.run.environment = "EE";
+		property test.run.environment = "CE";
+
+		Clustering.deployJarOnSpecificServer(
+			liferayDependencyJars = "Liferay Connected Services Client - API.lpkg",
+			nodePort = "8080");
+
+		Clustering.deployJarOnSpecificServer(
+			liferayDependencyJars = "Liferay Connected Services Client - Impl.lpkg",
+			nodePort = "8080");
 
 		ProductMenu.gotoPortlet(
 			category = "Configuration",
