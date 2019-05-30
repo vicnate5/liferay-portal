@@ -37,13 +37,11 @@ definition {
 		property portal.upstream = "false";
 		property test.run.environment = "CE";
 
-		Clustering.deployJarOnSpecificServer(
-			liferayDependencyJars = "Liferay Connected Services Client - API.lpkg",
-			nodePort = "8080");
-
-		Clustering.deployJarOnSpecificServer(
-			liferayDependencyJars = "Liferay Connected Services Client - Impl.lpkg",
-			nodePort = "8080");
+		for (var jarFile : list "com.liferay.lcs.api-12.0.7.jar,com.liferay.lcs.client.api-5.1.1.jar,com.liferay.lcs.client.impl-1.0.21.jar,com.liferay.lcs.client.web-1.0.16.jar,com.liferay.lcs.keystore-1.0.1.jar,com.liferay.lcs.messaging-12.1.2.jar,com.liferay.lcs.security-1.0.6.jar") {
+			Clustering.deployJarOnSpecificServer(
+				liferayDependencyJars = "${jarFile}",
+				nodePort = "8080");
+		}
 
 		ProductMenu.gotoPortlet(
 			category = "Configuration",
