@@ -1,7 +1,7 @@
 task jarPatched(type: Zip)
 
 dependencies {
-	compileOnly group: "javax.xml.ws", name: "jaxws-api", transitive: false, version: "2.3.0"
+	compileOnly group: "com.liferay", name: "javax.xml.ws", transitive: false, version: "2.3.0.LIFERAY-PATCHED-1"
 }
 
 jar {

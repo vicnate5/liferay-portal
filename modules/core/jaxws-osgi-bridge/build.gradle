@@ -1,5 +1,5 @@
 dependencies {
-	compileOnly group: "javax.xml.ws", name: "jaxws-api", version: "2.3.1"
+	compileOnly group: "com.liferay", name: "javax.xml.ws", version: "2.3.0.LIFERAY-PATCHED-1"
 	compileOnly project(":core:registry-api")
 }
 
