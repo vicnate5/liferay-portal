@@ -238,7 +238,7 @@
 		</or>
 	</condition>
 
-	<fail message="Please use Java 1.8.">
+	<!-- <fail message="Please use Java 1.8.">
 		<condition>
 			<not>
 				<or>
@@ -247,7 +247,7 @@
 				</or>
 			</not>
 		</condition>
-	</fail>
+	</fail> -->
 
 	<condition property="correct.ant.version">
 		<antversion atleast="1.9.3" />
