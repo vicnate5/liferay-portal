@@ -1,4 +1,5 @@
 dependencies {
+	compileOnly group: "com.liferay", name: "javax.xml.bind", version: "2.3.0.LIFERAY-PATCHED-1"
 	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.9.9"
 	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.9.9"
 	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.9.9"
