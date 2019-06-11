@@ -7245,7 +7245,7 @@ persisted.scheduler.org.quartz.threadPool.threadCount=1
 
 virtual.hosts.default.site.name=
 
-com.liferay.portal.servlet.filters.strip.StripFilter=true
+com.liferay.portal.servlet.filters.strip.StripFilter=false
 
 web.server.http.port=8080</echo>
 
