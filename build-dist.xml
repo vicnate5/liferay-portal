@@ -100,6 +100,9 @@
 					value="${app.server.websphere.jvm.args} -Xquickstart ${app.server.websphere.jvm.mem}"
 				/>
 			</replace>
+
+			<loadfile property="temp-standalone-web-file" srcFile="${app.server.websphere.instance.dir}/config/cells/liferay-cell/nodes/liferay-node/servers/server1/server.xml" />
+			<echo> Replace for line 91/100 ${temp-standalone-web-file} </echo>
 		</sequential>
 	</macrodef>
 
@@ -901,6 +904,9 @@ this task.
 
 		<echo append="true" file="${app.server.jboss.bin.dir}/standalone.conf">${line.separator}JAVA_OPTS=${app.server.jboss.jvm.args} ${app.server.jboss.jvm.mem}</echo>
 
+		<loadfile property="temp-standalone-conf-file" srcFile="${app.server.jboss.bin.dir}/standalone.conf" />
+		<echo> Replace for line 897 ${temp-standalone-conf-file} </echo>
+
 		<replace
 			file="${app.server.jboss.bin.dir}/standalone.conf.bat"
 		>
@@ -914,6 +920,9 @@ this task.
 			<replacetoken><![CDATA[:JAVA_OPTS_SET]]></replacetoken>
 			<replacevalue expandProperties="true"><![CDATA[set "JAVA_OPTS=%JAVA_OPTS% ${app.server.jboss.jvm.args} ${app.server.jboss.jvm.mem}":JAVA_OPTS_SET]]></replacevalue>
 		</replace>
+
+		<loadfile property="temp-standalone-bat-file" srcFile="${app.server.jboss.bin.dir}/standalone.conf.bat" />
+		<echo> Replace for line 913 ${temp-standalone-bat-file} </echo>
 
 		<chmod
 			perm="a+x"
@@ -984,25 +993,25 @@ this task.
 			</else>
 		</if>
 
-		<if>
-			<os family="windows" />
-			<then>
-				<replace
-					file="${app.server.tcserver.bin.dir}/setenv.bat"
-				>
-					<replacetoken><![CDATA[set JVM_OPTS=-Xmx512M -Xss256K]]></replacetoken>
-					<replacevalue expandProperties="true"><![CDATA[set JVM_OPTS=${app.server.tcserver.jvm.args} ${app.server.tcserver.jvm.mem}]]></replacevalue>
-				</replace>
-			</then>
-			<else>
-				<replace
-					file="${app.server.tcserver.bin.dir}/setenv.sh"
-				>
-					<replacetoken><![CDATA[JVM_OPTS="-Xmx512M -Xss256K"]]></replacetoken>
-					<replacevalue expandProperties="true"><![CDATA[JVM_OPTS="${app.server.tcserver.jvm.args} ${app.server.tcserver.jvm.mem}"]]></replacevalue>
-				</replace>
-			</else>
-		</if>
+		<replace
+			file="${app.server.tcserver.bin.dir}/setenv.bat"
+		>
+			<replacetoken><![CDATA[set JVM_OPTS=-Xmx512M -Xss256K]]></replacetoken>
+			<replacevalue expandProperties="true"><![CDATA[set JVM_OPTS=${app.server.tcserver.jvm.args} ${app.server.tcserver.jvm.mem}]]></replacevalue>
+		</replace>
+
+		<loadfile property="temp-setenv-bat-file" srcFile="${app.server.tcserver.bin.dir}/setenv.bat" />
+		<echo> Replace for line 993 ${temp-setenv-bat-file} </echo>
+
+		<replace
+			file="${app.server.tcserver.bin.dir}/setenv.sh"
+		>
+			<replacetoken><![CDATA[JVM_OPTS="-Xmx512M -Xss256K"]]></replacetoken>
+			<replacevalue expandProperties="true"><![CDATA[JVM_OPTS="${app.server.tcserver.jvm.args} ${app.server.tcserver.jvm.mem}"]]></replacevalue>
+		</replace>
+
+		<loadfile property="temp-setenv-sh-file" srcFile="${app.server.tcserver.bin.dir}/setenv.sh" />
+		<echo> Replace for line 1003 ${temp-setenv-sh-file} </echo>
 
 		<replace
 			file="${app.server.tcserver.conf.dir}/catalina.properties"
@@ -1549,6 +1558,9 @@ closeTemplate()
 					</else>
 				</if>
 
+				<loadfile property="temp-weblogic-file" srcFile="${tstamp.value}/create-weblogic-domain.sh" />
+				<echo> Replace for line 1542 or 1527 ${temp-weblogic-file} </echo>
+
 				<chmod
 					file="${tstamp.value}/create-weblogic-domain.sh"
 					perm="744"
@@ -1573,6 +1585,9 @@ closeTemplate()
 						]]>
 					</replacevalue>
 				</replace>
+
+				<loadfile property="temp-weblogic-start-file" srcFile="${app.server.weblogic.instance.dir}/startWebLogic.sh" />
+				<echo> Replace for line 1575 ${temp-weblogic-start-file} </echo>
 
 				<replace
 					file="${app.server.weblogic.instance.dir}/startWebLogic.sh"
@@ -1691,6 +1706,9 @@ this task.
 					<replacetoken><![CDATA[-Xmx1024m]]></replacetoken>
 					<replacevalue expandProperties="true"><![CDATA[${app.server.weblogic.jvm.args} ${app.server.weblogic.jvm.mem}]]></replacevalue>
 				</replace>
+
+				<loadfile property="temp-startWeblogic-file" srcFile="${app.server.weblogic.instance.dir}/startWebLogic.sh" />
+				<echo> Replace for line 1703 ${temp-setenv-bat-file} </echo>
 			</then>
 			<elseif>
 				<os family="windows" />
@@ -2086,6 +2104,9 @@ and put it in ${app.server.parent.dir}. Then rerun this task.
 			<replacetoken><![CDATA[genericJvmArguments="-Xquickstart"]]></replacetoken>
 			<replacevalue><![CDATA[genericJvmArguments="-Xquickstart ${app.server.websphere.jvm.args}"]]></replacevalue>
 		</replace>
+
+		<loadfile property="temp-serverxml-file" srcFile="${app.server.websphere.instance.dir}/config/cells/liferay-cell/nodes/liferay-node/servers/server1/server.xml" />
+		<echo> Replace for line 2099/2092 ${temp-serverxml-file} </echo>
 
 		<echo>Installing fix pack. This may take a few minutes.</echo>
 
@@ -2484,6 +2505,9 @@ this task.
 			]]>
 		</echo>
 
+		<loadfile property="temp-standalone-conf-file" srcFile="${app.server.wildfly.bin.dir}/standalone.conf" />
+		<echo> Replace for line 2498 ${temp-standalone-conf-file} </echo>
+
 		<replace
 			file="${app.server.wildfly.bin.dir}/standalone.conf.bat"
 		>
@@ -2503,6 +2527,9 @@ this task.
 				]]>
 			</replacevalue>
 		</replace>
+
+		<loadfile property="temp-standalone-bat-file" srcFile="${app.server.wildfly.bin.dir}/standalone.conf.bat" />
+		<echo> Replace for line 2518 ${temp-standalone-bat-file} </echo>
 
 		<replace
 			file="${app.server.wildfly.instance.dir}/configuration/standalone.xml"
