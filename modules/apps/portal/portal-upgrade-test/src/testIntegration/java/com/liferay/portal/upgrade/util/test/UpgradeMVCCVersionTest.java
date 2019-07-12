@@ -35,8 +35,8 @@ public class UpgradeMVCCVersionTest extends UpgradeMVCCVersion {
 	public void setUp() throws Exception {
 		connection = DataAccess.getConnection();
 
-		runSQL(UpgradeMVCCVersionTestModuleTable.TABLE_SQL_CREATE);
-		runSQL(UpgradeMVCCVersionTestPortalTable.TABLE_SQL_CREATE);
+		runSQL(UpgradeMVCCVersionModuleTestTableClass.TABLE_SQL_CREATE);
+		runSQL(UpgradeMVCCVersionPortalTestTableClass.TABLE_SQL_CREATE);
 
 		_excludedTableNames = new String[0];
 		_moduleTableNames = new String[0];
@@ -44,8 +44,8 @@ public class UpgradeMVCCVersionTest extends UpgradeMVCCVersion {
 
 	@After
 	public void tearDown() throws Exception {
-		runSQL(UpgradeMVCCVersionTestModuleTable.TABLE_SQL_DROP);
-		runSQL(UpgradeMVCCVersionTestPortalTable.TABLE_SQL_DROP);
+		runSQL(UpgradeMVCCVersionModuleTestTableClass.TABLE_SQL_DROP);
+		runSQL(UpgradeMVCCVersionPortalTestTableClass.TABLE_SQL_DROP);
 
 		connection.close();
 	}
@@ -53,30 +53,30 @@ public class UpgradeMVCCVersionTest extends UpgradeMVCCVersion {
 	@Test
 	public void testUpgradeModuleMVCCVersion() throws Exception {
 		_excludedTableNames = new String[] {
-			UpgradeMVCCVersionTestPortalTable.TABLE_NAME
+			UpgradeMVCCVersionPortalTestTableClass.TABLE_NAME
 		};
 
 		_moduleTableNames = new String[] {
-			UpgradeMVCCVersionTestModuleTable.TABLE_NAME
+			UpgradeMVCCVersionModuleTestTableClass.TABLE_NAME
 		};
 
 		doUpgrade();
 
 		DBAssertionUtil.assertColumns(
-			UpgradeMVCCVersionTestModuleTable.TABLE_NAME, "_id", "_userId",
+			UpgradeMVCCVersionModuleTestTableClass.TABLE_NAME, "_id", "_userId",
 			"mvccVersion");
 	}
 
 	@Test
 	public void testUpgradePortalMVCCVersion() throws Exception {
 		_excludedTableNames = new String[] {
-			UpgradeMVCCVersionTestModuleTable.TABLE_NAME
+			UpgradeMVCCVersionModuleTestTableClass.TABLE_NAME
 		};
 
 		doUpgrade();
 
 		DBAssertionUtil.assertColumns(
-			UpgradeMVCCVersionTestPortalTable.TABLE_NAME, "_id", "_userId",
+			UpgradeMVCCVersionPortalTestTableClass.TABLE_NAME, "_id", "_userId",
 			"mvccversion");
 	}
 
@@ -93,29 +93,29 @@ public class UpgradeMVCCVersionTest extends UpgradeMVCCVersion {
 	private String[] _excludedTableNames;
 	private String[] _moduleTableNames;
 
-	private class UpgradeMVCCVersionTestModuleTable {
+	private class UpgradeMVCCVersionModuleTestTableClass {
 
-		public static final String TABLE_NAME = "UpgradeMVCCVersionTestModule";
+		public static final String TABLE_NAME = "UpgradeMVCCVersionModuleTest";
 
 		public static final String TABLE_SQL_CREATE =
-			"create table UpgradeMVCCVersionTestModule(_id LONG not null " +
+			"create table UpgradeMVCCVersionModuleTest(_id LONG not null " +
 				"primary key, _userId LONG)";
 
 		public static final String TABLE_SQL_DROP =
-			"drop table UpgradeMVCCVersionTestModule";
+			"drop table UpgradeMVCCVersionModuleTest";
 
 	}
 
-	private class UpgradeMVCCVersionTestPortalTable {
+	private class UpgradeMVCCVersionPortalTestTableClass {
 
-		public static final String TABLE_NAME = "UpgradeMVCCVersionTestPortal";
+		public static final String TABLE_NAME = "UpgradeMVCCVersionPortalTest";
 
 		public static final String TABLE_SQL_CREATE =
-			"create table UpgradeMVCCVersionTestPortal(_id LONG not null " +
+			"create table UpgradeMVCCVersionPortalTest(_id LONG not null " +
 				"primary key, _userId LONG)";
 
 		public static final String TABLE_SQL_DROP =
-			"drop table UpgradeMVCCVersionTestPortal";
+			"drop table UpgradeMVCCVersionPortalTest";
 
 	}
 
