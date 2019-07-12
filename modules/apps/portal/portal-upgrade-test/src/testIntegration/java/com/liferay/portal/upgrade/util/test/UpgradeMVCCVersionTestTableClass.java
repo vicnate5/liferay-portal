@@ -17,15 +17,15 @@ package com.liferay.portal.upgrade.util.test;
 /**
  * @author Alicia García
  */
-public class UpgradeMVCCVersionPortalTestTableClass {
+public class UpgradeMVCCVersionTestTableClass {
 
-	public static final String TABLE_NAME = "UpgradeMVCCVersionPortalTest";
+	public static final String TABLE_NAME = "UpgradeMVCCVersionTest";
 
 	public static final String TABLE_SQL_CREATE =
-		"create table UpgradeMVCCVersionPortalTest(_id LONG not null primary " +
-			"key, _userId LONG)";
+		"create table UpgradeMVCCVersionTest(_id LONG not null primary key" +
+			", _userId LONG)";
 
 	public static final String TABLE_SQL_DROP =
-		"drop table UpgradeMVCCVersionPortalTest";
+		"drop table UpgradeMVCCVersionTest";
 
 }

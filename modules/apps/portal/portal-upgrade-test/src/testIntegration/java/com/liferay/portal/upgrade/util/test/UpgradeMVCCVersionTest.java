@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.test.util.DBAssertionUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeMVCCVersion;
 
+import java.sql.DatabaseMetaData;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +28,6 @@ import org.junit.runner.RunWith;
 
 /**
  * @author Alicia García
- * @author Alberto Chaparro
  */
 @RunWith(Arquillian.class)
 public class UpgradeMVCCVersionTest extends UpgradeMVCCVersion {
@@ -35,62 +36,35 @@ public class UpgradeMVCCVersionTest extends UpgradeMVCCVersion {
 	public void setUp() throws Exception {
 		connection = DataAccess.getConnection();
 
-		runSQL(UpgradeMVCCVersionModuleTestTableClass.TABLE_SQL_CREATE);
-		runSQL(UpgradeMVCCVersionPortalTestTableClass.TABLE_SQL_CREATE);
-
-		_excludedTableNames = new String[0];
-		_moduleTableNames = new String[0];
+		runSQL(UpgradeMVCCVersionTestTableClass.TABLE_SQL_CREATE);
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		runSQL(UpgradeMVCCVersionModuleTestTableClass.TABLE_SQL_DROP);
-		runSQL(UpgradeMVCCVersionPortalTestTableClass.TABLE_SQL_DROP);
+		runSQL(UpgradeMVCCVersionTestTableClass.TABLE_SQL_DROP);
 
 		connection.close();
 	}
 
 	@Test
-	public void testUpgradeModuleMVCCVersion() throws Exception {
-		_excludedTableNames = new String[] {
-			UpgradeMVCCVersionPortalTestTableClass.TABLE_NAME
-		};
-
-		_moduleTableNames = new String[] {
-			UpgradeMVCCVersionModuleTestTableClass.TABLE_NAME
-		};
-
+	public void testDoUpgrade() throws Exception {
 		doUpgrade();
 
 		DBAssertionUtil.assertColumns(
-			UpgradeMVCCVersionModuleTestTableClass.TABLE_NAME, "_id", "_userId",
-			"mvccVersion");
-	}
-
-	@Test
-	public void testUpgradePortalMVCCVersion() throws Exception {
-		_excludedTableNames = new String[] {
-			UpgradeMVCCVersionModuleTestTableClass.TABLE_NAME
-		};
-
-		doUpgrade();
-
-		DBAssertionUtil.assertColumns(
-			UpgradeMVCCVersionPortalTestTableClass.TABLE_NAME, "_id", "_userId",
+			UpgradeMVCCVersionTestTableClass.TABLE_NAME, "_id", "_userId",
 			"mvccversion");
 	}
 
-	@Override
-	protected String[] getExcludedTableNames() {
-		return _excludedTableNames;
-	}
+	@Test
+	public void testUpgradeMVCCVersion() throws Exception {
+		DatabaseMetaData databaseMetaData = connection.getMetaData();
 
-	@Override
-	protected String[] getModuleTableNames() {
-		return _moduleTableNames;
-	}
+		upgradeMVCCVersion(
+			databaseMetaData, UpgradeMVCCVersionTestTableClass.TABLE_NAME);
 
-	private String[] _excludedTableNames;
-	private String[] _moduleTableNames;
+		DBAssertionUtil.assertColumns(
+			UpgradeMVCCVersionTestTableClass.TABLE_NAME, "_id", "_userId",
+			"mvccVersion");
+	}
 
 }
