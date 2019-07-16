@@ -285,6 +285,8 @@ definition {
 		}
 
 		Open(locator1 = "${baseURL}/web/guest/home");
+
+		Pause(locator1 = "3000");
 	}
 
 	macro openWithAppendToBaseURL {
