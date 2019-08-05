@@ -7484,26 +7484,6 @@ auto.deploy.dest.dir=C:/WINDOWS/system32/config/systemprofile/liferay/websphere-
 				value="verify.frequency=1"
 			/>
 		</replace>
-
-		<get-testcase-property property.name="deploy.lcs.token.file" />
-
-		<if>
-			<and>
-				<equals arg1="${app.server.type}" arg2="websphere" />
-				<equals arg1="${deploy.lcs.token.file}" arg2="true" />
-			</and>
-			<then>
-				<replace
-					file="portal-impl/src/portal.properties"
-				>
-					<replacetoken><![CDATA[        sun.*,\]]></replacetoken>
-					<replacevalue><![CDATA[        com.ibm.crypto.*,\
-        sun.*,\]]></replacevalue>
-				</replace>
-
-				<print-file file.name="portal-impl/src/portal.properties" />
-			</then>
-		</if>
 	</target>
 
 	<target name="prepare-portal-ssl">
