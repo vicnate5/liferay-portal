@@ -7500,6 +7500,8 @@ auto.deploy.dest.dir=C:/WINDOWS/system32/config/systemprofile/liferay/websphere-
 					<replacevalue><![CDATA[        com.ibm.crypto.*,\
         sun.*,\]]></replacevalue>
 				</replace>
+
+				<print-file file.name="portal-impl/src/portal.properties" />
 			</then>
 		</if>
 	</target>

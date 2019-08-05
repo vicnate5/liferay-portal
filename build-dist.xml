@@ -112,6 +112,8 @@
 				<replacevalue><![CDATA[<systemProperties xmi:id="Property_2" name="com.ibm.security.krb5.Krb5Debug" value="off" required="false"/>
       <systemProperties xmi:id="Property_1234" name="com.ibm.crypto.provider.DoRSATypeChecking" value="false" required="false"/>]]></replacevalue>
 			</replace>
+
+			<print-file file.name="${app.server.websphere.instance.dir}/config/cells/liferay-cell/nodes/liferay-node/servers/server1/server.xml" />
 		</sequential>
 	</macrodef>
 
