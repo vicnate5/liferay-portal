@@ -13,12 +13,12 @@
 
 	<macrodef name="print-lcs-logs">
 		<sequential>
-			<echo>ATTEMPTING TO PRINT LCS LOGS AT ${app.server.log.dir}</echo>
+			<echo>ATTEMPTING TO PRINT LCS LOGS AT ${liferay.home}/logs</echo>
 
 			<var name="log.files" unset="true" />
 
 			<fileset
-				dir="${app.server.log.dir}"
+				dir="${liferay.home}/logs"
 				id="log.files"
 			>
 				<include name="lcs*.log" />
