@@ -7,6 +7,33 @@
 		<isset property="env.AXIS_VARIABLE" />
 	</condition>
 
+	<target name="lcs">
+		<print-lcs-logs />
+	</target>
+
+	<macrodef name="print-lcs-logs">
+		<sequential>
+			<echo>ATTEMPTING TO PRINT LCS LOGS AT ${app.server.log.dir}</echo>
+
+			<var name="log.files" unset="true" />
+
+			<fileset
+				dir="${app.server.log.dir}"
+				id="log.files"
+			>
+				<include name="lcs*.log" />
+			</fileset>
+
+			<pathconvert pathsep="," property="log.files" refid="log.files" />
+
+			<for list="${log.files}" param="log.file">
+				<sequential>
+					<print-file file.name="@{log.file}" />
+				</sequential>
+			</for>
+		</sequential>
+	</macrodef>
+
 	<macrodef name="check-jenkins-console">
 		<sequential>
 			<if>
@@ -1327,6 +1354,8 @@ app.server.type=@{app.server.type}]]></echo>
 										<property name="test.class" value="${test.class}" />
 									</ant>
 
+									<print-lcs-logs />
+
 									<if>
 										<equals arg1="@{test.legacy.database.dump}" arg2="true" />
 										<then>
@@ -1342,23 +1371,6 @@ app.server.type=@{app.server.type}]]></echo>
 									</if>
 								</try>
 								<finally>
-									<var name="log.files" unset="true" />
-
-									<fileset
-										dir="${app.server.log.dir}"
-										id="log.files"
-									>
-										<include name="lcs*.log" />
-									</fileset>
-
-									<pathconvert pathsep="," property="log.files" refid="log.files" />
-
-									<for list="${log.files}" param="log.file">
-										<sequential>
-											<print-file file.name="@{log.file}" />
-										</sequential>
-									</for>
-
 									<if>
 										<equals arg1="@{test.portal.log.assert}" arg2="true" />
 										<then>
