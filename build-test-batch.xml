@@ -1342,6 +1342,23 @@ app.server.type=@{app.server.type}]]></echo>
 									</if>
 								</try>
 								<finally>
+									<var name="log.files" unset="true" />
+
+									<fileset
+										dir="${app.server.log.dir}"
+										id="log.files"
+									>
+										<include name="lcs*.log" />
+									</fileset>
+
+									<pathconvert pathsep="," property="log.files" refid="log.files" />
+
+									<for list="${log.files}" param="log.file">
+										<sequential>
+											<print-file file.name="@{log.file}" />
+										</sequential>
+									</for>
+
 									<if>
 										<equals arg1="@{test.portal.log.assert}" arg2="true" />
 										<then>
