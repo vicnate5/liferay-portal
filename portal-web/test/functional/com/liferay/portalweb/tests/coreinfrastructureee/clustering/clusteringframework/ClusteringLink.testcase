@@ -88,6 +88,22 @@ definition {
 		AssertConsoleTextPresent(value1 = "properties: TCP");
 		AssertConsoleTextPresent(value1 = "Autodetecting JGroups outgoing IP address and interface for www.google.com:80");
 
+		var nodePort = "8080";
+
+		var leadingPortNumber = StringUtil.replace("${nodePort}", "080", "");
+		var bundleIndex = MathUtil.difference("${leadingPortNumber}", "8");
+
+		AntCommand(
+			locator1 = "build-test.xml",
+			value1 = "copy-cluster-log -Dapp.server.bundle.index=${bundleIndex}");
+
+		var liferayHome = PropsUtil.get("liferay.home.dir.name");
+		var fileContent = FileUtil.read("${liferayHome}/cluster${bundleIndex}.log");
+
+		var ipAddress = StringUtil.extractLast("${fileContent}", "Setting JGroups outgoing IP address to");
+		var ipAddress = StringUtil.extractFirst("${ipAddress}", "and interface to");
+		var ipAddress = StringUtil.trim("${ipAddress}");
+
 		Portlet.shutdownServer();
 
 		AntCommand(
@@ -102,8 +118,6 @@ definition {
 		AssertConsoleTextNotPresent(value1 = "Autodetecting JGroups outgoing IP address and interface for www.google.com:80");
 
 		Portlet.shutdownServer();
-
-		var ipAddress = PropsUtil.get("ip.address");
 
 		AntCommand(
 			locator1 = "build-test.xml",
