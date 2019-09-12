@@ -5863,6 +5863,8 @@ ${output.content}</echo>
 
 								<antcall inheritall="false" target="stop-app-server" />
 
+								<delete dir="${liferay.home}" />
+
 								<property name="test.build.fix.pack.zip.url" value="http://mirrors.lax.liferay.com/files.liferay.com/private/ee/fix-packs/7.2.10/dxp/liferay-fix-pack-dxp-1-7210.zip" />
 								<property name="test.portal.bundle.dependencies.zip.url" value="http://mirrors.lax.liferay.com/files.liferay.com/private/ee/portal/7.2.10/liferay-dxp-dependencies-7.2.10-ga1-20190531140450482.zip" />
 								<property name="test.portal.bundle.osgi.zip.url" value="http://mirrors.lax.liferay.com/files.liferay.com/private/ee/portal/7.2.10/liferay-dxp-osgi-7.2.10-ga1-20190531140450482.zip" />
@@ -5882,6 +5884,16 @@ ${output.content}</echo>
 									test.portal.bundle.zip.url="${test.portal.bundle.zip.url}"
 									test.sql.zip.url="${test.sql.zip.url}"
 								/>
+
+								<antcall inheritAll="false" target="prepare-log4j-ext-xml">
+									<param name="database.type" value="@{database.type}" />
+								</antcall>
+
+								<antcall inheritAll="false" target="prepare-portal-ext-properties">
+									<param name="database.type" value="@{database.type}" />
+								</antcall>
+
+								<antcall inheritAll="false" target="prepare-system-ext-properties" />
 
 								<antcall inheritall="false" target="start-app-server" />
 
