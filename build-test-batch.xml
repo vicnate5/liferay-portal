@@ -5863,17 +5863,13 @@ ${output.content}</echo>
 
 								<antcall inheritall="false" target="stop-app-server" />
 
-								<echo>
-									test.build.fix.pack.zip.url="${test.build.fix.pack.zip.url}"
-									test.fix.pack.base.url="${test.fix.pack.base.url}"
-									test.license.xml.url="${test.license.xml.url}"
-									test.portal.bundle.dependencies.zip.url="${test.portal.bundle.dependencies.zip.url}"
-									test.portal.bundle.osgi.zip.url="${test.portal.bundle.osgi.zip.url}"
-									test.portal.bundle.tools.zip.url="${test.portal.bundle.tools.zip.url}"
-									test.portal.bundle.war.url="${test.portal.bundle.war.url}"
-									test.portal.bundle.zip.url="${test.portal.bundle.zip.url}"
-									test.sql.zip.url="${test.sql.zip.url}"
-								</echo>
+								<property name="test.build.fix.pack.zip.url" value="http://mirrors.lax.liferay.com/files.liferay.com/private/ee/fix-packs/7.2.10/dxp/liferay-fix-pack-dxp-1-7210.zip" />
+								<property name="test.portal.bundle.dependencies.zip.url" value="http://mirrors.lax.liferay.com/files.liferay.com/private/ee/portal/7.2.10/liferay-dxp-dependencies-7.2.10-ga1-20190531140450482.zip" />
+								<property name="test.portal.bundle.osgi.zip.url" value="http://mirrors.lax.liferay.com/files.liferay.com/private/ee/portal/7.2.10/liferay-dxp-osgi-7.2.10-ga1-20190531140450482.zip" />
+								<property name="test.portal.bundle.tools.zip.url" value="http://mirrors.lax.liferay.com/files.liferay.com/private/ee/portal/7.2.10/liferay-dxp-tools-7.2.10-ga1-20190531140450482.zip" />
+								<property name="test.portal.bundle.war.url" value="http://mirrors.lax.liferay.com/files.liferay.com/private/ee/portal/7.2.10/liferay-dxp-7.2.10-ga1-20190531140450482.war" />
+								<property name="test.portal.bundle.zip.url" value="http://mirrors.lax.liferay.com/files.liferay.com/private/ee/portal/7.2.10/liferay-dxp-tomcat-7.2.10-ga1-20190531140450482.7z" />
+								<property name="test.sql.zip.url" value="http://mirrors.lax.liferay.com/files.liferay.com/private/ee/portal/7.2.10/liferay-dxp-sql-7.2.10-ga1-20190531140450482.zip" />
 
 								<prepare-release-test-environment
 									test.build.fix.pack.zip.url="${test.build.fix.pack.zip.url}"
