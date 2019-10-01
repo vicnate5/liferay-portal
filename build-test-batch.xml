@@ -2253,6 +2253,7 @@ log.sanitizer.enabled=false</echo>
 
 							<gradle-execute dir="modules" refreshdependencies="@{refreshdependencies}" task="testIntegration">
 								<arg value="--continue" />
+								<arg value="--exclude-task=setupTestableTomcat" />
 								<arg value="--exclude-task=startTestableTomcat" />
 								<arg value="--exclude-task=stopTestableTomcat" />
 								<arg value="-Dbuild.exclude.ant.plugin=true" />
