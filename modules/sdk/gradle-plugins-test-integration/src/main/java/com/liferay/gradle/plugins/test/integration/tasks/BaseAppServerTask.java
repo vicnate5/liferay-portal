@@ -120,12 +120,17 @@ public abstract class BaseAppServerTask extends DefaultTask {
 			URL url = new URL(
 				"http", getHostName(), getPortNumber(), getCheckPath());
 
+			System.out.println("isReachable");
+			System.out.println(url);
+
 			HttpURLConnection httpURLConnection =
 				(HttpURLConnection)url.openConnection();
 
 			httpURLConnection.setRequestMethod("GET");
 
 			int responseCode = httpURLConnection.getResponseCode();
+
+			System.out.println(responseCode);
 
 			if ((responseCode > 0) && (responseCode < 400)) {
 				return true;
