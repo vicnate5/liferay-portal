@@ -782,6 +782,29 @@ definition {
 		User.loginPG();
 	}
 
+	@priority = "5"
+	test ViewCanonicalURLWithLocalizedFriendlyURL {
+		property testray.component.names = "Site Localization";
+
+		JSONGroup.addGroup(groupName = "Site Name");
+
+		JSONLayout.addPublicLayout(
+			groupName = "Site Name",
+			layoutName = "Site Page");
+
+		User.logoutPG();
+
+		var portalURL = PropsUtil.get("portal.url");
+
+		Navigator.openSpecificURL(url = "${portalURL}/web/site-name");
+
+		Page.assertCanonicalURL(portalURL = "${portalURL}/web/site-name");
+
+		Navigator.openSpecificURL(url = "${portalURL}/es/web/site-name");
+
+		Page.assertCanonicalURL(portalURL = "${portalURL}/web/site-name");
+	}
+
 	@priority = "4"
 	test ViewEditURLLocale {
 		property custom.properties = "locale.use.default.if.not.available=true";
