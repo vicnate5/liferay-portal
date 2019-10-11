@@ -42,6 +42,8 @@ import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
+import javax.management.MBeanServer;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Assert;
@@ -238,6 +240,9 @@ public class ServicePreActionTest {
 
 	@DeleteAfterTestRun
 	private Group _group;
+
+	@Inject
+	private static MBeanServer _mBeanServer;
 
 	@Inject
 	private PermissionCheckerFactory _permissionCheckerFactory;
