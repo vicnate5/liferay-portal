@@ -42,6 +42,10 @@ definition {
 		Button.click(button = "Install");
 	}
 
+	macro clickLocalizedSave {
+		Button.click(button = "${localizedSaveButton}");
+	}
+
 	macro clickMap {
 		Button.click(button = "Map");
 	}
