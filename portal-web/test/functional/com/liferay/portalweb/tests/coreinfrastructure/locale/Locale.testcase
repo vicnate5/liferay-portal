@@ -1,0 +1,39 @@
+@component-name = "portal-locale"
+definition {
+
+	property portal.release = "true";
+	property portal.upstream = "true";
+	property testray.main.component.name = "Locale";
+
+	setUp {
+		User.firstLoginPG(
+			localization = "ES",
+			localizedAgree = "Acepto",
+			localizedAnswer = "Respuesta",
+			localizedSaveButton = "Guardar");
+	}
+
+	@priority = "4"
+	test RestrictDefaultLanguage {
+		property custom.properties = "company.default.locale=es_ES";
+
+		ProductMenu.gotoPortlet(
+			category = "Configuración",
+			panel = "Control Panel",
+			portlet = "Configuración de instancia");
+
+		PortalSettings.viewCurrentDefaultPortalLanguageCP(
+			defaultPortalLanguage = "español (España)",
+			localizationTranslation = "Localización");
+
+		ProductMenu.gotoPortlet(
+			category = "Contenido",
+			panel = "Site Administration",
+			portlet = "Contenido Web");
+
+		LexiconEntry.gotoAddMenuItem(menuItem = "Contenido web básico");
+
+		PortletEntry.viewLocale(locale = "es-ES");
+	}
+
+}
