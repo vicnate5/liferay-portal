@@ -17,6 +17,7 @@ import React from 'react';
 import {useDrop} from 'react-dnd';
 import Button from '../../components/button/Button.es';
 import Table from '../../components/table/Table.es';
+import {DRAG_FIELD_TYPE} from '../../utils/dragTypes.es';
 
 const generateItems = (columns, rows = 10) => {
 	const items = [];
@@ -37,19 +38,19 @@ const generateItem = (columns, index) =>
 		{}
 	);
 
-const DropZone = ({columns, onAddColumn, onRemoveColumn}) => {
+const DropZone = ({fields, onAddFieldName, onRemoveFieldName}) => {
 	const [{canDrop, overTarget}, drop] = useDrop({
-		accept: 'fieldType',
+		accept: DRAG_FIELD_TYPE,
 		collect: monitor => ({
 			canDrop: monitor.canDrop(),
 			overTarget: monitor.isOver()
 		}),
-		drop: item => {
-			onAddColumn(item.label);
+		drop: ({data: {name}}) => {
+			onAddFieldName(name);
 		}
 	});
 
-	if (columns.length == 0) {
+	if (fields.length == 0) {
 		return (
 			<div
 				className={classNames('empty-drop-zone', {
@@ -70,17 +71,17 @@ const DropZone = ({columns, onAddColumn, onRemoveColumn}) => {
 	return (
 		<Table
 			actions={[]}
-			columns={columns.map(column => ({
-				key: column,
+			columns={fields.map(({name, label: {en_US: label}}) => ({
+				key: label,
 				value: (
 					<div className="container p-0">
 						<div className="row align-items-center">
-							<div className="col">{column}</div>
+							<div className="col">{label}</div>
 							<div className="col-md-auto">
 								<Button
 									borderless
 									displayType="secondary"
-									onClick={() => onRemoveColumn(column)}
+									onClick={() => onRemoveFieldName(name)}
 									symbol="trash"
 									tooltip={Liferay.Language.get('remove')}
 								/>
@@ -89,7 +90,7 @@ const DropZone = ({columns, onAddColumn, onRemoveColumn}) => {
 					</div>
 				)
 			}))}
-			items={generateItems(columns)}
+			items={generateItems(fields.map(field => field.label.en_US))}
 			ref={drop}
 		/>
 	);

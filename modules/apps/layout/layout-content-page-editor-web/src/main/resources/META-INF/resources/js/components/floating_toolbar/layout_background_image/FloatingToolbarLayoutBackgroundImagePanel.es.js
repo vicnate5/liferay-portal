@@ -29,7 +29,7 @@ import {
 import {getConnectedComponent} from '../../../store/ConnectedComponent.es';
 import {getMappingSourceTypes} from '../../../utils/FragmentsEditorGetUtils.es';
 import {
-	openAssetBrowser,
+	openItemSelector,
 	openImageSelector
 } from '../../../utils/FragmentsEditorDialogUtils';
 import {setIn} from '../../../utils/FragmentsEditorUpdateUtils.es';
@@ -265,23 +265,12 @@ class FloatingToolbarLayoutBackgroundImagePanel extends Component {
 	}
 
 	/**
-	 * @param {MouseEvent} event
 	 * @private
 	 * @review
 	 */
-	_handleAssetBrowserLinkClick(event) {
-		const {
-			assetBrowserUrl,
-			assetBrowserWindowTitle
-		} = event.delegateTarget.dataset;
-
-		openAssetBrowser({
-			assetBrowserURL: assetBrowserUrl,
-			callback: selectedAssetEntry => {
-				this._selectAssetEntry(selectedAssetEntry);
-			},
-			eventName: `${this.portletNamespace}selectAsset`,
-			modalTitle: assetBrowserWindowTitle
+	_handleAssetBrowserLinkClick() {
+		openItemSelector(selectedInfoItem => {
+			this._selectAssetEntry(selectedInfoItem);
 		});
 	}
 
@@ -317,11 +306,7 @@ class FloatingToolbarLayoutBackgroundImagePanel extends Component {
 	 * @review
 	 */
 	_handleSelectButtonClick() {
-		openImageSelector({
-			callback: image => this._updateRowBackgroundImage(image),
-			imageSelectorURL: this.imageSelectorURL,
-			portletNamespace: this.portletNamespace
-		});
+		openImageSelector(image => this._updateRowBackgroundImage(image));
 	}
 
 	/**
@@ -546,14 +531,7 @@ FloatingToolbarLayoutBackgroundImagePanel.STATE = {
 
 const ConnectedFloatingToolbarLayoutBackgroundImagePanel = getConnectedComponent(
 	FloatingToolbarLayoutBackgroundImagePanel,
-	[
-		'assetBrowserLinks',
-		'imageSelectorURL',
-		'mappedAssetEntries',
-		'mappingFieldsURL',
-		'portletNamespace',
-		'selectedMappingTypes'
-	]
+	['mappedAssetEntries', 'mappingFieldsURL', 'selectedMappingTypes']
 );
 
 Soy.register(ConnectedFloatingToolbarLayoutBackgroundImagePanel, templates);

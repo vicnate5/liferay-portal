@@ -12,7 +12,7 @@
  * details.
  */
 
-import '../../common/AssetSelector.es';
+import '../../common/InfoItemSelector.es';
 import {debounce, PortletBase} from 'frontend-js-web';
 import Soy, {Config} from 'metal-soy';
 
@@ -32,7 +32,7 @@ import getConnectedComponent from '../../../store/ConnectedComponent.es';
 import {getMappingSourceTypes} from '../../../utils/FragmentsEditorGetUtils.es';
 import {setIn} from '../../../utils/FragmentsEditorUpdateUtils.es';
 import {encodeAssetId} from '../../../utils/FragmentsEditorIdUtils.es';
-import {openAssetBrowser} from '../../../utils/FragmentsEditorDialogUtils';
+import {openItemSelector} from '../../../utils/FragmentsEditorDialogUtils';
 
 /**
  * FloatingToolbarLinkPanel
@@ -233,26 +233,13 @@ class FloatingToolbarLinkPanel extends PortletBase {
 	}
 
 	/**
-	 * @param {MouseEvent} event
 	 * @private
 	 * @review
 	 */
-	_handleAssetBrowserLinkClick(event) {
-		const {
-			assetBrowserUrl,
-			assetBrowserWindowTitle
-		} = event.delegateTarget.dataset;
-
-		openAssetBrowser({
-			assetBrowserURL: assetBrowserUrl,
-			callback: selectedAssetEntry => {
-				this._selectAssetEntry(selectedAssetEntry);
-
-				this._focusPanel();
-			},
-			eventName: `${this.portletNamespace}selectAsset`,
-			modalTitle: assetBrowserWindowTitle,
-			portletNamespace: this.portletNamespace
+	_handleAssetBrowserLinkClick() {
+		openItemSelector(selectedInfoItem => {
+			this._selectAssetEntry(selectedInfoItem);
+			this._focusPanel();
 		});
 	}
 
@@ -575,12 +562,10 @@ FloatingToolbarLinkPanel.STATE = {
 const ConnectedFloatingToolbarLinkPanel = getConnectedComponent(
 	FloatingToolbarLinkPanel,
 	[
-		'assetBrowserLinks',
 		'getAssetFieldValueURL',
 		'getAssetMappingFieldsURL',
 		'mappedAssetEntries',
 		'mappingFieldsURL',
-		'portletNamespace',
 		'selectedMappingTypes',
 		'spritemap'
 	]

@@ -23,6 +23,7 @@ import com.liferay.rtl.css.RTLCSSConverter;
 import com.liferay.sass.compiler.SassCompiler;
 import com.liferay.sass.compiler.SassCompilerException;
 import com.liferay.sass.compiler.jni.internal.JniSassCompiler;
+import com.liferay.sass.compiler.jsass.internal.JSassCompiler;
 import com.liferay.sass.compiler.ruby.internal.RubySassCompiler;
 
 import java.io.File;
@@ -291,14 +292,14 @@ public class CSSBuilder implements AutoCloseable {
 
 		if ((sassCompilerClassName == null) ||
 			sassCompilerClassName.isEmpty() ||
-			sassCompilerClassName.equals("jni")) {
+			sassCompilerClassName.equals("jni32")) {
 
 			try {
 				System.setProperty("jna.nosys", Boolean.TRUE.toString());
 
 				_sassCompiler = new JniSassCompiler(precision);
 
-				System.out.println("Using native Sass compiler");
+				System.out.println("Using native 32-bit Sass compiler");
 			}
 			catch (Throwable t) {
 				System.out.println(
@@ -317,9 +318,7 @@ public class CSSBuilder implements AutoCloseable {
 				System.out.println(
 					"Unable to load Ruby compiler, falling back to native");
 
-				System.setProperty("jna.nosys", Boolean.TRUE.toString());
-
-				_sassCompiler = new JniSassCompiler(precision);
+				_sassCompiler = new JSassCompiler(precision);
 			}
 		}
 	}

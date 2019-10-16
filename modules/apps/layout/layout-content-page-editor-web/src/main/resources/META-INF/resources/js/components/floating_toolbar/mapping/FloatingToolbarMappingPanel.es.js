@@ -15,7 +15,7 @@
 import {PortletBase} from 'frontend-js-web';
 import Soy, {Config} from 'metal-soy';
 
-import '../../common/AssetSelector.es';
+import '../../common/InfoItemSelector.es';
 import './FloatingToolbarMappingPanelDelegateTemplate.soy';
 import {ADD_MAPPED_ASSET_ENTRY} from '../../../actions/actions.es';
 import {
@@ -29,7 +29,7 @@ import {encodeAssetId} from '../../../utils/FragmentsEditorIdUtils.es';
 import getConnectedComponent from '../../../store/ConnectedComponent.es';
 import {getMappingSourceTypes} from '../../../utils/FragmentsEditorGetUtils.es';
 import {
-	openAssetBrowser,
+	openItemSelector,
 	openCreateContentDialog
 } from '../../../utils/FragmentsEditorDialogUtils';
 import {setIn} from '../../../utils/FragmentsEditorUpdateUtils.es';
@@ -203,27 +203,16 @@ class FloatingToolbarMappingPanel extends PortletBase {
 	}
 
 	/**
-	 * @param {MouseEvent} event
 	 * @private
 	 * @review
 	 */
-	_handleAssetBrowserLinkClick(event) {
-		const {
-			assetBrowserUrl,
-			assetBrowserWindowTitle
-		} = event.delegateTarget.dataset;
+	_handleAssetBrowserLinkClick() {
+		openItemSelector(selectedInfoItem => {
+			this._selectAssetEntry(selectedInfoItem);
 
-		openAssetBrowser({
-			assetBrowserURL: assetBrowserUrl,
-			callback: selectedAssetEntry => {
-				this._selectAssetEntry(selectedAssetEntry);
-
-				requestAnimationFrame(() => {
-					this.refs.panel.focus();
-				});
-			},
-			eventName: `${this.portletNamespace}selectAsset`,
-			modalTitle: assetBrowserWindowTitle
+			requestAnimationFrame(() => {
+				this.refs.panel.focus();
+			});
 		});
 	}
 
@@ -460,14 +449,12 @@ FloatingToolbarMappingPanel.STATE = {
 const ConnectedFloatingToolbarMappingPanel = getConnectedComponent(
 	FloatingToolbarMappingPanel,
 	[
-		'assetBrowserLinks',
 		'contentCreationEnabled',
 		'defaultSegmentsExperienceId',
 		'getAssetMappingFieldsURL',
 		'languageId',
 		'mappedAssetEntries',
 		'mappingFieldsURL',
-		'portletNamespace',
 		'segmentsExperienceId',
 		'selectedItems',
 		'selectedMappingTypes'

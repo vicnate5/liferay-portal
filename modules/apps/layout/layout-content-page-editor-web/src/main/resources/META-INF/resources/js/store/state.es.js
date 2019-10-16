@@ -98,35 +98,6 @@ const INITIAL_STATE = {
 	addStructuredContentURL: Config.string().value(''),
 
 	/**
-	 * List of asset browser links that can be used
-	 * for selecting an asset
-	 * @default []
-	 * @review
-	 * @type {object[]}
-	 */
-	assetBrowserLinks: Config.arrayOf(
-		Config.shapeOf({
-			href: Config.string(),
-			typeName: Config.string()
-		})
-	).value([]),
-
-	availableAssets: Config.arrayOf(
-		Config.shapeOf({
-			availableTemplates: Config.arrayOf(
-				Config.shapeOf({
-					key: Config.string(),
-					label: Config.string()
-				})
-			),
-			className: Config.string(),
-			classNameId: Config.string(),
-			href: Config.string(),
-			name: Config.string()
-		})
-	).value([]),
-
-	/**
 	 * Object of available languages.
 	 * @default {}
 	 * @review
@@ -408,6 +379,14 @@ const INITIAL_STATE = {
 	getAssetMappingFieldsURL: Config.string().value(''),
 
 	/**
+	 * Get available templates url
+	 * @default undefined
+	 * @review
+	 * @type {string}
+	 */
+	getAvailableTemplatesURL: Config.string().value(''),
+
+	/**
 	 * URL for obtaining the content structure mapping fields
 	 * created.
 	 * @default '''
@@ -460,6 +439,13 @@ const INITIAL_STATE = {
 	getPageContentsURL: Config.string().value(''),
 
 	/**
+	 * @default true
+	 * @review
+	 * @type {bool}
+	 */
+	hasUpdatePermissions: Config.bool().value(true),
+
+	/**
 	 * Id of the last element that was hovered
 	 * @default ''
 	 * @review
@@ -482,6 +468,14 @@ const INITIAL_STATE = {
 	 * @type {string}
 	 */
 	imageSelectorURL: Config.string().value(''),
+
+	/**
+	 * URL for selecting info items
+	 * @default []
+	 * @review
+	 * @type {object[]}
+	 */
+	infoItemSelectorURL: Config.string().value(''),
 
 	/**
 	 * Currently selected language id.

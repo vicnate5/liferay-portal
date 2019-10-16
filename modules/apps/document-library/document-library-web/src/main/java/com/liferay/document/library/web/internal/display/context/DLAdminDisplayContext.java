@@ -468,6 +468,10 @@ public class DLAdminDisplayContext {
 			searchContext.setAttribute("paginationType", "none");
 			searchContext.setEnd(dlSearchContainer.getEnd());
 
+			if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+				searchContext.setFolderIds(new long[] {folderId});
+			}
+
 			int type = Sort.STRING_TYPE;
 			String fieldName = orderByCol;
 

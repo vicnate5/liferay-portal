@@ -76,7 +76,7 @@ public class LayoutCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(75);
 
 		sb.append("{mvccVersion=");
 		sb.append(mvccVersion);
@@ -140,6 +140,8 @@ public class LayoutCacheModel
 		sb.append(css);
 		sb.append(", priority=");
 		sb.append(priority);
+		sb.append(", masterLayoutPageTemplateEntryId=");
+		sb.append(masterLayoutPageTemplateEntryId);
 		sb.append(", layoutPrototypeUuid=");
 		sb.append(layoutPrototypeUuid);
 		sb.append(", layoutPrototypeLinkEnabled=");
@@ -285,6 +287,8 @@ public class LayoutCacheModel
 		}
 
 		layoutImpl.setPriority(priority);
+		layoutImpl.setMasterLayoutPageTemplateEntryId(
+			masterLayoutPageTemplateEntryId);
 
 		if (layoutPrototypeUuid == null) {
 			layoutImpl.setLayoutPrototypeUuid("");
@@ -369,6 +373,8 @@ public class LayoutCacheModel
 		css = objectInput.readUTF();
 
 		priority = objectInput.readInt();
+
+		masterLayoutPageTemplateEntryId = objectInput.readLong();
 		layoutPrototypeUuid = objectInput.readUTF();
 
 		layoutPrototypeLinkEnabled = objectInput.readBoolean();
@@ -505,6 +511,8 @@ public class LayoutCacheModel
 
 		objectOutput.writeInt(priority);
 
+		objectOutput.writeLong(masterLayoutPageTemplateEntryId);
+
 		if (layoutPrototypeUuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -556,6 +564,7 @@ public class LayoutCacheModel
 	public String colorSchemeId;
 	public String css;
 	public int priority;
+	public long masterLayoutPageTemplateEntryId;
 	public String layoutPrototypeUuid;
 	public boolean layoutPrototypeLinkEnabled;
 	public String sourcePrototypeLayoutUuid;

@@ -16,11 +16,12 @@ import Component from 'metal-component';
 import Soy from 'metal-soy';
 import {Config} from 'metal-state';
 
-import '../../../common/AssetSelector.es';
+import '../../../common/InfoItemSelector.es';
 import './ItemSelectorFieldDelegateTemplate.soy';
 import templates from './ItemSelectorField.soy';
+import {getAvailableTemplates} from '../../../../utils/FragmentsEditorFetchUtils.es';
 import getConnectedComponent from '../../../../store/ConnectedComponent.es';
-import {openAssetBrowser} from '../../../../utils/FragmentsEditorDialogUtils';
+import {openItemSelector} from '../../../../utils/FragmentsEditorDialogUtils';
 import {setIn} from '../../../../utils/FragmentsEditorUpdateUtils.es';
 
 /**
@@ -63,13 +64,11 @@ class ItemSelectorField extends Component {
 			this.configurationValues[this.field.name] &&
 			this.configurationValues[this.field.name].className
 		) {
-			const {className} = this.configurationValues[this.field.name];
-
-			const itemType = this.availableAssets.find(
-				availableAsset => availableAsset.className === className
-			);
-
-			this.availableTemplates = itemType.availableTemplates;
+			getAvailableTemplates(
+				this.configurationValues[this.field.name].className
+			).then(availableTemplates => {
+				this.availableTemplates = availableTemplates;
+			});
 		} else {
 			this.availableTemplates = [];
 		}
@@ -80,15 +79,7 @@ class ItemSelectorField extends Component {
 	 * @review
 	 */
 	_handleItemSelectClick() {
-		const className = this.field.typeOptions.className;
-
-		const itemType = this.availableAssets.find(
-			availableAsset => availableAsset.className === className
-		);
-
-		if (itemType) {
-			this._openAssetBrowser(itemType.href, itemType.typeName);
-		}
+		this._openItemSelector();
 	}
 
 	/**
@@ -111,40 +102,27 @@ class ItemSelectorField extends Component {
 
 	/**
 	 * Handle the click in the item type dropdown
-	 * @param {Event} event
 	 * @review
 	 */
-	_handleItemTypeClick(event) {
-		const {
-			assetBrowserUrl,
-			assetBrowserWindowTitle
-		} = event.delegateTarget.dataset;
-
-		this._openAssetBrowser(assetBrowserUrl, assetBrowserWindowTitle);
+	_handleItemTypeClick() {
+		this._openItemSelector();
 	}
 
 	/**
-	 * Opens asset browser
-	 * @param {string} assetBrowserURL
-	 * @param {string} assetBrowserWindowTitle
+	 * Opens item selector
 	 * @review
 	 */
-	_openAssetBrowser(assetBrowserURL, assetBrowserWindowTitle) {
-		openAssetBrowser({
-			assetBrowserURL,
-			callback: selectedAssetEntry => {
-				this.emit('fieldValueChanged', {
-					name: this.field.name,
-					value: {
-						className: selectedAssetEntry.className,
-						classNameId: selectedAssetEntry.classNameId,
-						classPK: selectedAssetEntry.classPK,
-						title: selectedAssetEntry.title
-					}
-				});
-			},
-			eventName: `${this.portletNamespace}selectAsset`,
-			modalTitle: assetBrowserWindowTitle
+	_openItemSelector() {
+		openItemSelector(selectedInfoItem => {
+			this.emit('fieldValueChanged', {
+				name: this.field.name,
+				value: {
+					className: selectedInfoItem.className,
+					classNameId: selectedInfoItem.classNameId,
+					classPK: selectedInfoItem.classPK,
+					title: selectedInfoItem.title
+				}
+			});
 		});
 	}
 }
@@ -191,8 +169,7 @@ ItemSelectorField.STATE = {
 };
 
 const ConnectedItemSelectorField = getConnectedComponent(ItemSelectorField, [
-	'availableAssets',
-	'portletNamespace',
+	'getAvailableTemplatesURL',
 	'spritemap'
 ]);
 

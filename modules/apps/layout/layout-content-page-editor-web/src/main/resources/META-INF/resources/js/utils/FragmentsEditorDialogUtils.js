@@ -12,8 +12,9 @@
  * details.
  */
 
-import CreateContentDialog from '../components/content/CreateContentDialog.es';
 import {UPDATE_LAST_SAVE_DATE} from '../actions/actions.es';
+import CreateContentDialog from '../components/content/CreateContentDialog.es';
+import {getState} from '../store/store.es';
 
 /**
  * @private
@@ -29,47 +30,6 @@ const DOWNLOAD_FILE_ENTRY_IMAGE_SELECTOR_RETURN_TYPE =
 	'com.liferay.item.selector.criteria.DownloadFileEntryItemSelectorReturnType';
 
 /**
- * @param {object} options
- * @param {function} options.callback
- * @param {string} options.assetBrowserURL
- * @param {string} options.eventName
- * @param {string} options.modalTitle
- * @param {function} [options.destroyedCallback=null]
- */
-function openAssetBrowser({
-	assetBrowserURL,
-	callback,
-	eventName,
-	modalTitle,
-	destroyedCallback = null
-}) {
-	Liferay.Util.selectEntity(
-		{
-			dialog: {
-				constrain: true,
-				destroyOnHide: true,
-				modal: true
-			},
-			eventName,
-			title: modalTitle,
-			uri: assetBrowserURL
-		},
-		event => {
-			if (event.assetclassnameid) {
-				callback({
-					className: event.assetclassname,
-					classNameId: event.assetclassnameid,
-					classPK: event.assetclasspk,
-					title: event.assettitle
-				});
-			} else if (destroyedCallback) {
-				destroyedCallback();
-			}
-		}
-	);
-}
-
-/**
  * @param {object} store Store
  * @return {CreateContentDialog}
  */
@@ -80,21 +40,15 @@ function openCreateContentDialog(store) {
 }
 
 /**
- * @param {object} options
- * @param {function} options.callback
- * @param {string} options.imageSelectorURL
- * @param {string} options.portletNamespace
- * @param {function} [options.destroyedCallback=null]
+ * @param {function} callback
+ * @param {function} [destroyedCallback=null]
  */
-function openImageSelector({
-	callback,
-	imageSelectorURL,
-	portletNamespace,
-	destroyedCallback = null
-}) {
+function openImageSelector(callback, destroyedCallback = null) {
+	const state = getState();
+
 	AUI().use('liferay-item-selector-dialog', A => {
 		const itemSelector = new A.LiferayItemSelectorDialog({
-			eventName: `${portletNamespace}selectImage`,
+			eventName: `${state.portletNamespace}selectImage`,
 			on: {
 				selectedItemChange: event => {
 					const selectedItem = event.newVal || {};
@@ -129,7 +83,48 @@ function openImageSelector({
 				}
 			},
 			title: Liferay.Language.get('select'),
-			url: imageSelectorURL
+			url: state.imageSelectorURL
+		});
+
+		itemSelector.open();
+	});
+}
+
+/**
+ * @param {function} callback
+ * @param {function} [destroyedCallback=null]
+ */
+function openItemSelector(callback, destroyedCallback = null) {
+	const state = getState();
+
+	AUI().use('liferay-item-selector-dialog', A => {
+		const itemSelector = new A.LiferayItemSelectorDialog({
+			eventName: `${state.portletNamespace}selectInfoItem`,
+			on: {
+				selectedItemChange: event => {
+					const selectedItem = event.newVal;
+
+					if (selectedItem && selectedItem.value) {
+						const infoItem = JSON.parse(selectedItem.value);
+
+						callback({
+							className: infoItem.className,
+							classNameId: infoItem.classNameId,
+							classPK: infoItem.classPK,
+							title: infoItem.title
+						});
+					}
+				},
+
+				visibleChange: event => {
+					if (event.newVal === false && destroyedCallback) {
+						destroyedCallback();
+					}
+				}
+			},
+			'strings.add': Liferay.Language.get('done'),
+			title: Liferay.Language.get('select'),
+			url: state.infoItemSelectorURL
 		});
 
 		itemSelector.open();
@@ -179,9 +174,9 @@ function stopListeningWidgetConfigurationChange() {
 }
 
 export {
-	openAssetBrowser,
 	openCreateContentDialog,
 	openImageSelector,
+	openItemSelector,
 	startListeningWidgetConfigurationChange,
 	stopListeningWidgetConfigurationChange
 };

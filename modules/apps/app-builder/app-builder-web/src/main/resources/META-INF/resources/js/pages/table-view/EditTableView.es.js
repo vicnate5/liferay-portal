@@ -51,7 +51,7 @@ const EditTableView = ({
 		title = Liferay.Language.get('edit-table-view');
 	}
 
-	const onAddColumn = fieldName => {
+	const onAddFieldName = fieldName => {
 		setState(prevState => ({
 			...prevState,
 			dataListView: {
@@ -77,13 +77,13 @@ const EditTableView = ({
 		}));
 	};
 
-	const onRemoveColumn = column => {
+	const onRemoveFieldName = fieldName => {
 		setState(prevState => ({
 			...prevState,
 			dataListView: {
 				...prevState.dataListView,
 				fieldNames: prevState.dataListView.fieldNames.filter(
-					fieldName => fieldName != column
+					name => name != fieldName
 				)
 			}
 		}));
@@ -167,7 +167,7 @@ const EditTableView = ({
 
 	const {
 		name: {en_US: dataListViewName},
-		fieldNames: columns
+		fieldNames
 	} = dataListView;
 
 	return (
@@ -216,17 +216,23 @@ const EditTableView = ({
 
 						<Sidebar.TabContent>
 							<FieldTypeList
-								fieldTypes={availableFields.map(field => ({
-									description: field.fieldType,
-									disabled: columns.some(
-										column => column === field.name
-									),
-									icon: field.fieldType,
-									label: field.name,
-									name: field.fieldType
-								}))}
+								fieldTypes={availableFields.map(
+									({
+										fieldType,
+										label: {en_US: label},
+										name
+									}) => ({
+										description: fieldType,
+										disabled: fieldNames.some(
+											fieldName => fieldName === name
+										),
+										icon: fieldType,
+										label,
+										name
+									})
+								)}
 								keywords={keywords}
-								onDoubleClick={({label}) => onAddColumn(label)}
+								onDoubleClick={({name}) => onAddFieldName(name)}
 							/>
 						</Sidebar.TabContent>
 					</Sidebar.Body>
@@ -239,9 +245,13 @@ const EditTableView = ({
 				>
 					<div className="container table-view-container">
 						<DropZone
-							columns={columns}
-							onAddColumn={onAddColumn}
-							onRemoveColumn={onRemoveColumn}
+							fields={fieldNames.map(fieldName => ({
+								...availableFields.find(
+									({name}) => name === fieldName
+								)
+							}))}
+							onAddFieldName={onAddFieldName}
+							onRemoveFieldName={onRemoveFieldName}
 						/>
 					</div>
 				</div>

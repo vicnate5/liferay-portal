@@ -96,7 +96,9 @@ public class LayoutModelImpl
 		{"system_", Types.BOOLEAN}, {"friendlyURL", Types.VARCHAR},
 		{"iconImageId", Types.BIGINT}, {"themeId", Types.VARCHAR},
 		{"colorSchemeId", Types.VARCHAR}, {"css", Types.CLOB},
-		{"priority", Types.INTEGER}, {"layoutPrototypeUuid", Types.VARCHAR},
+		{"priority", Types.INTEGER},
+		{"mLayoutPageTemplateEntryId", Types.BIGINT},
+		{"layoutPrototypeUuid", Types.VARCHAR},
 		{"layoutPrototypeLinkEnabled", Types.BOOLEAN},
 		{"sourcePrototypeLayoutUuid", Types.VARCHAR},
 		{"publishDate", Types.TIMESTAMP}, {"lastPublishDate", Types.TIMESTAMP}
@@ -137,6 +139,7 @@ public class LayoutModelImpl
 		TABLE_COLUMNS_MAP.put("colorSchemeId", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("css", Types.CLOB);
 		TABLE_COLUMNS_MAP.put("priority", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("mLayoutPageTemplateEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("layoutPrototypeUuid", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("layoutPrototypeLinkEnabled", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("sourcePrototypeLayoutUuid", Types.VARCHAR);
@@ -145,7 +148,7 @@ public class LayoutModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table Layout (mvccVersion LONG default 0 not null,ctCollectionId LONG default 0 not null,uuid_ VARCHAR(75) null,plid LONG not null,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentPlid LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,classNameId LONG,classPK LONG,name STRING null,title STRING null,description STRING null,keywords STRING null,robots STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,system_ BOOLEAN,friendlyURL VARCHAR(255) null,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,css TEXT null,priority INTEGER,layoutPrototypeUuid VARCHAR(75) null,layoutPrototypeLinkEnabled BOOLEAN,sourcePrototypeLayoutUuid VARCHAR(75) null,publishDate DATE null,lastPublishDate DATE null,primary key (plid, ctCollectionId))";
+		"create table Layout (mvccVersion LONG default 0 not null,ctCollectionId LONG default 0 not null,uuid_ VARCHAR(75) null,plid LONG not null,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentPlid LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,classNameId LONG,classPK LONG,name STRING null,title STRING null,description STRING null,keywords STRING null,robots STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,system_ BOOLEAN,friendlyURL VARCHAR(255) null,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,css TEXT null,priority INTEGER,mLayoutPageTemplateEntryId LONG,layoutPrototypeUuid VARCHAR(75) null,layoutPrototypeLinkEnabled BOOLEAN,sourcePrototypeLayoutUuid VARCHAR(75) null,publishDate DATE null,lastPublishDate DATE null,primary key (plid, ctCollectionId))";
 
 	public static final String TABLE_SQL_DROP = "drop table Layout";
 
@@ -196,19 +199,22 @@ public class LayoutModelImpl
 
 	public static final long LAYOUTPROTOTYPEUUID_COLUMN_BITMASK = 512L;
 
-	public static final long PARENTLAYOUTID_COLUMN_BITMASK = 1024L;
+	public static final long MASTERLAYOUTPAGETEMPLATEENTRYID_COLUMN_BITMASK =
+		1024L;
 
-	public static final long PARENTPLID_COLUMN_BITMASK = 2048L;
+	public static final long PARENTLAYOUTID_COLUMN_BITMASK = 2048L;
 
-	public static final long PRIORITY_COLUMN_BITMASK = 4096L;
+	public static final long PARENTPLID_COLUMN_BITMASK = 4096L;
 
-	public static final long PRIVATELAYOUT_COLUMN_BITMASK = 8192L;
+	public static final long PRIORITY_COLUMN_BITMASK = 8192L;
 
-	public static final long SOURCEPROTOTYPELAYOUTUUID_COLUMN_BITMASK = 16384L;
+	public static final long PRIVATELAYOUT_COLUMN_BITMASK = 16384L;
 
-	public static final long TYPE_COLUMN_BITMASK = 32768L;
+	public static final long SOURCEPROTOTYPELAYOUTUUID_COLUMN_BITMASK = 32768L;
 
-	public static final long UUID_COLUMN_BITMASK = 65536L;
+	public static final long TYPE_COLUMN_BITMASK = 65536L;
+
+	public static final long UUID_COLUMN_BITMASK = 131072L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -254,6 +260,8 @@ public class LayoutModelImpl
 		model.setColorSchemeId(soapModel.getColorSchemeId());
 		model.setCss(soapModel.getCss());
 		model.setPriority(soapModel.getPriority());
+		model.setMasterLayoutPageTemplateEntryId(
+			soapModel.getMasterLayoutPageTemplateEntryId());
 		model.setLayoutPrototypeUuid(soapModel.getLayoutPrototypeUuid());
 		model.setLayoutPrototypeLinkEnabled(
 			soapModel.isLayoutPrototypeLinkEnabled());
@@ -509,6 +517,13 @@ public class LayoutModelImpl
 		attributeGetterFunctions.put("priority", Layout::getPriority);
 		attributeSetterBiConsumers.put(
 			"priority", (BiConsumer<Layout, Integer>)Layout::setPriority);
+		attributeGetterFunctions.put(
+			"masterLayoutPageTemplateEntryId",
+			Layout::getMasterLayoutPageTemplateEntryId);
+		attributeSetterBiConsumers.put(
+			"masterLayoutPageTemplateEntryId",
+			(BiConsumer<Layout, Long>)
+				Layout::setMasterLayoutPageTemplateEntryId);
 		attributeGetterFunctions.put(
 			"layoutPrototypeUuid", Layout::getLayoutPrototypeUuid);
 		attributeSetterBiConsumers.put(
@@ -1632,6 +1647,32 @@ public class LayoutModelImpl
 
 	@JSON
 	@Override
+	public long getMasterLayoutPageTemplateEntryId() {
+		return _masterLayoutPageTemplateEntryId;
+	}
+
+	@Override
+	public void setMasterLayoutPageTemplateEntryId(
+		long masterLayoutPageTemplateEntryId) {
+
+		_columnBitmask |= MASTERLAYOUTPAGETEMPLATEENTRYID_COLUMN_BITMASK;
+
+		if (!_setOriginalMasterLayoutPageTemplateEntryId) {
+			_setOriginalMasterLayoutPageTemplateEntryId = true;
+
+			_originalMasterLayoutPageTemplateEntryId =
+				_masterLayoutPageTemplateEntryId;
+		}
+
+		_masterLayoutPageTemplateEntryId = masterLayoutPageTemplateEntryId;
+	}
+
+	public long getOriginalMasterLayoutPageTemplateEntryId() {
+		return _originalMasterLayoutPageTemplateEntryId;
+	}
+
+	@JSON
+	@Override
 	public String getLayoutPrototypeUuid() {
 		if (_layoutPrototypeUuid == null) {
 			return "";
@@ -1946,6 +1987,8 @@ public class LayoutModelImpl
 		layoutImpl.setColorSchemeId(getColorSchemeId());
 		layoutImpl.setCss(getCss());
 		layoutImpl.setPriority(getPriority());
+		layoutImpl.setMasterLayoutPageTemplateEntryId(
+			getMasterLayoutPageTemplateEntryId());
 		layoutImpl.setLayoutPrototypeUuid(getLayoutPrototypeUuid());
 		layoutImpl.setLayoutPrototypeLinkEnabled(
 			isLayoutPrototypeLinkEnabled());
@@ -2091,6 +2134,11 @@ public class LayoutModelImpl
 		layoutModelImpl._originalPriority = layoutModelImpl._priority;
 
 		layoutModelImpl._setOriginalPriority = false;
+
+		layoutModelImpl._originalMasterLayoutPageTemplateEntryId =
+			layoutModelImpl._masterLayoutPageTemplateEntryId;
+
+		layoutModelImpl._setOriginalMasterLayoutPageTemplateEntryId = false;
 
 		layoutModelImpl._originalLayoutPrototypeUuid =
 			layoutModelImpl._layoutPrototypeUuid;
@@ -2258,6 +2306,9 @@ public class LayoutModelImpl
 		}
 
 		layoutCacheModel.priority = getPriority();
+
+		layoutCacheModel.masterLayoutPageTemplateEntryId =
+			getMasterLayoutPageTemplateEntryId();
 
 		layoutCacheModel.layoutPrototypeUuid = getLayoutPrototypeUuid();
 
@@ -2437,6 +2488,9 @@ public class LayoutModelImpl
 	private int _priority;
 	private int _originalPriority;
 	private boolean _setOriginalPriority;
+	private long _masterLayoutPageTemplateEntryId;
+	private long _originalMasterLayoutPageTemplateEntryId;
+	private boolean _setOriginalMasterLayoutPageTemplateEntryId;
 	private String _layoutPrototypeUuid;
 	private String _originalLayoutPrototypeUuid;
 	private boolean _layoutPrototypeLinkEnabled;

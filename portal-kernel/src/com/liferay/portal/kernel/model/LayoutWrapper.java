@@ -74,6 +74,9 @@ public class LayoutWrapper
 		attributes.put("colorSchemeId", getColorSchemeId());
 		attributes.put("css", getCss());
 		attributes.put("priority", getPriority());
+		attributes.put(
+			"masterLayoutPageTemplateEntryId",
+			getMasterLayoutPageTemplateEntryId());
 		attributes.put("layoutPrototypeUuid", getLayoutPrototypeUuid());
 		attributes.put(
 			"layoutPrototypeLinkEnabled", isLayoutPrototypeLinkEnabled());
@@ -271,6 +274,13 @@ public class LayoutWrapper
 
 		if (priority != null) {
 			setPriority(priority);
+		}
+
+		Long masterLayoutPageTemplateEntryId = (Long)attributes.get(
+			"masterLayoutPageTemplateEntryId");
+
+		if (masterLayoutPageTemplateEntryId != null) {
+			setMasterLayoutPageTemplateEntryId(masterLayoutPageTemplateEntryId);
 		}
 
 		String layoutPrototypeUuid = (String)attributes.get(
@@ -870,6 +880,16 @@ public class LayoutWrapper
 	@Override
 	public Layout getLinkedToLayout() {
 		return model.getLinkedToLayout();
+	}
+
+	/**
+	 * Returns the master layout page template entry ID of this layout.
+	 *
+	 * @return the master layout page template entry ID of this layout
+	 */
+	@Override
+	public long getMasterLayoutPageTemplateEntryId() {
+		return model.getMasterLayoutPageTemplateEntryId();
 	}
 
 	/**
@@ -1949,6 +1969,19 @@ public class LayoutWrapper
 	@Override
 	public void setLayoutSet(LayoutSet layoutSet) {
 		model.setLayoutSet(layoutSet);
+	}
+
+	/**
+	 * Sets the master layout page template entry ID of this layout.
+	 *
+	 * @param masterLayoutPageTemplateEntryId the master layout page template entry ID of this layout
+	 */
+	@Override
+	public void setMasterLayoutPageTemplateEntryId(
+		long masterLayoutPageTemplateEntryId) {
+
+		model.setMasterLayoutPageTemplateEntryId(
+			masterLayoutPageTemplateEntryId);
 	}
 
 	/**

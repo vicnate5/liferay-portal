@@ -1004,6 +1004,21 @@ public interface LayoutModel
 	public void setPriority(int priority);
 
 	/**
+	 * Returns the master layout page template entry ID of this layout.
+	 *
+	 * @return the master layout page template entry ID of this layout
+	 */
+	public long getMasterLayoutPageTemplateEntryId();
+
+	/**
+	 * Sets the master layout page template entry ID of this layout.
+	 *
+	 * @param masterLayoutPageTemplateEntryId the master layout page template entry ID of this layout
+	 */
+	public void setMasterLayoutPageTemplateEntryId(
+		long masterLayoutPageTemplateEntryId);
+
+	/**
 	 * Returns the layout prototype uuid of this layout.
 	 *
 	 * @return the layout prototype uuid of this layout

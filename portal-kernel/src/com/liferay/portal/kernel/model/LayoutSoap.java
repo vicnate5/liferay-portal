@@ -62,6 +62,8 @@ public class LayoutSoap implements Serializable {
 		soapModel.setColorSchemeId(model.getColorSchemeId());
 		soapModel.setCss(model.getCss());
 		soapModel.setPriority(model.getPriority());
+		soapModel.setMasterLayoutPageTemplateEntryId(
+			model.getMasterLayoutPageTemplateEntryId());
 		soapModel.setLayoutPrototypeUuid(model.getLayoutPrototypeUuid());
 		soapModel.setLayoutPrototypeLinkEnabled(
 			model.isLayoutPrototypeLinkEnabled());
@@ -381,6 +383,16 @@ public class LayoutSoap implements Serializable {
 		_priority = priority;
 	}
 
+	public long getMasterLayoutPageTemplateEntryId() {
+		return _masterLayoutPageTemplateEntryId;
+	}
+
+	public void setMasterLayoutPageTemplateEntryId(
+		long masterLayoutPageTemplateEntryId) {
+
+		_masterLayoutPageTemplateEntryId = masterLayoutPageTemplateEntryId;
+	}
+
 	public String getLayoutPrototypeUuid() {
 		return _layoutPrototypeUuid;
 	}
@@ -458,6 +470,7 @@ public class LayoutSoap implements Serializable {
 	private String _colorSchemeId;
 	private String _css;
 	private int _priority;
+	private long _masterLayoutPageTemplateEntryId;
 	private String _layoutPrototypeUuid;
 	private boolean _layoutPrototypeLinkEnabled;
 	private String _sourcePrototypeLayoutUuid;
