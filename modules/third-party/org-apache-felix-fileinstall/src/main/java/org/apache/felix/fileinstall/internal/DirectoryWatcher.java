@@ -809,7 +809,7 @@ public class DirectoryWatcher extends Thread implements BundleListener
     private void initializeCurrentManagedBundles()
     {
         Bundle[] bundles = this.context.getBundles();
-        String watchedDirPath = watchedDirectory.toURI().normalize().toString();
+        String watchedDirPath = watchedDirectory.toURI().normalize().getPath();
         Map<File, Long> checksums = new HashMap<File, Long>();
         Pattern filePattern = filter == null || filter.isEmpty() ? null : Pattern.compile(filter);
         for (Bundle bundle : bundles) {
@@ -997,9 +997,7 @@ public class DirectoryWatcher extends Thread implements BundleListener
     {
 		Bundle bundle = context.getBundle(bundleLocation);
 
-		if ((bundle != null) &&
-			(Util.loadChecksum(bundle, context) != checksum)) {
-
+		if (bundle != null) {
 			bundle.update(is);
 
 			Util.storeChecksum(bundle, checksum, context);
