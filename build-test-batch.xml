@@ -5299,6 +5299,9 @@ ${output.content}</echo>
 		<run-batch-test>
 			<test-action>
 				<sequential>
+					<echo append="true" file="${release.tool.dir}/build.${env.HOSTNAME}.properties">
+build.modules.from.source=true</echo>
+
 					<exec dir="${release.tool.dir}" executable="git" failonerror="true">
 						<arg value="apply" />
 						<arg value="${project.dir}/LPS-103493.patch" />
