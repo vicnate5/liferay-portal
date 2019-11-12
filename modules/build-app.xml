@@ -235,6 +235,12 @@
 							<property name="output.dir" value="${osgi.dir}/marketplace" />
 						</ant>
 					</then>
+					<else>
+						<ant inheritAll="false" target="build-app-lpkg">
+							<property name="app.name" value="${app.name}" />
+							<property name="output.dir" value="/Users/vicnate5/Liferay/non-required" />
+						</ant>
+					</else>
 				</if>
 			</sequential>
 		</for>
