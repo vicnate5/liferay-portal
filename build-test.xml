@@ -6778,7 +6778,7 @@ ${update.properties}</echo>
 		<get-testcase-property property.name="testcase.url" />
 
 		<if>
-			<isset property="testcase.url" />
+			<contains string="${testcase.url}" substring=":1]" />
 			<then>
 				<replace
 					file="${app.server.bin.dir}/setenv${file.suffix.bat}"
