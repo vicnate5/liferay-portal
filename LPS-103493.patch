@@ -1,5 +1,5 @@
 diff --git a/ext/7.2.x/ext-impl/src/com/liferay/portal/ee/license/LCSLicenseManager.java b/ext/7.2.x/ext-impl/src/com/liferay/portal/ee/license/LCSLicenseManager.java
-index d6624ee..559eb1d 100644
+index d6624ee..821d6b1 100644
 --- a/ext/7.2.x/ext-impl/src/com/liferay/portal/ee/license/LCSLicenseManager.java
 +++ b/ext/7.2.x/ext-impl/src/com/liferay/portal/ee/license/LCSLicenseManager.java
 @@ -15,6 +15,7 @@
@@ -10,39 +10,37 @@ index d6624ee..559eb1d 100644
  import com.liferay.portal.kernel.json.JSONObject;
  import com.liferay.portal.kernel.license.messaging.LCSPortletState;
  import com.liferay.portal.kernel.license.messaging.LicenseManagerMessageType;
-@@ -132,6 +133,31 @@ public class LCSLicenseManager {
+@@ -132,6 +133,29 @@ public class LCSLicenseManager {
  		return new int[] {lcsPortletState, lcsLicenseState};
  	}
  
-+	public static JSONObject getMessagePayload(Message message) {
-+		return getMessagePayload(message.getPayload());
-+	}
-+
 +	public static JSONObject getMessagePayload(Object object) {
++		if (object instanceof Message) {
++			Message message = (Message)object;
++
++			object = message.getPayload();
++		}
++
 +		if (object instanceof String) {
-+			return getMessagePayload((String)object);
++			try {
++				JSONObject jsonObject = JSONFactoryUtil.createJSONObject(json);
++
++				LicenseManagerMessageType.valueOf(jsonObject);
++
++				return jsonObject;
++			}
++			catch (Exception e) {
++				return null;
++			}
 +		}
 +
 +		return null;
 +	}
 +
-+	public static JSONObject getMessagePayload(String json) {
-+		try {
-+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(json);
-+
-+			LicenseManagerMessageType.valueOf(jsonObject);
-+
-+			return jsonObject;
-+		}
-+		catch (Exception e) {
-+			return null;
-+		}
-+	}
-+
  	public static void init() {
  		AuthPublicPathRegistry.register("/portal/license_lcs");
  
-@@ -195,8 +221,7 @@ public class LCSLicenseManager {
+@@ -195,8 +219,7 @@ public class LCSLicenseManager {
  		Object responseObject = MessageBusUtil.sendSynchronousMessage(
  			message.getDestinationName(), message);
  
@@ -53,18 +51,10 @@ index d6624ee..559eb1d 100644
  		if (jsonObject == null) {
  			if (_log.isDebugEnabled()) {
 diff --git a/ext/7.2.x/ext-impl/src/com/liferay/portal/ee/license/messaging/LicenseMessageListener.java b/ext/7.2.x/ext-impl/src/com/liferay/portal/ee/license/messaging/LicenseMessageListener.java
-index fba3221..623e330 100644
+index fba3221..c6de997 100644
 --- a/ext/7.2.x/ext-impl/src/com/liferay/portal/ee/license/messaging/LicenseMessageListener.java
 +++ b/ext/7.2.x/ext-impl/src/com/liferay/portal/ee/license/messaging/LicenseMessageListener.java
-@@ -15,6 +15,7 @@
- package com.liferay.portal.ee.license.messaging;
- 
- import com.liferay.portal.ee.license.LCSLicenseManager;
-+import com.liferay.portal.kernel.json.JSONFactoryUtil;
- import com.liferay.portal.kernel.json.JSONObject;
- import com.liferay.portal.kernel.license.messaging.LCSPortletState;
- import com.liferay.portal.kernel.license.messaging.LicenseManagerMessageType;
-@@ -35,8 +36,7 @@ public class LicenseMessageListener extends BaseMessageListener {
+@@ -35,8 +35,7 @@ public class LicenseMessageListener extends BaseMessageListener {
  			_log.debug("Received message: " + message.toString());
  		}
  
