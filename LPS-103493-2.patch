@@ -1,0 +1,13 @@
+diff --git a/ext/7.2.x/ext-impl/src/com/liferay/portal/ee/license/LCSLicenseManager.java b/ext/7.2.x/ext-impl/src/com/liferay/portal/ee/license/LCSLicenseManager.java
+index 821d6b1..85ad2dd 100644
+--- a/ext/7.2.x/ext-impl/src/com/liferay/portal/ee/license/LCSLicenseManager.java
++++ b/ext/7.2.x/ext-impl/src/com/liferay/portal/ee/license/LCSLicenseManager.java
+@@ -141,6 +141,8 @@ public class LCSLicenseManager {
+ 		}
+ 
+ 		if (object instanceof String) {
++			String json = (String)object;
++
+ 			try {
+ 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject(json);
+ 
