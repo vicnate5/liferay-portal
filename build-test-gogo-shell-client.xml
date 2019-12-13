@@ -30,7 +30,7 @@
 				<sleep seconds="5" />
 
 				<exec executable="/bin/bash">
-					<redirector errorproperty="redirector.err" inputstring="telnet 127.0.0.1 11312" outputproperty="redirector.out">
+					<redirector errorproperty="redirector.err" inputstring="telnet -4 localhost 11312" outputproperty="redirector.out">
 						<inputfilterchain>
 							<replacestring from="before" to="after" />
 						</inputfilterchain>
@@ -78,7 +78,7 @@
 				<sleep seconds="5" />
 
 				<exec executable="/bin/bash">
-					<redirector errorproperty="redirector.err" inputstring="telnet 127.0.0.1 11311" outputproperty="redirector.out">
+					<redirector errorproperty="redirector.err" inputstring="telnet -4 localhost 11311" outputproperty="redirector.out">
 						<inputfilterchain>
 							<replacestring from="before" to="after" />
 						</inputfilterchain>
