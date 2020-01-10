@@ -50,6 +50,7 @@ definition {
 	@priority = "4"
 	test ViewFriendlyURLWithSharedLocalesButDifferentLanguages {
 		property custom.properties = "locale.prepend.friendly.url.style=2${line.separator}locales.enabled=en_US,en_GB,en_AU";
+		property portal.acceptance = "koorgai";
 		property test.name.skip.portal.instance = "FriendlyURL#ViewFriendlyURLWithSharedLocalesButDifferentLanguages";
 
 		for (var siteName : list "USA Site Name,Great Britain Site Name,Australia Site Name") {
