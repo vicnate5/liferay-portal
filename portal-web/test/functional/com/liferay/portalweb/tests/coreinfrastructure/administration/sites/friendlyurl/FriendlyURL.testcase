@@ -45,6 +45,65 @@ definition {
 		Page.assertCanonicalURL(portalURL = "${portalURL}/web/test-site-name");
 	}
 
+	@priority = "4"
+	test ViewFriendlyURLWithSharedLocalesButDifferentLanguages {
+		property custom.properties = "locale.prepend.friendly.url.style=2${line.separator}locales.enabled=en_US,en_GB,en_AU";
+		property test.name.skip.portal.instance = "FriendlyURL#ViewFriendlyURLWithSharedLocalesButDifferentLanguages";
+
+		for (var siteName : list "USA Site Name,Great Britain Site Name,Australia Site Name") {
+			JSONGroup.addGroup(groupName = "${siteName}");
+
+			JSONLayout.addPublicLayout(
+				groupName = "${siteName}",
+				layoutName = "Test Page");
+
+			JSONLayout.addWidgetToPublicLayout(
+				groupName = "${siteName}",
+				layoutName = "Test Page",
+				widgetName = "Language Selector");
+		}
+
+		Site.openSiteSettingsAdmin(siteURLKey = "great-britain-site-name");
+
+		Site.configureCurrentLanguagesCP(defaultSiteLanguage = "English (United Kingdom)");
+
+		Navigator.gotoNavTab(navTab = "General");
+
+		PortletEntry.inputName(name = "Great Britain Site Name");
+
+		PortletEntry.save();
+
+		Site.openSiteSettingsAdmin(siteURLKey = "australia-site-name");
+
+		Site.configureCurrentLanguagesCP(defaultSiteLanguage = "English (Australia)");
+
+		Navigator.gotoNavTab(navTab = "General");
+
+		PortletEntry.inputName(name = "Australia Site Name");
+
+		PortletEntry.save();
+
+		var portalURL = PropsUtil.get("portal.url");
+
+		Navigator.openWithAppendToBaseURL(urlAppend = "/web/usa-site-name/test-page");
+
+		LanguagePortlet.selectLanguagePG(
+			locale = "en_GB",
+			textIcon = "english-United Kingdom [beta]");
+
+		Navigator.openWithAppendToBaseURL(urlAppend = "/web/great-britain-site-name/test-page");
+
+		AssertLocation(value1 = "${portalURL}/en-GB/web/great-britain-site-name/test-page");
+
+		LanguagePortlet.selectLanguagePG(
+			locale = "en_AU",
+			textIcon = "english-Australia [beta]");
+
+		Navigator.openWithAppendToBaseURL(urlAppend = "/web/australia-site-name/test-page");
+
+		AssertLocation(value1 = "${portalURL}/en-AU/web/australia-site-name/test-page");
+	}
+
 	@description = "This is a use case for LRQA-52002. FriendlyURLS should support Unicode characters."
 	@priority = "4"
 	test ViewFriendlyURLWithUnicodeChars {
