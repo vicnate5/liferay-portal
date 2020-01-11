@@ -25,17 +25,13 @@ definition {
 	}
 
 	@priority = "4"
-	test EditFriendlyURL {
+	test VerifyFriendlyURLsOnlyDisplayLocaleOnce {
+
 		JSONLayout.addPublicLayout(
-			friendlyURL = "/home",
 			groupName = "Test Site Name",
 			layoutName = "Test Page");
 
-		Navigator.openWithAppendToBaseURL(urlAppend = "web/test-site-name/home");
-
-		var portalURL = PropsUtil.get("portal.url");
-
-		AssertLocation(value1 = "${portalURL}/web/test-site-name/home");
+		Navigator.openWithAppendToBaseURL(urlAppend = "web/test-site-name");
 
 		ProductMenu.gotoPortlet(
 			category = "Site Builder",
@@ -46,21 +42,25 @@ definition {
 			menuItem = "Configure",
 			pageName = "Test Page");
 
+		Click(locator1 = "Dropdown#FRIENDLY_URL_LOCALE");
+
+		MenuItem.click(menuItem = "hu-HU");
+
+		Type(
+			locator1 = "TextInput#TEXT",
+			value1 = "Test Page");
+
 		Type(
 			locator1 = "TextInput#FRIENDLY_URL",
-			value1 = "/test");
+			value1 = "/teszt-page");
 
 		Button.clickSave();
 
-		Navigator.openWithAppendToBaseURL(urlAppend = "web/test-site-name/test");
+		var portalURL = PropsUtil.get("portal.url");
 
-		AssertLocation(value1 = "${portalURL}/web/test-site-name/test");
+		Navigator.openWithAppendToBaseURL(urlAppend = "hu/web/test-site-name/test-page");
 
-		Navigator.openWithAppendToBaseURL(urlAppend = "web/test-site-name/home");
-
-		AssertTextEquals(
-			locator1 = "Home#ERROR_MESSAGE_ALERT_ERROR",
-			value1 = "Not Found");
+		AssertLocation(value1 = "${portalURL}/hu/web/test-site-name/teszt-page");
 	}
 
 	@priority = "5"
