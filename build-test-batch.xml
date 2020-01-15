@@ -5126,6 +5126,11 @@ ${output.content}</echo>
 		<run-batch-test>
 			<test-action>
 				<sequential>
+					<exec dir="${release.tool.dir}" executable="git" failonerror="true">
+						<arg value="apply" />
+						<arg value="${project.dir}/LPS-107079.patch" />
+					</exec>
+					
 					<ant dir="${release.tool.dir}" inheritAll="false" target="dist" useNativeBasedir="true">
 						<property name="project.release.dir.native" value="${release.tool.dir}" />
 					</ant>
