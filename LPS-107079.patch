@@ -1,0 +1,39 @@
+diff --git a/ext/7.2.x/build-release-license.xml b/ext/7.2.x/build-release-license.xml
+index d4b48c4..9d7ef40 100644
+--- a/ext/7.2.x/build-release-license.xml
++++ b/ext/7.2.x/build-release-license.xml
+@@ -40,10 +40,9 @@
+ 			<libraryjar path="${java.lib.dir}/jce.jar" />
+ 			<libraryjar path="${java.lib.dir}/rt.jar" />
+ 			<libraryjar path="${portal.dir}/.gradle/caches/modules-2/files-2.1/com.liferay/com.liferay.petra.encryptor" />
+-			<libraryjar path="${portal.dir}/.gradle/caches/modules-2/files-2.1/com.liferay/com.liferay.petra.string" />
+ 			<libraryjar path="${portal.dir}/lib/development/servlet-api.jar" />
+ 			<libraryjar path="${portal.dir}/lib/portal/commons-io.jar" />
+-			<libraryjar path="${portal.dir}/modules/core/portal-compat/petra/util-java-compat/classes" />
++			<libraryjar path="${portal.dir}/tmp/lib-pre/com.liferay.petra.string.jar" />
+ 			<libraryjar filter="!WEB-INF/**,!**/portal/ee/license/**.class,!**/portal/license/License.class,!**/portal/license/LicenseManager*.class,!**/portal/license/validator/**.class" path="${portal.dir}/portal-impl/classes" />
+ 			<libraryjar path="${portal.kernel.dir}/classes" />
+ 			<libraryjar path="${portal.dir}/util-java/classes" />
+diff --git a/ext/7.3.x/build-release-license.xml b/ext/7.3.x/build-release-license.xml
+index d4b48c4..8dbc056 100644
+--- a/ext/7.3.x/build-release-license.xml
++++ b/ext/7.3.x/build-release-license.xml
+@@ -40,10 +40,9 @@
+ 			<libraryjar path="${java.lib.dir}/jce.jar" />
+ 			<libraryjar path="${java.lib.dir}/rt.jar" />
+ 			<libraryjar path="${portal.dir}/.gradle/caches/modules-2/files-2.1/com.liferay/com.liferay.petra.encryptor" />
+-			<libraryjar path="${portal.dir}/.gradle/caches/modules-2/files-2.1/com.liferay/com.liferay.petra.string" />
+ 			<libraryjar path="${portal.dir}/lib/development/servlet-api.jar" />
+ 			<libraryjar path="${portal.dir}/lib/portal/commons-io.jar" />
+-			<libraryjar path="${portal.dir}/modules/core/portal-compat/petra/util-java-compat/classes" />
++			<libraryjar path="${portal.dir}/tmp/lib-pre/com.liferay.petra.string.jar" />
+ 			<libraryjar filter="!WEB-INF/**,!**/portal/ee/license/**.class,!**/portal/license/License.class,!**/portal/license/LicenseManager*.class,!**/portal/license/validator/**.class" path="${portal.dir}/portal-impl/classes" />
+ 			<libraryjar path="${portal.kernel.dir}/classes" />
+ 			<libraryjar path="${portal.dir}/util-java/classes" />
+@@ -737,4 +736,4 @@
+ 			</then>
+ 		</if>
+ 	</target>
+-</project>
+\ No newline at end of file
++</project>
