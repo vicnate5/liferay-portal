@@ -216,6 +216,8 @@ public interface LiferaySelenium {
 
 	public String getSikuliImagesDirName();
 
+	public String getTestName();
+
 	public String getTestDependenciesDirName();
 
 	public String getText(String locator) throws Exception;
