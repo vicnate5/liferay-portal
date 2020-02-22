@@ -9820,6 +9820,24 @@ ANT_OPTS=${env.ANT_OPTS}</echo>
 				<delete file="liferay-portal-dependencies.zip" />
 
 				<mirrors-get
+					dest="liferay-portal-elasticsearch-sidecar.zip"
+					src="${test.build.portal.elasticsearch.sidecar.zip.url}"
+				/>
+
+				<unzip
+					dest="${liferay.home}/elasticsearch7"
+					src="liferay-portal-elasticsearch-sidecar.zip"
+				>
+					<mapper
+						from="[^/]+/(elasticsearch7/)?(.*)"
+						to="\2"
+						type="regexp"
+					/>
+				</unzip>
+
+				<delete file="liferay-portal-elasticsearch-sidecar.zip" />
+
+				<mirrors-get
 					dest="liferay-portal-osgi.zip"
 					src="${test.build.portal.osgi.zip.url}"
 				/>
@@ -10059,15 +10077,6 @@ ANT_OPTS=${env.ANT_OPTS}</echo>
 			<equals arg1="${app.server.type}" arg2="tomcat" />
 			<then>
 				<antcall target="prepare-tomcat-ext-environment" />
-			</then>
-		</if>
-
-		<if>
-			<not>
-				<equals arg1="${app.server.type}" arg2="tomcat" />
-			</not>
-			<then>
-				<antcall target="deploy-elasticsearch-sidecar" />
 			</then>
 		</if>
 
