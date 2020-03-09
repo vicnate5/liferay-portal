@@ -1511,7 +1511,7 @@ definition {
 		if (IsTextNotEqual(locator1 = "Select#LOS_ANGELES_TIME_ZONE", value1 = "(UTC -07:00) Pacific Daylight Time")) {
 			Select(
 				locator1 = "Select#TIME_ZONE",
-				value1 = "(UTC -08:00) Pacific Standard Time");
+				value1 = "(UTC -07:00) Pacific Daylight Time");
 		}
 		else {
 			Select(
@@ -1530,7 +1530,7 @@ definition {
 		if (IsTextNotEqual(locator1 = "Select#LOS_ANGELES_TIME_ZONE", value1 = "(UTC -07:00) Pacific Daylight Time")) {
 			AssertSelectedLabel(
 				locator1 = "Select#TIME_ZONE",
-				value1 = "(UTC -08:00) Pacific Standard Time");
+				value1 = "(UTC -07:00) Pacific Daylight Time");
 		}
 		else {
 			AssertSelectedLabel(

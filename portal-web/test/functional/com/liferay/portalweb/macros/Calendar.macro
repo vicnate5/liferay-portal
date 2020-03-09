@@ -755,7 +755,7 @@ definition {
 	}
 
 	macro viewSelectedTimeZone {
-		if ("${timeZone}" == "(UTC -08:00) Pacific Standard Time") {
+		if ("${timeZone}" == "(UTC -07:00) Pacific Daylight Time") {
 			if (IsTextNotEqual(locator1 = "Select#LOS_ANGELES_TIME_ZONE", value1 = "(UTC -07:00) Pacific Daylight Time")) {
 				AssertSelectedLabel(
 					locator1 = "Select#TIME_ZONE",

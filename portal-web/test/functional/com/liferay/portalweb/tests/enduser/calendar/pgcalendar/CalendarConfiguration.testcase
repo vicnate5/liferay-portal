@@ -284,7 +284,7 @@ definition {
 
 		CalendarNavigator.gotoAddMyCalendars();
 
-		Calendar.viewSelectedTimeZone(timeZone = "(UTC -08:00) Pacific Standard Time");
+		Calendar.viewSelectedTimeZone(timeZone = "(UTC -07:00) Pacific Daylight Time");
 
 		Navigator.gotoPage(pageName = "Calendar Page");
 

@@ -84,7 +84,7 @@ definition {
 		task ("Assert current time displays in user's selected time zone by asserting time zone specific label") {
 			AssertSelectedLabel(
 				locator1 = "Select#TIME_ZONE",
-				value1 = "(UTC -08:00) Pacific Standard Time");
+				value1 = "(UTC -07:00) Pacific Daylight Time");
 		}
 
 		JSONUser.addUser(
@@ -105,7 +105,7 @@ definition {
 		task ("Assert current time displays in user's selected time zone by asserting time zone specific label") {
 			AssertSelectedLabel(
 				locator1 = "Select#TIME_ZONE",
-				value1 = "(UTC -08:00) Pacific Standard Time");
+				value1 = "(UTC -07:00) Pacific Daylight Time");
 		}
 
 		PortalSettings.gotoConfiguration(
@@ -127,7 +127,7 @@ definition {
 		task ("Assert current time displays in user's selected time zone by asserting time zone specific label") {
 			AssertSelectedLabel(
 				locator1 = "Select#TIME_ZONE",
-				value1 = "(UTC -08:00) Pacific Standard Time");
+				value1 = "(UTC -07:00) Pacific Daylight Time");
 		}
 	}
 
