@@ -1905,9 +1905,14 @@ com.liferay.portal.kernel.util.ServiceProxyFactory.timeout=300000</echo>
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
-							<antcall inheritAll="false" target="prepare-portal-ext-properties">
-								<param name="database.type" value="@{database.type}" />
-							</antcall>
+							<if>
+								<isset property="env.JENKINS_HOME" />
+								<then>
+									<antcall inheritAll="false" target="prepare-portal-ext-properties">
+										<param name="database.type" value="@{database.type}" />
+									</antcall>
+								</then>
+							</if>
 
 							<antcall inheritAll="false" target="prepare-system-ext-properties" />
 
