@@ -1887,7 +1887,7 @@ com.liferay.portal.kernel.util.ServiceProxyFactory.timeout=300000</echo>
 		<sequential>
 			<run-batch-test tomcat.gc.log="true">
 				<test-action>
-					<database-test-run-test database.type="mysql" stop.app.server="true">
+					<database-test-run-test database.type="mysql" rebuild.database="false" stop.app.server="true">
 						<test-action>
 							<if>
 								<and>
