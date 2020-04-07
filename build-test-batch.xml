@@ -249,6 +249,7 @@ database.@{database.type}.version=@{database.version}]]></echo>
 			<if>
 				<and>
 					<equals arg1="@{database.type}" arg2="mysql" />
+					<isset property="env.JENKINS_HOME" />
 					<or>
 						<equals arg1="@{database.version}" arg2="5.5" />
 						<equals arg1="@{database.version}" arg2="5.7" />
@@ -289,7 +290,12 @@ mariadb.executable=${mariadb.executable}]]></echo>
 				</then>
 			</if>
 
-			<print-file file.name="sql/sql.${env.HOSTNAME}.properties" />
+			<if>
+				<isset property="env.JENKINS_HOME" />
+				<then>
+					<print-file file.name="sql/sql.${env.HOSTNAME}.properties" />
+				</then>
+			</if>
 
 			<database-test-action database.type="@{database.type}">
 				<action>
@@ -349,11 +355,14 @@ mariadb.executable=${mariadb.executable}]]></echo>
 						<then>
 							<stop-docker-database />
 						</then>
-						<else>
-							<exec executable="${database.service.executable}">
-								<arg line="${database.service.cmd.stop}" />
-							</exec>
-						</else>
+						<elseif>
+							<isset property="env.JENKINS_HOME" />
+							<then>
+								<exec executable="${database.service.executable}">
+									<arg line="${database.service.cmd.stop}" />
+								</exec>
+							</then>
+						</elseif>
 					</if>
 				</action>
 			</database-test-action>
@@ -389,13 +398,16 @@ mariadb.executable=${mariadb.executable}]]></echo>
 								<fail message="Unsupported database: @{database.type}-@{database.version}" />
 							</then>
 						</elseif>
-						<else>
-							<exec executable="${database.service.executable}" resultproperty="exec.result">
-								<arg line="${database.service.cmd.start}" />
-							</exec>
+						<elseif>
+							<isset property="env.JENKINS_HOME" />
+							<then>
+								<exec executable="${database.service.executable}" resultproperty="exec.result">
+									<arg line="${database.service.cmd.start}" />
+								</exec>
 
-							<diagnose-database-start database.type="@{database.type}" exec.result="${exec.result}" />
-						</else>
+								<diagnose-database-start database.type="@{database.type}" exec.result="${exec.result}" />
+							</then>
+						</elseif>
 					</if>
 
 					<antcall inheritall="false" target="copy-optional-jars">
@@ -412,9 +424,14 @@ mariadb.executable=${mariadb.executable}]]></echo>
 						<param name="todir" value="${test.app.server.lib.global.dir}" />
 					</antcall>
 
-					<antcall if:true="@{rebuild.database}" inheritall="false" target="rebuild-database">
-						<param name="database.type" value="@{database.type}" />
-					</antcall>
+					<if>
+						<isset property="env.JENKINS_HOME" />
+						<then>
+							<antcall if:true="@{rebuild.database}" inheritall="false" target="rebuild-database">
+								<param name="database.type" value="@{database.type}" />
+							</antcall>
+						</then>
+					</if>
 
 					<test-action />
 
@@ -437,11 +454,14 @@ mariadb.executable=${mariadb.executable}]]></echo>
 						<then>
 							<stop-docker-database />
 						</then>
-						<else>
-							<exec executable="${database.service.executable}" failonerror="true">
-								<arg line="${database.service.cmd.stop}" />
-							</exec>
-						</else>
+						<elseif>
+							<isset property="env.JENKINS_HOME" />
+							<then>
+								<exec executable="${database.service.executable}" failonerror="true">
+									<arg line="${database.service.cmd.stop}" />
+								</exec>
+							</then>
+						</elseif>
 					</if>
 				</action>
 			</database-test-action>
@@ -1875,7 +1895,10 @@ com.liferay.portal.kernel.util.ServiceProxyFactory.timeout=300000</echo>
 					<database-test-run-test database.type="mysql" stop.app.server="true">
 						<test-action>
 							<if>
-								<equals arg1="${build.profile}" arg2="dxp" />
+								<and>
+									<equals arg1="${build.profile}" arg2="dxp" />
+									<isset property="env.JENKINS_HOME" />
+								</and>
 								<then>
 									<antcall inheritAll="false" target="setup-profile-dxp" />
 
@@ -1889,9 +1912,14 @@ com.liferay.portal.kernel.util.ServiceProxyFactory.timeout=300000</echo>
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
-							<antcall inheritAll="false" target="prepare-portal-ext-properties">
-								<param name="database.type" value="@{database.type}" />
-							</antcall>
+							<if>
+								<isset property="env.JENKINS_HOME" />
+								<then>
+									<antcall inheritAll="false" target="prepare-portal-ext-properties">
+										<param name="database.type" value="@{database.type}" />
+									</antcall>
+								</then>
+							</if>
 
 							<antcall inheritAll="false" target="prepare-system-ext-properties" />
 
@@ -3045,13 +3073,21 @@ log.sanitizer.enabled=false</echo>
 	<macrodef name="setup-test-environment">
 		<sequential>
 			<if>
-				<and>
-					<available file="liferay-portal-bundle-${app.server.type}.tar.gz" />
-					<available file="liferay-portal-source.tar.gz" />
-				</and>
+				<not>
+					<isset property="env.JENKINS_HOME" />
+				</not>
 				<then>
-					<prepare-test-environment />
+					<echo> Skipping bundle setup since this is a local run </echo>
 				</then>
+				<elseif>
+					<and>
+						<available file="liferay-portal-bundle-${app.server.type}.tar.gz" />
+						<available file="liferay-portal-source.tar.gz" />
+					</and>
+					<then>
+						<prepare-test-environment />
+					</then>
+				</elseif>
 				<else>
 					<prepare-test-build />
 				</else>
