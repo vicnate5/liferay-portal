@@ -194,7 +194,7 @@ definition {
 		SikuliClick(locator1 = "DDMEditStructure#FORM_FIELD_DELETE_BUTTON");
 
 		AssertTextEquals(
-			locator1 = "IFrame#DIALOG_BOX",
+			locator1 = "IFrame#MODAL_BODY_BOX",
 			value1 = "${fieldFieldLabel}");
 
 		AssertTextEquals(
@@ -598,8 +598,8 @@ definition {
 		if (IsElementPresent(locator1 = "DDMEditStructure#IFRAME")) {
 			SelectFrame(locator1 = "DDMEditStructure#IFRAME");
 		}
-		else if (IsElementPresent(locator1 = "IFrame#DIALOG")) {
-			SelectFrame(locator1 = "IFrame#DIALOG");
+		else if (IsElementPresent(locator1 = "IFrame#MODAL_BODY")) {
+			SelectFrame(locator1 = "IFrame#MODAL_BODY");
 		}
 	}
 

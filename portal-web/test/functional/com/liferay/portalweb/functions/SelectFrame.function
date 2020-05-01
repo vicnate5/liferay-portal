@@ -18,7 +18,7 @@ definition {
 				);
 			}
 
-			selenium.waitForElementNotPresent(//*[(contains(@class,'loading-animation'))]);
+			selenium.waitForElementNotPresent(//*[contains(@class,'loading-animation')]);
 
 			selenium.selectFrame();
 
@@ -81,7 +81,7 @@ definition {
 				);
 			}
 
-			selenium.waitForElementNotPresent(//*[(contains(@class,'loading-animation'))]);
+			selenium.waitForElementNotPresent(//*[contains(@class,'loading-animation')]);
 
 			selenium.selectFrame();
 
