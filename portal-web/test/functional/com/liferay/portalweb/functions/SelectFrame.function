@@ -18,6 +18,8 @@ definition {
 				);
 			}
 
+			selenium.waitForElementNotPresent(//*[(contains(@class,'loading-animation'))]);
+
 			selenium.selectFrame();
 
 			selenium.waitForElementPresent("//body");
@@ -78,6 +80,8 @@ definition {
 					"xpath=(//iframe[not(contains(@class,'hide'))])[2]"
 				);
 			}
+
+			selenium.waitForElementNotPresent(//*[(contains(@class,'loading-animation'))]);
 
 			selenium.selectFrame();
 
