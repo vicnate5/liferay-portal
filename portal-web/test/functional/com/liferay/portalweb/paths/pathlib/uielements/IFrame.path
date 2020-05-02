@@ -38,9 +38,11 @@
 	<td>//iframe[contains(@id,'selectAssetList_iframe')]</td>
 	<td></td>
 </tr>
+<tr>
 	<td>DIALOG</td>
 	<td>//iframe[@class='dialog-iframe-node']</td>
 	<td></td>
+</tr>
 <tr>
 	<td>DIALOG_BOX</td>
 	<td>//div[contains(@class,'modal-header')]/h3</td>

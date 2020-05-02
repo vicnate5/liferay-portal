@@ -19,7 +19,11 @@ definition {
 			portletName = "Tags Navigation",
 			portletOption = "Configuration");
 
+<<<<<<< HEAD
 		SelectFrame(locator1 = "IFrame#DIALOG");
+=======
+		SelectFrame(locator1 = "IFrame#MODAL_BODY");
+>>>>>>> LPS-110927 Adjust other iframe path locators
 
 		if (isSet(displayTemplate)) {
 			Select(
@@ -35,7 +39,11 @@ definition {
 			portletName = "Tags Navigation",
 			portletOption = "Configuration");
 
+<<<<<<< HEAD
 		SelectFrame(locator1 = "IFrame#DIALOG");
+=======
+		SelectFrame(locator1 = "IFrame#MODAL_BODY");
+>>>>>>> LPS-110927 Adjust other iframe path locators
 
 		if ("${showUnusedTags}" == "true") {
 			Check.checkToggleSwitch(

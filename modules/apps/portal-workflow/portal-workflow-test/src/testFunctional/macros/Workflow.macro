@@ -175,7 +175,7 @@ definition {
 		LexiconEntry.gotoEllipsisMenuItem(menuItem = "Assign to...");
 
 		AssertTextEquals(
-			locator1 = "IFrame#MODAL_BODY_BOX",
+			locator1 = "IFrame#DIALOG_BOX",
 			value1 = "Assign to...");
 
 		IFrame.selectConfigurationFrame();
@@ -383,7 +383,7 @@ definition {
 		MenuItem.clickNoError(menuItem = "Delete");
 
 		AssertTextEquals(
-			locator1 = "IFrame#MODAL_BODY_BOX",
+			locator1 = "IFrame#DIALOG_BOX",
 			value1 = "Delete workflow?");
 
 		AssertTextEquals(
