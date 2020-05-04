@@ -1054,7 +1054,7 @@ app.server.type=@{app.server.type}]]></echo>
 
 			<antcall inheritAll="false" target="setup-yarn" />
 
-			<untar
+			<!-- <untar
 				compression="gzip"
 				dest="."
 				src="liferay-portal-source.tar.gz"
@@ -1064,7 +1064,7 @@ app.server.type=@{app.server.type}]]></echo>
 				compression="gzip"
 				dest="."
 				src="liferay-portal-bundle-@{app.server.type}.tar.gz"
-			/>
+			/> -->
 
 			<chmod
 				perm="a+x"
