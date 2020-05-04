@@ -990,7 +990,7 @@ app.server.type=@{app.server.type}]]></echo>
 
 			<delete>
 				<fileset
-					dir="bundles"
+					dir="${app.server.parent.dir}"
 					includes="*.zip"
 				/>
 			</delete>
@@ -1007,7 +1007,7 @@ app.server.type=@{app.server.type}]]></echo>
 						longfile="posix"
 					/>
 
-					<prepare-liferay-classes if:true="${test.batch.code.coverage}" merged.jar="${project.dir}/jacoco/merged.jar" portal.bundle.dir="bundles" />
+					<prepare-liferay-classes if:true="${test.batch.code.coverage}" merged.jar="${project.dir}/jacoco/merged.jar" portal.bundle.dir="${app.server.parent.dir}" />
 				</then>
 			</if>
 
@@ -1016,7 +1016,7 @@ app.server.type=@{app.server.type}]]></echo>
 				type="file"
 			>
 				<fileset
-					dir="bundles"
+					dir="${app.server.parent.dir}"
 				>
 					<include name="**/*.sh" />
 					<include name="**/bin/*" />
@@ -1024,16 +1024,16 @@ app.server.type=@{app.server.type}]]></echo>
 			</chmod>
 
 			<tar
-				basedir="."
+				basedir="${project.dir}"
 				compression="gzip"
 				destfile="liferay-portal-bundle-@{app.server.type}.tar.gz"
-				includes="bundles/**"
+				includes="${app.server.parent.dir}/**"
 				longfile="posix"
 			/>
 
 			<execute>
 				<![CDATA[
-					tar --file=liferay-portal-bundle-@{app.server.type}.tar.gz --gzip --list --verbose
+					tar --file=${project.dir}/liferay-portal-bundle-@{app.server.type}.tar.gz --gzip --list --verbose
 				]]>
 			</execute>
 
