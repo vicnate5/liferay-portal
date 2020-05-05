@@ -1052,7 +1052,7 @@ app.server.type=@{app.server.type}]]></echo>
 
 			<antcall inheritAll="false" target="setup-sdk" />
 
-			<antcall inheritAll="false" target="setup-yarn" />
+			<!-- <antcall inheritAll="false" target="setup-yarn" /> -->
 
 			<!-- <untar
 				compression="gzip"
@@ -1078,9 +1078,9 @@ app.server.type=@{app.server.type}]]></echo>
 				</fileset>
 			</chmod>
 
-			<setup-libs />
+			<!-- <setup-libs />
 
-			<setup-yarn />
+			<setup-yarn /> -->
 
 			<antcall inheritAll="false" target="install-portal-snapshots" />
 
