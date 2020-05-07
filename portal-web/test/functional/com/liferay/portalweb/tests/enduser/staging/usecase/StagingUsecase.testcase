@@ -1302,6 +1302,9 @@ definition {
 		WebContent.viewPGViaWCD(webContentContent = "Web Content Content");
 	}
 
+	// Ignore because of ticket LPS-110927, need to fix wait for select frame
+
+	@ignore = "true"
 	@priority = "5"
 	test TrashEntryReferencePublishing {
 		property portal.acceptance = "true";

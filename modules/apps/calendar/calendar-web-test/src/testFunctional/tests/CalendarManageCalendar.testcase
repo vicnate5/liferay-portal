@@ -365,6 +365,9 @@ definition {
 			calendarType = "Other Calendars");
 	}
 
+	// Ignore because of ticket LPS-110927, need to fix wait for select frame
+
+	@ignore = "true"
 	@priority = "5"
 	test SearchForOtherCalendars {
 		property portal.upstream = "quarantine";
