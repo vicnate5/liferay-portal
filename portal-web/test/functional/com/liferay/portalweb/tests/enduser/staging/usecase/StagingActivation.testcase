@@ -59,9 +59,6 @@ definition {
 			publicationTitle = "summCheck");
 	}
 
-	// Ignore because of ticket LPS-110927, need to fix wait for select frame
-
-	@ignore = "true"
 	@priority = "4"
 	test CheckPublicationSummaryRemote {
 		property app.server.bundles.size = "1";

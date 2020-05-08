@@ -429,10 +429,7 @@ definition {
 		OpenGraph.viewOpenGraphProperties(ogPropertyList = '''property="og:image:alt" content="This is new image alternative description"''');
 	}
 
-	// Ignore because of ticket LPS-110927, need to fix wait for select frame
-
 	@description = "This ensures that the HTTPS users can customize OG image tags and generate special tags."
-	@ignore = "true"
 	@priority = "5"
 	test ViewImageWithMetaTags {
 		property portal.acceptance = "true";
