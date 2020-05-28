@@ -3,7 +3,12 @@ definition {
 	macro _editFieldLabel {
 		DynamicDataMapping.editFieldSettings(fieldFieldLabel = "${field}");
 
-		DoubleClick(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
+		if ("${browserType}" == "safari") {
+			DoubleClick.doubleClickAt(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
+		}
+		else {
+			DoubleClick(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
+		}
 
 		Type(
 			locator1 = "DDMEditStructure#SETTINGS_CELL_EDITOR_FIELD",
