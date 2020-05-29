@@ -3,6 +3,8 @@ definition {
 	macro _editFieldLabel {
 		DynamicDataMapping.editFieldSettings(fieldFieldLabel = "${field}");
 
+		var browserType = PropsUtil.get("browser.type");
+
 		if ("${browserType}" == "safari") {
 			DoubleClick.javaScriptDoubleClick(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
 		}
