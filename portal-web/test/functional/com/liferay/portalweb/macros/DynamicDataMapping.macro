@@ -316,7 +316,7 @@ definition {
 
 		Pause(locator1 = "3000");
 
-		SelectFrame(value1 = "relative=top");
+		Click(locator1 = "DDMEditStructure#SETTINGS_CELL_EDITOR_SAVE_BUTTON");
 
 		Click(locator1 = "DDMEditStructure#SETTINGS_CELL_EDITOR_SAVE_BUTTON");
 	}
