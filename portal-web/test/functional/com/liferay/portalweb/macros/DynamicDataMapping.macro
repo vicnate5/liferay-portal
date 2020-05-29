@@ -19,18 +19,18 @@ definition {
 
 		var key_field = "${field}";
 
-		DragAndDrop(
-			locator1 = "DDMEditStructure#FIELDS_FIELD",
-			locator2 = "DDMEditStructure#FORM_BUILDER",
-			value1 = "${field}");
+		// DragAndDrop(
+		// 	locator1 = "DDMEditStructure#FIELDS_FIELD",
+		// 	locator2 = "DDMEditStructure#FORM_BUILDER",
+		// 	value1 = "${field}");
 
-		DynamicDataMapping._editFieldLabel(
-			field = "${field}",
-			fieldFieldLabel = "${fieldFieldLabel}");
+		// DynamicDataMapping._editFieldLabel(
+		// 	field = "${field}",
+		// 	fieldFieldLabel = "${fieldFieldLabel}");
 
-		AssertTextEquals(
-			locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL",
-			value1 = "${fieldFieldLabel}");
+		// AssertTextEquals(
+		// 	locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL",
+		// 	value1 = "${fieldFieldLabel}");
 
 		AssertClick.pauseAssertTextClickAt(
 			locator1 = "DDMEditStructure#FIELDS_LINK",
