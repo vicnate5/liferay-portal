@@ -8,7 +8,8 @@ definition {
 		if ("${browserType}" == "safari") {
 			Click(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
 
-			DoubleClick(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
+			Click(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
+			Click(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
 		}
 		else {
 			DoubleClick(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
