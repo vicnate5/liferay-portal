@@ -69,7 +69,8 @@ public class SafariWebDriverImpl extends BaseWebDriverImpl {
 	}
 
 	@Override
-	public void clickAt(String locator) {
+	public void clickAt(
+		String locator, String coordString, boolean scrollIntoView) {
 		click(locator);
 	}
 
