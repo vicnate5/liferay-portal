@@ -3,16 +3,7 @@ definition {
 	macro _editFieldLabel {
 		DynamicDataMapping.editFieldSettings(fieldFieldLabel = "${field}");
 
-		var browserType = PropsUtil.get("browser.type");
-
-		if ("${browserType}" == "safari") {
-			Click(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
-
-			DoubleClick.javaScriptDoubleClick(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
-		}
-		else {
-			DoubleClick(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
-		}
+		DoubleClick(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
 
 		Type(
 			locator1 = "DDMEditStructure#SETTINGS_CELL_EDITOR_FIELD",
