@@ -69,6 +69,11 @@ public class SafariWebDriverImpl extends BaseWebDriverImpl {
 	}
 
 	@Override
+	public void clickAt(String locator) {
+		click(locator);
+	}
+
+	@Override
 	public void doubleClick(String locator) {
 		click(locator);
 
