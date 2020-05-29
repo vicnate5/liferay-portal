@@ -320,11 +320,7 @@ definition {
 			locator1 = "DDMEditStructure#SETTINGS_CELL_EDITOR_FIELD",
 			value1 = "${fieldName}");
 
-		ScrollWebElementIntoView(locator1 = "DDMEditStructure#SETTINGS_CELL_EDITOR_SAVE_BUTTON");
-
-		AssertClick(
-			locator1 = "DDMEditStructure#SETTINGS_CELL_EDITOR_SAVE_BUTTON",
-			value1 = "Save");
+		Click(locator1 = "DDMEditStructure#SETTINGS_CELL_EDITOR_SAVE_BUTTON");
 	}
 
 	macro editFieldNameInvalidCharacter {
