@@ -4,8 +4,8 @@ definition {
 		DynamicDataMapping.editFieldSettings(fieldFieldLabel = "${field}");
 
 		if ("${browserType}" == "safari") {
-			Click(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
-			Click(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
+			Click.javaScriptClick(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
+			Click.javaScriptClick(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
 		}
 		else {
 			DoubleClick(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
