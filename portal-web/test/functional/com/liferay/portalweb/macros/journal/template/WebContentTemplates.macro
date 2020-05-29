@@ -39,6 +39,8 @@ definition {
 				locator1 = "DDMEditTemplate#DETAILS_SELECT_STRUCTURE",
 				value1 = "Select");
 
+			SelectFrameTop();
+
 			LiferayEvent.waitForLiferayEvent(
 				attributeName = "src",
 				attributeValue = "dialog-iframe-popup",
@@ -61,7 +63,7 @@ definition {
 				value1 = "${structureName}");
 			}
 
-			// SelectFrameTop();
+			SelectFrameTop();
 		}
 	}
 
