@@ -6,6 +6,8 @@ definition {
 		var browserType = PropsUtil.get("browser.type");
 
 		if ("${browserType}" == "safari") {
+			Click(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
+
 			DoubleClick.javaScriptDoubleClick(locator1 = "DDMEditStructure#SETTINGS_FIELD_LABEL");
 		}
 		else {
