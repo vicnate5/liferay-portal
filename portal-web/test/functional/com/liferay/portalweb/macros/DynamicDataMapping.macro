@@ -314,7 +314,7 @@ definition {
 			locator1 = "DDMEditStructure#SETTINGS_CELL_EDITOR_FIELD",
 			value1 = "${fieldName}");
 
-		DoubleClick(locator1 = "DDMEditStructure#SETTINGS_CELL_EDITOR_SAVE_BUTTON_2");
+		DoubleClick(locator1 = "DDMEditStructure#SETTINGS_CELL_EDITOR_SAVE_BUTTON");
 	}
 
 	macro editFieldNameInvalidCharacter {
