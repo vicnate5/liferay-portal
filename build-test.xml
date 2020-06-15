@@ -2038,10 +2038,10 @@ jdbc.default.password=${database.password}</echo>
 				<then>
 					<stop-edge-driver />
 
-					<mirrors-get
+					<!-- <mirrors-get
 						dest="tools/selenium/MicrosoftWebDriver.exe"
 						src="http://www.microsoft.com/en-us/download/webdriver/2.0/MicrosoftWebDriver.exe"
-					/>
+					/> -->
 				</then>
 				<else>
 					<if>
@@ -9242,9 +9242,9 @@ auto.deploy.dest.dir=C:/WINDOWS/system32/config/systemprofile/liferay/websphere-
 			<then>
 				<prepare-edge-driver />
 
-				<!-- <echo append="true" file="${test.ext.properties.file}">
+				<echo append="true" file="${test.ext.properties.file}">
 					selenium.executable.dir.name=${selenium.executable.dir.name}
-				</echo> -->
+				</echo>
 			</then>
 		</if>
 
