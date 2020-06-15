@@ -311,9 +311,9 @@ public class WebDriverUtil extends PropsValues {
 		else if (BROWSER_TYPE.equals("edge") &&
 				 !SELENIUM_REMOTE_DRIVER_ENABLED) {
 
-			// System.setProperty(
-			// 	"webdriver.edge.driver",
-			// 	SELENIUM_EXECUTABLE_DIR_NAME + "MicrosoftWebDriver.exe");
+			System.setProperty(
+				"webdriver.edge.driver",
+				SELENIUM_EXECUTABLE_DIR_NAME + "MicrosoftWebDriver.exe");
 
 			_webDriver = _getEdgeDriver();
 		}
