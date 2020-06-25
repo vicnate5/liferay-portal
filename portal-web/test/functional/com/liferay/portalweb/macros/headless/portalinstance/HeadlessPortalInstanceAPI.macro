@@ -1,0 +1,49 @@
+definition {
+
+	macro _addPortalInstance {
+		Variables.assertDefined(parameterList = "${domain},${virtualHost},${portalInstanceId}");
+
+		var portalURL = JSONCompany.getPortalURL();
+
+		var parameters = JSONUtil2._addJSONObject(
+			JSON = "{}",
+			key = "domain",
+			value = ""${domain}"");
+
+		var parameters = JSONUtil2._addJSONObject(
+			JSON = "${parameters}",
+			key = "virtualHost",
+			value = ""${virtualHost}"");
+
+		var parameters = JSONUtil2._addJSONObject(
+			JSON = "${parameters}",
+			key = "portalInstanceId",
+			value = ""${portalInstanceId}"");
+
+		var curl = '''
+			${portalURL}/o/headless-portal-instances/v1.0/portal-instances \
+			-u test@liferay.com:test \
+			-d ${parameters} \
+			-H Content-Type: application/json
+		''';
+
+		com.liferay.poshi.runner.util.JSONCurlUtil.post("${curl}");
+	}
+
+	macro _deletePortalInstance {
+		Variables.assertDefined(parameterList = "${portalInstanceId}");
+
+		var portalURL = JSONCompany.getPortalURL();
+
+		var portalInstanceId = StringUtil.replace("${portalInstanceId}", " ", "%20");
+
+		var curl = '''
+			${portalURL}/o/headless-portal-instances/v1.0/portal-instances/${portalInstanceId} \
+			-u test@liferay.com:test \
+			-H Content-Type: application/json
+		''';
+
+		com.liferay.poshi.runner.util.JSONCurlUtil.delete("${curl}");
+	}
+
+}
