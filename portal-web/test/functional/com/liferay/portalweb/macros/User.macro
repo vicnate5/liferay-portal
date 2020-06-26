@@ -1686,7 +1686,7 @@ definition {
 			value1 = "${siteName}");
 
 		if ("${browserType}" == "safari") {
-			Click(locator1 = "Icon#BASIC_SEARCH");
+			Click.javaScriptClick(locator1 = "Icon#BASIC_SEARCH");
 		}
 		else {
 			KeyPress(
