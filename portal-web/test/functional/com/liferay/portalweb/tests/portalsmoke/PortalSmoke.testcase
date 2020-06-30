@@ -40,7 +40,7 @@ definition {
 
 		Pause(locator1 = "60000");
 
-		ProductMenu.gotoPortlet(
+		GlobalMenu.gotoPortlet(
 			category = "Configuration",
 			panel = "Control Panel",
 			portlet = "Liferay Connected Services");
