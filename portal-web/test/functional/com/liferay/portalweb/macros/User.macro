@@ -1685,10 +1685,7 @@ definition {
 			locator1 = "TextInput#SITE_SEARCH_KEYWORDS",
 			value1 = "${siteName}");
 
-		if ("${browserType}" == "safari") {
-			Click.javaScriptClick(locator1 = "Icon#BASIC_SEARCH");
-		}
-		else {
+		if ("${browserType}" != "safari") {
 			KeyPress(
 				locator1 = "TextInput#SEARCH",
 				value1 = "\RETURN");
