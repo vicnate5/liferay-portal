@@ -1,0 +1,4 @@
+Bundle-Name: Liferay Commerce License Temp
+Bundle-SymbolicName: com.liferay.commerce.license.temp
+Bundle-Version: 1.0.0
+Web-ContextPath: /commerce-license-temp
