@@ -1,4 +1,5 @@
 Bundle-Name: Liferay Commerce License Temp
 Bundle-SymbolicName: com.liferay.commerce.license.temp
 Bundle-Version: 1.0.0
+Liferay-Enterprise-App: product.id=Liferay Commerce Production
 Web-ContextPath: /commerce-license-temp
