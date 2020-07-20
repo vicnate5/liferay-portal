@@ -21,7 +21,7 @@ import org.osgi.service.component.annotations.Deactivate;
 /**
  * @author Tina Tian
  */
-@Component(service = {})
+@Component(enabled = false, service = {})
 public class TempComponent {
 
 	@Activate
