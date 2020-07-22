@@ -21,6 +21,8 @@ definition {
 
 	@priority = "4"
 	test UninstallWarOffline {
+		property portal.acceptance = "koorgai";
+		
 		FileInstall.deployJarAndWarOnServer(
 			bundleIndex = "0",
 			liferayDependencyJars = "test-theme.war");
