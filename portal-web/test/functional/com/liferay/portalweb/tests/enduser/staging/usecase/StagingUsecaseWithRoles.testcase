@@ -414,6 +414,8 @@ definition {
 	@priority = "5"
 	test StagingDemoLocalLive4 {
 		property testray.component.names = "Training";
+		property test.relies.on = "quartz-scheduler";
+		property portal.acceptance = "true";
 
 		ApplicationsMenu.gotoPortlet(
 			category = "Sites",
