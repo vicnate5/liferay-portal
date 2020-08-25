@@ -4386,11 +4386,11 @@ log.sanitizer.enabled=false</echo>
 		<run-functional-test app.server.type="websphere" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-wildfly160-mariadb102-jdk8">
+	<target name="functional-smoke-wildfly140-mariadb102-jdk8">
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-wildfly160-mariadb102-jdk11_open">
+	<target name="functional-smoke-wildfly140-mariadb102-jdk11_open">
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
@@ -4662,11 +4662,11 @@ log.sanitizer.enabled=false</echo>
 		<run-functional-test app.server.type="websphere" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="functional-upgrade-wildfly160-mariadb102-jdk8">
+	<target name="functional-upgrade-wildfly140-mariadb102-jdk8">
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" />
 	</target>
 
-	<target name="functional-upgrade-wildfly160-mariadb102-jdk11_open">
+	<target name="functional-upgrade-wildfly140-mariadb102-jdk11_open">
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" />
 	</target>
 
@@ -4686,11 +4686,11 @@ log.sanitizer.enabled=false</echo>
 		<run-functional-test app.server.type="websphere" database.type="mysql" />
 	</target>
 
-	<target name="functional-wildfly160-mariadb102-jdk8">
+	<target name="functional-wildfly140-mariadb102-jdk8">
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" />
 	</target>
 
-	<target name="functional-wildfly160-mysql57-jdk8">
+	<target name="functional-wildfly140-mysql57-jdk8">
 		<run-functional-test app.server.type="wildfly" database.type="mysql" />
 	</target>
 
