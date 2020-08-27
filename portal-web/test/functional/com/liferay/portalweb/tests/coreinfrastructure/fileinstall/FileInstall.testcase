@@ -49,8 +49,6 @@ definition {
 			panel = "Control Panel",
 			portlet = "Gogo Shell");
 
-		AssertConsoleTextNotPresent(value1 = "STARTED com.liferay.cluster.test.module_");
-
 		GogoShell.executeCommand(commandName = "lb | grep 'Test Module'");
 
 		GogoShell.viewOutput(outputContent = "false");
@@ -89,8 +87,6 @@ definition {
 			category = "System",
 			panel = "Control Panel",
 			portlet = "Gogo Shell");
-
-		AssertConsoleTextNotPresent(value1 = "STARTED test-theme_");
 
 		GogoShell.executeCommand(commandName = "lb | grep test-theme");
 
