@@ -114,6 +114,7 @@ definition {
 
 	@priority = "3"
 	test InstallOSGiConfigWithHiddenFile {
+		property portal.acceptance = "koorgai";
 		property test.name.skip.portal.instance = "FileInstall#InstallOSGiConfigWithHiddenFile";
 
 		Portlet.shutdownServer();
