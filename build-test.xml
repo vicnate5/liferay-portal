@@ -6581,6 +6581,12 @@ go</echo>
 		</if>
 	</target>
 
+	<target name="create-hidden-file">
+		<touch file="${liferay.home}/osgi/configs/.keep" />
+
+		<echo> ${liferay.home}/osgi/configs/.keep" </echo>
+	</target>
+
 	<target name="curl-execute">
 		<fail message="Please set the property ${curl.args}." unless="curl.args" />
 
