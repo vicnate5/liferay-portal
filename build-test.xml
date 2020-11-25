@@ -4896,6 +4896,8 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 				app.server.tomcat.zip.url=${app.server.tomcat.zip.url}
 			</echo>
 
+			<echoproperties />
+
 			<start-app-server-cmd
 				app.server.bin.dir="${app.server.bin.dir}"
 				app.server.bundle.index="@{app.server.bundle.index}"
