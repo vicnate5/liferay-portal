@@ -65,6 +65,7 @@ import freemarker.template.TemplateModelException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -395,6 +396,22 @@ public class FreeMarkerManager extends BaseTemplateManager {
 		try {
 			_threadLocalsField = ReflectionUtil.getDeclaredField(
 				Thread.class, "threadLocals");
+
+			Class<?> threadLocalMapClass = _threadLocalsField.getType();
+
+			_createInheritedMapMethod = ReflectionUtil.getDeclaredMethod(
+				ThreadLocal.class, "createInheritedMap", threadLocalMapClass);
+
+			_tableField = ReflectionUtil.getDeclaredField(
+				threadLocalMapClass, "table");
+			_sizeField = ReflectionUtil.getDeclaredField(
+				threadLocalMapClass, "size");
+			_thresholdField = ReflectionUtil.getDeclaredField(
+				threadLocalMapClass, "threshold");
+
+			Class<?> tableFieldType = _tableField.getType();
+
+			_entryClass = tableFieldType.getComponentType();
 		}
 		catch (Exception exception) {
 			throw new IllegalStateException(
@@ -560,7 +577,8 @@ public class FreeMarkerManager extends BaseTemplateManager {
 					" times"));
 		}
 
-		Object threadLocals = _threadLocalsField.get(Thread.currentThread());
+		Object threadLocals = _copyThreadLocals(
+			_threadLocalsField.get(Thread.currentThread()));
 
 		NoticeableFuture<?> noticeableFuture =
 			_noticeableExecutorService.submit(
@@ -594,12 +612,40 @@ public class FreeMarkerManager extends BaseTemplateManager {
 						" processing timeout"),
 					timeoutException);
 			}
+
+			_tableField.set(threadLocals, Array.newInstance(_entryClass, 0));
+			_sizeField.set(threadLocals, 0);
+			_thresholdField.set(threadLocals, 0);
 		}
 	}
 
 	@Reference(unbind = "-")
 	protected void setSingleVMPool(SingleVMPool singleVMPool) {
 		_singleVMPool = singleVMPool;
+	}
+
+	private Object _copyThreadLocals(Object threadLocals) throws Exception {
+		Object table = _tableField.get(threadLocals);
+
+		int length = Array.getLength(table);
+
+		try {
+			_tableField.set(
+				threadLocals, Array.newInstance(_entryClass, length));
+
+			Object clonedThreadLocals = _createInheritedMapMethod.invoke(
+				null, threadLocals);
+
+			System.arraycopy(
+				table, 0, _tableField.get(clonedThreadLocals), 0, length);
+
+			_sizeField.set(clonedThreadLocals, _sizeField.get(threadLocals));
+
+			return clonedThreadLocals;
+		}
+		finally {
+			_tableField.set(threadLocals, table);
+		}
 	}
 
 	private String _getMacroLibrary() {
@@ -645,7 +691,9 @@ public class FreeMarkerManager extends BaseTemplateManager {
 
 	private volatile int _bundleTrackingCount = -2;
 	private Configuration _configuration;
+	private Method _createInheritedMapMethod;
 	private BeansWrapper _defaultBeanWrapper;
+	private Class<?> _entryClass;
 	private volatile FreeMarkerBundleClassloader _freeMarkerBundleClassloader;
 	private volatile FreeMarkerEngineConfiguration
 		_freeMarkerEngineConfiguration;
@@ -660,12 +708,15 @@ public class FreeMarkerManager extends BaseTemplateManager {
 
 	private BeansWrapper _restrictedBeanWrapper;
 	private SingleVMPool _singleVMPool;
+	private Field _sizeField;
+	private Field _tableField;
 	private final Map<String, String> _taglibMappings =
 		new ConcurrentHashMap<>();
 	private TemplateClassResolver _templateClassResolver;
 	private final Map<String, TemplateModel> _templateModels =
 		new ConcurrentHashMap<>();
 	private Field _threadLocalsField;
+	private Field _thresholdField;
 	private Map<String, AtomicInteger> _timeoutTemplateCounters;
 
 	private class ServletContextInvocationHandler implements InvocationHandler {
