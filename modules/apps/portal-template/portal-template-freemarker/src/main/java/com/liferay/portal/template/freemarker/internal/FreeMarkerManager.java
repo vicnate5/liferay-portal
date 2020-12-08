@@ -18,7 +18,6 @@ import com.liferay.petra.concurrent.ConcurrentReferenceKeyHashMap;
 import com.liferay.petra.concurrent.NoticeableExecutorService;
 import com.liferay.petra.concurrent.NoticeableFuture;
 import com.liferay.petra.executor.PortalExecutorManager;
-import com.liferay.petra.lang.CentralizedThreadLocal;
 import com.liferay.petra.lang.ClassLoaderPool;
 import com.liferay.petra.memory.FinalizeManager;
 import com.liferay.petra.reflect.ReflectionUtil;
@@ -31,8 +30,6 @@ import com.liferay.portal.kernel.cache.thread.local.Lifecycle;
 import com.liferay.portal.kernel.cache.thread.local.ThreadLocalCacheManager;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.servlet.JSPSupportServlet;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateConstants;
@@ -394,6 +391,15 @@ public class FreeMarkerManager extends BaseTemplateManager {
 
 			_timeoutTemplateCounters = new ConcurrentHashMap<>();
 		}
+
+		try {
+			_threadLocalsField = ReflectionUtil.getDeclaredField(
+				Thread.class, "threadLocals");
+		}
+		catch (Exception exception) {
+			throw new IllegalStateException(
+				"Unable to get declared field", exception);
+		}
 	}
 
 	protected void addTaglibSupport(
@@ -554,23 +560,22 @@ public class FreeMarkerManager extends BaseTemplateManager {
 					" times"));
 		}
 
-		Map<String, Object> threadLocals =
-			FreemarkerThreadLocalUtil.collectThreadLocals();
+		Object threadLocals = _threadLocalsField.get(Thread.currentThread());
 
 		NoticeableFuture<?> noticeableFuture =
 			_noticeableExecutorService.submit(
 				(Callable<Void>)() -> {
+					Thread currentThread = Thread.currentThread();
+
 					try {
-						FreemarkerThreadLocalUtil.populateThreadLocals(
-							threadLocals, _permissionCheckerFactory,
-							_userLocalService);
+						_threadLocalsField.set(currentThread, threadLocals);
 
 						callable.call();
 					}
 					finally {
 						ThreadLocalCacheManager.clearAll(Lifecycle.REQUEST);
 
-						CentralizedThreadLocal.clearShortLivedThreadLocals();
+						_threadLocalsField.set(currentThread, null);
 					}
 
 					return null;
@@ -651,9 +656,6 @@ public class FreeMarkerManager extends BaseTemplateManager {
 	private NoticeableExecutorService _noticeableExecutorService;
 
 	@Reference
-	private PermissionCheckerFactory _permissionCheckerFactory;
-
-	@Reference
 	private PortalExecutorManager _portalExecutorManager;
 
 	private BeansWrapper _restrictedBeanWrapper;
@@ -663,10 +665,8 @@ public class FreeMarkerManager extends BaseTemplateManager {
 	private TemplateClassResolver _templateClassResolver;
 	private final Map<String, TemplateModel> _templateModels =
 		new ConcurrentHashMap<>();
+	private Field _threadLocalsField;
 	private Map<String, AtomicInteger> _timeoutTemplateCounters;
-
-	@Reference
-	private UserLocalService _userLocalService;
 
 	private class ServletContextInvocationHandler implements InvocationHandler {
 
