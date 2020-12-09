@@ -64,6 +64,7 @@ import freemarker.template.TemplateModelException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Writer;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -551,7 +552,8 @@ public class FreeMarkerManager extends BaseTemplateManager {
 		return false;
 	}
 
-	protected void render(String templateId, Callable<Void> callable)
+	protected void render(
+			String templateId, Writer writer, Callable<Void> callable)
 		throws Exception {
 
 		long timeout = _freeMarkerEngineConfiguration.asyncRenderTimeout();
@@ -605,12 +607,13 @@ public class FreeMarkerManager extends BaseTemplateManager {
 		catch (TimeoutException timeoutException) {
 			timeoutCounter.incrementAndGet();
 
+			String error = StringBundler.concat(
+				"Freemarker template ", templateId, " processing timeout");
+
+			writer.write(error);
+
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					StringBundler.concat(
-						"Freemarker template ", templateId,
-						" processing timeout"),
-					timeoutException);
+				_log.warn(error, timeoutException);
 			}
 
 			_tableField.set(threadLocals, Array.newInstance(_entryClass, 0));

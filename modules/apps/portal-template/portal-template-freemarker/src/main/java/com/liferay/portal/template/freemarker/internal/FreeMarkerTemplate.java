@@ -142,7 +142,7 @@ public class FreeMarkerTemplate extends BaseTemplate {
 		throws Exception {
 
 		_freeMarkerManager.render(
-			templateResource.getTemplateId(),
+			templateResource.getTemplateId(), writer,
 			() -> {
 				TemplateResourceThreadLocal.setTemplateResource(
 					TemplateConstants.LANG_TYPE_FTL, templateResource);
