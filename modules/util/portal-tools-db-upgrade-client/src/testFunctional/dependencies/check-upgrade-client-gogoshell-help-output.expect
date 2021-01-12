@@ -27,7 +27,12 @@ expect {
 }
 
 expect {
-	"check - List pending or running upgrades\r\r\n   scope: upgrade" {}
+	"check - List pending upgrades\r\r\n   scope: upgrade" {}
+	timeout {send_user "No available command upgrade:check";exit 2}
+}
+
+expect {
+	"checkAll - List latest execution result for all verify processes\r\r\n   scope: verify" {}
 	timeout {send_user "No available command upgrade:check";exit 2}
 }
 
