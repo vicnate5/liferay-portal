@@ -14,18 +14,6 @@ definition {
 		Alert.viewSuccessMessage();
 	}
 
-	macro assertRedirectActionPG {
-		var key_pageName = "${pageName}";
-
-		AssertClick(
-			locator1 = "Home#PAGE",
-			value1 = "${pageName}");
-
-		var key_pageName = "${redirectPageName}";
-
-		AssertVisible(locator1 = "Home#PAGE_ACTIVE");
-	}
-
 	macro previewPG {
 		Click(locator1 = "ControlMenu#SIMULATION");
 
