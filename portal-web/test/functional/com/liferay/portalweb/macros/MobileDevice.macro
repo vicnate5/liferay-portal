@@ -1,37 +1,5 @@
 definition {
 
-	macro addClassificationRuleCP {
-		var key_deviceFamilyName = "${mobileDeviceFamilyName}";
-
-		AssertClick(
-			locator1 = "MobileDevice#DEVICE_FAMILY_TABLE_NAME_LINK",
-			value1 = "${mobileDeviceFamilyName}");
-
-		// Workaround for LPS-92682
-
-		Click(locator1 = "Button#PLUS");
-
-		AssertTextEquals.assertPartialText(
-			locator1 = "Portlet#HEADER",
-			value1 = "New Classification Rule");
-
-		PortletEntry.inputName(name = "${classificationName}");
-
-		Panel.expandPanel(panel = "Operating System and Type");
-
-		var key_ruleOSScope = "${ruleOSScope}";
-
-		Click(locator1 = "MobileDevice#ADD_CLASSIFICATION_RULE_OPERATING_SYSTEM");
-
-		var key_deviceType = "${deviceType}";
-
-		Click(locator1 = "MobileDevice#ADD_CLASSIFICATION_RULE_DEVICE_TYPE");
-
-		Click(locator1 = "Button#SAVE");
-
-		Alert.viewSuccessMessage();
-	}
-
 	macro addDeviceFamilyCP {
 		Click(locator1 = "Button#PLUS");
 
