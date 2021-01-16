@@ -228,231 +228,251 @@ lportal_BS
 		<element name="test-action" />
 
 		<sequential>
-			<var name="database.type" unset="true" />
+			<if>
+				<or>
+					<equals arg1="${test.batch.full.setup}" arg2="true" />
+					<isset property="env.JENKINS_HOME" />
+				</or>
+				<then>
+					<var name="database.type" unset="true" />
 
-			<property name="database.type" value="@{database.type}" />
+					<property name="database.type" value="@{database.type}" />
 
-			<echo append="true" file="test.${env.HOSTNAME}.properties"><![CDATA[
+					<echo append="true" file="test.${env.HOSTNAME}.properties"><![CDATA[
 database.type=@{database.type}]]></echo>
 
-			<if>
-				<not>
-					<equals arg1="@{database.version}" arg2="" />
-				</not>
-				<then>
-					<var name="database.@{database.type}.version" unset="true" />
+					<if>
+						<not>
+							<equals arg1="@{database.version}" arg2="" />
+						</not>
+						<then>
+							<var name="database.@{database.type}.version" unset="true" />
 
-					<property name="database.@{database.type}.version" value="@{database.version}" />
+							<property name="database.@{database.type}.version" value="@{database.version}" />
 
-					<echo append="true" file="test.${env.HOSTNAME}.properties"><![CDATA[
+							<echo append="true" file="test.${env.HOSTNAME}.properties"><![CDATA[
 database.@{database.type}.version=@{database.version}]]></echo>
-				</then>
-			</if>
+						</then>
+					</if>
 
-			<if>
-				<and>
-					<equals arg1="@{database.type}" arg2="mysql" />
-					<or>
-						<equals arg1="@{database.version}" arg2="5.5" />
-						<equals arg1="@{database.version}" arg2="5.7" />
-					</or>
-				</and>
-				<then>
-					<var name="database.major.version.build" unset="true" />
-					<var name="database.mysql.service.cmd.start" unset="true" />
-					<var name="database.mysql.service.cmd.stop" unset="true" />
-					<var name="mysql.executable" unset="true" />
+					<if>
+						<and>
+							<equals arg1="@{database.type}" arg2="mysql" />
+							<or>
+								<equals arg1="@{database.version}" arg2="5.5" />
+								<equals arg1="@{database.version}" arg2="5.7" />
+							</or>
+						</and>
+						<then>
+							<var name="database.major.version.build" unset="true" />
+							<var name="database.mysql.service.cmd.start" unset="true" />
+							<var name="database.mysql.service.cmd.stop" unset="true" />
+							<var name="mysql.executable" unset="true" />
 
-					<antelope:stringutil property="database.major.version.build" string="@{database.version}">
-						<antelope:replace regex="\." replacement="" />
-					</antelope:stringutil>
+							<antelope:stringutil property="database.major.version.build" string="@{database.version}">
+								<antelope:replace regex="\." replacement="" />
+							</antelope:stringutil>
 
-					<property name="database.mysql.service.cmd.start" value="mysql${database.major.version.build} start" />
-					<property name="database.mysql.service.cmd.stop" value="mysql${database.major.version.build} stop" />
-					<property name="mysql.executable" value="mysql${database.major.version.build}" />
+							<property name="database.mysql.service.cmd.start" value="mysql${database.major.version.build} start" />
+							<property name="database.mysql.service.cmd.stop" value="mysql${database.major.version.build} stop" />
+							<property name="mysql.executable" value="mysql${database.major.version.build}" />
 
-					<echo append="true" file="test.${env.HOSTNAME}.properties"><![CDATA[
+							<echo append="true" file="test.${env.HOSTNAME}.properties"><![CDATA[
 database.mysql.service.cmd.start=${database.mysql.service.cmd.start}
 database.mysql.service.cmd.stop=${database.mysql.service.cmd.stop}]]></echo>
 
-					<echo append="true" file="sql/sql.${env.HOSTNAME}.properties"><![CDATA[
+							<echo append="true" file="sql/sql.${env.HOSTNAME}.properties"><![CDATA[
 mysql.executable=${mysql.executable}]]></echo>
-				</then>
-			</if>
-
-			<if>
-				<equals arg1="@{database.type}" arg2="mariadb" />
-				<then>
-					<var name="mariadb.executable" unset="true" />
-
-					<property name="mariadb.executable" value="mariadb" />
-
-					<echo append="true" file="sql/sql.${env.HOSTNAME}.properties"><![CDATA[
-mariadb.executable=${mariadb.executable}]]></echo>
-				</then>
-			</if>
-
-			<print-file file.name="sql/sql.${env.HOSTNAME}.properties" />
-
-			<database-test-action database.type="@{database.type}">
-				<action>
-					<if>
-						<isset property="database.docker.image" />
-						<then>
-							<echo>Using Docker for ${database.type}.</echo>
 						</then>
-						<elseif>
-							<equals arg1="${database.type}" arg2="db2" />
-							<then>
-								<echo></echo>
-								<echo>##</echo>
-								<echo>## ${database.version.cmd}</echo>
-								<echo>##</echo>
-								<echo></echo>
+					</if>
 
-								<exec executable="${database.version.cmd}" />
-							</then>
-						</elseif>
-						<else>
-							<local name="database.executable" />
+					<if>
+						<equals arg1="@{database.type}" arg2="mariadb" />
+						<then>
+							<var name="mariadb.executable" unset="true" />
 
+							<property name="mariadb.executable" value="mariadb" />
+
+							<echo append="true" file="sql/sql.${env.HOSTNAME}.properties"><![CDATA[
+mariadb.executable=${mariadb.executable}]]></echo>
+						</then>
+					</if>
+
+					<print-file file.name="sql/sql.${env.HOSTNAME}.properties" />
+
+					<database-test-action database.type="@{database.type}">
+						<action>
 							<if>
-								<equals arg1="${database.type}" arg2="oracle" />
+								<isset property="database.docker.image" />
 								<then>
-									<propertycopy from="oracle.sqlplus.executable" name="database.executable" />
+									<echo>Using Docker for ${database.type}.</echo>
+								</then>
+								<elseif>
+									<equals arg1="${database.type}" arg2="db2" />
+									<then>
+										<echo></echo>
+										<echo>##</echo>
+										<echo>## ${database.version.cmd}</echo>
+										<echo>##</echo>
+										<echo></echo>
+
+										<exec executable="${database.version.cmd}" />
+									</then>
+								</elseif>
+								<else>
+									<local name="database.executable" />
+
+									<if>
+										<equals arg1="${database.type}" arg2="oracle" />
+										<then>
+											<propertycopy from="oracle.sqlplus.executable" name="database.executable" />
+										</then>
+										<else>
+											<propertycopy from="${database.type}.executable" name="database.executable" />
+										</else>
+									</if>
+
+									<echo></echo>
+									<echo>##</echo>
+									<echo>## ${database.executable} ${database.version.cmd}</echo>
+									<echo>##</echo>
+									<echo></echo>
+
+									<exec executable="${database.executable}">
+										<arg line="${database.version.cmd}" />
+									</exec>
+								</else>
+							</if>
+						</action>
+					</database-test-action>
+
+					<database-test-action database.type="@{database.type}">
+						<action>
+							<if>
+								<isset property="database.docker.image" />
+								<then>
+									<stop-docker-database />
 								</then>
 								<else>
-									<propertycopy from="${database.type}.executable" name="database.executable" />
+									<exec executable="${database.service.executable}">
+										<arg line="${database.service.cmd.stop}" />
+									</exec>
+								</else>
+							</if>
+						</action>
+					</database-test-action>
+
+					<database-test-action database.type="@{database.type}">
+						<action>
+							<set-portal-impl-portal-test-ext-properties />
+
+							<set-portal-impl-system-ext-properties />
+
+							<if>
+								<isset property="database.docker.image" />
+								<then>
+									<start-docker-database />
+								</then>
+								<elseif>
+									<or>
+										<and>
+											<equals arg1="@{database.type}" arg2="oracle" />
+											<equals arg1="@{database.version}" arg2="19.3.0.0.0" />
+										</and>
+										<and>
+											<equals arg1="@{database.type}" arg2="postgresql" />
+											<equals arg1="@{database.version}" arg2="11" />
+										</and>
+									</or>
+									<then>
+										<fail message="Unsupported database: @{database.type}-@{database.version}" />
+									</then>
+								</elseif>
+								<else>
+									<exec executable="${database.service.executable}" resultproperty="exec.result">
+										<arg line="${database.service.cmd.start}" />
+									</exec>
+
+									<diagnose-database-start database.type="@{database.type}" exec.result="${exec.result}" />
 								</else>
 							</if>
 
-							<echo></echo>
-							<echo>##</echo>
-							<echo>## ${database.executable} ${database.version.cmd}</echo>
-							<echo>##</echo>
-							<echo></echo>
+							<get-operating-system-property property.name="operating.system.docker.image" />
 
-							<exec executable="${database.executable}">
-								<arg line="${database.version.cmd}" />
-							</exec>
-						</else>
-					</if>
-				</action>
-			</database-test-action>
+							<if>
+								<isset property="operating.system.docker.image" />
+								<then>
+									<stop-docker-os />
 
-			<database-test-action database.type="@{database.type}">
-				<action>
-					<if>
-						<isset property="database.docker.image" />
-						<then>
-							<stop-docker-database />
-						</then>
-						<else>
-							<exec executable="${database.service.executable}">
-								<arg line="${database.service.cmd.stop}" />
-							</exec>
-						</else>
-					</if>
-				</action>
-			</database-test-action>
+									<start-docker-os />
+								</then>
+							</if>
 
-			<database-test-action database.type="@{database.type}">
-				<action>
-					<set-portal-impl-portal-test-ext-properties />
+							<antcall inheritall="false" target="copy-optional-jars">
+								<param name="database.type" value="@{database.type}" />
+								<param name="todir" value="lib/development" />
+							</antcall>
 
-					<set-portal-impl-system-ext-properties />
+							<local name="test.app.server.lib.global.dir" />
 
-					<if>
-						<isset property="database.docker.image" />
-						<then>
-							<start-docker-database />
-						</then>
-						<elseif>
-							<or>
-								<and>
-									<equals arg1="@{database.type}" arg2="oracle" />
-									<equals arg1="@{database.version}" arg2="19.3.0.0.0" />
-								</and>
-								<and>
-									<equals arg1="@{database.type}" arg2="postgresql" />
-									<equals arg1="@{database.version}" arg2="11" />
-								</and>
-							</or>
-							<then>
-								<fail message="Unsupported database: @{database.type}-@{database.version}" />
-							</then>
-						</elseif>
-						<else>
-							<exec executable="${database.service.executable}" resultproperty="exec.result">
-								<arg line="${database.service.cmd.start}" />
-							</exec>
+							<propertycopy from="app.server.${app.server.type}.lib.global.dir" name="test.app.server.lib.global.dir" />
 
-							<diagnose-database-start database.type="@{database.type}" exec.result="${exec.result}" />
-						</else>
-					</if>
+							<antcall inheritall="false" target="copy-optional-jars">
+								<param name="database.type" value="@{database.type}" />
+								<param name="todir" value="${test.app.server.lib.global.dir}" />
+							</antcall>
 
-					<get-operating-system-property property.name="operating.system.docker.image" />
+							<antcall if:true="@{rebuild.database}" inheritall="false" target="rebuild-database">
+								<param name="database.type" value="@{database.type}" />
+							</antcall>
 
-					<if>
-						<isset property="operating.system.docker.image" />
-						<then>
-							<stop-docker-os />
+							<test-action />
 
-							<start-docker-os />
-						</then>
-					</if>
+							<if if:true="@{stop.app.server}">
+								<available file=".testable.portal.started" />
+								<then>
+									<antcall target="stop-app-server" />
 
-					<antcall inheritall="false" target="copy-optional-jars">
-						<param name="database.type" value="@{database.type}" />
-						<param name="todir" value="lib/development" />
-					</antcall>
+									<delete failonerror="false" file=".testable.portal.started" />
+								</then>
+							</if>
 
-					<local name="test.app.server.lib.global.dir" />
+							<get-operating-system-property property.name="operating.system.docker.image" />
 
-					<propertycopy from="app.server.${app.server.type}.lib.global.dir" name="test.app.server.lib.global.dir" />
+							<if>
+								<isset property="operating.system.docker.image" />
+								<then>
+									<stop-docker-os />
+								</then>
+							</if>
 
-					<antcall inheritall="false" target="copy-optional-jars">
-						<param name="database.type" value="@{database.type}" />
-						<param name="todir" value="${test.app.server.lib.global.dir}" />
-					</antcall>
-
-					<antcall if:true="@{rebuild.database}" inheritall="false" target="rebuild-database">
-						<param name="database.type" value="@{database.type}" />
-					</antcall>
-
+							<if>
+								<isset property="database.docker.image" />
+								<then>
+									<stop-docker-database />
+								</then>
+								<else>
+									<exec executable="${database.service.executable}" failonerror="true">
+										<arg line="${database.service.cmd.stop}" />
+									</exec>
+								</else>
+							</if>
+						</action>
+					</database-test-action>
+				</then>
+				<else>
 					<test-action />
 
-					<if if:true="@{stop.app.server}">
-						<available file=".testable.portal.started" />
+					<if>
+						<equals arg1="@{stop.app.server}" arg2="true" />
 						<then>
 							<antcall target="stop-app-server" />
 
 							<delete failonerror="false" file=".testable.portal.started" />
 						</then>
 					</if>
-
-					<get-operating-system-property property.name="operating.system.docker.image" />
-
-					<if>
-						<isset property="operating.system.docker.image" />
-						<then>
-							<stop-docker-os />
-						</then>
-					</if>
-
-					<if>
-						<isset property="database.docker.image" />
-						<then>
-							<stop-docker-database />
-						</then>
-						<else>
-							<exec executable="${database.service.executable}" failonerror="true">
-								<arg line="${database.service.cmd.stop}" />
-							</exec>
-						</else>
-					</if>
-				</action>
-			</database-test-action>
+				</else>
+			</if>
 		</sequential>
 	</macrodef>
 
@@ -994,7 +1014,7 @@ app.server.type=@{app.server.type}]]></echo>
 				</else>
 			</if>
 
-			<antcall inheritAll="false" target="prepare-portal-ext-properties" />
+			<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties" />
 
 			<antcall inheritAll="false" target="prepare-system-ext-properties" />
 
@@ -1173,7 +1193,7 @@ app.server.type=@{app.server.type}]]></echo>
 									<param name="database.type" value="@{database.type}" />
 								</antcall>
 
-								<antcall inheritAll="false" target="prepare-portal-ext-properties">
+								<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 									<param name="database.type" value="@{database.type}" />
 								</antcall>
 
@@ -1231,7 +1251,7 @@ app.server.type=@{app.server.type}]]></echo>
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
-							<antcall inheritAll="false" target="prepare-portal-ext-properties">
+							<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
@@ -1386,7 +1406,7 @@ app.server.type=@{app.server.type}]]></echo>
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
-							<antcall inheritAll="false" target="prepare-portal-ext-properties">
+							<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
@@ -1464,7 +1484,7 @@ app.server.type=@{app.server.type}]]></echo>
 										<param name="database.type" value="@{database.type}" />
 									</antcall>
 
-									<antcall inheritAll="false" target="prepare-portal-ext-properties">
+									<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 										<param name="database.type" value="@{database.type}" />
 									</antcall>
 
@@ -1815,13 +1835,15 @@ ${poshi.runner.testsuite.testcase.name}</echo>
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
-							<antcall inheritAll="false" target="prepare-portal-ext-properties">
+							<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
 							<antcall inheritAll="false" target="prepare-system-ext-properties" />
 
-							<ant dir="modules" inheritAll="false" target="build-app-lpkg-base" />
+							<ant dir="modules" inheritAll="false" target="build-app-lpkg-base">
+								<property name="liferay.home" value="${liferay.home}" />
+							</ant>
 
 							<delete dir="${liferay.home}/osgi/deploy" />
 							<delete dir="${liferay.home}/osgi/modules" />
@@ -1878,7 +1900,7 @@ ${poshi.runner.testsuite.testcase.name}</echo>
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
-							<antcall inheritAll="false" target="prepare-portal-ext-properties">
+							<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
@@ -1985,13 +2007,15 @@ com.liferay.portal.kernel.util.ServiceProxyFactory.timeout=300000</echo>
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
-							<antcall inheritAll="false" target="prepare-portal-ext-properties">
+							<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
 							<antcall inheritAll="false" target="prepare-system-ext-properties" />
 
-							<ant dir="modules" inheritAll="false" target="build-app-lpkg-base" />
+							<ant dir="modules" inheritAll="false" target="build-app-lpkg-base">
+								<property name="liferay.home" value="${liferay.home}" />
+							</ant>
 
 							<for param="app.dir">
 								<path>
@@ -2047,6 +2071,7 @@ com.liferay.portal.kernel.util.ServiceProxyFactory.timeout=300000</echo>
 											<ant dir="modules" inheritAll="false" target="build-app-lpkg">
 												<property name="app.name" value="${app.name}" />
 												<property name="hot.deploy.test" value="true" />
+												<property name="liferay.home" value="${liferay.home}" />
 												<property name="lpkg.container" value="true" />
 												<property name="output.dir" value="${app.server.parent.dir}/osgi/temp" />
 											</ant>
@@ -2061,6 +2086,7 @@ com.liferay.portal.kernel.util.ServiceProxyFactory.timeout=300000</echo>
 									<ant dir="modules" inheritAll="false" target="build-app-lpkg">
 										<property name="app.name" value="portal-mobile-device-detection-fiftyonedegrees" />
 										<property name="hot.deploy.test" value="true" />
+										<property name="liferay.home" value="${liferay.home}" />
 										<property name="lpkg.container" value="false" />
 										<property name="output.dir" value="${app.server.parent.dir}/osgi/temp" />
 									</ant>
@@ -2068,6 +2094,7 @@ com.liferay.portal.kernel.util.ServiceProxyFactory.timeout=300000</echo>
 									<ant dir="modules" inheritAll="false" target="build-app-lpkg">
 										<property name="app.name" value="portal-mobile-device-detection-fiftyonedegrees-enterprise" />
 										<property name="hot.deploy.test" value="true" />
+										<property name="liferay.home" value="${liferay.home}" />
 										<property name="lpkg.container" value="false" />
 										<property name="output.dir" value="${app.server.parent.dir}/osgi/temp" />
 									</ant>
@@ -2180,13 +2207,15 @@ com.liferay.portal.kernel.util.ServiceProxyFactory.timeout=300000</echo>
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
-							<antcall inheritAll="false" target="prepare-portal-ext-properties">
+							<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
 							<antcall inheritAll="false" target="prepare-system-ext-properties" />
 
-							<ant dir="modules" inheritAll="false" target="build-app-lpkg-base" />
+							<ant dir="modules" inheritAll="false" target="build-app-lpkg-base">
+								<property name="liferay.home" value="${liferay.home}" />
+							</ant>
 
 							<for param="app.dir">
 								<path>
@@ -2238,6 +2267,7 @@ com.liferay.portal.kernel.util.ServiceProxyFactory.timeout=300000</echo>
 										<then>
 											<ant dir="modules" inheritAll="false" target="build-app-lpkg">
 												<property name="app.name" value="${app.name}" />
+												<property name="liferay.home" value="${liferay.home}" />
 												<property name="output.dir" value="${app.server.parent.dir}/osgi/temp/${app.name}" />
 											</ant>
 										</then>
@@ -2406,7 +2436,7 @@ com.liferay.portal.kernel.util.ServiceProxyFactory.timeout=300000</echo>
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
-							<antcall inheritAll="false" target="prepare-portal-ext-properties">
+							<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
@@ -2522,13 +2552,15 @@ log.sanitizer.enabled=false</echo>
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
-							<antcall inheritAll="false" target="prepare-portal-ext-properties">
+							<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
 							<antcall inheritAll="false" target="prepare-system-ext-properties" />
 
-							<ant dir="modules" inheritAll="false" target="build-app-lpkg-release" />
+							<ant dir="modules" inheritAll="false" target="build-app-lpkg-release">
+								<property name="liferay.home" value="${liferay.home}" />
+							</ant>
 
 							<delete dir="${liferay.home}/osgi/deploy" />
 							<delete dir="${liferay.home}/osgi/modules" />
@@ -2732,7 +2764,7 @@ log.sanitizer.enabled=false</echo>
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
-							<antcall inheritAll="false" target="prepare-portal-ext-properties">
+							<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
@@ -2918,7 +2950,7 @@ log.sanitizer.enabled=false</echo>
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
-							<antcall inheritAll="false" target="prepare-portal-ext-properties">
+							<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 								<param name="database.type" value="@{database.type}" />
 							</antcall>
 
@@ -2987,7 +3019,7 @@ log.sanitizer.enabled=false</echo>
 								/>
 							</delete>
 
-							<antcall inheritAll="false" target="prepare-portal-ext-properties">
+							<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 								<param name="database.type" value="@{database.type}" />
 								<param name="liferay.home" value="${project.dir}/bun dles" />
 							</antcall>
@@ -3101,7 +3133,7 @@ log.sanitizer.enabled=false</echo>
 				<param name="database.type" value="@{database.type}" />
 			</antcall>
 
-			<antcall inheritAll="false" target="prepare-portal-ext-properties">
+			<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 				<param name="database.type" value="@{database.type}" />
 			</antcall>
 
@@ -3110,6 +3142,7 @@ log.sanitizer.enabled=false</echo>
 
 			<ant dir="modules" inheritAll="false" target="build-app-lpkg-all">
 				<property name="app.server.parent.dir" value="${project.dir}/bundles" />
+				<property name="liferay.home" value="${liferay.home}" />
 				<property name="osgi.dir" value="${app.server.parent.dir}/osgi" />
 			</ant>
 		</sequential>
@@ -3154,9 +3187,15 @@ log.sanitizer.enabled=false</echo>
 				<then>
 					<prepare-test-environment />
 				</then>
-				<else>
-					<prepare-test-build />
-				</else>
+				<elseif>
+					<or>
+						<equals arg1="${test.batch.full.setup}" arg2="true" />
+						<isset property="env.JENKINS_HOME" />
+					</or>
+					<then>
+						<prepare-test-build />
+					</then>
+				</elseif>
 			</if>
 		</sequential>
 	</macrodef>
@@ -4850,7 +4889,7 @@ log.sanitizer.enabled=false</echo>
 
 						<antcall inheritAll="false" target="prepare-log4j-ext-xml" />
 
-						<antcall inheritAll="false" target="prepare-portal-ext-properties" />
+						<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties" />
 
 						<antcall inheritall="false" target="start-app-server" />
 
@@ -5859,7 +5898,7 @@ ${output.content}</echo>
 							<param name="database.type" value="@{database.type}" />
 						</antcall>
 
-						<antcall inheritAll="false" target="prepare-portal-ext-properties">
+						<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 							<param name="database.type" value="@{database.type}" />
 						</antcall>
 
@@ -5942,7 +5981,7 @@ ${output.content}</echo>
 							<param name="database.type" value="@{database.type}" />
 						</antcall>
 
-						<antcall inheritAll="false" target="prepare-portal-ext-properties">
+						<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 							<param name="database.type" value="@{database.type}" />
 						</antcall>
 
@@ -6017,7 +6056,7 @@ ${output.content}</echo>
 									<param name="database.type" value="@{database.type}" />
 								</antcall>
 
-								<antcall inheritAll="false" target="prepare-portal-ext-properties">
+								<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 									<param name="database.type" value="@{database.type}" />
 								</antcall>
 
@@ -6039,7 +6078,7 @@ ${output.content}</echo>
 												<param name="database.type" value="@{database.type}" />
 											</antcall>
 
-											<antcall inheritAll="false" target="prepare-portal-ext-properties">
+											<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 												<param name="database.type" value="@{database.type}" />
 												<param name="liferay.home" value="${project.dir}/bun dles" />
 											</antcall>
@@ -6106,7 +6145,7 @@ ${output.content}</echo>
 											<param name="database.type" value="@{database.type}" />
 										</antcall>
 
-										<antcall inheritAll="false" target="prepare-portal-ext-properties">
+										<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="prepare-portal-ext-properties">
 											<param name="database.type" value="@{database.type}" />
 										</antcall>
 
@@ -7074,7 +7113,7 @@ ${output.content}</echo>
 
 				<setup-test-environment />
 
-				<antcall target="prepare-portal-ext-properties">
+				<antcall if:set="env.JENKINS_HOME" target="prepare-portal-ext-properties">
 					<param name="hot.deploy.dependency.management.enabled" value="false" />
 				</antcall>
 
