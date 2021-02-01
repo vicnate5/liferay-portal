@@ -9653,16 +9653,26 @@ auto.deploy.dest.dir=C:/WINDOWS/system32/config/systemprofile/liferay/websphere-
 			</else>
 		</if>
 
+		<get-testcase-property property.name="skip.tear.down" />
+
 		<if>
-			<and>
-				<contains string="${test.class}" substring="," />
-				<equals arg1="${test.batch.run.type}" arg2="sequential" />
-			</and>
+			<isset property="skip.tear.down" />
 			<then>
 				<echo append="true" file="${test.ext.properties.file}">
-					test.skip.tear.down=false
+					test.skip.tear.down=${skip.tear.down}
 				</echo>
 			</then>
+			<elseif>
+				<and>
+					<contains string="${test.class}" substring="," />
+					<equals arg1="${test.batch.run.type}" arg2="sequential" />
+				</and>
+				<then>
+					<echo append="true" file="${test.ext.properties.file}">
+						test.skip.tear.down=false
+					</echo>
+				</then>
+			</elseif>
 			<elseif>
 				<isset property="test.skip.tear.down" />
 				<then>
