@@ -30,17 +30,24 @@ definition {
 			locator1 = "ApplicationsMenu#PANEL");
 	}
 
-	@summary = "Assert Commerce UI is missing from the platform when not activated"
+	@summary = "Assert Commerce UI is unusable from the platform when not activated"
 	macro viewCommerceMissing {
-		ApplicationsMenuHelper.openApplicationsMenu();
-
-		AssertElementPresent(
-			key_panel = "Applications",
-			locator1 = "ApplicationsMenu#PANEL");
+		CommerceNavigator.gotoPortlet(
+			category = "Store Management",
+			portlet = "Channels");
 
 		AssertElementNotPresent(
-			key_panel = "Commerce",
-			locator1 = "ApplicationsMenu#PANEL");
+			locator1 = "ItemSelector#ADD_BUTTON");
+	}
+
+	@summary = "Assert expiration date warning for Liferay Commerce Subscription"
+	macro viewWarningExpirationDate {
+		CommerceNavigator.gotoPortlet(
+			category = "Product Management",
+			portlet = "Catalogs");
+
+		Alert.viewErrorMessage(errorMessage = "Update your activation key for Liferay Commerce Subscription Development");
+		Alert.viewErrorMessage(errorMessage = "expire");
 	}
 
 }
