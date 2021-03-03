@@ -5492,7 +5492,7 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 	</macrodef>
 
 	<target name="kyle">
-		<swap-commerce-license custom.commerce.license="commerce-license-developer-custom-expiration.xml" />
+		<swap-commerce-license custom.commerce.license="commerce-license-developer-custom-expiration-2-day-expired.xml" />
 	</target>
 
 	<macrodef name="swap-commerce-license">
@@ -5505,6 +5505,13 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 				file="${project.dir}/portal-web/test/functional/com/liferay/portalweb/dependencies/license/@{custom.commerce.license}"
 				todir="${liferay.home}/deploy"
 			/>
+
+			<if>
+				<equals arg1="@{custom.commerce.license}" arg2="commerce-dxp-license-developer-combined.xml" />
+				<then>
+					<delete failonerror="false" file="${liferay.home}/deploy/license.xml" verbose="true" />
+				</then>
+			</if>
 
 			<if>
 				<equals arg1="@{custom.commerce.license}" arg2="commerce-license-developer-ipaddress.xml" />
