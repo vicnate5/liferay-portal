@@ -102,6 +102,19 @@ definition {
 		CommerceLicense.viewCommerceMissing();
 	}
 
+	@priority = "3"
+	test DeployCommereceLicenseBinaryFile {
+		property commerce.enabled = "true";
+
+		// Require property to generate commerce license binary file and directly deploy it into ${liferay.home}/data/license folder
+
+		Pause(locator1 = "60000");
+
+		AssertConsoleTextNotPresent(value1 = "Processing portal-commerce-license.xml");
+
+		CommerceLicense.executeSmoke();
+	}
+
 	@ignore = "true"
 	@priority = "4"
 	test DeployModuleLicenseToLCSPortal {
