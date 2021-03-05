@@ -136,6 +136,25 @@ definition {
 	}
 
 	@priority = "4"
+	test LiferayDXPLicenseExpire {
+		property commerce.enabled = "true";
+
+		// Require a property to generate a modify dxp license with expiration date like commerce
+
+		ApplicationsMenuHelper.openApplicationsMenu();
+
+		CommerceLicense.viewCommerceAvailable();
+
+		// Waiting for dxp license expiration will depend on modification of expiration
+
+		Pause(locator1 = "10000");
+
+		Navigator.openURL();
+
+		Alert.viewErrorMessage(errorMessage = "This instance is not registered.");
+	}
+
+	@priority = "4"
 	test MatchHostName {
 		property commerce.enabled = "true";
 		property custom.commerce.license = "commerce-license-developer-hostname.xml";
