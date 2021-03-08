@@ -4468,51 +4468,6 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 						</then>
 					</if>
 
-					<get-testcase-property property.name="dxp.license.file" />
-
-					<if>
-						<isset property="dxp.license.file" />
-						<then>
-							<delete failonerror="false" file="${liferay.home}/deploy/license.xml" verbose="true" />
-
-							<copy
-								file="${project.dir}/portal-web/test/functional/com/liferay/portalweb/dependencies/license/${dxp.license.file}"
-								todir="${liferay.home}/deploy"
-							/>
-						</then>
-					</if>
-
-					<get-testcase-property property.name="commerce.enabled" />
-					<get-testcase-property property.name="commerce.license.file" />
-
-					<if>
-						<equals arg1="${commerce.enabled}" arg2="false" />
-						<then>
-							<delete failonerror="false" file="${liferay.home}/deploy/portal-commerce-license.xml" verbose="true" />
-						</then>
-						<else>
-							<if>
-								<isset property="commerce.license.file" />
-								<then>
-									<swap-commerce-license commerce.license.file="${commerce.license.file}" />
-								</then>
-							</if>
-						</else>
-					</if>
-
-					<get-testcase-property property.name="deploy.lcs.token.file" />
-
-					<if>
-						<equals arg1="${deploy.lcs.token.file}" arg2="true" />
-						<then>
-							<delete failonerror="false" file="${liferay.home}/deploy/license.xml" verbose="true" />
-
-							<antcall target="deploy-lcs-environment-token" />
-						</then>
-					</if>
-
-					<antcall target="deploy-license-xml-to-osgi-directory" />
-
 					<get-testcase-property property.name="portal.version" />
 
 					<if>
@@ -8949,6 +8904,55 @@ osb.lcs.portlet.oauth.consumer.secret=${osb.lcs.portlet.oauth.consumer.secret}</
 			</then>
 		</if>
 	</target>
+
+	<macrodef name="prepare-portal-licenses">
+		<sequential>
+			<get-testcase-property property.name="dxp.license.file" />
+
+			<if>
+				<isset property="dxp.license.file" />
+				<then>
+					<delete failonerror="false" file="${liferay.home}/deploy/license.xml" verbose="true" />
+
+					<copy
+						file="${project.dir}/portal-web/test/functional/com/liferay/portalweb/dependencies/license/${dxp.license.file}"
+						todir="${liferay.home}/deploy"
+					/>
+				</then>
+			</if>
+
+			<get-testcase-property property.name="commerce.enabled" />
+			<get-testcase-property property.name="commerce.license.file" />
+
+			<if>
+				<equals arg1="${commerce.enabled}" arg2="false" />
+				<then>
+					<delete failonerror="false" file="${liferay.home}/deploy/portal-commerce-license.xml" verbose="true" />
+				</then>
+				<else>
+					<if>
+						<isset property="commerce.license.file" />
+						<then>
+							<swap-commerce-license commerce.license.file="${commerce.license.file}" />
+						</then>
+					</if>
+				</else>
+			</if>
+
+			<get-testcase-property property.name="deploy.lcs.token.file" />
+
+			<if>
+				<equals arg1="${deploy.lcs.token.file}" arg2="true" />
+				<then>
+					<delete failonerror="false" file="${liferay.home}/deploy/license.xml" verbose="true" />
+
+					<antcall target="deploy-lcs-environment-token" />
+				</then>
+			</if>
+
+			<antcall target="deploy-license-xml-to-osgi-directory" />
+		</sequential>
+	</macrodef>
 
 	<target name="prepare-mobile-device">
 		<stop-android-device />
@@ -13401,6 +13405,8 @@ module.framework.properties.blacklist.portal.profile.names=${blacklist.portal.pr
 				<antcall target="deploy-osgi-module-configurations" />
 			</then>
 		</if>
+
+		<prepare-portal-licenses />
 
 		<get-testcase-property property.name="app.server.bundles.size" />
 
