@@ -85,8 +85,10 @@ definition {
 
 	@priority = "5"
 	test AddNewCompany {
+		property app.server.types = "tomcat";
 		property custom.properties = "database.partition.enabled=true${line.separator}database.partition.schema.name.prefix=testPartition";
 		property database.types = "mysql";
+		property environment.acceptance = "true";
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "DatabasePartitioning#AddNewCompany";
 
