@@ -21,6 +21,7 @@
 					/>
 					<fileset
 						dir="${app.server.lib.global.dir}"
+						excludes="${jdbc.drivers}"
 					/>
 					<fileset
 						dir="${liferay.home}"
@@ -442,16 +443,12 @@ message.
 			todir="${app.server.lib.global.dir}"
 		>
 			<fileset
-				dir="lib/global"
-				excludes="dependencies.properties"
-			/>
-		</copy>
-		<copy
-			todir="${app.server.lib.portal.dir}"
-		>
-			<fileset
 				dir="lib/development"
 				includes="hsql.jar,mariadb.jar,mysql.jar,postgresql.jar"
+			/>
+			<fileset
+				dir="lib/global"
+				excludes="dependencies.properties"
 			/>
 		</copy>
 
@@ -459,7 +456,7 @@ message.
 			<isset property="jdbc.drivers.optional.dir" />
 			<then>
 				<copy
-					todir="${app.server.lib.portal.dir}"
+					todir="${app.server.lib.global.dir}"
 				>
 					<fileset
 						dir="${jdbc.drivers.optional.dir}"
