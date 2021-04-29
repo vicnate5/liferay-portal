@@ -82,7 +82,10 @@ definition {
 			databaseSubstring = "testPartition",
 			expectedCount = "2");
 
-		DBPartition.validateSchemas(schemaNamePrefix = "testPartition");
+		// Ignore step due to LPS-131173
+
+		//DBPartition.validateSchemas(schemaNamePrefix = "testPartition");
+
 	}
 
 	@priority = "5"
