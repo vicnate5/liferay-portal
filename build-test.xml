@@ -13778,6 +13778,46 @@ url=${short.hostname}:8080</echo>
 		</trycatch>
 	</target>
 
+	<target name="validate-dbpartition-schemas">
+		<property name="liferay.dependency.dir" value="${project.dir}/portal-web/test/functional/com/liferay/portalweb/dependencies" />
+
+		<mkdir dir="${liferay.home}/test-temp/validate-schemas.jar" />
+
+		<copy
+			todir="${liferay.home}/test-temp/validate-schemas.jar"
+		>
+			<fileset
+				dir="${liferay.dependency.dir}/validate-schemas.jar"
+			/>
+		</copy>
+
+		<unzip
+			dest="${liferay.home}/test-temp/validate-schemas.jar"
+			overwrite="false"
+			src="${app.server.lib.portal.dir}/${jdbc.mysql.driver}"
+		/>
+
+		<jar
+			basedir="${liferay.home}/test-temp/validate-schemas.jar"
+			destfile="${liferay.home}/validate-schemas.jar"
+			manifest="${liferay.home}/test-temp/validate-schemas.jar/META-INF/MANIFEST.MF"
+		/>
+
+		<java
+			fork="true"
+			jar="${liferay.home}/validate-schemas.jar"
+			output="${liferay.home}/validateoutput.txt"
+		>
+			<arg value="${database.mysql.host}" />
+			<arg value="${database.mysql.schema}" />
+			<arg value="${database.mysql.username}" />
+			<arg value="${schema.name.prefix}" />
+			<arg value="${database.mysql.password}" />
+		</java>
+
+		<print-file file.name="${liferay.home}/validateoutput.txt" />
+	</target>
+
 	<target name="wait-for-license-activation">
 		<wait-for-license-activation />
 	</target>
