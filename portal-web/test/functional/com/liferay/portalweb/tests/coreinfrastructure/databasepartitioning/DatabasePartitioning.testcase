@@ -98,7 +98,9 @@ definition {
 			virtualHost = "www.able.com",
 			webId = "www.able.com");
 
-		User.firstLoginPG(
+		SignOut.signOut();
+
+		User.firstLoginUI(
 			password = "test",
 			userEmailAddress = "test@www.able.com",
 			virtualHostsURL = "http://www.able.com:8080");

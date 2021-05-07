@@ -1,10 +1,7 @@
 definition {
 
 	macro getCompanyId {
-		if (isSet(portalInstanceName)) {
-			var portalInstanceName = "${portalInstanceName}";
-		}
-		else {
+		if (!(isSet(portalInstanceName))) {
 			var portalInstanceName = JSONCompany.getPortalInstanceName();
 		}
 
@@ -29,8 +26,7 @@ definition {
 		if (("${testPortalInstance}" == "true") && (!(IsTestName(locator1 = "", value1 = "${testNameSkipPortalInstance}")))) {
 			var portalURL = JSONCompany.getPortalURL();
 
-			var portalInstanceName = StringUtil.replace("${portalURL}", "http://", "");
-			var portalInstanceName = StringUtil.replace("${portalInstanceName}", ":8080", "");
+			var portalInstanceName = JSONCompany.parsePortalInstanceURL(portalURL = "${portalURL}");
 
 			return "${portalInstanceName}";
 		}
@@ -43,6 +39,15 @@ definition {
 		var portalURL = PropsUtil.get("portal.url");
 
 		return "${portalURL}";
+	}
+
+	macro parsePortalInstanceURL {
+		Variables.assertDefined(parameterList = "${portalURL}");
+
+		var portalInstanceName = StringUtil.replace("${portalURL}", "http://", "");
+		var portalInstanceName = StringUtil.replace("${portalInstanceName}", ":8080", "");
+
+		return "${portalInstanceName}";
 	}
 
 }

@@ -162,6 +162,8 @@ definition {
 	macro agreeToTermsAndAnswerReminderQuery {
 		Variables.assertDefined(parameterList = "${userEmailAddress}");
 
+		var portalInstanceName = JSONUserSetter.setPortalInstanceName(portalURL = "${portalURL}");
+
 		var userId = JSONUserSetter.setUserId(
 			portalInstanceName = "${portalInstanceName}",
 			userEmailAddress = "${userEmailAddress}");
