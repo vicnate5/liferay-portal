@@ -25,6 +25,10 @@ definition {
 		property database.types = "mysql";
 		property test.name.skip.portal.instance = "SetupWizard#HypersonicToMySQL";
 
+		var check = PropsUtil.get("database.mysql.url");
+
+		echo("Victor ${check}");
+
 		SetupWizard.configurePG(
 			administratorEmail = "test@liferay.com",
 			administratorFirstName = "Test",
