@@ -99,20 +99,37 @@ public class IndexableAdvice extends ChainableMethodAdvice {
 		Indexer<Object> indexer = IndexerRegistryUtil.getIndexer(name);
 
 		if (indexer == null) {
+			if (name.equals("com.liferay.commerce.product.model.CommerceCatalog")) {
+				System.out.println("##########Postponing indexing for " + result);
+			}
+
 			DependencyManagerSyncUtil.registerSyncCallable(
 				() -> {
 					Indexer<Object> curIndexer = IndexerRegistryUtil.getIndexer(
 						name);
 
 					if (curIndexer != null) {
+						if (name.equals("com.liferay.commerce.product.model.CommerceCatalog")) {
+							System.out.println("##########Postponed indexing for " + result);
+						}
+
 						_reindex(
 							curIndexer, indexableContext, arguments, result);
+					}
+					else {
+						if (name.equals("com.liferay.commerce.product.model.CommerceCatalog")) {
+							System.out.println("##########Still missing indexer for " + result);
+						}
 					}
 
 					return null;
 				});
 
 			return;
+		}
+
+		if (name.equals("com.liferay.commerce.product.model.CommerceCatalog")) {
+			System.out.println("##########Inplace indexing for " + result);
 		}
 
 		_reindex(indexer, indexableContext, arguments, result);

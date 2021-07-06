@@ -142,6 +142,8 @@ public class CommerceCatalogIndexer extends BaseIndexer<CommerceCatalog> {
 
 	@Override
 	protected void doReindex(CommerceCatalog commerceCatalog) throws Exception {
+		System.out.println("###########Reindexing " + commerceCatalog);
+
 		_indexWriterHelper.updateDocument(
 			getSearchEngineId(), commerceCatalog.getCompanyId(),
 			getDocument(commerceCatalog), isCommitImmediately());
