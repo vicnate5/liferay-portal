@@ -1029,7 +1029,7 @@ syncPortalLanguageKeys {
 					languageProperties.each {
 						String key, String value ->
 
-						if (!portalImplLanguageProperties.containsKey(key) || (portalImplLanguageProperties.getProperty(key) != value)) {
+						if (!portalImplLanguageProperties.containsKey(key)) {
 							if (!portalLanguageProperties.containsKey(key)) {
 								updatedPortalLanguageProperties = true
 
@@ -1055,6 +1055,13 @@ syncPortalLanguageKeys {
 									languageKeys.add(key + '=' + value.replace("\n", "\\n"))
 								}
 							}
+						}
+						else if (portalImplLanguageProperties.getProperty(key) != value) {
+							String relativePath = FileUtil.relativize(languagePropertiesFile.parentFile.parentFile.parentFile.parentFile.parentFile, projectDir)
+
+							moduleMap.put(relativePath, moduleMap.containsKey(relativePath) ? moduleMap.get(relativePath).plus(key) : [key])
+
+							languageKeys.add(key + '=' + value.replace("\n", "\\n"))
 						}
 					}
 
