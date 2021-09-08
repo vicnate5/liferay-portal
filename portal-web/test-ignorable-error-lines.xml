@@ -260,5 +260,9 @@
 			<contains>Store is not available</contains>
 			<matches></matches>
 		</ignore-error>
+		<ignore-error description="LPS-136151">
+			<contains>Unable to register portal instance</contains>
+			<matches></matches>
+		</ignore-error>
 	</log>
 </ignore-errors>
