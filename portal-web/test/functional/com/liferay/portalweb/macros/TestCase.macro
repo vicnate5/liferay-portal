@@ -21,14 +21,16 @@ definition {
 		var projectDir = PropsUtil.get("project.dir");
 		var dependenciesDir = PropsUtil.get("test.dependencies.dir.name");
 
-		var testName = PropsUtil.get("test.name");
+		var testName = selenium.getTestName();
+		echo("Test Name: ${testName}");
 		var testName = StringUtil.extractLast("${testName}", ".");
 		var testName = StringUtil.extractFirst("${testName}", "#");
+		echo("Test Name1: ${testName}");
 		var testFileName = StringUtil.split("**/${testName}.testcase");
 		var testFilePath = FileUtil.getIncludedResourceURLs("${testFileName}", "${projectDir}");
 		var testFilePath = StringUtil.valueOf("${testFilePath}");
 		var testFilePath = RegexUtil.replace("${testFilePath}", "\[(.*)\]", "1");
-		var testFilePath = StringUtil.extractLast("${testFilePath}", "file:/");
+		var testFilePath = StringUtil.extractLast("${testFilePath}", "file:");
 		var testFileParentDir = StringUtil.extractFirst("${testFilePath}", "${testName}.testcase");
 		var dependenciesDir = "${testFileParentDir}${dependenciesDir}";
 
@@ -55,6 +57,8 @@ definition {
 		var dependenciesDir = TestCase.getDependenciesDirPath();
 		var filePath = "${dependenciesDir}/${fileName}";
 		var fileExists = FileUtil.exists("${filePath}");
+
+		echo("If file exists in ${filePath}: ${fileExists}");
 
 		if ("${fileExists}" == "true") {
 			var fileContent = FileUtil.read("${filePath}");
