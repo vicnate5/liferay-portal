@@ -6868,6 +6868,17 @@ go</echo>
 		<delete dir="/tmp/sprite" />
 	</target>
 
+	<target name="delete-osgi-configs-file">
+		<if>
+			<isset property="config.fileName" />
+			<then>
+				<delete file="${liferay.home}/osgi/configs/${config.fileName}" />
+
+				<echo>${liferay.home}/osgi/configs/${config.fileName} </echo>
+			</then>
+		</if>
+	</target>
+
 	<target name="delete-portal-theme">
 		<if>
 			<and>
@@ -7559,6 +7570,15 @@ virtualHostname="localhost"
 						type="regexp"
 					/>
 				</unzip>
+			</then>
+		</if>
+	</target>
+
+	<target name="enable-blacklisted-component">
+		<if>
+			<isset property="blacklist.component.names" />
+			<then>
+				<echo file="${liferay.home}/osgi/configs/com.liferay.portal.component.blacklist.internal.configuration.ComponentBlacklistConfiguration.config">blacklistComponentNames=[&quot;${blacklist.component.names}&quot; ]</echo>
 			</then>
 		</if>
 	</target>
