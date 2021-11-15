@@ -169,6 +169,27 @@ definition {
 			value1 = "Classic Theme");
 	}
 
+	@priority = "3"
+	test EnableBlacklistedComponentAtRuntime {
+		property test.name.skip.portal.instance = "BundleBlacklist#EnableBlacklistedComponentAtRuntime";
+
+		AntCommand(
+			locator1 = "build-test.xml",
+			value1 = "enable-blacklisted-component -Dblacklist.component.names=com.liferay.portal.security.ldap.internal.authenticator.LDAPAuth");
+
+		Pause(locator1 = "10000");
+
+		AssertConsoleTextPresent(value1 = "Disabling com.liferay.portal.security.ldap.internal.authenticator.LDAPAuth from bundle com.liferay.portal.security.ldap.impl");
+
+		AntCommand(
+			locator1 = "build-test.xml",
+			value1 = "delete-osgi-configs-file -Dconfig.fileName=com.liferay.portal.component.blacklist.internal.configuration.ComponentBlacklistConfiguration.config");
+
+		Pause(locator1 = "10000");
+
+		AssertConsoleTextPresent(value1 = "Enabling com.liferay.portal.security.ldap.internal.authenticator.LDAPAuth from bundle com.liferay.portal.security.ldap.impl");
+	}
+
 	@priority = "5"
 	test ExportBundleBlacklistConfig {
 		property test.name.skip.portal.instance = "BundleBlacklist#ExportBundleBlacklistConfig";
