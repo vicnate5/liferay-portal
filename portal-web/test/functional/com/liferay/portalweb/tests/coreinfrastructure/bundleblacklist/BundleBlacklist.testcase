@@ -306,8 +306,8 @@ definition {
 
 		ApplicationsMenu.gotoPortlet(
 			category = "System",
+			file = "TempFile.txt",
 			panel = "Control Panel",
-			file="TempFile.txt",
 			portlet = "Gogo Shell");
 
 		GogoShell.executeCommand(commandName = "scr:info authenticator.LDAPAuth");
