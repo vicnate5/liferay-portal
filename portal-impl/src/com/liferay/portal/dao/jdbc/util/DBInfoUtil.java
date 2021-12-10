@@ -18,6 +18,8 @@ import com.liferay.petra.concurrent.ConcurrentReferenceKeyHashMap;
 import com.liferay.petra.memory.FinalizeManager;
 import com.liferay.petra.reflect.ReflectionUtil;
 
+import com.zaxxer.hikari.HikariDataSource;
+
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
@@ -30,6 +32,7 @@ import org.springframework.jdbc.datasource.DelegatingDataSource;
 
 /**
  * @author Shuyang Zhou
+ * @author Zoltán Takács
  */
 public class DBInfoUtil {
 
@@ -48,11 +51,20 @@ public class DBInfoUtil {
 					DatabaseMetaData databaseMetaData =
 						connection.getMetaData();
 
+					String jdbcUrl = databaseMetaData.getURL();
+
+					if (keyDataSource instanceof HikariDataSource) {
+						HikariDataSource hikariDataSource =
+							(HikariDataSource)keyDataSource;
+
+						jdbcUrl = hikariDataSource.getJdbcUrl();
+					}
+
 					return new DBInfo(
 						databaseMetaData.getDatabaseProductName(),
 						databaseMetaData.getDriverName(),
 						databaseMetaData.getDatabaseMajorVersion(),
-						databaseMetaData.getDatabaseMinorVersion());
+						databaseMetaData.getDatabaseMinorVersion(), jdbcUrl);
 				}
 				catch (SQLException sqlException) {
 					return ReflectionUtil.throwException(sqlException);

@@ -16,16 +16,19 @@ package com.liferay.portal.dao.jdbc.util;
 
 /**
  * @author Shuyang Zhou
+ * @author Zoltán Takács
  */
 public class DBInfo {
 
 	public DBInfo(
-		String name, String driverName, int majorVersion, int minorVersion) {
+		String name, String driverName, int majorVersion, int minorVersion,
+		String url) {
 
 		_name = name;
 		_driverName = driverName;
 		_majorVersion = majorVersion;
 		_minorVersion = minorVersion;
+		_url = url;
 	}
 
 	public String getDriverName() {
@@ -44,9 +47,14 @@ public class DBInfo {
 		return _name;
 	}
 
+	public String getUrl() {
+		return _url;
+	}
+
 	private final String _driverName;
 	private final int _majorVersion;
 	private final int _minorVersion;
 	private final String _name;
+	private final String _url;
 
 }
