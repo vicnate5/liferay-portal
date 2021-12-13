@@ -101,6 +101,7 @@ definition {
 		Upgrade.viewUpgrade();
 	}
 
+	@ignore = "true"
 	@priority = "5"
 	test ViewPortalSmokeArchive7310 {
 		property data.archive.type = "data-archive-portal";
@@ -225,6 +226,7 @@ definition {
 		Upgrade.viewUpgrade();
 	}
 
+	@ignore = "true"
 	@priority = "5"
 	test ViewPortalSmokeArchiveAutoUpgrade7310 {
 		property custom.properties = "upgrade.database.auto.run=true";
