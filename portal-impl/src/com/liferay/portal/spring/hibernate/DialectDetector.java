@@ -102,9 +102,7 @@ public class DialectDetector {
 			else if (dbName.startsWith("DB2") && (dbMajorVersion >= 9)) {
 				dialect = new DB2Dialect();
 			}
-			else if (StringUtil.startsWith(dbInfo.getDriverName(), "mariadb") &&
-					 StringUtil.startsWith(dbInfo.getUrl(), "jdbc:mariadb")) {
-
+			else if (StringUtil.startsWith(dbInfo.getUrl(), "jdbc:mariadb")) {
 				dialect = new MariaDBDialect();
 			}
 			else if (dbName.startsWith("Microsoft") && (dbMajorVersion == 9)) {
