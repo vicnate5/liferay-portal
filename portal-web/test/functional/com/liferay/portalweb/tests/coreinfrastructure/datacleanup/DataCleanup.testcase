@@ -19,6 +19,7 @@ definition {
 	test CanCleanupShoppingDataAfterUpgrade {
 		property data.archive.type = "data-archive-portal";
 		property database.types = "mysql";
+		property portal.acceptance = "koorgai";
 		property portal.version = "6.2.10.21";
 
 		var expectedText = "com.liferay.shopping.service";
