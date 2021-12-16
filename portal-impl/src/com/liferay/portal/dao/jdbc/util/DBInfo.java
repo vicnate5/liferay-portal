@@ -20,23 +20,11 @@ package com.liferay.portal.dao.jdbc.util;
  */
 public class DBInfo {
 
-	public DBInfo(
-		String name, String driverName, int majorVersion, int minorVersion,
-		String url) {
-
+	public DBInfo(String name, int majorVersion, int minorVersion, String url) {
 		_name = name;
-		_driverName = driverName;
 		_majorVersion = majorVersion;
 		_minorVersion = minorVersion;
 		_url = url;
-	}
-
-	/**
-	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
-	 */
-	@Deprecated
-	public String getDriverName() {
-		return _driverName;
 	}
 
 	public int getMajorVersion() {
@@ -55,7 +43,6 @@ public class DBInfo {
 		return _url;
 	}
 
-	private final String _driverName;
 	private final int _majorVersion;
 	private final int _minorVersion;
 	private final String _name;
