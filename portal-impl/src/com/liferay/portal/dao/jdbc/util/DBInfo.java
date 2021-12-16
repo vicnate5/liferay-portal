@@ -31,6 +31,10 @@ public class DBInfo {
 		_url = url;
 	}
 
+	/**
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
+	 */
+	@Deprecated
 	public String getDriverName() {
 		return _driverName;
 	}
