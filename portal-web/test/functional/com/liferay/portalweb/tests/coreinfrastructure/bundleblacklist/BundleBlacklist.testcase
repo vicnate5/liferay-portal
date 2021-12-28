@@ -482,9 +482,8 @@ definition {
 
 		Navigator.openURL();
 
-		BundleBlacklist.viewProductMenuBlacklistedModule(
+		Portlet.viewNoPortletsPresentCP(
 			category = "System",
-			consoleText = "STOPPED com.liferay.gogo.shell.web",
 			panel = "Control Panel",
 			portlet = "Gogo Shell");
 
