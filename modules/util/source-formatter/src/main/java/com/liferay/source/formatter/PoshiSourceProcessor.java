@@ -42,7 +42,31 @@ public class PoshiSourceProcessor extends BaseSourceProcessor {
 
 	@Override
 	protected List<String> doGetFileNames() throws IOException {
-		return getFileNames(new String[0], getIncludes());
+		List<String> fileNames = getFileNames(new String[0], getIncludes());
+
+		Iterator<String> iterator = fileNames.iterator();
+
+		while (iterator.hasNext()) {
+			String fileName = iterator.next();
+
+			if (fileName.endsWith(".jar") || fileName.endsWith(".lar") ||
+				fileName.endsWith(".war") || fileName.endsWith(".zip")) {
+
+				if (fileName.matches(
+						".*/(modules/.*|portal-web)/test/.*/" +
+							"dependencies/.+")) {
+
+					processMessage(
+						fileName,
+						"Do not add binary archive files for test, they must " +
+							"be expanded");
+				}
+
+				iterator.remove();
+			}
+		}
+
+		return fileNames;
 	}
 
 	@Override
