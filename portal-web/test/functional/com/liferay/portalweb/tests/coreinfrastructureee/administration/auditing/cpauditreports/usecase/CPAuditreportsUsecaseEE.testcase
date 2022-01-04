@@ -136,4 +136,154 @@ definition {
 			userName = "Test Test");
 	}
 
+	test AuditCanCaptureEventsAboutUserGroupAndRole {
+		property test.name.skip.portal.instance = "CPAuditreportsUsecaseEE#AuditCanCaptureEventsAboutUserGroupAndRole";
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "User Groups");
+
+		UserGroup.addCP(userGroupName = "User Group1");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "ADD";
+		var key_resourceName = "UserGroup";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "",
+			clientIP = "127.0.0.1",
+			resourceAction = "ADD",
+			resourceName = "UserGroup",
+			userName = "Test Test");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "User Groups");
+
+		UserGroup.editCP(
+			userGroupDescriptionEdit = "This is only for test",
+			userGroupName = "User Group1");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "UPDATE";
+		var key_resourceName = "UserGroup";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "This is only for test",
+			clientIP = "127.0.0.1",
+			resourceAction = "UPDATE",
+			resourceName = "UserGroup",
+			userName = "Test Test");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "User Groups");
+
+		UserGroup.deleteCP(userGroupName = "User Group1");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "DELETE";
+		var key_resourceName = "UserGroup";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "",
+			clientIP = "127.0.0.1",
+			resourceAction = "DELETE",
+			resourceName = "UserGroup",
+			userName = "Test Test");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Roles");
+
+		Role.add(roleTitle = "Role1 Name");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "ADD";
+		var key_resourceName = "Role";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "",
+			clientIP = "127.0.0.1",
+			resourceAction = "ADD",
+			resourceName = "Role",
+			userName = "Test Test");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Roles");
+
+		Search.searchCP(searchTerm = "Role1 Name");
+
+		LexiconEntry.gotoEntry(rowEntry = "Role1 Name");
+
+		Type(
+			locator1 = "TextInput#KEY",
+			value1 = "Role2 Name");
+
+		AssertClick(
+			locator1 = "Button#SUBMIT",
+			value1 = "Save");
+
+		Alert.viewSuccessMessage();
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "UPDATE";
+		var key_resourceName = "Role";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "Role2 Name",
+			clientIP = "127.0.0.1",
+			resourceAction = "UPDATE",
+			resourceName = "Role",
+			userName = "Test Test");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Roles");
+
+		Role.deleteCP(roleTitle = "Role1 Name");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "DELETE";
+		var key_resourceName = "Role";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "",
+			clientIP = "127.0.0.1",
+			resourceAction = "DELETE",
+			resourceName = "Role",
+			userName = "Test Test");
+	}
+
 }
