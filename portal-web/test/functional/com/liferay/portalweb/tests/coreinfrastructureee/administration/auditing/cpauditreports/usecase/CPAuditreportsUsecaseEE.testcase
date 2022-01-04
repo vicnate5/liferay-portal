@@ -286,4 +286,87 @@ definition {
 			userName = "Test Test");
 	}
 
+	test AuditCanCaptureEventsAboutUserLoginLogoutLoginFailAndViewPages {
+		property test.name.skip.portal.instance = "CPAuditreportsUsecaseEE#AuditCanCaptureEventsAboutUserLoginLogoutLoginFailViewPages";
+		property custom.properties = "audit.message.com.liferay.portal.kernel.model.Layout.VIEW=true";
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "LOGIN";
+		var key_resourceName = "User";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "None",
+			clientIP = "127.0.0.1",
+			resourceAction = "LOGIN",
+			resourceName = "User",
+			userName = "Test Test");
+
+		Navigator.openURL();
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "VIEW";
+		var key_resourceName = "Layout";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "None",
+			clientIP = "127.0.0.1",
+			resourceAction = "VIEW",
+			resourceName = "Layout",
+			userName = "Test Test");
+
+		User.logoutPG();
+
+		User.loginPG(
+			password = "test",
+			userEmailAddress = "test@liferay.com");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "LOGOUT";
+		var key_resourceName = "User";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "None",
+			clientIP = "127.0.0.1",
+			resourceAction = "LOGOUT",
+			resourceName = "User",
+			userName = "Test Test");
+
+		User.logoutPG();
+
+		User.firstLoginUI(
+			password = "test2",
+			userEmailAddress = "test@liferay.com");
+
+		User.loginPG(
+			password = "test",
+			userEmailAddress = "test@liferay.com");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "LOGIN_FAILURE";
+		var key_resourceName = "User";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "Failed to authenticate by email address",
+			clientIP = "127.0.0.1",
+			resourceAction = "LOGIN_FAILURE",
+			resourceName = "User",
+			userName = "Test Test");
+	}
+
 }
