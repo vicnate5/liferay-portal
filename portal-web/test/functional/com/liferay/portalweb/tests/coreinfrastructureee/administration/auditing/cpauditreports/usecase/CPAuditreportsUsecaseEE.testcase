@@ -26,99 +26,8 @@ definition {
 		}
 	}
 
-	@priority = "4"
-	test ViewResourceActionsCP {
-		property test.name.skip.portal.instance = "CPAuditreportsUsecaseEE#ViewResourceActionsCP";
-
-		SearchAdministration.executeReindex();
-
-		var siteName = TestCase.getSiteName(siteName = "${siteName}");
-
-		ApplicationsMenu.gotoPortlet(
-			category = "Users",
-			panel = "Control Panel",
-			portlet = "Users and Organizations");
-
-		var key_userScreenName = "test";
-
-		AssertClick(
-			locator1 = "UsersAndOrganizations#USER_TABLE_SCREEN_NAME",
-			value1 = "test");
-
-		Pause(locator1 = "5000");
-
-		var userId = selenium.getElementValue("UsersAndOrganizationsEditUser#DETAILS_USER_ID_FIELD");
-
-		ApplicationsMenu.gotoPortlet(
-			category = "Security",
-			panel = "Control Panel",
-			portlet = "Audit");
-
-		Audit.searchCP(
-			searchTerm = "${userId}",
-			userId = "${userId}",
-			userName = "Test Test");
-
-		ApplicationsMenu.gotoPortlet(
-			category = "Security",
-			panel = "Control Panel",
-			portlet = "Audit");
-
-		Audit.searchCP(
-			searchTerm = "Test Test",
-			userName = "Test Test");
-
-		ApplicationsMenu.gotoPortlet(
-			category = "Security",
-			panel = "Control Panel",
-			portlet = "Audit");
-
-		Audit.searchCP(
-			resourceId = "${userId}",
-			searchTerm = "${userId}",
-			userName = "Test Test");
-
-		ApplicationsMenu.gotoPortlet(
-			category = "Security",
-			panel = "Control Panel",
-			portlet = "Audit");
-
-		Audit.searchCP(
-			resourceName = "com.liferay.portal.kernel.model.User",
-			searchTerm = "com.liferay.portal.kernel.model.User",
-			userName = "Test Test");
-
-		ApplicationsMenu.gotoPortlet(
-			category = "Security",
-			panel = "Control Panel",
-			portlet = "Audit");
-
-		Audit.searchCP(
-			resourceAction = "Login",
-			searchTerm = "Login",
-			userName = "Test Test");
-
-		User.logoutPG();
-
-		User.loginUserInvalidPG(
-			password = "user",
-			userEmailAddress = "test@liferay.com");
-
-		User.loginUserPG(
-			password = "test",
-			userEmailAddress = "test@liferay.com");
-
-		ApplicationsMenu.gotoPortlet(
-			category = "Security",
-			panel = "Control Panel",
-			portlet = "Audit");
-
-		var key_resourceAction = "LOGIN_FAILURE";
-		var key_resourceName = "User";
-
-		AssertTextEquals(
-			locator1 = "AuditReports#REPORTS_TABLE_RESOURCE_ACTION",
-			value1 = "LOGIN_FAILURE");
+	test AuditCanCaptureEventsAboutUserActions {
+		property test.name.skip.portal.instance = "CPAuditreportsUsecaseEE#AuditCanCaptureEventsAboutUserActions";
 
 		ApplicationsMenu.gotoPortlet(
 			category = "Users",
@@ -132,13 +41,43 @@ definition {
 			userScreenName = "test1");
 
 		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "ADD";
+		var key_resourceName = "User";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "test1@liferay.com",
+			clientIP = "127.0.0.1",
+			resourceAction = "ADD",
+			resourceName = "User",
+			userName = "Test Test");
+
+		ApplicationsMenu.gotoPortlet(
 			category = "Users",
 			panel = "Control Panel",
 			portlet = "Users and Organizations");
 
-		User.editPasswordCP(
-			userEmailAddress = "test1@liferay.com",
-			userScreenName = "test1");
+		UserNavigator.gotoUser(userScreenName = "test1");
+
+		User.editUserInformation(userMiddleNameEdit = "test1");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "UPDATE";
+		var key_resourceName = "User";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "middleName",
+			clientIP = "127.0.0.1",
+			resourceAction = "UPDATE",
+			resourceName = "User",
+			userName = "Test Test");
 
 		ApplicationsMenu.gotoPortlet(
 			category = "Users",
@@ -149,9 +88,9 @@ definition {
 			siteName = "${siteName}",
 			userScreenName = "test1");
 
-		Close.closeWindow(locator1 = "title=Welcome - ${siteName}");
+		Close.closeWindow(locator1 = "title=Home - ${siteName}");
 
-		SelectWindow(locator1 = "title=Users and Organizations - ${siteName}");
+		Navigator.selectSpecificWindow(windowTitle = "Users and Organizations - Liferay DXP");
 
 		ApplicationsMenu.gotoPortlet(
 			category = "Security",
@@ -161,91 +100,40 @@ definition {
 		var key_resourceAction = "IMPERSONATE";
 		var key_resourceName = "User";
 
-		AssertTextEquals(
-			locator1 = "AuditReports#REPORTS_TABLE_RESOURCE_ACTION",
-			value1 = "IMPERSONATE");
+		Audit.viewAuditDetails(
+			additionalInformation = "test1 test1 test1",
+			clientIP = "127.0.0.1",
+			resourceAction = "IMPERSONATE",
+			resourceName = "User",
+			userName = "Test Test");
 
 		ApplicationsMenu.gotoPortlet(
 			category = "Users",
 			panel = "Control Panel",
-			portlet = "Roles");
+			portlet = "Users and Organizations");
 
-		Role.add(roleTitle = "Role1");
+		User.deactivateCP(
+			deactivateType = "Actions",
+			userFirstName = "test1");
 
-		ApplicationsMenu.gotoPortlet(
-			category = "Users",
-			panel = "Control Panel",
-			portlet = "Roles");
-
-		JSONRole.assignRoleToUser(
-			roleTitle = "Role1",
-			userEmailAddress = "test1@liferay.com");
-
-		ApplicationsMenu.gotoPortlet(
-			category = "Users",
-			panel = "Control Panel",
-			portlet = "User Groups");
-
-		UserGroup.addCP(userGroupName = "User Group1");
-
-		UserGroup.assignMemberCP(
-			userGroupName = "User Group1",
-			userScreenName = "test1");
+		User.deleteCP(
+			deactivateType = "Actions",
+			userFirstName = "test1");
 
 		ApplicationsMenu.gotoPortlet(
 			category = "Security",
 			panel = "Control Panel",
 			portlet = "Audit");
 
-		var key_resourceAction = "ADD";
-		var key_resourceName = "Role";
-
-		AssertTextEquals(
-			locator1 = "AuditReports#REPORTS_TABLE_RESOURCE_NAME",
-			value1 = "com.liferay.portal.kernel.model.Role");
-
-		var key_resourceAction = "ADD";
-		var key_resourceName = "Role";
-
-		AssertTextEquals(
-			locator1 = "AuditReports#REPORTS_TABLE_RESOURCE_ACTION",
-			value1 = "ADD");
-
-		var key_resourceAction = "ASSIGN";
+		var key_resourceAction = "DELETE";
 		var key_resourceName = "User";
 
-		AssertTextEquals(
-			locator1 = "AuditReports#REPORTS_TABLE_RESOURCE_NAME",
-			value1 = "com.liferay.portal.kernel.model.User");
-
-		var key_resourceAction = "ASSIGN";
-		var key_resourceName = "User";
-
-		AssertTextEquals(
-			locator1 = "AuditReports#REPORTS_TABLE_RESOURCE_ACTION",
-			value1 = "ASSIGN");
-
-		var key_resourceAction = "ADD";
-		var key_resourceName = "UserGroup";
-
-		AssertTextEquals(
-			locator1 = "AuditReports#REPORTS_TABLE_RESOURCE_NAME",
-			value1 = "com.liferay.portal.kernel.model.UserGroup");
-
-		var key_resourceAction = "ADD";
-		var key_resourceName = "UserGroup";
-
-		AssertTextEquals(
-			locator1 = "AuditReports#REPORTS_TABLE_RESOURCE_ACTION",
-			value1 = "ADD");
-
-		AssertTextEquals(
-			locator1 = "xpath=(//tr[contains(.,'ASSIGN') and contains(.,'User')]/td[4])[2]",
-			value1 = "com.liferay.portal.kernel.model.User");
-
-		AssertTextEquals(
-			locator1 = "xpath=(//tr[contains(.,'ASSIGN') and contains(.,'User')]/td[5])[2]",
-			value1 = "ASSIGN");
+		Audit.viewAuditDetails(
+			additionalInformation = "test1@liferay.com",
+			clientIP = "127.0.0.1",
+			resourceAction = "DELETE",
+			resourceName = "User",
+			userName = "Test Test");
 	}
 
 }
