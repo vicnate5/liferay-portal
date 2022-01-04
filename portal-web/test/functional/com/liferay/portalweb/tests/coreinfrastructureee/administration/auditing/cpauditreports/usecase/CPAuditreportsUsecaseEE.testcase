@@ -26,6 +26,117 @@ definition {
 		}
 	}
 
+	test AuditCanCaptureEventsAboutAssignAndUnassignUserToUserGroupAndRole {
+		property test.name.skip.portal.instance = "CPAuditreportsUsecaseEE#AuditCanCaptureEventsAboutAssignAndUnassignUserToUserGroupAndRole";
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "User Groups");
+
+		UserGroup.addCP(userGroupName = "User Group1");
+
+		UserGroup.assignMemberCP(
+			userGroupName = "User Group1",
+			userScreenName = "test");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "ASSIGN";
+		var key_resourceName = "User";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "User Group1",
+			clientIP = "127.0.0.1",
+			resourceAction = "ASSIGN",
+			resourceName = "User",
+			userName = "Test Test");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "User Groups");
+
+		UserGroup.removeMemberCP(
+			userGroupName = "User Group1",
+			userScreenName = "test");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "UNASSIGN";
+		var key_resourceName = "User";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "User Group1",
+			clientIP = "127.0.0.1",
+			resourceAction = "UNASSIGN",
+			resourceName = "User",
+			userName = "Test Test");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Roles");
+
+		Role.add(roleTitle = "Role1 Name");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Roles");
+
+		Role.addAssignee(
+			assigneeName = "Test Test",
+			assigneeType = "Users",
+			roleTitle = "Role1 Name");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "ASSIGN";
+		var key_resourceName = "User";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "Role1 Name",
+			clientIP = "127.0.0.1",
+			resourceAction = "ASSIGN",
+			resourceName = "User",
+			userName = "Test Test");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Roles");
+
+		Role.removeAssignee(
+			assigneeName = "Test Test",
+			assigneeType = "Users",
+			roleTitle = "Role1 Name");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "UNASSIGN";
+		var key_resourceName = "User";
+
+		Audit.viewAuditDetails(
+			additionalInformation = "Role1 Name",
+			clientIP = "127.0.0.1",
+			resourceAction = "UNASSIGN",
+			resourceName = "User",
+			userName = "Test Test");
+	}
+
 	test AuditCanCaptureEventsAboutUserActions {
 		property test.name.skip.portal.instance = "CPAuditreportsUsecaseEE#AuditCanCaptureEventsAboutUserActions";
 
