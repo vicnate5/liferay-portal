@@ -480,4 +480,63 @@ definition {
 			userName = "Test Test");
 	}
 
+	test CanSearchEventsInAuditAdvancedSearch {
+		property test.name.skip.portal.instance = "CPAuditreportsUsecaseEE#AuditCanCaptureEventsBeAdvancedSearched";
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		Audit.searchCP(
+			match = "All",
+			resourceAction = "Login",
+			searchTerm = "Login",
+			userName = "Test Test");
+
+		var key_resourceAction = "LOGIN";
+		var key_resourceName = "User";
+
+		AssertTextEquals(
+			locator1 = "AuditReports#REPORTS_TABLE_RESOURCE_ACTION",
+			value1 = "LOGIN");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		Audit.searchCP(
+			match = "Any",
+			resourceAction = "Login",
+			resourceName = "com.liferay.portal.kernel.model.User",
+			searchTerm = "com.liferay.portal.kernel.model.User");
+
+		var key_resourceAction = "LOGIN";
+		var key_resourceName = "User";
+
+		AssertTextEquals(
+			locator1 = "AuditReports#REPORTS_TABLE_RESOURCE_ACTION",
+			value1 = "LOGIN");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		Audit.searchCP(
+			match = "All",
+			resourceAction = "Login",
+			resourceName = "com.liferay.portal.kernel.model.User",
+			searchTerm = "Test Test",
+			userName = "Test Test");
+
+		var key_resourceAction = "LOGIN";
+		var key_resourceName = "User";
+
+		AssertTextEquals(
+			locator1 = "AuditReports#REPORTS_TABLE_RESOURCE_ACTION",
+			value1 = "LOGIN");
+	}
+
 }
