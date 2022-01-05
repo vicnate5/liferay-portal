@@ -539,4 +539,87 @@ definition {
 			value1 = "LOGIN");
 	}
 
+	test AuditCanBeEnabledOrDisabledThroughSystemSettingsAndOSGIConfigFile {
+		property test.name.skip.portal.instance = "CPAuditreportsUsecaseEE#AuditCanCaptureEventsAboutUserActions";
+		property osgi.module.configuration.file.names = "com.liferay.portal.security.audit.configuration.AuditConfiguration.config";
+		property osgi.module.configurations = "enabled=&quot;false&quot;";
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Configuration",
+			panel = "Control Panel",
+			portlet = "System Settings");
+
+		SystemSettings.gotoConfiguration(
+			configurationCategory = "Audit",
+			configurationName = "Audit",
+			configurationScope = "System Scope");
+
+		FormFields.viewCheckboxNotChecked(fieldName = "Enabled");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		AssertElementNotPresent(locator1 = "AuditReports#REPORTS_TABLE_RESOURCE_ACTION");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Configuration",
+			panel = "Control Panel",
+			portlet = "System Settings");
+
+		SystemSettings.gotoConfiguration(
+			configurationCategory = "Audit",
+			configurationName = "Audit",
+			configurationScope = "System Scope");
+
+		FormFields.enableCheckbox(fieldName = "Enabled");
+
+		SystemSettings.saveConfiguration();
+
+		User.logoutPG();
+
+		User.firstLoginUI(
+			password = "test",
+			userEmailAddress = "test@liferay.com");
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		var key_resourceAction = "LOGIN";
+		var key_resourceName = "User";
+
+		AssertTextEquals(
+			locator1 = "AuditReports#REPORTS_TABLE_RESOURCE_ACTION",
+			value1 = "LOGIN");
+	}
+
+	test AuditLogCanBeEnabledInLogFileOrConsoleWithCSVOrJSONFormatThroughSystemSettingsOrOSGIConfigFile {
+		property test.name.skip.portal.instance = "CPAuditreportsUsecaseEE#AuditCanCaptureEventsAboutUserActions";
+		property osgi.module.configuration.file.names = "com.liferay.portal.security.audit.router.configuration.LoggingAuditMessageProcessorConfiguration.config";
+		property osgi.module.configurations = "enabled=&quot;true&quot;${line.separator}logMessageFormat=&quot;CSV&quot;${line.separator}outputToConsole=&quot;true&quot;";
+
+		ApplicationsMenu.gotoPortlet(
+			category = "Configuration",
+			panel = "Control Panel",
+			portlet = "System Settings");
+
+		SystemSettings.gotoConfiguration(
+			configurationCategory = "Audit",
+			configurationName = "Logging Message Audit Message Processor",
+			configurationScope = "System Scope");
+
+		FormFields.viewCheckboxChecked(fieldName = "Enabled");
+
+		FormFields.viewCheckboxChecked(fieldName = "Output to Console");
+
+		AssertTextEquals(
+			locator1 = "PopulateObjectFormsConfiguration#DISPLAY_SELECT_OBJECT",
+			value1 = "CSV");
+
+		AssertConsoleTextPresent(value1 = "LoggingAuditMessageProcessor");
+	}
+
 }
