@@ -6306,6 +6306,10 @@ log.sanitizer.enabled=false</echo>
 		<antcall target="modules-unit-jdk8" />
 	</target>
 
+	<target name="modules-unit-jdk11_open">
+		<antcall target="modules-unit-jdk8" />
+	</target>
+
 	<target name="modules-unit-project-templates-jdk8">
 		<antcall target="modules-unit-jdk8">
 			<param name="project.templates.test" value="true" />
@@ -7817,6 +7821,10 @@ ${output.content}</echo>
 	</target>
 
 	<target name="unit-jdk8_stable">
+		<antcall target="unit-jdk8" />
+	</target>
+
+	<target name="unit-jdk11_open">
 		<antcall target="unit-jdk8" />
 	</target>
 
