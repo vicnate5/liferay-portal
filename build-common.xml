@@ -1182,6 +1182,8 @@ information.
 				<isset property="junit.jvm.override" />
 			</condition>
 
+			<echo> VICTOR ${junit.jvm.bin} </echo>
+
 			<junit dir="${project.dir}" fork="on" forkmode="@{forkmode}" haltonfailure="${junit.halt.on.failure}" jvm="${junit.jvm.bin}" outputtoformatters="false" printsummary="on" showoutput="true">
 				<sysproperty if:true="${aspectj.weaver.enabled}" key="aspectj.agent" value="${aspectj.agent}" />
 				<sysproperty key="catalina.base" value="." />
