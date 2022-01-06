@@ -2396,7 +2396,7 @@ rerun your task.
 
 		<if>
 			<not>
-				<isset property="junit.jvm.override.version}" />
+				<isset property="junit.jvm.override.version" />
 			</not>
 			<then>
 				<property name="junit.jvm.override.version" value="" />
