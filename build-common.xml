@@ -1183,6 +1183,8 @@ information.
 			</condition>
 
 			<echo> VICTOR ${junit.jvm.bin} </echo>
+			<echo> VICTOR 2 @{junit.jvm.override.version} </echo>
+			<echo> VICTOR 3 ${junit.jvm.override.version} </echo>
 
 			<junit dir="${project.dir}" fork="on" forkmode="@{forkmode}" haltonfailure="${junit.halt.on.failure}" jvm="${junit.jvm.bin}" outputtoformatters="false" printsummary="on" showoutput="true">
 				<sysproperty if:true="${aspectj.weaver.enabled}" key="aspectj.agent" value="${aspectj.agent}" />
