@@ -3,6 +3,9 @@
 Check | Category | File Extensions | Description
 ----- | -------- | --------------- | -----------
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> be37e79b68dc... LPS-105380 Generated
 [AnnotationUseStyleCheck](https://checkstyle.sourceforge.io/config_annotation.html#AnnotationUseStyle) | [Styling](styling_checks.markdown#styling-checks) | .java | Checks the style of elements in annotations. |
 [AnonymousClassCheck](checks/anonymous_class_check.markdown#anonymousclasscheck) | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Checks for serialization issue when using anonymous class. |
 AppendCheck | [Styling](styling_checks.markdown#styling-checks) | .java, .jsp, .jspf, .jspx, .tag, .tpl or .vm | Checks instances where literal Strings are appended. |
@@ -167,6 +170,10 @@ JavaBooleanUsageCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prev
 JavaClassNameCheck | [Naming Conventions](naming_conventions_checks.markdown#naming-conventions-checks) | .java | Checks if class names follow naming conventions. |
 JavaCleanUpMethodSuperCleanUpCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Checks that `cleanUp` method in `*Tag` class with `@Override` annotation calls the `cleanUp` method of the superclass. |
 [JavaCleanUpMethodVariablesCheck](checks/java_clean_up_method_variables_check.markdown#javacleanupmethodvariablescheck) | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Checks that variables in `Tag` classes get cleaned up properly. |
+<<<<<<< HEAD
+=======
+JavaCollapseImportsCheck | [Performance](performance_checks.markdown#performance-checks) | .java | Collapses imports that use wildcard |
+>>>>>>> be37e79b68dc... LPS-105380 Generated
 [JavaCollatorUtilCheck](checks/java_collator_util_check.markdown#javacollatorutilcheck) | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Checks for correct use of `Collator`. |
 [JavaComponentActivateCheck](checks/java_component_activate_check.markdown#javacomponentactivatecheck) | [Naming Conventions](naming_conventions_checks.markdown#naming-conventions-checks) | .java | Checks if methods with annotation `@Activate` or `@Deactivate` follow naming conventions. |
 JavaComponentAnnotationsCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Performs several checks on classes with `@Component` annotation. |
@@ -455,6 +462,7 @@ YMLDefinitionOrderCheck | [Styling](styling_checks.markdown#styling-checks) | .y
 YMLEmptyLinesCheck | [Styling](styling_checks.markdown#styling-checks) | .yaml or .yml | Finds missing and unnecessary empty lines. |
 YMLLongLinesCheck | [Styling](styling_checks.markdown#styling-checks) | .yaml or .yml | Finds lines that are longer than the specified maximum line length. |
 YMLStylingCheck | [Styling](styling_checks.markdown#styling-checks) | .yaml or .yml | Applies rules to enforce consisteny in code style. |
+<<<<<<< HEAD
 YMLWhitespaceCheck | [Styling](styling_checks.markdown#styling-checks) | .yaml or .yml | Finds missing and unnecessary whitespace in `.yml` files. |
 =======
 [AnnotationUseStyleCheck](https://checkstyle.sourceforge.io/config_annotation.html#AnnotationUseStyle) | Styling | .java | Checks the style of elements in annotations. |
@@ -912,3 +920,6 @@ YMLLongLinesCheck | Styling | .yaml or .yml | Finds lines that are longer than t
 YMLStylingCheck | Styling | .yaml or .yml | Applies rules to enforce consisteny in code style. |
 YMLWhitespaceCheck | Styling | .yaml or .yml | Finds missing and unnecessary whitespace in `.yml` files. |
 >>>>>>> f33ec8cd3029... LRQA-72463 SF
+=======
+YMLWhitespaceCheck | [Styling](styling_checks.markdown#styling-checks) | .yaml or .yml | Finds missing and unnecessary whitespace in `.yml` files. |
+>>>>>>> be37e79b68dc... LPS-105380 Generated

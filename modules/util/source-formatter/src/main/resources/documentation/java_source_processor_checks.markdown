@@ -3,6 +3,9 @@
 Check | Category | Description
 ----- | -------- | -----------
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> be37e79b68dc... LPS-105380 Generated
 [AnnotationUseStyleCheck](https://checkstyle.sourceforge.io/config_annotation.html#AnnotationUseStyle) | [Styling](styling_checks.markdown#styling-checks) | Checks the style of elements in annotations. |
 [AnonymousClassCheck](checks/anonymous_class_check.markdown#anonymousclasscheck) | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | Checks for serialization issue when using anonymous class. |
 AppendCheck | [Styling](styling_checks.markdown#styling-checks) | Checks instances where literal Strings are appended. |
@@ -63,6 +66,10 @@ JavaBooleanUsageCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prev
 JavaClassNameCheck | [Naming Conventions](naming_conventions_checks.markdown#naming-conventions-checks) | Checks if class names follow naming conventions. |
 JavaCleanUpMethodSuperCleanUpCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | Checks that `cleanUp` method in `*Tag` class with `@Override` annotation calls the `cleanUp` method of the superclass. |
 [JavaCleanUpMethodVariablesCheck](checks/java_clean_up_method_variables_check.markdown#javacleanupmethodvariablescheck) | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | Checks that variables in `Tag` classes get cleaned up properly. |
+<<<<<<< HEAD
+=======
+JavaCollapseImportsCheck | [Performance](performance_checks.markdown#performance-checks) | Collapses imports that use wildcard |
+>>>>>>> be37e79b68dc... LPS-105380 Generated
 [JavaCollatorUtilCheck](checks/java_collator_util_check.markdown#javacollatorutilcheck) | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | Checks for correct use of `Collator`. |
 [JavaComponentActivateCheck](checks/java_component_activate_check.markdown#javacomponentactivatecheck) | [Naming Conventions](naming_conventions_checks.markdown#naming-conventions-checks) | Checks if methods with annotation `@Activate` or `@Deactivate` follow naming conventions. |
 JavaComponentAnnotationsCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | Performs several checks on classes with `@Component` annotation. |
@@ -254,6 +261,7 @@ ValidatorIsNullCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-preve
 VariableDeclarationAsUsedCheck | [Performance](performance_checks.markdown#performance-checks) | Finds cases where a variable declaration can be inlined or moved closer to where it is used. |
 VariableNameCheck | [Naming Conventions](naming_conventions_checks.markdown#naming-conventions-checks) | Checks that variable names follow naming conventions. |
 [WhitespaceAfterCheck](https://checkstyle.sourceforge.io/config_whitespace.html#WhitespaceAfter) | [Styling](styling_checks.markdown#styling-checks) | Checks that a token is followed by whitespace, with the exception that it does not check for whitespace after the semicolon of an empty for iterator. |
+<<<<<<< HEAD
 [WhitespaceAroundCheck](https://checkstyle.sourceforge.io/config_whitespace.html#WhitespaceAround) | [Styling](styling_checks.markdown#styling-checks) | Checks that a token is surrounded by whitespace. |
 =======
 [AnnotationUseStyleCheck](https://checkstyle.sourceforge.io/config_annotation.html#AnnotationUseStyle) | Styling | Checks the style of elements in annotations. |
@@ -510,3 +518,6 @@ VariableNameCheck | Naming Conventions | Checks that variable names follow namin
 [WhitespaceAfterCheck](https://checkstyle.sourceforge.io/config_whitespace.html#WhitespaceAfter) | Styling | Checks that a token is followed by whitespace, with the exception that it does not check for whitespace after the semicolon of an empty for iterator. |
 [WhitespaceAroundCheck](https://checkstyle.sourceforge.io/config_whitespace.html#WhitespaceAround) | Styling | Checks that a token is surrounded by whitespace. |
 >>>>>>> f33ec8cd3029... LRQA-72463 SF
+=======
+[WhitespaceAroundCheck](https://checkstyle.sourceforge.io/config_whitespace.html#WhitespaceAround) | [Styling](styling_checks.markdown#styling-checks) | Checks that a token is surrounded by whitespace. |
+>>>>>>> be37e79b68dc... LPS-105380 Generated
