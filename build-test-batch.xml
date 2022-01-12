@@ -7856,7 +7856,18 @@ ${output.content}</echo>
 	</target>
 
 	<target name="unit-jdk11_open">
-		<antcall target="unit-jdk8" />
+		<get-java-jdk-bundle-version test.batch.name="${test.batch.name}" />
+
+		<get-java-jdk-bundle-type test.batch.name="${test.batch.name}" />
+
+		<get-java-jdk-home type="${java.jdk.bundle.type}" version="${java.jdk.bundle.version}" />
+
+		<echo> ${java.jdk.home} ${java.jdk.bundle.version} </echo>
+
+		<antcall target="unit-jdk8">
+			<param name="junit.jvm.override" value="${java.jdk.home}/bin/java" />
+			<param name="junit.jvm.override.version" value="${java.jdk.bundle.version}" />
+		</antcall>
 	</target>
 
 	<target name="wsdd-builder-jdk8">
