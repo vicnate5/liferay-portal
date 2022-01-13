@@ -112,7 +112,7 @@ definition {
 
 		AssertTextEquals.assertPartialText(
 			locator1 = "BridgeDemos#RESULT_MESSAGE",
-			value1 = "Thank you John for your purchase.");
+			value1 = "Thank you. ${firstName} for your purchase. An E-Mail was sent to: ${emailAddress}");
 	}
 
 	macro editDateFormat {
@@ -286,7 +286,7 @@ definition {
 
 		AssertTextEquals(
 			locator1 = "BridgeDemos#RESULT_MESSAGE",
-			value1 = "Thank you John for participating in our survey.");
+			value1 = "Thank you. John for participating in our survey.");
 
 		Click(
 			key_buttonName = "Return From Survey Flow",
