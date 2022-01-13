@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.vulcan.util.TransformUtil;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -55,8 +54,6 @@ public class AccountGroupDisplaySearchContainerFactory {
 			SearchOrderByUtil.getOrderByType(
 				liferayPortletRequest, AccountPortletKeys.ACCOUNT_GROUPS_ADMIN,
 				"account-group-order-by-type", "asc"));
-		accountGroupDisplaySearchContainer.setRowChecker(
-			new EmptyOnClickRowChecker(liferayPortletResponse));
 
 		String keywords = ParamUtil.getString(
 			liferayPortletRequest, "keywords");
@@ -76,14 +73,13 @@ public class AccountGroupDisplaySearchContainerFactory {
 						accountGroupDisplaySearchContainer.getOrderByType(),
 						"asc")));
 
-		List<AccountGroupDisplay> accountGroupDisplays =
-			TransformUtil.transform(
-				baseModelSearchResult.getBaseModels(), AccountGroupDisplay::of);
-
-		accountGroupDisplaySearchContainer.setResults(accountGroupDisplays);
-
-		accountGroupDisplaySearchContainer.setTotal(
+		accountGroupDisplaySearchContainer.setResultsAndTotal(
+			() -> TransformUtil.transform(
+				baseModelSearchResult.getBaseModels(), AccountGroupDisplay::of),
 			baseModelSearchResult.getLength());
+
+		accountGroupDisplaySearchContainer.setRowChecker(
+			new EmptyOnClickRowChecker(liferayPortletResponse));
 
 		return accountGroupDisplaySearchContainer;
 	}

@@ -63,7 +63,21 @@ function check_usage {
 	fi
 }
 
+function check_utils {
+
+	#
+	# https://stackoverflow.com/a/677212
+	#
+
+	for util in "${@}"
+	do
+		command -v ${util} >/dev/null 2>&1 || { echo >&2 "The utility ${util} is not installed."; exit 1; }
+	done
+}
+
 function create_react_app {
+	check_utils yarn
+
 	yarn create react-app ${REMOTE_APP_DIR}
 
 	cd ${REMOTE_APP_DIR}
@@ -93,6 +107,8 @@ function create_react_app {
 }
 
 function create_vue_2_app {
+	check_utils npm
+
 	npm i -g @vue/cli
 
 	vue create ${REMOTE_APP_DIR} --default
@@ -157,13 +173,13 @@ import { Liferay } from "./liferay";
 const { REACT_APP_LIFERAY_HOST = window.location.origin } = process.env;
 
 const baseFetch = async (url, options = {}) => {
-return fetch(REACT_APP_LIFERAY_HOST + "/" + url, {
-	headers: {
-	  "Content-Type": "application/json",
-	  "x-csrf-token": Liferay.authToken,
-	},
-	...options,
-});
+	return fetch(REACT_APP_LIFERAY_HOST + "/" + url, {
+		headers: {
+			"Content-Type": "application/json",
+			"x-csrf-token": Liferay.authToken,
+		},
+		...options,
+	});
 };
 
 export default baseFetch;
@@ -175,12 +191,12 @@ EOF
 
 	cat <<EOF > common/services/liferay/liferay.js
 export const Liferay = window.Liferay || {
-ThemeDisplay: {
-	getCompanyGroupId: () => 0,
-	getScopeGroupId: () => 0,
-	getSiteGroupId: () => 0,
-},
-authToken: "",
+	ThemeDisplay: {
+		getCompanyGroupId: () => 0,
+		getScopeGroupId: () => 0,
+		getSiteGroupId: () => 0,
+	},
+	authToken: "",
 };
 EOF
 

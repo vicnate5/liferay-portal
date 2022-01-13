@@ -26,9 +26,9 @@ const SLA = {
 	platinum: 'Platinum',
 };
 
-const Invites = () => {
+const Invites = ({project}) => {
 	const {supportLink} = useApplicationProvider();
-	const [{project, subscriptionGroups}, dispatch] = useOnboarding();
+	const [{subscriptionGroups}, dispatch] = useOnboarding();
 	const {errors, setFieldValue, setTouched, values} = useFormikContext();
 	const [rolesData, setRolesData] = useState();
 

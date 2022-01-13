@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import {useState} from 'react';
 import {LiferayTheme} from '../../../../common/services/liferay';
 import {getKoroneikiAccounts} from '../../../../common/services/liferay/graphql/queries';
-import {PARAMS_KEYS} from '../../../../common/utils/constants';
+import {PARAMS_KEYS} from '../../../../common/services/liferay/search-params';
 import ProjectCard from '../../components/ProjectCard';
 import SearchProject from '../../components/SearchProject';
 import {status} from '../../utils/constants';
@@ -110,7 +110,13 @@ const Home = ({userAccount}) => {
 						<SearchProject onChange={setKeyword} value={keyword} />
 
 						<h5 className="m-0 text-neutral-7">
-							{projects.length} projects
+							{keyword
+								? `${projectsFiltered.length} result${
+										projectsFiltered.length === 1 ? '' : 's'
+								  }`
+								: `${projects.length} project${
+										projects.length === 1 ? '' : 's'
+								  }`}
 						</h5>
 					</div>
 				)}

@@ -1,13 +1,15 @@
 definition {
 
 	macro addBreakdown {
-		var key_buttonName = "${attributeName}";
+		for (var attributeName : list "${attributeNameList}") {
+			ACEventAnalysis.clickToAddBreakdownButton();
 
-		ACEventAnalysis.clickToAddBreakdownButton();
+			ACEventAnalysis.searchEventAnalysis(searchItem = "${attributeName}");
 
-		ACEventAnalysis.searchEventAnalysis(searchItem = "${attributeName}");
-
-		Click(locator1 = "ACUtils#GENERIC_BUTTON");
+			Click(
+				key_buttonName = "${attributeName}",
+				locator1 = "ACUtils#GENERIC_BUTTON");
+		}
 	}
 
 	macro addEvent {
@@ -41,9 +43,42 @@ definition {
 			locator1 = "Select#SELECT",
 			value1 = "${optionValue}");
 
-		Type(
-			locator1 = "ACEventAnalysis#INPUT_CONDITION",
-			value1 = "${inputValue}");
+		if ((IsElementNotPresent(key_text = "calendar", locator1 = "Icon#ANY")) && ("${optionValue}" != "True") && ("${optionValue}" != "False")) {
+			Type(
+				locator1 = "ACEventAnalysis#INPUT_CONDITION",
+				value1 = "${inputValue}");
+
+			if ("${optionValue}" == "between") {
+				Type(
+					locator1 = "ACEventAnalysis#INPUT_CONDITION_END_VALUE",
+					value1 = "${inputEndValue}");
+			}
+		}
+
+		if (IsElementPresent(key_text = "calendar", locator1 = "Icon#ANY")) {
+			Click(
+				key_text = "calendar",
+				locator1 = "Icon#ANY");
+
+			Select(
+				key_indexCalendar = "1",
+				locator1 = "ACSegments#MONTH_AND_YEAR_CALENDAR",
+				value1 = "${month}");
+
+			Click(
+				key_day = "${inputValue}",
+				locator1 = "ACSegments#DAY_CALENDAR_OPTION");
+
+			if ("${optionValue}" == "is between") {
+				Click(
+					key_day = "${inputEndValue}",
+					locator1 = "ACSegments#DAY_CALENDAR_OPTION");
+			}
+
+			Click(
+				key_text = "calendar",
+				locator1 = "Icon#ANY");
+		}
 
 		Click(
 			key_buttonName = "Done",
@@ -68,6 +103,14 @@ definition {
 
 			ACCustomEvents.changeAttributeDataType(newDataType = "${newDataType}");
 		}
+	}
+
+	macro changeBreakdownPosition {
+		DragAndDrop.javaScriptDragAndDropToObject(
+			indexEnd = "${indexEnd}",
+			indexStart = "${indexStart}",
+			locator1 = "ACEventAnalysis#BREAKDOWN_ORIGINAL_POSITION",
+			locator2 = "ACEventAnalysis#BREAKDOWN_NEW_POSITION");
 	}
 
 	macro clickToAddBreakdownButton {
@@ -104,6 +147,20 @@ definition {
 			value1 = "${searchItem}");
 	}
 
+	macro sortAnalysis {
+		var key_attributeName = "${attributeName}";
+
+		Click(locator1 = "ACEventAnalysis#SORT_ANALYSIS");
+	}
+
+	macro viewAnalysisColumnInOrder {
+		var index = "${index}";
+
+		AssertTextEquals(
+			locator1 = "ACEventAnalysis#VIEW_ORDER_ANALYSIS_COLUMN",
+			value1 = "${columnName}");
+	}
+
 	macro viewAnalysisDashboard {
 		if (isSet(eventName)) {
 			AssertElementPresent(
@@ -129,6 +186,23 @@ definition {
 			var key_informationValue = "${informationValue}";
 
 			AssertElementPresent(locator1 = "ACEventAnalysis#VIEW_ANALYSIS_INFORMATION");
+		}
+	}
+
+	macro viewAnalysisInformationInOrder {
+		var key_commonInformation = "${commonInformation}";
+		var index = "${index}";
+
+		AssertVisible(
+			locator1 = "ACEventAnalysis#VIEW_ANALYSIS_INFORMATION_SPECIFC_ORDER",
+			value1 = "${informationValue}");
+	}
+
+	macro viewAnalysisInformationNotPresent {
+		for (var informationValue : list "${informationValueList}") {
+			var key_informationValue = "${informationValue}";
+
+			AssertElementNotPresent(locator1 = "ACEventAnalysis#VIEW_ANALYSIS_INFORMATION");
 		}
 	}
 

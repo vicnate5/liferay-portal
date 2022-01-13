@@ -61,7 +61,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletProvider;
@@ -85,7 +84,6 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.segments.constants.SegmentsEntryConstants;
-import com.liferay.segments.constants.SegmentsPortletKeys;
 import com.liferay.segments.model.SegmentsEntry;
 import com.liferay.segments.service.SegmentsEntryLocalServiceUtil;
 import com.liferay.segments.service.SegmentsEntryServiceUtil;
@@ -498,9 +496,8 @@ public class EditAssetListDisplayContext {
 
 		String className = clazz.getName();
 
-		int pos = className.lastIndexOf(StringPool.PERIOD);
-
-		return className.substring(pos + 1);
+		return className.substring(
+			className.lastIndexOf(StringPool.PERIOD) + 1);
 	}
 
 	public long[] getClassNameIds() {
@@ -608,18 +605,6 @@ public class EditAssetListDisplayContext {
 
 				return Validator.isNotNull(assetListEntry.getAssetEntryType());
 			}
-		).put(
-			"createNewSegmentURL",
-			() -> PortletURLBuilder.createRenderURL(
-				PortalUtil.getLiferayPortletResponse(_portletResponse),
-				SegmentsPortletKeys.SEGMENTS
-			).setMVCRenderCommandName(
-				"/segments/edit_segments_entry", false
-			).setRedirect(
-				_themeDisplay.getURLCurrent()
-			).setParameter(
-				"type", User.class.getName()
-			).buildString()
 		).put(
 			"openSelectSegmentsEntryDialogMethod",
 			() -> {
@@ -867,16 +852,15 @@ public class EditAssetListDisplayContext {
 				_portletRequest, getPortletURL(), null,
 				"there-are-no-asset-entries");
 
-		searchContainer.setTotal(
+		searchContainer.setResultsAndTotal(
+			() ->
+				AssetListEntryAssetEntryRelLocalServiceUtil.
+					getAssetListEntryAssetEntryRels(
+						getAssetListEntryId(), getSegmentsEntryId(),
+						searchContainer.getStart(), searchContainer.getEnd()),
 			AssetListEntryAssetEntryRelLocalServiceUtil.
 				getAssetListEntryAssetEntryRelsCount(
 					getAssetListEntryId(), getSegmentsEntryId()));
-
-		searchContainer.setResults(
-			AssetListEntryAssetEntryRelLocalServiceUtil.
-				getAssetListEntryAssetEntryRels(
-					getAssetListEntryId(), getSegmentsEntryId(),
-					searchContainer.getStart(), searchContainer.getEnd()));
 
 		_searchContainer = searchContainer;
 
@@ -1022,14 +1006,10 @@ public class EditAssetListDisplayContext {
 	}
 
 	public List<Long> getVocabularyIds() throws PortalException {
-		long[] groupIds = PortalUtil.getCurrentAndAncestorSiteGroupIds(
-			getReferencedModelsGroupIds());
-
-		List<AssetVocabulary> vocabularies =
-			AssetVocabularyServiceUtil.getGroupsVocabularies(groupIds);
-
-		vocabularies = ListUtil.filter(
-			vocabularies,
+		List<AssetVocabulary> vocabularies = ListUtil.filter(
+			AssetVocabularyServiceUtil.getGroupsVocabularies(
+				PortalUtil.getCurrentAndAncestorSiteGroupIds(
+					getReferencedModelsGroupIds())),
 			vocabulary -> {
 				long[] classNameIds = vocabulary.getSelectedClassNameIds();
 
@@ -1240,11 +1220,10 @@ public class EditAssetListDisplayContext {
 		UnicodeProperties unicodeProperties, String className,
 		Long[] availableClassTypeIds) {
 
-		boolean anyAssetType = GetterUtil.getBoolean(
-			unicodeProperties.getProperty(
-				"anyClassType" + className, Boolean.TRUE.toString()));
+		if (GetterUtil.getBoolean(
+				unicodeProperties.getProperty(
+					"anyClassType" + className, Boolean.TRUE.toString()))) {
 
-		if (anyAssetType) {
 			return availableClassTypeIds;
 		}
 
