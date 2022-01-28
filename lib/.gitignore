@@ -95,6 +95,8 @@
 /portal/asm.jar
 /portal/axis.jar
 /portal/c3p0.jar
+/portal/ccpp-ri.jar
+/portal/ccpp.jar
 /portal/cglib-nodep.jar
 /portal/closure-compiler.jar
 /portal/commons-beanutils.jar
@@ -150,6 +152,7 @@
 /portal/jcl-over-slf4j.jar
 /portal/jdom2.jar
 /portal/jempbox.jar
+/portal/jena.jar
 /portal/jericho-html.jar
 /portal/jersey-common.jar
 /portal/jhighlight.jar
@@ -185,6 +188,7 @@
 /portal/netty-resolver.jar
 /portal/netty-transport.jar
 /portal/odmg.jar
+/portal/oro.jar
 /portal/pdfbox.jar
 /portal/persistence.jar
 /portal/poi-ooxml-schemas.jar
@@ -193,6 +197,7 @@
 /portal/poi.jar
 /portal/portlet.jar
 /portal/portletmvc4spring-framework.jar
+/portal/rdffilter.jar
 /portal/rhino.jar
 /portal/rmi-api.jar
 /portal/rometools-utils.jar
