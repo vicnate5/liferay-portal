@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class PortalProfileFactory {
 
-	public static Object getCCPPProfile(
+	public static Profile getCCPPProfile(
 		HttpServletRequest httpServletRequest) {
 
 		ProfileFactory profileFactory = ProfileFactory.getInstance();

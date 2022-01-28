@@ -75,6 +75,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.ccpp.Profile;
+
 import javax.portlet.PortalContext;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -176,7 +178,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		return _httpServletRequest.getAuthType();
 	}
 
-	public Object getCCPPProfile() {
+	public Profile getCCPPProfile() {
 		if (_profile == null) {
 			_profile = PortalProfileFactory.getCCPPProfile(_httpServletRequest);
 		}
@@ -1276,7 +1278,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 	private PortletSessionImpl _portletSessionImpl;
 	private int _portletSpecMajorVersion;
 	private PortletPreferences _preferences;
-	private Object _profile;
+	private Profile _profile;
 	private String _remoteUser;
 	private long _remoteUserId;
 	private RenderParameters _renderParameters;
