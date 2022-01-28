@@ -54,7 +54,6 @@ import com.liferay.portal.webserver.DynamicResourceServlet;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -75,6 +74,8 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+
+import org.apache.oro.io.GlobFilenameFilter;
 
 /**
  * @author Brian Wing Shun Chan
@@ -679,7 +680,7 @@ public class BaseAutoDeployer implements AutoDeployer {
 
 		if (PropsValues.AUTO_DEPLOY_COPY_COMMONS_LOGGING) {
 			String[] commonsLoggingJars = pluginLibDir.list(
-				new JarFileNameFilter("commons-logging"));
+				new GlobFilenameFilter("commons-logging*.jar"));
 
 			if (ArrayUtil.isEmpty(commonsLoggingJars)) {
 				String portalJarPath =
@@ -696,7 +697,7 @@ public class BaseAutoDeployer implements AutoDeployer {
 
 		if (PropsValues.AUTO_DEPLOY_COPY_LOG4J) {
 			String[] log4jJars = pluginLibDir.list(
-				new JarFileNameFilter("log4j"));
+				new GlobFilenameFilter("log4j*.jar"));
 
 			if (ArrayUtil.isEmpty(log4jJars)) {
 				String portalJarPath =
@@ -1612,24 +1613,5 @@ public class BaseAutoDeployer implements AutoDeployer {
 		"util-bridges.jar", "util-java.jar", "util-taglib.jar");
 
 	private final String _pluginType;
-
-	private static class JarFileNameFilter implements FilenameFilter {
-
-		@Override
-		public boolean accept(File file, String fileName) {
-			if (fileName.startsWith(_prefix) && fileName.endsWith(".jar")) {
-				return true;
-			}
-
-			return false;
-		}
-
-		private JarFileNameFilter(String prefix) {
-			_prefix = prefix;
-		}
-
-		private final String _prefix;
-
-	}
 
 }
