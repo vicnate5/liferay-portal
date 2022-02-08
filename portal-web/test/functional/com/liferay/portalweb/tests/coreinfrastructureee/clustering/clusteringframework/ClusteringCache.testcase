@@ -145,6 +145,7 @@ definition {
 	@priority = "4"
 	test DoNotReplicatePut {
 		property custom.properties = "ehcache.replicator.properties.test.cache=replicatePuts=false";
+		property portal.stable = "true";
 		property test.name.skip.portal.instance = "ClusteringCache#DoNotReplicatePut";
 
 		Clustering.viewClusterStatusInConsole();

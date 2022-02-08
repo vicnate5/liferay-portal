@@ -156,6 +156,8 @@ definition {
 	@description = "This is a use case for LRQA-52002. FriendlyURLS should support Unicode characters."
 	@priority = "4"
 	test ViewFriendlyURLWithUnicodeChars {
+		property portal.stable = "true";
+
 		JSONLayout.addPublicLayout(
 			friendlyURL = "/⚽⚽⚽",
 			groupName = "Test Site Name",
@@ -180,6 +182,7 @@ definition {
 	test ViewLocaleChangeThroughFriendlyURL {
 		property environment.acceptance = "true";
 		property portal.acceptance = "true";
+		property portal.stable = "true";
 
 		task ("View the inline text on Home page is in English as default") {
 			ContentPages.viewFragmentText(
