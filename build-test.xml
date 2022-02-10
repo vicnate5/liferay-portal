@@ -11854,6 +11854,8 @@ cluster.link.bind.addr["cluster-link-udp"]=127.0.0.1</echo>
 
 										db2 drop db lportal
 
+										cat /tmp/create.sql
+
 										db2 -f/tmp/create.sql -st
 									]]>
 								</echo>
