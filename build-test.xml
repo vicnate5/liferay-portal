@@ -2697,6 +2697,55 @@ jdbc.default.password=${database.password}</echo>
 		</sequential>
 	</macrodef>
 
+	<macrodef name="prepare-integration-digital-signature-properties">
+		<sequential>
+			<if>
+				<isset property="digital.signature.account.base.uri" />
+				<then>
+					<echo append="true" file="portal-web/test/test-portal-impl-ext.properties">
+						digital.signature.account.base.uri=${digital.signature.account.base.uri}
+					</echo>
+				</then>
+			</if>
+
+			<if>
+				<isset property="digital.signature.api.accountId" />
+				<then>
+					<echo append="true" file="portal-web/test/test-portal-impl-ext.properties">
+						digital.signature.api.accountId=${digital.signature.api.accountId}
+					</echo>
+				</then>
+			</if>
+
+			<if>
+				<isset property="digital.signature.api.username" />
+				<then>
+					<echo append="true" file="portal-web/test/test-portal-impl-ext.properties">
+						digital.signature.api.username=${digital.signature.api.username}
+					</echo>
+				</then>
+			</if>
+
+			<if>
+				<isset property="digital.signature.integration.key" />
+				<then>
+					<echo append="true" file="portal-web/test/test-portal-impl-ext.properties">
+						digital.signature.integration.key=${digital.signature.integration.key}
+					</echo>
+				</then>
+			</if>
+
+			<if>
+				<isset property="digital.signature.rsa.private.key" />
+				<then>
+					<echo append="true" file="portal-web/test/test-portal-impl-ext.properties">
+						digital.signature.rsa.private.key=${digital.signature.rsa.private.key}
+					</echo>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
 	<macrodef name="prepare-jboss-module-configuration">
 		<sequential>
 			<local name="module.configuration.path" />
