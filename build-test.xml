@@ -2699,6 +2699,8 @@ jdbc.default.password=${database.password}</echo>
 
 	<macrodef name="prepare-integration-digital-signature-properties">
 		<sequential>
+			<echoproperties />
+
 			<if>
 				<isset property="digital.signature.account.base.uri" />
 				<then>
