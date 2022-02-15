@@ -2699,7 +2699,7 @@ jdbc.default.password=${database.password}</echo>
 
 	<macrodef name="prepare-integration-digital-signature-properties">
 		<sequential>
-			<echoproperties />
+			<echoproperties prefix="digital.signature."/>
 
 			<if>
 				<isset property="digital.signature.account.base.uri" />
@@ -2745,6 +2745,8 @@ jdbc.default.password=${database.password}</echo>
 					</echo>
 				</then>
 			</if>
+
+			<print-file file.name="portal-web/test/test-portal-impl-ext.properties" />
 		</sequential>
 	</macrodef>
 
