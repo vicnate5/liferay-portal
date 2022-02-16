@@ -74,6 +74,7 @@ public class ViewBlogsEntryContentDashboardItemActionProviderTest {
 			TestPropsValues.getCompanyId(), TestPropsValues.getUserId(), 0);
 	}
 
+	@Ignore
 	@Test
 	public void testGetContentDashboardItemAction() throws Exception {
 		BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.addEntry(
