@@ -2861,7 +2861,7 @@ log.sanitizer.enabled=false</echo>
 						<test-action>
 							<prepare-integration-digital-signature-properties />
 
-							<print-file file.name="portal-web/test/test-portal-impl-ext.properties" />
+							<print-file file.name="${project.dir}/portal-web/test/test-portal-impl-ext.properties" />
 
 							<echoproperties prefix="digital.signature."/>
 

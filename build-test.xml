@@ -2706,18 +2706,18 @@ jdbc.default.password=${database.password}</echo>
 				<then>
 					<echo> PROPERTY SET - ADDING TO FILE </echo>
 
-					<echo append="true" file="portal-web/test/test-portal-impl-ext.properties">
+					<echo append="true" file="${project.dir}/portal-web/test/test-portal-impl-ext.properties">
 						digital.signature.account.base.uri=${digital.signature.account.base.uri}
 					</echo>
 
-					<print-file file.name="portal-web/test/test-portal-impl-ext.properties" />
+					<print-file file.name="${project.dir}/portal-web/test/test-portal-impl-ext.properties" />
 				</then>
 			</if>
 
 			<if>
 				<isset property="digital.signature.api.accountId" />
 				<then>
-					<echo append="true" file="portal-web/test/test-portal-impl-ext.properties">
+					<echo append="true" file="${project.dir}/portal-web/test/test-portal-impl-ext.properties">
 						digital.signature.api.accountId=${digital.signature.api.accountId}
 					</echo>
 				</then>
@@ -2726,7 +2726,7 @@ jdbc.default.password=${database.password}</echo>
 			<if>
 				<isset property="digital.signature.api.username" />
 				<then>
-					<echo append="true" file="portal-web/test/test-portal-impl-ext.properties">
+					<echo append="true" file="${project.dir}/portal-web/test/test-portal-impl-ext.properties">
 						digital.signature.api.username=${digital.signature.api.username}
 					</echo>
 				</then>
@@ -2735,7 +2735,7 @@ jdbc.default.password=${database.password}</echo>
 			<if>
 				<isset property="digital.signature.integration.key" />
 				<then>
-					<echo append="true" file="portal-web/test/test-portal-impl-ext.properties">
+					<echo append="true" file="${project.dir}/portal-web/test/test-portal-impl-ext.properties">
 						digital.signature.integration.key=${digital.signature.integration.key}
 					</echo>
 				</then>
@@ -2744,13 +2744,13 @@ jdbc.default.password=${database.password}</echo>
 			<if>
 				<isset property="digital.signature.rsa.private.key" />
 				<then>
-					<echo append="true" file="portal-web/test/test-portal-impl-ext.properties">
+					<echo append="true" file="${project.dir}/portal-web/test/test-portal-impl-ext.properties">
 						digital.signature.rsa.private.key=${digital.signature.rsa.private.key}
 					</echo>
 				</then>
 			</if>
 
-			<print-file file.name="portal-web/test/test-portal-impl-ext.properties" />
+			<print-file file.name="${project.dir}/portal-web/test/test-portal-impl-ext.properties" />
 		</sequential>
 	</macrodef>
 
