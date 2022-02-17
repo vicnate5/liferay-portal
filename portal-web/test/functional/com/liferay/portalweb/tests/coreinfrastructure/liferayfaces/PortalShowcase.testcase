@@ -50,8 +50,9 @@ definition {
 		AssertElementPresent(locator1 = "PortalShowcase#CHECKED_RENDERED_CHECKBOX");
 
 		// InputRichTextHidden
+		// Ignore assert until FACES-3578 is resolved
 
-		PortalShowcase.checkText(
+		/*PortalShowcase.checkText(
 			boldClose = "</strong>",
 			boldOpen = "<strong>",
 			italicClose = "</em>",
@@ -65,7 +66,7 @@ definition {
 			boldOpen = "<strong>",
 			italicClose = "</em>",
 			italicOpen = "<em>",
-			usecase = "General");
+			usecase = "General");*/
 
 		// InputRichTextBBCode
 
