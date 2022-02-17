@@ -5534,6 +5534,16 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 				</then>
 			</if>
 
+			<if>
+				<equals arg1="@{dxp.license.file}" arg2="dxp-license-virtual-cluster.xml" />
+				<then>
+					<copy
+						file="${project.dir}/portal-web/test/functional/com/liferay/portalweb/tests/coreinfrastructureee/clustering/clusteringframework/dependencies/@{dxp.license.file}"
+						todir="${liferay.home}/deploy"
+					/>
+				</then>
+			</if>
+
 			<var name="expiration.leeway" value="2" />
 
 			<if>
