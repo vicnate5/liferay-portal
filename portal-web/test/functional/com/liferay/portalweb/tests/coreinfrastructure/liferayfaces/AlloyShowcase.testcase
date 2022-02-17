@@ -53,10 +53,11 @@ definition {
 		AlloyShowcase.clickButton(buttonNum = "1,2,3");
 
 		// ButtonMenu
+		// Ignore assert until FACES-3596 is resolved
 
-		Navigator.openWithAppendToBaseURL(urlAppend = "web/guest/alloy-showcase/-/alloy-tag/alloy/button/menu");
+		/*Navigator.openWithAppendToBaseURL(urlAppend = "web/guest/alloy-showcase/-/alloy-tag/alloy/button/menu");
 
-		AlloyShowcase.testMenu();
+		AlloyShowcase.testMenu();*/
 
 		// CommandButtonMenu
 
