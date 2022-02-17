@@ -194,11 +194,13 @@ definition {
 			postalCode = "32801",
 			state = "FL");
 
-		BridgeDemos.addComment(comments = "testing 1, 2, 3");
+		// Ignore assert until FACES-3595 is resolved
+
+		/*BridgeDemos.addComment(comments = "testing 1, 2, 3");
 
 		Click(locator1 = "BridgeDemos#SHOW_HIDE_COMMENTS_LINK");
 
-		BridgeDemos.viewComment(comments = "testing 1, 2, 3");
+		BridgeDemos.viewComment(comments = "testing 1, 2, 3");*/
 
 		Navigator.openWithAppendToBaseURL(urlAppend = "web/bridge-demos/bootsfaces-applicant");
 
