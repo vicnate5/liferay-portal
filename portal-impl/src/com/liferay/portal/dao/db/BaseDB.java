@@ -740,6 +740,8 @@ public abstract class BaseDB implements DB {
 				StringUtil.trim(sqlTypeStringAndText[i]),
 				getSQLVarcharSizes()[i]);
 		}
+
+		_log.info("INFO level is enabled");
 	}
 
 	protected void addPrimaryKey(
