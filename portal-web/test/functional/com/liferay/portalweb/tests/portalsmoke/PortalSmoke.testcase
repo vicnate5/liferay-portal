@@ -36,7 +36,7 @@ definition {
 		property database.bare.enabled = "true";
 		property database.types = "db2,hypersonic,mariadb,mysql,oracle,postgresql,sqlserver,sybase";
 		property environment.acceptance = "true";
-		property portal.acceptance = "false";
+		property portal.acceptance = "true";
 		property testray.component.names = "Training";
 
 		Smoke.viewWelcomeContentPage();
@@ -65,6 +65,7 @@ definition {
 		property app.server.types = "jboss,tomcat,weblogic,websphere,wildfly";
 		property database.hypersonic.embedded = "true";
 		property database.types = "hypersonic";
+		property portal.acceptance = "true";
 		property portal.smoke = "false";
 
 		Smoke.viewWelcomeContentPage();
