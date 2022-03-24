@@ -9824,6 +9824,10 @@ auto.deploy.dest.dir=C:/WINDOWS/system32/config/systemprofile/liferay/websphere-
 
 		<echo> VICTOR ${test.release.bundle.parent.dir} </echo>
 
+		<echo> VICTOR ${test.released.release.bundle.version} </echo>
+
+		<echo> VICTOR ${test.released.test.portal.bundle.zip.url} </echo>
+
 		<delete dir="${test.release.bundle.parent.dir}/bundles-original" />
 
 		<move
