@@ -1,0 +1,55 @@
+@component-name = "portal-upgrades"
+definition {
+
+	property app.server.types = "jboss,tomcat,weblogic,websphere,wildfly";
+	property database.types = "db2,mariadb,mysql,oracle,postgresql,sqlserver,sybase";
+	property portal.release = "true";
+	property portal.upstream = "true";
+	property testray.main.component.name = "Upgrades Core Infrastructure";
+
+	setUp {
+		SignIn.signInTestSetup();
+	}
+
+	@priority = "4"
+	test AutoUpgradeFromLatest7413Update {
+		property database.bare.enabled = "true";
+		property database.types = "mysql";
+		property portal.upgrades = "true";
+		property skip.upgrade-legacy-database = "true";
+		property test.assert.warning.exceptions = "true";
+
+		Portlet.shutdownServer();
+
+		AntCommand(
+				locator1 = "build-test.xml",
+				value1 = "rebuild-database -Ddatabase.bare.enabled=true");
+
+		AntCommand(
+				locator1 = "build-test.xml",
+				value1 = "prepare-released-bundle-test-environment");
+
+		AntCommand(
+				locator1 = "build-test.xml",
+				value1 = "deploy-license-xml");
+
+		Portlet.startServer();
+
+		Navigator.openURL();
+
+		SignIn.signInTestSetup();
+
+		Portlet.shutdownServer();
+
+		AntCommand(
+				locator1 = "build-test.xml",
+				value1 = "restore-bundles-original-for-upgrade");
+
+		Portlet.startServer();
+
+		SignIn.signIn();
+
+		Smoke.viewWelcomeContentPage();
+	}
+
+}
