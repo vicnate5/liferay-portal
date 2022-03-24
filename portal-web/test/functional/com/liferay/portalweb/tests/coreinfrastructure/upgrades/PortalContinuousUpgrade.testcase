@@ -15,7 +15,7 @@ definition {
 	test AutoUpgradeFromLatest7413Update {
 		property database.bare.enabled = "true";
 		property database.types = "mysql";
-		property portal.upgrades = "true";
+		property portal.upgrades = "victor";
 		property skip.upgrade-legacy-database = "true";
 		property test.assert.warning.exceptions = "true";
 
