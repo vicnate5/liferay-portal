@@ -25,16 +25,13 @@ definition {
 				locator1 = "build-test.xml",
 				value1 = "rebuild-database -Ddatabase.bare.enabled=true");
 
+		var releaseLicenseFile = PropsUtil.get("test.license.xml.url");
 		var releaseBundleVersion = PropsUtil.get("test.released.release.bundle.version");
 		var releaseBundleZipURL = PropsUtil.get("test.released.test.portal.bundle.zip.url");
 
 		AntCommand(
 				locator1 = "build-test.xml",
-				value1 = "prepare-released-bundle-test-environment -Dtest.released.release.bundle.version=${releaseBundleVersion} -Dtest.released.test.portal.bundle.zip.url=${releaseBundleZipURL}");
-
-		AntCommand(
-				locator1 = "build-test.xml",
-				value1 = "deploy-license-xml");
+				value1 = "prepare-released-bundle-test-environment -Dtest.license.xml.url=${releaseLicenseFile} -Dtest.released.release.bundle.version=${releaseBundleVersion} -Dtest.released.test.portal.bundle.zip.url=${releaseBundleZipURL}");
 
 		Portlet.startServer();
 
