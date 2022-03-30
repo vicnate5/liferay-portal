@@ -175,6 +175,7 @@ definition {
 
 		var userId = JSONUserSetter.setUserId(
 			portalInstanceName = "${portalInstanceName}",
+			portalURL = "${portalURL}",
 			userEmailAddress = "${userEmailAddress}");
 
 		JSONUserAPI._agreeToTermsAndAnswerReminderQuery(userId = "${userId}");

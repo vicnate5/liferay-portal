@@ -7462,7 +7462,7 @@ virtualHostname="localhost"
 
 	<target name="deploy-license-xml">
 		<if>
-			<matches pattern="https?://" string="${test.build.license.xml.zip.url}" />
+			<matches pattern="(file|https?)://" string="${test.build.license.xml.zip.url}" />
 			<then>
 				<mkdir dir="${liferay.home}/deploy" />
 
@@ -14016,7 +14016,16 @@ module.framework.properties.blacklist.portal.profile.names=${blacklist.portal.pr
 			</then>
 		</if>
 
-		<antcall target="start-app-server-preserve-liferay-home" />
+		<get-testcase-property property.name="skip.start.app.server" />
+
+		<if>
+			<not>
+				<equals arg1="${skip.start.app.server}" arg2="true" />
+			</not>
+			<then>
+				<antcall target="start-app-server-preserve-liferay-home" />
+			</then>
+		</if>
 
 		<get-testcase-property property.name="app.server.bundles.size" />
 

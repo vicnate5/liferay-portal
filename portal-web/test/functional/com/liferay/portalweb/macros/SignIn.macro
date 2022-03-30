@@ -65,11 +65,15 @@ definition {
 
 	@summary = "Sign in to Liferay Portal as '${userEmailAddress}' using the password '${userPassword}'"
 	macro signInTestSetup {
-		JSONUser.agreeToTermsAndAnswerReminderQuery(userEmailAddress = "test@liferay.com");
+		JSONUser.agreeToTermsAndAnswerReminderQuery(
+			portalURL = "${portalURL}",
+			userEmailAddress = "test@liferay.com",
+			virtualHostsURL = "${portalURL}");
 
 		SignIn._signIn(
 			userEmailAddress = "${userEmailAddress}",
-			userPassword = "${userPassword}");
+			userPassword = "${userPassword}",
+			virtualHostsURL = "${portalURL}");
 	}
 
 }

@@ -2,13 +2,13 @@
 definition {
 
 	property app.server.types = "jboss,tomcat,weblogic,websphere,wildfly";
-	property database.types = "db2,mariadb,mysql,oracle,postgresql,sqlserver,sybase";
+	property database.types = "db2,mariadb,mysql,oracle,postgresql,sqlserver";
 	property portal.release = "true";
 	property portal.upstream = "true";
 	property testray.main.component.name = "Upgrades Core Infrastructure";
 
 	setUp {
-		SignIn.signInTestSetup();
+		echo("Skip Setup");
 	}
 
 	@priority = "4"
@@ -16,38 +16,42 @@ definition {
 		property database.bare.enabled = "true";
 		property database.types = "mysql";
 		property portal.upgrades = "victor";
+		property skip.start.app.server = "true";
 		property skip.upgrade-legacy-database = "true";
 		property test.assert.warning.exceptions = "true";
-
-		Portlet.shutdownServer();
+		property testcase.url = "http://www.google.com";
 
 		AntCommand(
-				locator1 = "build-test.xml",
-				value1 = "rebuild-database -Ddatabase.bare.enabled=true");
+			locator1 = "build-test.xml",
+			value1 = "rebuild-database -Ddatabase.bare.enabled=true");
 
 		var releaseLicenseFile = PropsUtil.get("test.license.xml.url");
 		var releaseBundleVersion = PropsUtil.get("test.released.release.bundle.version");
 		var releaseBundleZipURL = PropsUtil.get("test.released.test.portal.bundle.zip.url");
 
 		AntCommand(
-				locator1 = "build-test.xml",
-				value1 = "prepare-released-bundle-test-environment -Dtest.license.xml.url=${releaseLicenseFile} -Dtest.released.release.bundle.version=${releaseBundleVersion} -Dtest.released.test.portal.bundle.zip.url=${releaseBundleZipURL}");
+			locator1 = "build-test.xml",
+			value1 = "prepare-released-bundle-test-environment -Dtest.license.xml.url=${releaseLicenseFile} -Dtest.released.release.bundle.version=${releaseBundleVersion} -Dtest.released.test.portal.bundle.zip.url=${releaseBundleZipURL}");
 
 		Portlet.startServer();
 
-		Navigator.openURL();
+		var portalURL = JSONCompany.getDefaultPortalURL();
 
-		SignIn.signInTestSetup();
+		echo("VICTOR POSHI ${portalURL}");
+
+		Navigator.openURL(baseURL = "${portalURL}");
+
+		SignIn.signInTestSetup(portalURL = "${portalURL}");
 
 		Portlet.shutdownServer();
 
 		AntCommand(
-				locator1 = "build-test.xml",
-				value1 = "restore-bundles-original-for-upgrade");
+			locator1 = "build-test.xml",
+			value1 = "restore-bundles-original-for-upgrade");
 
 		Portlet.startServer();
 
-		SignIn.signIn();
+		SignIn.signIn(virtualHostsURL = "${portalURL}");
 
 		Smoke.viewWelcomeContentPage();
 	}
