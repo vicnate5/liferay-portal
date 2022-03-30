@@ -35,25 +35,51 @@ definition {
 
 		Portlet.startServer();
 
-		var portalURL = JSONCompany.getDefaultPortalURL();
+		AntCommand(
+			locator1 = "build-test.xml",
+			value1 = "wait-for-license-activation -Dtest.license.xml.url=${releaseLicenseFile}");
 
-		echo("VICTOR POSHI ${portalURL}");
+		User.firstLoginUI(
+			password = "test",
+			specificURL = "http://localhost:8080",
+			userEmailAddress = "test@liferay.com");
 
-		Navigator.openURL(baseURL = "${portalURL}");
+		WebContentNavigator.openWebContentAdmin(
+			baseURL = "http://localhost:8080",
+			siteURLKey = "guest");
 
-		SignIn.signInTestSetup(portalURL = "${portalURL}");
+		WebContentNavigator.gotoAddCP();
+
+		WebContent.addCP(
+			webContentContent = "WC WebContent Content",
+			webContentTitle = "WC WebContent Title");
+
+		PortletEntry.publish();
+
+		WebContent.viewTitle(webContentTitle = "WC WebContent Title");
 
 		Portlet.shutdownServer();
 
 		AntCommand(
 			locator1 = "build-test.xml",
-			value1 = "restore-bundles-original-for-upgrade");
+			value1 = "prepare-original-bundle-test-environment");
 
 		Portlet.startServer();
 
-		SignIn.signIn(virtualHostsURL = "${portalURL}");
+		User.firstLoginUI(
+			password = "test",
+			specificURL = "http://localhost:8080",
+			userEmailAddress = "test@liferay.com");
 
-		Smoke.viewWelcomeContentPage();
+		WebContentNavigator.openWebContentAdmin(
+			baseURL = "http://localhost:8080",
+			siteURLKey = "guest");
+
+		WebContentNavigator.gotoEditCP(webContentTitle = "WC WebContent Title");
+
+		WebContent.viewCP(
+			webContentContent = "WC WebContent Content",
+			webContentTitle = "WC WebContent Title");
 	}
 
 }

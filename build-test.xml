@@ -13297,7 +13297,7 @@ if (ppstate.equals("normal")) {
 		</execute>
 	</target>
 
-	<target name="restore-bundles-original">
+	<target name="prepare-original-bundle-test-environment">
 		<property location="${app.server.parent.dir}/../" name="test.release.bundle.parent.dir" />
 
 		<echo> VICTOR ${test.release.bundle.parent.dir} </echo>
