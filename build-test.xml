@@ -13302,6 +13302,15 @@ if (ppstate.equals("normal")) {
 
 		<echo> VICTOR ${test.release.bundle.parent.dir} </echo>
 
+		<delete dir="${test.release.bundle.parent.dir}/bundles-original/data" />
+
+		<move
+			file="${test.release.bundle.parent.dir}/bundles/data"
+			tofile="${test.release.bundle.parent.dir}/bundles-original/data"
+		/>
+
+		<delete dir="${test.release.bundle.parent.dir}/bundles-original/data/elasticsearch7" />
+
 		<delete dir="${test.release.bundle.parent.dir}/bundles" />
 
 		<move

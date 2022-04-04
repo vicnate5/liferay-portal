@@ -64,7 +64,7 @@ definition {
 			locator1 = "build-test.xml",
 			value1 = "prepare-original-bundle-test-environment");
 
-		Portlet.startServer();
+		Portlet.startServer(deleteLiferayHome = "false");
 
 		User.firstLoginUI(
 			password = "test",
