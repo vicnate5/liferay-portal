@@ -25,7 +25,6 @@ definition {
 			locator1 = "build-test.xml",
 			value1 = "rebuild-database -Ddatabase.bare.enabled=true");
 
-		var releaseLicenseFile = PropsUtil.get("test.license.xml.url");
 		var releaseBundleVersion = PropsUtil.get("test.released.release.bundle.version");
 		var releaseBundleZipURL = PropsUtil.get("test.released.test.portal.bundle.zip.url");
 

@@ -9854,46 +9854,6 @@ auto.deploy.dest.dir=C:/WINDOWS/system32/config/systemprofile/liferay/websphere-
 		</antcall>
 	</target>
 
-	<target name="prepare-released-bundle-test-environment">
-		<!-- <property name="test.released.release.bundle.version" value="7.4.13.u16" />
-		<property name="test.released.test.portal.bundle.zip.url" value="file://opt/dev/projects/release/liferay-dxp-tomcat-7.4.13.u16-20220314145423856.7z" /> -->
-
-		<property location="${app.server.parent.dir}/../" name="test.release.bundle.parent.dir" />
-
-		<echo> VICTOR ${test.release.bundle.parent.dir} </echo>
-
-		<echo> VICTOR ${test.released.release.bundle.version} </echo>
-
-		<echo> VICTOR ${test.released.test.portal.bundle.zip.url} </echo>
-
-		<delete dir="${test.release.bundle.parent.dir}/bundles-original" />
-
-		<move
-			file="${test.release.bundle.parent.dir}/bundles"
-			tofile="${test.release.bundle.parent.dir}/bundles-original"
-		/>
-
-		<set-tomcat-version-number liferay.portal.bundle="${test.released.release.bundle.version}" />
-
-		<antcall inheritAll="false" target="prepare-test-bundle">
-			<param name="app.server.type" value="tomcat" />
-			<param name="test.app.server.bin.dir" value="${app.server.tomcat.bin.dir}" />
-			<param name="test.build.bundle.zip.url" value="${test.released.test.portal.bundle.zip.url}" />
-		</antcall>
-
-		<echo> VICTOR license url ${test.license.xml.url} </echo>
-
-		<antcall target="deploy-license-xml">
-			<param name="test.build.license.xml.zip.url" value="${test.license.xml.url}" />
-		</antcall>
-
-		<antcall target="prepare-osgi-module-configurations" />
-		<antcall target="prepare-portal-properties" />
-		<antcall target="prepare-portal-ext-properties" />
-		<antcall target="prepare-portlet-ext-properties" />
-		<antcall target="prepare-system-ext-properties" />
-	</target>
-
 	<target name="prepare-selenium">
 		<delete file="${test.ext.properties.file}" />
 
@@ -11969,6 +11929,78 @@ ANT_OPTS=${env.ANT_OPTS}</echo>
 		<lstopwatch action="total" name="prepare.bundles.${app.server.name}" />
 	</target>
 
+	<target name="prepare-upgrade-original-bundle-test-environment">
+		<property location="${app.server.parent.dir}/../" name="test.release.bundle.parent.dir" />
+
+		<echo> VICTOR ${test.release.bundle.parent.dir} </echo>
+
+		<delete dir="${test.release.bundle.parent.dir}/bundles-original/data" />
+
+		<move
+			file="${test.release.bundle.parent.dir}/bundles/data"
+			tofile="${test.release.bundle.parent.dir}/bundles-original/data"
+		/>
+
+		<delete dir="${test.release.bundle.parent.dir}/bundles-original/data/elasticsearch7" />
+
+		<delete dir="${test.release.bundle.parent.dir}/bundles" />
+
+		<move
+			file="${test.release.bundle.parent.dir}/bundles-original"
+			tofile="${test.release.bundle.parent.dir}/bundles"
+		/>
+
+		<set-tomcat-version-number liferay.portal.bundle="${liferay.portal.bundle}" />
+
+		<prepare-custom-properties
+			custom.properties="upgrade.database.auto.run=true"
+			properties.file="${app.server.tomcat.classes.portal.dir}/portal-ext.properties"
+		/>
+
+		<delete file="${testable.portal.started.marker.file}" />
+	</target>
+
+
+	<target name="prepare-upgrade-released-bundle-test-environment">
+		<!-- <property name="test.released.release.bundle.version" value="7.4.13.u16" />
+		<property name="test.released.test.portal.bundle.zip.url" value="file://opt/dev/projects/release/liferay-dxp-tomcat-7.4.13.u16-20220314145423856.7z" /> -->
+
+		<property location="${app.server.parent.dir}/../" name="test.release.bundle.parent.dir" />
+
+		<echo> VICTOR ${test.release.bundle.parent.dir} </echo>
+
+		<echo> VICTOR ${test.released.release.bundle.version} </echo>
+
+		<echo> VICTOR ${test.released.test.portal.bundle.zip.url} </echo>
+
+		<delete dir="${test.release.bundle.parent.dir}/bundles-original" />
+
+		<move
+			file="${test.release.bundle.parent.dir}/bundles"
+			tofile="${test.release.bundle.parent.dir}/bundles-original"
+		/>
+
+		<set-tomcat-version-number liferay.portal.bundle="${test.released.release.bundle.version}" />
+
+		<antcall inheritAll="false" target="prepare-test-bundle">
+			<param name="app.server.type" value="tomcat" />
+			<param name="test.app.server.bin.dir" value="${app.server.tomcat.bin.dir}" />
+			<param name="test.build.bundle.zip.url" value="${test.released.test.portal.bundle.zip.url}" />
+		</antcall>
+
+		<echo> VICTOR license url ${test.license.xml.url} </echo>
+
+		<antcall target="deploy-license-xml">
+			<param name="test.build.license.xml.zip.url" value="${test.license.xml.url}" />
+		</antcall>
+
+		<antcall target="prepare-osgi-module-configurations" />
+		<antcall target="prepare-portal-properties" />
+		<antcall target="prepare-portal-ext-properties" />
+		<antcall target="prepare-portlet-ext-properties" />
+		<antcall target="prepare-system-ext-properties" />
+	</target>
+
 	<target name="prepare-virtual-host-name-properties">
 		<if>
 			<isset property="virtual.host.name" />
@@ -13306,37 +13338,6 @@ if (ppstate.equals("normal")) {
 		<execute>
 			docker restart ${docker.container}
 		</execute>
-	</target>
-
-	<target name="prepare-original-bundle-test-environment">
-		<property location="${app.server.parent.dir}/../" name="test.release.bundle.parent.dir" />
-
-		<echo> VICTOR ${test.release.bundle.parent.dir} </echo>
-
-		<delete dir="${test.release.bundle.parent.dir}/bundles-original/data" />
-
-		<move
-			file="${test.release.bundle.parent.dir}/bundles/data"
-			tofile="${test.release.bundle.parent.dir}/bundles-original/data"
-		/>
-
-		<delete dir="${test.release.bundle.parent.dir}/bundles-original/data/elasticsearch7" />
-
-		<delete dir="${test.release.bundle.parent.dir}/bundles" />
-
-		<move
-			file="${test.release.bundle.parent.dir}/bundles-original"
-			tofile="${test.release.bundle.parent.dir}/bundles"
-		/>
-
-		<set-tomcat-version-number liferay.portal.bundle="${liferay.portal.bundle}" />
-
-		<prepare-custom-properties
-			custom.properties="upgrade.database.auto.run=true"
-			properties.file="${app.server.tomcat.classes.portal.dir}/portal-ext.properties"
-		/>
-
-		<delete file="${testable.portal.started.marker.file}" />
 	</target>
 
 	<target name="run-poshi-evaluate-console">
