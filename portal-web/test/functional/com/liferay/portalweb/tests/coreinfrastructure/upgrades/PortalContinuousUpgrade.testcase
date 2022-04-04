@@ -21,10 +21,6 @@ definition {
 		property test.assert.warning.exceptions = "true";
 		property testcase.url = "http://www.google.com";
 
-		AntCommand(
-			locator1 = "build-test.xml",
-			value1 = "rebuild-database -Ddatabase.bare.enabled=true");
-
 		var releaseBundleVersion = PropsUtil.get("test.released.release.bundle.version");
 		var releaseBundleZipURL = PropsUtil.get("test.released.test.portal.bundle.zip.url");
 
