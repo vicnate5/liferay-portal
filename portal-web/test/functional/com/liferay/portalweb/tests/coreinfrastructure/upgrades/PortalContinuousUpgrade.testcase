@@ -30,7 +30,7 @@ definition {
 
 		AntCommand(
 			locator1 = "build-test.xml",
-			value1 = "prepare-released-bundle-test-environment -Dtest.released.release.bundle.version=${releaseBundleVersion} -Dtest.released.test.portal.bundle.zip.url=${releaseBundleZipURL}");
+			value1 = "prepare-upgrade-released-bundle-test-environment -Dtest.released.release.bundle.version=${releaseBundleVersion} -Dtest.released.test.portal.bundle.zip.url=${releaseBundleZipURL}");
 
 		Portlet.startServer();
 
@@ -61,7 +61,7 @@ definition {
 
 		AntCommand(
 			locator1 = "build-test.xml",
-			value1 = "prepare-original-bundle-test-environment");
+			value1 = "prepare-upgrade-original-bundle-test-environment");
 
 		Portlet.startServer(deleteLiferayHome = "false");
 
