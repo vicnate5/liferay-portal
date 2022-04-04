@@ -7,10 +7,6 @@ definition {
 	property portal.upstream = "true";
 	property testray.main.component.name = "Upgrades Core Infrastructure";
 
-	setUp {
-		echo("Skip Setup");
-	}
-
 	@priority = "4"
 	test AutoUpgradeFromLatest7413Update {
 		property database.bare.enabled = "true";
@@ -19,7 +15,7 @@ definition {
 		property skip.start.app.server = "true";
 		property skip.upgrade-legacy-database = "true";
 		property test.assert.warning.exceptions = "true";
-		property testcase.url = "http://www.example.com/";
+		property testcase.url = "http://www.example.com";
 
 		var releaseBundleVersion = PropsUtil.get("test.released.release.bundle.version");
 		var releaseBundleZipURL = PropsUtil.get("test.released.test.portal.bundle.zip.url");
