@@ -11988,6 +11988,8 @@ ANT_OPTS=${env.ANT_OPTS}</echo>
 			<param name="test.build.bundle.zip.url" value="${test.released.test.portal.bundle.zip.url}" />
 		</antcall>
 
+		<echoproperties prefix="test." />
+
 		<echo> VICTOR license url ${test.license.xml.url} </echo>
 
 		<antcall target="deploy-license-xml">
