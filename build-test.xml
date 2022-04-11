@@ -12047,6 +12047,7 @@ ANT_OPTS=${env.ANT_OPTS}</echo>
 			<param name="test.build.license.xml.zip.url" value="${test.license.xml.url}" />
 		</antcall>
 
+		<antcall target="copy-optional-jars" />
 		<antcall target="prepare-osgi-module-configurations" />
 		<antcall target="prepare-portal-properties" />
 		<antcall target="prepare-portal-ext-properties" />
