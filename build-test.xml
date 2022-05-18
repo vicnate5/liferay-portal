@@ -10516,6 +10516,12 @@ ${update.properties}</echo>
 	<target name="prepare-portal-ext-properties">
 		<delete file="portal-impl/src/portal-ext.properties" />
 
+		<execute>
+			<![CDATA[
+				find . | grep commons-compress
+			]]>
+		</execute>
+
 		<if>
 			<and>
 				<isset property="test.base.dir.name" />
