@@ -10519,6 +10519,9 @@ ${update.properties}</echo>
 		<execute>
 			<![CDATA[
 				find . | grep commons-compress
+				ant -version
+				java -version
+				echo $ANT_OPTS
 			]]>
 		</execute>
 
