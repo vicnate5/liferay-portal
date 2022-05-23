@@ -23,7 +23,7 @@ definition {
 	@priority = "5"
 	test CanUpgradePartitionedDatabase741 {
 		property data.archive.type = "data-archive-portal-partition";
-		property portal.upgrades = "true";
+		property portal.upgrades = "false";
 		property portal.version = "7.4.1";
 
 		Upgrade.viewUpgradeDBPartition();
