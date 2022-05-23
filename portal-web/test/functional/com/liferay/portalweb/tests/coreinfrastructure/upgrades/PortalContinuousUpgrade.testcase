@@ -58,6 +58,8 @@ definition {
 
 		Portlet.startServer(deleteLiferayHome = "false");
 
+		Navigator.openSpecificURL(url = "http://localhost:8080");
+
 		User.firstLoginUI(
 			password = "test",
 			specificURL = "http://localhost:8080",
