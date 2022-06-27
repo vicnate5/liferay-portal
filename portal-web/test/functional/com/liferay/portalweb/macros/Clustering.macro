@@ -309,6 +309,8 @@ definition {
 			locator1 = "build-test.xml",
 			value1 = "wait-for-server-shutdown -Dapp.server.port.number=${nodePort}");
 
+		// Pausing 30 seconds due to LRQA-66618
+
 		Pause(locator1 = "30000");
 	}
 
