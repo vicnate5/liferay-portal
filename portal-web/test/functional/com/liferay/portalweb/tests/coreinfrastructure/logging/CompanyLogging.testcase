@@ -1,0 +1,85 @@
+@component-name = "portal-logging"
+definition {
+
+	property portal.release = "true";
+	property portal.upstream = "true";
+	property test.assert.warning.exceptions = "true";
+	property testray.main.component.name = "Logging";
+
+	setUp {
+		TestCase.setUpPortalInstance();
+	}
+
+	tearDown {
+		var testPortalInstance = PropsUtil.get("test.portal.instance");
+
+		if ("${testPortalInstance}" == "true") {
+			PortalInstances.tearDownCP();
+		}
+	}
+
+	@ignore = "Test Stub"
+	@priority = "3"
+	test AssertCompanyLogsIsolated {
+
+		// TODO LRQA-75859
+
+	}
+
+	@ignore = "Test Stub"
+	@priority = "4"
+	test CompanyLoggingDisabled {
+
+		// TODO LRQA-75853
+
+	}
+
+	@ignore = "Test Stub"
+	@priority = "4"
+	test GetAllCompanyLogs {
+
+		// TODO LRQA-75854
+
+	}
+
+	@ignore = "Test Stub"
+	@priority = "5"
+	test GetCompanyAdminLogs {
+
+		// TODO LRQA-75855
+
+	}
+
+	@ignore = "Test Stub"
+	@priority = "4"
+	test GetCompanyAdminLogsFromDifferentCompany {
+
+		// TODO LRQA-75856
+
+	}
+
+	@ignore = "Test Stub"
+	@priority = "4"
+	test GetCompanyLogsAsGuest {
+
+		// TODO LRQA-75857
+
+	}
+
+	@ignore = "Test Stub"
+	@priority = "4"
+	test GetEmptyCompanyLogs {
+
+		// TODO LRQA-75858
+
+	}
+
+	@ignore = "Test Stub"
+	@priority = "4"
+	test GetInvalidCompanyLogs {
+
+		// TODO LRQA-75860
+
+	}
+
+}
