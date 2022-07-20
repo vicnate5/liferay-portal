@@ -2707,6 +2707,16 @@ jdbc.default.username=${database.username}
 jdbc.default.password=${database.password}</echo>
 
 			<echo append="true" file="${liferay.home}/tools/portal-tools-db-upgrade-client/portal-upgrade-ext.properties">${line.separator}liferay.home=${liferay.home}</echo>
+
+			<get-testcase-property property.name="upgrade.report.enabled" />
+
+			<if>
+				<equals arg1="${upgrade.report.enabled}" arg2="true" />
+				<then>
+					<echo append="true" file="${liferay.home}/tools/portal-tools-db-upgrade-client/portal-upgrade-ext.properties">
+upgrade.report.enabled=true</echo>
+				</then>
+			</if>
 		</sequential>
 	</macrodef>
 
@@ -4379,16 +4389,6 @@ tell application "Safari" to quit
 						timeout.explicit.wait=${default.timeout.explicit.wait}
 					</echo>
 				</else>
-			</if>
-
-			<get-testcase-property property.name="upgrade.report.enabled" />
-
-			<if>
-				<equals arg1="${upgrade.report.enabled}" arg2="true" />
-				<then>
-					<echo append="true" file="${liferay.home}/tools/portal-tools-db-upgrade-client/portal-upgrade-ext.properties">
-upgrade.report.enabled=true</echo>
-				</then>
 			</if>
 		</sequential>
 	</macrodef>
