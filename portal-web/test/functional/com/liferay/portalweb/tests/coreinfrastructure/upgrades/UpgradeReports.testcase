@@ -69,8 +69,8 @@ definition {
 		property test.assert.warning.exceptions = "true";
 
         task("Look for the upgrade report"){
-		    var tempDir = PropsUtil.get("liferay.home");
-		    var tempFileExists = FileUtil.exists("${tempDir}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
+			var tempDir = PropsUtil.get("liferay.home.dir.name");
+			var tempFileExists = FileUtil.exists("${tempDir}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
         }
 
 		task ("Check if file exists") {
