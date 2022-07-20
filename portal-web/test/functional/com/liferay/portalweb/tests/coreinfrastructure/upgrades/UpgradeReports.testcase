@@ -71,6 +71,8 @@ definition {
         task("Look for the upgrade report"){
 			var tempDir = PropsUtil.get("liferay.home.dir.name");
 			var tempFileExists = FileUtil.exists("${tempDir}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
+
+			echo("DEBUG ${tempDir}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
         }
 
 		task ("Check if file exists") {
