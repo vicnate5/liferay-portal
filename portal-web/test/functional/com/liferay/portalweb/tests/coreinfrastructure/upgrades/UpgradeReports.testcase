@@ -38,14 +38,12 @@ definition {
 	@description = "LPS-154683: Upgrade Report is not created when property is not set to true"
 	@priority = "4"
 	test UpgradeFileDoesNotExistUpgradeTool {
-		task("Set the properties needed to run the upgrade and run it"){
-			property test.name.skip.portal.instance = "UpgradeReports#UpgradeFileDoesNotExistUpgradeTool";
-			property data.archive.type = "data-archive-portal";
-			property database.types = "mariadb,mysql,postgresql";
-			property portal.upgrades = "true";
-			property portal.version = "7.4.0";
-			property test.assert.warning.exceptions = "true";
-        }
+		property test.name.skip.portal.instance = "UpgradeReports#UpgradeFileDoesNotExistUpgradeTool";
+		property data.archive.type = "data-archive-portal";
+		property database.types = "mariadb,mysql,postgresql";
+		property portal.upgrades = "true";
+		property portal.version = "7.4.0";
+		property test.assert.warning.exceptions = "true";
 
         task("Look for the upgrade report"){
 		    var tempDir = PropsUtil.get("liferay.home.dir.name");
@@ -62,15 +60,13 @@ definition {
 	@description = "LPS-154683: Upgrade Report is created when property is set to true"
 	@priority = "4"
 	test UpgradeFileExistUpgradeTool {
-		task("Set the properties needed to run the upgrade"){
-            property test.name.skip.portal.instance = "UpgradeReports#UpgradeFileExistUpgradeTool";
-			property upgrade.report.enabled = "true";
-			property data.archive.type = "data-archive-portal";
-			property database.types = "mariadb,mysql,postgresql";
-			property portal.upgrades = "true";
-			property portal.version = "7.4.0";
-			property test.assert.warning.exceptions = "true";
-        }
+		property test.name.skip.portal.instance = "UpgradeReports#UpgradeFileExistUpgradeTool";
+		property upgrade.report.enabled = "true";
+		property data.archive.type = "data-archive-portal";
+		property database.types = "mariadb,mysql,postgresql";
+		property portal.upgrades = "true";
+		property portal.version = "7.4.0";
+		property test.assert.warning.exceptions = "true";
 
         task("Look for the upgrade report"){
 		    var tempDir = PropsUtil.get("liferay.home");
@@ -88,17 +84,15 @@ definition {
 	@priority = "4"
 	@ignore = "true"
 	test UpgradeReportShowWarningsUpgradeTool {
-		task("Set the properties needed to run the upgrade"){
-            property test.name.skip.portal.instance = "UpgradeReports#UpgradeReportShowWarningsUpgradeTool";
-			property upgrade.report.enabled = "true";
-			property data.archive.type = "data-archive-portal";
-			property database.types = "mariadb,mysql,postgresql";
-			property portal.upgrades = "true";
-			property portal.version = "7.4.0";
-			property test.assert.warning.exceptions = "true";
+		property test.name.skip.portal.instance = "UpgradeReports#UpgradeReportShowWarningsUpgradeTool";
+		property upgrade.report.enabled = "true";
+		property data.archive.type = "data-archive-portal";
+		property database.types = "mariadb,mysql,postgresql";
+		property portal.upgrades = "true";
+		property portal.version = "7.4.0";
+		property test.assert.warning.exceptions = "true";
 
-			Upgrade.viewUpgrade();
-        }
+		Upgrade.viewUpgrade();
 
         task("Look for the upgrade report"){
 		    var tempDir = PropsUtil.get("liferay.home.dir.name");
@@ -116,17 +110,15 @@ definition {
 	@description = "LPS-154683: Upgrade Report does not show errors and warning"
 	@priority = "4"
 	test UpgradeReportWithoutErrorsUpgradeTool {
-		task("Set the properties needed to run the upgrade"){
-            property test.name.skip.portal.instance = "UpgradeReports#UpgradeReportWithoutErrors";
-			property upgrade.report.enabled = "true";
-			property data.archive.type = "data-archive-portal";
-			property database.types = "mariadb,mysql,postgresql";
-			property portal.upgrades = "true";
-			property portal.version = "7.4.0";
-			property test.assert.warning.exceptions = "true";
+		property test.name.skip.portal.instance = "UpgradeReports#UpgradeReportWithoutErrors";
+		property upgrade.report.enabled = "true";
+		property data.archive.type = "data-archive-portal";
+		property database.types = "mariadb,mysql,postgresql";
+		property portal.upgrades = "true";
+		property portal.version = "7.4.0";
+		property test.assert.warning.exceptions = "true";
 
-			Upgrade.viewUpgrade();
-        }
+		Upgrade.viewUpgrade();
 
         task("Look for the upgrade report"){
 		    var tempDir = PropsUtil.get("liferay.home.dir.name");
@@ -144,17 +136,15 @@ definition {
     @description = "LPS-154683: Upgrade Report shows errors"
 	@priority = "4"
 	test UpgradeReportWithErrorsUpgradeTool {
-		task("Set the properties needed to run the upgrade"){
-            property test.name.skip.portal.instance = "UpgradeReports#UpgradeReportWithErrorsUpgradeTool";
-            property upgrade.report.enabled = "true";
-			property portal.upgrades = "true";
-            property data.archive.type = "data-archive-portal";
-		    property database.types = "mariadb,mysql,postgresql";
-		    property portal.version = "6.0.12";
-			property test.assert.warning.exceptions = "true";
+		property test.name.skip.portal.instance = "UpgradeReports#UpgradeReportWithErrorsUpgradeTool";
+		property upgrade.report.enabled = "true";
+		property portal.upgrades = "true";
+		property data.archive.type = "data-archive-portal";
+		property database.types = "mariadb,mysql,postgresql";
+		property portal.version = "6.0.12";
+		property test.assert.warning.exceptions = "true";
 
-			Upgrade.viewUpgrade();
-        }
+		Upgrade.viewUpgrade();
 
         task("Look for the upgrade report"){
 		    var tempDir = PropsUtil.get("liferay.home.dir.name");
@@ -174,15 +164,13 @@ definition {
 	@priority = "4"
     @ignore = "true"
 	test UpgradeReportCheckVersionAndNumberOfTablesUpgradeTool {
-		task("Set the properties needed to run the upgrade"){
-            property test.name.skip.portal.instance = "UpgradeReports#UpgradeReportCheckVersionAndNumberOfTablesUpgradeTool";
-			property upgrade.report.enabled = "true";
-			property data.archive.type = "data-archive-portal";
-			property database.types = "mariadb,mysql,postgresql";
-			property portal.upgrades = "true";
-			property portal.version = "7.4.0";
-			property test.assert.warning.exceptions = "true";
-        }
+		property test.name.skip.portal.instance = "UpgradeReports#UpgradeReportCheckVersionAndNumberOfTablesUpgradeTool";
+		property upgrade.report.enabled = "true";
+		property data.archive.type = "data-archive-portal";
+		property database.types = "mariadb,mysql,postgresql";
+		property portal.upgrades = "true";
+		property portal.version = "7.4.0";
+		property test.assert.warning.exceptions = "true";
 
         task("Read the version in database"){
 			var databaseVersion = Upgrade.getDatabaseVersion();
