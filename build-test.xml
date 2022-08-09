@@ -5300,8 +5300,6 @@ upgrade.report.enabled=true</echo>
 												db2 select schemaname from syscat.schemata
 
 												db2 set current schema = ROOT
-
-												db2set
 											]]>
 										</echo>
 
