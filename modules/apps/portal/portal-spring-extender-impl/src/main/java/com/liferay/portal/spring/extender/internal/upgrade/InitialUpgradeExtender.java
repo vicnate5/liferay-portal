@@ -300,20 +300,6 @@ public class InitialUpgradeExtender
 							exception);
 					}
 				}
-
-				if (indexesSQL != null) {
-					try {
-						_db.runSQLTemplateString(connection, indexesSQL, true);
-					}
-					catch (Exception exception) {
-						throw new UpgradeException(
-							StringBundler.concat(
-								"Bundle ", _bundle,
-								" has invalid content in indexes.sql:\n",
-								indexesSQL),
-							exception);
-					}
-				}
 			}
 			catch (SQLException sqlException) {
 				throw new UpgradeException(sqlException);
