@@ -8764,13 +8764,17 @@ org.apache.catalina.tribes.level = FINE]]>
 					/>
 				</delete>
 
+				<copy
+					todir="${todir}"
+				>
+					<fileset
+						dir="lib/development"
+						includes="${jdbc.db2.driver}"
+					/>
+				</copy>
+
 				<for list="${jdbc.db2.driver}" param="jdbc.driver">
 					<sequential>
-						<mirrors-get
-							dest="${todir}"
-							src="${test.jdbc.drivers.url}/db2/11.1.3/@{jdbc.driver}"
-						/>
-
 						<tstamp>
 							<format pattern="yyyyMMddkkmmssSSS" property="tstamp.value" />
 						</tstamp>
