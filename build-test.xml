@@ -14979,6 +14979,13 @@ url=${short.hostname}:8080</echo>
 	</target>
 
 	<target name="start-docker-database-postgresql">
+		<get-database-property property.name="database.host" />
+
+		<antcall target="stop-docker-database">
+			<param name="database.postgresql.host" value="${database.host}_postgresql" />
+			<param name="database.type" value="postgresql" />
+		</antcall>
+
 		<if>
 			<not>
 				<isset property="database.version" />
@@ -14988,16 +14995,22 @@ url=${short.hostname}:8080</echo>
 			</then>
 		</if>
 
-		<get-database-property property.name="database.host" />
+		<var name="database.postgresql.docker.run.options" value="--env=POSTGRES_USER=root --expose=5432 -p 5432:5432" />
 
-		<antcall target="stop-docker-database">
-			<param name="database.postgresql.host" value="${database.host}_postgresql" />
-			<param name="database.type" value="postgresql" />
-		</antcall>
+		<if>
+			<or>
+				<equals arg1="${database.version}" arg2="13.4" />
+				<equals arg1="${database.version}" arg2="14.4" />
+			</or>
+
+			<then>
+				<var name="database.postgresql.docker.run.options" value="${database.postgresql.docker.run.options} --env=POSTGRES_HOST_AUTH_METHOD=trust" />
+			</then>
+		</if>
 
 		<antcall inheritAll="false" target="start-docker-database">
 			<param name="database.postgresql.docker.image" value="postgres:${database.version}" />
-			<param name="database.postgresql.docker.run.options" value="--env=POSTGRES_USER=root --expose=5432 -p 5432:5432 --env=POSTGRES_HOST_AUTH_METHOD=trust" />
+			<param name="database.postgresql.docker.run.options" value="${database.postgresql.docker.run.options}" />
 			<param name="database.postgresql.host" value="${database.host}_postgresql" />
 			<param name="database.postgresql.name" value="PostgreSQL" />
 			<param name="database.postgresql.version" value="${database.version}" />
@@ -15129,12 +15142,7 @@ url=${short.hostname}:8080</echo>
 		<local name="osgi.configs.dir" />
 
 		<condition else="${app.server.parent.dir}-${install.patch.cluster.node.index}/osgi/configs" property="osgi.configs.dir" value="${app.server.parent.dir}/osgi/configs">
-			<or>
-				<not>
-					<isset property="install.patch.cluster.node.index" />
-				</not>
-				<equals arg1="${install.patch.cluster.node.index}" arg2="0" />
-			</or>
+			s
 		</condition>
 
 		<get-testcase-property property.name="osgi.module.configurations" />
