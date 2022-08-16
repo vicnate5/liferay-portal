@@ -284,6 +284,10 @@
 			<contains>No binary licenses found</contains>
 			<matches></matches>
 		</ignore-error>
+		<ignore-error description="LRQA-76256">
+			<contains>Unable to handle received message {destinationName=liferay/cache_replication, response=null, responseDestinationName=null, responseId=null, payload=</contains>
+			<matches></matches>
+		</ignore-error>
 		<ignore-error description="WCM-202">
 			<contains>No score point assigners available</contains>
 			<matches></matches>
