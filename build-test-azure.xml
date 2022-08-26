@@ -3,6 +3,26 @@
 <project basedir="." name="portal-test-azure" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
+	<macrodef name="delete-azure-containers">
+		<sequential>
+			<local name="container.list" />
+
+			<exec executable="az" outputproperty="container.list">
+				<arg line="storage container list --account-name blobstoragesmoketest --prefix lfr-qa-poshi-test --query [*].[name] --output tsv" />
+			</exec>
+
+			<for list="${container.list}" param="container.name">
+				<sequential>
+					<echo>Deleting ${container.name}</echo>
+
+					<exec executable="az" outputproperty="delete.container">
+						<arg line="storage container delete --account-name blobstoragesmoketest --name ${container.name}" />
+					</exec>
+				</sequential>
+			</for>
+		</sequential>
+	</macrodef>
+
 	<target name="assert-document-in-container">
 		<local name="container.blobs" />
 
@@ -33,7 +53,9 @@
 		<echo>${container.blobs}</echo>
 
 		<if>
-			<equals arg1="${container.blobs}" arg2="" />
+			<not>
+				<isset property="${container.blobs}" />
+			</not>
 			<then>
 				<echo>The container is empty.</echo>
 			</then>
@@ -55,8 +77,10 @@
 
 	<target name="delete-azure-container">
 		<exec executable="az">
-			<arg line="storage container delete --account-name blobstoragesmoketest --name lfr-qa-poshi-test-${azure.container.id}" />
+			<arg line="az storage container delete --account-name blobstoragesmoketest --name lfr-qa-poshi-test-${azure.container.id}" />
 		</exec>
+
+		<delete-azure-containers />
 	</target>
 
 	<target name="login-azure-cli">
