@@ -100,6 +100,14 @@ definition {
 		AntCommand(
 			locator1 = "build-test.xml",
 			value1 = "wait-for-server-shutdown -Dapp.server.port.number=8080");
+
+		var appServerType = PropsUtil.get("app.server.type");
+
+		if (("${appServerType}" == "weblogic") || ("${appServerType}" == "websphere")) {
+			AntCommand(
+				locator1 = "build-test.xml",
+				value1 = "wait-for-weblogic-websphere-admin-server-shutdown");
+		}
 	}
 
 	@priority = "3"
