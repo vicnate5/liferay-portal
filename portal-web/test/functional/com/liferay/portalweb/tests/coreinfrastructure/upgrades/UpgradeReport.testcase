@@ -7,7 +7,7 @@ definition {
 	property portal.release = "true";
 	property portal.upstream = "true";
 	property portal.version = "7.4.13";
-	property testray.main.component.name = "Upgrades Core";
+	property testray.main.component.name = "Database Upgrade Framework";
 	property upgrade.reports.enabled = "true";
 
 	setUp {
