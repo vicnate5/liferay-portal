@@ -10,31 +10,13 @@ definition {
 	property testray.main.component.name = "Database Upgrade Framework";
 	property upgrade.reports.enabled = "true";
 
-	setUp {
-		TestCase.setUpPortalInstance();
-
-		User.firstLoginPG();
-	}
-
-	tearDown {
-		var testPortalInstance = PropsUtil.get("test.portal.instance");
-
-		if ("${testPortalInstance}" == "true") {
-			PortalInstances.tearDownCP();
-		}
-
-		var liferayHome = PropsUtil.get("liferay.home.dir.name");
-
-		var reportFile = FileUtil.exists("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
-
-		if ("${reportFile}" == "true") {
-			FileUtil.delete("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
-		}
-	}
-
 	@description = "LPS-154683: Upgrade Report is not created when property is not set to true"
 	@priority = "4"
 	test UpgradeFileDoesNotExistUpgradeTool {
+		property skip.start.app.server = "true";
+		property test.name.skip.portal.instance = "UpgradeReport#UpgradeFileDoesNotExistUpgradeTool";
+		property testcase.url = "http://www.example.com";
+
 		property upgrade.reports.enabled = "false";
 
 		task ("Look for the upgrade report") {
@@ -53,6 +35,10 @@ definition {
 	@description = "LPS-154683: Upgrade Report is created when property is set to true"
 	@priority = "4"
 	test UpgradeFileExistUpgradeTool {
+		property skip.start.app.server = "true";
+		property test.name.skip.portal.instance = "UpgradeReport#UpgradeFileExistUpgradeTool";
+		property testcase.url = "http://www.example.com";
+
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
@@ -71,6 +57,10 @@ definition {
 	@priority = "4"
 	@refactorneeded
 	test UpgradeReportCheckNumberOfTablesUpgradeTool {
+		property skip.start.app.server = "true";
+		property test.name.skip.portal.instance = "UpgradeReport#UpgradeReportCheckNumberOfTablesUpgradeTool";
+		property testcase.url = "http://www.example.com";
+
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
@@ -91,6 +81,10 @@ definition {
 	@description = "LPS-154683: Upgrade Report Check version"
 	@priority = "4"
 	test UpgradeReportCheckVersionUpgradeTool {
+		property skip.start.app.server = "true";
+		property test.name.skip.portal.instance = "UpgradeReport#UpgradeReportCheckVersionUpgradeTool";
+		property testcase.url = "http://www.example.com";
+
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
@@ -113,6 +107,10 @@ definition {
 	@priority = "4"
 	@refactorneeded
 	test UpgradeReportShowWarningsUpgradeTool {
+		property skip.start.app.server = "true";
+		property test.name.skip.portal.instance = "UpgradeReport#UpgradeReportShowWarningsUpgradeTool";
+		property testcase.url = "http://www.example.com";
+
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
@@ -129,6 +127,10 @@ definition {
 	@description = "LPS-154683: Upgrade Report does not show errors and warning"
 	@priority = "4"
 	test UpgradeReportWarningsUpgradeTool {
+		property skip.start.app.server = "true";
+		property test.name.skip.portal.instance = "UpgradeReport#UpgradeReportWarningsUpgradeTool";
+		property testcase.url = "http://www.example.com";
+
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
@@ -151,6 +153,10 @@ definition {
 	@priority = "4"
 	@refactorneeded
 	test UpgradeReportWithErrorsUpgradeTool {
+		property skip.start.app.server = "true";
+		property test.name.skip.portal.instance = "UpgradeReport#UpgradeReportWithErrorsUpgradeTool";
+		property testcase.url = "http://www.example.com";
+
 		property portal.version = "6.0.12";
 
 		task ("Look for the upgrade report") {
@@ -171,6 +177,10 @@ definition {
 	@description = "LPS-154683: Upgrade Report does not show errors and warning"
 	@priority = "4"
 	test UpgradeReportWithoutErrorsUpgradeTool {
+		property skip.start.app.server = "true";
+		property test.name.skip.portal.instance = "UpgradeReport#UpgradeFileDoesNotExistUpgradeTool";
+		property testcase.url = "http://www.example.com";
+
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
