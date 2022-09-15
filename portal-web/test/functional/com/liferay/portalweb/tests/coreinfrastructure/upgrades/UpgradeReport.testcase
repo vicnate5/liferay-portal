@@ -132,6 +132,8 @@ definition {
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
+			echo("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
+
 			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
 
 			echo("${fileContent}");

@@ -15539,6 +15539,8 @@ url=${short.hostname}:8080</echo>
 
 		<get-java-jdk-home type="${java.jdk.bundle.type}" version="${java.jdk.bundle.version}" />
 
+		<print-file file.name="${liferay.home}/tools/portal-tools-db-upgrade-client/portal-upgrade-ext.properties" />
+
 		<trycatch property="upgrade.error">
 			<try>
 				<if>
@@ -15576,6 +15578,8 @@ url=${short.hostname}:8080</echo>
 				<fail message="${upgrade.error}" />
 			</catch>
 		</trycatch>
+
+		<print-file file.name="${liferay.home}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info" />
 	</target>
 
 	<target name="validate-db-partition-schemas">
