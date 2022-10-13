@@ -175,7 +175,7 @@ public class MarketplaceStorePortlet extends MVCPortlet {
 
 			downloadApp(actionRequest, appPackageId, unlicensed, file);
 
-			App app = _appService.updateApp(file);
+			App app = appService.updateApp(file);
 
 			JSONObject jsonObject = _getAppJSONObject(app.getRemoteAppId());
 
@@ -252,7 +252,7 @@ public class MarketplaceStorePortlet extends MVCPortlet {
 			"getPrepackagedApps");
 
 		Map<String, String> prepackagedApps =
-			_appLocalService.getPrepackagedApps();
+			appLocalService.getPrepackagedApps();
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
@@ -280,7 +280,7 @@ public class MarketplaceStorePortlet extends MVCPortlet {
 
 		long remoteAppId = ParamUtil.getLong(actionRequest, "appId");
 
-		_appService.installApp(remoteAppId);
+		appService.installApp(remoteAppId);
 
 		JSONObject jsonObject = _getAppJSONObject(remoteAppId);
 
@@ -397,7 +397,7 @@ public class MarketplaceStorePortlet extends MVCPortlet {
 
 		long remoteAppId = ParamUtil.getLong(actionRequest, "appId");
 
-		_appService.uninstallApp(remoteAppId);
+		appService.uninstallApp(remoteAppId);
 
 		JSONObject jsonObject = _getAppJSONObject(remoteAppId);
 
@@ -427,7 +427,7 @@ public class MarketplaceStorePortlet extends MVCPortlet {
 
 			downloadApp(actionRequest, appPackageId, unlicensed, file);
 
-			App app = _appService.updateApp(file);
+			App app = appService.updateApp(file);
 
 			if (Validator.isNull(orderUuid) &&
 				Validator.isNotNull(productEntryName)) {
@@ -440,7 +440,7 @@ public class MarketplaceStorePortlet extends MVCPortlet {
 					orderUuid, productEntryName);
 			}
 
-			_appService.installApp(app.getRemoteAppId());
+			appService.installApp(app.getRemoteAppId());
 
 			JSONObject jsonObject = _getAppJSONObject(app.getRemoteAppId());
 
@@ -512,9 +512,9 @@ public class MarketplaceStorePortlet extends MVCPortlet {
 
 						downloadApp(actionRequest, appPackageId, false, file);
 
-						App app = _appService.updateApp(file);
+						App app = appService.updateApp(file);
 
-						_appService.installApp(app.getRemoteAppId());
+						appService.installApp(app.getRemoteAppId());
 
 						jsonArray.put(_getAppJSONObject(app));
 					}
@@ -670,16 +670,6 @@ public class MarketplaceStorePortlet extends MVCPortlet {
 			"supportsHotDeploy", new String[] {Boolean.TRUE.toString()});
 	}
 
-	@Reference(unbind = "-")
-	protected void setAppLocalService(AppLocalService appLocalService) {
-		_appLocalService = appLocalService;
-	}
-
-	@Reference(unbind = "-")
-	protected void setAppService(AppService appService) {
-		_appService = appService;
-	}
-
 	protected void setBaseRequestParameters(
 		PortletRequest portletRequest, OAuthRequest oAuthRequest) {
 
@@ -698,11 +688,13 @@ public class MarketplaceStorePortlet extends MVCPortlet {
 		addOAuthParameter(oAuthRequest, "p_p_id", getServerPortletId());
 	}
 
-	@Reference(unbind = "-")
-	protected void setOAuthManager(OAuthManager oAuthManager) {
-		this.oAuthManager = oAuthManager;
-	}
+	@Reference
+	protected AppLocalService appLocalService;
 
+	@Reference
+	protected AppService appService;
+
+	@Reference
 	protected OAuthManager oAuthManager;
 
 	@Reference
@@ -737,7 +729,7 @@ public class MarketplaceStorePortlet extends MVCPortlet {
 	}
 
 	private JSONObject _getAppJSONObject(long remoteAppId) throws Exception {
-		App app = _appLocalService.fetchRemoteApp(remoteAppId);
+		App app = appLocalService.fetchRemoteApp(remoteAppId);
 
 		if (app != null) {
 			return _getAppJSONObject(app);
@@ -768,7 +760,7 @@ public class MarketplaceStorePortlet extends MVCPortlet {
 	private JSONArray _getInstalledAppsJSONArray() throws Exception {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		List<App> apps = _appLocalService.getInstalledApps();
+		List<App> apps = appLocalService.getInstalledApps();
 
 		for (App app : apps) {
 			if (app.getRemoteAppId() > 0) {
@@ -931,8 +923,6 @@ public class MarketplaceStorePortlet extends MVCPortlet {
 	private static final Log _log = LogFactoryUtil.getLog(
 		MarketplaceStorePortlet.class);
 
-	private AppLocalService _appLocalService;
-	private AppService _appService;
 	private final ReentrantLock _reentrantLock = new ReentrantLock();
 
 }
