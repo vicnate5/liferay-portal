@@ -3289,6 +3289,26 @@ log.sanitizer.enabled=false</echo>
 		</run-batch-test>
 	</target>
 
+	<target name="debug-commerce-bnd-jdk8">
+		<run-batch-test>
+			<test-action>
+				<for keepgoing="true" list="1,2,3,4,5" param="count">
+					<sequential>
+						<echo> Interation @{count} </echo>
+
+						<antcall target="debug-bnd">
+							<param name="module.dir" value="apps/commerce/commerce-service" />
+						</antcall>
+					</sequential>
+				</for>
+			</test-action>
+
+			<test-set-up>
+				<setup-test-environment />
+			</test-set-up>
+		</run-batch-test>
+	</target>
+
 	<target name="dist-jdk7">
 		<parallel threadCount="1" timeout="7200000">
 			<prepare-test-build-dist
