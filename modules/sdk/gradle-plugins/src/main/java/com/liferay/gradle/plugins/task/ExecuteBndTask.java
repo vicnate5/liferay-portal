@@ -40,9 +40,11 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.jar.Manifest;
 
+import org.gradle.api.Action;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.Project;
+import org.gradle.api.file.CopySpec;
 import org.gradle.api.file.FileCollection;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.tasks.CacheableTask;
@@ -88,7 +90,7 @@ public class ExecuteBndTask extends DefaultTask {
 			builder.setJar(new Jar("dot"));
 			builder.setProperties(properties);
 
-			FileCollection buildDirs = project.files(
+			final FileCollection buildDirs = project.files(
 				getClasspath(), getResourceDirs());
 
 			builder.setClasspath(_toArray(buildDirs));
@@ -96,6 +98,24 @@ public class ExecuteBndTask extends DefaultTask {
 
 			if (logger.isDebugEnabled() ||
 				Boolean.getBoolean("build.bnd.print.builder.classpath")) {
+
+				final File destinationDir = new File(
+					getTemporaryDir(), "classpath");
+
+				project.copy(
+					new Action<CopySpec>() {
+
+						@Override
+						public void execute(CopySpec copySpec) {
+							copySpec.from(buildDirs);
+							copySpec.into(destinationDir);
+						}
+
+					});
+
+				logger.lifecycle(
+					"BND Copy Classpath {}: {}", project.getName(),
+					destinationDir);
 
 				logger.lifecycle(
 					"BND Builder Classpath {}: {}", project.getName(),

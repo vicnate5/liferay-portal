@@ -833,9 +833,10 @@ public class LiferayOSGiPlugin implements Plugin<Project> {
 									SourceSetOutput sourceSetOutput =
 										javaMainSourceSet.getOutput();
 
-									FileCollection buildDirs = project.files(
-										sourceDirectorySet.getOutputDir(),
-										sourceSetOutput.getResourcesDir());
+									final FileCollection buildDirs =
+										project.files(
+											sourceDirectorySet.getOutputDir(),
+											sourceSetOutput.getResourcesDir());
 
 									Set<File> buildDirsFiles =
 										buildDirs.getFiles();
@@ -851,6 +852,28 @@ public class LiferayOSGiPlugin implements Plugin<Project> {
 										Boolean.getBoolean(
 											"build.bnd.print.builder." +
 												"classpath")) {
+
+										final File destinationDir = new File(
+											task.getTemporaryDir(),
+											"classpath");
+
+										project.copy(
+											new Action<CopySpec>() {
+
+												@Override
+												public void execute(
+													CopySpec copySpec) {
+
+													copySpec.from(buildDirs);
+													copySpec.into(
+														destinationDir);
+												}
+
+											});
+
+										logger.lifecycle(
+											"BND Copy Classpath {}: {}",
+											project.getName(), destinationDir);
 
 										logger.lifecycle(
 											"BND Builder Classpath {}: {}",
@@ -1490,8 +1513,27 @@ public class LiferayOSGiPlugin implements Plugin<Project> {
 									Boolean.getBoolean(
 										"build.bnd.print.builder.classpath")) {
 
-									FileCollection builderClasspath =
+									final FileCollection builderClasspath =
 										bundleTaskConvention.getClasspath();
+									final File destinationDir = new File(
+										task.getTemporaryDir(), "classpath");
+
+									project.copy(
+										new Action<CopySpec>() {
+
+											@Override
+											public void execute(
+												CopySpec copySpec) {
+
+												copySpec.from(builderClasspath);
+												copySpec.into(destinationDir);
+											}
+
+										});
+
+									logger.lifecycle(
+										"BND Copy Classpath {}: {}",
+										project.getName(), destinationDir);
 
 									logger.lifecycle(
 										"BND Builder Classpath {}: {}",
