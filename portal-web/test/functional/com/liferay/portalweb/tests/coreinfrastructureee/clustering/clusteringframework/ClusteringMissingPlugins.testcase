@@ -41,6 +41,10 @@ definition {
 			exceptionText = "Could not resolve module: com.liferay.portal.cluster.multiple.sample.web",
 			nodePort = "8080");
 
+		Clustering.viewTextPresentOnSpecificNode(
+			expectedText = "STARTED com.liferay.portal.cluster.multiple.sample.web",
+			nodePort = "8080");
+
 		Clustering.runGroovyScript(
 			nodePort = "8080",
 			scriptFile = "groovy-script-portal-cache-put-modules.groovy");
@@ -54,12 +58,9 @@ definition {
 			nodePort = "9080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "9080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
 
 		Clustering.runGroovyScript(
 			nodePort = "9080",
@@ -88,12 +89,9 @@ definition {
 			nodePort = "9080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "9080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
 
 		Clustering.runGroovyScript(
 			nodePort = "8080",
@@ -119,20 +117,14 @@ definition {
 			nodePort = "8080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "This node is master node",
 			nodePort = "8080",
 			scriptFile = "groovy-script-master-slave.groovy");
 
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "This node is master node");
-
 		Clustering.runGroovyScript(
+			expectedOutput = "This node is slave node",
 			nodePort = "9080",
 			scriptFile = "groovy-script-master-slave.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "This node is slave node");
 
 		Clustering.deployClusteringModule(nodePort = "9080");
 
@@ -169,12 +161,9 @@ definition {
 		Clustering.shutdownSpecificServer(nodePort = "8080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "This node is master node",
 			nodePort = "9080",
 			scriptFile = "groovy-script-master-slave.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "This node is master node");
 
 		// Pausing 10 seconds due to LRQA-75909
 
@@ -210,12 +199,9 @@ definition {
 		Clustering.shutdownSpecificServer(nodePort = "8080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "This node is master node",
 			nodePort = "9080",
 			scriptFile = "groovy-script-master-slave.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "This node is master node");
 
 		// Pausing 10 seconds due to LRQA-75909
 

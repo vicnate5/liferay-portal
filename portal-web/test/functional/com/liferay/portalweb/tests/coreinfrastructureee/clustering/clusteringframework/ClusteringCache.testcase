@@ -150,20 +150,14 @@ definition {
 		Clustering.viewClusterStatusInConsole();
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "8080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
 
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
-
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "9080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
 
 		Clustering.runGroovyScript(
 			nodePort = "8080",
@@ -174,20 +168,14 @@ definition {
 			nodePort = "8080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.key=test.value",
 			nodePort = "8080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
 
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.key=test.value");
-
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "9080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
 
 		Clustering.runGroovyScript(
 			nodePort = "9080",
@@ -198,20 +186,14 @@ definition {
 			nodePort = "9080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.key=test.value.update",
 			nodePort = "9080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
 
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.key=test.value.update");
-
 		Clustering.runGroovyScript(
+			expectedOutput = "test.key=test.value",
 			nodePort = "8080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.key=test.value");
 
 		Clustering.runGroovyScript(
 			nodePort = "8080",
@@ -222,24 +204,18 @@ definition {
 			nodePort = "8080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "8080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
 
 		Clustering.viewTextPresentOnSpecificNode(
 			expectedText = "Removed test.key from test.cache",
 			nodePort = "9080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "9080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
 	}
 
 	@priority = "4"
@@ -250,20 +226,14 @@ definition {
 		Clustering.viewClusterStatusInConsole();
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "8080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
 
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
-
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "9080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
 
 		Clustering.runGroovyScript(
 			nodePort = "8080",
@@ -274,24 +244,18 @@ definition {
 			nodePort = "8080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.key=test.value",
 			nodePort = "8080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.key=test.value");
 
 		Clustering.viewTextPresentOnSpecificNode(
 			expectedText = "Put test.key into test.cache",
 			nodePort = "9080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.key=test.value",
 			nodePort = "9080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.key=test.value");
 
 		Clustering.runGroovyScript(
 			nodePort = "8080",
@@ -302,24 +266,18 @@ definition {
 			nodePort = "8080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "8080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
 
 		Clustering.viewTextPresentOnSpecificNode(
 			expectedText = "Removed test.key from test.cache",
 			nodePort = "9080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "9080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
 	}
 
 	@priority = "4"
@@ -330,20 +288,14 @@ definition {
 		Clustering.viewClusterStatusInConsole();
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "8080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
 
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
-
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "9080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
 
 		Clustering.runGroovyScript(
 			nodePort = "8080",
@@ -354,24 +306,18 @@ definition {
 			nodePort = "8080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.key=test.value",
 			nodePort = "8080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.key=test.value");
 
 		Clustering.viewTextPresentOnSpecificNode(
 			expectedText = "Removed test.key from test.cache",
 			nodePort = "9080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "9080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
 
 		Clustering.runGroovyScript(
 			nodePort = "8080",
@@ -382,24 +328,18 @@ definition {
 			nodePort = "8080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "8080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
 
 		Clustering.viewTextPresentOnSpecificNode(
 			expectedText = "Cleared test.cache",
 			nodePort = "9080");
 
 		Clustering.runGroovyScript(
+			expectedOutput = "test.cache is empty",
 			nodePort = "9080",
 			scriptFile = "groovy-script-portal-cache-get.groovy");
-
-		AssertTextEquals(
-			locator1 = "ServerAdministrationScript#OUTPUT_FIELD",
-			value1 = "test.cache is empty");
 	}
 
 }
