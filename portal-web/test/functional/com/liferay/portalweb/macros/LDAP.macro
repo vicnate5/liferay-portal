@@ -59,8 +59,6 @@ definition {
 		Clustering.runGroovyScript(
 			nodePort = "${nodePort}",
 			scriptFile = "groovy-script-invoke-ldap-user-import-on-master.groovy");
-
-		AssertElementPresent(locator1 = "Message#SUCCESS");
 	}
 
 	@description = "Install openldap util to be able to use ldap commands on command line"
