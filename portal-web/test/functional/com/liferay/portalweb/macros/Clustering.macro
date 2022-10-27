@@ -174,25 +174,54 @@ definition {
 	}
 
 	macro runGroovyScript {
-		Navigator.openSpecificURL(url = "http://localhost:${nodePort}");
+		if ("${executeScriptUI}" == "true") {
+			Navigator.openSpecificURL(url = "http://localhost:${nodePort}");
 
-		if (IsElementPresent(locator1 = "UserBar#USER_SIGN_IN")) {
-			User.firstLoginUI(
-				password = "test",
-				specificURL = "http://localhost:${nodePort}",
-				userEmailAddress = "test@liferay.com");
+			if (IsElementPresent(locator1 = "UserBar#USER_SIGN_IN")) {
+				User.firstLoginUI(
+					password = "test",
+					specificURL = "http://localhost:${nodePort}",
+					userEmailAddress = "test@liferay.com");
+			}
+
+			ApplicationsMenu.gotoPortlet(
+				category = "System",
+				panel = "Control Panel",
+				portlet = "Server Administration");
+
+			var script = TestCase.getFileContent(fileName = "${scriptFile}");
+
+			ServerAdministration.executeScript(
+				language = "Groovy",
+				script = "${script}");
 		}
+		else {
+			var leadingPortNumber = StringUtil.replace("${nodePort}", "080", "");
 
-		ApplicationsMenu.gotoPortlet(
-			category = "System",
-			panel = "Control Panel",
-			portlet = "Server Administration");
+			var bundleIndex = ${leadingPortNumber} - 8;
+			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
-		var script = TestCase.getFileContent(fileName = "${scriptFile}");
+			if ("${bundleIndex}" != "0") {
+				var liferayHome = "${liferayHome}-${bundleIndex}";
+			}
 
-		ServerAdministration.executeScript(
-			language = "Groovy",
-			script = "${script}");
+			var scriptFilePath = TestCase.getDependenciesDirPath(fileName = "${scriptFile}");
+
+			AntCommand(
+				locator1 = "build-test.xml",
+				value1 = "execute-groovy-script-from-gogo-shell -Dbundle.index=${bundleIndex} -Dscript.file.path=${scriptFilePath}");
+
+			if (isSet(expectedOutput)) {
+				var outputContent = FileUtil.read("${liferayHome}/gogo-output.txt");
+
+				if (contains("${outputContent}", "${expectedOutput}")) {
+					echo("${expectedOutput} exists!");
+				}
+				else {
+					fail("${expectedOutput} does not exist!");
+				}
+			}
+		}
 	}
 
 	@description = "This will shutdown the server at a specific bundle at ${base_branch}-bundles-${bundle_index}\tomcat."
