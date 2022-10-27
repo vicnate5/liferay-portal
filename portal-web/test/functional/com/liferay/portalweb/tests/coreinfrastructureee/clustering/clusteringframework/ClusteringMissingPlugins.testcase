@@ -84,8 +84,16 @@ definition {
 
 		Clustering.deployClusteringModule(nodePort = "9080");
 
+		// This pause is waiting for the Cluster module to start on 9080 so that the groovy script can be executed on this node in the following steps. Please see LRQA-66486 for more details.
+
+		Pause(locator1 = "15000");
+
 		Clustering.viewTextNotPresentOnSpecificNode(
 			exceptionText = "Could not resolve module: com.liferay.portal.cluster.multiple.sample.web",
+			nodePort = "9080");
+
+		Clustering.viewTextPresentOnSpecificNode(
+			expectedText = "STARTED com.liferay.portal.cluster.multiple.sample.web",
 			nodePort = "9080");
 
 		Clustering.runGroovyScript(
