@@ -15480,24 +15480,9 @@ url=${short.hostname}:8080</echo>
 	</target>
 
 	<target name="start-docker-database-oracle">
-		<if>
-			<or>
-				<not>
-					<isset property="database.version" />
-				</not>
-				<equals arg1="${database.version}" arg2="19.3" />
-			</or>
-			<then>
-				<var name="database.version" value="19.3.0.0.0" />
-			</then>
-		</if>
+		<var name="database.version" value="19.3.0.0.0" />
 
-		<if>
-			<equals arg1="${database.version}" arg2="19.3.0.0.0" />
-			<then>
-				<var name="database.oracle.docker.image" value="liferay/liferay-ci-environment:oracle-19.3.0.0.0_1.0.1" />
-			</then>
-		</if>
+		<var name="database.oracle.docker.image" value="liferay/liferay-ci-environment:oracle-19.3.0.0.0_1.0.1" />
 
 		<var name="database.oracle.docker.run.options" value="-p 1522:1521" />
 
