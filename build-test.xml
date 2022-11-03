@@ -8051,7 +8051,17 @@ war.path=${app.server.portal.dir}/</echo>
 					</or>
 				</and>
 				<then>
-					<wait-for-license-activation />
+					<if>
+						<not>
+							<and>
+								<equals arg1="${env.CI_TEST_SUITE}" arg2="portal-release" />
+								<contains string="${test.batch.name}" substring="empty-temp-dir" />
+							</and>
+						</not>
+						<then>
+							<wait-for-license-activation />
+						</then>
+					</if>
 				</then>
 			</if>
 		</sequential>
