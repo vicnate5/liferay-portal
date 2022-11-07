@@ -56,7 +56,7 @@
 		<local name="container.blobs" />
 
 		<exec executable="az" outputproperty="container.blobs">
-			<arg line="storage blob list --container-name lfr-qa-poshi-test-${azure.container.id} --account-name blobstoragesmoketest --prefix ${companyId}/${groupId} --output table" />
+			<arg line="storage blob list --container-name lfr-qa-poshi-test-${azure.container.id} --account-name blobstoragesmoketest --prefix ${companyId}/${groupId} --output table --auth-mode login" />
 		</exec>
 
 		<echo>${container.blobs}</echo>
@@ -76,7 +76,7 @@
 		<local name="container.blobs" />
 
 		<exec executable="az" outputproperty="container.blobs">
-			<arg line="storage blob list --container-name lfr-qa-poshi-test-${azure.container.id} --account-name blobstoragesmoketest --prefix ${companyId}/${groupId} --output table" />
+			<arg line="storage blob list --container-name lfr-qa-poshi-test-${azure.container.id} --account-name blobstoragesmoketest --prefix ${companyId}/${groupId} --output table --auth-mode login" />
 		</exec>
 
 		<echo>${container.blobs}</echo>
@@ -98,7 +98,7 @@
 		<local name="container.create.output" />
 
 		<exec executable="az" outputproperty="container.create.output">
-			<arg line="storage container create -n lfr-qa-poshi-test-${azure.container.id} --public-access container --account-name blobstoragesmoketest" />
+			<arg line="storage container create -n lfr-qa-poshi-test-${azure.container.id} --public-access container --account-name blobstoragesmoketest --auth-mode login" />
 		</exec>
 
 		<echo>${container.create.output}</echo>
@@ -106,7 +106,7 @@
 
 	<target name="delete-azure-container">
 		<exec executable="az">
-			<arg line="storage container delete --account-name blobstoragesmoketest --name lfr-qa-poshi-test-${azure.container.id}" />
+			<arg line="storage container delete --account-name blobstoragesmoketest --name lfr-qa-poshi-test-${azure.container.id} --auth-mode login" />
 		</exec>
 
 		<delete-azure-containers />
