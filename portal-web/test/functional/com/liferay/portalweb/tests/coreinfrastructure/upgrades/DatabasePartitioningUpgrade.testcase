@@ -11,22 +11,33 @@ definition {
 	property test.run.environment = "EE";
 	property testray.main.component.name = "Database Partitioning";
 
-	setUp {
-		User.loginPG(
-			nodePort = "8080",
-			password = "test",
-			userEmailAddress = "test@liferay.com");
-
-		SearchAdministration.executeReindex();
-	}
-
 	@priority = "5"
 	test CanUpgradePartitionedDatabase7413U33 {
 		property data.archive.type = "data-archive-portal-partition";
 		property portal.upgrades = "true";
 		property portal.version = "7.4.13.u33";
 
+		User.loginPG(
+			nodePort = "8080",
+			password = "test",
+			userEmailAddress = "test@liferay.com");
+
+		SearchAdministration.executeReindex();
+
 		Upgrade.viewUpgradeDBPartition();
+	}
+
+	@priority = "5"
+	test CanUpgradeLargePartitionedDatabase {
+		property custom.properties = "upgrade.database.auto.run=true";
+		property data.archive.type = "data-archive-portal-partition-large";
+		property portal.version = "7.4.13.u33";
+		property skip.upgrade-legacy-database = "true";
+
+		User.firstLoginUI(
+			password = "1234",
+			specificURL = "http://www.able.com:8080",
+			userEmailAddress = "test@www.able.com");
 	}
 
 }
