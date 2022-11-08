@@ -7190,6 +7190,12 @@ ${docker.start.error}</fail>
 				</else>
 			</if>
 
+			<echo>
+				VICTOR
+				VICTOR ${database.docker.database.options.new}
+				VICTOR
+			</echo>
+
 			<start-docker-container image="${database.docker.image}" name="${database.host}" options="${database.docker.database.options.new}">\
 				${database.docker.run.options} \
 			</start-docker-container>
