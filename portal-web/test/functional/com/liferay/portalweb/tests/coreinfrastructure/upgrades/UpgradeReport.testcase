@@ -52,6 +52,7 @@ definition {
 	@priority = "3"
 	test DatabaseLogged {
 		property skip.start.app.server = "true";
+		property database.types = "db2,mariadb,mysql,oracle,postgresql,sqlserver";
 		property test.name.skip.portal.instance = "UpgradeReport#DatabaseLogged";
 		property testcase.url = "http://www.example.com";
 
@@ -101,7 +102,7 @@ definition {
 			}
 		}
 
-		
+
 	}
 
 	@description = "LPS-154683: Upgrade Report shows errors"
