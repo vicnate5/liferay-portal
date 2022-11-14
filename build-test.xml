@@ -8027,11 +8027,23 @@ war.path=${app.server.portal.dir}/</echo>
 				</else>
 			</if>
 
+			<get-testcase-property property.name="data.archive.type" />
+
+			<if>
+				<contains string="${data.archive.type}" substring="-large" />
+				<then>
+					<var name="timeout.app.server.wait.new" value="120" />
+				</then>
+				<else>
+					<var name="timeout.app.server.wait.new" value="${timeout.app.server.wait}" />
+				</else>
+			</if>
+
 			<local name="app.server.waiting.timeout" />
 
 			<echo>Waiting for ${app.server.waiting.url} to load</echo>
 
-			<waitfor maxwait="${timeout.app.server.wait}" maxwaitunit="second" timeoutproperty="app.server.waiting.timeout">
+			<waitfor maxwait="${timeout.app.server.wait.new}" maxwaitunit="second" timeoutproperty="app.server.waiting.timeout">
 				<http url="${app.server.waiting.url}" />
 			</waitfor>
 
