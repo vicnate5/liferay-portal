@@ -8118,7 +8118,7 @@ war.path=${app.server.portal.dir}/</echo>
 
 			<local name="app.server.waiting.timeout" />
 
-			<echo>Waiting for ${app.server.waiting.url} to load</echo>
+			<echo>Waiting for ${app.server.waiting.url} to load ${timeout.app.server.wait.new}</echo>
 
 			<waitfor maxwait="${timeout.app.server.wait.new}" maxwaitunit="second" timeoutproperty="app.server.waiting.timeout">
 				<http url="${app.server.waiting.url}" />
