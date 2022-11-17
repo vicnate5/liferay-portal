@@ -51,8 +51,8 @@ definition {
 	@description = "LPS-154683: Upgrade Report provides the type and version of the database"
 	@priority = "3"
 	test DatabaseLogged {
-		property skip.start.app.server = "true";
 		property database.types = "db2,mariadb,mysql,oracle,postgresql,sqlserver";
+		property skip.start.app.server = "true";
 		property test.name.skip.portal.instance = "UpgradeReport#DatabaseLogged";
 		property testcase.url = "http://www.example.com";
 
@@ -101,8 +101,6 @@ definition {
 				fail("Size of document library storage is not present in upgrade report.");
 			}
 		}
-
-
 	}
 
 	@description = "LPS-154683: Upgrade Report shows errors"
@@ -147,8 +145,6 @@ definition {
 				fail("List with the 20 longest upgrade processes not found.");
 			}
 		}
-
-		
 	}
 
 	@description = "LPS-154683: Upgrade Report is created when property is set to true"
@@ -202,12 +198,26 @@ definition {
 	}
 
 	@description = "LPS-154683: The Upgrade Report logs the row counts for each table."
-	@ignore = "Test Stub"
 	@priority = "3"
 	test RowCountsLogged {
+		property skip.start.app.server = "true";
+		property testcase.url = "http://www.example.com";
 
-		// TODO The Upgrade Report should list the initial and final row counts for each database table sorted by initial row in descending order
+		task ("Look for the upgrade report") {
+			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
+			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
+		}
+
+		task ("Read the intial schema version") {
+			if (!(contains("${fileContent}", "Rows (initial)"))) {
+				fail("Initial rows numbers Column not present on Report.");
+			}
+
+			if (!(contains("${fileContent}", "Rows (final)"))) {
+				fail("Final rows numbers Column not present on Report.");
+			}
+		}
 	}
 
 	@description = "LPS-158741: The Upgrade Report should list the initial, expected, and final schema versions."
@@ -253,8 +263,34 @@ definition {
 	@priority = "4"
 	test TotalRuntimeLogged {
 
+<<<<<<< HEAD
 		// TODO The Upgrade Report should give the total runtime of the upgrade
 
+=======
+		task ("Look for the upgrade logs") {
+			var liferayHome = PropsUtil.get("liferay.home.dir.name");
+
+			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/logs/upgrade.log");
+		}
+
+		task ("Capture the upgrade runtime in upgrade logs") {
+			var upgradeRunTime = RegexUtil.replace("${fileContent}", "Completed Liferay core upgrade process i\"?n \"?(.*[0-9])", "1");
+
+			echo("${upgradeRunTime}");
+		}
+
+		task ("Look for the upgrade report") {
+			var liferayHome = PropsUtil.get("liferay.home.dir.name");
+
+			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
+		}
+
+		task ("Read the total runtime comparing with the one got in the logs") {
+			if (!(contains("${fileContent}", "Upgrade completed in ${upgradeRunTime}"))) {
+				fail("Total Runtime is not present in upgrade report.");
+			}
+		}
+>>>>>>> b56423b (LPS-166392 Add RowCountsLogged testcase)
 	}
 
 	@description = "LPS-154683: Upgrade Report shows warnings"
