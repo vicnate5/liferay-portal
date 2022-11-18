@@ -253,7 +253,7 @@ definition {
 		property test.assert.javascript.errors = "false";
 		property test.smtp.server.enabled = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Navigator.openURL();
 
@@ -573,7 +573,7 @@ definition {
 		property test.assert.javascript.errors = "false";
 		property test.name.skip.portal.instance = "CPReportsadmin#ViewEmailNotificationDelivery";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		ApplicationsMenu.gotoPortlet(
@@ -647,7 +647,7 @@ definition {
 		property test.assert.javascript.errors = "false";
 		property test.name.skip.portal.instance = "CPReportsadmin#ViewEmailRecipientDelivery";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		ApplicationsMenu.gotoPortlet(
 			category = "System",

@@ -583,7 +583,7 @@ definition {
 	}
 
 	macro openToConfigInSystemSettings {
-		var baseURL = PropsUtil.get("portal.url");
+		var baseURL = TestCase.getPortalURL();
 
 		if ("${portlet}" == "Message Boards Moderation Workflow") {
 			var portletId = "com.liferay.message.boards.moderation.configuration.MBModerationGroupConfiguration";

@@ -158,7 +158,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		// Articles accessed in admin will stay in admin after publishing.
@@ -189,7 +189,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		if (!(isSet(site))) {

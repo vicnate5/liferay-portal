@@ -358,7 +358,7 @@ definition {
 
 		PageEditor.publish();
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		ContentPagesNavigator.openViewContentPage(
 			locale = "es",

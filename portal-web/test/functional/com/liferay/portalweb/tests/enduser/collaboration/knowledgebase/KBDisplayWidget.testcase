@@ -595,7 +595,7 @@ definition {
 	test CanViewCustomFriendlyURL {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		for (var num : list "1,2") {
 			JSONKnowledgeBase.addkBArticle(
@@ -617,7 +617,7 @@ definition {
 	@priority = "4"
 	@refactordone
 	test CanViewDefaultFriendlyURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		for (var num : list "1,2") {
 			JSONKnowledgeBase.addkBArticle(

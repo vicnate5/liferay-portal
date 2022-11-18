@@ -107,7 +107,7 @@ definition {
 	test CanAccessOldFriendlyURLAfterRevert {
 		property custom.properties = "company.default.time.zone=America/Los_Angeles";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONDocument.addFileWithUploadedFile(
 			dmDocumentDescription = "DM Document Description",
@@ -896,7 +896,7 @@ definition {
 	test CanDownloadThroughURLWithFileName {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteId = JSONGroupAPI._getGroupIdByName(
 			groupName = "Guest",
 			site = "true");
@@ -923,7 +923,7 @@ definition {
 	test CanDownloadThroughURLWithTitle {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteId = JSONGroupAPI._getGroupIdByName(
 			groupName = "Guest",
 			site = "true");
@@ -950,7 +950,7 @@ definition {
 	test CanDownloadThroughURLWithUpdatedFileName {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteId = JSONGroupAPI._getGroupIdByName(
 			groupName = "Guest",
 			site = "true");
@@ -983,7 +983,7 @@ definition {
 	test CanDownloadThroughURLWithUpdatedTitle {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteId = JSONGroupAPI._getGroupIdByName(
 			groupName = "Guest",
 			site = "true");
@@ -1648,7 +1648,7 @@ definition {
 		property custom.properties = "company.default.time.zone=America/Los_Angeles";
 		property test.name.skip.portal.instance = "DMFileEntry#CannotViewExpiredDocumentAsGuest";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONGroup.addGroup(groupName = "Site Name");
 
@@ -1730,7 +1730,7 @@ definition {
 	test CanPreviewImageThroughURL {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteId = JSONGroupAPI._getGroupIdByName(
 			groupName = "Guest",
 			site = "true");

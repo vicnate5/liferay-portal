@@ -32,7 +32,7 @@ definition {
 	@description = "This ensures that accessing an old friendlyURL in the default language after publishing the new friendly URL will redirect the user to the new URL."
 	@priority = "5"
 	test CanAccessOldFriendlyURLAfterPublishing {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONStaging.enableLocalStaging(groupName = "Test Site Name");
 
@@ -64,7 +64,7 @@ definition {
 	@description = "This ensures that accessing an old localized friendlyURL after publishing the new friendly URL will redirect the user to the new URL."
 	@priority = "5"
 	test CanAccessOldLocalizedFriendlyURLAfterPublishing {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONStaging.enableLocalStaging(groupName = "Test Site Name");
 
@@ -120,7 +120,7 @@ definition {
 	test CanAccessWithSpecificDisabledLanguageAfterSettingLocally {
 		property custom.properties = "locales.enabled=zh_CN,en_US,en_AU,fr_FR,de_DE,it_IT,ja_JP,pt_BR,es_ES${line.separator}locales=zh_CN,en_US,en_AU,fr_FR,de_DE,it_IT,ja_JP,pt_BR,es_ES,ru_RU,pl_PL,sv_SE,hu_HU,ar_SA,nb_NO,hr_HR,fi_FI,nl_NL,cs_CZ";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Site.openSiteSettingsAdmin(siteURLKey = "test-site-name");
 
@@ -136,7 +136,7 @@ definition {
 	@description = "This ensures that a user can add friendlyURL with escape character in a web content."
 	@priority = "3"
 	test CanAddFriendlyURLWithEscapeCharacter {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONLayout.addWidgetToPublicLayout(
 			groupName = "Test Site Name",
@@ -178,7 +178,7 @@ definition {
 	@description = "This ensures that a user is redirected to the updated friendlyURL when he accesses the former friendlyURL."
 	@priority = "5"
 	test CanRedirectToUpdatedFriendlyURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		PagesAdmin.openToConfigurePublicPage(
 			groupName = "Test Site Name",
@@ -199,7 +199,7 @@ definition {
 	@description = "This ensures that a user is redirected to the updated localized friendlyURL when he accesses the former localized friendlyURL."
 	@priority = "5"
 	test CanRedirectToUpdatedLocalizedFriendlyURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		PagesAdmin.openToConfigurePublicPage(
 			groupName = "Test Site Name",
@@ -223,7 +223,7 @@ definition {
 	@description = "This ensures that the old friendlyURL can be removed from the history."
 	@priority = "5"
 	test CanRemoveOldFriendlyURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONLayout.addPublicLayout(
 			groupName = "Test Site Name",
@@ -248,7 +248,7 @@ definition {
 	@description = "This ensures that the friendlyURL of web content can be reset to default."
 	@priority = "4"
 	test CanResetFriendlyURLToDefault {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONLayout.addWidgetToPublicLayout(
 			groupName = "Test Site Name",
@@ -299,7 +299,7 @@ definition {
 	@description = "This ensures that the old friendlyURL can be restored from the history."
 	@priority = "5"
 	test CanRestoreOldFriendlyURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONLayout.addPublicLayout(
 			groupName = "Test Site Name",
@@ -394,7 +394,7 @@ definition {
 			localizedFriendlyURLList = "/^_^",
 			localizedNameList = "Pagina de prueba");
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Navigator.openWithAppendToBaseURL(urlAppend = "es/web/test-site-name/test-source-page");
 
@@ -528,7 +528,7 @@ definition {
 	@description = "This ensures that a previous friendlyURL of web content can be deleted when updating."
 	@priority = "4"
 	test CanViewWCWithLatestFriendlyURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONLayout.addWidgetToPublicLayout(
 			groupName = "Test Site Name",
@@ -578,7 +578,7 @@ definition {
 	@description = "This ensures that the default URL of the document will be displayed when accessing a document stored in the current site asset."
 	@priority = "5"
 	test DefaultURLIsDisplayedWhenAccessingDocumentInCurrentSite {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONLayout.addPublicLayout(
 			groupName = "Guest",
@@ -628,7 +628,7 @@ definition {
 		property portal.acceptance = "false";
 		property test.name.skip.portal.instance = "FriendlyURLService#PermanentRedirectionCanBePerformedWhenAccessingBlogOldFriendlyURL";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.configureFriendlyURLRedirection(redirectionType = "Permanent");
 
@@ -676,7 +676,7 @@ definition {
 		property custom.properties = "locale.prepend.friendly.url.style=0";
 		property test.name.skip.portal.instance = "FriendlyURLService#PermanentRedirectionCanBePerformedWhenAccessingPageOldFriendlyURL";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.configureFriendlyURLRedirection(
 			redirectionType = "Permanent",
@@ -710,7 +710,7 @@ definition {
 		property portal.acceptance = "false";
 		property test.name.skip.portal.instance = "FriendlyURLService#TemporaryRedirectionCanBePerformedWhenAccessingBlogOldFriendlyURL";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.configureFriendlyURLRedirection(
 			redirectionType = "Temporary",
@@ -760,7 +760,7 @@ definition {
 		property custom.properties = "locale.prepend.friendly.url.style=0";
 		property test.name.skip.portal.instance = "FriendlyURLService#TemporaryRedirectionCanBePerformedWhenAccessingPageOldFriendlyURL";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.configureFriendlyURLRedirection(redirectionType = "Temporary");
 
@@ -788,7 +788,7 @@ definition {
 	@description = "This ensures that the friendly URL will contain the group info to identify the attribution of the document when accessing other site documents."
 	@priority = "5"
 	test URLIsDisplayedWithGroupWhenAccessingDocumentInOtherSite {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONLayout.addPublicLayout(
 			groupName = "Guest",

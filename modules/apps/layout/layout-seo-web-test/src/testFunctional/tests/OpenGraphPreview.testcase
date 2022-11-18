@@ -34,7 +34,7 @@ definition {
 	test CanPreviewAfterReplacingImage {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -93,7 +93,7 @@ definition {
 	test CanPreviewInheritedSEO {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -149,7 +149,7 @@ definition {
 	@priority = "3"
 	@refactordone
 	test CanPreviewWithEscapeCharacters {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONLayout.addPublicLayout(
 			groupName = "Guest",
@@ -189,7 +189,7 @@ definition {
 	test CanPreviewWithLongInputs {
 		property portal.acceptance = "quarantine";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONLayout.addPublicLayout(
 			groupName = "Test Site Name",
@@ -234,7 +234,7 @@ definition {
 	test CanReturnToDefault {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -272,7 +272,7 @@ definition {
 	test CanViewArabicTranslation {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONLayout.addPublicLayout(
 			groupName = "Test Site Name",
@@ -309,7 +309,7 @@ definition {
 		property environment.acceptance = "true";
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -355,7 +355,7 @@ definition {
 	test CanViewSpecialImages {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -389,7 +389,7 @@ definition {
 	test CanViewTranslatedLanguages {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -477,7 +477,7 @@ definition {
 	test CanViewUntranslatedLanguage {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(

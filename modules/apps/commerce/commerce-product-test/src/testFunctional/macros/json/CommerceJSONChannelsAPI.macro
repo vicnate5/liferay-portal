@@ -6,7 +6,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		if (!(isSet(externalReferenceCode))) {
@@ -36,7 +36,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		var channelsCount = CommerceJSONChannelsAPI._getCommerceChannelsCount();
@@ -67,7 +67,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		if (isSet(channelCount)) {
@@ -92,7 +92,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		if (isSet(channelCount)) {
@@ -117,7 +117,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		var curl = '''

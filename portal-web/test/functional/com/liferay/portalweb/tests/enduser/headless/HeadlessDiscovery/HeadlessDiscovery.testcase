@@ -135,7 +135,7 @@ definition {
 		}
 
 		task ("Then headless admin content api loaded with no errors") {
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			AssertTextEquals(
 				locator1 = "Select#HEADLESS_SERVERS",
@@ -158,7 +158,7 @@ definition {
 		}
 
 		task ("Then headless admin taxonomy api loaded with no errors") {
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			AssertTextEquals(
 				locator1 = "Select#HEADLESS_SERVERS",
@@ -180,7 +180,7 @@ definition {
 		}
 
 		task ("Then headless delivery api loaded with no errors") {
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			AssertTextEquals(
 				locator1 = "Select#HEADLESS_SERVERS",

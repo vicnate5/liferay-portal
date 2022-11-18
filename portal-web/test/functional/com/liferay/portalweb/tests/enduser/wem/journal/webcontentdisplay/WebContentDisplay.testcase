@@ -207,7 +207,7 @@ definition {
 
 			WebContent.addCP(webContentTitle = "Web Content Title");
 
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			CKEditor.addSourceContent(content = '''<p><span><a href="${portalURL}/web/test-site-name/test-page-name/-/testportlet">text</a></span></p>''');
 

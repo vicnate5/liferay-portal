@@ -188,7 +188,7 @@ definition {
 	}
 
 	macro openToConfigInSystemSettings {
-		var baseURL = PropsUtil.get("portal.url");
+		var baseURL = TestCase.getPortalURL();
 
 		if ("${portlet}" == "SEO") {
 			var portletId = "com.liferay.layout.seo.internal.configuration.LayoutSEOCompanyConfiguration";

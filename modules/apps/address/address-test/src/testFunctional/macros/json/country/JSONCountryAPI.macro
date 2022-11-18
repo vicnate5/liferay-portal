@@ -29,7 +29,7 @@ definition {
 	macro _getCountryAbbreviation {
 		Variables.assertDefined(parameterList = "${countryName}");
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var countryName = StringUtil.replace("${countryName}", " ", "-");
 
 		var curl = '''
@@ -49,7 +49,7 @@ definition {
 	macro _getCountryByName {
 		Variables.assertDefined(parameterList = "${countryName}");
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		var curl = '''
 			${portalURL}/api/jsonws/country/get-country-by-name \
@@ -67,7 +67,7 @@ definition {
 		Variables.assertDefined(parameterList = "${countryAbbreviation}");
 
 		var companyId = JSONCompany.getCompanyId();
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		var curl = '''
 			${portalURL}/api/jsonws/region/get-regions \

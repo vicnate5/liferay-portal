@@ -463,7 +463,7 @@ definition {
 				pageName = "Test Page Name",
 				siteName = "Test Site Name");
 
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 
 			Portlet.gotoPortletOptions(
 				portletName = "IFrame",

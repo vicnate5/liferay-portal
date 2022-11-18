@@ -32,7 +32,7 @@ definition {
 	test CanViewAllHreflangTagsAfterDisabling {
 		property test.name.skip.portal.instance = "TranslationsSEO#CanViewAllHreflangTagsAfterDisabling";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		TranslationsSEO.enableOnlyTranslatedHreflangs(configurationScope = "System Settings");
 
@@ -62,7 +62,7 @@ definition {
 	@description = "This ensures that all languages hreflang tag of an untranslated page can be viewed when the OTH is disabled."
 	@priority = "4"
 	test CanViewPageDefaultHreflangTags {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONLayout.addPublicLayout(
 			groupName = "Test Site Name",
@@ -89,7 +89,7 @@ definition {
 	test CanViewTranslatedLanguageHreflangTagOnContentPage {
 		property test.name.skip.portal.instance = "TranslationsSEO#CanViewTranslatedLanguageHreflangTagOnContentPage";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		TranslationsSEO.enableOnlyTranslatedHreflangs(configurationScope = "Instance Settings");
 
@@ -141,7 +141,7 @@ definition {
 	test CanViewTranslatedLanguageHreflangTagOnDisplayPage {
 		property test.name.skip.portal.instance = "TranslationsSEO#CanViewTranslatedLanguageHreflangTagOnDisplayPage";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		TranslationsSEO.enableOnlyTranslatedHreflangs(
 			configurationScope = "Site Settings",
@@ -216,7 +216,7 @@ definition {
 	test CanViewTranslatedLanguageHreflangTagOnWidgetPage {
 		property test.name.skip.portal.instance = "TranslationsSEO#CanViewTranslatedLanguageHreflangTagOnWidgetPage";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		TranslationsSEO.enableOnlyTranslatedHreflangs(configurationScope = "System Settings");
 

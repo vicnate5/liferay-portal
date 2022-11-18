@@ -27,7 +27,7 @@ definition {
 	@priority = "3"
 	@refactordone
 	test CanAddTagWithEscapeCharacters {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		CustomMetaTags.openToCustomMetaTags(
 			groupName = "Test Site Name",
@@ -51,7 +51,7 @@ definition {
 	test CanClearCustomTag {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		CustomMetaTags.openToCustomMetaTags(
 			groupName = "Test Site Name",
@@ -81,7 +81,7 @@ definition {
 	test CanEditTag {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		CustomMetaTags.openToCustomMetaTags(
 			groupName = "Test Site Name",
@@ -113,7 +113,7 @@ definition {
 	test CanViewMultipleTranslatedTags {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		CustomMetaTags.openToCustomMetaTags(
 			groupName = "Test Site Name",
@@ -149,7 +149,7 @@ definition {
 	test CanViewTagAfterEditingPage {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		CustomMetaTags.openToCustomMetaTags(
 			groupName = "Test Site Name",
@@ -189,7 +189,7 @@ definition {
 	test CanViewTagWithoutPropertyOrContent {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		CustomMetaTags.openToCustomMetaTags(
 			groupName = "Test Site Name",
@@ -240,7 +240,7 @@ definition {
 	test CanViewTranslatedTagWithDefaultValue {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		CustomMetaTags.openToCustomMetaTags(
 			groupName = "Test Site Name",

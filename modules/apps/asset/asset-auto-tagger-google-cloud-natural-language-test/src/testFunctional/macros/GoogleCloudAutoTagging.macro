@@ -59,7 +59,7 @@ definition {
 	}
 
 	macro openToImageConfiguration {
-		var baseURL = PropsUtil.get("portal.url");
+		var baseURL = TestCase.getPortalURL();
 
 		if ("${configurationScope}" == "Instance Settings") {
 			var portlet = "InstanceSettingsPortlet";
@@ -72,7 +72,7 @@ definition {
 	}
 
 	macro openToTextConfiguration {
-		var baseURL = PropsUtil.get("portal.url");
+		var baseURL = TestCase.getPortalURL();
 
 		if ("${configurationScope}" == "Instance Settings") {
 			var portlet = "InstanceSettingsPortlet";

@@ -118,7 +118,7 @@ definition {
 
 		Navigator.openWithAppendToBaseURL(urlAppend = "web/bridge-issues/faces-1478");
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		AssertTextEquals(
 			locator1 = "BridgeIssues#URL_MESSAGE",
@@ -649,7 +649,7 @@ definition {
 
 		Navigator.openWithAppendToBaseURL(urlAppend = "web/bridge-issues/faces-3328-start");
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Click(locator1 = "//a[@href='${portalURL}/web/bridge-issues/faces-3328']");
 

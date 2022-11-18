@@ -132,7 +132,7 @@ definition {
 
 			ACTimeFilter.setLast24Hours();
 
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			var portalURL = StringUtil.replace("${portalURL}", "http://", "");
 

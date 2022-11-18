@@ -34,7 +34,7 @@ definition {
 		task ("Go to Testray and exit Testray") {
 			ApplicationsMenu.gotoSite(site = "Testray2");
 
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			Testray.signOutTestray();
 		}
@@ -58,7 +58,7 @@ definition {
 		task ("Go to Testray and exit Testray") {
 			ApplicationsMenu.gotoSite(site = "Testray2");
 
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			Testray.signOutTestray();
 		}
@@ -84,7 +84,7 @@ definition {
 		task ("Go to Testray and exit Testray") {
 			ApplicationsMenu.gotoSite(site = "Testray2");
 
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			Testray.signOutTestray();
 		}
@@ -110,7 +110,7 @@ definition {
 		task ("Go to Testray and exit Testray") {
 			ApplicationsMenu.gotoSite(site = "Testray2");
 
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			Testray.signOutTestray();
 		}

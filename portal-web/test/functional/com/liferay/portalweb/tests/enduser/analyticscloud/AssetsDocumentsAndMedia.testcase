@@ -89,7 +89,7 @@ definition {
 			var fileEntryId = JSONDocument.getFileEntryId(
 				dmDocumentTitle = "DM AC Title",
 				groupName = "Site Name");
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 			var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 			ACAssets.viewAssetAppearsOnMetric(

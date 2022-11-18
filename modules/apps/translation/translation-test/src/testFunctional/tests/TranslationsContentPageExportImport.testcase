@@ -993,7 +993,7 @@ definition {
 				id = "element-text",
 				text = "HeadingExperiencees_ES");
 
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			Navigator.openSpecificURL(url = "${portalURL}/en/");
 		}

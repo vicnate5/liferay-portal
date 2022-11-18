@@ -36,7 +36,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanMapDMWithOpenGraph {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		DepotNavigator.openDepotDocumentTypeAdmin(depotName = "Test Depot Name");
 
@@ -222,7 +222,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanMapWCWithOpenGraph {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		DepotNavigator.openDepotWebContentStructuresAdmin(depotName = "Test Depot Name");
 
@@ -458,7 +458,7 @@ definition {
 	test CanViewCustomizeDMFromConnectedSite {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		DepotNavigator.openDepotDocumentTypeAdmin(depotName = "Test Depot Name");
 
@@ -529,7 +529,7 @@ definition {
 	test CanViewCustomizeWCFromConnectedSite {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		DepotNavigator.openDepotWebContentStructuresAdmin(depotName = "Test Depot Name");
 

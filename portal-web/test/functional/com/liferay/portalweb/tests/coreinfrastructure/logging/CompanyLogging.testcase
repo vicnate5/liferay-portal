@@ -337,7 +337,7 @@ definition {
 	test GetInvalidCompanyLogs {
 		task ("When the user tries to download a log via an http request where the log name is invalid") {
 			var companyId = JSONCompany.getCompanyId();
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 
 			Open.openNoError(locator1 = "${baseURL}/o/company-log/${companyId}/invalidLog.log");
 		}

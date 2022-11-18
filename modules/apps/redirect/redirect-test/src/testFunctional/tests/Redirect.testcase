@@ -39,7 +39,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanAccessPermanentEntry {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONRedirect.addRedirect(
@@ -73,7 +73,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanAccessTemporaryEntry {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONRedirect.addRedirect(
@@ -104,7 +104,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanAccessUpdatedPermanentEntry {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -137,7 +137,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanAccessUpdatedTemporaryEntry {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -168,7 +168,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanAddEntryWithoutReferences {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		for (var i : list "1,2,3") {
 			JSONLayout.addPublicLayout(
@@ -210,7 +210,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanAddEntryWithReferences {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		for (var i : list "1,2,3") {
 			JSONLayout.addPublicLayout(
@@ -257,7 +257,7 @@ definition {
 	test CanAddExpiredEntryFromActive404 {
 		property test.name.skip.portal.instance = "Redirect#CanAddExpiredEntryFromActive404";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openToConfigInSystemSettings();
 
@@ -300,7 +300,7 @@ definition {
 	test CanAddExpiredEntryFromIgnored404 {
 		property test.name.skip.portal.instance = "Redirect#CanAddExpiredEntryFromIgnored404";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openToConfigInSystemSettings();
 
@@ -349,7 +349,7 @@ definition {
 	test CanAddPermanentEntryFromActive404 {
 		property test.name.skip.portal.instance = "Redirect#CanAddPermanentEntryFromActive404";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openToConfigInSystemSettings();
 
@@ -391,7 +391,7 @@ definition {
 	test CanAddPermanentEntryFromIgnored404 {
 		property test.name.skip.portal.instance = "Redirect#CanAddPermanentEntryFromIgnored404";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openToConfigInSystemSettings();
 
@@ -438,7 +438,7 @@ definition {
 	test CanAddTempEntryFromActive404 {
 		property test.name.skip.portal.instance = "Redirect#CanAddTempEntryFromActive404";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openToConfigInSystemSettings();
 
@@ -479,7 +479,7 @@ definition {
 	test CanAddTempEntryFromIgnored404 {
 		property test.name.skip.portal.instance = "Redirect#CanAddTempEntryFromIgnored404";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openToConfigInSystemSettings();
 
@@ -523,7 +523,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanAvoidRedirectChain {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		for (var i : list "1,2,3") {
 			JSONLayout.addPublicLayout(
@@ -569,7 +569,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanCheckDestinationURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -614,7 +614,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanCreateRedirectChain {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		for (var i : list "1,2,3") {
 			JSONLayout.addPublicLayout(
@@ -658,7 +658,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanDeleteEntry {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONRedirect.addRedirect(
 			destinationURL = "${portalURL}/web/test-site-name/test-destination-page",
@@ -682,7 +682,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanDeleteMultipleEntries {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		for (var pageCount : list "1,2,3") {
 			JSONLayout.addPublicLayout(
@@ -712,7 +712,7 @@ definition {
 	@description = "This ensures that a temporary entry can be deleted."
 	@priority = "4"
 	test CanDeleteTemporaryEntry {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONRedirect.addRedirect(
 			destinationURL = "${portalURL}/web/test-site-name/test-destination-page",
@@ -733,7 +733,7 @@ definition {
 	test CanDisable404InSystemSettings {
 		property test.name.skip.portal.instance = "Redirect#CanDisable404InSystemSettings";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openToConfigInSystemSettings();
 
@@ -778,7 +778,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanEditEntry {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONRedirect.addRedirect(
@@ -816,7 +816,7 @@ definition {
 	test CanIgnoreURLAfterReactivation {
 		property test.name.skip.portal.instance = "Redirect#CanIgnoreURLAfterReactivation";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openToConfigInSystemSettings();
 
@@ -865,7 +865,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CannotAddEntryWithDuplicateSourceURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONRedirect.addRedirect(
 			destinationURL = "${portalURL}/web/test-site-name/test-destination-page",
@@ -885,7 +885,7 @@ definition {
 	@description = "This ensures that a user cannot create a redirect if the sourceURL is too long."
 	@priority = "4"
 	test CannotAddEntryWithTooLongSourceURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openRedirectAdmin(siteURLKey = "test-site-name");
 
@@ -901,7 +901,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CannotPublishWithInvalidSourceURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openRedirectAdmin(siteURLKey = "test-site-name");
 
@@ -923,7 +923,7 @@ definition {
 	test CannotView404ByDefault {
 		property test.name.skip.portal.instance = "Redirect#CannotView404ByDefault";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Navigator.openSpecificURL(url = "${portalURL}/web/guest/my-url-that-does-not-exist");
 
@@ -957,7 +957,7 @@ definition {
 		property portal.acceptance = "false";
 		property test.name.skip.portal.instance = "Redirect#CanOrder404URLsByRequests";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openToConfigInSystemSettings();
 
@@ -1008,7 +1008,7 @@ definition {
 	@priority = "4"
 	@refactordone
 	test CanRedirect404sToSiteHomePage {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Navigator.openSpecificURL(url = "${portalURL}/web/test-site-name/fakepage");
 
@@ -1027,7 +1027,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanResetExpiredEntry {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONRedirect.addRedirect(
 			destinationURL = "${portalURL}/web/test-site-name/test-destination-page",
@@ -1058,7 +1058,7 @@ definition {
 	test CanSearchForEntry {
 		property portal.acceptance = "false";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONRedirect.addRedirect(
 			destinationURL = "${portalURL}/web/test-site-name/test-destination-page",
@@ -1109,7 +1109,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanUpdateEntryWithCheckingUpdateRedirect {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		for (var i : list "1,2,3,4") {
 			JSONLayout.addPublicLayout(
@@ -1167,7 +1167,7 @@ definition {
 	test CanView404URLsAfterReactivating {
 		property test.name.skip.portal.instance = "Redirect#CanView404URLsAfterReactivating";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openToConfigInSystemSettings();
 
@@ -1225,7 +1225,7 @@ definition {
 	test CanViewEntryInfo {
 		property custom.properties = "company.default.time.zone=America/Los_Angeles";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONRedirect.addRedirect(
 			destinationURL = "${portalURL}/web/test-site-name/test-destination-page",
@@ -1263,7 +1263,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanViewExpiredAndActiveEntries {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONRedirect.addRedirect(
@@ -1295,7 +1295,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanViewExpiredPermanentEntry {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONRedirect.addRedirect(
 			destinationURL = "${portalURL}/web/test-site-name/test-destination-page",
@@ -1317,7 +1317,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanViewExpiredTempEntry {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONRedirect.addRedirect(
 			destinationURL = "${portalURL}/web/test-site-name/test-destination-page",
@@ -1340,7 +1340,7 @@ definition {
 	test CanViewIgnoredURL {
 		property test.name.skip.portal.instance = "Redirect#CanViewIgnoredURL";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openToConfigInSystemSettings();
 
@@ -1381,7 +1381,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanViewPermanentEntryInAdmin {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openRedirectAdmin(siteURLKey = "test-site-name");
 
@@ -1402,7 +1402,7 @@ definition {
 	@description = "This test covers LPS-152732. It ensures that the default redirect can not override localized redirect."
 	@priority = "4"
 	test DefaultRedirectCanNotOverrideLocalizedRedirect {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONRedirect.addRedirect(
 			destinationURL = "https://google.hu",

@@ -11,7 +11,7 @@ definition {
 		}
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		if (!(isSet(cost))) {
@@ -284,7 +284,7 @@ definition {
 	}
 
 	macro _addCommerceProductImage {
-		var baseURL = PropsUtil.get("portal.url");
+		var baseURL = TestCase.getPortalURL();
 
 		if (!(isSet(catalogName))) {
 			var catalogName = "Master";
@@ -344,7 +344,7 @@ definition {
 		var diagramProductId = CommerceJSONProductsAPI._getProductId(productName = "${diagram}");
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		if ("${pinType}" == "Linked to a SKU") {
@@ -402,7 +402,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		var productsCount = CommerceJSONProductsAPI._getCommerceProductsCount();
@@ -431,7 +431,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		if (isSet(prodCount)) {
@@ -458,7 +458,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		var productId = CommerceJSONProductsAPI._getProductId(productName = "${productName}");
@@ -484,7 +484,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		var curl = '''
@@ -504,7 +504,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		var productId = CommerceJSONProductsAPI._getProductId(productName = "${productName}");
@@ -526,7 +526,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		var productId = CommerceJSONProductsAPI._getProductId(productName = "${productName}");
@@ -548,7 +548,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		var curl = '''
@@ -566,7 +566,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		var curl = '''
@@ -588,7 +588,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		var productId = CommerceJSONProductsAPI._getProductId(productName = "${productName}");
@@ -641,7 +641,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		var productId = CommerceJSONProductsAPI._getProductId(productName = "${productName}");
@@ -661,7 +661,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		var productCreateDate = CommerceJSONProductsAPI._getProductId(productName = "${productName}");
@@ -689,7 +689,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		var curl = '''
@@ -715,7 +715,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		var curl = '''
@@ -741,7 +741,7 @@ definition {
 		var productId = CommerceJSONProductsAPI._getProductId(productName = "${productName}");
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		if (isSet(allowBackOrder)) {
@@ -824,7 +824,7 @@ definition {
 	macro _patchCommerceProductImageUsingERC {
 		Variables.assertDefined(parameterList = "${productERC}");
 
-		var baseURL = PropsUtil.get("portal.url");
+		var baseURL = TestCase.getPortalURL();
 
 		if (!(isSet(cdnEnabled))) {
 			var cdnEnabled = "false";
@@ -899,7 +899,7 @@ definition {
 		var cpDefinitionId = CommerceJSONProductsAPI._getCPDefinitionId(productName = "${productName}");
 
 		if (!(isSet(baseURL))) {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 		}
 
 		if (!(isSet(neverExpire))) {

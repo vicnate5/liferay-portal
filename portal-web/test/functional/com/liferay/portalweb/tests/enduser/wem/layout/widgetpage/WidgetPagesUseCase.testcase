@@ -39,7 +39,7 @@ definition {
 		}
 
 		task ("When the admin user signs out via URL") {
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			Navigator.openSpecificURL(url = "${portalURL}/c/portal/logout");
 		}

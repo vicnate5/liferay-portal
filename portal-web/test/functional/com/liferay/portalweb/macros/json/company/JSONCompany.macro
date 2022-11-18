@@ -135,7 +135,7 @@ definition {
 	}
 
 	macro getPortalURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		return "${portalURL}";
 	}

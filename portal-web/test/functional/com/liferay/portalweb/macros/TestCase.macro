@@ -121,7 +121,7 @@ definition {
 
 		if (("${siteName}" == "Liferay") || !(isSet(siteName))) {
 			if (("${testPortalInstance}" == "true") && !(IsTestName(locator1 = "", value1 = "${testNameSkipPortalInstance}"))) {
-				var portalURL = PropsUtil.get("portal.url");
+				var portalURL = TestCase.getPortalURL();
 
 				var portalURL = StringUtil.replace("${portalURL}", "http://", "");
 

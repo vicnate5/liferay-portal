@@ -56,7 +56,7 @@ definition {
 	@description = "LPS-155465. Assert that clicking quick action is equivalent to clicking the ellipsis dropdown menu."
 	@priority = "5"
 	test BehaviorIsEqualToEllipsisDropdownEquivalentAction {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		task ("When click on Pencil Icon") {
 			ClickNoError(

@@ -39,7 +39,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanCustomizeMetaTags {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteId = JSONGroupSetter.setGroupId(groupName = "Test Site Name");
 
 		Navigator.openToGroupPagesPortlet(
@@ -74,7 +74,7 @@ definition {
 	@priority = "4"
 	@refactordone
 	test CanCustomizeMetaTagsWithEscapeCharacters {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Navigator.openToGroupPagesPortlet(
 			groupName = "Test Site Name",
@@ -100,7 +100,7 @@ definition {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "OpenGraph#CanDisableConfiguration";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		OpenGraph.openToConfigInSystemSettings(portlet = "SEO");
 
@@ -162,7 +162,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanEditMetaTagCustomizations {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteId = JSONGroupSetter.setGroupId(groupName = "Test Site Name");
 
 		Navigator.openToGroupPagesPortlet(
@@ -196,7 +196,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanMapBlogsToDisplayPage {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONLayoutpagetemplate.addDisplayPageTemplateEntry(
 			contentType = "Blogs Entry",
@@ -378,7 +378,7 @@ definition {
 		var dmFileEntryId = JSONDocument.getFileEntryId(
 			dmDocumentTitle = "DM Document Title",
 			groupName = "Test Site Name");
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteId = JSONGroupAPI._getGroupIdByName(
 			groupName = "Test Site Name",
 			site = "true");
@@ -450,7 +450,7 @@ definition {
 			pageName = "Display Page Template Name",
 			siteURLKey = "test-site-name");
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteId = JSONGroupAPI._getGroupIdByName(
 			groupName = "Test Site Name",
 			site = "true");
@@ -515,7 +515,7 @@ definition {
 			pageName = "Display Page Template Name",
 			siteURLKey = "test-site-name");
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Navigator.openSpecificURL(url = "${portalURL}/c/portal/logout");
 
@@ -528,7 +528,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanRevertCustomTitle {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Navigator.openToGroupPagesPortlet(
 			groupName = "Test Site Name",
@@ -569,7 +569,7 @@ definition {
 	test CanViewDefaultMetaTags {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Navigator.openToGroupPagesPortlet(
 			groupName = "Test Site Name",
@@ -592,7 +592,7 @@ definition {
 	@priority = "5"
 	@refactordone
 	test CanViewNewPageWithMetaTags {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		PagesAdmin.openPagesAdmin(siteURLKey = "test-site-name");
 

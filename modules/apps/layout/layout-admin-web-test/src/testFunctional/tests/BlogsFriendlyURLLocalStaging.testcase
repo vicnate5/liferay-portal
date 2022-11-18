@@ -42,7 +42,7 @@ definition {
 	@description = "This ensures that the friendlyURL in Blogs can be published when local staging is enabled."
 	@priority = "5"
 	test CanPublishFriendlyURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONBlog.addEntry(
 			entryContent = "Blogs Entry Content",
@@ -94,7 +94,7 @@ definition {
 	@description = "This ensures that the old friendlyURL in Blogs can be removed and published when local staging is enabled."
 	@priority = "4"
 	test CanPublishRemovedOldFriendlyURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONBlog.addEntry(
 			entryContent = "Blogs Entry Content",
@@ -150,7 +150,7 @@ definition {
 	@description = "This ensures that the old friendlyURL in Blogs can be restored and published when local staging is enabled."
 	@priority = "4"
 	test CanPublishRestoredOldFriendlyURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONBlog.addEntry(
 			entryContent = "Blogs Entry Content",

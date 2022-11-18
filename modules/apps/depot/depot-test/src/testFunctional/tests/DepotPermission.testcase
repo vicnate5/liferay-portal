@@ -345,7 +345,7 @@ definition {
 	test CanAddImageToFolderViaMG {
 		property custom.properties = "jsonws.web.service.paths.excludes=";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONUser.addUser(
 			userEmailAddress = "userea@liferay.com",
@@ -550,7 +550,7 @@ definition {
 	test CanDeleteImageInMG {
 		property custom.properties = "jsonws.web.service.paths.excludes=";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONUser.addUser(
 			userEmailAddress = "userea@liferay.com",
@@ -770,7 +770,7 @@ definition {
 	test CanEditImageInMG {
 		property custom.properties = "jsonws.web.service.paths.excludes=";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONUser.addUser(
 			userEmailAddress = "userea@liferay.com",
@@ -942,7 +942,7 @@ definition {
 	@description = "This ensures that an image stored in asset library folder cannot be viewed by a guest without permissions via MG on a connected site."
 	@priority = "4"
 	test CannotViewImageInMGAsGuest {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONGroup.addGroup(groupName = "Site Name");
 

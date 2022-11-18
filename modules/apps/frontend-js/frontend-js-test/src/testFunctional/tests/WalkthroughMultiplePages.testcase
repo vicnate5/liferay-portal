@@ -61,7 +61,7 @@ definition {
 	test CanNavigateToNextPage {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		task ("When on step 1") {
 			Walkthrough.enablePopoverMode();
@@ -91,7 +91,7 @@ definition {
 	test CanNavigateToPreviousPage {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		task ("When on step 2") {
 			Walkthrough.enablePopoverMode();
@@ -121,7 +121,7 @@ definition {
 	@description = "LPS-159475. Assert walkthrough can save current step when navigating through different pages."
 	@priority = "4"
 	test CurrentStepIsSavedWhenNavigatingPages {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		task ("When on step 2") {
 			Walkthrough.enablePopoverMode();
@@ -157,7 +157,7 @@ definition {
 	@description = "LPS-159476. Assert walkthrough can save current step when user signs in and out."
 	@priority = "3"
 	test CurrentStepIsSavedWhenUserSignsInAndOut {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		task ("When on step 2") {
 			Walkthrough.enablePopoverMode();

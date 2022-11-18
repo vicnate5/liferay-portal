@@ -1331,7 +1331,7 @@ definition {
 	}
 
 	macro editAndDeleteRedirects {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openRedirectAdmin(siteURLKey = "test-site-name");
 
@@ -1792,7 +1792,7 @@ definition {
 	}
 
 	macro ignore404URLs {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.open404URLsAdmin(siteURLKey = "test-site-name");
 
@@ -3087,7 +3087,7 @@ definition {
 	}
 
 	macro viewAndAccessRedirects {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openRedirectAdmin(siteURLKey = "test-site-name");
 
@@ -3455,7 +3455,7 @@ definition {
 	}
 
 	macro viewAndEditCustomMetaTag {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		User.logoutPG();
 
@@ -3553,7 +3553,7 @@ definition {
 	}
 
 	macro viewAndEditOpenGraph {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteId = JSONGroupSetter.setGroupId(groupName = "Test Site Name");
 
 		Navigator.openToGroupPagesPortlet(
@@ -3643,7 +3643,7 @@ definition {
 	}
 
 	macro viewAndEditSERPPreview {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Navigator.gotoPage(pageName = "Test Page");
 
@@ -4567,7 +4567,7 @@ definition {
 	}
 
 	macro viewDocuments {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 		var siteId = JSONGroupAPI._getGroupIdByName(
 			groupName = "Guest",
 			site = "true");

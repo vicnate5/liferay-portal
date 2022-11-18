@@ -1366,7 +1366,7 @@ definition {
 		property custom.properties = "jsonws.web.service.paths.excludes=";
 		property release.feature.flags.disable.DISABLE_PRIVATE_LAYOUTS = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONGroup.addGroup(
 			groupName = "Site A",

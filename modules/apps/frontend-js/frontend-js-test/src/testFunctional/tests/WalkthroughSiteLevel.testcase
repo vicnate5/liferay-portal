@@ -168,7 +168,7 @@ definition {
 	test StepCanCorrespondToCorrectStepId {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		task ("Given walkthrough enabled site-level") {
 			Walkthrough.setupWalkthroughPage(

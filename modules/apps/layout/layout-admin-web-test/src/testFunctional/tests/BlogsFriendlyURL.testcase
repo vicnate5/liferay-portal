@@ -38,7 +38,7 @@ definition {
 	@description = "This ensures that a user is redirected to a restored friendly URL when he accesses a blog display page URL."
 	@priority = "4"
 	test CanAccessDisplayPageWithOldFriendlyURLAfterRestoring {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONLayoutpagetemplate.addDisplayPageTemplateEntry(
 			contentType = "Blogs Entry",
@@ -186,7 +186,7 @@ definition {
 	@description = "This ensures that an old friendlyURL can be removed from the history."
 	@priority = "5"
 	test CanRemoveOldFriendlyURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONBlog.addEntry(
 			entryContent = "Blogs Entry Content",
@@ -224,7 +224,7 @@ definition {
 	@description = "This ensures that an old friendlyURL can be restored from the history."
 	@priority = "5"
 	test CanRestoreOldFriendlyURL {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONBlog.addEntry(
 			entryContent = "Blogs Entry Content",
@@ -267,7 +267,7 @@ definition {
 	@description = "This ensures that both the active URL and old friendlyURL can be viewed from the history."
 	@priority = "5"
 	test CanViewFriendlyURLs {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONBlog.addEntry(
 			entryContent = "Blogs Entry Content",

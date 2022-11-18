@@ -1,7 +1,7 @@
 @component-name = "OSB Site Initializer Partner Portal"
 definition {
 
-	var baseURL = PropsUtil.get("portal.url");
+	var baseURL = TestCase.getPortalURL();
 
 	property custom.properties = "feature.flag.LPS-135430=true";
 	property osgi.modules.includes = "osb-site-initializer-partner-portal";

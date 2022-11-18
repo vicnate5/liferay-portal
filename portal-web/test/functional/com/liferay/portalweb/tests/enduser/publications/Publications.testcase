@@ -279,7 +279,7 @@ definition {
 		Publications.workOnProduction();
 
 		var ctCollectionId = JSONPublicationsAPI._getCTCollectionId(publicationName = "Publication Name");
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Navigator.openSpecificURL(url = "${portalURL}/web/site-name/test-page-name?previewCTCollectionId=${ctCollectionId}");
 
@@ -516,7 +516,7 @@ definition {
 		var ctCollectionId1 = JSONPublicationsAPI._getCTCollectionId(publicationName = "Publication Name");
 
 		var ctCollectionId2 = ${ctCollectionId1} + 1;
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Open.openRedirect(locator1 = "${portalURL}/web/site-name/test-page-name?previewCTCollectionId=${ctCollectionId2}");
 
@@ -553,7 +553,7 @@ definition {
 		WebContentDisplayPortlet.selectWebContent(webContentTitle = "Web Content Title");
 
 		var ctCollectionId = JSONPublicationsAPI._getCTCollectionId(publicationName = "Publication Name");
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONPublications.publishPublication(publicationName = "Publication Name");
 
@@ -1317,7 +1317,7 @@ definition {
 		Publications.workOnProduction();
 
 		var ctCollectionId = JSONPublicationsAPI._getCTCollectionId(publicationName = "Publication Name");
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		User.logoutPG();
 

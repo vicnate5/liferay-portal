@@ -328,7 +328,7 @@ definition {
 		}
 
 		task ("View inactive request message in the second organization site") {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 
 			Navigator.openSpecificURL(url = "${baseURL}/web/organization-name-2");
 
@@ -706,7 +706,7 @@ definition {
 		property custom.properties = "jsonws.web.service.paths.excludes=";
 		property testray.component.names = "Site Administration";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		task ("Add a user group") {
 			UserGroup.openUserGroupsAdmin();
@@ -887,7 +887,7 @@ definition {
 		}
 
 		task ("View the inactive request message in the first created site") {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 
 			Navigator.openSpecificURL(url = "${baseURL}/web/site1-name");
 
@@ -906,7 +906,7 @@ definition {
 		property test.name.skip.portal.instance = "SitesUsecase#SitesDemoSiteManagement";
 		property testray.component.names = "Site Administration,Site Pages Administration";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		task ("Add a new site") {
 			JSONGroup.addGroup(

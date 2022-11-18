@@ -51,7 +51,7 @@ definition {
 	@description = "This test checks that an Alias will override a Pattern."
 	@priority = "5"
 	test AliasTakesPrecedenceOverPattern {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONRedirect.addRedirect(
 			destinationURL = "${portalURL}/web/test-site/parent/child2",
@@ -82,7 +82,7 @@ definition {
 	@description = "This test checks that a Pattern can be updated."
 	@priority = "5"
 	test CanUpdatePattern {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openToPatterns(siteURLKey = "test-site");
 
@@ -106,7 +106,7 @@ definition {
 	@description = "This test checks that when there are multiple Patterns, the first one that matches the URL will be applied."
 	@priority = "5"
 	test FirstMatchingPatternWillBeApplied {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openToPatterns(siteURLKey = "test-site");
 
@@ -148,7 +148,7 @@ definition {
 	@description = "This test checks that when there are multiple Patterns, the first one that matches the URL will be applied."
 	@priority = "5"
 	test WillGenerateErrorIfInvalid {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Redirect.openRedirectAdmin(siteURLKey = "test-site");
 

@@ -49,7 +49,7 @@ definition {
 		}
 
 		task ("Change to instance language to es-ES") {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 			var currentURL = Navigator.getCurrentURL();
 
 			var localizedURL = StringUtil.replace("${currentURL}", "${baseURL}", "${baseURL}/es");

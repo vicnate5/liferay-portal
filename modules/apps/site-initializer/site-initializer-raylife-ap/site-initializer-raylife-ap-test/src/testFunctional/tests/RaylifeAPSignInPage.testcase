@@ -46,7 +46,7 @@ definition {
 		task ("Go to Raylife AP and exit Raylife AP") {
 			ApplicationsMenu.gotoSite(site = "${testSiteName}");
 
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			User.logoutPG();
 		}
@@ -70,7 +70,7 @@ definition {
 		task ("Go to Raylife AP and exit Raylife AP") {
 			ApplicationsMenu.gotoSite(site = "${testSiteName}");
 
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			User.logoutPG();
 		}
@@ -94,7 +94,7 @@ definition {
 		task ("Go to Raylife AP and exit Raylife AP") {
 			ApplicationsMenu.gotoSite(site = "${testSiteName}");
 
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			User.logoutPG();
 		}
@@ -118,7 +118,7 @@ definition {
 		task ("Go to Raylife AP and exit Raylife AP") {
 			ApplicationsMenu.gotoSite(site = "${testSiteName}");
 
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			User.logoutPG();
 		}

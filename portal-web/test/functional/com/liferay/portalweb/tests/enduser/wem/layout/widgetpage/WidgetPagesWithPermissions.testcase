@@ -82,7 +82,7 @@ definition {
 		}
 
 		task ("Get blogs and message boards URL") {
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 			var blogEntryId = JSONBlog.getBlogEntryId(
 				entryTitle = "Blogs Entry Title",
 				groupName = "Test Site Name");
@@ -192,7 +192,7 @@ definition {
 		}
 
 		task ("Get blogs and message boards URL") {
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 			var blogEntryId = JSONBlog.getBlogEntryId(
 				entryTitle = "Blogs Entry Title",
 				groupName = "Test Site Name");
@@ -406,7 +406,7 @@ definition {
 		}
 
 		task ("Access a non existing page") {
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 
 			Navigator.openSpecificURL(url = "${portalURL}/web/usersn/page-name");
 		}
@@ -490,7 +490,7 @@ definition {
 		}
 
 		task ("Get blogs and message boards URL") {
-			var portalURL = PropsUtil.get("portal.url");
+			var portalURL = TestCase.getPortalURL();
 			var blogEntryId = JSONBlog.getBlogEntryId(
 				entryTitle = "Blogs Entry Title",
 				groupName = "Test Site Name");

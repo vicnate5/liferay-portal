@@ -46,7 +46,7 @@ definition {
 	test CanBeDisabled {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		task ("Given walkthrough enabled site-level") {
 			Walkthrough.addWalkthrough(fileName = "walkthrough_configuration_single_page.json");
@@ -74,7 +74,7 @@ definition {
 	test CanBeEnabled {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		task ("Given Walkthrough in System Settings") {
 			Walkthrough.gotoSiteConfigWalkthrough();
@@ -94,7 +94,7 @@ definition {
 	test JSONCanBeConfigured {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		task ("Given Walkthrough in System Settings") {
 			Walkthrough.gotoSiteConfigWalkthrough();
@@ -116,7 +116,7 @@ definition {
 	test JSONCanBeUpdated {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		task ("Given walkthrough enabled site-level") {
 			Walkthrough.addWalkthrough(fileName = "walkthrough_configuration_single_page.json");
@@ -146,7 +146,7 @@ definition {
 	test WillDisplayWhenDefinedForSite {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		task ("Given there is a site-level JSON defined for current site") {
 			JSONGroup.addGroup(groupName = "Site Name");
@@ -185,7 +185,7 @@ definition {
 	test WillNotDisplayWhenNotDefinedForSite {
 		property portal.acceptance = "true";
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		task ("Given there is no site-level JSON defined for current site") {
 			JSONLayout.addPublicLayout(

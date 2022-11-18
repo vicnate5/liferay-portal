@@ -28,7 +28,7 @@ definition {
 	@description = "This test ensures that the Max Nesting settings can be configured in the KB navigation fragment for a display page."
 	@priority = "5"
 	test CanUpdateMaxNestingForArticleNavigation {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONKnowledgeBase.addkBArticle(
 			groupName = "Guest",
@@ -85,7 +85,7 @@ definition {
 	@description = "This test ensures that when viewing a KB article in the navigation fragment, the corresponding KB article content is displayed in another fragment that selects to display KB content."
 	@priority = "5"
 	test CanViewArticlesViaKBNavigation {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONKnowledgeBase.addkBArticle(
 			groupName = "Guest",
@@ -170,7 +170,7 @@ definition {
 	@description = "This test ensures that a KB article is displayed with the default template when accessing the KB display page URL."
 	@priority = "4"
 	test CanViewArticleWithDefaultTemplate {
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		JSONKnowledgeBase.addkBArticle(
 			groupName = "Test Site Name",

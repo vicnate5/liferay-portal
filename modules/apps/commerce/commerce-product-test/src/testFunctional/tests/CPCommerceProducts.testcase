@@ -1281,7 +1281,7 @@ definition {
 		property portal.acceptance = "false";
 
 		task ("When a product is created with an image using JSON") {
-			var baseURL = PropsUtil.get("portal.url");
+			var baseURL = TestCase.getPortalURL();
 			var catalogId = CommerceJSONCatalogsAPI._getCommerceCatalogIdByName(catalogName = "Master");
 
 			var curl = '''
@@ -2253,7 +2253,7 @@ definition {
 			productName = "Orange",
 			productType = "Simple");
 
-		var baseURL = PropsUtil.get("portal.url");
+		var baseURL = TestCase.getPortalURL();
 
 		Navigator.openSpecificURL(url = "${baseURL}/web/guest/p/orange");
 

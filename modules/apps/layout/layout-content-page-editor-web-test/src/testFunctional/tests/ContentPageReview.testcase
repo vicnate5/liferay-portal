@@ -403,7 +403,7 @@ definition {
 
 		PageEditor.publish();
 
-		var portalURL = PropsUtil.get("portal.url");
+		var portalURL = TestCase.getPortalURL();
 
 		Navigator.openSpecificURL(url = "${portalURL}/c/portal/logout");
 
