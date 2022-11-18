@@ -25,6 +25,23 @@
 		</sequential>
 	</macrodef>
 
+	<macrodef name="prevent-exit-code">
+		<sequential>
+			<get-database-upgrade-client-paths />
+
+			<replace
+				file="${db.upgrade.client.home}/db_upgrade${file.suffix.bat}"
+				token="exit 1"
+				value="exit 0"
+			/>
+
+			<chmod
+				file="${db.upgrade.client.home}/db_upgrade${file.suffix.bat}"
+				perm="a+x"
+			/>
+		</sequential>
+	</macrodef>
+
 	<macrodef name="rebuild-upgrade-database">
 		<sequential>
 			<antcall target="rebuild-legacy-database">
@@ -339,6 +356,8 @@
 
 	<target name="check-upgrade-client-second-process">
 		<get-database-upgrade-client-paths />
+
+		<prevent-exit-code />
 
 		<parallel failonany="true">
 			<exec executable="/bin/bash" spawn="true">
