@@ -108,8 +108,6 @@ definition {
 	@summary = "Clean up Portal Instances as part of standard teardown"
 	macro tearDownCP {
 		JSONUser.tearDownNonAdminUsers(authenticationMethod = "${authenticationMethod}");
-
-		HeadlessPortalInstanceAPI.cleanAllPortalInstances(authenticationMethod = "${authenticationMethod}");
 	}
 
 	macro viewCP {
