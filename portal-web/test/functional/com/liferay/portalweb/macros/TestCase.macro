@@ -104,6 +104,17 @@ definition {
 		return "${fileContent}";
 	}
 
+	macro getPortalURL {
+		if (isSet(loopbackAddress)) {
+			var portalURL = "${loopbackAddress}";
+		}
+		else {
+			var portalURL = PropsUtil.get("portal.url");
+		}
+
+		return "${portalURL}";
+	}
+
 	macro getSiteName {
 		var testNameSkipPortalInstance = PropsUtil.get("test.name.skip.portal.instance");
 		var testPortalInstance = PropsUtil.get("test.portal.instance");
