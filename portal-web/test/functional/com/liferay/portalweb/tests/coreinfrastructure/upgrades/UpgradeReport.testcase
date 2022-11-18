@@ -21,13 +21,13 @@ definition {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
 			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
-
-			echo("${fileContent}");
 		}
 
 		task ("Read the intial portal build number") {
 			if (!(contains("${fileContent}", "Initial portal build number: 7413"))) {
 				fail("Inital portal build number is not present in upgrade report.");
+
+				echo("${fileContent}");
 			}
 		}
 
@@ -36,6 +36,8 @@ definition {
 
 			if (!(contains("${fileContent}", "Final portal build number: ${finalBuildVersion}"))) {
 				fail("Final portal build number is not present in upgrade report.");
+
+				echo("${fileContent}");
 			}
 		}
 
@@ -44,6 +46,8 @@ definition {
 
 			if (!(contains("${fileContent}", "Expected portal build number: ${expectedBuildVersion}"))) {
 				fail("Expected portal build number is not present in upgrade report.");
+
+				echo("${fileContent}");
 			}
 		}
 	}
@@ -60,8 +64,6 @@ definition {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
 			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
-
-			echo("${fileContent}");
 		}
 
 		task ("Read the type and version is correct in the report") {
@@ -71,6 +73,8 @@ definition {
 
 			if (!(contains("${fileContent}", "Using ${databaseType} version ${databaseVersion}"))) {
 				fail("Database type and version is not present in upgrade report.");
+
+				echo("${fileContent}");
 			}
 		}
 	}
@@ -86,19 +90,21 @@ definition {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
 			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
-
-			echo("${fileContent}");
 		}
 
 		task ("Read which Document Library Store is being used") {
 			if (!(contains("${fileContent}", "dl.store.impl=com.liferay.portal.store.file.system.FileSystemStore"))) {
 				fail("Document Library Store is not present in upgrade report.");
+
+				echo("${fileContent}");
 			}
 		}
 
 		task ("Read the size of document library storage") {
 			if (!(contains("${fileContent}", "The document library storage size is 750.03 KB"))) {
 				fail("Size of document library storage is not present in upgrade report.");
+
+				echo("${fileContent}");
 			}
 		}
 	}
@@ -117,13 +123,13 @@ definition {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
 			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
-
-			echo("${fileContent}");
 		}
 
 		task ("Read the content. No errors expected") {
 			if (contains("${fileContent}", "Errors thrown during upgrade")) {
 				fail("Upgrade report does not contain expected errors.");
+
+				echo("${fileContent}");
 			}
 		}
 	}
@@ -231,13 +237,13 @@ definition {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
 			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
-
-			echo("${fileContent}");
 		}
 
 		task ("Read the intial schema version") {
 			if (!(contains("${fileContent}", "Initial portal schema version: 13.1.1"))) {
 				fail("Inital schema version is not present in upgrade report.");
+
+				echo("${fileContent}");
 			}
 		}
 
@@ -246,6 +252,8 @@ definition {
 
 			if (!(contains("${fileContent}", "Final portal schema version: ${finalSchemaVersion}"))) {
 				fail("Final schema version is not present in upgrade report.");
+
+				echo("${fileContent}");
 			}
 		}
 
@@ -254,6 +262,8 @@ definition {
 
 			if (!(contains("${fileContent}", "Expected portal schema version: ${expectedSchemaVersion}"))) {
 				fail("Expected schema version is not present in upgrade report.");
+
+				echo("${fileContent}");
 			}
 		}
 	}
@@ -276,7 +286,7 @@ definition {
 		task ("Capture the upgrade runtime in upgrade logs") {
 			var upgradeRunTime = RegexUtil.replace("${fileContent}", "Completed Liferay core upgrade process i\"?n \"?(.*[0-9])", "1");
 
-			echo("${upgradeRunTime}");
+			echo("Upgrade runtime reported by upgrade.log is ${upgradeRunTime}");
 		}
 
 		task ("Look for the upgrade report") {
@@ -288,6 +298,8 @@ definition {
 		task ("Read the total runtime comparing with the one got in the logs") {
 			if (!(contains("${fileContent}", "Upgrade completed in ${upgradeRunTime}"))) {
 				fail("Total Runtime is not present in upgrade report.");
+
+				echo("${fileContent}");
 			}
 		}
 >>>>>>> b56423b (LPS-166392 Add RowCountsLogged testcase)
