@@ -390,7 +390,7 @@
 			</exec>
 
 			<sequential>
-				<waitfor maxwait="30" maxwaitunit="second" timeoutproperty="upgrade.startfailed">
+				<waitfor maxwait="300" maxwaitunit="second" timeoutproperty="upgrade.startfailed">
 					<available file="${db.upgrade.client.log}" />
 				</waitfor>
 
