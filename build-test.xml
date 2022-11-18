@@ -11132,6 +11132,8 @@ web.server.http.port=8080
 
 admin.email.from.address=test@liferay.com
 
+configuration.override.com.liferay.redirect.internal.configuration.RedirectURLConfiguration_allowedIPs=""
+
 announcements.email.to.address=noreply@liferay.com
 
 login.secure.forgot.password=false</echo>
