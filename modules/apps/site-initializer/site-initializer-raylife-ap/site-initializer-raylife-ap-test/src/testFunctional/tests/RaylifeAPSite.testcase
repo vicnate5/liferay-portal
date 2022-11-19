@@ -11,6 +11,12 @@ definition {
 	var testSiteName = "Raylife AP";
 	var testSiteURL = "raylife-ap";
 
+	var ip1 = MathUtil.randomNumber(255);
+	var ip2 = MathUtil.randomNumber(255);
+	var ip3 = MathUtil.randomNumber(255);
+
+	static var loopbackAddress = "http://127.${ip1}.${ip2}.${ip3}:8080";
+
 	setUp {
 		task ("Set up instance and sign in") {
 			TestCase.setUpPortalInstance();

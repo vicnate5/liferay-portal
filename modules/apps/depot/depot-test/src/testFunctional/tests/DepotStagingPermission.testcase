@@ -6,6 +6,12 @@ definition {
 	property portal.upstream = "true";
 	property testray.main.component.name = "Depot";
 
+	var ip1 = MathUtil.randomNumber(255);
+	var ip2 = MathUtil.randomNumber(255);
+	var ip3 = MathUtil.randomNumber(255);
+
+	static var loopbackAddress = "http://127.${ip1}.${ip2}.${ip3}:8080";
+
 	setUp {
 		TestCase.setUpPortalInstance();
 

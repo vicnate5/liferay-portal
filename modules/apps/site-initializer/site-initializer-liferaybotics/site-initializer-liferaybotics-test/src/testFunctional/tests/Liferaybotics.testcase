@@ -11,6 +11,12 @@ definition {
 	var testNewsArticleName2 = " Easier to operate than never before";
 	var testNewsArticleName3 = " Grab the best deals this June";
 
+	var ip1 = MathUtil.randomNumber(255);
+	var ip2 = MathUtil.randomNumber(255);
+	var ip3 = MathUtil.randomNumber(255);
+
+	static var loopbackAddress = "http://127.${ip1}.${ip2}.${ip3}:8080";
+
 	setUp {
 		task ("Set up instance and sign in") {
 			TestCase.setUpPortalInstance();

@@ -10,6 +10,12 @@ definition {
 	var testBuildFixPackZipURLPrevious = PropsUtil.get("test.build.fix.pack.zip.url.previous");
 	var testBuildFixPackZipURLLatestHeavy = PropsUtil.get("test.build.fix.pack.zip.url.latest.heavy");
 
+	var ip1 = MathUtil.randomNumber(255);
+	var ip2 = MathUtil.randomNumber(255);
+	var ip3 = MathUtil.randomNumber(255);
+
+	static var loopbackAddress = "http://127.${ip1}.${ip2}.${ip3}:8080";
+
 	setUp {
 		SignIn.signInTestSetup();
 	}
