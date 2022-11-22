@@ -9,7 +9,7 @@ definition {
 	property portal.version = "7.4.13";
 	property skip.start.app.server = "true";
 	property testcase.url = "http://www.example.com";
-	property testray.main.component.name = "Database Upgrade Framework";
+	property testray.main.component.name = "Database Upgrade Tool";
 	property upgrade.reports.enabled = "true";
 
 	@description = "LPS-158741: Upgrade Report provides the initial, final, and expected portal build number"
