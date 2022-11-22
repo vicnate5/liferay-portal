@@ -75,12 +75,29 @@ definition {
 	}
 
 	@description = "LPS-154683: The Upgrade Report Document Library Store and storage size."
-	@ignore = "Test Stub"
 	@priority = "4"
 	test DocumentLibraryLogged {
+		task ("Look for the upgrade report") {
+			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
-		// TODO The Upgrade Report should list which Document Library Store is being used and the amount of storage it contains in bytes
+			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
+		}
 
+		task ("Read which Document Library Store is being used") {
+			if (!(contains("${fileContent}", "dl.store.impl=com.liferay.portal.store.file.system.FileSystemStore"))) {
+				echo("${fileContent}");
+
+				fail("Document Library Store is not present in upgrade report.");
+			}
+		}
+
+		task ("Read the size of document library storage") {
+			if (!(contains("${fileContent}", "The document library storage size is 750.03 KB"))) {
+				echo("${fileContent}");
+
+				fail("Size of document library storage is not present in upgrade report.");
+			}
+		}
 	}
 
 	@description = "LPS-154683: Upgrade Report shows errors"
