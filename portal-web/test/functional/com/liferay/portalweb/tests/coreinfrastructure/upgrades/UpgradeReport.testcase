@@ -161,7 +161,9 @@ definition {
 	@description = "LPS-154683: The Upgrade Report should not be deleted on additional upgrade runs."
 	@priority = "4"
 	test ReportPersistThroughAdditionalUpgradeRuns {
+		property skip.start.app.server = "true";
 		property test.name.skip.portal.instance = "UpgradeReport#ReportPersistThroughAdditionalUpgradeRuns";
+		property testcase.url = "http://www.example.com";
 
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
