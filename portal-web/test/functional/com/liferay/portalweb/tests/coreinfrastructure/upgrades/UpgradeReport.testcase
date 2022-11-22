@@ -9,13 +9,14 @@ definition {
 	property portal.version = "7.4.13";
 	property testray.main.component.name = "Database Upgrade Framework";
 	property upgrade.reports.enabled = "true";
+	property testcase.url = "http://www.example.com";
+	property skip.start.app.server = "true";
 
 	@description = "LPS-158741: Upgrade Report provides the initial, final, and expected portal build number"
 	@priority = "3"
 	test BuildNumberLogged {
-		property skip.start.app.server = "true";
 		property test.name.skip.portal.instance = "UpgradeReport#BuildNumberLogged";
-		property testcase.url = "http://www.example.com";
+		
 
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
@@ -58,9 +59,7 @@ definition {
 	@priority = "3"
 	test DatabaseLogged {
 		property database.types = "db2,mariadb,mysql,oracle,postgresql,sqlserver";
-		property skip.start.app.server = "true";
 		property test.name.skip.portal.instance = "UpgradeReport#DatabaseLogged";
-		property testcase.url = "http://www.example.com";
 
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
@@ -115,9 +114,8 @@ definition {
 	@refactorneeded
 	test ErrorsLogged {
 		property portal.version = "6.0.12";
-		property skip.start.app.server = "true";
 		property test.name.skip.portal.instance = "UpgradeReport#ErrorsLogged";
-		property testcase.url = "http://www.example.com";
+		
 
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
@@ -153,9 +151,8 @@ definition {
 	@description = "LPS-154683: Upgrade Report is created when property is set to true"
 	@priority = "4"
 	test ReportGeneratedWhenEnabled {
-		property skip.start.app.server = "true";
 		property test.name.skip.portal.instance = "UpgradeReport#ReportGeneratedWhenEnabled";
-		property testcase.url = "http://www.example.com";
+		
 
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
@@ -173,9 +170,7 @@ definition {
 	@description = "LPS-154683: Upgrade Report is not created when property is not set to true"
 	@priority = "4"
 	test ReportNotGenerated {
-		property skip.start.app.server = "true";
 		property test.name.skip.portal.instance = "UpgradeReport#ReportNotGenerated";
-		property testcase.url = "http://www.example.com";
 		property upgrade.reports.enabled = "false";
 
 		task ("Look for the upgrade report") {
@@ -227,9 +222,7 @@ definition {
 	@description = "LPS-158741: The Upgrade Report should list the initial, expected, and final schema versions."
 	@priority = "4"
 	test SchemaVersionsLogged {
-		property skip.start.app.server = "true";
 		property test.name.skip.portal.instance = "UpgradeReport#SchemaVersionsLogged";
-		property testcase.url = "http://www.example.com";
 
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
@@ -316,9 +309,7 @@ definition {
 	@description = "LPS-154683: Upgrade Report shows warnings"
 	@priority = "3"
 	test WarningsLogged {
-		property skip.start.app.server = "true";
 		property test.name.skip.portal.instance = "UpgradeReport#WarningsLogged";
-		property testcase.url = "http://www.example.com";
 
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
@@ -343,7 +334,7 @@ definition {
 
 			if (!(contains("${fileContent}", "occurrences of the following warnings: "))) {
 				echo("${fileContent}");
-				
+
 				fail("Upgrade report does not contain the warning message.");
 			}
 		}
