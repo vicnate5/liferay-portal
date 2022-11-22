@@ -22,11 +22,13 @@ definition {
 
 			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
 
-			echo("${fileContent}");
+		
 		}
 
 		task ("Read the intial portal build number") {
 			if (!(contains("${fileContent}", "Initial portal build number: 7413"))) {
+				echo("${fileContent}");
+
 				fail("Inital portal build number is not present in upgrade report.");
 			}
 		}
@@ -35,6 +37,8 @@ definition {
 			var finalBuildVersion = Upgrade.getBuildNumber();
 
 			if (!(contains("${fileContent}", "Final portal build number: ${finalBuildVersion}"))) {
+				echo("${fileContent}");
+
 				fail("Final portal build number is not present in upgrade report.");
 			}
 		}
@@ -43,6 +47,8 @@ definition {
 			var expectedBuildVersion = Upgrade.getBuildNumber();
 
 			if (!(contains("${fileContent}", "Expected portal build number: ${expectedBuildVersion}"))) {
+				echo("${fileContent}");
+
 				fail("Expected portal build number is not present in upgrade report.");
 			}
 		}
@@ -61,7 +67,7 @@ definition {
 
 			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
 
-			echo("${fileContent}");
+			
 		}
 
 		task ("Read the type and version is correct in the report") {
@@ -70,6 +76,8 @@ definition {
 			var databaseVersion = PropsUtil.get("database.${databaseType}.version");
 
 			if (!(contains("${fileContent}", "Using ${databaseType} version ${databaseVersion}"))) {
+				echo("${fileContent}");
+
 				fail("Database type and version is not present in upgrade report.");
 			}
 		}
@@ -115,8 +123,6 @@ definition {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
 			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
-
-			echo("${fileContent}");
 		}
 
 		task ("Read the content. No errors expected") {
@@ -205,10 +211,14 @@ definition {
 
 		task ("Read the row counts references") {
 			if (!(contains("${fileContent}", "Rows (initial)"))) {
+				echo("${fileContent}");
+
 				fail("Initial rows numbers Column not present on Report.");
 			}
 
 			if (!(contains("${fileContent}", "Rows (final)"))) {
+				echo("${fileContent}");
+
 				fail("Final rows numbers Column not present on Report.");
 			}
 		}
@@ -226,11 +236,13 @@ definition {
 
 			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
 
-			echo("${fileContent}");
+			
 		}
 
 		task ("Read the intial schema version") {
 			if (!(contains("${fileContent}", "Initial portal schema version: 13.1.1"))) {
+				echo("${fileContent}");
+
 				fail("Inital schema version is not present in upgrade report.");
 			}
 		}
@@ -239,6 +251,8 @@ definition {
 			var finalSchemaVersion = Upgrade.getSchemaVersion();
 
 			if (!(contains("${fileContent}", "Final portal schema version: ${finalSchemaVersion}"))) {
+				echo("${fileContent}");
+
 				fail("Final schema version is not present in upgrade report.");
 			}
 		}
@@ -247,6 +261,8 @@ definition {
 			var expectedSchemaVersion = Upgrade.getSchemaVersion();
 
 			if (!(contains("${fileContent}", "Expected portal schema version: ${expectedSchemaVersion}"))) {
+				echo("${fileContent}");
+				
 				fail("Expected schema version is not present in upgrade report.");
 			}
 		}
@@ -312,16 +328,22 @@ definition {
 
 		task ("Read the content. Warnings expected") {
 			if (!(contains("${fileContent}", "Warnings thrown during upgrade process"))) {
+				echo("${fileContent}");
+
 				fail("Upgrade report does not contain expected warnings.");
 			}
 		}
 
 		task ("Read the content. Check for class name and message") {
 			if (!(contains("${fileContent}", "Class name:"))) {
+				echo("${fileContent}");
+
 				fail("Upgrade report does not contain the warning class name.");
 			}
 
 			if (!(contains("${fileContent}", "occurrences of the following warnings: "))) {
+				echo("${fileContent}");
+				
 				fail("Upgrade report does not contain the warning message.");
 			}
 		}
