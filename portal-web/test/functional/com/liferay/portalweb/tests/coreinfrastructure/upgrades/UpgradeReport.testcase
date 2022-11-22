@@ -232,12 +232,48 @@ definition {
 	}
 
 	@description = "LPS-154683: The Upgrade Report logs total upgrade runtime."
-	@ignore = "Test Stub"
+	@ignore = "true"
 	@priority = "4"
 	test TotalRuntimeLogged {
+		property test.name.skip.portal.instance = "UpgradeReport#TotalRuntimeLogged";
 
-		// TODO The Upgrade Report should give the total runtime of the upgrade
+		task ("Look for the upgrade logs") {
+			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
+			var fileContentLog = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/logs/upgrade.log");
+		}
+
+		task ("Look for the upgrade report") {
+			var fileContentReport = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
+		}
+
+		task ("Capture the upgrade runtime in upgrade logs") {
+			var upgradeRunTimeLog = RegexUtil.replace("${fileContentLog}", "Completed Liferay core upgrade process i\"?n \"?(.*[0-9])", "1");
+
+			echo("Upgrade runtime reported by upgrade.log is ${upgradeRunTimeLog}");
+		}
+
+		task ("Capture the upgrade runtime in upgrade Report") {
+			var upgradeRunTimeReport = RegexUtil.replace("${fileContentReport}", "Upgrade completed i\"?n \"?(.*[0-9])", "1");
+
+			echo("Upgrade runtime reported by upgrade_report.info is ${upgradeRunTimeReport}");
+		}
+
+		task ("Read the total runtime to see if it's present") {
+			if (!(contains("${fileContentReport}", "Upgrade completed in ${upgradeRunTimeReport}"))) {
+				echo("${fileContentReport}");
+
+				fail("Total Runtime it's not present on the Report.");
+			}
+		}
+
+		task ("Read the total runtime comparing with the one got in the logs") {
+			if (!(contains("${fileContentReport}", "Upgrade completed in ${upgradeRunTimeLog}"))) {
+				echo("${fileContentReport}");
+
+				fail("Total Runtime on Report mismatch the runtime on upgrade.log file.");
+			}
+		}
 	}
 
 	@description = "LPS-154683: Upgrade Report shows warnings"
