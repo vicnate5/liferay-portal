@@ -126,12 +126,21 @@ definition {
 	}
 
 	@description = "LPS-154683: The Upgrade Report logs the longest running upgrade processes."
-	@ignore = "Test Stub"
 	@priority = "4"
 	test LongestProcessesLogged {
+		task ("Look for the upgrade report") {
+			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
-		// TODO The Upgrade Report should list the 20 longest running upgrade process in the upgrade report in descending order
+			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
+		}
 
+		task ("Read the processes list message") {
+			if (!(contains("${fileContent}", "Top 20 longest running upgrade processes"))) {
+				echo("${fileContent}");
+
+				fail("List with the 20 longest upgrade processes not found.");
+			}
+		}
 	}
 
 	@description = "LPS-154683: Upgrade Report is created when property is set to true"
