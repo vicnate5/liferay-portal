@@ -7,23 +7,20 @@ definition {
 	property portal.release = "true";
 	property portal.upstream = "true";
 	property portal.version = "7.4.13";
+	property skip.start.app.server = "true";
+	property testcase.url = "http://www.example.com";
 	property testray.main.component.name = "Database Upgrade Framework";
 	property upgrade.reports.enabled = "true";
-	property testcase.url = "http://www.example.com";
-	property skip.start.app.server = "true";
 
 	@description = "LPS-158741: Upgrade Report provides the initial, final, and expected portal build number"
 	@priority = "3"
 	test BuildNumberLogged {
 		property test.name.skip.portal.instance = "UpgradeReport#BuildNumberLogged";
-		
 
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
 			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
-
-		
 		}
 
 		task ("Read the intial portal build number") {
@@ -65,8 +62,6 @@ definition {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
 			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
-
-			
 		}
 
 		task ("Read the type and version is correct in the report") {
@@ -115,7 +110,6 @@ definition {
 	test ErrorsLogged {
 		property portal.version = "6.0.12";
 		property test.name.skip.portal.instance = "UpgradeReport#ErrorsLogged";
-		
 
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
@@ -152,7 +146,6 @@ definition {
 	@priority = "4"
 	test ReportGeneratedWhenEnabled {
 		property test.name.skip.portal.instance = "UpgradeReport#ReportGeneratedWhenEnabled";
-		
 
 		task ("Look for the upgrade report") {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
@@ -228,8 +221,6 @@ definition {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
 			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
-
-			
 		}
 
 		task ("Read the intial schema version") {
@@ -255,7 +246,7 @@ definition {
 
 			if (!(contains("${fileContent}", "Expected portal schema version: ${expectedSchemaVersion}"))) {
 				echo("${fileContent}");
-				
+
 				fail("Expected schema version is not present in upgrade report.");
 			}
 		}
