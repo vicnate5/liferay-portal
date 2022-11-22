@@ -185,12 +185,23 @@ definition {
 	}
 
 	@description = "LPS-154683: The Upgrade Report logs the row counts for each table."
-	@ignore = "Test Stub"
 	@priority = "3"
 	test RowCountsLogged {
+		task ("Look for the upgrade report") {
+			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
-		// TODO The Upgrade Report should list the initial and final row counts for each database table sorted by initial row in descending order
+			var fileContent = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/reports/upgrade_report.info");
+		}
 
+		task ("Read the row counts references") {
+			if (!(contains("${fileContent}", "Rows (initial)"))) {
+				fail("Initial rows numbers Column not present on Report.");
+			}
+
+			if (!(contains("${fileContent}", "Rows (final)"))) {
+				fail("Final rows numbers Column not present on Report.");
+			}
+		}
 	}
 
 	@description = "LPS-158741: The Upgrade Report should list the initial, expected, and final schema versions."
