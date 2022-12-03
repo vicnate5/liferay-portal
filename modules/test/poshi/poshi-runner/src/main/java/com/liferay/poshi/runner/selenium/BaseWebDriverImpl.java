@@ -206,7 +206,7 @@ public abstract class BaseWebDriverImpl implements LiferaySelenium, WebDriver {
 		Future<Void> future = executorService.submit(antCommands);
 
 		try {
-			future.get(150, TimeUnit.SECONDS);
+			future.get(600, TimeUnit.SECONDS);
 		}
 		catch (ExecutionException executionException) {
 			throw executionException;
