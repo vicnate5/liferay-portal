@@ -4609,6 +4609,24 @@ tell application "Safari" to quit
 				</then>
 			</if>
 
+			<property name="default.timeout.app.server.wait" value="${timeout.app.server.wait}" />
+
+			<get-testcase-property property.name="timeout.app.server.wait" />
+
+			<if>
+				<isset property="timeout.app.server.wait" />
+				<then>
+					<echo append="true" file="${test.ext.properties.file}">
+						timeout.app.server.wait=${timeout.app.server.wait}
+					</echo>
+				</then>
+				<else>
+					<echo append="true" file="${test.ext.properties.file}">
+						timeout.app.server.wait=${default.timeout.app.server.wait}
+					</echo>
+				</else>
+			</if>
+
 			<property name="default.timeout.explicit.wait" value="${timeout.explicit.wait}" />
 
 			<get-testcase-property property.name="timeout.explicit.wait" />

@@ -33,6 +33,7 @@ definition {
 		property data.archive.type = "data-archive-portal-partition-large";
 		property portal.version = "7.4.13.u33";
 		property skip.upgrade-legacy-database = "true";
+		property timeout.app.server.wait = "60";
 
 		User.firstLoginUI(
 			password = "1234",
