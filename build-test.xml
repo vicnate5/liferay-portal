@@ -13701,7 +13701,7 @@ company.default.web.id=www.able.com</echo>
 								<param name="sql.dir" value="sql/create-bare/" />
 								<param name="sql.file" value="create-bare-mysql.sql" />
 							</antcall>
-							
+
 							<echo file="${import.database.sh.file.path}">
 								<![CDATA[
 									#!/bin/bash
@@ -13714,7 +13714,7 @@ company.default.web.id=www.able.com</echo>
 
 							<property name="docker.database.dest.path" value="/tmp/${database.type}.sql" />
 							<property name="import.database.src.path" value="${liferay.home}/${database.type}.sql" />
-							
+
 							<if>
 								<isset property="database.failure.enabled" />
 								<then>
@@ -13943,7 +13943,7 @@ go</echo>
 							</retry>
 
 							<exec executable="mysql_upgrade" />
-							
+
 							<if>
 								<isset property="database.failure.enabled" />
 								<then>
