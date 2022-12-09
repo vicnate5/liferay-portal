@@ -4609,24 +4609,6 @@ tell application "Safari" to quit
 				</then>
 			</if>
 
-			<property name="default.timeout.app.server.wait" value="${timeout.app.server.wait}" />
-
-			<get-testcase-property property.name="timeout.app.server.wait" />
-
-			<if>
-				<isset property="timeout.app.server.wait" />
-				<then>
-					<echo append="true" file="${test.ext.properties.file}">
-						timeout.app.server.wait=${timeout.app.server.wait}
-					</echo>
-				</then>
-				<else>
-					<echo append="true" file="${test.ext.properties.file}">
-						timeout.app.server.wait=${default.timeout.app.server.wait}
-					</echo>
-				</else>
-			</if>
-
 			<property name="default.timeout.explicit.wait" value="${timeout.explicit.wait}" />
 
 			<get-testcase-property property.name="timeout.explicit.wait" />
@@ -8113,7 +8095,7 @@ war.path=${app.server.portal.dir}/</echo>
 
 			<local name="app.server.waiting.timeout" />
 
-			<echo>Waiting for ${app.server.waiting.url} to load ${timeout.app.server.wait.new}</echo>
+			<echo>Waiting for ${app.server.waiting.url} to load ${timeout.app.server.wait}</echo>
 
 			<waitfor maxwait="${timeout.app.server.wait}" maxwaitunit="second" timeoutproperty="app.server.waiting.timeout">
 				<http url="${app.server.waiting.url}" />
@@ -8164,6 +8146,20 @@ war.path=${app.server.portal.dir}/</echo>
 				<then>
 					<local name="wait.for.app.server.log.timed.out.message" />
 
+					<get-testcase-property property.name="custom.startup.timeout" />
+
+					<if>
+						<isset property="custom.startup.timeout" />
+						<then>
+							<property name="timeout.app.server.wait.final" value="${custom.startup.timeout}" />
+						</then>
+						<else>
+							<property name="timeout.app.server.wait.final" value="${timeout.app.server.wait}" />
+						</else>
+					</if>
+
+					<echo>VICTOR log ${timeout.app.server.wait.final}</echo>
+
 					<beanshell>
 						<![CDATA[
 							import java.nio.file.Files;
@@ -8210,7 +8206,7 @@ war.path=${app.server.portal.dir}/</echo>
 
 							System.out.println("Waiting for server startup message");
 
-							int timeout = Integer.parseInt(project.getProperty("timeout.app.server.wait"));
+							int timeout = Integer.parseInt(project.getProperty("timeout.app.server.wait.final"));
 
 							int second = 0;
 

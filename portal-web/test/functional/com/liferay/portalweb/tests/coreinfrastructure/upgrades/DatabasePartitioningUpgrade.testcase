@@ -30,10 +30,10 @@ definition {
 	@priority = "5"
 	test CanUpgradeLargePartitionedDatabase {
 		property custom.properties = "upgrade.database.auto.run=true";
+		property custom.startup.timeout = "300";
 		property data.archive.type = "data-archive-portal-partition-large";
 		property portal.version = "7.4.13.u33";
 		property skip.upgrade-legacy-database = "true";
-		property timeout.app.server.wait = "60";
 
 		User.firstLoginUI(
 			password = "1234",
