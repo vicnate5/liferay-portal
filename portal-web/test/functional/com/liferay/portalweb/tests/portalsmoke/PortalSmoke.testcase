@@ -46,6 +46,14 @@ definition {
 		// Assert all bundles installed
 
 		AssertConsoleTextNotPresent(value1 = "The portal instance needs to be restarted to complete the installation");
+
+		// Assert no warnings and error in logs after "Starting dynamic bundles"
+
+		AssertConsoleTextPresent(value1 = "Starting dynamic bundles");
+
+		AssertConsoleTextNotPresent(value1 = "log4j:WARN");
+
+		AssertConsoleTextNotPresent(value1 = "log4j:ERROR");
 	}
 
 	@priority = "5"
