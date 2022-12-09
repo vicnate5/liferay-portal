@@ -11,4 +11,30 @@ definition {
 		User.firstLoginPG();
 	}
 
+	@description = "LRQA-78466: Verify Properties is executed before the PortalUpgradeProcess starts to upgrade database when running upgrade tool"
+	@priority = "4"
+	test VerifyPropertiesIsExecutedBeforePortalUpgradeProcessUsingUpgradeTool {
+		property data.archive.type = "data-archive-portal";
+		property portal.version = "7.4.13";
+		property test.name.skip.portal.instance = "VerifyProperties#VerifyPropertiesIsExecutedBeforePortalUpgradeProcessUsingUpgradeTool";
+
+		var liferayHome = PropsUtil.get("liferay.home.dir.name");
+
+		var fileContentLog = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/logs/upgrade.log");
+
+		AssertConsoleTextPresent(value1 = "Completed com.liferay.portal.verify.VerifyProperties#verifySystemProperties");
+
+		AssertConsoleTextPresent(value1 = "Completed com.liferay.portal.verify.VerifyProperties#verifyPortalProperties");
+
+		AssertConsoleTextPresent(value1 = "Completed com.liferay.portal.verify.VerifyProperties#verifyDocumentLibrary");
+
+		AssertConsoleTextPresent(value1 = "Upgrading com.liferay.portal.upgrade.PortalUpgradeProcess");
+
+		if (!(contains("${fileContentLog}", "Completed Liferay core upgrade process"))) {
+			echo("${fileContentLog} is present in the logs");
+
+			fail("Upgrade Process is not completed");
+		}
+	}
+
 }
