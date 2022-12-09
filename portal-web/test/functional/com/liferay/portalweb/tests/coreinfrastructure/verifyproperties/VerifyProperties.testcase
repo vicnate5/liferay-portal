@@ -55,4 +55,16 @@ definition {
 		}
 	}
 
+	@description = "LRQA-78468: Verify Properties not run when start portal with empty database"
+	@priority = "3"
+	test VerifyPropertiesNotRunWithEmptyDatabase {
+		property test.name.skip.portal.instance = "VerifyProperties#VerifyPropertiesNotRunWithEmptyDatabase";
+
+		Log.viewLogFileContentNotPresent(logContent = "Completed com.liferay.portal.verify.VerifyProperties#verifySystemProperties");
+
+		Log.viewLogFileContentNotPresent(logContent = "Completed com.liferay.portal.verify.VerifyProperties#verifyPortalProperties");
+
+		Log.viewLogFileContentNotPresent(logContent = "Completed com.liferay.portal.verify.VerifyProperties#verifyDocumentLibrary");
+	}
+
 }
