@@ -49,8 +49,6 @@ definition {
 
 		Navigator.openSpecificURL(url = "http://localhost:10080");
 
-		Alert.viewErrorMessage(errorMessage = "exceeded the maximum number of cluster nodes");
-
 		AssertTextEquals.assertPartialText(
 			locator1 = "Message#ERROR_2",
 			value1 = "This instance is not registered.");
