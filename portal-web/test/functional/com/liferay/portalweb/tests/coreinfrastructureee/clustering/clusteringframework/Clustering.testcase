@@ -207,10 +207,6 @@ definition {
 			virtualHost = "www.able.com",
 			webId = "www.able.com");
 
-		var companyId = JSONCompany.getCompanyId();
-
-		AssertConsoleTextNotPresent(value1 = "No default user was found for company ${companyId}");
-
 		Navigator.openSpecificURL(url = "http://www.able.com:8080");
 
 		User.firstLoginPG(
@@ -220,10 +216,12 @@ definition {
 
 		Navigator.openSpecificURL(url = "http://www.able.com:9080");
 
-		User.firstLoginPG(
+		User.firstLoginUI(
 			password = "test",
-			userEmailAddress = "test@www.able.com",
-			virtualHostsURL = "http://www.able.com:9080");
+			specificURL = "http://www.able.com:9080",
+			userEmailAddress = "test@www.able.com");
+
+		AssertConsoleTextNotPresent(value1 = "No default user was found for company");
 	}
 
 	@priority = "4"
