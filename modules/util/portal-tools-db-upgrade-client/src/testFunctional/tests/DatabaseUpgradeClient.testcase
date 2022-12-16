@@ -128,6 +128,8 @@ definition {
 			locator1 = "modules/util/portal-tools-db-upgrade-client/src/testFunctional/ant/build-test-db-upgrade-client.xml",
 			value1 = "check-upgrade-client-upgrade-core-only");
 
+		WaitForConsoleTextPresent(value1 = "Verifying com.liferay.search.experiences.internal.verify.SXPServiceVerifyProcess");
+
 		AntCommand(
 			locator1 = "modules/util/portal-tools-db-upgrade-client/src/testFunctional/ant/build-test-db-upgrade-client.xml",
 			value1 = "check-failed-upgrade-log");
