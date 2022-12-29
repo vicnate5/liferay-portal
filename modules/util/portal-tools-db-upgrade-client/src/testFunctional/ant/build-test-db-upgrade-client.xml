@@ -569,4 +569,40 @@ upgrade.database.auto.run=false</echo>
 	<target name="clean-database-upgrade-client">
 		<clean-database-upgrade-client />
 	</target>
+
+	<target name="execute-all-pending-upgrades-from-gogo-shell">
+
+		<echo append="true" file="${liferay.home}/portal-ext.properties">
+module.framework.properties.osgi.console=localhost:11312</echo>
+
+		<execute failonerror="true">
+			telnet localhost 11312
+		</execute>
+		
+		<execute failonerror="true">
+			upgrades:executeAll
+		</execute>
+
+		<loadfile
+			property="upgrade.process.output"
+			srcFile="temp.log"
+		/>
+
+		<echo>${upgrade.process.output}</echo>
+
+		<if>
+			<contains string="${upgrade.process.output}" substring="All modules were successfully upgraded" />
+			<then>
+				<echo>After executing upgrade:executeAll command all remaining upgrade processes have been executed.</echo>
+			</then>
+			<else>
+				<fail message="User is attempting to execute all remaining upgrade processes executing upgrade:executeAll command." />
+			</else>
+		</if>
+
+		<execute failonerror="true">
+			exit
+		</execute>
+
+	</target>
 </project>
