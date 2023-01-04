@@ -4,6 +4,7 @@ definition {
 	property app.server.types = "tomcat";
 	property database.types = "mysql";
 	property portal.release = "true";
+	property portal.upgrades = "lucas";
 	property portal.upstream = "true";
 	property testray.main.component.name = "Database Upgrade Framework";
 
