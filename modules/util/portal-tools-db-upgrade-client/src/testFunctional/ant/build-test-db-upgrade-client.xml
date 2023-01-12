@@ -92,6 +92,45 @@
 		<fail if="gogoshell.timeout" message="The Gogo shell connection did not connect as expected." />
 	</target>
 
+	<target name="check-gogoshell-connection">
+		<get-database-upgrade-client-paths />
+
+		<echo file="${db.upgrade.client.home}/telnet-connection.sh">
+			#!/bin/sh
+
+			telnet localhost 11312
+
+			exit 0
+		</echo>
+
+		<chmod
+			file="${db.upgrade.client.home}/telnet-connection.sh"
+			perm="744"
+		/>
+
+		<exec dir="${db.upgrade.client.home}" executable="sh" output="${db.upgrade.client.home}/gogo-shell-connection-output.txt">
+			<arg value="telnet-connection.sh" />
+		</exec>
+
+		<local name="gogo.shell.connection.output" />
+
+		<loadfile
+			property="gogo.shell.connection.output"
+			srcfile="${db.upgrade.client.home}/gogo-shell-connection-output.txt"
+		/>
+
+		<if>
+			<not>
+				<contains string="${gogo.shell.connection.output}" substring="Connection refused" />
+			</not>
+			<then>
+				<fail message="The Gogo shell was connected" />
+			</then>
+		</if>
+
+		<echo>The gogo shell connection check is completed.</echo>
+	</target>
+
 	<target name="check-upgrade-client-additional-settings">
 		<get-database-upgrade-client-paths />
 
