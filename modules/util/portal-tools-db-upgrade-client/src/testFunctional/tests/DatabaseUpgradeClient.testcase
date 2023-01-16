@@ -198,6 +198,10 @@ definition {
             locator1 = "modules/util/portal-tools-db-upgrade-client/src/testFunctional/ant/build-test-db-upgrade-client.xml",
             value1 = "check-upgrade-client-upgrade-core-only");
 
+		AntCommand(
+			locator1 = "modules/util/portal-tools-db-upgrade-client/src/testFunctional/ant/build-test-db-upgrade-client.xml",
+			value1 = "clean-database-upgrade-client");
+
         AntCommand(
             locator1 = "modules/util/portal-tools-db-upgrade-client/src/testFunctional/ant/build-test-db-upgrade-client.xml",
             value1 = "execute-all-pending-upgrades-from-gogo-shell");
