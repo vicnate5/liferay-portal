@@ -12,7 +12,7 @@ expect {
 set timeout 5
 
 expect {
-	"upgrade:executeAll" 
+	"upgrade:executeAll" {send_user " Command is printed";exit 2}
 	timeout {send_user "Command is not printed!";exit 2}
 }
 
