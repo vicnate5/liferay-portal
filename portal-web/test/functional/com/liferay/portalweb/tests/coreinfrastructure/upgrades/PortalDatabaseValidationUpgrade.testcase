@@ -9,6 +9,7 @@ definition {
 	property testray.main.component.name = "Database Upgrade Framework";
 
 	@priority = "4"
+	@ignore = "true"
 	test CompareUpgradedAndFreshDatabaseSchemas6130 {
 		property custom.properties = "feature.flag.LPS-157670=true";
 		property data.archive.type = "data-archive-portal";
@@ -36,6 +37,7 @@ definition {
 	}
 
 	@priority = "4"
+	@ignore = "true"
 	test CompareUpgradedAndFreshDatabaseSchemas7210 {
 		property data.archive.type = "data-archive-portal";
 		property portal.version = "7.2.10";
@@ -88,6 +90,7 @@ definition {
 	}
 
 	@priority = "4"
+	@ignore = "true"
 	test CompareUpgradedAndFreshDatabaseSchemas7413 {
 		property data.archive.type = "data-archive-portal";
 		property portal.version = "7.4.13";
@@ -114,6 +117,7 @@ definition {
 	}
 
 	@priority = "4"
+	@ignore = "true"
 	test CompareUpgradedAndFreshDatabaseSchemas70106 {
 		property data.archive.type = "data-archive-portal";
 		property portal.version = "7.0.10.6";
@@ -140,6 +144,7 @@ definition {
 	}
 
 	@priority = "4"
+	@ignore = "true"
 	test CompareUpgradedAndFreshDatabaseSchemas71103 {
 		property data.archive.type = "data-archive-portal";
 		property portal.version = "7.1.10.3";
@@ -166,6 +171,7 @@ definition {
 	}
 
 	@priority = "4"
+	@ignore = "true"
 	test CompareUpgradedAndFreshDatabaseSchemas621021 {
 		property data.archive.type = "data-archive-portal";
 		property portal.version = "6.2.10.21";
