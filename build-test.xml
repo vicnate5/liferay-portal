@@ -15684,6 +15684,14 @@ mail.send.blacklist=</echo>
 				</antcall>
 			</then>
 		</if>
+
+		<echo append="true" file="test.${user.name}.properties"><![CDATA[
+database.mysql.docker.image=mysql:${database.version}
+database.mysql.host=${database.host}_mysql
+database.mysql.schema=lportal
+database.mysql.url=jdbc:mysql://${database.host}:3307/${database.mysql.schema}?characterEncoding=UTF-8&dontTrackOpenResources=true&holdResultsOpenOverStatementClose=true&serverTimezone=GMT&useFastDateParsing=false&useUnicode=true
+database.mysql.version=${database.version}
+database.type=mysql]]></echo>
 	</target>
 
 	<target name="start-docker-database-oracle">
