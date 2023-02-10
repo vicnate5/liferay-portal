@@ -7033,6 +7033,79 @@ ${output.content}</echo>
 		</exec>
 	</target>
 
+	<target name="prepare-generated-files-jdk8">
+		<run-batch-test>
+			<test-action>
+				<if>
+					<available file="modules/util/portal-tools-service-builder" />
+					<then>
+						<gradle-execute dir="modules/util/portal-tools-service-builder" task="deploy">
+							<arg value="clean" />
+						</gradle-execute>
+					</then>
+				</if>
+
+				<exec executable="git">
+					<arg value="add" />
+					<arg value="--all" />
+				</exec>
+
+				<record action="start" name="${project.dir}/prepare.generated.files.txt" />
+
+				<ant antfile="build-dist.xml" inheritAll="false" target="prepare-generated-files" />
+
+				<record action="stop" name="${project.dir}/prepare.generated.files.txt" />
+
+				<loadfile
+					property="prepare.generated.files.content"
+					srcfile="${project.dir}/prepare.generated.files.txt"
+				/>
+
+				<delete file="${project.dir}/prepare.generated.files.txt" />
+
+				<if>
+					<contains string="prepare.generated.files.content" substring="Writing " />
+					<then>
+						<exec executable="git" output="${project.dir}/prepare.generated.files.diff.txt">
+							<arg value="diff" />
+							<arg value="--" />
+							<arg value="." />
+							<arg value=":!*/*-portlet-service.jar" />
+							<arg value=":!*/packageinfo" />
+							<arg value=":!*/src/main/resources/service.properties" />
+							<arg value=":!*/src/service.properties" />
+						</exec>
+
+						<loadfile
+							property="prepare.generated.files.diff.txt.content"
+							srcfile="${project.dir}/prepare.generated.files.diff.txt"
+						/>
+
+						<delete file="${project.dir}/prepare.generated.files.diff.txt" />
+
+						<if>
+							<isset property="prepare.generated.files.diff.txt.content" />
+							<then>
+								<echo>${prepare.generated.files.diff.txt.content}</echo>
+
+								<fail>
+.
+
+Detected generated file changes. See above generated file log for more
+information. Make sure to commit in all generated file results.
+								</fail>
+							</then>
+						</if>
+					</then>
+				</if>
+			</test-action>
+
+			<test-set-up>
+				<setup-test-environment />
+			</test-set-up>
+		</run-batch-test>
+	</target>
+
 	<target name="release-functional-bundle-tomcat-mysql56-jdk8">
 		<antcall target="functional-bundle-tomcat-mysql56-jdk8" />
 	</target>
