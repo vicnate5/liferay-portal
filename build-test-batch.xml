@@ -1611,6 +1611,9 @@ app.server.type=@{app.server.type}]]></echo>
 			<var name="browser.type" value="@{browser.type}" />
 			<var name="database.type" value="@{database.type}" />
 
+			<echo> VICTOR @{database.type} </echo>
+			<echo> VICTOR ${database.type} </echo>
+
 			<condition else="${run.test.case.method.group}_${axis.variable}" property="test.class" value="${axis.variable}">
 				<matches pattern="[A-z]+" string="${axis.variable}" />
 			</condition>

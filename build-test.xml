@@ -10810,6 +10810,8 @@ ${update.properties}</echo>
 	<target name="prepare-log4j-ext-xml">
 		<var name="dialect.detector.log.level" value="INFO" />
 
+		<echo> VICTOR prepare-lo4j ${database.type} </echo>
+
 		<if>
 			<equals arg1="${database.type}" arg2="hypersonic" />
 			<then>
