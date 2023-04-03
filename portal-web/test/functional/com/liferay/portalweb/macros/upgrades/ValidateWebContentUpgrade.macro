@@ -1,6 +1,6 @@
 definition {
 
-    macro addWCStructureAndTemplate {
+	macro addWCStructureAndTemplate {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
@@ -485,5 +485,5 @@ definition {
 				locator1 = "WCEditWebContent#IMAGE_PICKER_PREVIEW");
 		}
 	}
-		
+
 }
