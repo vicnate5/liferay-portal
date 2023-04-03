@@ -63,6 +63,13 @@ definition {
 
 		Navigator.openSpecificURL(url = "http://localhost:8080");
 
+		TestUtils.hardRefresh();
+
+		ContentPages.viewFragmentImage(
+			fragmentName = "image",
+			id = "image-square",
+			image = "tree.png");
+
 		User.firstLoginUI(
 			password = "test",
 			specificURL = "http://localhost:8080",
@@ -140,6 +147,15 @@ definition {
 			value1 = "prepare-upgrade-original-bundle-test-environment");
 
 		Portlet.startServer(deleteLiferayHome = "false");
+
+		Navigator.openSpecificURL(url = "http://localhost:8080");
+
+		TestUtils.hardRefresh();
+
+		ContentPages.viewFragmentImage(
+			fragmentName = "image",
+			id = "image-square",
+			image = "tree.png");
 
 		User.firstLoginUI(
 			password = "test",
@@ -219,6 +235,15 @@ definition {
 			value1 = "prepare-upgrade-original-bundle-test-environment");
 
 		Portlet.startServer(deleteLiferayHome = "false");
+
+		Navigator.openSpecificURL(url = "http://localhost:8080");
+
+		TestUtils.hardRefresh();
+
+		ContentPages.viewFragmentImage(
+			fragmentName = "image",
+			id = "image-square",
+			image = "tree.png");
 
 		User.firstLoginPG(
 			password = "test",
