@@ -6,7 +6,7 @@ definition {
 	property minimum.slave.ram = "24";
 	property portal.release = "true";
 	property portal.upgrades = "false";
-	property portal.upstream = "true";
+	property portal.upstream = "lucas";
 	property testray.main.component.name = "Database Upgrade Framework";
 
 	@priority = 4
