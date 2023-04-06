@@ -325,7 +325,7 @@ definition {
 		task ("View SAML general IdP and connection configuration") {
 			Upgrade.viewSAMLGeneralConfiguration(samlRoleType = "Identity Provider");
 
-			Upgrade.viewSAMLSPConnectionConfiguration();
+			ValidateSAMLUpgrade.viewSAMLSPConnectionConfiguration();
 		}
 	}
 
@@ -338,7 +338,7 @@ definition {
 		task ("View SAML general IdP and connection configuration") {
 			Upgrade.viewSAMLGeneralConfiguration(samlRoleType = "Identity Provider");
 
-			Upgrade.viewSAMLSPConnectionConfiguration();
+			ValidateSAMLUpgrade.viewSAMLSPConnectionConfiguration();
 		}
 	}
 
@@ -351,7 +351,7 @@ definition {
 		task ("View SAML general IdP and connection configuration") {
 			Upgrade.viewSAMLGeneralConfiguration(samlRoleType = "Identity Provider");
 
-			Upgrade.viewSAMLSPConnectionConfiguration();
+			ValidateSAMLUpgrade.viewSAMLSPConnectionConfiguration();
 		}
 	}
 
@@ -364,7 +364,7 @@ definition {
 		task ("View SAML general IdP and connection configuration") {
 			Upgrade.viewSAMLGeneralConfiguration(samlRoleType = "Identity Provider");
 
-			Upgrade.viewSAMLSPConnectionConfiguration();
+			ValidateSAMLUpgrade.viewSAMLSPConnectionConfiguration();
 		}
 	}
 
@@ -378,7 +378,7 @@ definition {
 		task ("View SAML general IdP and connection configuration") {
 			Upgrade.viewSAMLGeneralConfiguration(samlRoleType = "Identity Provider");
 
-			Upgrade.viewSAMLSPConnectionConfiguration();
+			ValidateSAMLUpgrade.viewSAMLSPConnectionConfiguration();
 		}
 	}
 
@@ -391,7 +391,7 @@ definition {
 		task ("View SAML general IdP and connection configuration") {
 			Upgrade.viewSAMLGeneralConfiguration(samlRoleType = "Identity Provider");
 
-			Upgrade.viewSAMLSPConnectionConfiguration();
+			ValidateSAMLUpgrade.viewSAMLSPConnectionConfiguration();
 		}
 	}
 
@@ -405,7 +405,7 @@ definition {
 		task ("View SAML general IdP and connection with encryption configuration ") {
 			Upgrade.viewSAMLGeneralConfiguration(samlRoleType = "Identity Provider");
 
-			Upgrade.viewSAMLSPConnectionConfiguration(forceEncryption = "true");
+			ValidateSAMLUpgrade.viewSAMLSPConnectionConfiguration(forceEncryption = "true");
 		}
 	}
 
@@ -418,7 +418,7 @@ definition {
 		task ("View SAML general IdP and connection with encryption configuration") {
 			Upgrade.viewSAMLGeneralConfiguration(samlRoleType = "Identity Provider");
 
-			Upgrade.viewSAMLSPConnectionConfiguration(forceEncryption = "true");
+			ValidateSAMLUpgrade.viewSAMLSPConnectionConfiguration(forceEncryption = "true");
 		}
 	}
 
@@ -431,7 +431,7 @@ definition {
 		task ("View SAML general IdP and connection with encryption configuration") {
 			Upgrade.viewSAMLGeneralConfiguration(samlRoleType = "Identity Provider");
 
-			Upgrade.viewSAMLSPConnectionConfiguration(forceEncryption = "true");
+			ValidateSAMLUpgrade.viewSAMLSPConnectionConfiguration(forceEncryption = "true");
 		}
 	}
 

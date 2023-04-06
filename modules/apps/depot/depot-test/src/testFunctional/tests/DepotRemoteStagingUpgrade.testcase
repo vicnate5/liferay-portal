@@ -156,11 +156,11 @@ definition {
 		property portal.version = "7.3.10.1";
 		property test.name.skip.portal.instance = "DepotRemoteStagingUpgrade#ViewDepotRemoteStagingArchive73101";
 
-		Upgrade.publishDMsInRemoteStagingDepot();
+		ValidateDepotUpgrade.publishDMsInRemoteStagingDepot();
 
-		Upgrade.publishWCsInRemoteStagingDepot();
+		ValidateDepotUpgrade.publishWCsInRemoteStagingDepot();
 
-		Upgrade.publishCollectionsInRemoteStagingDepot();
+		ValidateDepotUpgrade.publishCollectionsInRemoteStagingDepot();
 	}
 
 }

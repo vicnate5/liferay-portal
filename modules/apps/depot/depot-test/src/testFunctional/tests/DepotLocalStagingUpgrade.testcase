@@ -167,11 +167,11 @@ definition {
 		property portal.version = "7.3.10.1";
 		property test.name.skip.portal.instance = "DepotLocalStagingUpgrade#ViewDepotStagingArchive73101";
 
-		Upgrade.publishDMsInStagingDepot();
+		ValidateDepotUpgrade.publishDMsInStagingDepot();
 
 		Upgrade.publishWCsInStagingDepot();
 
-		Upgrade.publishCollectionsInStagingDepot();
+		ValidateDepotUpgrade.publishCollectionsInStagingDepot();
 	}
 
 }
