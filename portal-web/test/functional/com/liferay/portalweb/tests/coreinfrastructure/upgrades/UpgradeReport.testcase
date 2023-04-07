@@ -330,6 +330,10 @@ definition {
 				fail("New upgrade report contains unexpected upgrades.");
 			}
 		}
+
+		task ("Verify upgrade report is not generated in console output in log context format") {
+			AssertConsoleTextNotPresent(value1 = "upgrade.component=framework");
+		}
 	}
 
 	@description = "LPS-158743: Upgrade report is generated in the console using log context format"
