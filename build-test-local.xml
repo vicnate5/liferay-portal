@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<project basedir="." name="portal-test-local" xmlns:antelope="antlib:ise.antelope.tasks">
+	<import file="build-test.xml" />
+
+	<target name="build-dxp">
+		<antcall inheritAll="false" target="setup-profile-dxp" />
+
+		<antcall target="all" />
+
+		<antcall target="create-bundles-backup" />
+	</target>
+
+	<target name="create-bundles-backup">
+		<basename file="${app.server.parent.dir}" property="app.server.parent.dir.name" />
+
+		<exec dir="${project.dir}" executable="git" outputproperty="git.commit.portal.rev.parse">
+			<arg line="rev-parse HEAD" />
+		</exec>
+
+		<property name="liferay.home.parent.dir" location="${app.server.parent.dir}/../"/>
+
+		<echo>Creating backup of ${app.server.parent.dir.name} directory at ${liferay.home.parent.dir}/bundles-master-${git.commit.portal.rev.parse}.tar.gz.</echo>
+
+		<exec dir="${liferay.home.parent.dir}" executable="tar" failonerror="true">
+			<arg value="-czf" />
+			<arg value="${liferay.home.parent.dir}/bundles-master-${git.commit.portal.rev.parse}.tar.gz" />
+			<arg value="${app.server.parent.dir.name}" />
+		</exec>
+	</target>
+</project>
