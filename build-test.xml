@@ -1849,6 +1849,7 @@ jdbc.default.connectionProperties=oracle.jdbc.ReadTimeout=0;oracle.net.CONNECT_T
 			</if>
 
 			<get-testcase-property property.name="portal.context" />
+			<propertycopy from="portal.context[${env.CI_TEST_SUITE}]" name="portal.context" silent="true" />
 
 			<if>
 				<isset property="portal.context" />
@@ -1858,6 +1859,7 @@ jdbc.default.connectionProperties=oracle.jdbc.ReadTimeout=0;oracle.net.CONNECT_T
 			</if>
 
 			<get-testcase-property property.name="portal.proxy.path" />
+			<propertycopy from="portal.proxy.path[${env.CI_TEST_SUITE}]" name="portal.proxy.path" silent="true" />
 
 			<if>
 				<isset property="portal.proxy.path" />
@@ -2254,6 +2256,7 @@ war.path=${app.server.portal.dir}/</echo>
 						/>
 
 						<get-testcase-property property.name="portal.proxy.path" />
+						<propertycopy from="portal.proxy.path[${env.CI_TEST_SUITE}]" name="portal.proxy.path" silent="true" />
 
 						<if>
 							<isset property="portal.proxy.path" />
@@ -7487,7 +7490,9 @@ ${docker.start.error}</fail>
 
 									<get-operating-system-property property.name="operating.system.docker.image" />
 									<get-testcase-property property.name="portal.context" />
+									<propertycopy from="portal.context[${env.CI_TEST_SUITE}]" name="portal.context" silent="true" />
 									<get-testcase-property property.name="portal.proxy.path" />
+									<propertycopy from="portal.proxy.path[${env.CI_TEST_SUITE}]" name="portal.proxy.path" silent="true" />
 
 									<if>
 										<isset property="portal.context" />
@@ -8085,7 +8090,9 @@ war.path=${app.server.portal.dir}/</echo>
 
 			<get-operating-system-property property.name="operating.system.docker.image" />
 			<get-testcase-property property.name="portal.context" />
+			<propertycopy from="portal.context[${env.CI_TEST_SUITE}]" name="portal.context" silent="true" />
 			<get-testcase-property property.name="portal.proxy.path" />
+			<propertycopy from="portal.proxy.path[${env.CI_TEST_SUITE}]" name="portal.proxy.path" silent="true" />
 
 			<if>
 				<isset property="portal.context" />
@@ -11605,6 +11612,7 @@ session.cookie.use.full.hostname=true
 		</if>
 
 		<get-testcase-property property.name="portal.proxy.path" />
+		<propertycopy from="portal.proxy.path[${env.CI_TEST_SUITE}]" name="portal.proxy.path" silent="true" />
 
 		<if>
 			<isset property="portal.proxy.path" />
@@ -14856,6 +14864,7 @@ mail.send.blacklist=</echo>
 		</if>
 
 		<get-testcase-property property.name="portal.context" />
+		<propertycopy from="portal.context[${env.CI_TEST_SUITE}]" name="portal.context" silent="true" />
 
 		<if>
 			<isset property="portal.context" />
@@ -14893,6 +14902,7 @@ mail.send.blacklist=</echo>
 		</if>
 
 		<get-testcase-property property.name="portal.proxy.path" />
+		<propertycopy from="portal.proxy.path[${env.CI_TEST_SUITE}]" name="portal.proxy.path" silent="true" />
 
 		<if>
 			<isset property="portal.proxy.path" />
@@ -15708,6 +15718,7 @@ mail.send.blacklist=</echo>
 		</if>
 
 		<get-testcase-property property.name="portal.proxy.path" />
+		<propertycopy from="portal.proxy.path[${env.CI_TEST_SUITE}]" name="portal.proxy.path" silent="true" />
 
 		<if>
 			<isset property="portal.proxy.path" />
