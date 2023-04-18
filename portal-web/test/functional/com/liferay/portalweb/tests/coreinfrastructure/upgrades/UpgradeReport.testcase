@@ -598,8 +598,6 @@ definition {
 
 		task ("Read report generation message in the logs") {
 			if (!(contains(${fileContentLog}, "Starting upgrade report generation"))) {
-				echo(${fileContent});
-
 				fail("Starting upgrade report generation message not present in the logs");
 			}
 		}
