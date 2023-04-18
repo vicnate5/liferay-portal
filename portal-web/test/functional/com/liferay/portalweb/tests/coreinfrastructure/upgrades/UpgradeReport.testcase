@@ -104,24 +104,6 @@ definition {
 		}
 	}
 
-	@description = "LPS-181594: The message of start report generation is printed in the logs."
-	@priority = 4
-	test StartReportGenerationMessageLogged {
-		task ("Look for the upgrade logs") {
-			var liferayHome = PropsUtil.get("liferay.home.dir.name");
-
-			var fileContentLog = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/logs/upgrade.log");
-		}
-
-		task ("Read report generation message in the logs") {
-			if (!(contains(${fileContentLog}, "Starting upgrade report generation"))) {
-				echo(${fileContent});
-
-				fail("Starting upgrade report generation message not present in the logs");
-			}
-		}
-	}
-
 	@description = "LPS-154683: Upgrade Report shows errors"
 	@priority = 4
 	test ErrorsLogged {
@@ -605,6 +587,24 @@ definition {
 		}
 	}
 
+	@description = "LPS-181594: The message of start report generation is printed in the logs."
+	@priority = 4
+	test StartReportGenerationMessageLogged {
+		task ("Look for the upgrade logs") {
+			var liferayHome = PropsUtil.get("liferay.home.dir.name");
+
+			var fileContentLog = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/logs/upgrade.log");
+		}
+
+		task ("Read report generation message in the logs") {
+			if (!(contains(${fileContentLog}, "Starting upgrade report generation"))) {
+				echo(${fileContent});
+
+				fail("Starting upgrade report generation message not present in the logs");
+			}
+		}
+	}
+
 	@description = "LPS-154683: The Upgrade Report logs total upgrade runtime."
 	@priority = 4
 	test TotalRuntimeLogged {
@@ -656,7 +656,6 @@ definition {
 			var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
 			var localLiferayHomeInitialFilePath = StringUtil.extractFirst(${liferayHome}, "/liferay-portal");
-
 			var localLiferayHome = StringUtil.extractLast(${liferayHome}, "../");
 
 			var localLiferayHome = "${localLiferayHomeInitialFilePath}/${localLiferayHome}";
@@ -664,12 +663,11 @@ definition {
 
 		task ("Format local liferay home path to match the one printed in the logs") {
 			var localLiferayHomeInitialFilePath = StringUtil.extractFirst(${liferayHome}, "/liferay-portal");
-
 			var localLiferayHome = StringUtil.extractLast(${liferayHome}, "../");
 
 			var localLiferayHome = "${localLiferayHomeInitialFilePath}/${localLiferayHome}";
 		}
-		
+
 		task ("Look for the upgrade logs") {
 			var fileContentLog = FileUtil.read("${liferayHome}/tools/portal-tools-db-upgrade-client/logs/upgrade.log");
 		}
@@ -677,7 +675,6 @@ definition {
 		task ("Read upgrade report file path message in the logs") {
 			if (!(contains(${fileContentLog}, "Upgrade report generated in ${liferayHome}/tools/portal-tools-db-upgrade-client/./reports/upgrade_report.info"))) {
 				if (!(contains(${fileContentLog}, "Upgrade report generated in ${localLiferayHome}/tools/portal-tools-db-upgrade-client/./reports/upgrade_report.info"))) {
-
 					fail("Upgrade report file path message not present");
 				}
 			}
@@ -721,7 +718,7 @@ definition {
 				echo(${fileContent});
 
 				fail("Upgrade report does not contain expected warnings.");
-			} 
+			}
 
 			if (!(contains(${fileContent}, "Class name:"))) {
 				echo(${fileContent});
