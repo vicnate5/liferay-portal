@@ -587,6 +587,20 @@ definition {
 		}
 	}
 
+	@description = "LPS-181594: The message of start report generation is printed in the logs."
+	@priority = 4
+	test StartReportGenerationMessageLogged {
+		task ("Look for the upgrade logs") {
+			var upgradeLogFileContent = Log.getUpgradeLogFileContent();
+		}
+
+		task ("Read report generation message in the logs") {
+			if (!(contains(${upgradeLogFileContent}, "Starting upgrade report generation"))) {
+				fail("Starting upgrade report generation message not present in the logs");
+			}
+		}
+	}
+
 	@description = "LPS-154683: The Upgrade Report logs total upgrade runtime."
 	@priority = 4
 	test TotalRuntimeLogged {
@@ -627,6 +641,23 @@ definition {
 				echo(${fileContentReport});
 
 				fail("Total runtime in upgrade report does not match the runtime in upgrade.log file.");
+			}
+		}
+	}
+
+	@description = "LPS-181594: The message with the  upgrade report file path is printed in the logs"
+	@priority = 4
+	test UpgradeReportFilePathMessageLogged {
+
+		var liferayHome = PropsUtil.get("liferay.home.dir.name"); 
+
+		task ("Look for the upgrade logs") {
+			var upgradeLogFileContent = Log.getUpgradeLogFileContent();
+		}
+
+		task ("Read upgrade report file path message in the logs") {
+			if (!(contains(${upgradeLogFileContent}, "Upgrade report generated in ${liferayHome}/tools/portal-tools-db-upgrade-client/./reports/upgrade_report.info"))) {
+				fail("Upgrade report file path message not present");
 			}
 		}
 	}
