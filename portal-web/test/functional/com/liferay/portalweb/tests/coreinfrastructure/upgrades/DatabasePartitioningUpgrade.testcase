@@ -13,7 +13,7 @@ definition {
 
 	@priority = 5
 	test CanAutoUpgradeLargePartitionedDatabase7413 {
-		property custom.properties = "upgrade.database.auto.run=true";
+		property custom.properties = "upgrade.database.auto.run=true${line.separator}upgrade.report.enabled=true";
 		property custom.startup.timeout = "300";
 		property data.archive.type = "data-archive-portal-partition-large";
 		property minimum.slave.ram = "24";
@@ -22,6 +22,14 @@ definition {
 		property portal.version = "7.4.13.u72";
 		property skip.upgrade-legacy-database = "true";
 		property test.assert.warning.exceptions = "false";
+
+		task ("Print the upgrade execution time") {
+			var reportFileContent = UpgradeReport.getAutoUpgradeReportFileContent();
+
+			var upgradeRunTimeReport = UpgradeReport.getUpgradeExecutionTime(reportFileContent = ${reportFileContent});
+
+			echo("Upgrade execution time is ${upgradeRunTimeReport} seconds");
+		}
 
 		User.firstLoginUI(
 			password = 1234,
@@ -39,6 +47,14 @@ definition {
 		property portal.version = "7.4.13.u72";
 		property skip.upgrade-legacy-database = "true";
 		property test.assert.warning.exceptions = "false";
+
+		task ("Print the upgrade execution time") {
+			var reportFileContent = UpgradeReport.getAutoUpgradeReportFileContent();
+
+			var upgradeRunTimeReport = UpgradeReport.getUpgradeExecutionTime(reportFileContent = ${reportFileContent});
+
+			echo("Upgrade execution time is ${upgradeRunTimeReport} seconds");
+		}
 
 		User.firstLoginUI(
 			password = 1234,
@@ -63,6 +79,15 @@ definition {
 		property portal.upstream = "false";
 		property portal.version = "7.4.13.u72";
 		property test.assert.warning.exceptions = "false";
+		property upgrade.reports.enabled = "true";
+
+		task ("Print the upgrade execution time") {
+			var reportFileContent = UpgradeReport.getUpgradeReportFileContent();
+
+			var upgradeRunTimeReport = UpgradeReport.getUpgradeExecutionTime(reportFileContent = ${reportFileContent});
+
+			echo("Upgrade execution time is ${upgradeRunTimeReport} seconds");
+		}
 
 		User.firstLoginUI(
 			password = 1234,
@@ -79,6 +104,14 @@ definition {
 		property portal.version = "7.4.13.u72";
 		property test.assert.warning.exceptions = "false";
 		property upgrade.reports.enabled = "true";
+
+		task ("Print the upgrade execution time") {
+			var reportFileContent = UpgradeReport.getUpgradeReportFileContent();
+
+			var upgradeRunTimeReport = UpgradeReport.getUpgradeExecutionTime(reportFileContent = ${reportFileContent});
+
+			echo("Upgrade execution time is ${upgradeRunTimeReport} seconds");
+		}
 
 		User.firstLoginUI(
 			password = 1234,
