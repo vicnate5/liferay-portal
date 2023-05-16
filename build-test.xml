@@ -641,7 +641,7 @@ jdbc.default.password=${database.password}
 // HikariCP
 
 jdbc.default.connectionTimeout=600000
-jdbc.default.maximumPoolSize=30
+jdbc.default.maximumPoolSize=40
 jdbc.default.minimumIdle=0]]></echo>
 
 			<if>
@@ -11260,7 +11260,7 @@ login.secure.forgot.password=false</echo>
 					// HikariCP
 
 					jdbc.default.connectionTimeout=600000
-					jdbc.default.maximumPoolSize=30
+					jdbc.default.maximumPoolSize=40
 					jdbc.default.minimumIdle=0
 
 					initial.system.check.enabled=true</echo>
