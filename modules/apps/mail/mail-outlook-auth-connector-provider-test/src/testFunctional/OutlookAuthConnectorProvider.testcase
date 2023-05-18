@@ -1,0 +1,43 @@
+@component-name = "portal-lima"
+definition {
+
+	property portal.release = "true";
+	property portal.upstream = "true";
+	property testray.main.component.name = "Message Boards";
+
+	setUp {
+		TestCase.setUpPortalInstance();
+
+		User.firstLoginPG();
+	}
+
+	tearDown {
+		var testPortalInstance = PropsUtil.get("test.portal.instance");
+
+		if (${testPortalInstance} == "true") {
+			PortalInstances.tearDownCP();
+		}
+	}
+
+	@description = "This test ensures that the Google Drive file can be added with Japanese."
+	@priority = 5
+	test CanSendEmailToMSExchangeServer {
+		Gmail.login(
+			userEmailAddress = PropsUtil.get("email.address.2"),
+			userPassword = PropsUtil.get("email.password.2"));
+
+		Gmail.gotoHtmlMode();
+
+		Gmail.viewMail(
+			emailFromUserName = "Joe Bloggs",
+			gmailAssetType = "New Report: reports_admin_template_source_sample_class_name.pdf",
+			gmailMessageAttachment = "reports_admin_template_source_sample_class_name.pdf",
+			gmailMessageBody = "Please review the attached report.",
+			gmailMessageTitle = "New Report: reports_admin_template_source_sample_class_name.pdf");
+
+		Gmail.deleteSpecificMail(gmailMessageTitleList = "New Report: reports_admin_template_source_sample_class_name.pdf,Your New Account,Your New Password");
+
+		Navigator.openSpecificURL(url = ${portalURL});
+	}
+
+}
