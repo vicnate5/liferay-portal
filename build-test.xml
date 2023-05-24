@@ -10833,6 +10833,17 @@ send_user $expect_out(buffer)]]></echo>
 		</if>
 	</target>
 
+	<target name="move-lpkg-file">
+		<move
+			todir="${toDir}"
+		>
+			<fileset
+				dir="${fromDir}"
+				includes="${lpkg.file}"
+			/>
+		</move>
+	</target>
+
 	<target name="portal-ext-properties-update">
 		<if>
 			<not>
