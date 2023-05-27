@@ -11108,6 +11108,10 @@ ${update.properties}</echo>
 	</target>
 
 	<target name="prepare-osgi-module-configurations">
+		<echo file="${liferay.home}/osgi/configs/com.liferay.antivirus.clamd.scanner.internal.configuration.ClamdAntivirusScannerConfiguration.config">
+hostname=&quot;clamd&quot;
+port=I&quot;3310&quot;</echo>
+
 		<get-testcase-property property.name="custom.element.client.extension.created" />
 
 		<if>
@@ -11206,6 +11210,8 @@ jdbc.default.password=${database.password}
 jdbc.default.connectionTimeout=600000
 jdbc.default.maximumPoolSize=30
 jdbc.default.minimumIdle=0
+
+dl.store.antivirus.enabled=true
 
 admin.email.from.address=test@liferay.com
 announcements.email.to.address=noreply@liferay.com
