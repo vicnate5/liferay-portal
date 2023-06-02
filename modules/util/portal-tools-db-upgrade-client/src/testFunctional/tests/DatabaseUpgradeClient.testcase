@@ -167,6 +167,8 @@ definition {
 	@description = "LPS-163243: The user can execute the upgrade:executeAll command on Gogo shell to execute all remaining upgrade processes"
 	@priority = 3
 	test ExecuteAllPendingUpgradesFromGogoShell {
+		property osgi.module.configuration.file.names = "com.liferay.portal.search.configuration.IndexStatusManagerConfiguration.config";
+		property osgi.module.configurations = "indexReadOnly=\"true\"";
 		property skip.get.testcase.database.properties = "true";
 		property skip.upgrade-legacy-database = "true";
 
