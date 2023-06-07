@@ -2,6 +2,7 @@
 
 <project basedir="." default="test" name="portal-test" xmlns:antelope="antlib:ise.antelope.tasks" xmlns:if="ant:if" xmlns:unless="ant:unless">
 	<import file="build.xml" />
+	<import file="build-test-local.xml" />
 
 	<if>
 		<and>
@@ -503,10 +504,190 @@ typeSettings=&#91;&quot;friendlyURLMapping=perico&quot;,&quot;instanceable=false
 		</sequential>
 	</macrodef>
 
-	<macrodef name="export-database-mysql-compact">
+	<macrodef name="get-database-partitions">
+		<sequential>
+			<var name="arg.line" value="" />
+			<var name="arg.line" unless:blank="${database.mysql.password}" value="--password=${database.mysql.password}" />
+			<var name="arg.line" unless:blank="${database.mysql.username}" value="${arg.line} --user=${database.mysql.username}" />
+			<var name="arg.line" value="${arg.line} -e &quot;show databases like 'lpartition_%';&quot;" />
+			
+			<echo> teste macro get-partitions 1 </echo>
+
+			<if>
+				<or>
+					<equals arg1="${env.DOCKER_ENABLED}" arg2="true" />
+					<isset property="database.${database.type}.docker.image" />
+				</or>
+
+				<then>
+					<property location="partition.sh" name="partition.sh.file.path" />
+
+					<echo> teste macro get-partitions 2 </echo>
+
+					<echo file="${partition.sh.file.path}">
+						<![CDATA[
+							#!/bin/bash
+
+							mysql ${arg.line}
+						]]>
+					</echo>
+
+					<echo> teste macro get-partitions 3 </echo>
+
+					<print-file file.name="${partition.sh.file.path}" />
+
+					<get-database-property property.name="database.host" />
+
+					<echo> teste macro get-partitions 4 </echo>
+
+					<exec executable="docker" failonerror="true" logError="true">
+						<arg line="cp ${partition.sh.file.path} ${database.host}:/tmp/partition.sh" />
+					</exec>
+
+					<exec executable="docker" failonerror="true" logError="true" outputproperty="database.partition.schemas.unformatted">
+						<arg line="exec ${database.host} /bin/bash /tmp/partition.sh" />
+					</exec>
+				</then>
+				<else>
+					<exec executable="${mysql.executable}" failonerror="true" logError="true" outputproperty="database.partition.schemas.unformatted">
+						<arg line="${arg.line}" />
+					</exec>
+				</else>
+			</if>
+
+			<propertyregex
+				global="true"
+				input="${database.partition.schemas.unformatted}"
+				property="database.partition.schemas.temp"
+				regexp="\n"
+				replace=" "
+			/>
+
+			<propertyregex
+				global="true"
+				input="${database.partition.schemas.temp}"
+				property="database.partition.schemas"
+				regexp="Database \(lpartition_%\) "
+				replace=""
+			/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="export-partitioned-database">
 		<attribute default="mysql" name="database.file.prefix" />
 
 		<sequential>
+			<get-testcase-property property.name="database.partition.enabled" />
+
+			<get-database-partitions />
+
+			<if>
+				<or>
+					<equals arg1="${env.DOCKER_ENABLED}" arg2="true" />
+					<isset property="database.${database.type}.docker.image" />
+				</or>
+				
+				<then>
+					<local name="export.dmp.file.path" />
+
+					<property location="export.sh" name="export.sh.file.path" />
+					<property name="docker.src.file.path" value="/tmp/export.sql" />
+					<property name="export.dmp.file.path" value="${basedir}/${database.file.prefix}.sql" />
+
+					<echo> teste bloco if 1 </echo>
+
+					<echo> teste bloco if 2 </echo>
+
+					<echo file="${export.sh.file.path}">
+						<![CDATA[
+							#!/bin/bash
+
+							mysqldump \
+								--compact \
+								--no-data \
+								--order-by-primary \
+								--skip-comments \
+								--skip-extended-insert \
+								--password=${database.mysql.password} \
+								--user=${database.mysql.username} \
+								--databases ${database.partition.schemas} > \
+								${docker.src.file.path}
+
+							sed -i "s/Warning: Using a password on the command line interface can be insecure.//g" ${docker.src.file.path}
+						]]>
+					</echo>
+
+					<echo> teste bloco if 3 </echo>
+
+					<get-database-property property.name="database.host" />
+
+					<echo> teste bloco if 4 </echo>
+
+					<execute>
+						<![CDATA[
+							docker cp ${export.sh.file.path} ${database.host}:/tmp/export.sh
+
+							docker exec ${database.host} /bin/bash /tmp/export.sh
+						]]>
+					</execute>
+
+					<echo> teste bloco if 5 </echo>
+
+					<execute>
+							<![CDATA[
+							docker cp ${database.host}:${docker.src.file.path} ${export.dmp.file.path}
+						]]>
+					</execute>
+					<echo> teste bloco if 6 </echo>
+				</then>
+				<else>
+					<echo> teste bloco else 1 </echo>
+					<get-database-partitions />
+
+					<echo> teste bloco else 2 </echo>
+
+					<exec executable="mysqldump" output="${database.file.prefix}.sql">
+						<arg line="--password=${database.mysql.password} --user=${database.mysql.username} --databases ${database.partition.schemas} ${database.mysql.schema}" />
+					</exec>
+
+					<echo> teste bloco else 3 </echo>
+
+					<replace
+						file="${database.file.prefix}.sql"
+						token="mysqldump: [Warning] Using a password on the command line interface can be insecure."
+						value=""
+					/>
+				</else>
+			</if>
+
+			<if>
+				<and>
+					<not>
+						<available file="${database.file.prefix}.dmp" type="file" />
+					</not>
+					<not>
+						<available file="${database.file.prefix}.sql" type="file" />
+					</not>
+				</and>
+				<then>
+					<fail message="Unable to backup database." />
+				</then>
+			</if>
+
+			<get-testcase-property property.name="data.archive.type" />
+
+			<zip destfile="data-archive/${data.archive.type}-${database.file.prefix}.zip">
+				<zipfileset dir="." includes="${database.file.prefix}.dmp" />
+				<zipfileset dir="${liferay.home}" includes="data/**" />
+			</zip>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="export-database-mysql-compact">
+		<attribute default="mysql" name="database.file.prefix" />
+		<attribute default="database.mysql.schema" name="partition.schema.prefix" />
+
+		<sequential> 
 			<if>
 				<or>
 					<equals arg1="${env.DOCKER_ENABLED}" arg2="true" />
@@ -518,25 +699,55 @@ typeSettings=&#91;&quot;friendlyURLMapping=perico&quot;,&quot;instanceable=false
 					<property location="export_database_mysql_compact_export.sh" name="export.database.mysql.compact.file.path" />
 					<property name="docker.src.file.path" value="/tmp/export.sql" />
 					<property name="export.dmp.file.path" value="${basedir}/@{database.file.prefix}.sql" />
+					
+					<get-testcase-property property.name="database.partition.enabled" />
 
-					<echo file="${export.database.mysql.compact.file.path}">
-						<![CDATA[
-							#!/bin/bash
+					<if>
+						<equals arg1="${database.partition.enabled}" arg2="true" />
+						<then>
+							<get-database-partitions />
 
-							mysqldump \
-								--compact \
-								--no-data \
-								--order-by-primary \
-								--password=${database.mysql.password} \
-								--skip-comments \
-								--skip-extended-insert \
-								--user=${database.mysql.username} \
-								${database.mysql.schema} > \
-								${docker.src.file.path}
+							<echo file="${export.database.mysql.compact.file.path}">
+								<![CDATA[
+									#!/bin/bash
 
-							sed -i "s/Warning: Using a password on the command line interface can be insecure.//g" ${docker.src.file.path}
-						]]>
-					</echo>
+									mysqldump \
+										--compact \
+										--no-data \
+										--order-by-primary \
+										--password=${database.mysql.password} \
+										--skip-comments \
+										--skip-extended-insert \
+										--user=${database.mysql.username} \
+										--default-character-set=utf8 \
+										--databases ${database.partition.schemas} > \
+										${docker.src.file.path} 
+
+									sed -i "s/Warning: Using a password on the command line interface can be insecure.//g" ${docker.src.file.path}
+								]]>
+							</echo>
+						</then>
+						<else>
+							<echo file="${export.database.mysql.compact.file.path}">
+								<![CDATA[
+									#!/bin/bash
+
+									mysqldump \
+										--compact \
+										--no-data \
+										--order-by-primary \
+										--password=${database.mysql.password} \
+										--skip-comments \
+										--skip-extended-insert \
+										--user=${database.mysql.username} \
+										--databases ${database.mysql.schema} > \
+										${docker.src.file.path} 
+
+									sed -i "s/Warning: Using a password on the command line interface can be insecure.//g" ${docker.src.file.path}
+								]]>
+							</echo>
+						</else>  
+					</if>
 
 					<get-database-property property.name="database.host" />
 
@@ -583,7 +794,8 @@ typeSettings=&#91;&quot;friendlyURLMapping=perico&quot;,&quot;instanceable=false
 						!f
 						f{a[$0]=$0}' ${1} |
 					sed 's=/[^/]*$==;s/\,$//' |
-					sed 's/_x_.*//'
+					sed 's/_x_.*//' | 
+					sed '/lpartition_/d'
 				]]>
 			</echo>
 
@@ -5467,6 +5679,29 @@ tell application "Safari" to quit
 										<equals arg1="${database.type}" arg2="mysql" />
 									</or>
 									<then>
+										<get-testcase-property property.name="database.partition.enabled" />
+
+										<if>
+											<equals arg1="${database.partition.enabled}" arg2="true" />															
+											<then>
+												<exec executable="mysql">
+													<arg value="--host=localhost_mysql"/>
+													<arg value="--password="/>
+													<arg value="--user=root"/>
+													<arg value="-e"/>
+													<arg value="DROP DATABASE IF EXISTS lpartition_42638;"/>
+													</exec>
+
+													<exec executable="mysql">
+													<arg value="--host=localhost_mysql"/>
+													<arg value="--password="/>
+													<arg value="--user=root"/>
+													<arg value="-e"/>
+													<arg value="DROP DATABASE IF EXISTS lpartition_44913;"/>
+													</exec>
+											</then>
+										</if>
+
 										<echo file="${create.sh.file.path}">
 											<![CDATA[
 												#!/bin/bash
@@ -10306,6 +10541,10 @@ send_user $expect_out(buffer)]]></echo>
 		<get-test-app-server-lib-portal-dir />
 
 		<sql classpath="${test.app.server.lib.portal.dir}/${jdbc.mysql.driver}" driver="${database.mysql.driver}" onerror="continue" output="${mysql.output.file}" password="${database.mysql.password}" print="true" showtrailers="false" src="${mysql.input.file}" url="${database.mysql.url}" userid="${database.mysql.username}" />
+	</target>
+
+	<target name="export-partitioned-database-schema">
+		<export-partitioned-database database.file.prefix="${database.file.prefix}" />
 	</target>
 
 	<target name="export-database-schema">
