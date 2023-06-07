@@ -16165,6 +16165,19 @@ mail.send.blacklist=</echo>
 		<start-docker-os />
 	</target>
 
+	<target name="start-simple-app-server">
+		<trycatch property="startup.error">
+			<try>
+				<exec executable="${app.server.tomcat.bin.dir}/catalina.sh" failonerror="true">
+					<arg line="run" />
+				</exec>
+			</try>
+			<catch>
+				<echo>Server failed to start</echo>
+			</catch>
+		</trycatch>
+	</target>
+
 	<target name="start-test-smtp-server">
 		<exec executable="/bin/bash" outputproperty="output">
 			<arg value="-c" />
