@@ -5679,29 +5679,6 @@ tell application "Safari" to quit
 										<equals arg1="${database.type}" arg2="mysql" />
 									</or>
 									<then>
-										<get-testcase-property property.name="database.partition.enabled" />
-
-										<if>
-											<equals arg1="${database.partition.enabled}" arg2="true" />															
-											<then>
-												<exec executable="mysql">
-													<arg value="--host=localhost_mysql"/>
-													<arg value="--password="/>
-													<arg value="--user=root"/>
-													<arg value="-e"/>
-													<arg value="DROP DATABASE IF EXISTS lpartition_42638;"/>
-													</exec>
-
-													<exec executable="mysql">
-													<arg value="--host=localhost_mysql"/>
-													<arg value="--password="/>
-													<arg value="--user=root"/>
-													<arg value="-e"/>
-													<arg value="DROP DATABASE IF EXISTS lpartition_44913;"/>
-													</exec>
-											</then>
-										</if>
-
 										<echo file="${create.sh.file.path}">
 											<![CDATA[
 												#!/bin/bash
