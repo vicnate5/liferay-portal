@@ -11868,6 +11868,26 @@ dl.store.antivirus.enabled=true</echo>
 			</then>
 		</if>
 
+		<get-testcase-property property.name="osgi.modules.includes" />
+
+		<if>
+			<equals arg1="${osgi.modules.includes}" arg2="ext-test-impl" />
+			<then>
+				<loadproperties srcFile="portal-impl/src/portal.properties">
+					<filterchain>
+						<linecontains>
+							<contains value="spring" />
+						</linecontains>
+					</filterchain>
+				</loadproperties>
+
+				<echo append="true" file="portal-impl/src/portal-ext.properties">
+
+spring.configs=${spring.configs},/META-INF/infrastructure-spring.xml
+				</echo>
+			</then>
+		</if>
+
 		<if>
 			<equals arg1="${ms.exchange.enabled}" arg2="true" />
 
