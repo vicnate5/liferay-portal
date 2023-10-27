@@ -5,16 +5,23 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.petra.reflect.ReflectionUtil;
 import com.liferay.petra.string.CharPool;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
@@ -91,8 +98,31 @@ public class DirectRequestDispatcherFactoryUtil {
 				_log.debug("No servlet found for " + fullPath);
 			}
 
+			RequestDispatcher requestDispatcher = null;
+
+			try {
+				requestDispatcher = servletContext.getRequestDispatcher(path);
+
+				synchronized (System.err) {
+					System.err.println("###Inspect for good case");
+
+					_inspectServletContext(servletContext);
+				}
+			}
+			catch (NullPointerException nullPointerException) {
+				synchronized (System.err) {
+					System.err.println(
+						"####Caught npe on servletContext : " + servletContext +
+							" with " + path);
+
+					_inspectServletContext(servletContext);
+				}
+
+				throw nullPointerException;
+			}
+
 			return new DirectServletPathRegisterDispatcher(
-				path, servletContext.getRequestDispatcher(path));
+				path, requestDispatcher);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -100,6 +130,75 @@ public class DirectRequestDispatcherFactoryUtil {
 		}
 
 		return new DirectRequestDispatcher(servlet, path, queryString);
+	}
+
+	private static void _inspectServletContext(ServletContext servletContext) {
+		InvocationHandler invocationHandler =
+			ProxyUtil.getInvocationHandler(servletContext);
+
+		System.err.println("Unwrapped " + servletContext + " to get " + invocationHandler);
+
+		try {
+			Object defaultObject = _getFieldValue(invocationHandler, "_defaultObject");
+
+			System.err.println("Unwrapped " + invocationHandler + " to get " + defaultObject);
+
+			Object applicationContext = _getFieldValue(defaultObject, "context");
+
+			System.err.println("Unwrapped " + defaultObject + " to get " + applicationContext);
+
+			Object context = _getFieldValue(applicationContext, "context");
+
+			System.err.println("Unwrapped " + applicationContext + " to get " + context);
+
+			Object service = _getFieldValue(applicationContext, "service");
+
+			System.err.println("Unwrapped " + applicationContext + " to get " + service);
+
+			Object mapper = _invoke(service, "getMapper", new Class<?>[0]);
+
+			System.err.println("Invoked " + service + " to get " + mapper);
+
+			Map<?, ?> contextObjectToContextVersionMap = _getFieldValue(mapper, "contextObjectToContextVersionMap");
+
+			System.err.println("Unwrapped " + mapper + " to get " + contextObjectToContextVersionMap);
+
+			System.err.println("Lookup with " + context + ", " + contextObjectToContextVersionMap.get(context));
+		}
+		catch (Exception exception) {
+			System.err.println("Inspection stopped with " + exception.getMessage());
+		}
+	}
+
+	private static <T> T _getFieldValue(Object instance, String fieldName) {
+		try {
+			Field field = ReflectionUtil.getDeclaredField(
+				instance.getClass(), fieldName);
+
+			return (T)field.get(instance);
+		}
+		catch (Exception exception) {
+			return ReflectionUtil.throwException(exception);
+		}
+	}
+
+	private static <T> T _invoke(
+		Object instance, String methodName, Class<?>[] parameterTypes,
+		Object... parameters) {
+
+		try {
+			Method method = ReflectionUtil.getDeclaredMethod(
+				instance.getClass(), methodName, parameterTypes);
+
+			return (T)method.invoke(instance, parameters);
+		}
+		catch (InvocationTargetException invocationTargetException) {
+			return ReflectionUtil.throwException(
+				invocationTargetException.getCause());
+		}
+		catch (Exception exception) {
+			return ReflectionUtil.throwException(exception);
+		}
 	}
 
 	private static RequestDispatcher _getRequestDispatcher(
