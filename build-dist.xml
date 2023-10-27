@@ -2911,11 +2911,7 @@ plugins.includes=</echo>
 							</exec>
 
 							<sequential>
-								<waitfor>
-									<http url="http://localhost:8080" />
-								</waitfor>
-
-								<sleep seconds="5" />
+								<get src="http://localhost:8080" dest="${zip.executable.dir}/../homepage.html" />
 
 								<exec dir="dist/${tstamp.value}/liferay-portal-${lp.version}/tomcat-${app.server.tomcat.version}/bin" executable="sh">
 									<arg value="shutdown.sh" />
