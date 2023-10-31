@@ -36,7 +36,7 @@ definition {
 		property database.types = "db2,hypersonic,mariadb,mysql,oracle,postgresql,sqlserver,sybase";
 		property environment.acceptance = "true";
 		property operating.system.types = "alpine,amazonlinux,centos,debian,fedora,orcllinux,osx,redhat,rockylinux,solaris,suse,ubuntu,windows";
-		property portal.acceptance = "false";
+		property portal.acceptance = "kvale1733";
 		property testray.component.names = "Training";
 
 		SignIn.signInTestSetup();

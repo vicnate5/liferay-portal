@@ -63,6 +63,7 @@ definition {
 		property portal.smoke.upgrades = "true";
 		property portal.version = "7.3.0";
 		property test.assert.warning.exceptions = "true";
+		property portal.acceptance = "kvale1733";
 
 		ValidateSmokeUpgrade.viewUpgrade();
 	}
