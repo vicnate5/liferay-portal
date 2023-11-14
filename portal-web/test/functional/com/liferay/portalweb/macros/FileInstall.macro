@@ -1,34 +1,34 @@
 definition {
 
-	@summary = "Default summary"
+	@summary = "This will delete ${configFile}"
 	macro deleteConfigFile(configFile = null) {
 		var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
 		AntCommands.runCommand("build-test.xml", "delete-dependency-file  -Dliferay.dependency.config=${configFile} -Dliferay.home=${liferayHome}");
 	}
 
-	@summary = "Default summary"
+	@summary = "This will delete ${jarFile}"
 	macro deleteJarOffline(jarFile = null) {
 		var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
 		AntCommands.runCommand("build-test.xml", "delete-dependency-file  -Dliferay.dependency.jar=${jarFile} -Dliferay.home=${liferayHome}");
 	}
 
-	@summary = "Default summary"
+	@summary = "This will delete portal ${jarFile}"
 	macro deletePortalJarOffline(jarFile = null) {
 		var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
 		AntCommands.runCommand("build-test.xml", "delete-dependency-file  -Dliferay.home=${liferayHome} -Dliferay.portal.dependency.jar=${jarFile}");
 	}
 
-	@summary = "Default summary"
+	@summary = "This will delete ${warFile}"
 	macro deleteWarOffline(warFile = null) {
 		var liferayHome = PropsUtil.get("liferay.home.dir.name");
 
 		AntCommands.runCommand("build-test.xml", "delete-dependency-file  -Dliferay.dependency.war=${warFile} -Dliferay.home=${liferayHome}");
 	}
 
-	@summary = "Default summary"
+	@summary = "This will deploy ${jarFile} on the server"
 	macro deployFileOnServer(jarFile = null, bundleIndex = null) {
 		var liferayHome = PropsUtil.get("liferay.home.dir.name");
 

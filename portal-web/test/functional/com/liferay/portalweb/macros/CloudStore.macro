@@ -1,6 +1,6 @@
 definition {
 
-	@summary = "Default summary"
+	@summary = "This will verify the connection when serving file as stream"
 	macro VerifyConnectionWhenServingFileAsStream() {
 		if (!(isSet(siteName))) {
 			var siteName = "Test Site Name";
