@@ -23,9 +23,21 @@ definition {
 			PortalInstances.tearDownCP();
 		}
 		else {
+			User.loginPG(
+				password = "test",
+				userEmailAddress = "test@liferay.com");
+
+			PortalInstances.tearDownCP();
+
+			Site.tearDownCP();
+
 			PagesAdmin.tearDownCP();
 
 			BlogsEntry.tearDownCP();
+
+			DMDocument.tearDownCP();
+
+			Vocabulary.tearDownCP();
 		}
 	}
 
@@ -33,7 +45,7 @@ definition {
 	test AddAndDeleteBlogEntriesOnSeparateNodes {
 		property portal.upstream = "quarantine";
 		property test.liferay.virtual.instance = "false";
-		property test.run.type = "single";
+		property test.run.type = "sequential";
 
 		Clustering.viewClusterStatusInConsole();
 
@@ -159,7 +171,7 @@ definition {
 	@priority = 3
 	test CanAccessGogoShellOnAnyClusteredNode {
 		property test.liferay.virtual.instance = "false";
-		property test.run.type = "single";
+		property test.run.type = "sequential";
 
 		GogoShell.openGogoShellAdmin();
 
@@ -185,7 +197,7 @@ definition {
 	@priority = 3
 	test CanAddCategoryToDocumentOnSlaveNode {
 		property test.liferay.virtual.instance = "false";
-		property test.run.type = "single";
+		property test.run.type = "sequential";
 
 		task ("Given a category") {
 			JSONCategory.addVocabulary(
@@ -286,7 +298,7 @@ definition {
 		property custom.properties = "virtual.hosts.valid.hosts=localhost,127.0.0.1,www.able.com";
 		property portal.acceptance = "true";
 		property test.liferay.virtual.instance = "false";
-		property test.run.type = "single";
+		property test.run.type = "sequential";
 
 		Clustering.viewClusterStatusInConsole();
 
@@ -334,7 +346,7 @@ definition {
 		property custom.properties = "virtual.hosts.valid.hosts=localhost,127.0.0.1,www.able.com";
 		property portal.acceptance = "true";
 		property test.liferay.virtual.instance = "false";
-		property test.run.type = "single";
+		property test.run.type = "sequential";
 
 		Clustering.viewClusterStatusInConsole();
 
@@ -647,7 +659,7 @@ definition {
 	test EnableAndDisableFeatureFlagOnMasterNode {
 		property custom.properties = "feature.flag.ui.visible[dev]=true";
 		property test.liferay.virtual.instance = "false";
-		property test.run.type = "single";
+		property test.run.type = "sequential";
 
 		task ("Given a feature is disabled on both nodes") {
 			for (var nodePort : list "9080,8080") {
@@ -732,7 +744,7 @@ definition {
 	test EnableAndDisableFeatureFlagOnSlaveNode {
 		property custom.properties = "feature.flag.ui.visible[dev]=true";
 		property test.liferay.virtual.instance = "false";
-		property test.run.type = "single";
+		property test.run.type = "sequential";
 
 		task ("Given a feature is disabled on both nodes") {
 			for (var nodePort : list "9080,8080") {
@@ -1004,7 +1016,7 @@ definition {
 	@priority = 4
 	test ValidateDocumentOnSeparateNodes {
 		property test.liferay.virtual.instance = "false";
-		property test.run.type = "single";
+		property test.run.type = "sequential";
 
 		Clustering.viewClusterStatusInConsole();
 
@@ -1115,7 +1127,7 @@ definition {
 	@priority = 4
 	test ValidatePublishOnTwoNodes {
 		property test.liferay.virtual.instance = "false";
-		property test.run.type = "single";
+		property test.run.type = "sequential";
 
 		Clustering.viewClusterStatusInConsole();
 
