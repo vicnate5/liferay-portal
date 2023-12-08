@@ -7442,6 +7442,15 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 					<parallel>
 						<wait-for-app-server app.server.bin.dir="@{app.server.bin.dir}" app.server.bundle.index="@{app.server.bundle.index}" />
 
+						<if>
+							<equals arg1="@{app.server.bundle.index}" arg2="1" />
+							<then>
+								<echo> VICTOR Executing random node kill </echo>
+								
+								<antcall inheritAll="false" target="kill-first-node" />
+							</then>
+						</if>
+
 						<daemons>
 							<if>
 								<istrue value="${test.docker.environment}" />
@@ -9560,6 +9569,58 @@ go</echo>
 				<exec executable="${basedir}/clean_up_java_processes.sh" />
 
 				<delete file="clean_up_java_processes.sh" />
+			</then>
+		</if>
+	</target>
+
+	<target name="kill-first-node">
+		<if>
+			<os family="unix" />
+			<then>
+				<echo file="kill_bundles_processes.sh">
+					<![CDATA[
+						#!/bin/bash
+
+						randomTime=$(( ( RANDOM % 180 )  + 1 ))
+
+						echo "VICTOR"
+						echo "VICTOR"
+						echo "VICTOR"
+						echo "VICTOR"
+						echo "VICTOR"
+						echo "VICTOR"
+
+						rm time.txt
+						echo "${randomTime}" > time.txt
+
+						echo "Will stop first node after ${randomTime} seconds"
+
+						sleep ${randomTime}
+
+						for i in `for x in $(pgrep -x java); do pwdx $x ; done | grep 'bundles/tomcat-9.0.83' | cut -f1 -d":"`;
+						do
+							echo "Killing $i"
+
+							kill -9 $i
+						done
+
+						echo "VICTOR"
+						echo "VICTOR"
+						echo "VICTOR"
+						echo "VICTOR"
+						echo "VICTOR"
+						echo "VICTOR"
+					]]>
+				</echo>
+
+				<chmod
+					file="kill_bundles_processes.sh"
+					perm="a+x"
+				/>
+
+				<exec executable="${basedir}/kill_bundles_processes.sh" />
+
+				<delete file="kill_bundles_processes.sh" />
 			</then>
 		</if>
 	</target>

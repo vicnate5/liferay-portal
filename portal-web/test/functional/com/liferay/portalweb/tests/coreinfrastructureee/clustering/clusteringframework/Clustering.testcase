@@ -10,12 +10,6 @@ definition {
 	property test.assert.warning.exceptions = "true";
 	property testray.main.component.name = "Clustering";
 
-	setUp {
-		TestCase.setUpPortalInstance();
-
-		User.firstLoginPG();
-	}
-
 	tearDown {
 		var testLiferayVirtualInstance = PropsUtil.get("test.liferay.virtual.instance");
 
@@ -170,27 +164,22 @@ definition {
 
 	@priority = 3
 	test CanAccessGogoShellOnAnyClusteredNode {
+		property app.server.bundles.size = "2";
 		property test.liferay.virtual.instance = "false";
 		property test.run.type = "sequential";
+		property testcase.url = "file:///opt/dev/projects/github/liferay-portal/";
+		property test.assert.warning.exceptions = "true";
+		property browser.chrome.bin.args = "explicitly-allowed-ports=10080";
 
-		GogoShell.openGogoShellAdmin();
+		Clustering.viewClusterStatusInConsole();
 
-		GogoShell.executeCommand(commandName = "lb | grep Liferay");
+		Navigator.openSpecificURL(url = "http://localhost:9080");
 
-		GogoShell.viewOutput(outputContent = "Liferay Portal");
+		Page.assertNodePortPG(nodePort = 9080);
 
-		User.logoutPG();
+		Navigator.openSpecificURL(url = "http://localhost:10080");
 
-		User.loginPG(
-			nodePort = 9080,
-			password = "test",
-			userEmailAddress = "test@liferay.com");
-
-		GogoShell.openGogoShellAdmin(baseURL = "http://localhost:9080");
-
-		GogoShell.executeCommand(commandName = "lb | grep Liferay");
-
-		GogoShell.viewOutput(outputContent = "Liferay Portal");
+		Page.assertNodePortPG(nodePort = 10080);
 	}
 
 	@description = "This is a usecase for LPS-151178. Verify a category can be added to a document on a slave node."
