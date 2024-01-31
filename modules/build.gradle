@@ -561,6 +561,10 @@ gradle.beforeProject {
 					javaLauncher = javaToolchains.launcherFor {
 						languageVersion = JavaLanguageVersion.of(project.properties["junit.jvm.override.version"])
 					}
+
+					if (project.properties["junit.jvm.override.version"] == "21") {
+						systemProperty "net.bytebuddy.experimental", "true"
+					}
 				}
 			}
 
