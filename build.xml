@@ -367,7 +367,7 @@ message.
 
 		<touch file="${liferay.home}/.liferay-home" />
 
-		<ant dir="sql" inheritAll="false" target="build-db" />
+		<!-- <ant dir="sql" inheritAll="false" target="build-db" /> -->
 
 		<deploy-properties />
 
