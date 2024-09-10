@@ -5,7 +5,6 @@
 
 package com.liferay.ant.manifest.helper;
 
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.util.OSDetector;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -112,7 +111,7 @@ public class ManifestHelperTask extends Task {
 			return execute("git rev-parse HEAD");
 		}
 
-		return StringPool.BLANK;
+		return "";
 	}
 
 	protected String getDateString(Date date) {
