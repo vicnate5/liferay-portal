@@ -3471,15 +3471,15 @@ ${poshi.runner.testsuite.testcase.name}</echo>
 		</sequential>
 	</macrodef>
 
-	<target name="archived-module-smoke-mysql57-jdk8">
+	<target name="archived-module-smoke-mysql57">
 		<run-archived-module-smoke />
 	</target>
 
-	<target name="archived-modules-test-mysql57-jdk8">
+	<target name="archived-modules-test-mysql57">
 		<run-archived-modules-test />
 	</target>
 
-	<target name="blade-samples-jdk8">
+	<target name="blade-samples">
 		<propertycopy from="app.server.${app.server.type}.version" name="app.server.version" />
 
 		<run-batch-test>
@@ -3556,7 +3556,7 @@ ${poshi.runner.testsuite.testcase.name}</echo>
 		</run-batch-test>
 	</target>
 
-	<target name="build-iw-jdk8">
+	<target name="build-iw">
 		<run-batch-test>
 			<test-action>
 				<record action="start" name="${project.dir}/build.iw.output.txt" />
@@ -3616,7 +3616,7 @@ information. Make sure to commit in all build-iw results.
 		</run-batch-test>
 	</target>
 
-	<target name="build-lib-versions-jdk8">
+	<target name="build-lib-versions">
 		<run-batch-test>
 			<test-action>
 				<ant dir="portal-impl" inheritAll="false" target="build-lib-versions" />
@@ -3661,11 +3661,11 @@ information. Make sure to commit in all build-lib-versions results.
 		</run-batch-test>
 	</target>
 
-	<target name="bundle-blacklist-restart-mysql57-jdk8">
+	<target name="bundle-blacklist-restart-mysql57">
 		<run-bundle-blacklist-restart-test />
 	</target>
 
-	<target name="central-requirements-jdk8">
+	<target name="central-requirements">
 		<fail message="Please set the property ${central.requirements.tests}." unless="central.requirements.tests" />
 
 		<run-batch-test>
@@ -3696,7 +3696,7 @@ information. Make sure to commit in all build-lib-versions results.
 		</run-batch-test>
 	</target>
 
-	<target name="compile-jsp-jdk8">
+	<target name="compile-jsp">
 		<run-batch-test>
 			<test-action>
 				<delete dir="${project.dir}/portal-web/docroot/html" />
@@ -3731,7 +3731,7 @@ information. Make sure to commit in all build-lib-versions results.
 		</parallel>
 	</target>
 
-	<target name="empty-osgi-core-dir-mysql57-jdk8">
+	<target name="empty-osgi-core-dir-mysql57">
 		<run-empty-osgi-core-dir-test />
 	</target>
 
@@ -3739,7 +3739,7 @@ information. Make sure to commit in all build-lib-versions results.
 		<run-empty-osgi-core-dir-test />
 	</target>
 
-	<target name="format-javadoc-jdk8">
+	<target name="format-javadoc">
 		<run-batch-test>
 			<test-action>
 				<record action="start" name="${project.dir}/format.javadoc.output.txt" />
@@ -3806,23 +3806,23 @@ information. Make sure to commit in all format-javadoc results.
 		</run-batch-test>
 	</target>
 
-	<target name="functional-alpine38-tomcat90-mysql57-jdk8">
+	<target name="functional-alpine38-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-alpine310-tomcat90-mysql57-jdk8">
+	<target name="functional-alpine310-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-amazonlinux2-tomcat90-mysql57-jdk8">
+	<target name="functional-amazonlinux2-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-amazonlinux2022-tomcat90-mysql57-jdk8">
+	<target name="functional-amazonlinux2022-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-bundle-alpine310-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-alpine310-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -3843,7 +3843,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-amazonlinux2-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-amazonlinux2-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -3864,7 +3864,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-amazonlinux2022-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-amazonlinux2022-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -3885,7 +3885,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-centos8-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-centos8-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -3906,7 +3906,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-fedora35-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-fedora35-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -3927,7 +3927,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-jboss-db2111-jdk8">
+	<target name="functional-bundle-jboss-db2111">
 		<run-functional-test
 			app.server.type="jboss"
 			database.type="db2"
@@ -3943,7 +3943,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-jboss-db2115-jdk8">
+	<target name="functional-bundle-jboss-db2115">
 		<run-functional-test
 			app.server.type="jboss"
 			database.type="db2"
@@ -3960,7 +3960,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-jboss-mysql56-jdk8">
+	<target name="functional-bundle-jboss-mysql56">
 		<run-functional-test
 			app.server.type="jboss"
 			database.type="mysql"
@@ -3980,7 +3980,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-jboss-mysql57-jdk8">
+	<target name="functional-bundle-jboss-mysql57">
 		<run-functional-test
 			app.server.type="jboss"
 			database.type="mysql"
@@ -4001,7 +4001,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-jboss73-mysql57-jdk8">
+	<target name="functional-bundle-jboss73-mysql57">
 		<set-app-server-version-number app.server.type="jboss" app.server.version="7.3.0" />
 
 		<run-functional-test
@@ -4049,7 +4049,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-jboss74-mysql57-jdk8">
+	<target name="functional-bundle-jboss74-mysql57">
 		<set-app-server-version-number app.server.type="jboss" app.server.version="7.4.0" />
 
 		<run-functional-test
@@ -4097,31 +4097,31 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-marketplaceapp-smoke-jboss-mysql56-jdk8">
-		<antcall target="functional-bundle-jboss-mysql56-jdk8" />
+	<target name="functional-bundle-marketplaceapp-smoke-jboss-mysql56">
+		<antcall target="functional-bundle-jboss-mysql56" />
 	</target>
 
-	<target name="functional-bundle-marketplaceapp-smoke-jboss-mysql57-jdk8">
-		<antcall target="functional-bundle-jboss-mysql57-jdk8" />
+	<target name="functional-bundle-marketplaceapp-smoke-jboss-mysql57">
+		<antcall target="functional-bundle-jboss-mysql57" />
 	</target>
 
-	<target name="functional-bundle-marketplaceapp-smoke-tomcat-mysql56-jdk8">
-		<antcall target="functional-bundle-tomcat-mysql56-jdk8" />
+	<target name="functional-bundle-marketplaceapp-smoke-tomcat-mysql56">
+		<antcall target="functional-bundle-tomcat-mysql56" />
 	</target>
 
-	<target name="functional-bundle-marketplaceapp-smoke-tomcat-mysql57-jdk8">
-		<antcall target="functional-bundle-tomcat-mysql57-jdk8" />
+	<target name="functional-bundle-marketplaceapp-smoke-tomcat-mysql57">
+		<antcall target="functional-bundle-tomcat-mysql57" />
 	</target>
 
-	<target name="functional-bundle-marketplaceapp-smoke-wildfly-mysql56-jdk8">
-		<antcall target="functional-bundle-wildfly-mysql56-jdk8" />
+	<target name="functional-bundle-marketplaceapp-smoke-wildfly-mysql56">
+		<antcall target="functional-bundle-wildfly-mysql56" />
 	</target>
 
-	<target name="functional-bundle-marketplaceapp-smoke-wildfly-mysql57-jdk8">
-		<antcall target="functional-bundle-wildfly-mysql57-jdk8" />
+	<target name="functional-bundle-marketplaceapp-smoke-wildfly-mysql57">
+		<antcall target="functional-bundle-wildfly-mysql57" />
 	</target>
 
-	<target name="functional-bundle-orcllinux7-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-orcllinux7-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4142,7 +4142,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-orcllinux8-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-orcllinux8-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4163,7 +4163,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-orcllinux9-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-orcllinux9-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4184,7 +4184,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-redhat8-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-redhat8-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4205,7 +4205,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-redhat9-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-redhat9-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4226,7 +4226,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-rockylinux91-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-rockylinux91-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4247,7 +4247,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-suse15-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-suse15-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4268,7 +4268,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tcserver-mysql56-jdk8">
+	<target name="functional-bundle-tcserver-mysql56">
 		<run-functional-test
 			app.server.type="tcserver"
 			database.type="mysql"
@@ -4287,7 +4287,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tcserver-mysql57-jdk8">
+	<target name="functional-bundle-tcserver-mysql57">
 		<run-functional-test
 			app.server.type="tcserver"
 			database.type="mysql"
@@ -4307,7 +4307,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-db2111-jdk8">
+	<target name="functional-bundle-tomcat-db2111">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4345,7 +4345,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-db2115-jdk8">
+	<target name="functional-bundle-tomcat-db2115">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4385,7 +4385,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-hypersonic20-jdk8">
+	<target name="functional-bundle-tomcat-hypersonic20">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4423,7 +4423,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-mariadb102-jdk8">
+	<target name="functional-bundle-tomcat-mariadb102">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4480,7 +4480,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-mariadb106-jdk8">
+	<target name="functional-bundle-tomcat-mariadb106">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4518,7 +4518,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-mysql56-jdk8">
+	<target name="functional-bundle-tomcat-mysql56">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4537,27 +4537,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-mysql57-jdk8">
-		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
-
-		<run-functional-test
-			app.server.type="tomcat"
-			database.type="mysql"
-			database.version="5.7"
-			setup.proxy="false"
-			test.build.fix.pack.zip.url="${test.build.fix.pack.zip.url}"
-			test.fix.pack.base.url="${test.fix.pack.base.url}"
-			test.license.xml.url="${test.license.xml.url}"
-			test.plugin.zip.url="${test.plugin.zip.url}"
-			test.plugins.war.zip.url="${test.plugins.war.zip.url}"
-			test.portal.bundle.version="${test.portal.bundle.version}"
-			test.portal.bundle.zip.url="${test.portal.bundle.zip.url}"
-			test.portal.lpkg.name="${test.portal.lpkg.name}"
-			test.sql.zip.url="${test.sql.zip.url}"
-		/>
-	</target>
-
-	<target name="functional-bundle-tomcat-mysql57-jdk8_redhat">
+	<target name="functional-bundle-tomcat-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4657,7 +4637,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-oracle193-jdk8">
+	<target name="functional-bundle-tomcat-oracle193">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4697,7 +4677,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-postgresql121-jdk8">
+	<target name="functional-bundle-tomcat-postgresql121">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4737,7 +4717,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-postgresql134-jdk8">
+	<target name="functional-bundle-tomcat-postgresql134">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4777,7 +4757,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-postgresql144-jdk8">
+	<target name="functional-bundle-tomcat-postgresql144">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4817,7 +4797,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-postgresql153-jdk8">
+	<target name="functional-bundle-tomcat-postgresql153">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4857,7 +4837,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-postgresql163-jdk8">
+	<target name="functional-bundle-tomcat-postgresql163">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4897,7 +4877,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-sqlserver2017-jdk8">
+	<target name="functional-bundle-tomcat-sqlserver2017">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4937,7 +4917,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-sqlserver2019-jdk8">
+	<target name="functional-bundle-tomcat-sqlserver2019">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -4997,7 +4977,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-tomcat-sybase160-jdk8">
+	<target name="functional-bundle-tomcat-sybase160">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -5016,7 +4996,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-ubuntu18-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-ubuntu18-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -5037,7 +5017,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-ubuntu20-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-ubuntu20-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -5058,7 +5038,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-ubuntu22-tomcat90-mysql57-jdk8">
+	<target name="functional-bundle-ubuntu22-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -5079,7 +5059,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-weblogic122-mysql56-jdk8">
+	<target name="functional-bundle-weblogic122-mysql56">
 		<run-functional-test
 			app.server.type="weblogic"
 			database.type="mysql"
@@ -5098,7 +5078,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-weblogic122-mysql57-jdk8">
+	<target name="functional-bundle-weblogic122-mysql57">
 		<run-functional-test
 			app.server.type="weblogic"
 			database.type="mysql"
@@ -5138,7 +5118,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-weblogic141-mysql56-jdk8">
+	<target name="functional-bundle-weblogic141-mysql56">
 		<run-functional-test
 			app.server.type="weblogic"
 			database.type="mysql"
@@ -5157,7 +5137,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-weblogic141-mysql57-jdk8">
+	<target name="functional-bundle-weblogic141-mysql57">
 		<run-functional-test
 			app.server.type="weblogic"
 			database.type="mysql"
@@ -5197,7 +5177,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-wildfly-mariadb102-jdk8">
+	<target name="functional-bundle-wildfly-mariadb102">
 		<run-functional-test
 			app.server.type="wildfly"
 			database.type="mariadb"
@@ -5216,7 +5196,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-wildfly-mariadb104-jdk8">
+	<target name="functional-bundle-wildfly-mariadb104">
 		<run-functional-test
 			app.server.type="wildfly"
 			database.type="mariadb"
@@ -5235,7 +5215,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-wildfly-mariadb106-jdk8">
+	<target name="functional-bundle-wildfly-mariadb106">
 		<run-functional-test
 			app.server.type="wildfly"
 			database.type="mariadb"
@@ -5254,7 +5234,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-wildfly-mysql56-jdk8">
+	<target name="functional-bundle-wildfly-mysql56">
 		<run-functional-test
 			app.server.type="wildfly"
 			database.type="mysql"
@@ -5273,7 +5253,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-bundle-wildfly-mysql57-jdk8">
+	<target name="functional-bundle-wildfly-mysql57">
 		<run-functional-test
 			app.server.type="wildfly"
 			database.type="mysql"
@@ -5365,73 +5345,73 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-centos6-tomcat90-mysql57-jdk8">
+	<target name="functional-centos6-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-centos8-tomcat90-mysql57-jdk8">
+	<target name="functional-centos8-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-debian7-tomcat90-mysql57-jdk8">
+	<target name="functional-debian7-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-debian8-tomcat90-mysql57-jdk8">
+	<target name="functional-debian8-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-debian9-tomcat90-mysql57-jdk8">
+	<target name="functional-debian9-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-debian11-tomcat90-mysql57-jdk8">
+	<target name="functional-debian11-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-fedora35-tomcat90-mysql57-jdk8">
+	<target name="functional-fedora35-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-jboss73-mysql57-jdk8">
+	<target name="functional-jboss73-mysql57">
 		<run-functional-test app.server.type="jboss" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="functional-jboss74-mysql57-jdk8">
+	<target name="functional-jboss74-mysql57">
 		<set-app-server-version-number app.server.type="jboss" app.server.version="7.4.0" />
 
 		<run-functional-test app.server.type="jboss" app.server.version="7.4.0" database.type="mysql" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-orcllinux6-tomcat90-mysql57-jdk8">
+	<target name="functional-orcllinux6-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-orcllinux7-tomcat90-mysql57-jdk8">
+	<target name="functional-orcllinux7-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-orcllinux8-tomcat90-mysql57-jdk8">
+	<target name="functional-orcllinux8-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-orcllinux9-tomcat90-mysql57-jdk8">
+	<target name="functional-orcllinux9-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-redhat8-tomcat90-mysql57-jdk8">
+	<target name="functional-redhat8-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-redhat9-tomcat90-mysql57-jdk8">
+	<target name="functional-redhat9-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-rockylinux91-tomcat90-mysql57-jdk8">
+	<target name="functional-rockylinux91-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-bundle-jboss-mysql57-jdk8">
+	<target name="functional-smoke-bundle-jboss-mysql57">
 		<run-functional-test
 			app.server.type="jboss"
 			database.type="mysql"
@@ -5453,15 +5433,15 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-smoke-bundle-jboss73-mysql57-jdk8">
-		<antcall target="functional-bundle-jboss73-mysql57-jdk8" />
+	<target name="functional-smoke-bundle-jboss73-mysql57">
+		<antcall target="functional-bundle-jboss73-mysql57" />
 	</target>
 
-	<target name="functional-smoke-bundle-jboss74-mysql57-jdk8">
-		<antcall target="functional-bundle-jboss74-mysql57-jdk8" />
+	<target name="functional-smoke-bundle-jboss74-mysql57">
+		<antcall target="functional-bundle-jboss74-mysql57" />
 	</target>
 
-	<target name="functional-smoke-bundle-tcserver-mysql57-jdk8">
+	<target name="functional-smoke-bundle-tcserver-mysql57">
 		<run-functional-test
 			app.server.type="tcserver"
 			database.type="mysql"
@@ -5483,27 +5463,27 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-smoke-bundle-tomcat-db2111-jdk8">
-		<antcall target="functional-bundle-tomcat-db2111-jdk8" />
+	<target name="functional-smoke-bundle-tomcat-db2111">
+		<antcall target="functional-bundle-tomcat-db2111" />
 	</target>
 
-	<target name="functional-smoke-bundle-tomcat-db2115-jdk8">
-		<antcall target="functional-bundle-tomcat-db2115-jdk8" />
+	<target name="functional-smoke-bundle-tomcat-db2115">
+		<antcall target="functional-bundle-tomcat-db2115" />
 	</target>
 
-	<target name="functional-smoke-bundle-tomcat-hypersonic20-jdk8">
-		<antcall target="functional-bundle-tomcat-hypersonic20-jdk8" />
+	<target name="functional-smoke-bundle-tomcat-hypersonic20">
+		<antcall target="functional-bundle-tomcat-hypersonic20" />
 	</target>
 
-	<target name="functional-smoke-bundle-tomcat-mariadb102-jdk8">
-		<antcall target="functional-bundle-tomcat-mariadb102-jdk8" />
+	<target name="functional-smoke-bundle-tomcat-mariadb102">
+		<antcall target="functional-bundle-tomcat-mariadb102" />
 	</target>
 
-	<target name="functional-smoke-bundle-tomcat-mysql56-jdk8">
-		<antcall target="functional-bundle-tomcat-mysql56-jdk8" />
+	<target name="functional-smoke-bundle-tomcat-mysql56">
+		<antcall target="functional-bundle-tomcat-mysql56" />
 	</target>
 
-	<target name="functional-smoke-bundle-tomcat-mysql57-jdk8">
+	<target name="functional-smoke-bundle-tomcat-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -5524,27 +5504,27 @@ information. Make sure to commit in all format-javadoc results.
 		<antcall target="functional-bundle-tomcat-mysql57-jdk11_open" />
 	</target>
 
-	<target name="functional-smoke-bundle-tomcat-oracle193-jdk8">
-		<antcall target="functional-bundle-tomcat-oracle193-jdk8" />
+	<target name="functional-smoke-bundle-tomcat-oracle193">
+		<antcall target="functional-bundle-tomcat-oracle193" />
 	</target>
 
-	<target name="functional-smoke-bundle-tomcat-postgresql134-jdk8">
-		<antcall target="functional-bundle-tomcat-postgresql134-jdk8" />
+	<target name="functional-smoke-bundle-tomcat-postgresql134">
+		<antcall target="functional-bundle-tomcat-postgresql134" />
 	</target>
 
-	<target name="functional-smoke-bundle-tomcat-postgresql144-jdk8">
-		<antcall target="functional-bundle-tomcat-postgresql144-jdk8" />
+	<target name="functional-smoke-bundle-tomcat-postgresql144">
+		<antcall target="functional-bundle-tomcat-postgresql144" />
 	</target>
 
-	<target name="functional-smoke-bundle-tomcat-postgresql153-jdk8">
-		<antcall target="functional-bundle-tomcat-postgresql153-jdk8" />
+	<target name="functional-smoke-bundle-tomcat-postgresql153">
+		<antcall target="functional-bundle-tomcat-postgresql153" />
 	</target>
 
-	<target name="functional-smoke-bundle-tomcat-postgresql163-jdk8">
-		<antcall target="functional-bundle-tomcat-postgresql163-jdk8" />
+	<target name="functional-smoke-bundle-tomcat-postgresql163">
+		<antcall target="functional-bundle-tomcat-postgresql163" />
 	</target>
 
-	<target name="functional-smoke-bundle-weblogic122-mysql57-jdk8">
+	<target name="functional-smoke-bundle-weblogic122-mysql57">
 		<run-functional-test
 			app.server.type="weblogic"
 			database.type="mysql"
@@ -5566,7 +5546,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-smoke-bundle-weblogic141-mysql57-jdk8">
+	<target name="functional-smoke-bundle-weblogic141-mysql57">
 		<run-functional-test
 			app.server.type="weblogic"
 			database.type="mysql"
@@ -5588,7 +5568,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="functional-smoke-bundle-wildfly-mysql57-jdk8">
+	<target name="functional-smoke-bundle-wildfly-mysql57">
 		<run-functional-test
 			app.server.type="wildfly"
 			database.type="mysql"
@@ -5622,7 +5602,7 @@ information. Make sure to commit in all format-javadoc results.
 		<antcall target="functional-bundle-wildfly261-mysql57-jdk21_zulu" />
 	</target>
 
-	<target name="functional-smoke-jboss73-mysql57-jdk8">
+	<target name="functional-smoke-jboss73-mysql57">
 		<set-app-server-version-number app.server.type="jboss" app.server.version="7.3.0" />
 
 		<run-functional-test app.server.type="jboss" app.server.version="7.3.0" database.type="mysql" database.version="5.7" />
@@ -5640,7 +5620,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="jboss" app.server.version="7.3.0" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-jboss74-mysql57-jdk8">
+	<target name="functional-smoke-jboss74-mysql57">
 		<set-app-server-version-number app.server.type="jboss" app.server.version="7.4.0" />
 
 		<run-functional-test app.server.type="jboss" app.server.version="7.4.0" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
@@ -5658,23 +5638,23 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="jboss" app.server.version="7.4.0" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-startup-cold-tomcat90-hypersonic20-jdk8">
+	<target name="functional-smoke-startup-cold-tomcat90-hypersonic20">
 		<run-functional-test app.server.type="tomcat" database.type="hypersonic" startup.testing.cold="true" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-startup-cold-tomcat90-mysql57-jdk8">
+	<target name="functional-smoke-startup-cold-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" startup.testing.cold="true" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-startup-warm-tomcat90-hypersonic20-jdk8">
+	<target name="functional-smoke-startup-warm-tomcat90-hypersonic20">
 		<run-functional-test app.server.type="tomcat" database.type="hypersonic" startup.testing.warm="true" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-startup-warm-tomcat90-mysql57-jdk8">
+	<target name="functional-smoke-startup-warm-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" startup.testing.warm="true" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tcserver40-mysql57-jdk8">
+	<target name="functional-smoke-tcserver40-mysql57">
 		<run-functional-test app.server.type="tcserver" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
@@ -5682,7 +5662,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tcserver" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-db2111-jdk8">
+	<target name="functional-smoke-tomcat90-db2111">
 		<run-functional-test app.server.type="tomcat" database.type="db2" test.portal.log.assert="true" />
 	</target>
 
@@ -5690,7 +5670,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="db2" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-db2115-jdk8">
+	<target name="functional-smoke-tomcat90-db2115">
 		<run-functional-test app.server.type="tomcat" database.type="db2" database.version="11.5.7" test.portal.log.assert="true" />
 	</target>
 
@@ -5698,11 +5678,11 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="db2" database.version="11.5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-hypersonic20-jdk8">
+	<target name="functional-smoke-tomcat90-hypersonic20">
 		<run-functional-test app.server.type="tomcat" database.type="hypersonic" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-mariadb102-jdk8">
+	<target name="functional-smoke-tomcat90-mariadb102">
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
@@ -5710,7 +5690,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-mariadb104-jdk8">
+	<target name="functional-smoke-tomcat90-mariadb104">
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
@@ -5718,7 +5698,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-mariadb106-jdk8">
+	<target name="functional-smoke-tomcat90-mariadb106">
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
@@ -5726,23 +5706,15 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-mysql57-chrome100-jdk8">
+	<target name="functional-smoke-tomcat90-mysql57-chrome100">
 		<run-functional-test app.server.type="tomcat" browser.type="chrome" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-mysql57-jdk8">
+	<target name="functional-smoke-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-mysql57-jdk8_redhat">
-		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
-	</target>
-
-	<target name="functional-smoke-tomcat90-mysql57-jdk8_stable">
-		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
-	</target>
-
-	<target name="functional-smoke-tomcat90-mysql57-jdk8_zulu">
+	<target name="functional-smoke-tomcat90-mysql57_stable">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
@@ -5758,7 +5730,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-mysql80-jdk8">
+	<target name="functional-smoke-tomcat90-mysql80">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="8.0" test.portal.log.assert="true" />
 	</target>
 
@@ -5766,7 +5738,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="8.0" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-oracle193-jdk8">
+	<target name="functional-smoke-tomcat90-oracle193">
 		<run-functional-test app.server.type="tomcat" database.type="oracle" database.version="19.3.0.0.0" test.portal.log.assert="true" />
 	</target>
 
@@ -5774,7 +5746,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="oracle" database.version="19.3.0.0.0" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-postgresql121-jdk8">
+	<target name="functional-smoke-tomcat90-postgresql121">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="12.1" test.portal.log.assert="true" />
 	</target>
 
@@ -5782,7 +5754,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="12.1" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-postgresql134-jdk8">
+	<target name="functional-smoke-tomcat90-postgresql134">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="13.4" test.portal.log.assert="true" />
 	</target>
 
@@ -5790,7 +5762,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="13.4" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-postgresql144-jdk8">
+	<target name="functional-smoke-tomcat90-postgresql144">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="14.4" test.portal.log.assert="true" />
 	</target>
 
@@ -5798,7 +5770,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="14.4" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-postgresql153-jdk8">
+	<target name="functional-smoke-tomcat90-postgresql153">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="15.3" test.portal.log.assert="true" />
 	</target>
 
@@ -5806,7 +5778,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="15.3" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-postgresql163-jdk8">
+	<target name="functional-smoke-tomcat90-postgresql163">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="16.3" test.portal.log.assert="true" />
 	</target>
 
@@ -5814,7 +5786,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="16.3" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-sqlserver2017-jdk8">
+	<target name="functional-smoke-tomcat90-sqlserver2017">
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2017" test.portal.log.assert="true" />
 	</target>
 
@@ -5822,7 +5794,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2017" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-sqlserver2019-jdk8">
+	<target name="functional-smoke-tomcat90-sqlserver2019">
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2019" test.portal.log.assert="true" />
 	</target>
 
@@ -5830,7 +5802,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2019" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-sqlserver2022-jdk8">
+	<target name="functional-smoke-tomcat90-sqlserver2022">
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2022" test.portal.log.assert="true" />
 	</target>
 
@@ -5838,7 +5810,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2022" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat90-sybase160-jdk8">
+	<target name="functional-smoke-tomcat90-sybase160">
 		<run-functional-test app.server.type="tomcat" database.type="sybase" test.portal.log.assert="true" />
 	</target>
 
@@ -5846,13 +5818,13 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="sybase" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-weblogic122-mysql57-jdk8">
+	<target name="functional-smoke-weblogic122-mysql57">
 		<set-app-server-version-number app.server.type="weblogic" app.server.version="12.2.1" />
 
 		<run-functional-test app.server.type="weblogic" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-weblogic141-mysql57-jdk8">
+	<target name="functional-smoke-weblogic141-mysql57">
 		<set-app-server-version-number app.server.type="weblogic" app.server.version="14.1.1" />
 
 		<run-functional-test app.server.type="weblogic" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
@@ -5864,7 +5836,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="weblogic" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-wildfly180-mariadb104-jdk8">
+	<target name="functional-smoke-wildfly180-mariadb104">
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
@@ -5872,7 +5844,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-wildfly180-mariadb106-jdk8">
+	<target name="functional-smoke-wildfly180-mariadb106">
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
@@ -5880,7 +5852,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-wildfly230-mariadb104-jdk8">
+	<target name="functional-smoke-wildfly230-mariadb104">
 		<set-app-server-version-number app.server.type="wildfly" app.server.version="23.0.0" />
 
 		<run-functional-test app.server.type="wildfly" app.server.version="23.0.0" database.type="mariadb" test.portal.log.assert="true" />
@@ -5892,7 +5864,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="wildfly" app.server.version="23.0.0" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-wildfly230-mariadb106-jdk8">
+	<target name="functional-smoke-wildfly230-mariadb106">
 		<set-app-server-version-number app.server.type="wildfly" app.server.version="23.0.0" />
 
 		<run-functional-test app.server.type="wildfly" app.server.version="23.0.0" database.type="mariadb" test.portal.log.assert="true" />
@@ -5910,7 +5882,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="wildfly" app.server.version="23.0.0" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-wildfly261-mariadb104-jdk8">
+	<target name="functional-smoke-wildfly261-mariadb104">
 		<set-app-server-version-number app.server.type="wildfly" app.server.version="26.1.0" />
 
 		<run-functional-test app.server.type="wildfly" app.server.version="26.1.0" database.type="mariadb" test.portal.log.assert="true" />
@@ -5922,7 +5894,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="wildfly" app.server.version="26.1.0" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-wildfly261-mariadb106-jdk8">
+	<target name="functional-smoke-wildfly261-mariadb106">
 		<set-app-server-version-number app.server.type="wildfly" app.server.version="26.1.0" />
 
 		<run-functional-test app.server.type="wildfly" app.server.version="26.1.0" database.type="mariadb" test.portal.log.assert="true" />
@@ -5940,11 +5912,11 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="wildfly" app.server.version="26.1.0" database.type="mariadb" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-suse15-tomcat90-mysql57-jdk8">
+	<target name="functional-suse15-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-tomcat90-db2111-jdk8">
+	<target name="functional-tomcat90-db2111">
 		<run-functional-test app.server.type="tomcat" database.type="db2" />
 	</target>
 
@@ -5952,7 +5924,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="db2" />
 	</target>
 
-	<target name="functional-tomcat90-db2115-jdk8">
+	<target name="functional-tomcat90-db2115">
 		<run-functional-test app.server.type="tomcat" database.type="db2" database.version="11.5.7" />
 	</target>
 
@@ -5960,7 +5932,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="db2" database.version="11.5.7" />
 	</target>
 
-	<target name="functional-tomcat90-hypersonic20-jdk8">
+	<target name="functional-tomcat90-hypersonic20">
 		<run-functional-test app.server.type="tomcat" database.type="hypersonic" />
 	</target>
 
@@ -5968,7 +5940,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="hypersonic" />
 	</target>
 
-	<target name="functional-tomcat90-mariadb102-jdk8">
+	<target name="functional-tomcat90-mariadb102">
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" />
 	</target>
 
@@ -5976,7 +5948,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" />
 	</target>
 
-	<target name="functional-tomcat90-mariadb104-jdk8">
+	<target name="functional-tomcat90-mariadb104">
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" />
 	</target>
 
@@ -5984,7 +5956,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" />
 	</target>
 
-	<target name="functional-tomcat90-mariadb106-jdk8">
+	<target name="functional-tomcat90-mariadb106">
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" />
 	</target>
 
@@ -5992,31 +5964,27 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" />
 	</target>
 
-	<target name="functional-tomcat90-mysql57-chrome100-jdk8">
+	<target name="functional-tomcat90-mysql57-chrome100">
 		<run-functional-test app.server.type="tomcat" browser.type="chrome" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="functional-tomcat90-mysql57-chrome100-jdk8_stable">
+	<target name="functional-tomcat90-mysql57-chrome100-jdk21_zulu">
+		<run-functional-test app.server.type="tomcat" browser.type="chrome" database.type="mysql" database.version="5.7" />
+	</target>
+
+	<target name="functional-tomcat90-mysql57-chrome100_stable">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="functional-tomcat90-mysql57-jdk8">
+	<target name="functional-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="functional-tomcat90-mysql57-jdk8-quarantine">
-		<antcall target="functional-tomcat90-mysql57-jdk8" />
+	<target name="functional-tomcat90-mysql57-quarantine">
+		<antcall target="functional-tomcat90-mysql57" />
 	</target>
 
-	<target name="functional-tomcat90-mysql57-jdk8_redhat">
-		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" />
-	</target>
-
-	<target name="functional-tomcat90-mysql57-jdk8_stable">
-		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" />
-	</target>
-
-	<target name="functional-tomcat90-mysql57-jdk8_zulu">
+	<target name="functional-tomcat90-mysql57_stable">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" />
 	</target>
 
@@ -6036,7 +6004,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="functional-tomcat90-mysql80-jdk8">
+	<target name="functional-tomcat90-mysql80">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="8.0" />
 	</target>
 
@@ -6044,7 +6012,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="8.0" />
 	</target>
 
-	<target name="functional-tomcat90-oracle193-jdk8">
+	<target name="functional-tomcat90-oracle193">
 		<run-functional-test app.server.type="tomcat" database.type="oracle" database.version="19.3.0.0.0" />
 	</target>
 
@@ -6052,7 +6020,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="oracle" database.version="19.3.0.0.0" />
 	</target>
 
-	<target name="functional-tomcat90-postgresql121-jdk8">
+	<target name="functional-tomcat90-postgresql121">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="12.1" />
 	</target>
 
@@ -6060,7 +6028,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="12.1" />
 	</target>
 
-	<target name="functional-tomcat90-postgresql134-jdk8">
+	<target name="functional-tomcat90-postgresql134">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="13.4" />
 	</target>
 
@@ -6068,7 +6036,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="13.4" />
 	</target>
 
-	<target name="functional-tomcat90-postgresql144-jdk8">
+	<target name="functional-tomcat90-postgresql144">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="14.4" />
 	</target>
 
@@ -6076,7 +6044,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="14.4" />
 	</target>
 
-	<target name="functional-tomcat90-postgresql153-jdk8">
+	<target name="functional-tomcat90-postgresql153">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="15.3" />
 	</target>
 
@@ -6084,7 +6052,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="15.3" />
 	</target>
 
-	<target name="functional-tomcat90-postgresql163-jdk8">
+	<target name="functional-tomcat90-postgresql163">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="16.3" />
 	</target>
 
@@ -6092,7 +6060,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="16.3" />
 	</target>
 
-	<target name="functional-tomcat90-sqlserver2017-jdk8">
+	<target name="functional-tomcat90-sqlserver2017">
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2017" />
 	</target>
 
@@ -6100,7 +6068,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2017" />
 	</target>
 
-	<target name="functional-tomcat90-sqlserver2019-jdk8">
+	<target name="functional-tomcat90-sqlserver2019">
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2019" />
 	</target>
 
@@ -6108,7 +6076,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2019" />
 	</target>
 
-	<target name="functional-tomcat90-sqlserver2022-jdk8">
+	<target name="functional-tomcat90-sqlserver2022">
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2022" />
 	</target>
 
@@ -6116,7 +6084,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2022" />
 	</target>
 
-	<target name="functional-tomcat90-sybase160-jdk8">
+	<target name="functional-tomcat90-sybase160">
 		<run-functional-test app.server.type="tomcat" database.type="sybase" />
 	</target>
 
@@ -6124,27 +6092,27 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="sybase" />
 	</target>
 
-	<target name="functional-ubuntu14-tomcat90-mysql57-jdk8">
+	<target name="functional-ubuntu14-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-ubuntu16-tomcat90-mysql57-jdk8">
+	<target name="functional-ubuntu16-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-ubuntu18-tomcat90-mysql57-jdk8">
+	<target name="functional-ubuntu18-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-ubuntu20-tomcat90-mysql57-jdk8">
+	<target name="functional-ubuntu20-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-ubuntu22-tomcat90-mysql57-jdk8">
+	<target name="functional-ubuntu22-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-upgrade-jboss73-mysql57-jdk8">
+	<target name="functional-upgrade-jboss73-mysql57">
 		<run-functional-test app.server.type="jboss" database.type="mysql" database.version="5.7" />
 	</target>
 
@@ -6152,7 +6120,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="jboss" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="functional-upgrade-jboss74-mysql57-jdk8">
+	<target name="functional-upgrade-jboss74-mysql57">
 		<set-app-server-version-number app.server.type="jboss" app.server.version="7.4.0" />
 
 		<run-functional-test app.server.type="jboss" app.server.version="7.4.0" database.type="mysql" database.version="5.7" />
@@ -6164,7 +6132,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="jboss" app.server.version="7.4.0" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="functional-upgrade-tcserver40-mysql57-jdk8">
+	<target name="functional-upgrade-tcserver40-mysql57">
 		<run-functional-test app.server.type="tcserver" database.type="mysql" database.version="5.7" />
 	</target>
 
@@ -6172,7 +6140,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tcserver" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-db2111-jdk8">
+	<target name="functional-upgrade-tomcat90-db2111">
 		<run-functional-test app.server.type="tomcat" database.type="db2" />
 	</target>
 
@@ -6180,7 +6148,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="db2" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-db2115-jdk8">
+	<target name="functional-upgrade-tomcat90-db2115">
 		<run-functional-test app.server.type="tomcat" database.type="db2" database.version="11.5.7" />
 	</target>
 
@@ -6188,7 +6156,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="db2" database.version="11.5.7" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-mariadb102-jdk8">
+	<target name="functional-upgrade-tomcat90-mariadb102">
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" />
 	</target>
 
@@ -6196,7 +6164,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-mariadb104-jdk8">
+	<target name="functional-upgrade-tomcat90-mariadb104">
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" />
 	</target>
 
@@ -6204,7 +6172,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-mariadb106-jdk8">
+	<target name="functional-upgrade-tomcat90-mariadb106">
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" />
 	</target>
 
@@ -6212,11 +6180,11 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-mysql57-jdk8">
+	<target name="functional-upgrade-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-mysql57-jdk8_stable">
+	<target name="functional-upgrade-tomcat90-mysql57_stable">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" />
 	</target>
 
@@ -6228,11 +6196,11 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-mysql80-jdk8">
+	<target name="functional-upgrade-tomcat90-mysql80">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="8.0" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-oracle193-jdk8">
+	<target name="functional-upgrade-tomcat90-oracle193">
 		<run-functional-test app.server.type="tomcat" database.type="oracle" database.version="19.3.0.0.0" />
 	</target>
 
@@ -6240,7 +6208,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="oracle" database.version="19.3.0.0.0" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-postgresql121-jdk8">
+	<target name="functional-upgrade-tomcat90-postgresql121">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="12.1" />
 	</target>
 
@@ -6248,7 +6216,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="12.1" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-postgresql134-jdk8">
+	<target name="functional-upgrade-tomcat90-postgresql134">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="13.4" />
 	</target>
 
@@ -6256,7 +6224,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="13.4" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-postgresql144-jdk8">
+	<target name="functional-upgrade-tomcat90-postgresql144">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="14.4" />
 	</target>
 
@@ -6264,7 +6232,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="14.4" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-postgresql153-jdk8">
+	<target name="functional-upgrade-tomcat90-postgresql153">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="15.3" />
 	</target>
 
@@ -6272,7 +6240,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="15.3" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-postgresql163-jdk8">
+	<target name="functional-upgrade-tomcat90-postgresql163">
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="16.3" />
 	</target>
 
@@ -6280,7 +6248,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="postgresql" database.version="16.3" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-sqlserver2017-jdk8">
+	<target name="functional-upgrade-tomcat90-sqlserver2017">
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2017" />
 	</target>
 
@@ -6288,7 +6256,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2017" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-sqlserver2019-jdk8">
+	<target name="functional-upgrade-tomcat90-sqlserver2019">
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2019" />
 	</target>
 
@@ -6296,7 +6264,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2019" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-sqlserver2022-jdk8">
+	<target name="functional-upgrade-tomcat90-sqlserver2022">
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2022" />
 	</target>
 
@@ -6304,7 +6272,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="sqlserver" database.version="2022" />
 	</target>
 
-	<target name="functional-upgrade-tomcat90-sybase160-jdk8">
+	<target name="functional-upgrade-tomcat90-sybase160">
 		<run-functional-test app.server.type="tomcat" database.type="sybase" />
 	</target>
 
@@ -6312,31 +6280,31 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="sybase" />
 	</target>
 
-	<target name="functional-upgrade-weblogic121-mysql56-jdk8">
+	<target name="functional-upgrade-weblogic121-mysql56">
 		<set-app-server-version-number app.server.type="weblogic" app.server.version="12.2.1" />
 
 		<run-functional-test app.server.type="weblogic" database.type="mysql" />
 	</target>
 
-	<target name="functional-upgrade-weblogic122-mysql57-jdk8">
+	<target name="functional-upgrade-weblogic122-mysql57">
 		<set-app-server-version-number app.server.type="weblogic" app.server.version="12.2.1" />
 
 		<run-functional-test app.server.type="weblogic" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="functional-upgrade-weblogic141-mysql56-jdk8">
+	<target name="functional-upgrade-weblogic141-mysql56">
 		<set-app-server-version-number app.server.type="weblogic" app.server.version="14.1.1" />
 
 		<run-functional-test app.server.type="weblogic" database.type="mysql" />
 	</target>
 
-	<target name="functional-upgrade-weblogic141-mysql57-jdk8">
+	<target name="functional-upgrade-weblogic141-mysql57">
 		<set-app-server-version-number app.server.type="weblogic" app.server.version="14.1.1" />
 
 		<run-functional-test app.server.type="weblogic" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="functional-upgrade-wildfly180-mariadb104-jdk8">
+	<target name="functional-upgrade-wildfly180-mariadb104">
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" />
 	</target>
 
@@ -6344,7 +6312,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" />
 	</target>
 
-	<target name="functional-upgrade-wildfly180-mariadb106-jdk8">
+	<target name="functional-upgrade-wildfly180-mariadb106">
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" />
 	</target>
 
@@ -6352,7 +6320,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" />
 	</target>
 
-	<target name="functional-upgrade-wildfly230-mariadb104-jdk8">
+	<target name="functional-upgrade-wildfly230-mariadb104">
 		<set-app-server-version-number app.server.type="wildfly" app.server.version="23.0.0" />
 
 		<run-functional-test app.server.type="wildfly" app.server.version="23.0.0" database.type="mariadb" />
@@ -6364,7 +6332,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="wildfly" app.server.version="23.0.0" database.type="mariadb" />
 	</target>
 
-	<target name="functional-upgrade-wildfly230-mariadb106-jdk8">
+	<target name="functional-upgrade-wildfly230-mariadb106">
 		<set-app-server-version-number app.server.type="wildfly" app.server.version="23.0.0" />
 
 		<run-functional-test app.server.type="wildfly" app.server.version="23.0.0" database.type="mariadb" />
@@ -6376,7 +6344,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="wildfly" app.server.version="23.0.0" database.type="mariadb" />
 	</target>
 
-	<target name="functional-upgrade-wildfly261-mariadb104-jdk8">
+	<target name="functional-upgrade-wildfly261-mariadb104">
 		<set-app-server-version-number app.server.type="wildfly" app.server.version="26.1.0" />
 
 		<run-functional-test app.server.type="wildfly" app.server.version="26.1.0" database.type="mariadb" />
@@ -6388,7 +6356,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="wildfly" app.server.version="26.1.0" database.type="mariadb" />
 	</target>
 
-	<target name="functional-upgrade-wildfly261-mariadb106-jdk8">
+	<target name="functional-upgrade-wildfly261-mariadb106">
 		<set-app-server-version-number app.server.type="wildfly" app.server.version="26.1.0" />
 
 		<run-functional-test app.server.type="wildfly" app.server.version="26.1.0" database.type="mariadb" />
@@ -6400,79 +6368,79 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="wildfly" app.server.version="26.1.0" database.type="mariadb" />
 	</target>
 
-	<target name="functional-weblogic122-mysql57-jdk8">
+	<target name="functional-weblogic122-mysql57">
 		<set-app-server-version-number app.server.type="weblogic" app.server.version="12.2.1" />
 
 		<run-functional-test app.server.type="weblogic" database.type="mysql" />
 	</target>
 
-	<target name="functional-weblogic122-oracle193-jdk8">
+	<target name="functional-weblogic122-oracle193">
 		<set-app-server-version-number app.server.type="weblogic" app.server.version="12.2.1" />
 
 		<run-functional-test app.server.type="weblogic" database.type="oracle" database.version="19.3.0.0.0" />
 	</target>
 
-	<target name="functional-weblogic141-mysql57-jdk8">
+	<target name="functional-weblogic141-mysql57">
 		<set-app-server-version-number app.server.type="weblogic" app.server.version="14.1.1" />
 
 		<run-functional-test app.server.type="weblogic" database.type="mysql" />
 	</target>
 
-	<target name="functional-weblogic141-oracle193-jdk8">
+	<target name="functional-weblogic141-oracle193">
 		<set-app-server-version-number app.server.type="weblogic" app.server.version="14.1.1" />
 
 		<run-functional-test app.server.type="weblogic" database.type="oracle" database.version="19.3.0.0.0" />
 	</target>
 
-	<target name="functional-wildfly180-mariadb104-jdk8">
+	<target name="functional-wildfly180-mariadb104">
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" />
 	</target>
 
-	<target name="functional-wildfly180-mariadb106-jdk8">
+	<target name="functional-wildfly180-mariadb106">
 		<run-functional-test app.server.type="wildfly" database.type="mariadb" />
 	</target>
 
-	<target name="functional-wildfly180-mysql57-jdk8">
+	<target name="functional-wildfly180-mysql57">
 		<run-functional-test app.server.type="wildfly" database.type="mysql" />
 	</target>
 
-	<target name="functional-wildfly230-mariadb104-jdk8">
+	<target name="functional-wildfly230-mariadb104">
 		<set-app-server-version-number app.server.type="wildfly" app.server.version="23.0.0" />
 
 		<run-functional-test app.server.type="wildfly" app.server.version="23.0.0" database.type="mariadb" />
 	</target>
 
-	<target name="functional-wildfly230-mariadb106-jdk8">
+	<target name="functional-wildfly230-mariadb106">
 		<set-app-server-version-number app.server.type="wildfly" app.server.version="23.0.0" />
 
 		<run-functional-test app.server.type="wildfly" app.server.version="23.0.0" database.type="mariadb" />
 	</target>
 
-	<target name="functional-wildfly230-mysql57-jdk8">
+	<target name="functional-wildfly230-mysql57">
 		<set-app-server-version-number app.server.type="wildfly" app.server.version="23.0.0" />
 
 		<run-functional-test app.server.type="wildfly" app.server.version="23.0.0" database.type="mysql" />
 	</target>
 
-	<target name="functional-wildfly261-mariadb104-jdk8">
+	<target name="functional-wildfly261-mariadb104">
 		<set-app-server-version-number app.server.type="wildfly" app.server.version="26.1.0" />
 
 		<run-functional-test app.server.type="wildfly" app.server.version="26.1.0" database.type="mariadb" />
 	</target>
 
-	<target name="functional-wildfly261-mariadb106-jdk8">
+	<target name="functional-wildfly261-mariadb106">
 		<set-app-server-version-number app.server.type="wildfly" app.server.version="26.1.0" />
 
 		<run-functional-test app.server.type="wildfly" app.server.version="26.1.0" database.type="mariadb" />
 	</target>
 
-	<target name="functional-wildfly261-mysql57-jdk8">
+	<target name="functional-wildfly261-mysql57">
 		<set-app-server-version-number app.server.type="wildfly" app.server.version="26.1.0" />
 
 		<run-functional-test app.server.type="wildfly" app.server.version="26.1.0" database.type="mysql" />
 	</target>
 
-	<target name="functional-workspaces-bundle-mysql57-jdk8">
+	<target name="functional-workspaces-bundle-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -6492,7 +6460,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="gogo-shell-client-mysql57-jdk8">
+	<target name="gogo-shell-client-mysql57">
 		<run-batch-test>
 			<test-action>
 				<database-test-run-test database.type="mysql" stop.app.server="true">
@@ -6535,7 +6503,7 @@ information. Make sure to commit in all format-javadoc results.
 		</run-batch-test>
 	</target>
 
-	<target name="gradle-plugins-test-jdk8">
+	<target name="gradle-plugins-test">
 		<run-batch-test>
 			<test-action>
 				<antcall inheritAll="false" target="compile" />
@@ -6604,7 +6572,7 @@ information. Make sure to commit in all format-javadoc results.
 		</run-batch-test>
 	</target>
 
-	<target name="javadoc-jdk8">
+	<target name="javadoc">
 		<run-batch-test>
 			<test-action>
 				<antcall target="compile" />
@@ -6614,7 +6582,7 @@ information. Make sure to commit in all format-javadoc results.
 		</run-batch-test>
 	</target>
 
-	<target name="js-unit-jdk8">
+	<target name="js-unit">
 		<run-batch-test>
 			<test-action>
 				<for delimiter=" " list="${modules.test.class.group}" param="modules.test.class" trim="true">
@@ -6655,11 +6623,11 @@ information. Make sure to commit in all format-javadoc results.
 		</run-batch-test>
 	</target>
 
-	<target name="jsf-jdk8">
-		<ant antfile="build-test-batch/jsf.xml" target="jsf-jdk8" />
+	<target name="jsf">
+		<ant antfile="build-test-batch/jsf.xml" target="jsf" />
 	</target>
 
-	<target name="jsp-runtime-compile-mysql57-jdk8">
+	<target name="jsp-runtime-compile-mysql57">
 		<run-batch-test>
 			<test-action>
 				<database-test-run-test database.type="mysql" stop.app.server="true">
@@ -6744,27 +6712,27 @@ information. Make sure to commit in all format-javadoc results.
 		<run-legacy-database-dump database.type="sybase" />
 	</target>
 
-	<target name="lpkg-container-mysql57-jdk8">
+	<target name="lpkg-container-mysql57">
 		<run-lpkg-container-test />
 	</target>
 
-	<target name="lpkg-controller-mysql57-jdk8">
+	<target name="lpkg-controller-mysql57">
 		<run-lpkg-controller-test />
 	</target>
 
-	<target name="lpkg-override-mysql57-jdk8">
+	<target name="lpkg-override-mysql57">
 		<run-lpkg-override-test />
 	</target>
 
-	<target name="lpkg-persistence-mysql57-jdk8">
+	<target name="lpkg-persistence-mysql57">
 		<run-lpkg-persistence-test />
 	</target>
 
-	<target name="lpkg-startup-mysql57-jdk8">
+	<target name="lpkg-startup-mysql57">
 		<run-lpkg-startup-test />
 	</target>
 
-	<target name="modules-compile-jdk8">
+	<target name="modules-compile">
 		<run-batch-test>
 			<test-action>
 				<if>
@@ -6884,7 +6852,7 @@ information. Make sure to commit in all format-javadoc results.
 		</run-batch-test>
 	</target>
 
-	<target name="modules-functional-jdk8">
+	<target name="modules-functional">
 		<run-batch-test>
 			<test-action>
 				<antcall target="run-selenium-test">
@@ -6894,7 +6862,7 @@ information. Make sure to commit in all format-javadoc results.
 		</run-batch-test>
 	</target>
 
-	<target name="modules-functional-tomcat90-mysql57-jdk8">
+	<target name="modules-functional-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" />
 	</target>
 
@@ -6928,7 +6896,7 @@ information. Make sure to commit in all format-javadoc results.
 		</run-batch-test>
 	</target>
 
-	<target name="modules-integration-aws-s3-mysql57-jdk8">
+	<target name="modules-integration-aws-s3-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<tstamp>
@@ -6996,7 +6964,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-bundle-db2115-jdk8">
+	<target name="modules-integration-bundle-db2115">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-modules-integration-test
@@ -7106,7 +7074,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-bundle-mariadb104-jdk8">
+	<target name="modules-integration-bundle-mariadb104">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-modules-integration-test
@@ -7142,7 +7110,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-bundle-mariadb106-jdk8">
+	<target name="modules-integration-bundle-mariadb106">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-modules-integration-test
@@ -7178,7 +7146,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-bundle-mysql57-jdk8">
+	<target name="modules-integration-bundle-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-modules-integration-test
@@ -7235,7 +7203,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-bundle-mysql80-jdk8">
+	<target name="modules-integration-bundle-mysql80">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-modules-integration-test
@@ -7311,7 +7279,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-bundle-postgresql134-jdk8">
+	<target name="modules-integration-bundle-postgresql134">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-modules-integration-test
@@ -7330,7 +7298,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-bundle-postgresql144-jdk8">
+	<target name="modules-integration-bundle-postgresql144">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-modules-integration-test
@@ -7349,7 +7317,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-bundle-postgresql153-jdk8">
+	<target name="modules-integration-bundle-postgresql153">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-modules-integration-test
@@ -7368,7 +7336,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-bundle-postgresql163-jdk8">
+	<target name="modules-integration-bundle-postgresql163">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-modules-integration-test
@@ -7406,7 +7374,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-bundle-sqlserver2019-jdk8">
+	<target name="modules-integration-bundle-sqlserver2019">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-modules-integration-test
@@ -7425,7 +7393,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-bundle-sqlserver2022-jdk8">
+	<target name="modules-integration-bundle-sqlserver2022">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-modules-integration-test
@@ -7444,7 +7412,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-bundle-sybase160-jdk8">
+	<target name="modules-integration-bundle-sybase160">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-modules-integration-test
@@ -7480,7 +7448,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-db-partition-mysql57-jdk8">
+	<target name="modules-integration-db-partition-mysql57">
 		<run-modules-integration-test
 			database.partition.enabled="true"
 			database.type="mysql"
@@ -7488,7 +7456,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-db-partition-postgresql153-jdk8">
+	<target name="modules-integration-db-partition-postgresql153">
 		<run-modules-integration-test
 			database.partition.enabled="true"
 			database.type="postgresql"
@@ -7496,7 +7464,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-db-partition-postgresql163-jdk8">
+	<target name="modules-integration-db-partition-postgresql163">
 		<run-modules-integration-test
 			database.partition.enabled="true"
 			database.type="postgresql"
@@ -7504,7 +7472,7 @@ information. Make sure to commit in all format-javadoc results.
 		/>
 	</target>
 
-	<target name="modules-integration-db2111-jdk8">
+	<target name="modules-integration-db2111">
 		<run-modules-integration-test database.type="db2" />
 	</target>
 
@@ -7512,7 +7480,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="db2" />
 	</target>
 
-	<target name="modules-integration-db2115-jdk8">
+	<target name="modules-integration-db2115">
 		<run-modules-integration-test database.type="db2" database.version="11.5.7" />
 	</target>
 
@@ -7520,7 +7488,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="db2" database.version="11.5.7" />
 	</target>
 
-	<target name="modules-integration-hypersonic20-jdk8">
+	<target name="modules-integration-hypersonic20">
 		<run-modules-integration-test database.type="hypersonic" />
 	</target>
 
@@ -7528,7 +7496,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="hypersonic" />
 	</target>
 
-	<target name="modules-integration-mariadb102-jdk8">
+	<target name="modules-integration-mariadb102">
 		<run-modules-integration-test database.type="mariadb" />
 	</target>
 
@@ -7536,7 +7504,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="mariadb" />
 	</target>
 
-	<target name="modules-integration-mariadb104-jdk8">
+	<target name="modules-integration-mariadb104">
 		<run-modules-integration-test database.type="mariadb" />
 	</target>
 
@@ -7544,7 +7512,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="mariadb" />
 	</target>
 
-	<target name="modules-integration-mariadb106-jdk8">
+	<target name="modules-integration-mariadb106">
 		<run-modules-integration-test database.type="mariadb" />
 	</target>
 
@@ -7552,15 +7520,15 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="mariadb" />
 	</target>
 
-	<target name="modules-integration-mysql56-jdk8">
+	<target name="modules-integration-mysql56">
 		<run-modules-integration-test database.type="mysql" />
 	</target>
 
-	<target name="modules-integration-mysql57-jdk8">
+	<target name="modules-integration-mysql57">
 		<run-modules-integration-test database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="modules-integration-mysql57-jdk8_stable">
+	<target name="modules-integration-mysql57_stable">
 		<run-modules-integration-test database.type="mysql" database.version="5.7" />
 	</target>
 
@@ -7572,11 +7540,11 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="modules-integration-mysql80-jdk8">
+	<target name="modules-integration-mysql80">
 		<run-modules-integration-test database.type="mysql" database.version="8.0" />
 	</target>
 
-	<target name="modules-integration-mysql80-jdk8_stable">
+	<target name="modules-integration-mysql80_stable">
 		<run-modules-integration-test database.type="mysql" database.version="8.0" />
 	</target>
 
@@ -7584,7 +7552,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="mysql" database.version="8.0" />
 	</target>
 
-	<target name="modules-integration-oracle193-jdk8">
+	<target name="modules-integration-oracle193">
 		<run-modules-integration-test database.type="oracle" database.version="19.3.0.0.0" />
 	</target>
 
@@ -7592,7 +7560,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="oracle" database.version="19.3.0.0.0" />
 	</target>
 
-	<target name="modules-integration-postgresql121-jdk8">
+	<target name="modules-integration-postgresql121">
 		<run-modules-integration-test database.type="postgresql" database.version="12.1" />
 	</target>
 
@@ -7600,7 +7568,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="postgresql" database.version="12.1" />
 	</target>
 
-	<target name="modules-integration-postgresql134-jdk8">
+	<target name="modules-integration-postgresql134">
 		<run-modules-integration-test database.type="postgresql" database.version="13.4" />
 	</target>
 
@@ -7608,7 +7576,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="postgresql" database.version="13.4" />
 	</target>
 
-	<target name="modules-integration-postgresql144-jdk8">
+	<target name="modules-integration-postgresql144">
 		<run-modules-integration-test database.type="postgresql" database.version="14.4" />
 	</target>
 
@@ -7616,7 +7584,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="postgresql" database.version="14.4" />
 	</target>
 
-	<target name="modules-integration-postgresql153-jdk8">
+	<target name="modules-integration-postgresql153">
 		<run-modules-integration-test database.type="postgresql" database.version="15.3" />
 	</target>
 
@@ -7624,7 +7592,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="postgresql" database.version="15.3" />
 	</target>
 
-	<target name="modules-integration-postgresql163-jdk8">
+	<target name="modules-integration-postgresql163">
 		<run-modules-integration-test database.type="postgresql" database.version="16.3" />
 	</target>
 
@@ -7632,8 +7600,8 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="postgresql" database.version="16.3" />
 	</target>
 
-	<target name="modules-integration-project-templates-jdk8">
-		<antcall target="modules-unit-jdk8">
+	<target name="modules-integration-project-templates">
+		<antcall target="modules-unit">
 			<param name="project.templates.test" value="true" />
 			<param name="project.templates.test.builds" value="true" />
 		</antcall>
@@ -7646,7 +7614,7 @@ information. Make sure to commit in all format-javadoc results.
 			junit.jvm.override=${java.jdk.home}/bin/java
 			junit.jvm.override.version=17</echo>
 
-		<antcall target="modules-unit-jdk8">
+		<antcall target="modules-unit">
 			<param name="junit.jvm.override" value="${java.jdk.home}/bin/java" />
 			<param name="junit.jvm.override.version" value="17" />
 			<param name="project.templates.test" value="true" />
@@ -7661,7 +7629,7 @@ information. Make sure to commit in all format-javadoc results.
 			junit.jvm.override=${java.jdk.home}/bin/java
 			junit.jvm.override.version=21</echo>
 
-		<antcall target="modules-unit-jdk8">
+		<antcall target="modules-unit">
 			<param name="junit.jvm.override" value="${java.jdk.home}/bin/java" />
 			<param name="junit.jvm.override.version" value="21" />
 			<param name="project.templates.test" value="true" />
@@ -7669,7 +7637,7 @@ information. Make sure to commit in all format-javadoc results.
 		</antcall>
 	</target>
 
-	<target name="modules-integration-sqlserver2017-jdk8">
+	<target name="modules-integration-sqlserver2017">
 		<run-modules-integration-test database.type="sqlserver" database.version="2017" />
 	</target>
 
@@ -7677,7 +7645,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="sqlserver" database.version="2017" />
 	</target>
 
-	<target name="modules-integration-sqlserver2019-jdk8">
+	<target name="modules-integration-sqlserver2019">
 		<run-modules-integration-test database.type="sqlserver" database.version="2019" />
 	</target>
 
@@ -7685,7 +7653,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="sqlserver" database.version="2019" />
 	</target>
 
-	<target name="modules-integration-sqlserver2022-jdk8">
+	<target name="modules-integration-sqlserver2022">
 		<run-modules-integration-test database.type="sqlserver" database.version="2022" />
 	</target>
 
@@ -7693,7 +7661,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="sqlserver" database.version="2022" />
 	</target>
 
-	<target name="modules-integration-sybase160-jdk8">
+	<target name="modules-integration-sybase160">
 		<run-modules-integration-test database.type="sybase" />
 	</target>
 
@@ -7701,7 +7669,7 @@ information. Make sure to commit in all format-javadoc results.
 		<run-modules-integration-test database.type="sybase" />
 	</target>
 
-	<target name="modules-semantic-versioning-jdk8">
+	<target name="modules-semantic-versioning">
 		<propertycopy from="app.server.${app.server.type}.version" name="app.server.version" />
 
 		<run-batch-test>
@@ -7811,7 +7779,7 @@ information. Make sure to commit in all format-javadoc results.
 		</run-batch-test>
 	</target>
 
-	<target name="modules-unit-jdk8">
+	<target name="modules-unit">
 		<run-batch-test>
 			<test-action>
 				<print-test-class-group test.class.group.index="${axis.variable}" />
@@ -7872,8 +7840,8 @@ information. Make sure to commit in all format-javadoc results.
 		</run-batch-test>
 	</target>
 
-	<target name="modules-unit-jdk8_stable">
-		<antcall target="modules-unit-jdk8" />
+	<target name="modules-unit_stable">
+		<antcall target="modules-unit" />
 	</target>
 
 	<target name="modules-unit-jdk21_zulu">
@@ -7883,14 +7851,14 @@ information. Make sure to commit in all format-javadoc results.
 junit.jvm.override=${java.jdk.home}/bin/java
 junit.jvm.override.version=21</echo>
 
-		<antcall target="modules-unit-jdk8">
+		<antcall target="modules-unit">
 			<param name="junit.jvm.override" value="${java.jdk.home}/bin/java" />
 			<param name="junit.jvm.override.version" value="21" />
 		</antcall>
 	</target>
 
-	<target name="modules-unit-project-templates-jdk8">
-		<antcall target="modules-unit-jdk8">
+	<target name="modules-unit-project-templates">
+		<antcall target="modules-unit">
 			<param name="project.templates.test" value="true" />
 			<param name="project.templates.test.builds" value="false" />
 		</antcall>
@@ -7903,7 +7871,7 @@ junit.jvm.override.version=21</echo>
 			junit.jvm.override=${java.jdk.home}/bin/java
 			junit.jvm.override.version=17</echo>
 
-		<antcall target="modules-unit-jdk8">
+		<antcall target="modules-unit">
 			<param name="junit.jvm.override" value="${java.jdk.home}/bin/java" />
 			<param name="junit.jvm.override.version" value="17" />
 			<param name="project.templates.test" value="true" />
@@ -7918,7 +7886,7 @@ junit.jvm.override.version=21</echo>
 			junit.jvm.override=${java.jdk.home}/bin/java
 			junit.jvm.override.version=21</echo>
 
-		<antcall target="modules-unit-jdk8">
+		<antcall target="modules-unit">
 			<param name="junit.jvm.override" value="${java.jdk.home}/bin/java" />
 			<param name="junit.jvm.override.version" value="21" />
 			<param name="project.templates.test" value="true" />
@@ -7963,7 +7931,7 @@ ${output.content}</echo>
 		</exec>
 	</target>
 
-	<target name="patching-tool-custom-scripts-jdk8">
+	<target name="patching-tool-custom-scripts">
 		<fail message="Please set the property liferay.jenkins.dir">
 			<condition>
 				<not>
@@ -7988,7 +7956,7 @@ ${output.content}</echo>
 		</run-batch-test>
 	</target>
 
-	<target name="patching-tool-mysql57-jdk8">
+	<target name="patching-tool-mysql57">
 		<run-batch-test>
 			<test-action>
 				<database-test-run-test database.type="mysql" stop.app.server="true">
@@ -8029,7 +7997,7 @@ ${output.content}</echo>
 		</run-batch-test>
 	</target>
 
-	<target name="playwright-compile-jdk8">
+	<target name="playwright-compile">
 		<run-batch-test>
 			<test-action>
 				<trycatch>
@@ -8060,7 +8028,7 @@ ${output.content}</echo>
 		</run-batch-test>
 	</target>
 
-	<target name="playwright-js-bundle-tomcat90-mysql57-jdk8">
+	<target name="playwright-js-bundle-tomcat90-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-playwright-js-test
@@ -8082,15 +8050,15 @@ ${output.content}</echo>
 		<run-playwright-js-test />
 	</target>
 
-	<target name="playwright-js-tomcat90-mysql57-jdk8">
+	<target name="playwright-js-tomcat90-mysql57">
 		<run-playwright-js-test />
 	</target>
 
-	<target name="playwright-js-tomcat90-mysql57-jdk8_stable">
-		<antcall target="playwright-js-tomcat90-mysql57-jdk8" />
+	<target name="playwright-js-tomcat90-mysql57_stable">
+		<antcall target="playwright-js-tomcat90-mysql57" />
 	</target>
 
-	<target name="plugins-compile-jdk8">
+	<target name="plugins-compile">
 		<run-batch-test>
 			<test-action>
 				<ant antfile="build-test-plugins.xml" target="test-plugin-group">
@@ -8108,7 +8076,7 @@ ${output.content}</echo>
 		</run-batch-test>
 	</target>
 
-	<target name="plugins-functional-bundle-tomcat-mysql56-jdk8">
+	<target name="plugins-functional-bundle-tomcat-mysql56">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -8123,7 +8091,7 @@ ${output.content}</echo>
 		/>
 	</target>
 
-	<target name="plugins-functional-bundle-tomcat-mysql57-jdk8">
+	<target name="plugins-functional-bundle-tomcat-mysql57">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
 		<run-functional-test
@@ -8139,11 +8107,11 @@ ${output.content}</echo>
 		/>
 	</target>
 
-	<target name="plugins-functional-tomcat90-mysql57-jdk8">
+	<target name="plugins-functional-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="plugins-gulp-jdk8">
+	<target name="plugins-gulp">
 		<fail message="Please set the property ${test.base.dir.name}" unless="test.base.dir.name" />
 
 		<run-batch-test>
@@ -8167,7 +8135,7 @@ ${output.content}</echo>
 		</run-batch-test>
 	</target>
 
-	<target name="pmd-jdk8">
+	<target name="pmd">
 		<local name="pmd.violations.count" />
 
 		<delete dir="pmd-reports" />
@@ -8229,7 +8197,7 @@ ${output.content}</echo>
 		</if>
 	</target>
 
-	<target name="portal-frontend-js-lint-jdk8">
+	<target name="portal-frontend-js-lint">
 		<run-batch-test>
 			<test-action>
 				<gradle-execute dir="modules" task="packageRunLint" />
@@ -8241,7 +8209,7 @@ ${output.content}</echo>
 		</run-batch-test>
 	</target>
 
-	<target name="portal-license-smoke-mysql57-jdk8">
+	<target name="portal-license-smoke-mysql57">
 		<run-batch-test>
 			<test-action>
 				<database-test-run-test database.type="mysql" stop.app.server="true">
@@ -8291,7 +8259,7 @@ ${output.content}</echo>
 		</run-batch-test>
 	</target>
 
-	<target name="portal-renamed-tomcat-in-path-mysql57-jdk8">
+	<target name="portal-renamed-tomcat-in-path-mysql57">
 		<run-batch-test>
 			<test-action>
 				<database-test-run-test database.type="mysql" stop.app.server="true">
@@ -8437,7 +8405,7 @@ ${output.content}</echo>
 		</run-batch-test>
 	</target>
 
-	<target name="portal-second-startup-space-in-path-mysql57-jdk8">
+	<target name="portal-second-startup-space-in-path-mysql57">
 		<sequential>
 			<run-batch-test>
 				<test-action>
@@ -8519,7 +8487,7 @@ ${output.content}</echo>
 		</sequential>
 	</target>
 
-	<target name="portal-startup-space-in-path-mysql57-jdk8">
+	<target name="portal-startup-space-in-path-mysql57">
 		<propertycopy from="app.server.${app.server.type}.version" name="app.server.version" />
 
 		<sequential>
@@ -8763,7 +8731,7 @@ ${output.content}</echo>
 		</sequential>
 	</target>
 
-	<target name="poshi-validation-jdk8">
+	<target name="poshi-validation">
 		<run-batch-test>
 			<test-action>
 				<run-poshi-validation />
@@ -8848,35 +8816,35 @@ ${output.content}</echo>
 		</exec>
 	</target>
 
-	<target name="release-functional-bundle-tomcat-mysql56-jdk8">
-		<antcall target="functional-bundle-tomcat-mysql56-jdk8" />
+	<target name="release-functional-bundle-tomcat-mysql56">
+		<antcall target="functional-bundle-tomcat-mysql56" />
 	</target>
 
-	<target name="release-functional-smoke-bundle-tomcat-mysql56-jdk8">
-		<antcall target="functional-bundle-tomcat-mysql56-jdk8" />
+	<target name="release-functional-smoke-bundle-tomcat-mysql56">
+		<antcall target="functional-bundle-tomcat-mysql56" />
 	</target>
 
-	<target name="release-functional-smoke-bundle-tomcat-mysql57-jdk8">
-		<antcall target="functional-bundle-tomcat-mysql57-jdk8" />
+	<target name="release-functional-smoke-bundle-tomcat-mysql57">
+		<antcall target="functional-bundle-tomcat-mysql57" />
 	</target>
 
 	<target name="release-functional-smoke-bundle-tomcat-mysql57-jdk11_open">
 		<antcall target="functional-bundle-tomcat-mysql57-jdk11_open" />
 	</target>
 
-	<target name="release-osgi-state-exploded-test-mysql57-jdk8">
+	<target name="release-osgi-state-exploded-test-mysql57">
 		<run-release-osgi-state-exploded-test />
 	</target>
 
-	<target name="release-osgi-state-lpkg-change-directory-test-mysql57-jdk8">
+	<target name="release-osgi-state-lpkg-change-directory-test-mysql57">
 		<run-release-osgi-state-lpkg-change-directory-test />
 	</target>
 
-	<target name="release-osgi-state-lpkg-test-mysql57-jdk8">
+	<target name="release-osgi-state-lpkg-test-mysql57">
 		<run-release-osgi-state-lpkg-test />
 	</target>
 
-	<target name="rest-builder-jdk8">
+	<target name="rest-builder">
 		<run-batch-test>
 			<test-action>
 				<if>
@@ -8979,7 +8947,7 @@ information. Make sure to commit in all build REST results.
 		</run-batch-test>
 	</target>
 
-	<target name="ruby-sass-compiler-jdk8">
+	<target name="ruby-sass-compiler">
 		<antcall if:set="env.JENKINS_HOME" inheritAll="false" target="clean-up-java-processes" />
 
 		<setup-test-environment />
@@ -9022,7 +8990,7 @@ information. Make sure to commit in all build REST results.
 		</fail>
 	</target>
 
-	<target name="semantic-versioning-jdk8">
+	<target name="semantic-versioning">
 		<run-batch-test>
 			<test-action>
 				<echo>Checking for baseline log files.</echo>
@@ -9118,7 +9086,7 @@ tar --extract --file=liferay-portal-source.tar.gz modules/core/portal-bootstrap/
 		</run-batch-test>
 	</target>
 
-	<target name="service-builder-jdk8">
+	<target name="service-builder">
 		<run-batch-test>
 			<test-action>
 				<if>
@@ -9241,7 +9209,7 @@ information. Make sure to commit in all build services results.
 		<setup-testable-tomcat-gc test.portal.bundle.version="${test.portal.bundle.version}" />
 	</target>
 
-	<target name="source-format-current-branch-jdk8">
+	<target name="source-format-current-branch">
 		<run-batch-test>
 			<test-action>
 				<exec executable="git" failonerror="true" outputproperty="git.diff">
@@ -9307,7 +9275,7 @@ information. Make sure to commit in all build services results.
 		</run-batch-test>
 	</target>
 
-	<target name="source-format-jdk8">
+	<target name="source-format">
 		<run-batch-test>
 			<test-action>
 				<if>
@@ -9341,7 +9309,7 @@ information. Make sure to commit in all build services results.
 		</run-batch-test>
 	</target>
 
-	<target name="subrepository-assemble-jdk8">
+	<target name="subrepository-assemble">
 		<fail message="Please set the property ${subrepository.name}." unless="subrepository.name" />
 
 		<run-batch-test tomcat.gc.log="true">
@@ -9357,7 +9325,7 @@ information. Make sure to commit in all build services results.
 		</run-batch-test>
 	</target>
 
-	<target name="subrepository-compile-jdk8">
+	<target name="subrepository-compile">
 		<fail message="Please set the property ${subrepository.name}." unless="subrepository.name" />
 
 		<get-module-base-dir-from-subrepository-name subrepository.name="${subrepository.name}" />
@@ -9365,23 +9333,23 @@ information. Make sure to commit in all build services results.
 		<gradle-execute checktask="true" dir="${module.base.dir}" refreshdependencies="true" task="compileJava" />
 	</target>
 
-	<target name="subrepository-functional-tomcat90-mysql57-jdk8">
+	<target name="subrepository-functional-tomcat90-mysql57">
 		<run-functional-test app.server.type="tomcat" database.type="mysql" database.version="5.7" />
 	</target>
 
-	<target name="subrepository-integration-mysql56-jdk8">
+	<target name="subrepository-integration-mysql56">
 		<fail message="Please set the property ${subrepository.name}." unless="subrepository.name" />
 
 		<run-modules-integration-test database.type="mysql" refreshdependencies="true" subrepository.name="${subrepository.name}" />
 	</target>
 
-	<target name="subrepository-integration-mysql57-jdk8">
+	<target name="subrepository-integration-mysql57">
 		<fail message="Please set the property ${subrepository.name}." unless="subrepository.name" />
 
 		<run-modules-integration-test database.type="mysql" database.version="5.7" refreshdependencies="true" subrepository.name="${subrepository.name}" />
 	</target>
 
-	<target name="subrepository-pmd-jdk8">
+	<target name="subrepository-pmd">
 		<fail message="Please set the property ${subrepository.name}." unless="subrepository.name" />
 
 		<get-module-base-dir-from-subrepository-name subrepository.name="${subrepository.name}" />
@@ -9392,7 +9360,7 @@ information. Make sure to commit in all build services results.
 		</gradle-execute>
 	</target>
 
-	<target name="subrepository-semantic-versioning-jdk8">
+	<target name="subrepository-semantic-versioning">
 		<fail message="Please set the property ${subrepository.name}." unless="subrepository.name" />
 
 		<get-module-base-dir-from-subrepository-name subrepository.name="${subrepository.name}" />
@@ -9446,7 +9414,7 @@ information. Make sure to commit in all build services results.
 		<echo>Check for baseline log files completed.</echo>
 	</target>
 
-	<target name="subrepository-source-format-jdk8">
+	<target name="subrepository-source-format">
 		<fail message="Please set the property ${subrepository.name}." unless="subrepository.name" />
 
 		<get-module-base-dir-from-subrepository-name subrepository.name="${subrepository.name}" />
@@ -9456,7 +9424,7 @@ information. Make sure to commit in all build services results.
 		</gradle-execute>
 	</target>
 
-	<target name="subrepository-unit-jdk8">
+	<target name="subrepository-unit">
 		<fail message="Please set the property ${subrepository.name}." unless="subrepository.name" />
 
 		<if>
@@ -9625,7 +9593,7 @@ ${output.content}</echo>
 		<antcall target="clean-up-sybase-processes" />
 	</target>
 
-	<target name="tck-jdk8">
+	<target name="tck">
 		<run-batch-test tomcat.gc.log="true" tsant.gc.log="true">
 			<test-action>
 				<database-test-run-test database.type="mysql" stop.app.server="true">
@@ -9655,7 +9623,7 @@ ${output.content}</echo>
 		</run-batch-test>
 	</target>
 
-	<target name="unit-jdk8">
+	<target name="unit">
 		<run-batch-test>
 			<test-action>
 				<print-test-class-group test.class.group.index="${axis.variable}" />
@@ -9706,8 +9674,8 @@ ${output.content}</echo>
 		</run-batch-test>
 	</target>
 
-	<target name="unit-jdk8_stable">
-		<antcall target="unit-jdk8" />
+	<target name="unit_stable">
+		<antcall target="unit" />
 	</target>
 
 	<target name="unit-jdk21_zulu">
@@ -9717,13 +9685,13 @@ ${output.content}</echo>
 junit.jvm.override=${java.jdk.home}/bin/java
 junit.jvm.override.version=21</echo>
 
-		<antcall target="unit-jdk8">
+		<antcall target="unit">
 			<param name="junit.jvm.override" value="${java.jdk.home}/bin/java" />
 			<param name="junit.jvm.override.version" value="21" />
 		</antcall>
 	</target>
 
-	<target name="workspaces-compile-jdk8">
+	<target name="workspaces-compile">
 		<run-batch-test>
 			<test-action>
 				<local name="workspace.names" />
@@ -9828,7 +9796,7 @@ junit.jvm.override.version=21</echo>
 	</target>
 
 	<target name="workspaces-compile-jdk11">
-		<antcall target="workspaces-compile-jdk8">
+		<antcall target="workspaces-compile">
 			<param name="batch.jdk.version" value="11" />
 		</antcall>
 	</target>
