@@ -155,7 +155,7 @@
 					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_RESOURCE",
 					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_CALENDAR",
 					"objectDefinitionName2": "CalendarCollabCalendar",
-					"objectDefinitionSystem2": true,
+					"objectDefinitionSystem2": false,
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
@@ -176,7 +176,7 @@
 				"label": "approved",
 				"label_i18n": "Approved"
 			},
-			"system": true,
+			"system": false,
 			"titleObjectFieldName": "name"
 		},
 		{
@@ -324,7 +324,7 @@
 					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_CALENDAR",
 					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionName2": "CalendarCollabEvent",
-					"objectDefinitionSystem2": true,
+					"objectDefinitionSystem2": false,
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
@@ -342,7 +342,7 @@
 					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_CALENDAR",
 					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
 					"objectDefinitionName2": "CalendarCollabNotificationTemplate",
-					"objectDefinitionSystem2": true,
+					"objectDefinitionSystem2": false,
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
@@ -363,7 +363,7 @@
 				"label": "approved",
 				"label_i18n": "Approved"
 			},
-			"system": true,
+			"system": false,
 			"titleObjectFieldName": "name"
 		},
 		{
@@ -609,7 +609,7 @@
 					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_CALENDAR",
 					"objectDefinitionName2": "CalendarCollabCalendar",
-					"objectDefinitionSystem2": true,
+					"objectDefinitionSystem2": false,
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
@@ -627,7 +627,7 @@
 					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionName2": "CalendarCollabEvent",
-					"objectDefinitionSystem2": true,
+					"objectDefinitionSystem2": false,
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
@@ -645,7 +645,7 @@
 					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionName2": "CalendarCollabEvent",
-					"objectDefinitionSystem2": true,
+					"objectDefinitionSystem2": false,
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
@@ -666,7 +666,7 @@
 				"label": "approved",
 				"label_i18n": "Approved"
 			},
-			"system": true,
+			"system": false,
 			"titleObjectFieldName": "title"
 		},
 		{
@@ -781,7 +781,7 @@
 					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
 					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_CALENDAR",
 					"objectDefinitionName2": "CalendarCollabCalendar",
-					"objectDefinitionSystem2": true,
+					"objectDefinitionSystem2": false,
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
@@ -802,7 +802,7 @@
 				"label": "approved",
 				"label_i18n": "Approved"
 			},
-			"system": true,
+			"system": false,
 			"titleObjectFieldName": "notificationType"
 		}
 	]
