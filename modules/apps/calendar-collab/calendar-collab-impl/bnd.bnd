@@ -1,5 +1,7 @@
 Bundle-Name: Calendar Collab Impl
 Bundle-SymbolicName: com.liferay.calendar.collab.impl
 Bundle-Version: 1.0.0
+Liferay-Client-Extension-Batch: com/liferay/calendar/collab/internal/batch
 -dsannotations-options: inherit
+
 
