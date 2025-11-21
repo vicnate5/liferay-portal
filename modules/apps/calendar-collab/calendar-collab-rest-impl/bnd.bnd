@@ -1,0 +1,5 @@
+Bundle-Name: Calendar Collab REST Impl
+Bundle-SymbolicName: com.liferay.calendar.collab.rest.impl
+Bundle-Version: 1.0.0
+-dsannotations-options: inherit
+
