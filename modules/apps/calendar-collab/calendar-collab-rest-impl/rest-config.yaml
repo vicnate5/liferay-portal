@@ -1,0 +1,8 @@
+apiDir: ../calendar-collab-rest-api/src/main/java
+apiPackagePath: com.liferay.calendar.collab.rest
+author: Liferay
+compatibilityVersion: 13
+forcePredictableOperationId: true
+generateOpenAPI: false
+javaEEPackage: jakarta
+

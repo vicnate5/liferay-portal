@@ -1,0 +1,828 @@
+{
+	"configuration": {
+		"className": "com.liferay.object.admin.rest.dto.v1_0.ObjectDefinition",
+		"multiCompany": true,
+		"parameters": {
+			"containsHeaders": "true",
+			"createStrategy": "UPSERT",
+			"importStrategy": "ON_ERROR_FAIL",
+			"updateStrategy": "UPDATE"
+		},
+		"taskItemDelegateName": "DEFAULT"
+	},
+	"items": [
+		{
+			"accountEntryRestricted": false,
+			"enableCategorization": true,
+			"enableComments": false,
+			"enableFormContainer": false,
+			"enableLocalization": true,
+			"enableObjectEntryHistory": false,
+			"externalReferenceCode": "L_CALENDAR_COLLAB_RESOURCE",
+			"label": {
+				"en_US": "Calendar Collab Resource"
+			},
+			"modifiable": true,
+			"name": "CalendarCollabResource",
+			"objectFields": [
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "CODE",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Code"
+					},
+					"localized": false,
+					"name": "code",
+					"required": true,
+					"state": false,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "NAME",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Name"
+					},
+					"localized": true,
+					"name": "name",
+					"required": true,
+					"state": false,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "Clob",
+					"businessType": "LongText",
+					"externalReferenceCode": "DESCRIPTION",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Description"
+					},
+					"localized": true,
+					"name": "description",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Clob"
+				},
+				{
+					"DBType": "Boolean",
+					"businessType": "Boolean",
+					"defaultValue": true,
+					"externalReferenceCode": "ACTIVE",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "Active"
+					},
+					"localized": false,
+					"name": "active",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Boolean"
+				},
+				{
+					"DBType": "Long",
+					"businessType": "LongInteger",
+					"externalReferenceCode": "CLASS_NAME_ID",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "Class Name ID"
+					},
+					"localized": false,
+					"name": "classNameId",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Long"
+				},
+				{
+					"DBType": "Long",
+					"businessType": "LongInteger",
+					"externalReferenceCode": "CLASS_PK",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "Class PK"
+					},
+					"localized": false,
+					"name": "classPK",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Long"
+				},
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "CLASS_UUID",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Class UUID"
+					},
+					"localized": false,
+					"name": "classUuid",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "String"
+				}
+			],
+			"objectRelationships": [
+				{
+					"deletionType": "prevent",
+					"edge": false,
+					"externalReferenceCode": "L_CALENDAR_COLLAB_RESOURCE_TO_CALENDAR_COLLAB_CALENDAR",
+					"label": {
+						"en_US": "Calendar Collab Resource to Calendar Collab Calendar"
+					},
+					"name": "calendarCollabResourceToCalendarCollabCalendar",
+					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_RESOURCE",
+					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_CALENDAR",
+					"objectDefinitionName2": "CalendarCollabCalendar",
+					"objectDefinitionSystem2": true,
+					"parameterObjectFieldId": 0,
+					"parameterObjectFieldName": "",
+					"reverse": false,
+					"system": true,
+					"type": "oneToMany"
+				}
+			],
+			"panelCategoryKey": "applications_menu.applications.custom.apps",
+			"parameterRequired": false,
+			"pluralLabel": {
+				"en_US": "Calendar Collab Resources"
+			},
+			"portlet": false,
+			"restContextPath": "/o/c/calendarcollabresources",
+			"scope": "company",
+			"status": {
+				"code": 0,
+				"label": "approved",
+				"label_i18n": "Approved"
+			},
+			"system": true,
+			"titleObjectFieldName": "name"
+		},
+		{
+			"accountEntryRestricted": false,
+			"enableCategorization": true,
+			"enableComments": false,
+			"enableFormContainer": false,
+			"enableLocalization": true,
+			"enableObjectEntryHistory": false,
+			"externalReferenceCode": "L_CALENDAR_COLLAB_CALENDAR",
+			"label": {
+				"en_US": "Calendar Collab Calendar"
+			},
+			"modifiable": true,
+			"name": "CalendarCollabCalendar",
+			"objectFields": [
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "NAME",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Name"
+					},
+					"localized": true,
+					"name": "name",
+					"required": true,
+					"state": false,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "Clob",
+					"businessType": "LongText",
+					"externalReferenceCode": "DESCRIPTION",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Description"
+					},
+					"localized": true,
+					"name": "description",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Clob"
+				},
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "TIME_ZONE_ID",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Time Zone ID"
+					},
+					"localized": false,
+					"name": "timeZoneId",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "Integer",
+					"businessType": "Integer",
+					"externalReferenceCode": "COLOR",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "Color"
+					},
+					"localized": false,
+					"name": "color",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Integer"
+				},
+				{
+					"DBType": "Boolean",
+					"businessType": "Boolean",
+					"defaultValue": false,
+					"externalReferenceCode": "DEFAULT_CALENDAR",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "Default Calendar"
+					},
+					"localized": false,
+					"name": "defaultCalendar",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Boolean"
+				},
+				{
+					"DBType": "Boolean",
+					"businessType": "Boolean",
+					"defaultValue": false,
+					"externalReferenceCode": "ENABLE_COMMENTS",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "Enable Comments"
+					},
+					"localized": false,
+					"name": "enableComments",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Boolean"
+				},
+				{
+					"DBType": "Boolean",
+					"businessType": "Boolean",
+					"defaultValue": false,
+					"externalReferenceCode": "ENABLE_RATINGS",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "Enable Ratings"
+					},
+					"localized": false,
+					"name": "enableRatings",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Boolean"
+				}
+			],
+			"objectRelationships": [
+				{
+					"deletionType": "prevent",
+					"edge": false,
+					"externalReferenceCode": "L_CALENDAR_COLLAB_CALENDAR_TO_CALENDAR_COLLAB_RESOURCE",
+					"label": {
+						"en_US": "Calendar Collab Calendar to Calendar Collab Resource"
+					},
+					"name": "calendarCollabCalendarToCalendarCollabResource",
+					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_CALENDAR",
+					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_RESOURCE",
+					"objectDefinitionName2": "CalendarCollabResource",
+					"objectDefinitionSystem2": true,
+					"parameterObjectFieldId": 0,
+					"parameterObjectFieldName": "",
+					"reverse": false,
+					"system": true,
+					"type": "manyToOne"
+				},
+				{
+					"deletionType": "cascade",
+					"edge": false,
+					"externalReferenceCode": "L_CALENDAR_COLLAB_CALENDAR_TO_CALENDAR_COLLAB_EVENT",
+					"label": {
+						"en_US": "Calendar Collab Calendar to Calendar Collab Event"
+					},
+					"name": "calendarCollabCalendarToCalendarCollabEvent",
+					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_CALENDAR",
+					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_EVENT",
+					"objectDefinitionName2": "CalendarCollabEvent",
+					"objectDefinitionSystem2": true,
+					"parameterObjectFieldId": 0,
+					"parameterObjectFieldName": "",
+					"reverse": false,
+					"system": true,
+					"type": "oneToMany"
+				},
+				{
+					"deletionType": "cascade",
+					"edge": false,
+					"externalReferenceCode": "L_CALENDAR_COLLAB_CALENDAR_TO_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
+					"label": {
+						"en_US": "Calendar Collab Calendar to Calendar Collab Notification Template"
+					},
+					"name": "calendarCollabCalendarToCalendarCollabNotificationTemplate",
+					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_CALENDAR",
+					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
+					"objectDefinitionName2": "CalendarCollabNotificationTemplate",
+					"objectDefinitionSystem2": true,
+					"parameterObjectFieldId": 0,
+					"parameterObjectFieldName": "",
+					"reverse": false,
+					"system": true,
+					"type": "oneToMany"
+				}
+			],
+			"panelCategoryKey": "applications_menu.applications.custom.apps",
+			"parameterRequired": false,
+			"pluralLabel": {
+				"en_US": "Calendar Collab Calendars"
+			},
+			"portlet": false,
+			"restContextPath": "/o/c/calendarcollabcalendars",
+			"scope": "company",
+			"status": {
+				"code": 0,
+				"label": "approved",
+				"label_i18n": "Approved"
+			},
+			"system": true,
+			"titleObjectFieldName": "name"
+		},
+		{
+			"accountEntryRestricted": false,
+			"enableCategorization": true,
+			"enableComments": false,
+			"enableFormContainer": false,
+			"enableLocalization": true,
+			"enableObjectEntryHistory": false,
+			"externalReferenceCode": "L_CALENDAR_COLLAB_EVENT",
+			"label": {
+				"en_US": "Calendar Collab Event"
+			},
+			"modifiable": true,
+			"name": "CalendarCollabEvent",
+			"objectFields": [
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "TITLE",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Title"
+					},
+					"localized": true,
+					"name": "title",
+					"required": true,
+					"state": false,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "Clob",
+					"businessType": "LongText",
+					"externalReferenceCode": "DESCRIPTION",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Description"
+					},
+					"localized": true,
+					"name": "description",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Clob"
+				},
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "LOCATION",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Location"
+					},
+					"localized": false,
+					"name": "location",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "DateTime",
+					"businessType": "DateTime",
+					"externalReferenceCode": "START_TIME",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "Start Time"
+					},
+					"localized": false,
+					"name": "startTime",
+					"required": true,
+					"state": false,
+					"system": false,
+					"type": "DateTime"
+				},
+				{
+					"DBType": "DateTime",
+					"businessType": "DateTime",
+					"externalReferenceCode": "END_TIME",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "End Time"
+					},
+					"localized": false,
+					"name": "endTime",
+					"required": true,
+					"state": false,
+					"system": false,
+					"type": "DateTime"
+				},
+				{
+					"DBType": "Boolean",
+					"businessType": "Boolean",
+					"defaultValue": false,
+					"externalReferenceCode": "ALL_DAY",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "All Day"
+					},
+					"localized": false,
+					"name": "allDay",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Boolean"
+				},
+				{
+					"DBType": "Clob",
+					"businessType": "LongText",
+					"externalReferenceCode": "RECURRENCE",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Recurrence"
+					},
+					"localized": false,
+					"name": "recurrence",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Clob"
+				},
+				{
+					"DBType": "Long",
+					"businessType": "LongInteger",
+					"externalReferenceCode": "FIRST_REMINDER",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "First Reminder"
+					},
+					"localized": false,
+					"name": "firstReminder",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Long"
+				},
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "FIRST_REMINDER_TYPE",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "First Reminder Type"
+					},
+					"localized": false,
+					"name": "firstReminderType",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "Long",
+					"businessType": "LongInteger",
+					"externalReferenceCode": "SECOND_REMINDER",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "Second Reminder"
+					},
+					"localized": false,
+					"name": "secondReminder",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Long"
+				},
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "SECOND_REMINDER_TYPE",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Second Reminder Type"
+					},
+					"localized": false,
+					"name": "secondReminderType",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "Integer",
+					"businessType": "Integer",
+					"externalReferenceCode": "STATUS",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "Status"
+					},
+					"localized": false,
+					"name": "status",
+					"required": false,
+					"state": true,
+					"system": false,
+					"type": "Integer"
+				},
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "V_EVENT_UID",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "vEvent UID"
+					},
+					"localized": false,
+					"name": "vEventUid",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "String"
+				}
+			],
+			"objectRelationships": [
+				{
+					"deletionType": "prevent",
+					"edge": false,
+					"externalReferenceCode": "L_CALENDAR_COLLAB_EVENT_TO_CALENDAR_COLLAB_CALENDAR",
+					"label": {
+						"en_US": "Calendar Collab Event to Calendar Collab Calendar"
+					},
+					"name": "calendarCollabEventToCalendarCollabCalendar",
+					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_EVENT",
+					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_CALENDAR",
+					"objectDefinitionName2": "CalendarCollabCalendar",
+					"objectDefinitionSystem2": true,
+					"parameterObjectFieldId": 0,
+					"parameterObjectFieldName": "",
+					"reverse": false,
+					"system": true,
+					"type": "manyToOne"
+				},
+				{
+					"deletionType": "prevent",
+					"edge": false,
+					"externalReferenceCode": "L_CALENDAR_COLLAB_EVENT_TO_PARENT_EVENT",
+					"label": {
+						"en_US": "Calendar Collab Event to Parent Event"
+					},
+					"name": "calendarCollabEventToParentEvent",
+					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_EVENT",
+					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_EVENT",
+					"objectDefinitionName2": "CalendarCollabEvent",
+					"objectDefinitionSystem2": true,
+					"parameterObjectFieldId": 0,
+					"parameterObjectFieldName": "",
+					"reverse": false,
+					"system": true,
+					"type": "manyToOne"
+				},
+				{
+					"deletionType": "prevent",
+					"edge": false,
+					"externalReferenceCode": "L_CALENDAR_COLLAB_EVENT_TO_RECURRING_EVENT",
+					"label": {
+						"en_US": "Calendar Collab Event to Recurring Event"
+					},
+					"name": "calendarCollabEventToRecurringEvent",
+					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_EVENT",
+					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_EVENT",
+					"objectDefinitionName2": "CalendarCollabEvent",
+					"objectDefinitionSystem2": true,
+					"parameterObjectFieldId": 0,
+					"parameterObjectFieldName": "",
+					"reverse": false,
+					"system": true,
+					"type": "manyToOne"
+				}
+			],
+			"panelCategoryKey": "applications_menu.applications.custom.apps",
+			"parameterRequired": false,
+			"pluralLabel": {
+				"en_US": "Calendar Collab Events"
+			},
+			"portlet": false,
+			"restContextPath": "/o/c/calendarcollabevents",
+			"scope": "company",
+			"status": {
+				"code": 0,
+				"label": "approved",
+				"label_i18n": "Approved"
+			},
+			"system": true,
+			"titleObjectFieldName": "title"
+		},
+		{
+			"accountEntryRestricted": false,
+			"enableCategorization": false,
+			"enableComments": false,
+			"enableFormContainer": false,
+			"enableLocalization": false,
+			"enableObjectEntryHistory": false,
+			"externalReferenceCode": "L_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
+			"label": {
+				"en_US": "Calendar Collab Notification Template"
+			},
+			"modifiable": true,
+			"name": "CalendarCollabNotificationTemplate",
+			"objectFields": [
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "NOTIFICATION_TYPE",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Notification Type"
+					},
+					"localized": false,
+					"name": "notificationType",
+					"required": true,
+					"state": false,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "Clob",
+					"businessType": "LongText",
+					"externalReferenceCode": "NOTIFICATION_TYPE_SETTINGS",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Notification Type Settings"
+					},
+					"localized": false,
+					"name": "notificationTypeSettings",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Clob"
+				},
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "NOTIFICATION_TEMPLATE_TYPE",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Notification Template Type"
+					},
+					"localized": false,
+					"name": "notificationTemplateType",
+					"required": true,
+					"state": false,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "SUBJECT",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Subject"
+					},
+					"localized": false,
+					"name": "subject",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "Clob",
+					"businessType": "LongText",
+					"externalReferenceCode": "BODY",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Body"
+					},
+					"localized": false,
+					"name": "body",
+					"required": false,
+					"state": false,
+					"system": false,
+					"type": "Clob"
+				}
+			],
+			"objectRelationships": [
+				{
+					"deletionType": "prevent",
+					"edge": false,
+					"externalReferenceCode": "L_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE_TO_CALENDAR_COLLAB_CALENDAR",
+					"label": {
+						"en_US": "Calendar Collab Notification Template to Calendar Collab Calendar"
+					},
+					"name": "calendarCollabNotificationTemplateToCalendarCollabCalendar",
+					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
+					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_CALENDAR",
+					"objectDefinitionName2": "CalendarCollabCalendar",
+					"objectDefinitionSystem2": true,
+					"parameterObjectFieldId": 0,
+					"parameterObjectFieldName": "",
+					"reverse": false,
+					"system": true,
+					"type": "manyToOne"
+				}
+			],
+			"panelCategoryKey": "applications_menu.applications.custom.apps",
+			"parameterRequired": false,
+			"pluralLabel": {
+				"en_US": "Calendar Collab Notification Templates"
+			},
+			"portlet": false,
+			"restContextPath": "/o/c/calendarcollabnotificationtemplates",
+			"scope": "company",
+			"status": {
+				"code": 0,
+				"label": "approved",
+				"label_i18n": "Approved"
+			},
+			"system": true,
+			"titleObjectFieldName": "notificationType"
+		}
+	]
+}
+

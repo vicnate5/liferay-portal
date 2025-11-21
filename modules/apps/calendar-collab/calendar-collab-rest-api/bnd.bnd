@@ -1,0 +1,8 @@
+Bundle-Name: Calendar Collab REST API
+Bundle-SymbolicName: com.liferay.calendar.collab.rest.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.calendar.collab.rest.dto.v1_0,\
+	com.liferay.calendar.collab.rest.resource.v1_0
+-dsannotations-options: inherit
+
