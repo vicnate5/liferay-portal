@@ -314,24 +314,6 @@
 			],
 			"objectRelationships": [
 				{
-					"deletionType": "prevent",
-					"edge": false,
-					"externalReferenceCode": "L_CALENDAR_COLLAB_CALENDAR_TO_CALENDAR_COLLAB_RESOURCE",
-					"label": {
-						"en_US": "Calendar Collab Calendar to Calendar Collab Resource"
-					},
-					"name": "calendarCollabCalendarToCalendarCollabResource",
-					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_CALENDAR",
-					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_RESOURCE",
-					"objectDefinitionName2": "CalendarCollabResource",
-					"objectDefinitionSystem2": true,
-					"parameterObjectFieldId": 0,
-					"parameterObjectFieldName": "",
-					"reverse": false,
-					"system": true,
-					"type": "manyToOne"
-				},
-				{
 					"deletionType": "cascade",
 					"edge": false,
 					"externalReferenceCode": "L_CALENDAR_COLLAB_CALENDAR_TO_CALENDAR_COLLAB_EVENT",
@@ -632,7 +614,7 @@
 					"parameterObjectFieldName": "",
 					"reverse": false,
 					"system": true,
-					"type": "manyToOne"
+					"type": "oneToMany"
 				},
 				{
 					"deletionType": "prevent",
@@ -650,7 +632,7 @@
 					"parameterObjectFieldName": "",
 					"reverse": false,
 					"system": true,
-					"type": "manyToOne"
+					"type": "oneToMany"
 				},
 				{
 					"deletionType": "prevent",
@@ -668,7 +650,7 @@
 					"parameterObjectFieldName": "",
 					"reverse": false,
 					"system": true,
-					"type": "manyToOne"
+					"type": "oneToMany"
 				}
 			],
 			"panelCategoryKey": "applications_menu.applications.custom.apps",
@@ -804,7 +786,7 @@
 					"parameterObjectFieldName": "",
 					"reverse": false,
 					"system": true,
-					"type": "manyToOne"
+					"type": "oneToMany"
 				}
 			],
 			"panelCategoryKey": "applications_menu.applications.custom.apps",
