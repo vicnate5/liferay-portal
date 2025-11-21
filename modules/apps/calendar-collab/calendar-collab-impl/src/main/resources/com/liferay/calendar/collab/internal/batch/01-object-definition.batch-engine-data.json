@@ -54,7 +54,7 @@
 					},
 					"localized": true,
 					"name": "name",
-					"required": true,
+					"required": false,
 					"state": false,
 					"system": false,
 					"type": "String"
@@ -205,7 +205,7 @@
 					},
 					"localized": true,
 					"name": "name",
-					"required": true,
+					"required": false,
 					"state": false,
 					"system": false,
 					"type": "String"
@@ -392,7 +392,7 @@
 					},
 					"localized": true,
 					"name": "title",
-					"required": true,
+					"required": false,
 					"state": false,
 					"system": false,
 					"type": "String"
