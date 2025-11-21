@@ -18,7 +18,7 @@
 			"enableFormContainer": false,
 			"enableLocalization": true,
 			"enableObjectEntryHistory": false,
-			"externalReferenceCode": "L_CALENDAR_COLLAB_RESOURCE",
+			"externalReferenceCode": "C_CALENDAR_COLLAB_RESOURCE",
 			"label": {
 				"en_US": "Calendar Collab Resource"
 			},
@@ -147,13 +147,13 @@
 				{
 					"deletionType": "prevent",
 					"edge": false,
-					"externalReferenceCode": "L_CALENDAR_COLLAB_RESOURCE_TO_CALENDAR_COLLAB_CALENDAR",
+					"externalReferenceCode": "C_CALENDAR_COLLAB_RESOURCE_TO_CALENDAR_COLLAB_CALENDAR",
 					"label": {
 						"en_US": "Calendar Collab Resource to Calendar Collab Calendar"
 					},
 					"name": "calendarCollabResourceToCalendarCollabCalendar",
-					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_RESOURCE",
-					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_CALENDAR",
+					"objectDefinitionExternalReferenceCode1": "C_CALENDAR_COLLAB_RESOURCE",
+					"objectDefinitionExternalReferenceCode2": "C_CALENDAR_COLLAB_CALENDAR",
 					"objectDefinitionName2": "CalendarCollabCalendar",
 					"objectDefinitionSystem2": false,
 					"parameterObjectFieldId": 0,
@@ -186,7 +186,7 @@
 			"enableFormContainer": false,
 			"enableLocalization": true,
 			"enableObjectEntryHistory": false,
-			"externalReferenceCode": "L_CALENDAR_COLLAB_CALENDAR",
+			"externalReferenceCode": "C_CALENDAR_COLLAB_CALENDAR",
 			"label": {
 				"en_US": "Calendar Collab Calendar"
 			},
@@ -316,13 +316,13 @@
 				{
 					"deletionType": "cascade",
 					"edge": false,
-					"externalReferenceCode": "L_CALENDAR_COLLAB_CALENDAR_TO_CALENDAR_COLLAB_EVENT",
+					"externalReferenceCode": "C_CALENDAR_COLLAB_CALENDAR_TO_CALENDAR_COLLAB_EVENT",
 					"label": {
 						"en_US": "Calendar Collab Calendar to Calendar Collab Event"
 					},
 					"name": "calendarCollabCalendarToCalendarCollabEvent",
-					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_CALENDAR",
-					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_EVENT",
+					"objectDefinitionExternalReferenceCode1": "C_CALENDAR_COLLAB_CALENDAR",
+					"objectDefinitionExternalReferenceCode2": "C_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionName2": "CalendarCollabEvent",
 					"objectDefinitionSystem2": false,
 					"parameterObjectFieldId": 0,
@@ -334,13 +334,13 @@
 				{
 					"deletionType": "cascade",
 					"edge": false,
-					"externalReferenceCode": "L_CALENDAR_COLLAB_CALENDAR_TO_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
+					"externalReferenceCode": "C_CALENDAR_COLLAB_CALENDAR_TO_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
 					"label": {
 						"en_US": "Calendar Collab Calendar to Calendar Collab Notification Template"
 					},
 					"name": "calendarCollabCalendarToCalendarCollabNotificationTemplate",
-					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_CALENDAR",
-					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
+					"objectDefinitionExternalReferenceCode1": "C_CALENDAR_COLLAB_CALENDAR",
+					"objectDefinitionExternalReferenceCode2": "C_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
 					"objectDefinitionName2": "CalendarCollabNotificationTemplate",
 					"objectDefinitionSystem2": false,
 					"parameterObjectFieldId": 0,
@@ -373,7 +373,7 @@
 			"enableFormContainer": false,
 			"enableLocalization": true,
 			"enableObjectEntryHistory": false,
-			"externalReferenceCode": "L_CALENDAR_COLLAB_EVENT",
+			"externalReferenceCode": "C_CALENDAR_COLLAB_EVENT",
 			"label": {
 				"en_US": "Calendar Collab Event"
 			},
@@ -601,13 +601,13 @@
 				{
 					"deletionType": "prevent",
 					"edge": false,
-					"externalReferenceCode": "L_CALENDAR_COLLAB_EVENT_TO_CALENDAR_COLLAB_CALENDAR",
+					"externalReferenceCode": "C_CALENDAR_COLLAB_EVENT_TO_CALENDAR_COLLAB_CALENDAR",
 					"label": {
 						"en_US": "Calendar Collab Event to Calendar Collab Calendar"
 					},
 					"name": "calendarCollabEventToCalendarCollabCalendar",
-					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_EVENT",
-					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_CALENDAR",
+					"objectDefinitionExternalReferenceCode1": "C_CALENDAR_COLLAB_EVENT",
+					"objectDefinitionExternalReferenceCode2": "C_CALENDAR_COLLAB_CALENDAR",
 					"objectDefinitionName2": "CalendarCollabCalendar",
 					"objectDefinitionSystem2": false,
 					"parameterObjectFieldId": 0,
@@ -619,13 +619,13 @@
 				{
 					"deletionType": "prevent",
 					"edge": false,
-					"externalReferenceCode": "L_CALENDAR_COLLAB_EVENT_TO_PARENT_EVENT",
+					"externalReferenceCode": "C_CALENDAR_COLLAB_EVENT_TO_PARENT_EVENT",
 					"label": {
 						"en_US": "Calendar Collab Event to Parent Event"
 					},
 					"name": "calendarCollabEventToParentEvent",
-					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_EVENT",
-					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_EVENT",
+					"objectDefinitionExternalReferenceCode1": "C_CALENDAR_COLLAB_EVENT",
+					"objectDefinitionExternalReferenceCode2": "C_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionName2": "CalendarCollabEvent",
 					"objectDefinitionSystem2": false,
 					"parameterObjectFieldId": 0,
@@ -637,13 +637,13 @@
 				{
 					"deletionType": "prevent",
 					"edge": false,
-					"externalReferenceCode": "L_CALENDAR_COLLAB_EVENT_TO_RECURRING_EVENT",
+					"externalReferenceCode": "C_CALENDAR_COLLAB_EVENT_TO_RECURRING_EVENT",
 					"label": {
 						"en_US": "Calendar Collab Event to Recurring Event"
 					},
 					"name": "calendarCollabEventToRecurringEvent",
-					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_EVENT",
-					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_EVENT",
+					"objectDefinitionExternalReferenceCode1": "C_CALENDAR_COLLAB_EVENT",
+					"objectDefinitionExternalReferenceCode2": "C_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionName2": "CalendarCollabEvent",
 					"objectDefinitionSystem2": false,
 					"parameterObjectFieldId": 0,
@@ -676,7 +676,7 @@
 			"enableFormContainer": false,
 			"enableLocalization": false,
 			"enableObjectEntryHistory": false,
-			"externalReferenceCode": "L_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
+			"externalReferenceCode": "C_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
 			"label": {
 				"en_US": "Calendar Collab Notification Template"
 			},
@@ -773,13 +773,13 @@
 				{
 					"deletionType": "prevent",
 					"edge": false,
-					"externalReferenceCode": "L_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE_TO_CALENDAR_COLLAB_CALENDAR",
+					"externalReferenceCode": "C_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE_TO_CALENDAR_COLLAB_CALENDAR",
 					"label": {
 						"en_US": "Calendar Collab Notification Template to Calendar Collab Calendar"
 					},
 					"name": "calendarCollabNotificationTemplateToCalendarCollabCalendar",
-					"objectDefinitionExternalReferenceCode1": "L_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
-					"objectDefinitionExternalReferenceCode2": "L_CALENDAR_COLLAB_CALENDAR",
+					"objectDefinitionExternalReferenceCode1": "C_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
+					"objectDefinitionExternalReferenceCode2": "C_CALENDAR_COLLAB_CALENDAR",
 					"objectDefinitionName2": "CalendarCollabCalendar",
 					"objectDefinitionSystem2": false,
 					"parameterObjectFieldId": 0,
