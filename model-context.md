@@ -197,6 +197,12 @@ Common field types used:
 6. **"Name must be less than 41 characters"**
    - **Fix**: Shorten relationship names (e.g., `resourceToCalendar` instead of `calendarCollabResourceToCalendarCollabCalendar`)
 
+7. **"The panel apps ... have the same order null and category key"**
+   - **Fix**: Add unique `panelAppOrder` values to each object definition in the batch engine data JSON. If objects already exist in the database with null `panelAppOrder`, you may need to manually update them via the Object Admin REST API (`PUT /o/object-admin/v1.0/object-definitions/{id}`) or delete and recreate them.
+
+8. **"Reserved name status"**
+   - **Fix**: The field name `status` is reserved in Liferay Objects. Rename it to something more specific like `eventStatus`, `bookingStatus`, etc. Also update the `externalReferenceCode` to match (e.g., `EVENT_STATUS`).
+
 ## Auto-Generated REST Endpoints
 
 Liferay Objects automatically generates CRUD REST endpoints for each object definition:
@@ -228,6 +234,8 @@ For custom REST endpoints beyond CRUD operations:
 5. **Relationship types are limited** - only `oneToMany`, `oneToOne`, and `manyToMany` are supported
 6. **Batch engine data files** are automatically processed when the bundle is deployed
 7. **Check logs immediately after deployment** to catch validation errors early
+8. **Panel App Order is required** - When multiple object definitions share the same `panelCategoryKey`, each must have a unique `panelAppOrder` value (as a string, e.g., `"1"`, `"2"`, etc.) to avoid panel app registration conflicts
+9. **Reserved field names** - Certain field names are reserved in Liferay Objects and cannot be used. Common reserved names include: `status`, `uuid`, `id`, `groupId`, `companyId`, `userId`, `userName`, `createDate`, `modifiedDate`. Use more specific names like `eventStatus` instead of `status`.
 
 ## Next Steps
 

@@ -151,7 +151,7 @@
 					"label": {
 						"en_US": "Calendar Collab Resource to Calendar Collab Calendar"
 					},
-					"name": "calendarCollabResourceToCalendarCollabCalendar",
+					"name": "resourceToCalendar",
 					"objectDefinitionExternalReferenceCode1": "C_CALENDAR_COLLAB_RESOURCE",
 					"objectDefinitionExternalReferenceCode2": "C_CALENDAR_COLLAB_CALENDAR",
 					"objectDefinitionName2": "CalendarCollabCalendar",
@@ -159,11 +159,11 @@
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
-					"system": true,
+					"system": false,
 					"type": "oneToMany"
 				}
 			],
-			"panelCategoryKey": "applications_menu.applications.custom.apps",
+			"panelCategoryKey": null,
 			"parameterRequired": false,
 			"pluralLabel": {
 				"en_US": "Calendar Collab Resources"
@@ -320,7 +320,7 @@
 					"label": {
 						"en_US": "Calendar Collab Calendar to Calendar Collab Event"
 					},
-					"name": "calendarCollabCalendarToCalendarCollabEvent",
+					"name": "calendarToEvent",
 					"objectDefinitionExternalReferenceCode1": "C_CALENDAR_COLLAB_CALENDAR",
 					"objectDefinitionExternalReferenceCode2": "C_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionName2": "CalendarCollabEvent",
@@ -328,7 +328,7 @@
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
-					"system": true,
+					"system": false,
 					"type": "oneToMany"
 				},
 				{
@@ -338,7 +338,7 @@
 					"label": {
 						"en_US": "Calendar Collab Calendar to Calendar Collab Notification Template"
 					},
-					"name": "calendarCollabCalendarToCalendarCollabNotificationTemplate",
+					"name": "calendarToNotificationTemplate",
 					"objectDefinitionExternalReferenceCode1": "C_CALENDAR_COLLAB_CALENDAR",
 					"objectDefinitionExternalReferenceCode2": "C_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
 					"objectDefinitionName2": "CalendarCollabNotificationTemplate",
@@ -346,11 +346,11 @@
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
-					"system": true,
+					"system": false,
 					"type": "oneToMany"
 				}
 			],
-			"panelCategoryKey": "applications_menu.applications.custom.apps",
+			"panelCategoryKey": null,
 			"parameterRequired": false,
 			"pluralLabel": {
 				"en_US": "Calendar Collab Calendars"
@@ -442,6 +442,12 @@
 					},
 					"localized": false,
 					"name": "startTime",
+					"objectFieldSettings": [
+						{
+							"name": "timeStorage",
+							"value": "convertToUTC"
+						}
+					],
 					"required": true,
 					"state": false,
 					"system": false,
@@ -458,6 +464,12 @@
 					},
 					"localized": false,
 					"name": "endTime",
+					"objectFieldSettings": [
+						{
+							"name": "timeStorage",
+							"value": "convertToUTC"
+						}
+					],
 					"required": true,
 					"state": false,
 					"system": false,
@@ -566,14 +578,14 @@
 				{
 					"DBType": "Integer",
 					"businessType": "Integer",
-					"externalReferenceCode": "STATUS",
+					"externalReferenceCode": "EVENT_STATUS",
 					"indexed": true,
 					"indexedAsKeyword": false,
 					"label": {
-						"en_US": "Status"
+						"en_US": "Event Status"
 					},
 					"localized": false,
-					"name": "status",
+					"name": "eventStatus",
 					"required": false,
 					"state": true,
 					"system": false,
@@ -605,7 +617,7 @@
 					"label": {
 						"en_US": "Calendar Collab Event to Calendar Collab Calendar"
 					},
-					"name": "calendarCollabEventToCalendarCollabCalendar",
+					"name": "eventToCalendar",
 					"objectDefinitionExternalReferenceCode1": "C_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionExternalReferenceCode2": "C_CALENDAR_COLLAB_CALENDAR",
 					"objectDefinitionName2": "CalendarCollabCalendar",
@@ -613,7 +625,7 @@
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
-					"system": true,
+					"system": false,
 					"type": "oneToMany"
 				},
 				{
@@ -623,7 +635,7 @@
 					"label": {
 						"en_US": "Calendar Collab Event to Parent Event"
 					},
-					"name": "calendarCollabEventToParentEvent",
+					"name": "eventToParentEvent",
 					"objectDefinitionExternalReferenceCode1": "C_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionExternalReferenceCode2": "C_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionName2": "CalendarCollabEvent",
@@ -631,7 +643,7 @@
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
-					"system": true,
+					"system": false,
 					"type": "oneToMany"
 				},
 				{
@@ -641,7 +653,7 @@
 					"label": {
 						"en_US": "Calendar Collab Event to Recurring Event"
 					},
-					"name": "calendarCollabEventToRecurringEvent",
+					"name": "eventToRecurringEvent",
 					"objectDefinitionExternalReferenceCode1": "C_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionExternalReferenceCode2": "C_CALENDAR_COLLAB_EVENT",
 					"objectDefinitionName2": "CalendarCollabEvent",
@@ -649,11 +661,11 @@
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
-					"system": true,
+					"system": false,
 					"type": "oneToMany"
 				}
 			],
-			"panelCategoryKey": "applications_menu.applications.custom.apps",
+			"panelCategoryKey": null,
 			"parameterRequired": false,
 			"pluralLabel": {
 				"en_US": "Calendar Collab Events"
@@ -777,7 +789,7 @@
 					"label": {
 						"en_US": "Calendar Collab Notification Template to Calendar Collab Calendar"
 					},
-					"name": "calendarCollabNotificationTemplateToCalendarCollabCalendar",
+					"name": "notificationTemplateToCalendar",
 					"objectDefinitionExternalReferenceCode1": "C_CALENDAR_COLLAB_NOTIFICATION_TEMPLATE",
 					"objectDefinitionExternalReferenceCode2": "C_CALENDAR_COLLAB_CALENDAR",
 					"objectDefinitionName2": "CalendarCollabCalendar",
@@ -785,11 +797,11 @@
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
-					"system": true,
+					"system": false,
 					"type": "oneToMany"
 				}
 			],
-			"panelCategoryKey": "applications_menu.applications.custom.apps",
+			"panelCategoryKey": null,
 			"parameterRequired": false,
 			"pluralLabel": {
 				"en_US": "Calendar Collab Notification Templates"
