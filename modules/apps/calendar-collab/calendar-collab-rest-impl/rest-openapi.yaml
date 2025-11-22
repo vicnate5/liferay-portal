@@ -1,178 +1,180 @@
 openapi: 3.0.2
 info:
-	title: Calendar Collab REST API
-	version: v1.0
+  title: Calendar Collab REST API
+  version: v1.0
 servers:
-	- url: http://localhost:8080/o/calendar-collab
+  - url: http://localhost:8080/o/calendar-collab
 paths:
-	/calendars/{calendarId}/events/recurrence:
-		get:
-			operationId: getCalendarEventRecurrence
-			parameters:
-				- $ref: '#/components/parameters/calendarId'
-				- $ref: '#/components/parameters/eventId'
-			responses:
-				'200':
-					description: Success
-					content:
-						application/json:
-							schema:
-								$ref: '#/components/schemas/RecurrencePattern'
-		post:
-			operationId: parseRecurrencePattern
-			parameters:
-				- $ref: '#/components/parameters/calendarId'
-			requestBody:
-				content:
-					application/json:
-						schema:
-							$ref: '#/components/schemas/RecurrencePattern'
-			responses:
-				'200':
-					description: Success
-					content:
-						application/json:
-							schema:
-								type: array
-								items:
-									$ref: '#/components/schemas/EventInstance'
-	/calendars/{calendarId}/events/{eventId}/invitations:
-		get:
-			operationId: getEventInvitations
-			parameters:
-				- $ref: '#/components/parameters/calendarId'
-				- $ref: '#/components/parameters/eventId'
-			responses:
-				'200':
-					description: Success
-					content:
-						application/json:
-							schema:
-								type: array
-								items:
-									$ref: '#/components/schemas/EventInvitation'
-		post:
-			operationId: addEventInvitations
-			parameters:
-				- $ref: '#/components/parameters/calendarId'
-				- $ref: '#/components/parameters/eventId'
-			requestBody:
-				content:
-					application/json:
-						schema:
-							type: array
-							items:
-								$ref: '#/components/schemas/EventInvitation'
-			responses:
-				'200':
-					description: Success
-	/calendars/{calendarId}/view:
-		get:
-			operationId: getCalendarView
-			parameters:
-				- $ref: '#/components/parameters/calendarId'
-				- name: viewType
-				  in: query
-				  required: true
-				  schema:
-					type: string
-					enum: [month, week, day, agenda]
-				- name: startDate
-				  in: query
-				  required: true
-				  schema:
-					type: string
-					format: date-time
-				- name: endDate
-				  in: query
-				  required: true
-				  schema:
-					type: string
-					format: date-time
-			responses:
-				'200':
-					description: Success
-					content:
-						application/json:
-							schema:
-								$ref: '#/components/schemas/CalendarView'
+  /calendars/{calendarId}/events/{eventId}/recurrence:
+    get:
+      operationId: getCalendarEventRecurrence
+      parameters:
+        - $ref: '#/components/parameters/calendarId'
+        - $ref: '#/components/parameters/eventId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventInstance'
+    post:
+      operationId: parseRecurrencePattern
+      parameters:
+        - $ref: '#/components/parameters/calendarId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecurrencePattern'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventInstance'
+  /calendars/{calendarId}/events/{eventId}/invitations:
+    get:
+      operationId: getEventInvitations
+      parameters:
+        - $ref: '#/components/parameters/calendarId'
+        - $ref: '#/components/parameters/eventId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventInvitation'
+    post:
+      operationId: addEventInvitations
+      parameters:
+        - $ref: '#/components/parameters/calendarId'
+        - $ref: '#/components/parameters/eventId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/EventInvitation'
+      responses:
+        '200':
+          description: Success
+  /calendars/{calendarId}/view:
+    get:
+      operationId: getCalendarView
+      parameters:
+        - $ref: '#/components/parameters/calendarId'
+        - name: viewType
+          in: query
+          required: true
+          schema:
+          type: string
+          enum: [month, week, day, agenda]
+        - name: startDate
+          in: query
+          required: true
+          schema:
+          type: string
+          format: date-time
+        - name: endDate
+          in: query
+          required: true
+          schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalendarView'
 components:
-	parameters:
-		calendarId:
-			name: calendarId
-			in: path
-			required: true
-			schema:
-				type: string
-		eventId:
-			name: eventId
-			in: path
-			required: true
-			schema:
-				type: string
-	schemas:
-		RecurrencePattern:
-			type: object
-			properties:
-				frequency:
-					type: string
-					enum: [DAILY, WEEKLY, MONTHLY, YEARLY]
-				interval:
-					type: integer
-				count:
-					type: integer
-				until:
-					type: string
-					format: date-time
-				byDay:
-					type: array
-					items:
-						type: string
-				byMonth:
-					type: array
-					items:
-						type: integer
-				byMonthDay:
-					type: array
-					items:
-						type: integer
-		EventInstance:
-			type: object
-			properties:
-				eventId:
-					type: string
-				startTime:
-					type: string
-					format: date-time
-				endTime:
-					type: string
-					format: date-time
-				title:
-					type: string
-		EventInvitation:
-			type: object
-			properties:
-				userId:
-					type: integer
-				userName:
-					type: string
-				status:
-					type: string
-					enum: [pending, accepted, declined, tentative]
-		CalendarView:
-			type: object
-			properties:
-				events:
-					type: array
-					items:
-						$ref: '#/components/schemas/EventInstance'
-				viewType:
-					type: string
-				startDate:
-					type: string
-					format: date-time
-				endDate:
-					type: string
-					format: date-time
+  parameters:
+    calendarId:
+      name: calendarId
+      in: path
+      required: true
+      schema:
+        type: string
+    eventId:
+      name: eventId
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    RecurrencePattern:
+      type: object
+      properties:
+        frequency:
+          type: string
+          enum: [DAILY, WEEKLY, MONTHLY, YEARLY]
+        interval:
+          type: integer
+        count:
+          type: integer
+        until:
+          type: string
+          format: date-time
+        byDay:
+          type: array
+          items:
+            type: string
+        byMonth:
+          type: array
+          items:
+            type: integer
+        byMonthDay:
+          type: array
+          items:
+            type: integer
+    EventInstance:
+      type: object
+      properties:
+        eventId:
+          type: string
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        title:
+          type: string
+    EventInvitation:
+      type: object
+      properties:
+        userId:
+          type: integer
+        userName:
+          type: string
+        status:
+          type: string
+          enum: [pending, accepted, declined, tentative]
+    CalendarView:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventInstance'
+        viewType:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
 
 
