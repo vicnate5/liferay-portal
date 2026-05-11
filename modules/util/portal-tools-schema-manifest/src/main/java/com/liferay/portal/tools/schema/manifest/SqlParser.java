@@ -1,13 +1,17 @@
 /**
- * SPDX-FileCopyrightText: (c) 2000 Liferay, Inc. https://liferay.com
+ * SPDX-FileCopyrightText: (c) 2026 Liferay, Inc. https://liferay.com
  * SPDX-License-Identifier: LGPL-2.1-or-later OR LicenseRef-Liferay-DXP-EULA-2.0.0-2023-06
  */
 
 package com.liferay.portal.tools.schema.manifest;
 
+import com.liferay.portal.kernel.util.StringUtil;
+
 import java.io.File;
 import java.io.IOException;
+
 import java.nio.file.Files;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -17,12 +21,17 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author Victor Ware
+ */
 public class SqlParser {
 
 	public static Map<String, TableDef> parse(File file) throws IOException {
 		String content = new String(Files.readAllBytes(file.toPath()));
 
-		content = content.replace("\r\n", "\n").replace("\t", " ");
+		content = StringUtil.replace(content, "\r\n", "\n");
+
+		content = StringUtil.replace(content, "\t", " ");
 
 		Map<String, TableDef> tables = new LinkedHashMap<>();
 
@@ -31,7 +40,9 @@ public class SqlParser {
 		for (int i = 1; i < blocks.length; i++) {
 			String block = blocks[i].trim();
 
-			String tableName = block.substring(0, _firstWhitespaceOrParen(block)).trim();
+			String tableName = block.substring(
+				0, _firstWhitespaceOrParen(block)
+			).trim();
 
 			int start = block.indexOf('(');
 
@@ -49,10 +60,16 @@ public class SqlParser {
 
 			Set<String> pkColumns = new HashSet<>();
 
-			Matcher pkMatcher = _PK_PATTERN.matcher(body);
+			Matcher pkMatcher = _pkPattern.matcher(body);
 
 			if (pkMatcher.find()) {
-				for (String pkCol : pkMatcher.group(1).split(",")) {
+				for (String pkCol :
+						pkMatcher.group(
+							1
+						).split(
+							","
+						)) {
+
 					pkColumns.add(pkCol.trim());
 				}
 			}
@@ -63,10 +80,12 @@ public class SqlParser {
 				line = line.trim();
 
 				if (line.endsWith(",")) {
-					line = line.substring(0, line.length() - 1).trim();
+					line = line.substring(
+						0, line.length() - 1
+					).trim();
 				}
 
-				String lower = line.toLowerCase();
+				String lower = StringUtil.toLowerCase(line);
 
 				if (line.isEmpty() || lower.startsWith("primary key") ||
 					lower.startsWith("unique") || lower.startsWith("index") ||
@@ -83,9 +102,9 @@ public class SqlParser {
 
 				String colType = _secondToken(line, colName);
 				boolean nullable = !lower.contains(" not null");
-				boolean isPK = pkColumns.contains(colName);
+				boolean pK = pkColumns.contains(colName);
 
-				columns.add(new Column(colName, colType, nullable, isPK));
+				columns.add(new Column(colName, colType, nullable, pK));
 			}
 
 			tables.put(tableName, new TableDef(tableName, columns));
@@ -115,6 +134,18 @@ public class SqlParser {
 		return -1;
 	}
 
+	private static String _firstToken(String line) {
+		int end = 0;
+
+		while ((end < line.length()) &&
+			   !Character.isWhitespace(line.charAt(end))) {
+
+			end++;
+		}
+
+		return line.substring(0, end);
+	}
+
 	private static int _firstWhitespaceOrParen(String s) {
 		for (int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
@@ -127,18 +158,10 @@ public class SqlParser {
 		return s.length();
 	}
 
-	private static String _firstToken(String line) {
-		int end = 0;
-
-		while ((end < line.length()) && !Character.isWhitespace(line.charAt(end))) {
-			end++;
-		}
-
-		return line.substring(0, end);
-	}
-
 	private static String _secondToken(String line, String firstName) {
-		String rest = line.substring(firstName.length()).trim();
+		String rest = line.substring(
+			firstName.length()
+		).trim();
 
 		int end = 0;
 		boolean inParen = false;
@@ -162,7 +185,7 @@ public class SqlParser {
 		return rest.substring(0, end);
 	}
 
-	private static final Pattern _PK_PATTERN = Pattern.compile(
+	private static final Pattern _pkPattern = Pattern.compile(
 		"primary key \\(([^)]+)\\)", Pattern.CASE_INSENSITIVE);
 
 }
