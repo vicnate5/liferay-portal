@@ -1,0 +1,1368 @@
+{
+	"generatedAt": "2026-05-10",
+	"module": "com.liferay.fragment.service",
+	"snapshot": {
+		"tables": {
+			"FragmentCollection": {
+				"columns": [
+					{
+						"name": "mvccVersion",
+						"nullable": false,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "ctCollectionId",
+						"nullable": false,
+						"primaryKey": true,
+						"type": "LONG"
+					},
+					{
+						"name": "uuid_",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "externalReferenceCode",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "fragmentCollectionId",
+						"nullable": false,
+						"primaryKey": true,
+						"type": "LONG"
+					},
+					{
+						"name": "groupId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "companyId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "userId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "userName",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "createDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					},
+					{
+						"name": "modifiedDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					},
+					{
+						"name": "fragmentCollectionKey",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "name",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "description",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "STRING"
+					},
+					{
+						"name": "marketplace",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "lastPublishDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					}
+				],
+				"primaryKey": [
+					"ctCollectionId",
+					"fragmentCollectionId"
+				]
+			},
+			"FragmentComposition": {
+				"columns": [
+					{
+						"name": "mvccVersion",
+						"nullable": false,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "ctCollectionId",
+						"nullable": false,
+						"primaryKey": true,
+						"type": "LONG"
+					},
+					{
+						"name": "uuid_",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "externalReferenceCode",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "fragmentCompositionId",
+						"nullable": false,
+						"primaryKey": true,
+						"type": "LONG"
+					},
+					{
+						"name": "groupId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "companyId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "userId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "userName",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "createDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					},
+					{
+						"name": "modifiedDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					},
+					{
+						"name": "fragmentCollectionId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "fragmentCompositionKey",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "name",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "description",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "STRING"
+					},
+					{
+						"name": "data_",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "previewFileEntryId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "marketplace",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "lastPublishDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					},
+					{
+						"name": "status",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "INTEGER"
+					},
+					{
+						"name": "statusByUserId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "statusByUserName",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "statusDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					}
+				],
+				"primaryKey": [
+					"ctCollectionId",
+					"fragmentCompositionId"
+				]
+			},
+			"FragmentEntry": {
+				"columns": [
+					{
+						"name": "mvccVersion",
+						"nullable": false,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "ctCollectionId",
+						"nullable": false,
+						"primaryKey": true,
+						"type": "LONG"
+					},
+					{
+						"name": "uuid_",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "externalReferenceCode",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "headId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "head",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "fragmentEntryId",
+						"nullable": false,
+						"primaryKey": true,
+						"type": "LONG"
+					},
+					{
+						"name": "groupId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "companyId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "userId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "userName",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "createDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					},
+					{
+						"name": "modifiedDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					},
+					{
+						"name": "fragmentCollectionId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "fragmentEntryKey",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "name",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "css",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "html",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "js",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "cacheable",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "configuration",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "icon",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "previewFileEntryId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "marketplace",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "readOnly",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "type_",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "INTEGER"
+					},
+					{
+						"name": "typeOptions",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "lastPublishDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					},
+					{
+						"name": "status",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "INTEGER"
+					},
+					{
+						"name": "statusByUserId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "statusByUserName",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "statusDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					}
+				],
+				"primaryKey": [
+					"ctCollectionId",
+					"fragmentEntryId"
+				]
+			},
+			"FragmentEntryLink": {
+				"columns": [
+					{
+						"name": "mvccVersion",
+						"nullable": false,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "ctCollectionId",
+						"nullable": false,
+						"primaryKey": true,
+						"type": "LONG"
+					},
+					{
+						"name": "uuid_",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "externalReferenceCode",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "fragmentEntryLinkId",
+						"nullable": false,
+						"primaryKey": true,
+						"type": "LONG"
+					},
+					{
+						"name": "groupId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "companyId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "userId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "userName",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "createDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					},
+					{
+						"name": "modifiedDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					},
+					{
+						"name": "originalFragmentEntryLinkERC",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "fragmentEntryERC",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "fragmentEntryScopeERC",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "segmentsExperienceId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "classNameId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "classPK",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "plid",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "css",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "html",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "js",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "configuration",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "deleted",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "editableValues",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "namespace",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "position",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "INTEGER"
+					},
+					{
+						"name": "rendererKey",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(200)"
+					},
+					{
+						"name": "type_",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "INTEGER"
+					},
+					{
+						"name": "lastPropagationDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					},
+					{
+						"name": "lastPublishDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					}
+				],
+				"primaryKey": [
+					"ctCollectionId",
+					"fragmentEntryLinkId"
+				]
+			},
+			"FragmentEntryVersion": {
+				"columns": [
+					{
+						"name": "mvccVersion",
+						"nullable": false,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "ctCollectionId",
+						"nullable": false,
+						"primaryKey": true,
+						"type": "LONG"
+					},
+					{
+						"name": "fragmentEntryVersionId",
+						"nullable": false,
+						"primaryKey": true,
+						"type": "LONG"
+					},
+					{
+						"name": "version",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "INTEGER"
+					},
+					{
+						"name": "uuid_",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "externalReferenceCode",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "fragmentEntryId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "groupId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "companyId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "userId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "userName",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "createDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					},
+					{
+						"name": "modifiedDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					},
+					{
+						"name": "fragmentCollectionId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "fragmentEntryKey",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "name",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "css",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "html",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "js",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "cacheable",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "configuration",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "icon",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "previewFileEntryId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "marketplace",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "readOnly",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "type_",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "INTEGER"
+					},
+					{
+						"name": "typeOptions",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "TEXT"
+					},
+					{
+						"name": "lastPublishDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					},
+					{
+						"name": "status",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "INTEGER"
+					},
+					{
+						"name": "statusByUserId",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "LONG"
+					},
+					{
+						"name": "statusByUserName",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "VARCHAR(75)"
+					},
+					{
+						"name": "statusDate",
+						"nullable": true,
+						"primaryKey": false,
+						"type": "DATE"
+					}
+				],
+				"primaryKey": [
+					"ctCollectionId",
+					"fragmentEntryVersionId"
+				]
+			}
+		}
+	},
+	"transitions": [
+		{
+			"changes": [
+				{
+					"column": "css",
+					"derivation": "UpgradeProcessFactory",
+					"op": "alterColumnType",
+					"table": "FragmentEntry",
+					"toType": "TEXT null"
+				},
+				{
+					"column": "html",
+					"derivation": "UpgradeProcessFactory",
+					"op": "alterColumnType",
+					"table": "FragmentEntry",
+					"toType": "TEXT null"
+				},
+				{
+					"column": "js",
+					"derivation": "UpgradeProcessFactory",
+					"op": "alterColumnType",
+					"table": "FragmentEntry",
+					"toType": "TEXT null"
+				},
+				{
+					"column": "css",
+					"derivation": "UpgradeProcessFactory",
+					"op": "alterColumnType",
+					"table": "FragmentEntryLink",
+					"toType": "TEXT null"
+				},
+				{
+					"column": "html",
+					"derivation": "UpgradeProcessFactory",
+					"op": "alterColumnType",
+					"table": "FragmentEntryLink",
+					"toType": "TEXT null"
+				},
+				{
+					"column": "js",
+					"derivation": "UpgradeProcessFactory",
+					"op": "alterColumnType",
+					"table": "FragmentEntryLink",
+					"toType": "TEXT null"
+				},
+				{
+					"column": "editableValues",
+					"derivation": "UpgradeProcessFactory",
+					"op": "alterColumnType",
+					"table": "FragmentEntryLink",
+					"toType": "TEXT null"
+				}
+			],
+			"fromVersion": "1.0.0",
+			"toVersion": "1.0.1"
+		},
+		{
+			"changes": [
+			],
+			"fromVersion": "1.0.1",
+			"toVersion": "1.0.2"
+		},
+		{
+			"changes": [
+				{
+					"derivation": "PortletPreferencesUpgradeProcess",
+					"note": "@SchemaChange annotation required",
+					"op": "custom"
+				}
+			],
+			"fromVersion": "1.0.2",
+			"toVersion": "1.1.0"
+		},
+		{
+			"changes": [
+				{
+					"derivation": "BaseSQLServerDatetimeUpgradeProcess",
+					"note": "Converts datetime columns for SQL Server compatibility",
+					"op": "alterColumnType"
+				}
+			],
+			"fromVersion": "1.1.0",
+			"toVersion": "2.0.0"
+		},
+		{
+			"changes": [
+				{
+					"derivation": "SchemaUpgradeProcess",
+					"note": "@SchemaChange annotation required",
+					"op": "custom"
+				}
+			],
+			"fromVersion": "2.0.0",
+			"toVersion": "2.1.0"
+		},
+		{
+			"changes": [
+			],
+			"fromVersion": "2.1.0",
+			"toVersion": "2.1.1"
+		},
+		{
+			"changes": [
+				{
+					"column": "configuration",
+					"derivation": "UpgradeProcessFactory",
+					"op": "addColumn",
+					"table": "FragmentEntry",
+					"toType": "TEXT"
+				}
+			],
+			"fromVersion": "2.1.1",
+			"toVersion": "2.1.2"
+		},
+		{
+			"changes": [
+				{
+					"column": "configuration",
+					"derivation": "UpgradeProcessFactory",
+					"op": "addColumn",
+					"table": "FragmentEntryLink",
+					"toType": "TEXT"
+				}
+			],
+			"fromVersion": "2.1.2",
+			"toVersion": "2.1.3"
+		},
+		{
+			"changes": [
+				{
+					"column": "mvccVersion",
+					"derivation": "MVCCVersionUpgradeProcess",
+					"op": "addColumn",
+					"table": "FragmentCollection",
+					"toType": "LONG default 0 not null"
+				},
+				{
+					"column": "mvccVersion",
+					"derivation": "MVCCVersionUpgradeProcess",
+					"op": "addColumn",
+					"table": "FragmentEntry",
+					"toType": "LONG default 0 not null"
+				},
+				{
+					"column": "mvccVersion",
+					"derivation": "MVCCVersionUpgradeProcess",
+					"op": "addColumn",
+					"table": "FragmentEntryLink",
+					"toType": "LONG default 0 not null"
+				}
+			],
+			"fromVersion": "2.1.3",
+			"toVersion": "2.2.0"
+		},
+		{
+			"changes": [
+				{
+					"column": "readOnly",
+					"derivation": "UpgradeProcessFactory",
+					"op": "addColumn",
+					"table": "FragmentEntry",
+					"toType": "BOOLEAN"
+				}
+			],
+			"fromVersion": "2.2.0",
+			"toVersion": "2.2.1"
+		},
+		{
+			"changes": [
+				{
+					"column": "cacheable",
+					"derivation": "UpgradeProcessFactory",
+					"op": "addColumn",
+					"table": "FragmentEntry",
+					"toType": "BOOLEAN"
+				}
+			],
+			"fromVersion": "2.2.1",
+			"toVersion": "2.2.2"
+		},
+		{
+			"changes": [
+			],
+			"fromVersion": "2.2.2",
+			"toVersion": "2.3.0"
+		},
+		{
+			"changes": [
+				{
+					"derivation": "FragmentEntryLinkUpgradeProcess",
+					"note": "@SchemaChange annotation required",
+					"op": "custom"
+				}
+			],
+			"fromVersion": "2.3.0",
+			"toVersion": "2.4.0"
+		},
+		{
+			"changes": [
+			],
+			"fromVersion": "2.4.0",
+			"toVersion": "2.5.0"
+		},
+		{
+			"changes": [
+			],
+			"fromVersion": "2.5.0",
+			"toVersion": "2.5.1"
+		},
+		{
+			"changes": [
+			],
+			"fromVersion": "2.5.1",
+			"toVersion": "2.6.0"
+		},
+		{
+			"changes": [
+				{
+					"column": "ctCollectionId",
+					"derivation": "CTModelUpgradeProcess",
+					"op": "addColumn",
+					"table": "FragmentCollection",
+					"toType": "LONG default 0 not null"
+				},
+				{
+					"column": "ctCollectionId",
+					"derivation": "CTModelUpgradeProcess",
+					"op": "addColumn",
+					"table": "FragmentComposition",
+					"toType": "LONG default 0 not null"
+				},
+				{
+					"column": "ctCollectionId",
+					"derivation": "CTModelUpgradeProcess",
+					"op": "addColumn",
+					"table": "FragmentEntry",
+					"toType": "LONG default 0 not null"
+				},
+				{
+					"column": "ctCollectionId",
+					"derivation": "CTModelUpgradeProcess",
+					"op": "addColumn",
+					"table": "FragmentEntryLink",
+					"toType": "LONG default 0 not null"
+				},
+				{
+					"column": "ctCollectionId",
+					"derivation": "CTModelUpgradeProcess",
+					"op": "addColumn",
+					"table": "FragmentEntryVersion",
+					"toType": "LONG default 0 not null"
+				}
+			],
+			"fromVersion": "2.6.0",
+			"toVersion": "2.6.1"
+		},
+		{
+			"changes": [
+				{
+					"column": "mvccVersion",
+					"derivation": "MVCCVersionUpgradeProcess",
+					"op": "addColumn",
+					"table": "FragmentEntryVersion",
+					"toType": "LONG default 0 not null"
+				}
+			],
+			"fromVersion": "2.6.1",
+			"toVersion": "2.7.0"
+		},
+		{
+			"changes": [
+			],
+			"fromVersion": "2.7.0",
+			"toVersion": "2.7.1"
+		},
+		{
+			"changes": [
+				{
+					"column": "icon",
+					"derivation": "UpgradeProcessFactory",
+					"op": "addColumn",
+					"table": "FragmentEntry",
+					"toType": "VARCHAR(75) null"
+				},
+				{
+					"column": "icon",
+					"derivation": "UpgradeProcessFactory",
+					"op": "addColumn",
+					"table": "FragmentEntryVersion",
+					"toType": "VARCHAR(75) null"
+				}
+			],
+			"fromVersion": "2.7.1",
+			"toVersion": "2.8.0"
+		},
+		{
+			"changes": [
+				{
+					"column": "typeOptions",
+					"derivation": "UpgradeProcessFactory",
+					"op": "addColumn",
+					"table": "FragmentEntry",
+					"toType": "TEXT"
+				},
+				{
+					"column": "typeOptions",
+					"derivation": "UpgradeProcessFactory",
+					"op": "addColumn",
+					"table": "FragmentEntryVersion",
+					"toType": "TEXT"
+				}
+			],
+			"fromVersion": "2.8.0",
+			"toVersion": "2.9.0"
+		},
+		{
+			"changes": [
+			],
+			"fromVersion": "2.9.0",
+			"toVersion": "2.9.1"
+		},
+		{
+			"changes": [
+				{
+					"column": "typeOptions",
+					"derivation": "UpgradeProcessFactory",
+					"op": "addColumn",
+					"table": "FragmentEntryVersion",
+					"toType": "TEXT"
+				}
+			],
+			"fromVersion": "2.9.1",
+			"toVersion": "2.9.2"
+		},
+		{
+			"changes": [
+				{
+					"column": "description",
+					"derivation": "UpgradeProcessFactory",
+					"op": "alterColumnType",
+					"table": "FragmentComposition",
+					"toType": "STRING null"
+				}
+			],
+			"fromVersion": "2.9.2",
+			"toVersion": "2.9.3"
+		},
+		{
+			"changes": [
+			],
+			"fromVersion": "2.9.3",
+			"toVersion": "2.9.4"
+		},
+		{
+			"changes": [
+				{
+					"column": "deleted",
+					"derivation": "UpgradeProcessFactory",
+					"op": "addColumn",
+					"table": "FragmentEntryLink",
+					"toType": "BOOLEAN"
+				}
+			],
+			"fromVersion": "2.9.4",
+			"toVersion": "2.10.0"
+		},
+		{
+			"changes": [
+			],
+			"fromVersion": "2.10.0",
+			"toVersion": "2.10.1"
+		},
+		{
+			"changes": [
+				{
+					"derivation": "UpgradeProcessFactory.runSQL",
+					"note": "Data-only migration; no DDL change",
+					"op": "dataMigration"
+				}
+			],
+			"fromVersion": "2.10.1",
+			"toVersion": "2.10.2"
+		},
+		{
+			"changes": [
+				{
+					"derivation": "UpgradeProcessFactory.runSQL",
+					"note": "Data-only migration; no DDL change",
+					"op": "dataMigration"
+				}
+			],
+			"fromVersion": "2.10.2",
+			"toVersion": "2.10.3"
+		},
+		{
+			"changes": [
+				{
+					"column": "externalReferenceCode",
+					"derivation": "BaseExternalReferenceCodeUpgradeProcess",
+					"op": "addColumn",
+					"table": "FragmentCollection",
+					"toType": "VARCHAR(75) null"
+				}
+			],
+			"fromVersion": "2.10.3",
+			"toVersion": "2.11.0"
+		},
+		{
+			"changes": [
+				{
+					"column": "externalReferenceCode",
+					"derivation": "BaseExternalReferenceCodeUpgradeProcess",
+					"op": "addColumn",
+					"table": "FragmentComposition",
+					"toType": "VARCHAR(75) null"
+				},
+				{
+					"column": "externalReferenceCode",
+					"derivation": "BaseExternalReferenceCodeUpgradeProcess",
+					"op": "addColumn",
+					"table": "FragmentEntry",
+					"toType": "VARCHAR(75) null"
+				},
+				{
+					"column": "externalReferenceCode",
+					"derivation": "BaseExternalReferenceCodeUpgradeProcess",
+					"op": "addColumn",
+					"table": "FragmentEntryVersion",
+					"toType": "VARCHAR(75) null"
+				}
+			],
+			"fromVersion": "2.11.0",
+			"toVersion": "2.12.0"
+		},
+		{
+			"changes": [
+				{
+					"column": "externalReferenceCode",
+					"derivation": "BaseExternalReferenceCodeUpgradeProcess",
+					"op": "addColumn",
+					"table": "FragmentEntryLink",
+					"toType": "VARCHAR(75) null"
+				}
+			],
+			"fromVersion": "2.12.0",
+			"toVersion": "2.13.0"
+		},
+		{
+			"changes": [
+			],
+			"fromVersion": "2.13.0",
+			"toVersion": "2.13.1"
+		},
+		{
+			"changes": [
+				{
+					"column": "marketplace",
+					"derivation": "UpgradeProcessFactory",
+					"op": "addColumn",
+					"table": "FragmentComposition",
+					"toType": "BOOLEAN"
+				},
+				{
+					"column": "marketplace",
+					"derivation": "UpgradeProcessFactory",
+					"op": "addColumn",
+					"table": "FragmentEntry",
+					"toType": "BOOLEAN"
+				},
+				{
+					"column": "marketplace",
+					"derivation": "UpgradeProcessFactory",
+					"op": "addColumn",
+					"table": "FragmentEntryVersion",
+					"toType": "BOOLEAN"
+				}
+			],
+			"fromVersion": "2.13.1",
+			"toVersion": "2.14.0"
+		},
+		{
+			"changes": [
+				{
+					"column": "marketplace",
+					"derivation": "UpgradeProcessFactory",
+					"op": "addColumn",
+					"table": "FragmentCollection",
+					"toType": "BOOLEAN"
+				}
+			],
+			"fromVersion": "2.14.0",
+			"toVersion": "2.15.0"
+		},
+		{
+			"changes": [
+			],
+			"fromVersion": "2.15.0",
+			"toVersion": "3.0.0"
+		},
+		{
+			"changes": [
+				{
+					"derivation": "BrowserSnifferFragmentEntryTemplateUpgradeProcess",
+					"note": "@SchemaChange annotation required",
+					"op": "custom"
+				}
+			],
+			"fromVersion": "3.0.0",
+			"toVersion": "3.0.1"
+		},
+		{
+			"changes": [
+				{
+					"derivation": "FragmentEntryHTMLUpgradeProcess",
+					"note": "@SchemaChange annotation required",
+					"op": "custom"
+				}
+			],
+			"fromVersion": "3.0.1",
+			"toVersion": "3.0.2"
+		}
+	]
+}
