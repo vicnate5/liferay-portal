@@ -1,0 +1,4 @@
+Bundle-Name: Liferay Portal Tools Schema Manifest
+Bundle-SymbolicName: com.liferay.portal.tools.schema.manifest
+Bundle-Version: 1.0.0
+Main-Class: com.liferay.portal.tools.schema.manifest.SchemaManifestBuilder
