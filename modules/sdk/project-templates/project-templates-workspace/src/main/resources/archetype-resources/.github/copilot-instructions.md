@@ -1,1 +1,1 @@
-../.workspace-rules/liferay-rules.md
+../.workspace-rules/CLAUDE.md
