@@ -1,0 +1,24 @@
+services:
+  aihub-workspace:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      platforms:
+        - linux/amd64
+    image: aihub-workspace:poc
+    container_name: aihub-workspace
+    platform: linux/amd64
+    ports:
+      - "8090:8090"
+    volumes:
+      - /opt/dev/projects/github/ai-hub-workspace-poc/poc/agent-workspace:/workspace:rw
+      - /opt/dev/projects/github/bundles/osgi/client-extensions:/liferay/osgi/client-extensions:rw
+      - /opt/dev/projects/github/bundles/deploy:/liferay/deploy:rw
+      - /opt/dev/projects/github/ai-hub-workspace-poc/poc/docker/claude-home:/home/node/.claude:rw
+      # The credentials file is mounted read only on purpose. Host and container
+      # share one refresh token, so whichever process refreshes first rotates it
+      # and invalidates the other. The container lost that race and wrote back an
+      # empty record with expiresAt 0, which never recovers. Treat the container
+      # as a pure consumer: run seed-auth.sh when the host token rotates.
+      - /opt/dev/projects/github/ai-hub-workspace-poc/poc/docker/claude-home/.credentials.json:/home/node/.claude/.credentials.json:ro
+    restart: unless-stopped

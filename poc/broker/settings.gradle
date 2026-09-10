@@ -1,0 +1,6 @@
+/*
+ * Present so the broker builds standalone. Inside a Liferay workspace the
+ * workspace root supplies settings.gradle and this file is ignored.
+ */
+
+rootProject.name = "ai-hub-broker"

@@ -1,0 +1,21 @@
+#
+# OAuth2 user agent application for the AI Hub Workspace broker.
+#
+# The chat UI resolves this application by its yaml key, which DXP stores as the
+# external reference code, and exchanges the portal session for a bearer token
+# through the silent authorization flow. The broker validates that token by
+# calling GET /o/headless-admin-user/v1.0/my-user-account, so the token has to
+# carry the headless admin user read scope and nothing more.
+#
+# .serviceScheme and .serviceAddress produce the homePageURL of the application,
+# which is the origin the token may be sent to. It must match the broker base
+# URL used by liferay-aihub-chat-ui.
+#
+liferay-aihub-oauth:
+    .serviceAddress: localhost:8091
+    .serviceScheme: http
+    description: Issues a DXP access token so the AI Hub Workspace chat widget can reach the agent broker.
+    name: AI Hub Workspace OAuth User Agent
+    scopes:
+        -   Liferay.Headless.Admin.User.everything.read
+    type: oAuthApplicationUserAgent

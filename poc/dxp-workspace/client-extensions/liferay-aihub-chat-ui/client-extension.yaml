@@ -1,0 +1,15 @@
+assemble:
+    -   from: build/static
+        into: static
+liferay-aihub-chat-ui:
+    cssURLs:
+        -   index.*.css
+    friendlyURLMapping: aihub-chat
+    htmlElementName: liferay-aihub-chat-ui
+    instanceable: false
+    name: AI Hub Workspace Chat
+    portletCategoryName: category.client-extensions
+    type: customElement
+    urls:
+        -   index.*.js
+    useESM: true

@@ -1,0 +1,13 @@
+liferay-aihub-site-initializer:
+    name: AI Hub Workspace Site Initializer
+    oAuthApplicationHeadlessServer: liferay-aihub-site-initializer-oahs
+    siteExternalReferenceCode: AIHUB_WORKSPACE
+    siteName: AI Hub Workspace
+    type: siteInitializer
+liferay-aihub-site-initializer-oahs:
+    .serviceAddress: localhost:8080
+    .serviceScheme: http
+    name: AI Hub Workspace Site Initializer OAuth Application Headless Server
+    scopes:
+        -   Liferay.Headless.Site.everything
+    type: oAuthApplicationHeadlessServer

@@ -1,0 +1,63 @@
+buildscript {
+	dependencies {
+		classpath group: "org.springframework.boot", name: "spring-boot-gradle-plugin", version: "3.3.5"
+	}
+
+	repositories {
+		mavenCentral()
+
+		maven {
+			url "https://repository-cdn.liferay.com/nexus/content/groups/public"
+		}
+	}
+}
+
+apply plugin: "java"
+apply plugin: "org.springframework.boot"
+
+group = "com.liferay.aihub"
+version = "1.0.0"
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+}
+
+dependencies {
+	implementation platform("org.springframework.boot:spring-boot-dependencies:3.3.5")
+
+	implementation group: "org.springframework.boot", name: "spring-boot-starter-webflux"
+
+	annotationProcessor platform("org.springframework.boot:spring-boot-dependencies:3.3.5")
+	annotationProcessor group: "org.springframework.boot", name: "spring-boot-configuration-processor"
+
+	testImplementation platform("org.springframework.boot:spring-boot-dependencies:3.3.5")
+	testImplementation group: "org.springframework.boot", name: "spring-boot-starter-test"
+}
+
+repositories {
+	mavenCentral()
+
+	maven {
+		url "https://repository-cdn.liferay.com/nexus/content/groups/public"
+	}
+}
+
+test {
+	testLogging {
+		events "passed", "failed", "skipped"
+		showStandardStreams = true
+	}
+
+	useJUnitPlatform()
+}
+
+// Runs the throwaway mock sidecar from src/test on port 8090 so the broker can
+// be demonstrated without Track A.
+
+tasks.register("runMockSidecar", JavaExec) {
+	classpath = sourceSets.test.runtimeClasspath
+	description = "Start the mock sidecar SSE server on port 8090"
+	group = "verification"
+	mainClass = "com.liferay.aihub.broker.MockSidecarServer"
+}

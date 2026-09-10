@@ -1,0 +1,18 @@
+aihub-hello-site-init:
+    name: Hello Site Initializer
+    oAuthApplicationHeadlessServer: aihub-hello-site-oauth
+    siteExternalReferenceCode: aihub-hello-site
+    siteName: Hello Site
+    type: siteInitializer
+
+aihub-hello-site-oauth:
+    .serviceAddress: localhost:8090
+    .serviceScheme: http
+    name: Hello Site OAuth
+    scopes:
+        - Liferay.Headless.Admin.Site.everything
+        - Liferay.Headless.Admin.Content.everything
+        - Liferay.Object.Admin.REST.everything
+        - Liferay.Headless.Object.everything
+        - Liferay.Headless.Admin.User.everything
+    type: oAuthApplicationHeadlessServer

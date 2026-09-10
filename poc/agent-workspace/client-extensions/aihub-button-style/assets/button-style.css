@@ -1,0 +1,20 @@
+/*
+ * AI Hub Global CSS -- pill-shaped buttons.
+ *
+ * Overrides Clay's default button border-radius so every button on the
+ * site renders with fully rounded (pill) corners. `.btn` is the class Clay
+ * applies to every button variant (primary, secondary, outline, borderless,
+ * every size), so a single rule covers all of them. The plain element/type
+ * selectors are a fallback for a fragment that uses a raw <button> or
+ * <input type="submit"> instead of Clay markup. !important guards against
+ * Clay's own `.btn { border-radius: var(--border-radius); }` rule, which
+ * has equal specificity and could otherwise win depending on injection
+ * order relative to the theme stylesheet.
+ */
+.btn,
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+	border-radius: 9999px !important;
+}

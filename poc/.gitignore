@@ -1,0 +1,8 @@
+# Host Claude token copied in for the container. Never commit.
+docker/claude-home/
+
+# Dependencies and build output
+node_modules/
+build/
+dist/
+.gradle/

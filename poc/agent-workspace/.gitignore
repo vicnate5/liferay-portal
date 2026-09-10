@@ -1,0 +1,5 @@
+.gradle
+build
+bundles
+dist
+node_modules

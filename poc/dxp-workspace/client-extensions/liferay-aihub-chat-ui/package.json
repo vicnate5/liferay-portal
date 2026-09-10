@@ -1,0 +1,29 @@
+{
+	"dependencies": {
+		"@clayui/alert": "^3.0.0",
+		"@clayui/button": "^3.0.0",
+		"@clayui/form": "^3.0.0",
+		"@clayui/icon": "^3.0.0",
+		"@clayui/label": "^3.0.0",
+		"@clayui/list": "^3.0.0",
+		"@clayui/loading-indicator": "^3.0.0",
+		"@clayui/progress-bar": "^3.0.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"devDependencies": {
+		"@types/node": "^22.20.1",
+		"@types/react": "^18.2.6",
+		"@types/react-dom": "^18.0.9",
+		"esbuild": "^0.20.2",
+		"typescript": "5.7.2"
+	},
+	"name": "liferay-aihub-chat-ui",
+	"private": true,
+	"scripts": {
+		"build": "esbuild src/index.tsx --bundle --entry-names=[name].[hash] --external:react --external:react-dom --external:react-dom/client --external:@clayui/* --format=esm --minify --outdir=build/static",
+		"typecheck": "tsc --noEmit",
+		"verify:broker": "esbuild scripts/verify-broker.ts --bundle --platform=node --format=esm --outfile=build/verify-broker.mjs --log-level=warning && node build/verify-broker.mjs"
+	},
+	"version": "0.0.0"
+}

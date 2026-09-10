@@ -1,0 +1,9 @@
+assemble:
+    -   fromTask: bootJar
+ai-hub-broker-oaua:
+    .serviceAddress: localhost:8091
+    .serviceScheme: http
+    name: AI Hub Workspace Broker OAuth Application User Agent
+    scopes:
+        -   Liferay.Headless.Admin.User.everything
+    type: oAuthApplicationUserAgent

@@ -1,0 +1,30 @@
+/*
+ * AI Hub Announcement Bar
+ *
+ * Injected instance wide via a `globalCSS` client extension (scope: company),
+ * so it applies to every page on every site with no per site selection step
+ * and no dependency on a master page or site initializer reprovision.
+ *
+ * Implementation note: this uses a `body::before` generated box rather than a
+ * DOM element injected by script. `::before` is the first rendered box inside
+ * `body`, in normal flow, so it sits above every page's own markup regardless
+ * of theme or layout, pushes the rest of the page down (no overlap, no fixed
+ * positioning, no manual offset to maintain), and needs no JavaScript that
+ * could race with page render or be blocked.
+ */
+
+body::before {
+	background-color: #14b8a6;
+	box-sizing: border-box;
+	color: #062e2a;
+	content: "Built by AI Hub";
+	display: block;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial,
+		sans-serif;
+	font-size: 0.8125rem;
+	font-weight: 700;
+	letter-spacing: 0.03em;
+	padding: 10px 16px;
+	text-align: center;
+	width: 100%;
+}

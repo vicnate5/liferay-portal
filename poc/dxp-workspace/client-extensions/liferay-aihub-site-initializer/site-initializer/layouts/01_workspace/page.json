@@ -1,0 +1,11 @@
+{
+	"friendlyURL": "/workspace",
+	"hidden": false,
+	"name": "Workspace",
+	"name_i18n": {
+		"en_US": "Workspace"
+	},
+	"private": false,
+	"system": false,
+	"type": "Content"
+}

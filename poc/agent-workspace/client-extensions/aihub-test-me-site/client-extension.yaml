@@ -1,0 +1,18 @@
+aihub-test-me-site-init:
+    name: Test Me Site Initializer
+    oAuthApplicationHeadlessServer: aihub-test-me-site-oauth
+    siteExternalReferenceCode: aihub-test-me
+    siteName: Test Me
+    type: siteInitializer
+
+aihub-test-me-site-oauth:
+    .serviceAddress: localhost:8080
+    .serviceScheme: http
+    name: Test Me Site OAuth
+    scopes:
+        - Liferay.Headless.Admin.Site.everything
+        - Liferay.Headless.Admin.Content.everything
+        - Liferay.Object.Admin.REST.everything
+        - Liferay.Headless.Object.everything
+        - Liferay.Headless.Admin.User.everything
+    type: oAuthApplicationHeadlessServer
