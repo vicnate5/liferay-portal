@@ -7602,19 +7602,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				preparedStatement.addBatch();
 			}
 
-			int[] results = preparedStatement.executeBatch();
+			preparedStatement.executeBatch();
 
-			for (int i = 0; i < results.length; i++) {
-				User user = users.get(i);
-
-				if (results[i] == 1) {
-					EntityCacheUtil.putResult(
-						UserImpl.class, user, true, false);
-				}
-				else {
-					EntityCacheUtil.removeResult(
-						UserImpl.class, user.getUserId());
-				}
+			for (User user : users) {
+				EntityCacheUtil.removeResult(UserImpl.class, user.getUserId());
 			}
 		}
 	}
