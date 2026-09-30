@@ -1654,6 +1654,43 @@ public class UserLocalServiceTest {
 	}
 
 	@Test
+	public void testUpdateLastLoginWithUserUpdatedByAnotherNode()
+		throws Throwable {
+
+		User user = UserTestUtil.addUser();
+
+		User batchedUser = _userLocalService.getUser(user.getUserId());
+
+		batchedUser.setLoginDate(new Date());
+		batchedUser.setLastLoginDate(new Date());
+
+		// Simulate another node updating the user. The database version moves
+		// forward, and cluster link removes the user from this node's entity
+		// cache.
+
+		_userLocalService.updateJobTitle(
+			user.getUserId(), RandomTestUtil.randomString());
+
+		EntityCacheUtil.removeResult(UserImpl.class, user.getUserId());
+
+		_updateLastLogin(batchedUser);
+
+		String jobTitle = RandomTestUtil.randomString();
+
+		_userLocalService.updateJobTitle(user.getUserId(), jobTitle);
+
+		EntityCacheUtil.clearCache(UserImpl.class);
+
+		User updatedUser = _userLocalService.getUser(user.getUserId());
+
+		Assert.assertEquals(jobTitle, updatedUser.getJobTitle());
+		Assert.assertEquals(
+			batchedUser.getLoginDate(), updatedUser.getLoginDate());
+		Assert.assertEquals(
+			batchedUser.getLastLoginDate(), updatedUser.getLastLoginDate());
+	}
+
+	@Test
 	public void testUpdatePassword() throws Exception {
 		User user = UserTestUtil.addUser();
 		String password = RandomTestUtil.randomString(
@@ -2337,25 +2374,10 @@ public class UserLocalServiceTest {
 	}
 
 	private void _testUpdateLastLogin(User user) throws Throwable {
-		AopInvocationHandler aopInvocationHandler =
-			ProxyUtil.fetchInvocationHandler(
-				_userLocalService, AopInvocationHandler.class);
-
-		ServiceWrapper<UserLocalService> serviceWrapper =
-			(ServiceWrapper<UserLocalService>)aopInvocationHandler.getTarget();
-
-		UserLocalServiceImpl userLocalServiceImpl =
-			(UserLocalServiceImpl)serviceWrapper.getWrappedService();
-
 		user.setLoginDate(new Date());
 		user.setLastLoginDate(new Date());
 
-		TransactionInvokerUtil.invoke(
-			TransactionConfig.Factory.create(
-				Propagation.SUPPORTS, new Class<?>[] {Exception.class}),
-			() -> ReflectionTestUtil.invoke(
-				userLocalServiceImpl, "_updateLastLogin",
-				new Class<?>[] {List.class}, Collections.singletonList(user)));
+		_updateLastLogin(user);
 
 		try (SafeCloseable safeCloseable =
 				CompanyThreadLocal.setCompanyIdWithSafeCloseable(
@@ -2476,6 +2498,25 @@ public class UserLocalServiceTest {
 			_passwordPolicyLocalService.updatePasswordPolicy(
 				updatedPasswordPolicy);
 		};
+	}
+
+	private void _updateLastLogin(User user) throws Throwable {
+		AopInvocationHandler aopInvocationHandler =
+			ProxyUtil.fetchInvocationHandler(
+				_userLocalService, AopInvocationHandler.class);
+
+		ServiceWrapper<UserLocalService> serviceWrapper =
+			(ServiceWrapper<UserLocalService>)aopInvocationHandler.getTarget();
+
+		UserLocalServiceImpl userLocalServiceImpl =
+			(UserLocalServiceImpl)serviceWrapper.getWrappedService();
+
+		TransactionInvokerUtil.invoke(
+			TransactionConfig.Factory.create(
+				Propagation.SUPPORTS, new Class<?>[] {Exception.class}),
+			() -> ReflectionTestUtil.invoke(
+				userLocalServiceImpl, "_updateLastLogin",
+				new Class<?>[] {List.class}, Collections.singletonList(user)));
 	}
 
 	private SafeCloseable _updateSecuritySendPasswordResetLinkWithSafeCloseable(
