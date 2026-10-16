@@ -93,7 +93,7 @@ Its own module — **not** part of `headless-admin-site`, which is why fragment 
 
 Fragment code is in `fragmentVersions[]` (`html`, `css`, `js`, `configuration`, `status`). Fragments are keyed by **ERC** — a generated UUID for fragments imported by an initializer, not the fragment key — so list the set to resolve it.
 
-**Required flag:** `LPD-39244`.
+**Required flag:** `LPD-39244`: release on master, beta on 2026.Q3, hidden dev on 2026.Q2 (only `feature.flag.LPD-39244=true` enables it). The module does not exist on 2026.Q1; place and edit fragments through the site initializer there.
 
 **OAuth scope:** `Liferay.Headless.Admin.Fragment.everything` — verify against the running instance before relying on it in a CET.
 

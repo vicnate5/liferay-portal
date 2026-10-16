@@ -92,7 +92,7 @@ In a shared LDP workspace or instance, suffix every custom event with an identif
 const ercs = await window.Analytics.segment.getRealTimeSegmentExternalReferenceCodes();
 ```
 
-The Promise resolves to an array of the ERCs of the visitor's real-time segments. **Confirmed live on 2026.Q3.2 but absent from the official documentation**, so detect `window.Analytics?.segment` before calling it, and say so to the user.
+The Promise resolves to an array of the ERCs of the visitor's real-time segments. The call exists from 2026.Q2; 2026.Q1 has no equivalent. **Confirmed live on 2026.Q3.2 but absent from the official documentation**, so detect `window.Analytics?.segment` before calling it, and say so to the user.
 
 In LDP, a segment's ERC is editable on its detail screen and accepts only lowercase letters and dashes. Set a readable one (`white-paper-readers`) before writing code against it, rather than keeping the generated value.
 
