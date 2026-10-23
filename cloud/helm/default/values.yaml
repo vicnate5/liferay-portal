@@ -502,7 +502,7 @@ readinessProbe:
         path: /c/portal/robots
         port: http
     initialDelaySeconds: 0
-    periodSeconds: 10
+    periodSeconds: 5
     timeoutSeconds: 5
 replicaCount: 1
 resources:
@@ -533,12 +533,12 @@ service:
             targetPort: http
     type: ClusterIP
 startupProbe:
-    failureThreshold: 90
+    failureThreshold: 450
     httpGet:
         path: /c/portal/robots
         port: http
-    initialDelaySeconds: 60
-    periodSeconds: 10
+    initialDelaySeconds: 0
+    periodSeconds: 2
     timeoutSeconds: 5
 tolerations: []
 tomcat:
